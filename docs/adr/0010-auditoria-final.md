@@ -23,3 +23,12 @@
 ## O que só dá para verificar publicado
 
 Cabeçalhos reais, HSTS, cache e resposta 405 da Vercel; execução dos workflows no GitHub; leitor de tela real, outros navegadores e aparelhos físicos.
+
+## Primeira publicação (25/11/2026)
+
+- **CI no Linux:** 137 testes unitários e 119 de navegador aprovados na primeira execução.
+- **Monitor no GitHub:** `www.gov.br` respondeu `ECONNRESET` nas seis fontes; as outras duas foram lidas. O monitor acusou a falha, como devia. Passou a rodar no Windows.
+- **Vercel:** a primeira publicação de um projeto vai sempre para produção, por isso ela foi uma página provisória. A prévia do site confirmou cabeçalhos, HSTS, compressão, 404, redirecionamentos e `security.txt`.
+- **Fora dos buscadores** com `OCULTAR_DE_BUSCADORES`, até haver revisão. O `robots.txt` deixa ler, para o robô ver o `noindex`.
+- A Vercel acrescenta `Access-Control-Allow-Origin: *` aos arquivos estáticos. Todo o conteúdo é público e não há cookie nem login: risco baixo, registrado.
+- O 405 não foi testado na Vercel: a regra de execução só permite GET e HEAD fora do computador.

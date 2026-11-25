@@ -14,8 +14,10 @@ function endereco(): string {
   return u.origin;
 }
 export const SITE = endereco();
+/** No ar, mas fora dos buscadores: para revisar com calma antes de divulgar. */
+export const OCULTO = Boolean(process.env.OCULTAR_DE_BUSCADORES);
 /** Só produção de verdade é indexada: nem prévia, nem build local. */
-export const INDEXAR = SITE.startsWith("https://") && (process.env.VERCEL_ENV === undefined || process.env.VERCEL_ENV === "production");
+export const INDEXAR = !OCULTO && SITE.startsWith("https://") && (process.env.VERCEL_ENV === undefined || process.env.VERCEL_ENV === "production");
 export const NOME_SITE = "ECF e ECD Descomplicada";
 /** O nome fala em ECD; o conteúdo, ainda não. Aparece no rodapé e na entrada. */
 export const AVISO_ECD = "Por enquanto, o conteúdo é de ECF. A parte da ECD ainda não está disponível: ela aparece só como origem dos dados.";
