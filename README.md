@@ -74,7 +74,7 @@ O monitor lê 8 endereços oficiais, compara com o que já viu e, se algo mudou,
 2. Em Settings, Rules: proteja o ramo `main`, com ao menos uma aprovação e o CI obrigatório.
 3. Em um Pull Request do monitor, clique em "Approve workflows to run" para o CI rodar.
 
-Em repositório público, o GitHub desliga a agenda depois de 60 dias sem atividade. Alternativa local: `npm run monitor` no Agendador de Tarefas do Windows.
+**Situação em 25/11/2026:** o `www.gov.br` derruba a conexão vinda dos servidores do GitHub (6 das 8 fontes). O bloqueio não é contornado: o agendamento no GitHub está desligado, e uma tarefa diária do Windows ("ECF Descomplicada - monitor de fontes") roda `tools/monitor-local.ts`. Ela grava `monitor/execucao.log` e abre o relatório quando há rascunho novo. Para parar, desative a tarefa no Agendador.
 
 ## Publicação
 
@@ -83,6 +83,7 @@ Variáveis de ambiente do build, todas opcionais:
 | Variável | Para que serve |
 |---|---|
 | `SITE_URL` | Domínio próprio, com https. Sem ela, vale o domínio de produção da Vercel |
+| `OCULTAR_DE_BUSCADORES` | Com qualquer valor, o site fica no ar com `noindex`. Apague a variável e publique de novo para liberar |
 | `SECURITY_CONTACT` | Contato do `security.txt`: `mailto:` ou `https://`. Sem ela, o arquivo não é publicado |
 
 ### Passo a passo
@@ -93,4 +94,4 @@ Variáveis de ambiente do build, todas opcionais:
 4. Na Vercel: Settings → Environment Variables → `SECURITY_CONTACT` com `https://github.com/<usuário>/<repositório>/security/advisories/new`.
 5. Abra a prévia e confira os cabeçalhos, o 404 e o 405 antes de promover a produção.
 
-Só o build de produção é oferecido a buscadores. Build local e prévia saem com `noindex`.
+Só o build de produção é oferecido a buscadores, e nem ele com `OCULTAR_DE_BUSCADORES`. Build local e prévia saem com `noindex`.

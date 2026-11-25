@@ -116,7 +116,7 @@ describe("SEO e publicação", () => {
   });
   const carregar = async (env: Record<string, string>) => {
     vi.resetModules();
-    for (const k of ["SITE_URL", "VERCEL_PROJECT_PRODUCTION_URL", "VERCEL_ENV"]) vi.stubEnv(k, env[k]);
+    for (const k of ["SITE_URL", "VERCEL_PROJECT_PRODUCTION_URL", "VERCEL_ENV", "OCULTAR_DE_BUSCADORES"]) vi.stubEnv(k, env[k]);
     return import("@/lib/seo");
   };
 
@@ -124,6 +124,7 @@ describe("SEO e publicação", () => {
     expect(await carregar({})).toMatchObject({ SITE: "http://127.0.0.1:4173", INDEXAR: false });
     expect(await carregar({ VERCEL_PROJECT_PRODUCTION_URL: "x.vercel.app", VERCEL_ENV: "production" })).toMatchObject({ SITE: "https://x.vercel.app", INDEXAR: true });
     expect(await carregar({ VERCEL_PROJECT_PRODUCTION_URL: "x.vercel.app", VERCEL_ENV: "preview" })).toMatchObject({ INDEXAR: false });
+    expect(await carregar({ VERCEL_PROJECT_PRODUCTION_URL: "x.vercel.app", VERCEL_ENV: "production", OCULTAR_DE_BUSCADORES: "1" })).toMatchObject({ INDEXAR: false, OCULTO: true });
     expect(await carregar({ SITE_URL: "https://exemplo.com.br/" })).toMatchObject({ SITE: "https://exemplo.com.br", INDEXAR: true });
     for (const ruim of ["http://exemplo.com.br", "https://u:p@exemplo.com.br", "https://exemplo.com.br:8443", "lixo"]) await expect(carregar({ SITE_URL: ruim }), ruim).rejects.toThrow();
   });
@@ -142,6 +143,9 @@ describe("SEO e publicação", () => {
     for (const x of mapa) expect(String(x.lastModified)).toMatch(/^\d{4}-\d{2}-\d{2}$/);
     await carregar({});
     expect((await import("@/app/robots")).default()).toEqual({ rules: { userAgent: "*", disallow: "/" } });
+    // Oculto: sem mapa, mas legível, para o robô encontrar o noindex.
+    await carregar({ SITE_URL: "https://exemplo.com.br", OCULTAR_DE_BUSCADORES: "1" });
+    expect((await import("@/app/robots")).default()).toEqual({ rules: { userAgent: "*", allow: "/" } });
   });
 
   test("[SE-003] descrição cabe no resultado de busca e o ano entra no título", async () => {
