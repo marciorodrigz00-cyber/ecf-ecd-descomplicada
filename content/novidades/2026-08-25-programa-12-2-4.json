@@ -1,0 +1,30 @@
+{
+  "id": "nov-programa-12-2-4",
+  "slug": "programa-12-2-4",
+  "data": "2026-08-25",
+  "tipo": "programa",
+  "titulo": "Programa da ECF: versão 12.2.4",
+  "iniciante": "Saiu uma versão nova do programa que monta e envia a ECF. Ela substitui a anterior.",
+  "profissional": "Corrige erro no bloco J para entidades do Sistema Financeiro. O comunicado cita a versão 12.2.3 ao tratar dos leiautes 1 a 11, provável erro de digitação da fonte.",
+  "fazer": "Confira na página oficial de download qual é a versão atual antes de instalar.",
+  "registros": [],
+  "fonte": {
+    "id": "sped-comunicados",
+    "url": "https://www.gov.br/sped/pt-br/assuntos/comunicados/ecf/publicacao-da-versao-12-2-4-do-programa-da-ecf",
+    "trecho": "Texto do comunicado"
+  },
+  "norma": "Programa da ECF (RFB)",
+  "leiautes": [
+    "12"
+  ],
+  "vigencia": {
+    "acNormal": [
+      2025
+    ],
+    "situacaoEspecial": [
+      2026
+    ]
+  },
+  "verificadoEm": "2026-11-25",
+  "status": "conferido"
+}

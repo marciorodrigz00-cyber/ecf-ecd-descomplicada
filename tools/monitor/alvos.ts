@@ -1,0 +1,93 @@
+/** O que o monitor lê. Endereços fixos no código: nada vem de fora. */
+export type Alvo = {
+  id: string;
+  nome: string;
+  url: string;
+  /** Página para uma pessoa conferir. */
+  pagina: string;
+  tipo: "plone-lista" | "plone-pagina" | "norma" | "html";
+  /** Só para html: trechos que interessam. Cada um precisa ser encontrado, senão a estrutura mudou. */
+  trechos?: RegExp[];
+  confianca: "primaria" | "secundaria";
+};
+
+const SPED = "https://www.gov.br/sped/++api++/pt-br/assuntos/";
+const VER = "https://www.gov.br/sped/pt-br/assuntos/";
+const NORMAS = "https://normasinternet2.receita.fazenda.gov.br/";
+
+export const ALVOS: readonly Alvo[] = [
+  {
+    id: "programa-ecf",
+    nome: "Download do programa da ECF",
+    url: "https://www.gov.br/receitafederal/pt-br/centrais-de-conteudo/download/sped/ecf",
+    pagina: "https://www.gov.br/receitafederal/pt-br/centrais-de-conteudo/download/sped/ecf",
+    tipo: "html",
+    trechos: [/Programa ECF\s+Vers[ãa]o\s*\d+(?:\.\d+)+/gi, /SpedE(?:cf|CF)_[\w-]+?-\d+(?:\.\d+)+\.(?:exe|sh)/gi],
+    confianca: "primaria",
+  },
+  {
+    id: "comunicados-ecf",
+    nome: "Comunicados da ECF no portal do Sped",
+    url: `${SPED}comunicados/ecf?b_size=100`,
+    pagina: `${VER}comunicados/ecf`,
+    tipo: "plone-lista",
+    confianca: "primaria",
+  },
+  {
+    id: "tabelas-dinamicas",
+    nome: "Atualizações das tabelas dinâmicas do leiaute 12",
+    url: `${SPED}comunicados/ecf/atualizacoes-do-arquivo-de-tabelas-dinamicas-leiaute-12`,
+    pagina: `${VER}comunicados/ecf/atualizacoes-do-arquivo-de-tabelas-dinamicas-leiaute-12`,
+    tipo: "plone-pagina",
+    confianca: "primaria",
+  },
+  {
+    id: "manuais-ecf",
+    nome: "Manuais e documentos técnicos da ECF",
+    url: `${SPED}escrituracoes-digitais/ecf/manuais-e-documentos-tecnicos?b_size=100`,
+    pagina: `${VER}escrituracoes-digitais/ecf/manuais-e-documentos-tecnicos`,
+    tipo: "plone-lista",
+    confianca: "primaria",
+  },
+  {
+    id: "modulo-ecf",
+    nome: "Página da ECF no portal do Sped",
+    url: `${SPED}escrituracoes-digitais/ecf`,
+    pagina: `${VER}escrituracoes-digitais/ecf`,
+    tipo: "plone-pagina",
+    confianca: "primaria",
+  },
+  {
+    id: "servico-ecf",
+    nome: "Serviço: Entregar Escrituração Contábil Fiscal",
+    url: "https://www.gov.br/pt-br/servicos/entregar-escrituracao-contabil-fiscal",
+    pagina: "https://www.gov.br/pt-br/servicos/entregar-escrituracao-contabil-fiscal",
+    tipo: "html",
+    trechos: [/[ÚU]ltima Modifica[çc][ãa]o:?\s*\d{2}\/\d{2}\/\d{4}/gi],
+    confianca: "primaria",
+  },
+  {
+    id: "in-2004",
+    nome: "Instrução Normativa RFB nº 2.004/2021",
+    url: `${NORMAS}api/consulta-externa/ato/114966/visao/multivigente`,
+    pagina: `${NORMAS}#/consulta/externa/114966`,
+    tipo: "norma",
+    confianca: "primaria",
+  },
+  {
+    id: "sped-antigo",
+    nome: "Destaques da ECF no portal antigo do Sped",
+    url: "http://sped.rfb.gov.br/projeto/show/269",
+    pagina: "http://sped.rfb.gov.br/projeto/show/269",
+    tipo: "html",
+    trechos: [/[^\n]{3,160}\n?\s*\(\d{2}\/\d{2}\/\d{4}\)/g],
+    confianca: "secundaria",
+  },
+];
+
+/** Sem leitura automática: viram lembrete em todo relatório. */
+export const MANUAIS: readonly { nome: string; url: string; motivo: string }[] = [
+  { nome: "Diário Oficial da União", url: "https://www.in.gov.br/consulta", motivo: "O site recusa acesso automático (403). O INLABS exige cadastro." },
+  { nome: "Busca de normas da Receita Federal", url: "https://normas.receita.fazenda.gov.br/sijut2consulta/consulta.action?termoBusca=ECF", motivo: "A busca não tem endereço de leitura simples." },
+  { nome: "Leis no portal do Planalto", url: "https://www.planalto.gov.br/legislacao", motivo: "Mudam pouco; conferir quando um ato citar alteração." },
+];

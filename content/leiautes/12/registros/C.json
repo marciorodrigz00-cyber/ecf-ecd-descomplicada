@@ -1,0 +1,914 @@
+{
+ "rastreio": {
+  "id": "arq-12-c",
+  "fonte": {
+   "id": "manual-12",
+   "url": "https://www.gov.br/sped/pt-br/assuntos/escrituracoes-digitais/ecf/manuais-e-documentos-tecnicos",
+   "trecho": "Seção do bloco C"
+  },
+  "norma": "ADE Cofis nº 2/2026",
+  "leiautes": [
+   "12"
+  ],
+  "vigencia": {
+   "acNormal": [
+    2025
+   ],
+   "situacaoEspecial": [
+    2026
+   ]
+  },
+  "verificadoEm": "2026-11-24",
+  "status": "extraido"
+ },
+ "bloco": "C",
+ "descricao": "Armazena as informações do plano de contas e dos saldos mensais das ECD recuperadas. As ECD recuperadas devem corresponder ao período da ECF.\nOs seguintes registros da ECD são recuperados na ECF:\n- I050 – Plano de Contas\n- I051 – Mapeamento para o Plano de Contas Referencial\n- I053 – Subcontas Correlatas\n- I100 – Centro de Custos\n- I150 – Data dos Saldos Periódicos\n- I155 – Saldos Periódicos\n- I157 - Transferência de Saldos de Plano de Contas Anterior\n- I350 – Data da Apuração do Resultado\n- I355 – Saldos das Contas de Resultado Antes do Encerramento\nEstão obrigadas a efetuar a recuperação da ECD todas as pessoas jurídicas obrigadas a entregar a ECD, conforme Instrução Normativa RFB nº 2.004/2021 e alterações.",
+ "registros": [
+  {
+   "codigo": "C001",
+   "nome": "Abertura do Bloco C",
+   "ordem": 9,
+   "nivel": "1",
+   "ocorrencia": "[1;1]",
+   "chave": "[REG]",
+   "entrada": "O",
+   "saida": "O",
+   "descricao": [],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto fixo contendo a identificação do registro (C001).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[C001]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "IND_DAD",
+     "descricao": "Indicador de movimento:\n0 – Bloco com dados informados.\n1 – Bloco sem dados informados.",
+     "tipo": "N",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[0;1]",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_OCORRENCIA_UNITARIA_ARQ",
+     "texto": "Verifica se registro ocorreu apenas uma vez por arquivo, considerando a chave “C001” (REG). Se a regra não for cumprida, a ECF gera um erro."
+    }
+   ],
+   "regrasCampo": [],
+   "exemplo": []
+  },
+  {
+   "codigo": "C040",
+   "nome": "Identificador da ECD",
+   "ordem": 10,
+   "nivel": "2",
+   "ocorrencia": "[0;12]",
+   "chave": "HASH_ECD",
+   "entrada": "N",
+   "saida": "OC\n(Se houver recuperação de dados da ECD)",
+   "descricao": [
+    "Identifica as ECD recuperadas pelo sistema. O registro é preenchido pelo sistema ao executar a funcionalidade de recuperação de ECD."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto fixo contendo a identificação do registro (C040).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[C040]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "HASH_ECD",
+     "descricao": "Hashcode ECD Utilizada",
+     "tipo": "C",
+     "tamanho": "40",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "DT_INI",
+     "descricao": "Data de Início da ECD",
+     "tipo": "N",
+     "tamanho": "8",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 4,
+     "nome": "DT_FIN",
+     "descricao": "Data Final da ECD",
+     "tipo": "N",
+     "tamanho": "8",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 5,
+     "nome": "IND_SIT_ESP",
+     "descricao": "Indicador de Situação Especial",
+     "tipo": "N",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 6,
+     "nome": "CNPJ",
+     "descricao": "Número de Inscrição do Empresário ou Sociedade Empresária no CNPJ",
+     "tipo": "C",
+     "tamanho": "14",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 7,
+     "nome": "NUM_ORD",
+     "descricao": "Número de Ordem do Instrumento de Escrituração",
+     "tipo": "N",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 8,
+     "nome": "NIRE",
+     "descricao": "Número de Identificação do Registro de Empresas da Junta Comercial",
+     "tipo": "N",
+     "tamanho": "11",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 9,
+     "nome": "NAT_LIVR",
+     "descricao": "Natureza do Livro: finalidade a que se destina o instrumento",
+     "tipo": "C",
+     "tamanho": "80",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 10,
+     "nome": "COD_VER_LC",
+     "descricao": "Código da Versão do Leiaute Contábil",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 11,
+     "nome": "IND_ESC",
+     "descricao": "Indicador da Forma de Escrituração Contábil:\nG - Livro Diário (Completo sem escrituração auxiliar)\nR - Livro Diário com Escrituração Resumida (com escrituração auxiliar)\nB - Livro Balancetes Diários e Balanços",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[G; R; B]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 12,
+     "nome": "IDENT_MF",
+     "descricao": "Identificação de moeda funcional: Indica que a escrituração abrange valores com base na moeda funcional (art. 287 da Instrução Normativa RFB nº 1.700, de 14 de março de 2017).",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S;N]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 13,
+     "nome": "IND_ESC_CONS",
+     "descricao": "Escriturações Contábeis Consolidadas: (Deve ser preenchido pela empresa controladora obrigada a informar demonstrações contábeis consolidadas, nos termos da Lei nº 6.404/76 e/ou do Pronunciamento Técnico CPC 36 – Demonstrações Consolidadas)\nS – Sim\nN – Não",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S;N]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 14,
+     "nome": "IND_CENTRALIZADA",
+     "descricao": "Indicador da modalidade de escrituração centralizada ou descentralizada:\n0 – Escrituração Centralizada\n1 – Escrituração Descentralizada",
+     "tipo": "N",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[0;1]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 15,
+     "nome": "IND_MUDANC_PC",
+     "descricao": "Indicador de mudança de plano de contas:\n0 – Não houve mudança no plano de contas.\n1 – Houve mudança no plano de contas.",
+     "tipo": "N",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[0;1]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 16,
+     "nome": "COD_PLAN_REF",
+     "descricao": "Código do Plano de Contas Referencial que será utilizado para o mapeamento de todas as contas analíticas:\n1 – PJ em Geral – Lucro Real\n2 – PJ em Geral – Lucro Presumido\n3 – Financeiras – Lucro Real\n4 – Seguradoras – Lucro Real\n5 – Imunes e Isentas em Geral\n6 – Imunes e Isentas – Financeiras\n7 – Imunes e Isentas – Seguradoras\n8 – Entidades Fechadas de Previdência Complementar\n9 – Partidos Políticos\n10 – Financeiras – Lucro Presumido\n11 - TEF - Tributação Específica do Futebol\nObservação: Caso a pessoa jurídica não realize o mapeamento para os planos referenciais na ECD, este campo deve ficar em branco.",
+     "tipo": "C",
+     "tamanho": "2",
+     "decimal": "—",
+     "valores": "[1; 2; 3; 4; 5; 6; 7; 8; 9; 10; 11] ou Vazio",
+     "obrigatorio": "Não"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [],
+   "exemplo": []
+  },
+  {
+   "codigo": "C050",
+   "nome": "Plano de Contas da ECD",
+   "ordem": 11,
+   "nivel": "3",
+   "ocorrencia": "[0;N]",
+   "chave": "DT_ALT + COD_CTA",
+   "entrada": "N",
+   "saida": "OC\n(Se houver recuperação de dados da ECD)",
+   "descricao": [
+    "Registro preenchido pelo sistema ao executar a funcionalidade de recuperação da ECD. Recupera os registros I050 (plano de contas societário) das ECD do período."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto fixo contendo a identificação do registro (C050).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[C050]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "DT_ALT",
+     "descricao": "Data de Atualização (inclusão/ alteração).",
+     "tipo": "N",
+     "tamanho": "8",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "COD_NAT",
+     "descricao": "Código da Natureza da Conta/Grupo de Contas.",
+     "tipo": "C",
+     "tamanho": "2",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 4,
+     "nome": "IND_CTA",
+     "descricao": "Indicador do Tipo de Conta:\nS - Sintética (grupo de contas)\nA - Analítica (conta)",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S; A]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 5,
+     "nome": "NÍVEL",
+     "descricao": "Nível da Conta Analítica/Sintética.",
+     "tipo": "N",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 6,
+     "nome": "COD_CTA",
+     "descricao": "Código da Conta Analítica/Sintética.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 7,
+     "nome": "COD_CTA_SUP",
+     "descricao": "Código da Conta Sintética de Nível Imediatamente Superior.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 8,
+     "nome": "CTA",
+     "descricao": "Nome da Conta Analítica.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [],
+   "exemplo": []
+  },
+  {
+   "codigo": "C051",
+   "nome": "Plano de Contas Referencial",
+   "ordem": 12,
+   "nivel": "4",
+   "ocorrencia": "Se C050.IND_CTA = “A” [0:N]\nSenão [0]",
+   "chave": "COD_CCUS + COD_CTA_REF",
+   "entrada": "N",
+   "saida": "OC\n(Se houver recuperação de dados da ECD)",
+   "descricao": [
+    "Registro preenchido pelo sistema ao executar a funcionalidade de recuperação da ECD. Recupera os registros I051 (centro de custo e mapeamento para o plano de conta referencial) das ECD do período."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (C051).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[C051]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "COD_CCUS",
+     "descricao": "Código do Centro de Custos.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 3,
+     "nome": "COD_CTA_REF",
+     "descricao": "Código da Conta no Plano de Contas Referencial.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [],
+   "exemplo": []
+  },
+  {
+   "codigo": "C053",
+   "nome": "Subcontas Correlatas",
+   "ordem": 13,
+   "nivel": "4",
+   "ocorrencia": "[0;N]",
+   "chave": "COD_CNT_CORR",
+   "entrada": "N",
+   "saida": "OC\n(Se houver recuperação de dados da ECD)",
+   "descricao": [
+    "Registro preenchido pelo sistema ao executar a funcionalidade de recuperação da ECD. Recupera os registros I053 (subcontas correlatas) das ECD do período."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (C053).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[C053]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "COD_IDT",
+     "descricao": "Código de Identificação do Grupo de Conta-Subconta(a).",
+     "tipo": "C",
+     "tamanho": "6",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "COD_CNT_CORR",
+     "descricao": "Código da Subconta Correlata\n(Deve estar no plano de contas)",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 4,
+     "nome": "NAT_SUB_CNT",
+     "descricao": "Natureza da Subconta Correlata",
+     "tipo": "C",
+     "tamanho": "2",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [],
+   "exemplo": []
+  },
+  {
+   "codigo": "C100",
+   "nome": "Centro de Custos",
+   "ordem": 14,
+   "nivel": "3",
+   "ocorrencia": "[0;N]",
+   "chave": "DT_ALT + COD_CCUS",
+   "entrada": "N",
+   "saida": "OC\n(Se houver recuperação de dados da ECD)",
+   "descricao": [
+    "Registro preenchido pelo sistema ao executar a funcionalidade de recuperação da ECD. Recupera os registros I100 (centro de custo) das ECD do período."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (C100).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[C100]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "DT_ALT",
+     "descricao": "Data da Inclusão/Alteração.",
+     "tipo": "N",
+     "tamanho": "8",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "COD_CCUS",
+     "descricao": "Código do Centro de Custos.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 4,
+     "nome": "CCUS",
+     "descricao": "Nome do Centro de Custos.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [],
+   "exemplo": []
+  },
+  {
+   "codigo": "C150",
+   "nome": "Identificação do Período dos Saldos Periódicos das Contas",
+   "ordem": 15,
+   "nivel": "3",
+   "ocorrencia": "[0;13]",
+   "chave": "DT_INI + DT_FIN",
+   "entrada": "N",
+   "saida": "OC\n(Se houver recuperação de dados da ECD)",
+   "descricao": [
+    "Registro preenchido pelo sistema ao executar a funcionalidade de recuperação da ECD. Recupera as contas dos registros I150 (saldos periódicos – identificação do período) das ECD do período."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (C150).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[C150]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "DT_INI",
+     "descricao": "Data do Início do período.",
+     "tipo": "N",
+     "tamanho": "8",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "DT_FIN",
+     "descricao": "Data do Fim do período.",
+     "tipo": "N",
+     "tamanho": "8",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [],
+   "exemplo": []
+  },
+  {
+   "codigo": "C155",
+   "nome": "Detalhes dos Saldos Contábeis das Contas",
+   "ordem": 16,
+   "nivel": "4",
+   "ocorrencia": "[0; N]",
+   "chave": "COD_CTA + COD_CCUS",
+   "entrada": "N",
+   "saida": "OC\n(Se houver recuperação de dados da ECD)",
+   "descricao": [
+    "Registro preenchido pelo sistema ao executar a funcionalidade de recuperação da ECD. Recupera as contas dos registros I155 (detalhes dos saldos contábeis recuperados) das ECD do período."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (C155).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[C155]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "COD_CTA",
+     "descricao": "Código da Conta Analítica.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "COD_CCUS",
+     "descricao": "Código do Centro de Custos.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 4,
+     "nome": "VL_SLD_INI",
+     "descricao": "Valor do Saldo Inicial do Período.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 5,
+     "nome": "IND_VL_SLD_INI",
+     "descricao": "Indicador da Situação do Saldo Inicial:\nD – Devedor\nC – Credor",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[D; C]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 6,
+     "nome": "VL_DEB",
+     "descricao": "Valor Total dos Débitos no Período.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 7,
+     "nome": "VL_CRED",
+     "descricao": "Valor Total dos Créditos no Período.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 8,
+     "nome": "VL_SLD_FIN",
+     "descricao": "Valor do Saldo Final do Período.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 9,
+     "nome": "IND_VL_SLD_FIN",
+     "descricao": "Indicador da Situação do Saldo Final:\nD – Devedor\nC – Credor",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[D; C]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 10,
+     "nome": "LINHA_ECD",
+     "descricao": "Número da Linha do Arquivo da ECD.\nObs.: É utilizado para identificação de possíveis de inconsistências de saldo.",
+     "tipo": "N",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [],
+   "exemplo": []
+  },
+  {
+   "codigo": "C157",
+   "nome": "Transferência de Saldos do Plano de Contas Anterior",
+   "ordem": 17,
+   "nivel": "5",
+   "ocorrencia": "[0;N]",
+   "chave": "COD_CTA + COD_CCUS",
+   "entrada": "N",
+   "saida": "OC\n(Se houver recuperação de dados da ECD)",
+   "descricao": [
+    "Registro preenchido pelo sistema ao executar a funcionalidade de recuperação da ECD. Recupera o registro I157 (transferência de saldos do plano de contas anterior) das ECD do período."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (C157).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[C157]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "COD_CTA",
+     "descricao": "Código da Conta Analítica.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "COD_CCUS",
+     "descricao": "Código do Centro de Custos.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 4,
+     "nome": "VL_SLD_FIN",
+     "descricao": "Valor do Saldo Final do Período Transferido.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 5,
+     "nome": "IND_VL_SLD_FIN",
+     "descricao": "Indicador da Situação do Saldo Final:\nD - Devedor\nC – Credor",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[D; C]",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 6,
+     "nome": "LINHA_ECD",
+     "descricao": "Número da Linha do Arquivo da ECD\nObs.: É utilizado para identificação de possíveis de inconsistências de saldo.",
+     "tipo": "N",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_C157_OBRIGATORIO",
+     "texto": "Se existe na ECD o registro I157 para, pelo menos, uma conta em um período (Exceto o primeiro período da escrituração - C150.DT_INI diferente 0000.DT_INI – Se há I157 no primeiro período, o sistema recupera normalmente, sem verificar saldo do registro I157), deve existir neste período, registro I157(C157) para todas as contas com I155(C155).VL_SLD_INI diferente de zero. A conta deste período que não possui registro I157 gera erro e não é calculada no processo de recuperação."
+    },
+    {
+     "codigo": "REGRA_CONTA_SUBSTITUTA_SALDO_ZERO",
+     "texto": "Se existe na ECD mais de uma ocorrência do registro I157 para a mesma conta/centro de custos e o seu somatório, considerando os indicadores de saldo (D = Devedor; C = Credor), for igual a zero, as contas/centros de custos existentes no registro C155 vinculadas ao registro C157 (oriundo do registro I157) serão apontadas, no relatório de validação das ECD recuperadas, com erro e não serão calculadas no processo de recuperação."
+    }
+   ],
+   "regrasCampo": [],
+   "exemplo": []
+  },
+  {
+   "codigo": "C350",
+   "nome": "Identificação da Data dos Saldos das Contas de Resultado Antes do Encerramento",
+   "ordem": 18,
+   "nivel": "3",
+   "ocorrencia": "[0; N]",
+   "chave": "DT_RES",
+   "entrada": "N",
+   "saida": "OC\n(Se houver recuperação de dados da ECD)",
+   "descricao": [
+    "Registro preenchido pelo sistema ao executar a funcionalidade de recuperação da ECD. Recupera as contas patrimoniais dos registros I350 (saldos das contas de resultado antes do encerramento – identificação da data) das ECD do período."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (C350).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[C350]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "DT_RES",
+     "descricao": "Data da Apuração do Resultado",
+     "tipo": "N",
+     "tamanho": "8",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [],
+   "exemplo": []
+  },
+  {
+   "codigo": "C355",
+   "nome": "Detalhes dos Saldos das Contas de Resultado Antes do Encerramento",
+   "ordem": 19,
+   "nivel": "4",
+   "ocorrencia": "[0;N]",
+   "chave": "COD_CTA + COD_CCUS",
+   "entrada": "N",
+   "saida": "OC\n(Se houver recuperação de dados da ECD)",
+   "descricao": [
+    "Registro preenchido pelo sistema ao executar a funcionalidade de recuperação da ECD. Recupera os registros I355 (detalhes dos saldos das contas de resultado antes do encerramento) das ECD do período."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (C355).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[C355]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "COD_CTA",
+     "descricao": "Código da Conta Analítica de Resultado.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "COD_CCUS",
+     "descricao": "Código do Centro de Custos.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 4,
+     "nome": "VL_CTA",
+     "descricao": "Valor do Saldo Final Antes do Lançamento de Encerramento.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 5,
+     "nome": "IND_VL_CTA",
+     "descricao": "Indicador da Situação do Saldo Final:\nD – Devedor.\nC – Credor.",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[D; C]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 6,
+     "nome": "LINHA_ECD",
+     "descricao": "Número da Linha do Arquivo da ECD\nObs.: É utilizado para identificação de possíveis de inconsistências de saldo.",
+     "tipo": "N",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [],
+   "exemplo": []
+  },
+  {
+   "codigo": "C990",
+   "nome": "Encerramento do Bloco C",
+   "ordem": 20,
+   "nivel": "1",
+   "ocorrencia": "[1;1]",
+   "chave": "[REG]",
+   "entrada": "O",
+   "saida": "O",
+   "descricao": [],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto fixo contendo a identificação do registro (C990).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[C990]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "QTD_LIN",
+     "descricao": "Quantidade total de registros do Bloco C.",
+     "tipo": "N",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [],
+   "exemplo": []
+  }
+ ]
+}

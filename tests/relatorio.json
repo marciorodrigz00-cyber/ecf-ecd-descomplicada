@@ -1,0 +1,464 @@
+{
+  "versao": "auditoria final, fase 8",
+  "risco": "Auditoria completa, sobre o build local. Todos os casos foram reexecutados, menos a medição do Lighthouse, feita à parte no mesmo dia, e nenhum defeito conhecido ficou aberto. O risco que resta não está no código testado: o conteúdo foi conferido com as fontes, mas nenhum contador o revisou; a regra de arredondamento e dois campos de exemplo estão a verificar; os arquivos de exemplo não passaram pelo programa da ECF; e o comportamento na Vercel e no GitHub só poderá ser visto depois de publicar. O nome do site inclui a ECD, que ainda não tem conteúdo: o aviso está em todas as páginas.",
+  "bugs": [
+    {
+      "id": "BUG-001",
+      "titulo": "Pré-carga de páginas respondia 404 em builds feitos no Windows",
+      "severidade": "Média",
+      "modulos": [
+        "SM",
+        "RD"
+      ],
+      "casos": [
+        "SM-001"
+      ],
+      "situacao": "Corrigido",
+      "passos": "Gerar o build no Windows e abrir /, /ac/2024 ou qualquer seção com o console aberto.",
+      "esperado": "Nenhum erro no console.",
+      "obtido": "28 mensagens de recurso não encontrado na varredura das páginas.",
+      "tecnico": "O export do Next gravava __next.x em subpastas, e o cliente pede o nome com pontos. tools/achatar-segmentos.ts renomeia os arquivos após o build (81 renomeados). No Linux o passo não faz nada, salvo se o mesmo problema ocorrer.",
+      "evidencia": "Lista de respostas 404 por URL coletada no navegador; reexecução sem erros."
+    },
+    {
+      "id": "BUG-002",
+      "titulo": "Home buscava a si mesma duas vezes na primeira carga",
+      "severidade": "Baixa",
+      "modulos": [
+        "RD"
+      ],
+      "casos": [
+        "RD-001"
+      ],
+      "situacao": "Corrigido",
+      "passos": "Abrir / e listar as requisições.",
+      "esperado": "Nenhuma URL repetida.",
+      "obtido": "25 respostas para 24 URLs: o link do logotipo pré-carregava a página atual.",
+      "tecnico": "src/components/layout/cabecalho.tsx: prefetch={false} no link do logotipo.",
+      "evidencia": "Contagem de respostas por URL no teste RD-001."
+    },
+    {
+      "id": "BUG-003",
+      "titulo": "Breadcrumb centralizado e ícone do selo em linha separada no celular",
+      "severidade": "Baixa",
+      "modulos": [
+        "RS"
+      ],
+      "casos": [
+        "RS-004"
+      ],
+      "situacao": "Corrigido",
+      "passos": "Abrir /blocos em 1050 px (breadcrumb) e / em 375 px (selo).",
+      "esperado": "Breadcrumb alinhado ao título; ícone ao lado do texto.",
+      "obtido": "Breadcrumb no centro da página; ícone acima do texto.",
+      "tecnico": "Faltava w-full no breadcrumb dentro de um contêiner flex; o selo usava flex-wrap. Encontrado por inspeção visual, e o caso RS-004 foi criado para evitar regressão.",
+      "evidencia": "Capturas de tela da inspeção e medidas de posição do teste RS-004."
+    },
+    {
+      "id": "BUG-004",
+      "titulo": "Rolagem horizontal da página em telas de 375 px com tabelas",
+      "severidade": "Média",
+      "modulos": [
+        "RS"
+      ],
+      "casos": [
+        "RS-001",
+        "AC-008"
+      ],
+      "situacao": "Corrigido",
+      "passos": "Abrir /importancia em 375 px de largura.",
+      "esperado": "scrollWidth menor ou igual a clientWidth.",
+      "obtido": "scrollWidth de 603 px para 375 px (663 px em /quem-deve-entregar).",
+      "tecnico": "Textos .sr-only têm posição absoluta e escapavam da caixa rolável, que não era referência de posição. src/components/ui/index.tsx: classe relative em CaixaRolavel.",
+      "evidencia": "Medidas do teste RS-001 antes e depois."
+    },
+    {
+      "id": "BUG-005",
+      "titulo": "Norma repetida ao lado do link, valor separado de R$ e tabela sem aviso de rolagem",
+      "severidade": "Baixa",
+      "modulos": [
+        "CN",
+        "RS"
+      ],
+      "casos": [
+        "CN-005",
+        "RS-003"
+      ],
+      "situacao": "Corrigido",
+      "passos": "Abrir /o-que-e e /importancia e olhar a linha do tempo e as tabelas, inclusive em 375 px.",
+      "esperado": "Norma citada uma vez; valor inteiro na mesma linha; indicação de que a tabela rola.",
+      "obtido": "Norma duas vezes, R$ e número em linhas diferentes, tabela cortada sem aviso.",
+      "tecnico": "LinkFonte curto, semQuebra() em src/lib/formatos e aviso visível em telas estreitas. Encontrado por inspeção visual.",
+      "evidencia": "Capturas de tela da inspeção."
+    },
+    {
+      "id": "BUG-006",
+      "titulo": "Manual do leiaute 12 desatualizado usado na fase 3",
+      "severidade": "Média",
+      "modulos": [
+        "CN"
+      ],
+      "casos": [
+        "CN-001"
+      ],
+      "situacao": "Corrigido",
+      "passos": "Comparar a versão do portal SPED antigo (20/05/2026) com a do gov.br/sped (23/07/2026).",
+      "esperado": "Fonte mais recente.",
+      "obtido": "Versão dois meses mais antiga, com 37 trechos a menos, entre parágrafos e linhas de tabela.",
+      "tecnico": "A fonte passou para gov.br/sped, em HTTPS. As regras publicadas foram reconferidas e não mudaram.",
+      "evidencia": "Comparação dos dois arquivos registrada em docs/adr/0004."
+    },
+    {
+      "id": "BUG-007",
+      "titulo": "Botão do mapa com texto visível diferente do nome anunciado",
+      "severidade": "Média",
+      "modulos": [
+        "AC"
+      ],
+      "casos": [
+        "AC-001",
+        "AC-009"
+      ],
+      "situacao": "Corrigido",
+      "passos": "Rodar axe em /blocos.",
+      "esperado": "Nenhuma violação.",
+      "obtido": "label-content-name-mismatch no botão da ECF anterior.",
+      "tecnico": "src/components/ecf/mapa.tsx: o texto visível passou a ser igual ao nome acessível.",
+      "evidencia": "Saída do axe antes e depois."
+    },
+    {
+      "id": "BUG-008",
+      "titulo": "Redirecionamento de ano poderia levar para fora do domínio",
+      "severidade": "Média",
+      "modulos": [
+        "SG"
+      ],
+      "casos": [
+        "SG-009"
+      ],
+      "situacao": "Corrigido",
+      "passos": "Encontrado por revisão, antes de publicar: o padrão /ac/2025/:path* aceitava /ac/2025//exemplo.com no servidor local.",
+      "esperado": "Só caminhos internos.",
+      "obtido": "Location começando por //, que o navegador trata como outro site.",
+      "tecnico": "vercel.json: parâmetro restrito a letras minúsculas, números, hífen e barra simples. Falta confirmar no preview da Vercel.",
+      "evidencia": "Teste SG-009 com quatro variações."
+    },
+    {
+      "id": "BUG-009",
+      "titulo": "Linhas do mapa passavam por trás de outros blocos",
+      "severidade": "Baixa",
+      "modulos": [
+        "RS"
+      ],
+      "casos": [
+        "CT-042"
+      ],
+      "situacao": "Corrigido",
+      "passos": "Abrir /blocos/m e selecionar o bloco M.",
+      "esperado": "Ligações fáceis de seguir.",
+      "obtido": "E→M e K→M cruzavam K, L e P.",
+      "tecnico": "Nós reposicionados e arco por baixo para ligações longas em src/components/ecf/mapa.tsx.",
+      "evidencia": "Capturas de tela antes e depois."
+    },
+    {
+      "id": "BUG-010",
+      "titulo": "CNPJ fictício com dígito verificador válido",
+      "severidade": "Média",
+      "modulos": [
+        "CN"
+      ],
+      "casos": [
+        "CN-028"
+      ],
+      "situacao": "Corrigido",
+      "passos": "Calcular o dígito verificador dos CNPJs dos exemplos.",
+      "esperado": "Todos inválidos, para não pertencer a ninguém.",
+      "obtido": "O CNPJ do banco fictício era matematicamente válido.",
+      "tecnico": "content/exemplos/lucro-presumido.json: número trocado; o teste calcula o dígito de todos.",
+      "evidencia": "Falha e reexecução do CN-028."
+    },
+    {
+      "id": "BUG-011",
+      "titulo": "Aviso do simulador falava em ano seguinte, errado para 2024",
+      "severidade": "Média",
+      "modulos": [
+        "CN"
+      ],
+      "casos": [
+        "CT-059"
+      ],
+      "situacao": "Corrigido",
+      "passos": "Abrir /ac/2024/simulador.",
+      "esperado": "Menção correta à vigência das regras novas.",
+      "obtido": "Dizia que as regras mudavam no ano seguinte ao escolhido; as regras novas começam em 2026.",
+      "tecnico": "Texto virou a regra lc-224, com fonte, em content/regras/tributos.json. Encontrado por revisão.",
+      "evidencia": "Comparação com a coluna DT_INI das tabelas dinâmicas."
+    },
+    {
+      "id": "BUG-012",
+      "titulo": "Contas sem acento e explicação da CSLL em trimestre sem CSLL",
+      "severidade": "Baixa",
+      "modulos": [
+        "CN"
+      ],
+      "casos": [
+        "CN-027"
+      ],
+      "situacao": "Corrigido",
+      "passos": "Abrir /exemplos/lucro-real e o registro M300.",
+      "esperado": "Texto em português correto e explicação fiel à linha.",
+      "obtido": "Nomes sem acento; linha 2 do T03 citava CSLL descontada.",
+      "tecnico": "Dados regenerados e explicação condicionada em src/lib/exemplos/montar.ts. Encontrado por inspeção visual.",
+      "evidencia": "Capturas de tela da inspeção."
+    },
+    {
+      "id": "BUG-013",
+      "titulo": "Valores iniciais do simulador escritos no componente",
+      "severidade": "Média",
+      "modulos": [
+        "CN"
+      ],
+      "casos": [
+        "CN-034"
+      ],
+      "situacao": "Corrigido",
+      "passos": "Ler src/components/simulador/index.tsx.",
+      "esperado": "Valores vindos dos arquivos de dados.",
+      "obtido": "Oito valores do 4º trimestre digitados na tela.",
+      "tecnico": "src/lib/exemplos monta os valores a partir de content/exemplos e a página os passa ao componente.",
+      "evidencia": "Teste CN-034 compara com os valores digitados à mão e impede a volta."
+    },
+    {
+      "id": "BUG-014",
+      "titulo": "Hook de conteúdo falhava em silêncio com entrada ilegível",
+      "severidade": "Média",
+      "modulos": [
+        "CN"
+      ],
+      "casos": [
+        "CN-032"
+      ],
+      "situacao": "Corrigido",
+      "passos": "Enviar JSON inválido ao hook 1.",
+      "esperado": "Saída 2, com o motivo.",
+      "obtido": "Saída 1, que o Claude Code ignora.",
+      "tecnico": "O corpo do hook passou a tratar exceções e bloquear.",
+      "evidencia": "Reexecução: saída 2 e mensagem em português."
+    },
+    {
+      "id": "BUG-015",
+      "titulo": "Monitor cortava texto longo e não veria mudança no fim de um artigo",
+      "severidade": "Alta",
+      "modulos": [
+        "CT"
+      ],
+      "casos": [
+        "CT-062"
+      ],
+      "situacao": "Corrigido",
+      "passos": "Ler um artigo com mais de 400 caracteres e mudar o final.",
+      "esperado": "Mudança detectada.",
+      "obtido": "Linha cortada em 400 caracteres antes da comparação.",
+      "tecnico": "Linhas longas passam a ser divididas, sem perda, antes do hash.",
+      "evidencia": "Teste CT-062."
+    },
+    {
+      "id": "BUG-016",
+      "titulo": "Texto cortado do Pull Request esconderia fontes com mudança",
+      "severidade": "Média",
+      "modulos": [
+        "CT"
+      ],
+      "casos": [
+        "CT-065"
+      ],
+      "situacao": "Corrigido",
+      "passos": "Gerar relatório com muitas mudanças em todas as fontes.",
+      "esperado": "Todas as fontes citadas.",
+      "obtido": "As últimas sumiam no corte.",
+      "tecnico": "Lista de todas as fontes no topo do texto.",
+      "evidencia": "Teste CT-065."
+    },
+    {
+      "id": "BUG-017",
+      "titulo": "Registro aberto criava rolagem lateral e botões do mapa tinham nome diferente do texto",
+      "severidade": "Média",
+      "modulos": [
+        "RS",
+        "AC"
+      ],
+      "casos": [
+        "RS-008",
+        "AC-013"
+      ],
+      "situacao": "Corrigido",
+      "passos": "Abrir o 0000 no mapa em 375 px; rodar o axe.",
+      "esperado": "Sem rolagem lateral e nome igual ao texto visível.",
+      "obtido": "798 px de largura em tela de 375; rótulo diferente.",
+      "tecnico": "Coluna da grade com largura mínima zero e rótulo montado com o próprio texto.",
+      "evidencia": "Dez combinações de tema e largura sem violação."
+    },
+    {
+      "id": "BUG-018",
+      "titulo": "Botão Próximo do roteiro mudava de lugar entre etapas",
+      "severidade": "Média",
+      "modulos": [
+        "CT"
+      ],
+      "casos": [
+        "CT-046"
+      ],
+      "situacao": "Corrigido",
+      "passos": "No roteiro, clicar duas vezes seguidas em Próximo.",
+      "esperado": "Avança duas etapas.",
+      "obtido": "O botão subia 437 px e o segundo clique caía fora dele.",
+      "tecnico": "Botões no topo do cartão.",
+      "evidencia": "Teste CT-046."
+    },
+    {
+      "id": "BUG-019",
+      "titulo": "Exemplo do registro criava rolagem lateral na página do registro, no celular",
+      "severidade": "Média",
+      "modulos": [
+        "RS"
+      ],
+      "casos": [
+        "SM-004"
+      ],
+      "situacao": "Corrigido",
+      "passos": "Abrir /blocos/0/0030 em 375 px.",
+      "esperado": "Sem rolagem lateral.",
+      "obtido": "644 px de largura.",
+      "tecnico": "Grade com coluna de largura mínima zero.",
+      "evidencia": "Varredura de todas as páginas de registro."
+    },
+    {
+      "id": "BUG-020",
+      "titulo": "Dica do termo fechava sozinha ao chegar por teclado",
+      "severidade": "Média",
+      "modulos": [
+        "AC"
+      ],
+      "casos": [
+        "CT-099"
+      ],
+      "situacao": "Corrigido",
+      "passos": "Ir com Tab até um termo fora da tela.",
+      "esperado": "Dica visível.",
+      "obtido": "A rolagem automática fechava a dica.",
+      "tecnico": "A dica acompanha a rolagem e só fecha fora da tela.",
+      "evidencia": "Teste CT-099 em três larguras."
+    },
+    {
+      "id": "BUG-021",
+      "titulo": "Cabeçalho com busca passava da largura em 1.050 px",
+      "severidade": "Média",
+      "modulos": [
+        "RS",
+        "AC"
+      ],
+      "casos": [
+        "RS-009",
+        "AC-014"
+      ],
+      "situacao": "Corrigido",
+      "passos": "Abrir qualquer página em 1.050 px.",
+      "esperado": "Sem rolagem lateral.",
+      "obtido": "1.178 px de largura; nome do botão diferente do texto.",
+      "tecnico": "Texto da busca só a partir de 1.280 px e nome montado com o próprio texto.",
+      "evidencia": "Oito combinações de tema e largura."
+    },
+    {
+      "id": "BUG-022",
+      "titulo": "Troca de ano levava a página inexistente",
+      "severidade": "Média",
+      "modulos": [
+        "SM",
+        "CT"
+      ],
+      "casos": [
+        "SM-005",
+        "CT-005"
+      ],
+      "situacao": "Corrigido",
+      "passos": "Em /blocos/y/y730, que só existe no leiaute 12, clicar em 2024; ou clicar no ano estando na página 404.",
+      "esperado": "Chegar a uma página existente.",
+      "obtido": "Página não encontrada.",
+      "tecnico": "src/lib/rotas.ts, rotaEmOutroAno: registro ausente leva ao bloco, e endereço desconhecido, ao início.",
+      "evidencia": "Varredura de todos os links do site, com âncoras: nenhum quebrado."
+    },
+    {
+      "id": "BUG-023",
+      "titulo": "Barreira do hook 2 tratava caminho do Linux como unidade do Windows",
+      "severidade": "Baixa",
+      "modulos": [
+        "SG"
+      ],
+      "casos": [
+        "SG-020"
+      ],
+      "situacao": "Corrigido",
+      "passos": "Rodar os testes dos hooks no Linux.",
+      "esperado": "Mesmo resultado do Windows.",
+      "obtido": "Caminho /c/... lido como pasta do projeto.",
+      "tecnico": ".claude/hooks/lib/comandos.mjs: a conversão só vale no Windows. Achado por leitura; o Linux não foi executado.",
+      "evidencia": "Leitura do código."
+    }
+  ],
+  "aprovados": [
+    "CSP por hash em todas as páginas, sem unsafe-inline para scripts e sem violações em Report-Only (com controle negativo).",
+    "Conteúdo validado por schema: item sem fonte oficial, norma, leiaute, ano-calendário ou data derruba o build, e o leiaute precisa bater com a tabela oficial por ano.",
+    "axe-core sem violações A/AA nos dois temas, nos dois níveis e em 375 e 1440 px.",
+    "Nenhum domínio de terceiros é acessado; fontes tipográficas servidas pelo próprio site.",
+    "npm audit --omit=dev sem vulnerabilidades em 24/11/2026.",
+    "Regras digitadas à mão nos testes, a partir da leitura das normas, batem com os dados publicados nos dois anos-calendário.",
+    "Quiz: todos os caminhos terminam, e cada resultado aponta a norma.",
+    "Campos comparados por inteiro com o PDF oficial: 1.066 de 1.078 linhas no leiaute 12 e 1.057 de 1.067 no 11; as demais são quebras de página, conferidas por leitura.",
+    "Matriz bloco × regime sustentada pela condição oficial de cada registro nos dois leiautes.",
+    "Nenhuma fonte de conteúdo sem HTTPS.",
+    "Simulador: 22 casos calculados à mão batem, e os parâmetros conferem com as fórmulas oficiais.",
+    "Exemplos: balanço, saldos, e-Lalur, parte B, N, P, Q e X390 fecham entre si, e toda linha respeita o leiaute.",
+    "Hooks: os três bloquearam as falhas provocadas, e as falhas foram desfeitas. Comandos normais continuam livres.",
+    "Monitor: 8 de 8 fontes lidas de verdade, resultado estável em execuções seguidas e mudança simulada virou rascunho só em monitor/.",
+    "Anti-SSRF: mais de 35 endereços hostis, 27 endereços IP não públicos e 11 redirecionamentos recusados.",
+    "Interface nova: mapa por teclado, axe nos dois temas e em cinco larguras, sem sobreposição de blocos.",
+    "Exemplo por registro: 178 de 180 nos dois leiautes em que cabem, com cada valor no campo certo.",
+    "Busca: códigos, acentos, caixa e espaços; payloads não executam; funciona por teclado.",
+    "Glossário: 41 termos, cada um com fonte provada nos dois manuais ou em regra já conferida.",
+    "Build de produção simulado: canônicos, sitemap, robots, Open Graph e security.txt corretos.",
+    "Lighthouse em nove páginas: acessibilidade 100, boas práticas 100 e desempenho de 89 a 99, sem deslocamento de layout.",
+    "Todos os links internos e âncoras do site e do índice de busca levam a lugares que existem.",
+    "Nenhum dado pessoal, segredo, mapa de código ou caminho interno no site gerado nem nos arquivos do repositório.",
+    "Armazenamento cheio ou bloqueado não quebra o site."
+  ],
+  "acoes": [
+    "Validar os três arquivos de exemplo no programa da ECF e confirmar a regra de arredondamento.",
+    "Revisão por contador: regras, exemplos, textos dos blocos e seleção de erros.",
+    "Esclarecer o tipo de campo D, que o trecho lido do Manual não define.",
+    "Abrir C:\\dev\\ecf-descomplicada no Claude Code e confirmar o disparo real dos hooks.",
+    "Ligar o monitor no GitHub: permissões, proteção do ramo e primeira execução.",
+    "Antes de publicar: usuário do GitHub, para o e-mail oculto e o security.txt.",
+    "Na prévia da Vercel: conferir cabeçalhos, HSTS, 404 e 405.",
+    "Baixa: reduzir o JavaScript da página inicial e da do exemplo do lucro real, as duas com desempenho 89."
+  ],
+  "fora": [
+    "Cabeçalhos, 405 e 400 foram testados no servidor local, que lê o vercel.json. O comportamento da Vercel não foi testado; HSTS só foi conferido no arquivo.",
+    "Leitor de tela real, dispositivos físicos, Firefox, Safari e Edge.",
+    "Revisão humana por contador: os itens estão como “conferido”, não “revisado”.",
+    "Situações fora do quiz: transformação, extinção, fusão, cisão, incorporação e desenquadramento de imune ou isenta. Os prazos de extinção, fusão, cisão e incorporação aparecem em tabela, mas o quiz não as pergunta.",
+    "Formas mistas de tributação: a matriz cobre cinco formas puras; as mistas seguem a condição escrita em cada registro.",
+    "Programa da ECF: os arquivos de exemplo não foram importados nele.",
+    "Simulador: anual por estimativa, incentivos, atividade rural, instituições financeiras e regras da LC 224/2025.",
+    "Tabelas dinâmicas: só as linhas usadas nos exemplos foram importadas.",
+    "Hooks: testados com a entrada que o Claude Code envia, mas não dentro de uma sessão aberta na pasta do projeto.",
+    "Workflows: sintaxe e permissões conferidas, mas não executados no GitHub.",
+    "DOU: leitura manual; INLABS não construído.",
+    "O Bloco S está fora do escopo por decisão do usuário.",
+    "Cabeçalhos e domínio reais: só no preview da Vercel.",
+    "Rate limit e cache de borda: não há rota de API; o site é estático.",
+    "CI no Linux: não executado."
+  ],
+  "reaproveitados": [
+    "PF-001: as notas do Lighthouse vêm de tests/lighthouse.json, medidas no mesmo dia e na mesma versão do código; o teste confere os limites. Todos os demais casos foram revalidados nesta execução."
+  ]
+}

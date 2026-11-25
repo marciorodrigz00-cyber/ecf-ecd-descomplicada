@@ -1,0 +1,42 @@
+{
+  "rastreio": {
+    "id": "arq-legendas",
+    "fonte": {
+      "id": "manual-12",
+      "url": "https://www.gov.br/sped/pt-br/assuntos/escrituracoes-digitais/ecf/manuais-e-documentos-tecnicos",
+      "trecho": "Capítulo 2, regras de preenchimento e obrigatoriedade dos registros"
+    },
+    "norma": "Manual de Orientação do Leiaute (ADE Cofis nº 2/2026 e nº 38/2024)",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": [
+        2025,
+        2026
+      ]
+    },
+    "verificadoEm": "2026-11-24",
+    "status": "conferido"
+  },
+  "tipos": {
+    "C": "Alfanumérico",
+    "N": "Numérico, com vírgula decimal",
+    "NS": "Numérico com sinal; sem sinal, vale como positivo",
+    "D": "A verificar: o trecho lido do Manual não define este tipo"
+  },
+  "obrigatoriedade": {
+    "O": "Obrigatório",
+    "F": "Facultativo",
+    "OC": "Obrigatório condicional",
+    "FC": "Facultativo condicional",
+    "N": "Não deve existir"
+  },
+  "entrada": "Na importação do arquivo para o programa",
+  "saida": "Na geração do arquivo para transmissão"
+}

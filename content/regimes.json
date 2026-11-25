@@ -1,0 +1,295 @@
+{
+  "rastreio": {
+    "id": "arq-regimes",
+    "fonte": {
+      "id": "manual-12",
+      "url": "https://www.gov.br/sped/pt-br/assuntos/escrituracoes-digitais/ecf/manuais-e-documentos-tecnicos",
+      "trecho": "Tabela de obrigatoriedade dos registros e seção de cada bloco"
+    },
+    "norma": "Manual de Orientação do Leiaute (ADE Cofis nº 2/2026 e nº 38/2024)",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": [
+        2025,
+        2026
+      ]
+    },
+    "verificadoEm": "2026-11-24",
+    "status": "conferido"
+  },
+  "regimes": [
+    {
+      "id": "real",
+      "nome": "Lucro real",
+      "forma": "1"
+    },
+    {
+      "id": "presumido",
+      "nome": "Lucro presumido",
+      "forma": "5"
+    },
+    {
+      "id": "arbitrado",
+      "nome": "Lucro arbitrado",
+      "forma": "6"
+    },
+    {
+      "id": "imune",
+      "nome": "Imune",
+      "forma": "8"
+    },
+    {
+      "id": "isenta",
+      "nome": "Isenta",
+      "forma": "9"
+    }
+  ],
+  "linhas": [
+    {
+      "bloco": "0",
+      "base": [
+        "0010"
+      ],
+      "nota": "Obrigatório para todas.",
+      "celulas": {
+        "real": "sim",
+        "presumido": "sim",
+        "arbitrado": "sim",
+        "imune": "sim",
+        "isenta": "sim"
+      }
+    },
+    {
+      "bloco": "C",
+      "base": [
+        "C040"
+      ],
+      "nota": "Existe quando há recuperação da ECD.",
+      "celulas": {
+        "real": "depende",
+        "presumido": "depende",
+        "arbitrado": "depende",
+        "imune": "depende",
+        "isenta": "depende"
+      }
+    },
+    {
+      "bloco": "E",
+      "base": [
+        "E010"
+      ],
+      "nota": "Existe quando há recuperação de dados.",
+      "celulas": {
+        "real": "depende",
+        "presumido": "depende",
+        "arbitrado": "depende",
+        "imune": "depende",
+        "isenta": "depende"
+      }
+    },
+    {
+      "bloco": "J",
+      "base": [
+        "J050"
+      ],
+      "nota": "No presumido e nas imunes ou isentas, quando a ECD é recuperada.",
+      "celulas": {
+        "real": "sim",
+        "presumido": "depende",
+        "arbitrado": "nao",
+        "imune": "depende",
+        "isenta": "depende"
+      }
+    },
+    {
+      "bloco": "K",
+      "base": [
+        "K030"
+      ],
+      "nota": "No presumido e nas imunes ou isentas, quando a ECD é recuperada.",
+      "celulas": {
+        "real": "sim",
+        "presumido": "depende",
+        "arbitrado": "nao",
+        "imune": "depende",
+        "isenta": "depende"
+      }
+    },
+    {
+      "bloco": "L",
+      "base": [
+        "L030"
+      ],
+      "nota": "Só no lucro real e nas formas mistas com lucro real.",
+      "celulas": {
+        "real": "sim",
+        "presumido": "nao",
+        "arbitrado": "nao",
+        "imune": "nao",
+        "isenta": "nao"
+      }
+    },
+    {
+      "bloco": "M",
+      "base": [
+        "M030"
+      ],
+      "nota": "Só no lucro real e nas formas mistas com lucro real.",
+      "celulas": {
+        "real": "sim",
+        "presumido": "nao",
+        "arbitrado": "nao",
+        "imune": "nao",
+        "isenta": "nao"
+      }
+    },
+    {
+      "bloco": "N",
+      "base": [
+        "N030"
+      ],
+      "nota": "Só no lucro real e nas formas mistas com lucro real.",
+      "celulas": {
+        "real": "sim",
+        "presumido": "nao",
+        "arbitrado": "nao",
+        "imune": "nao",
+        "isenta": "nao"
+      }
+    },
+    {
+      "bloco": "P",
+      "base": [
+        "P030"
+      ],
+      "nota": "Lucro presumido e formas mistas com presumido.",
+      "celulas": {
+        "real": "nao",
+        "presumido": "sim",
+        "arbitrado": "nao",
+        "imune": "nao",
+        "isenta": "nao"
+      }
+    },
+    {
+      "bloco": "Q",
+      "base": [
+        "Q100"
+      ],
+      "nota": "Facultativo condicional: depende do tipo de escrituração e das regras do registro.",
+      "celulas": {
+        "real": "nao",
+        "presumido": "depende",
+        "arbitrado": "depende",
+        "imune": "depende",
+        "isenta": "depende"
+      }
+    },
+    {
+      "bloco": "T",
+      "base": [
+        "T030"
+      ],
+      "nota": "Lucro arbitrado e formas mistas com arbitrado.",
+      "celulas": {
+        "real": "nao",
+        "presumido": "nao",
+        "arbitrado": "sim",
+        "imune": "nao",
+        "isenta": "nao"
+      }
+    },
+    {
+      "bloco": "U",
+      "base": [
+        "U030"
+      ],
+      "nota": "Balanço e resultado dependem da recuperação da ECD; os cálculos, de haver apuração.",
+      "celulas": {
+        "real": "nao",
+        "presumido": "nao",
+        "arbitrado": "nao",
+        "imune": "sim",
+        "isenta": "sim"
+      }
+    },
+    {
+      "bloco": "V",
+      "base": [
+        "V010"
+      ],
+      "nota": "Depende da resposta sobre DEREX no bloco 0.",
+      "celulas": {
+        "real": "depende",
+        "presumido": "depende",
+        "arbitrado": "depende",
+        "imune": "depende",
+        "isenta": "depende"
+      }
+    },
+    {
+      "bloco": "W",
+      "base": [
+        "W100"
+      ],
+      "nota": "Depende da resposta sobre Declaração País-a-País no bloco 0.",
+      "celulas": {
+        "real": "depende",
+        "presumido": "depende",
+        "arbitrado": "depende",
+        "imune": "depende",
+        "isenta": "depende"
+      }
+    },
+    {
+      "bloco": "X",
+      "base": [
+        "X390"
+      ],
+      "nota": "Cada registro depende de uma resposta do bloco 0. Para imunes e isentas, há o demonstrativo de origem e aplicação de recursos.",
+      "celulas": {
+        "real": "depende",
+        "presumido": "depende",
+        "arbitrado": "depende",
+        "imune": "sim",
+        "isenta": "sim"
+      }
+    },
+    {
+      "bloco": "Y",
+      "base": [
+        "Y600",
+        "Y612"
+      ],
+      "nota": "Sócios e dirigentes nas tributadas; dirigentes nas imunes e isentas. Os demais registros dependem do bloco 0.",
+      "celulas": {
+        "real": "sim",
+        "presumido": "sim",
+        "arbitrado": "sim",
+        "imune": "sim",
+        "isenta": "sim"
+      }
+    },
+    {
+      "bloco": "9",
+      "base": [
+        "9900"
+      ],
+      "nota": "Obrigatório para todas.",
+      "celulas": {
+        "real": "sim",
+        "presumido": "sim",
+        "arbitrado": "sim",
+        "imune": "sim",
+        "isenta": "sim"
+      }
+    }
+  ]
+}

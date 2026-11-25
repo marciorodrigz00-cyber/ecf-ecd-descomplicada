@@ -1,0 +1,29 @@
+{
+  "id": "nov-manual-leiaute-12-julho-2026",
+  "slug": "manual-leiaute-12-julho-2026",
+  "data": "2026-07-23",
+  "tipo": "leiaute",
+  "titulo": "Manual do leiaute 12 atualizado",
+  "iniciante": "O guia oficial de preenchimento ganhou uma versão nova.",
+  "profissional": "Versões em PDF e Word do Manual com data de atualização de 23/07/2026. É a versão usada neste site.",
+  "registros": [],
+  "fonte": {
+    "id": "manual-12",
+    "url": "https://www.gov.br/sped/pt-br/assuntos/escrituracoes-digitais/ecf/manuais-e-documentos-tecnicos",
+    "trecho": "Título dos arquivos, data de atualização"
+  },
+  "norma": "Manual de Orientação do Leiaute 12 (ADE Cofis nº 2/2026)",
+  "leiautes": [
+    "12"
+  ],
+  "vigencia": {
+    "acNormal": [
+      2025
+    ],
+    "situacaoEspecial": [
+      2026
+    ]
+  },
+  "verificadoEm": "2026-11-25",
+  "status": "conferido"
+}

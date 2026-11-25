@@ -1,0 +1,81 @@
+{
+  "rastreio": {
+    "id": "arq-divergencias",
+    "fonte": {
+      "id": "manual-12",
+      "url": "https://www.gov.br/sped/pt-br/assuntos/escrituracoes-digitais/ecf/manuais-e-documentos-tecnicos",
+      "trecho": "Trechos do próprio Manual citados em cada item"
+    },
+    "norma": "Manual de Orientação do Leiaute (ADE Cofis nº 2/2026 e nº 38/2024)",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": [
+        2025,
+        2026
+      ]
+    },
+    "verificadoEm": "2026-11-24",
+    "status": "conferido"
+  },
+  "itens": [
+    {
+      "onde": "Tabela de obrigatoriedade",
+      "leiautes": [
+        "11",
+        "12"
+      ],
+      "texto": "O registro de encerramento do bloco 9 aparece como 9099 na tabela e como 9990 na seção. O site usa 9990."
+    },
+    {
+      "onde": "Tabela de obrigatoriedade",
+      "leiautes": [
+        "11",
+        "12"
+      ],
+      "texto": "O campo de tipo de escrituração aparece ora como TIP_ESC_PRE, ora como TIP_ESP_PRE. O site mantém o texto do Manual."
+    },
+    {
+      "onde": "J050, W100, X370 e Y600",
+      "leiautes": [
+        "11",
+        "12"
+      ],
+      "texto": "Algumas regras citam campos com nome diferente do que está na tabela do registro."
+    },
+    {
+      "onde": "X451",
+      "leiautes": [
+        "11"
+      ],
+      "texto": "A seção está repetida no Manual do leiaute 11. O site usa a primeira."
+    },
+    {
+      "onde": "0000",
+      "leiautes": [
+        "12"
+      ],
+      "texto": "O exemplo do Manual do leiaute 12 ainda mostra o código de versão do leiaute 11."
+    },
+    {
+      "onde": "M500",
+      "leiautes": [
+        "12"
+      ],
+      "texto": "As colunas de lançamentos descrevem os indicadores C e D ao contrário das colunas de saldo. O exemplo do próprio Manual só fecha com o mesmo sentido nas duas; os exemplos deste site seguem o exemplo do Manual."
+    },
+    {
+      "onde": "Y720",
+      "leiautes": [
+        "12"
+      ],
+      "texto": "A descrição diz que o registro é obrigatório para todas na entrega original; a tabela de obrigatoriedade diz que só na entrega com atraso. Os exemplos supõem entrega no prazo e não o trazem."
+    }
+  ]
+}

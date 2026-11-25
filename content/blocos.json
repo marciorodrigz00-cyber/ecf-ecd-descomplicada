@@ -1,0 +1,410 @@
+{
+ "rastreio": {
+  "id": "arq-blocos",
+  "fonte": {
+   "id": "manual-12",
+   "url": "https://www.gov.br/sped/pt-br/assuntos/escrituracoes-digitais/ecf/manuais-e-documentos-tecnicos",
+   "trecho": "Descrição de cada bloco e regras de validação citadas em cada erro. As comparações são explicações do site"
+  },
+  "norma": "Manual de Orientação do Leiaute (ADE Cofis nº 2/2026 e nº 38/2024)",
+  "leiautes": [
+   "11",
+   "12"
+  ],
+  "vigencia": {
+   "acNormal": [
+    2024,
+    2025
+   ],
+   "situacaoEspecial": [
+    2025,
+    2026
+   ]
+  },
+  "verificadoEm": "2026-11-24",
+  "status": "conferido"
+ },
+ "blocos": [
+  {
+   "letra": "0",
+   "curto": "Abertura",
+   "objetivo": "Diz quem é a empresa, qual período o arquivo cobre e como ela é tributada. As respostas daqui definem quais outros blocos aparecem.",
+   "analogia": "É a capa do dossiê, com o índice do que vem dentro.",
+   "origem": "Cadastro da empresa e decisões tributárias do ano.",
+   "erros": [
+    {
+     "titulo": "Usar o leiaute de outro ano",
+     "comoEvitar": "Confirme a versão do leiaute do período antes de gerar o arquivo.",
+     "registro": "0000",
+     "regra": "REGRA_LEIAUTE_VIGENTE"
+    },
+    {
+     "titulo": "Combinar forma de apuração e regime que não andam juntos",
+     "comoEvitar": "Defina primeiro a forma de tributação e só depois o período de apuração.",
+     "registro": "0010",
+     "regra": "REGRA_FORMA_APUR_VALIDA"
+    },
+    {
+     "titulo": "Informar quantidade de SCP diferente das identificadas",
+     "comoEvitar": "Conte as SCP listadas e repita o mesmo número nos parâmetros.",
+     "registro": "0020",
+     "regra": "REGRA_QTD_SCP"
+    }
+   ]
+  },
+  {
+   "letra": "C",
+   "curto": "Dados da ECD",
+   "objetivo": "Guarda a contabilidade que veio da ECD: contas e saldos. O programa preenche sozinho; ninguém digita aqui.",
+   "analogia": "É a fotocópia do livro contábil anexada ao dossiê.",
+   "origem": "ECD transmitida do mesmo período.",
+   "erros": [
+    {
+     "titulo": "Trocar o plano de contas sem informar a transferência de saldos",
+     "comoEvitar": "Na ECD, registre a passagem de saldos da conta antiga para a nova.",
+     "registro": "C157",
+     "regra": "REGRA_C157_OBRIGATORIO"
+    },
+    {
+     "titulo": "Saldo inicial da ECD diferente do final da ECF anterior",
+     "comoEvitar": "Compare os dois saldos antes de recuperar e corrija a origem.",
+     "registro": "E015",
+     "regra": "REGRA_COMPATIBILIDADE_C155_E015"
+    }
+   ]
+  },
+  {
+   "letra": "E",
+   "curto": "ECF anterior",
+   "objetivo": "Traz os saldos finais da ECF do ano passado e calcula os saldos do período a partir da ECD. Também é preenchido pelo programa.",
+   "analogia": "É a página “continua do volume anterior”.",
+   "origem": "ECF anterior transmitida e dados recuperados da ECD.",
+   "erros": [
+    {
+     "titulo": "Saldo inicial de hoje não bate com o final de ontem",
+     "comoEvitar": "Se o saldo do ano anterior estava errado, retifique aquela ECF antes.",
+     "registro": "E015",
+     "regra": "REGRA_EXISTENCIA_K155_E015"
+    },
+    {
+     "titulo": "Conta mapeada no ano passado sumiu do mapeamento atual",
+     "comoEvitar": "Mantenha o mapeamento ou registre a substituição da conta.",
+     "registro": "E015",
+     "regra": "REGRA_EXISTENCIA_MAPEAMENTO"
+    }
+   ]
+  },
+  {
+   "letra": "J",
+   "curto": "Plano de contas",
+   "objetivo": "Liga cada conta da empresa a uma conta do plano padrão da Receita, o referencial.",
+   "analogia": "É o dicionário que traduz o vocabulário da empresa para o do Fisco.",
+   "origem": "Plano de contas da ECD, com o mapeamento feito lá ou aqui.",
+   "erros": [
+    {
+     "titulo": "Ligar a conta a uma conta referencial sintética",
+     "comoEvitar": "Escolha sempre uma conta referencial analítica, a do último nível.",
+     "registro": "J051",
+     "regra": "REGRA_COD_CTA_REF_SINTETICA"
+    },
+    {
+     "titulo": "Ligar contas de naturezas diferentes",
+     "comoEvitar": "Ativo com ativo, passivo com passivo, resultado com resultado.",
+     "registro": "J051",
+     "regra": "REGRA_NATUREZA_REF"
+    },
+    {
+     "titulo": "Conta analítica patrimonial em nível muito alto",
+     "comoEvitar": "Confira a hierarquia do plano de contas na ECD.",
+     "registro": "J050",
+     "regra": "REGRA_ANALITICA_NIVEL4"
+    }
+   ]
+  },
+  {
+   "letra": "K",
+   "curto": "Saldos",
+   "objetivo": "Mostra os saldos das contas em cada período de apuração, já com o vínculo ao plano referencial.",
+   "analogia": "É o extrato de cada conta, período a período.",
+   "origem": "Saldos calculados da ECD, editáveis no programa.",
+   "erros": [
+    {
+     "titulo": "Saldos que não fecham entre devedores e credores",
+     "comoEvitar": "Confira o balancete do período: a soma precisa dar zero.",
+     "registro": "K155",
+     "regra": "REGRA_VALIDACAO_SOMA_SALDO_FINAL"
+    },
+    {
+     "titulo": "Total de débitos diferente do total de créditos",
+     "comoEvitar": "Procure lançamento de um lado só ou saldo digitado à mão.",
+     "registro": "K155",
+     "regra": "REGRA_VALIDACAO_DEB_DIF_CRED"
+    },
+    {
+     "titulo": "Justificar divergência com texto curto demais",
+     "comoEvitar": "Explique a causa da diferença; o programa exige um tamanho mínimo.",
+     "registro": "K915",
+     "regra": "REGRA_K915_JUSTIFICATIVA"
+    }
+   ]
+  },
+  {
+   "letra": "L",
+   "curto": "Lucro líquido",
+   "objetivo": "Monta o balanço e o resultado no formato da Receita e chega ao lucro líquido, para quem está no lucro real.",
+   "analogia": "É a demonstração que abre a conta do imposto.",
+   "origem": "Contas referenciais do bloco K.",
+   "erros": [
+    {
+     "titulo": "Ativo diferente do passivo",
+     "comoEvitar": "Revise o mapeamento: conta sem vínculo costuma ser a causa.",
+     "registro": "L100",
+     "regra": "REGRA_BALANCO_SALDO_FINAL"
+    },
+    {
+     "titulo": "Balanço referencial não confere com os saldos contábeis",
+     "comoEvitar": "Refaça a ligação entre contas antes de ajustar valores.",
+     "registro": "L100",
+     "regra": "REGRA_COMPARA_CONT_REF_SF"
+    }
+   ]
+  },
+  {
+   "letra": "M",
+   "curto": "e-Lalur e e-Lacs",
+   "objetivo": "É o e-Lalur e o e-Lacs: parte do lucro contábil, soma adições, tira exclusões e guarda o que fica para os próximos anos.",
+   "analogia": "É a planilha que transforma lucro contábil em lucro que paga imposto, com uma caderneta de saldos ao lado.",
+   "origem": "Resultado do bloco L, contas do bloco K e saldos da ECF anterior.",
+   "erros": [
+    {
+     "titulo": "Valor da linha diferente da soma dos detalhes",
+     "comoEvitar": "Some os vínculos com a parte B e com as contas antes de fechar.",
+     "registro": "M300",
+     "regra": "REGRA_VALOR_DETALHADO"
+    },
+    {
+     "titulo": "Compensar prejuízo sem apontar a conta da parte B",
+     "comoEvitar": "Toda compensação de prejuízo precisa vir de uma conta da parte B.",
+     "registro": "M300",
+     "regra": "REGRA_IND_RELACAO"
+    },
+    {
+     "titulo": "Saldo inicial da parte B diferente do recuperado",
+     "comoEvitar": "Traga o saldo da ECF anterior e corrija lá, se estiver errado.",
+     "registro": "M010",
+     "regra": "REGRA_SALDOS_M010_E020"
+    }
+   ]
+  },
+  {
+   "letra": "N",
+   "curto": "IRPJ e CSLL",
+   "objetivo": "Calcula o IRPJ e a CSLL do lucro real, seja por trimestre, seja com estimativas mensais e ajuste no fim do ano.",
+   "analogia": "É a calculadora do imposto.",
+   "origem": "Base apurada no bloco M, mais incentivos e retenções.",
+   "erros": [
+    {
+     "titulo": "Informar retenção no cálculo sem detalhar a origem",
+     "comoEvitar": "Preencha o demonstrativo de retenções na fonte com os mesmos valores.",
+     "registro": "Y570",
+     "regra": "REGRA_EXISTE_IR_RET"
+    },
+    {
+     "titulo": "Total de incentivos diferente da soma das parcelas",
+     "comoEvitar": "Recalcule cada parcela antes do total.",
+     "registro": "N615",
+     "regra": "REGRA_TOTAL_DIFERENTE"
+    }
+   ]
+  },
+  {
+   "letra": "P",
+   "curto": "Lucro presumido",
+   "objetivo": "Apura o IRPJ e a CSLL de quem está no lucro presumido, e mostra balanço e resultado quando há contabilidade recuperada.",
+   "analogia": "É a conta em que o lucro é estimado a partir da receita.",
+   "origem": "Receitas do trimestre e, se houver, saldos do bloco K.",
+   "erros": [
+    {
+     "titulo": "Saldo inicial do trimestre diferente do final do anterior",
+     "comoEvitar": "Feche um trimestre antes de abrir o outro.",
+     "registro": "P100",
+     "regra": "REGRA_BAL_SI_IGUAL_ANT"
+    },
+    {
+     "titulo": "Ativo diferente do passivo",
+     "comoEvitar": "Revise o mapeamento referencial e os saldos recuperados.",
+     "registro": "P100",
+     "regra": "REGRA_BALANCO_SALDO_FINAL"
+    }
+   ]
+  },
+  {
+   "letra": "Q",
+   "curto": "Livro caixa",
+   "objetivo": "Lista entradas e saídas de dinheiro, uma por linha, com o saldo depois de cada uma.",
+   "analogia": "É o caderno de caixa passado a limpo.",
+   "origem": "Livro caixa da empresa.",
+   "erros": [
+    {
+     "titulo": "Preencher entrada e saída na mesma linha",
+     "comoEvitar": "Use uma linha para cada movimento.",
+     "registro": "Q100",
+     "regra": "REGRA_ENTRADA_SAIDA"
+    },
+    {
+     "titulo": "Saldo que não acompanha os movimentos",
+     "comoEvitar": "Recalcule: saldo anterior, mais entrada, menos saída.",
+     "registro": "Q100",
+     "regra": "REGRA_SALDO_LC"
+    }
+   ]
+  },
+  {
+   "letra": "T",
+   "curto": "Lucro arbitrado",
+   "objetivo": "Apura o IRPJ e a CSLL dos trimestres em que o lucro foi arbitrado.",
+   "analogia": "É a conta usada quando o lucro é definido por arbitramento.",
+   "origem": "Receitas do trimestre arbitrado.",
+   "erros": [
+    {
+     "titulo": "Deixar linha editável sem valor",
+     "comoEvitar": "Confira as linhas do trimestre; quando não houver valor, siga o que o programa pede.",
+     "registro": "T120",
+     "regra": "REGRA_OBRIGATORIO_TIPO_DIFERENTE_R"
+    },
+    {
+     "titulo": "Importar período que não é do arquivo",
+     "comoEvitar": "Gere o arquivo só com os trimestres do período da ECF.",
+     "registro": "T030",
+     "regra": "REGRA_PERIODO_DESPREZADO"
+    }
+   ]
+  },
+  {
+   "letra": "U",
+   "curto": "Imunes e isentas",
+   "objetivo": "Mostra balanço e resultado das entidades imunes e isentas e calcula imposto quando houver atividade tributada.",
+   "analogia": "É a prestação de contas de quem, em regra, não paga esses tributos.",
+   "origem": "Contas recuperadas da ECD, pelo bloco K.",
+   "erros": [
+    {
+     "titulo": "Ativo diferente do passivo",
+     "comoEvitar": "Revise o mapeamento referencial da entidade.",
+     "registro": "U100",
+     "regra": "REGRA_BALANCO_SALDO_FINAL"
+    },
+    {
+     "titulo": "Saldo inicial diferente do final da ECF anterior",
+     "comoEvitar": "Recupere a ECF anterior e corrija a origem da diferença.",
+     "registro": "U100",
+     "regra": "REGRA_COMPATIBILIDADE_U100_E010"
+    }
+   ]
+  },
+  {
+   "letra": "V",
+   "curto": "DEREX",
+   "objetivo": "Declara o uso de recursos em moeda estrangeira recebidos por exportações (DEREX).",
+   "analogia": "É o extrato do dinheiro de exportação mantido fora do país.",
+   "origem": "Controles de câmbio e contas no exterior.",
+   "erros": [
+    {
+     "titulo": "Informar mês fora do período do arquivo",
+     "comoEvitar": "Use só os meses entre o início e o fim da escrituração.",
+     "registro": "V030",
+     "regra": "REGRA_MES_FORA_PERIODO"
+    },
+    {
+     "titulo": "Indicar o Brasil como país da instituição",
+     "comoEvitar": "O registro trata de instituições no exterior.",
+     "registro": "V010",
+     "regra": "REGRA_DIFERENTE_BRASIL"
+    }
+   ]
+  },
+  {
+   "letra": "W",
+   "curto": "País-a-País",
+   "objetivo": "Informa dados do grupo multinacional por jurisdição: a Declaração País-a-País.",
+   "analogia": "É o mapa de onde o grupo atua.",
+   "origem": "Dados consolidados do grupo multinacional.",
+   "erros": [
+    {
+     "titulo": "Data final antes da inicial",
+     "comoEvitar": "Confira o período da declaração.",
+     "registro": "W100",
+     "regra": "REGRA_W100_DATA_MAIOR"
+    },
+    {
+     "titulo": "Período da declaração maior que um ano",
+     "comoEvitar": "Declare um período por vez.",
+     "registro": "W100",
+     "regra": "REGRA_DATA_MENOR_UM_ANO"
+    }
+   ]
+  },
+  {
+   "letra": "X",
+   "curto": "Informações econômicas",
+   "objetivo": "Reúne informações econômicas: incentivos fiscais, operações com o exterior, participações e, para imunes e isentas, origem e uso dos recursos.",
+   "analogia": "É o questionário sobre o que a empresa faz além da conta do imposto.",
+   "origem": "Contratos, controles gerenciais e parâmetros do bloco 0.",
+   "erros": [
+    {
+     "titulo": "Não consolidar controlada no exterior sem dizer o motivo",
+     "comoEvitar": "Preencha o motivo sempre que responder que não consolida.",
+     "registro": "X340",
+     "regra": "REGRA_MOTIVO_NAO_CONSOL_PREENCHER"
+    },
+    {
+     "titulo": "Receita incentivada diferente da informada no cálculo",
+     "comoEvitar": "Confira os dois registros antes de transmitir.",
+     "registro": "X280",
+     "regra": "REGRA_RECEITA_ISENCAO"
+    }
+   ]
+  },
+  {
+   "letra": "Y",
+   "curto": "Informações gerais",
+   "objetivo": "Traz informações gerais: sócios e dirigentes, retenções na fonte, participações e dados para multa por atraso.",
+   "analogia": "É a ficha cadastral ampliada.",
+   "origem": "Contrato social, folha, comprovantes de retenção.",
+   "erros": [
+    {
+     "titulo": "Classificar sócio como pessoa física e informar CNPJ",
+     "comoEvitar": "Pessoa física com CPF; pessoa jurídica com CNPJ.",
+     "registro": "Y600",
+     "regra": "REGRA_CPF_IND_QUALIF_PF"
+    },
+    {
+     "titulo": "Preencher retenção sem o valor do imposto",
+     "comoEvitar": "Confira os comprovantes e o código de receita.",
+     "registro": "Y570",
+     "regra": "REGRA_COD_REC_IR_RET"
+    }
+   ]
+  },
+  {
+   "letra": "9",
+   "curto": "Encerramento",
+   "objetivo": "Fecha o arquivo e conta quantas linhas há de cada tipo. Também lista os avisos do programa.",
+   "analogia": "É a contracapa, com a contagem das páginas.",
+   "origem": "Gerado pelo programa.",
+   "erros": [
+    {
+     "titulo": "Ignorar os avisos da validação",
+     "comoEvitar": "Leia cada aviso antes de transmitir: ele mostra divergência que não bloqueia, mas precisa de explicação.",
+     "registro": "9100",
+     "regra": null
+    },
+    {
+     "titulo": "Editar o arquivo depois de gerado",
+     "comoEvitar": "Se mudar qualquer linha, gere de novo: as contagens precisam bater.",
+     "registro": "9900",
+     "regra": null
+    }
+   ]
+  }
+ ]
+}

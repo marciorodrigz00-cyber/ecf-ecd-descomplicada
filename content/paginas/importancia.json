@@ -1,0 +1,62 @@
+[
+  {
+    "id": "fisco",
+    "titulo": "Para que serve ao Fisco",
+    "iniciante": [
+      "Com a ECF, a Receita consegue conferir se o imposto calculado combina com a contabilidade."
+    ],
+    "profissional": [
+      "Concentra a demonstração da base de cálculo do IRPJ e da CSLL e permite cruzar dados contábeis e fiscais."
+    ],
+    "regras": [
+      "ecf-conteudo",
+      "sped-cruzamento"
+    ]
+  },
+  {
+    "id": "empresa",
+    "titulo": "Para que serve à empresa",
+    "iniciante": [
+      "É o histórico oficial dos ajustes. Se houve prejuízo em um ano, é na ECF que ele fica guardado para ser usado depois, dentro das regras."
+    ],
+    "profissional": [
+      "Controla valores a adicionar, excluir ou compensar em períodos seguintes. Erro de saldo se propaga, porque cada ECF parte da anterior."
+    ],
+    "regras": [
+      "controle-saldos",
+      "ecf-anterior-exigida"
+    ]
+  },
+  {
+    "id": "cruzamentos",
+    "titulo": "O que é cruzado",
+    "iniciante": [
+      "A ECF conversa com outros arquivos. Se você muda a contabilidade já enviada, a ECF precisa acompanhar. Se a ECF muda o imposto, a DCTF também."
+    ],
+    "profissional": [
+      "Vínculos previstos em norma: ECD do mesmo período, ECF imediatamente anterior e DCTF. Outros cruzamentos usados pelo Fisco não estão descritos nas normas lidas e não são afirmados aqui."
+    ],
+    "regras": [
+      "recupera-ecd",
+      "recupera-ecf-anterior",
+      "retificacao-ecd",
+      "retificacao-dctf"
+    ]
+  },
+  {
+    "id": "riscos",
+    "titulo": "Riscos de errar",
+    "iniciante": [
+      "Errou? Dá para entregar uma nova ECF no lugar da anterior. Mas há limites: corrigir depois que a fiscalização começou pode não ter efeito."
+    ],
+    "profissional": [
+      "A retificadora substitui a anterior por inteiro, tem limites materiais e pode exigir retificação em cadeia dos anos seguintes."
+    ],
+    "regras": [
+      "retificacao",
+      "retificacao-regime",
+      "retificacao-parte-b",
+      "retificacao-sem-efeito"
+    ]
+  }
+]

@@ -1,0 +1,1112 @@
+{
+ "rastreio": {
+  "id": "arq-12-p",
+  "fonte": {
+   "id": "manual-12",
+   "url": "https://www.gov.br/sped/pt-br/assuntos/escrituracoes-digitais/ecf/manuais-e-documentos-tecnicos",
+   "trecho": "Seção do bloco P"
+  },
+  "norma": "ADE Cofis nº 2/2026",
+  "leiautes": [
+   "12"
+  ],
+  "vigencia": {
+   "acNormal": [
+    2025
+   ],
+   "situacaoEspecial": [
+    2026
+   ]
+  },
+  "verificadoEm": "2026-11-24",
+  "status": "extraido"
+ },
+ "bloco": "P",
+ "descricao": "Apresenta o balanço patrimonial, a demonstração do resultado do exercício e apura o IRPJ e a CSLL com base no lucro presumido.",
+ "registros": [
+  {
+   "codigo": "P001",
+   "nome": "Abertura do Bloco P",
+   "ordem": 82,
+   "nivel": "1",
+   "ocorrencia": "[1;1]",
+   "chave": "[REG]",
+   "entrada": "F",
+   "saida": "O",
+   "descricao": [],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto fixo contendo a identificação do registro (P001).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[P001]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "IND_DAD",
+     "descricao": "Indicador de movimento:\n0 – Bloco com dados informados.\n1 – Bloco sem dados informados.",
+     "tipo": "N",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[0;1]",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_OCORRENCIA_UNITARIA_ARQ",
+     "texto": "Verifica se registro ocorreu apenas uma vez por arquivo, considerando a chave “P001” (REG). Se a regra não for cumprida, a ECF gera um erro."
+    }
+   ],
+   "regrasCampo": [],
+   "exemplo": [
+    "|P001|0|",
+    "|P001|: Identificação do tipo do registro.",
+    "|0|: Indica que o bloco possui dados informados."
+   ]
+  },
+  {
+   "codigo": "P030",
+   "nome": "Identificação dos Períodos e Formas de Apuração do IRPJ e da CSLL das Empresas Tributadas pelo Lucro Presumido",
+   "ordem": 83,
+   "nivel": "2",
+   "ocorrencia": "[0;4]",
+   "chave": "PER_APUR",
+   "entrada": "F",
+   "saida": "OC\n(Se 0010. FORMA_TRIB = “3”, “4”, “5” ou “7” E 0010.FORMA_TRIB_PER = “P”)",
+   "descricao": [
+    "Registro de identificação dos períodos da escrituração necessários conforme definições de parâmetros do Bloco 0."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (P030).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[P030]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "DT_INI",
+     "descricao": "Data do Início do Período",
+     "tipo": "N",
+     "tamanho": "8",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "DT_FIN",
+     "descricao": "Data do Fim do período",
+     "tipo": "N",
+     "tamanho": "8",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 4,
+     "nome": "PER_APUR",
+     "descricao": "A00 – Anual (para registrar o Balanço Patrimonial anual e a DRE anual)\nT01 – 1º Trimestre\nT02 – 2º Trimestre\nT03 – 3º Trimestre\nT04 – 4º Trimestre\nRegra: O período deve estar compreendido entre a data início e data fim da escrituração.\nSE 0010.FORMA_APUR = “T”\n- Deve existir um registro [T01..T04] para cada trimestre marcado no 0010.FORMA_TRIB_PER[1..4] como “P”",
+     "tipo": "C",
+     "tamanho": "3",
+     "decimal": "—",
+     "valores": "[A00; T01; T02; T03; T04]",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_DUPLICIDADE_DESPREZADA",
+     "texto": "Verifica se o registro já foi importado anteriormente, de acordo com a chave e os registros pais. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_PERIODO_DESPREZADO",
+     "texto": "Verifica se a linha deste período existe no arquivo de importação, mas não deve ser importado, pois as datas não compatíveis com o período da ECF. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_LINHA_ALTERADA",
+     "texto": "Verifica se a linha deste período existe no arquivo de importação, mas deve ser alterada, pois as datas não compatíveis com o período da ECF. Se a regra não for cumprida, a ECF gera um aviso."
+    }
+   ],
+   "regrasCampo": [],
+   "exemplo": [
+    "|P030|01092024|31122024|T04|",
+    "|P030|: Identificação do tipo do registro.",
+    "|01092024|: Data de início do período (01/09/2024).",
+    "|31122024|: Data de fim do período (31/12/2024).",
+    "|T04|: Período de apuração (T04 = 4º Trimestre)."
+   ]
+  },
+  {
+   "codigo": "P100",
+   "nome": "Balanço Patrimonial",
+   "ordem": 84,
+   "nivel": "3",
+   "ocorrencia": "[0;N]",
+   "chave": "CODIGO",
+   "entrada": "F",
+   "saida": "OC\n(Se 0010. TIP_ESP_PRE = “C” E\n0010.IND_REC_RECEITA = “2”)",
+   "descricao": [
+    "Apresenta o balanço patrimonial com base nas contas referenciais para o período de apuração. O saldo inicial pode ser replicado do registro E010/E015 ou preenchido. O saldo final será recuperado do registro K155/K156.",
+    "Atenção:",
+    "Caso 0010. TIP_ESC_PRE for igual a “L” (Livro Caixa), este registro não será preenchido; exceto se 0010. IND_REC_RECEITA for igual a “2” (Regime de Competência), quando este registro será obrigatório, mesmo que a empresa não tenha entregue/recuperado a ECD."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (P100).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[P100]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "CODIGO",
+     "descricao": "Código da Conta Referencial (Analíticas e Sintéticas), conforme tabela dinâmica do Sped (Disponibilizada no item II deste registro e no programa da ECF, no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+     "tipo": "C",
+     "tamanho": "50",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "DESCRICAO",
+     "descricao": "Descrição da Conta Referencial.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 4,
+     "nome": "TIPO",
+     "descricao": "Indicador do Tipo de Conta:\nS – Sintética\nA – Analítica",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S; A]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 5,
+     "nome": "NIVEL",
+     "descricao": "Nível da Conta.",
+     "tipo": "N",
+     "tamanho": "3",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 6,
+     "nome": "COD_NAT",
+     "descricao": "Natureza da Conta, conforme tabela do Sped (Disponibilizada no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+     "tipo": "C",
+     "tamanho": "2",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 7,
+     "nome": "COD_CTA_SUP",
+     "descricao": "Código da Conta Sintética de Nível Imediatamente Superior.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 8,
+     "nome": "VAL_CTA_REF_INI",
+     "descricao": "Saldo Inicial da Conta Referencial.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 9,
+     "nome": "IND_VAL_CTA_REF_INI",
+     "descricao": "Indicador da Situação do Saldo Inicial:\nD – Devedor\nC – Credor",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[D; C]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 10,
+     "nome": "VAL_CTA_REF_DEB",
+     "descricao": "Valor Total dos Débitos: Somatório dos valores mapeados.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 11,
+     "nome": "VAL_CTA_REF_CRED",
+     "descricao": "Valor Total dos Créditos: Somatório dos valores mapeados.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 12,
+     "nome": "VAL_CTA_REF_FIN",
+     "descricao": "Saldo Final da Conta Referencial",
+     "tipo": "C",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 13,
+     "nome": "IND_VAL_CTA_REF_FIN",
+     "descricao": "Indicador da Situação do Saldo Final:\nD – Devedor\nC – Credor",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[D; C]",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_COMPARA_CONT_REF_SI",
+     "texto": "Verifica se P100.VAL_CTA_REF_INI é igual ao somatório dos saldos iniciais dos registros K155 “pai” da mesma conta referencial, multiplicado pelo saldo final do registro K156 dividido pelo saldo final do registro K155 “pai”. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_COMPARA_CONT_REF_SF",
+     "texto": "Verifica, para cada período da escrturação, se o somatório do saldo final do registro K156 é igual a P100.VAL_CTA_REF_INI, para a mesma conta referencial. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_COMPATIBILIDADE_P100_E010",
+     "texto": "Verifica se o saldo inicial do primeiro período de apuração da escrituração é diferente dos saldos finais da ECF recuperada. O erro ocorre se (0010.FORMA_TRIB = “3” ou “4”) ou (0010.FORMA_TRIB = “5” ou “7” e 0010.TIP_ESC_PRE = “C”) e 0010.HASH_ECF_ANTERIOR é diferente de vazio e P030.DT.INI é igual a 0000.DT_INI e (P100.VAL_CTA_REF_INI diferente de zero e não for localizada a mesma conta referencial no registro E010 ou P100.VAL_CTA_REF_INI diferente de E010.VAL_CTA_REF ou P100.IND_VAL_CTA_REF_INI diferente de E010.IND_VAL_CTA_REF). Se a regra não for cumprida, a ECF gera um erro."
+    },
+    {
+     "codigo": "REGRA_DUPLICIDADE_DESPREZADA",
+     "texto": "Verifica se o registro já foi importado anteriormente, de acordo com a chave e os registros pais. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_LINHA_DESPREZADA",
+     "texto": "Verifica se o registro existe na importação, mas não será importado por não existir na tabela dinâmica devido às configurações do bloco 0 ou da tabela dinâmica. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_LINHA_ATUALIZADA",
+     "texto": "Verifica se o registro está desatualizado em relação à tabela da RFB. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_BALANCO_SALDO_FINAL",
+     "texto": "Verifica se o saldo final do ativo é igual ao saldo final do passivo. Gera um erro, caso P030.PER_APUR = “T04”."
+    },
+    {
+     "codigo": "REGRA_BALANCO_SALDO_INICIAL",
+     "texto": "Verifica se o saldo inicial do ativo é igual ao saldo inicial do passivo. Gera um erro, caso P030.PER_APUR = “T01”."
+    }
+   ],
+   "regrasCampo": [
+    {
+     "campo": "VAL_CTA_REF_INI",
+     "regras": [
+      {
+       "codigo": "REGRA_BAL_SI_IGUAL_ANT",
+       "texto": "Verifica, no caso de forma de apuração trimestral – 0010.FORMA_APUR = “T” – se o valor do saldo incial – P100.VAL_CTA_REF_INI – do período atual é igual ao valor do saldo final – P100.VAL_CTA_REF_FIN – do período anterior.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "VAL_CTA_REF_DEB",
+     "regras": [
+      {
+       "codigo": "REGRA_COMPARA_CONT_REF_DEB",
+       "texto": "Verifica se o valor total dos débitos – P100.VAL_CTA_REF_DEB – é igual ao somatório dos débitos informados nos registro K156 – K156.VL_DEB.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "VAL_CTA_REF_CRED",
+     "regras": [
+      {
+       "codigo": "REGRA_COMPARA_CONT_REF_CRED",
+       "texto": "Verifica se o valor total dos créditos – P100.VAL_CTA_REF_CRED – é igual ao somatório dos créditos informados nos registro K156 – K156.VL_CRED.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "VAL_CTA_REF_FIN",
+     "regras": [
+      {
+       "codigo": "REGRA_VALIDACAO_SALDO_FINAL_BAL",
+       "texto": "Verifica se o valor do saldo final – P100.VAL_CTA_REF_FIN – é igual ao valor do saldo inicial – P100.VAL_CTA_REF_INI – somado ao valor total dos débitos – P100.VAL_CTA_REF_DEB – e subtraído do valor total dos créditos – P100.VAL_CTA_REF_CRED.",
+       "tipo": "Erro"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|P100|2.03.04.01.99|Contas de Patrimônio Líquido Não Classificadas|A|5|03|2.03.04.01|10000,00|C|5000,00|15000,00|20000,00|C|",
+    "|P100|: Identificação do tipo do registro.",
+    "|2.03.04.01.99|: Código da linha.",
+    "|Contas de Patrimônio Líquido Não Classificadas|: Descrição da linha.",
+    "|A|: Tipo da conta (A = Analítica).",
+    "|5|: Nível da conta.",
+    "|03|: Natureza da conta (03 = Contas do Patrimônio Líquido).",
+    "|2.03.04.01|: Código da conta superior.",
+    "|10000,00|: Valor do saldo inicial (R$ 10.000,00).",
+    "|C|: Indicador do sinal do saldo inicial da conta (C = Credor).",
+    "|5000,00|: Valor total dos débitos (R$ 5.000,00).",
+    "|15000,00|: Valor total dos créditos (R$ 15.000,00).",
+    "|20000,00|: Valor do saldo final (R$ 20.000,00).",
+    "|C|: Indicador do sinal do saldo final da conta (C = Credor)."
+   ]
+  },
+  {
+   "codigo": "P130",
+   "nome": "Demonstração das Receitas Incentivadas do Lucro Presumido",
+   "ordem": 85,
+   "nivel": "3",
+   "ocorrencia": "[0;N]",
+   "chave": "CODIGO",
+   "entrada": "F",
+   "saida": "OC\n(Se 0020. IND_RED_ISEN = \"S\" E 0010.OPT_REFIS = \"S\")",
+   "descricao": [
+    "Este registro deve ser preenchido somente pelas pessoas jurídicas optantes pelo Lucro Presumido que estejam no Refis, de que trata a Lei nº 9.964, de 10 de abril de 2000, que, autorizadas pela legislação tributária, queiram usufruir os benefícios fiscais relativos a isenção ou redução do imposto sobre a renda, tais como:",
+    "a) empresas instaladas nas áreas de atuação da Sudene e/ou da Sudam, que tenham direito à isenção ou redução do imposto, de acordo com as legislações respectivas;",
+    "Atenção:",
+    "1) para os projetos protocolizados e aprovados após 23 de agosto de 2000, a MP nº 2.058, de 2000, prevê redução de 75% do imposto sobre a renda exclusivamente para aqueles enquadrados em setores da economia considerados, em ato do Poder Executivo, prioritários para o desenvolvimento regional, nas áreas de atuação da Sudene e da Sudam. (MP nº 2.058, de 2000, art. 1º e reedições).",
+    "2) a pessoa jurídica que se utilizar indevidamente do benefício está sujeita ao pagamento do imposto em relação a cada período de apuração, acrescido de juros e multa, sem prejuízo das sanções penais cabíveis.",
+    "b) empresas que tenham empreendimentos industriais ou agroindustriais, inclusive de construção civil, em operação nas áreas de atuação da Sudam e da Sudene, que optarem por depositar parte do imposto devido para reinvestimento, conforme legislação aplicável.",
+    "Atenção:",
+    "1) o incentivo de redução do imposto por reinvestimento pode ser utilizado somente em relação aos empreendimentos dos setores da economia que venham a ser considerados, em ato do Poder Executivo, prioritários para o desenvolvimento regional.",
+    "2) a pessoa jurídica que se utilizar indevidamente do benefício estará sujeita ao pagamento do imposto em relação a cada período de apuração, acrescido de juros e multa, sem prejuízo das sanções penais cabíveis."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (P130).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[P130]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "CODIGO",
+     "descricao": "Código, conforme tabela dinâmica do Sped (Disponibilizada no item III deste registro e no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "DESCRICAO",
+     "descricao": "Descrição, conforme tabela dinâmica do Sped (Disponibilizada no item III deste registro e no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 4,
+     "nome": "VALOR",
+     "descricao": "Valor",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_DUPLICIDADE_DESPREZADA",
+     "texto": "Verifica se o registro já foi importado anteriormente, de acordo com a chave e os registros pais. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_LINHA_DESPREZADA",
+     "texto": "Verifica se o registro existe na importação, mas não será importado por não existir na tabela dinâmica devido às configurações do bloco 0 ou da tabela dinâmica. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_LINHA_ATUALIZADA",
+     "texto": "Verifica se o registro está desatualizado em relação à tabela da RFB. Se a regra não for cumprida, a ECF gera um aviso."
+    }
+   ],
+   "regrasCampo": [
+    {
+     "campo": "VALOR",
+     "regras": [
+      {
+       "codigo": "REGRA_OBRIGATORIO_TIPO_DIFERENTE_R",
+       "texto": "Verifica se o campo está preenchido quando o tipo da linha é diferente de “R”.",
+       "tipo": "Erro"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|P130|82|TOTAL DO LUCRO PRESUMIDO AJUSTADO|100000,00|",
+    "|P130|: Identificação do tipo do registro.",
+    "|82|: Código da linha.",
+    "|TOTAL DO LUCRO PRESUMIDO AJUSTADO|: Descrição da linha.",
+    "|100000,00|: Valor da linha (R$ 100.000,00)."
+   ]
+  },
+  {
+   "codigo": "P150",
+   "nome": "Demonstrativo do Resultado Líquido no Período Fiscal",
+   "ordem": 86,
+   "nivel": "3",
+   "ocorrencia": "[0;N]",
+   "chave": "CODIGO",
+   "entrada": "F",
+   "saida": "OC\n(Se 0010. TIP_ESP_PRE = “C” E\n0010.IND_REC_RECEITA = “2”)",
+   "descricao": [
+    "Apresenta a apuração da demonstração do resultado do exercício. Os valores serão recuperados com base nos registros J051, K355 e K356 se 0010. TIP_ESC_PRE for igual a “C” (contábil) e calculados pela própria ECF.",
+    "Atenção:",
+    "Caso 0010. TIP_ESC_PRE for igual a “L” (Livro Caixa), este registro não será preenchido; exceto se 0010. IND_REC_RECEITA for igual a “2” (Regime de Competência), quando este registro será obrigatório, mesmo que a empresa não tenha entregue/recuperado a ECD."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (P150).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[P150]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "CODIGO",
+     "descricao": "Código da Conta Referencial (Analíticas e Sintéticas), conforme tabela dinâmica do Sped (Disponibilizada no item III deste registro e no programa da ECF, no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+     "tipo": "C",
+     "tamanho": "50",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "DESCRICAO",
+     "descricao": "Descrição da Conta Referencial.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 4,
+     "nome": "TIPO",
+     "descricao": "Indicador do Tipo de Conta:\nS – Sintética\nA – Analítica",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S; A]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 5,
+     "nome": "NIVEL",
+     "descricao": "Nível da Conta.",
+     "tipo": "N",
+     "tamanho": "3",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 6,
+     "nome": "COD_NAT",
+     "descricao": "Natureza da Conta:\n04 – Contas de Resultado",
+     "tipo": "C",
+     "tamanho": "2",
+     "decimal": "—",
+     "valores": "[04]",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 7,
+     "nome": "COD_CTA_SUP",
+     "descricao": "Código da Conta Sintética de Nível Imediatamente Superior.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 8,
+     "nome": "VALOR",
+     "descricao": "Saldo Final da Conta Referencial.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 9,
+     "nome": "IND_VALOR",
+     "descricao": "Indicador do Sinal do Saldo Final:\nC – Credor\nD – Devedor",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[D; C]",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_DUPLICIDADE_DESPREZADA",
+     "texto": "Verifica se o registro já foi importado anteriormente, de acordo com a chave e os registros pais. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_LINHA_DESPREZADA",
+     "texto": "Verifica se o registro existe na importação, mas não será importado por não existir na tabela dinâmica devido às configurações do bloco 0 ou da tabela dinâmica. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_LINHA_ATUALIZADA",
+     "texto": "Verifica se o registro está desatualizado em relação à tabela da RFB. Se a regra não for cumprida, a ECF gera um aviso."
+    }
+   ],
+   "regrasCampo": [
+    {
+     "campo": "VALOR",
+     "regras": [
+      {
+       "codigo": "REGRA_OBRIGATORIO_TIPO_DIFERENTE_R",
+       "texto": "Verifica se o campo está preenchido quando o tipo da linha é diferente de “R”.",
+       "tipo": "Erro"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|P150|3.11.05.01.03.03|Outras Participações|A|6|04|3.11.05.01.03|10000,00|D|",
+    "|P150|: Identificação do tipo do registro.",
+    "|3.11.05.01.03.03|: Código da linha.",
+    "|Outras Participações|: Descrição da linha.",
+    "|A|: Tipo da conta (A = Analítica).",
+    "|6|: Nível da conta.",
+    "|04|: Natureza da conta (04 = Contas de Resultado).",
+    "|3.11.05.01.03|: Código da conta superior.",
+    "|10000,00|: Valor do saldo final (R$ 10.000,00).",
+    "|D|: Indicador do sinal do saldo final da conta (D = Devedor)."
+   ]
+  },
+  {
+   "codigo": "P200",
+   "nome": "Apuração da Base de Cálculo do IRPJ com Base no Lucro Presumido",
+   "ordem": 87,
+   "nivel": "3",
+   "ocorrencia": "[1;N]",
+   "chave": "CODIGO",
+   "entrada": "F",
+   "saida": "O",
+   "descricao": [
+    "Apresenta a apuração da base de cálculo do lucro presumido.",
+    "Observação: Os valores informados neste registro devem considerar os ajustes específicos da Lei nº 12.973/2014 (Exemplos: Arts. 8º e 44 da Lei nº 12.973/2014)."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (P200).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[P200]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "CODIGO",
+     "descricao": "Código, conforme tabela dinâmica do Sped (Disponibilizada no item III deste registro e no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "DESCRICAO",
+     "descricao": "Descrição, conforme tabela dinâmica do Sped (Disponibilizada no item III deste registro e no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 4,
+     "nome": "VALOR",
+     "descricao": "Valor",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_DUPLICIDADE_DESPREZADA",
+     "texto": "Verifica se o registro já foi importado anteriormente, de acordo com a chave e os registros pais. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_PERIODO_DESPREZADO",
+     "texto": "Verifica se a linha deste período existe no arquivo de importação, mas não deve ser importado, pois as datas não compatíveis com o período da ECF. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_LINHA_ATUALIZADA",
+     "texto": "Verifica se o registro está desatualizado em relação à tabela da RFB. Se a regra não for cumprida, a ECF gera um aviso."
+    }
+   ],
+   "regrasCampo": [
+    {
+     "campo": "VALOR",
+     "regras": [
+      {
+       "codigo": "REGRA_OBRIGATORIO_TIPO_DIFERENTE_R",
+       "texto": "Verifica se o campo está preenchido quando o tipo da linha é diferente de “R”.",
+       "tipo": "Erro"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|P200|25|(-)Divulgação Eleitoral e Partidária Gratuita|10000,00|",
+    "|P200|: Identificação do tipo do registro.",
+    "|25|: Código da linha.",
+    "|(-)Divulgação Eleitoral e Partidária Gratuita|: Descrição da linha.",
+    "|10000,00|: Valor da linha (R$ 10.000,00)."
+   ]
+  },
+  {
+   "codigo": "P230",
+   "nome": "Cálculo da Isenção e Redução do Lucro Presumido",
+   "ordem": 88,
+   "nivel": "3",
+   "ocorrencia": "[0;N]",
+   "chave": "CODIGO",
+   "entrada": "F",
+   "saida": "OC\n(Se 0020.IND_RED_ISEN=\"S\" E 0010.OPT_REFIS=\"S\")",
+   "descricao": [
+    "Apresenta o cálculo da isenção e redução do lucro presumido."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (P230).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[P230]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "CODIGO",
+     "descricao": "Código, conforme tabela dinâmica do Sped (Disponibilizada no item III deste registro e no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "DESCRICAO",
+     "descricao": "Descrição, conforme tabela dinâmica do Sped (Disponibilizada no item III deste registro e no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 4,
+     "nome": "VALOR",
+     "descricao": "Valor",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_DUPLICIDADE_DESPREZADA",
+     "texto": "Verifica se o registro já foi importado anteriormente, de acordo com a chave e os registros pais. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_LINHA_DESPREZADA",
+     "texto": "Verifica se o registro existe na importação, mas não será importado por não existir na tabela dinâmica devido às configurações do bloco 0 ou da tabela dinâmica. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_LINHA_ATUALIZADA",
+     "texto": "Verifica se o registro está desatualizado em relação à tabela da RFB. Se a regra não for cumprida, a ECF gera um aviso."
+    }
+   ],
+   "regrasCampo": [
+    {
+     "campo": "VALOR",
+     "regras": [
+      {
+       "codigo": "REGRA_OBRIGATORIO_TIPO_DIFERENTE_R",
+       "texto": "Verifica se o campo está preenchido quando o tipo da linha é diferente de “R”.",
+       "tipo": "Erro"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|P230|37|TOTAL DA ISENÇÃO E REDUÇÃO|10000,00|",
+    "|P230|: Identificação do tipo do registro.",
+    "|37|: Código da linha.",
+    "|TOTAL DA ISENÇÃO E REDUÇÃO|: Descrição da linha.",
+    "|10000,00|: Valor da linha (R$ 10.000,00)."
+   ]
+  },
+  {
+   "codigo": "P300",
+   "nome": "Cálculo do IRPJ com Base no Lucro Presumido",
+   "ordem": 89,
+   "nivel": "3",
+   "ocorrencia": "[1;N]",
+   "chave": "CODIGO",
+   "entrada": "F",
+   "saida": "O",
+   "descricao": [
+    "Este registro é habilitado para a pessoa jurídica tributada com base no lucro presumido, optante ou não pelo Refis."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (P300).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[P300]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "CODIGO",
+     "descricao": "Código, conforme tabela dinâmica do Sped (Disponibilizada no item III deste registro e no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "DESCRICAO",
+     "descricao": "Descrição, conforme tabela dinâmica do Sped (Disponibilizada no item III deste registro e no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 4,
+     "nome": "VALOR",
+     "descricao": "Valor",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_DUPLICIDADE_DESPREZADA",
+     "texto": "Verifica se o registro já foi importado anteriormente, de acordo com a chave e os registros pais. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_LINHA_DESPREZADA",
+     "texto": "Verifica se o registro existe na importação, mas não será importado por não existir na tabela dinâmica devido às configurações do bloco 0 ou da tabela dinâmica. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_LINHA_ATUALIZADA",
+     "texto": "Verifica se o registro está desatualizado em relação à tabela da RFB. Se a regra não for cumprida, a ECF gera um aviso."
+    }
+   ],
+   "regrasCampo": [
+    {
+     "campo": "VALOR",
+     "regras": [
+      {
+       "codigo": "REGRA_OBRIGATORIO_TIPO_DIFERENTE_R",
+       "texto": "Verifica se o campo está preenchido quando o tipo da linha é diferente de “R”.",
+       "tipo": "Erro"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|P300|17|IMPOSTO DE RENDA POSTERGADO DE PERÍODOS DE APURAÇÃO ANTERIORES|10000,00|",
+    "|P300|: Identificação do tipo do registro.",
+    "|17|: Código da linha.",
+    "|IMPOSTO DE RENDA POSTERGADO DE PERÍODOS DE APURAÇÃO ANTERIORES|: Descrição da linha.",
+    "|10000,00|: Valor da linha (R$ 10.000,00)."
+   ]
+  },
+  {
+   "codigo": "P400",
+   "nome": "Apuração da Base de Cálculo da CSLL com Base no Lucro Presumido",
+   "ordem": 90,
+   "nivel": "3",
+   "ocorrencia": "[1;N]",
+   "chave": "CODIGO",
+   "entrada": "F",
+   "saida": "O",
+   "descricao": [
+    "Este registro deve ser preenchido pela pessoa jurídica que apurou a CSLL com base no lucro presumido, em um ou mais trimestres do ano-calendário, inclusive se optante pelo Refis.",
+    "Observação: Os valores informados neste registro devem considerar os ajustes específicos da Lei nº 12.973/2014 (Exemplos: Arts. 8º e 44 da Lei nº 12.973/2014)."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (P400).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[P400]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "CODIGO",
+     "descricao": "Código, conforme tabela dinâmica do Sped (Disponibilizada no item III deste registro e no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "DESCRICAO",
+     "descricao": "Descrição, conforme tabela dinâmica do Sped (Disponibilizada no item III deste registro e no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 4,
+     "nome": "VALOR",
+     "descricao": "Valor",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_DUPLICIDADE_DESPREZADA",
+     "texto": "Verifica se o registro já foi importado anteriormente, de acordo com a chave e os registros pais. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_LINHA_DESPREZADA",
+     "texto": "Verifica se o registro existe na importação, mas não será importado por não existir na tabela dinâmica devido às configurações do bloco 0 ou da tabela dinâmica. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_LINHA_ATUALIZADA",
+     "texto": "Verifica se o registro está desatualizado em relação à tabela da RFB. Se a regra não for cumprida, a ECF gera um aviso."
+    }
+   ],
+   "regrasCampo": [
+    {
+     "campo": "VALOR",
+     "regras": [
+      {
+       "codigo": "REGRA_OBRIGATORIO_TIPO_DIFERENTE_R",
+       "texto": "Verifica se o campo está preenchido quando o tipo da linha é diferente de “R”.",
+       "tipo": "Erro"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|P400|18|(-)Excedente de Variação Cambial (MP nº 1.858-10/1999, art. 31)|10000,00|",
+    "|P400|: Identificação do tipo do registro.",
+    "|18|: Código da linha.",
+    "|(-)Excedente de Variação Cambial (MP nº 1.858-10/1999, art. 31)|: Descrição da linha.",
+    "|10000,00|: Valor da linha (R$ 10.000,00)."
+   ]
+  },
+  {
+   "codigo": "P500",
+   "nome": "Cálculo da CSLL com Base no Lucro Presumido",
+   "ordem": 91,
+   "nivel": "3",
+   "ocorrencia": "[1;N]",
+   "chave": "CODIGO",
+   "entrada": "F",
+   "saida": "O",
+   "descricao": [
+    "Este registro deve ser preenchido pela pessoa jurídica que apurou a CSLL com base no lucro presumido, em um ou mais trimestres do ano-calendário, inclusive se optante pelo Refis."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (P500).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[P500]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "CODIGO",
+     "descricao": "Código, conforme tabela dinâmica do Sped (Disponibilizada no item III deste registro e no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "DESCRICAO",
+     "descricao": "Descrição, conforme tabela dinâmica do Sped (Disponibilizada no item III deste registro e no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 4,
+     "nome": "VALOR",
+     "descricao": "Valor",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_DUPLICIDADE_DESPREZADA",
+     "texto": "Verifica se o registro já foi importado anteriormente, de acordo com a chave e os registros pais. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_LINHA_DESPREZADA",
+     "texto": "Verifica se o registro existe na importação, mas não será importado por não existir na tabela dinâmica devido às configurações do bloco 0 ou da tabela dinâmica. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_LINHA_ATUALIZADA",
+     "texto": "Verifica se o registro está desatualizado em relação à tabela da RFB. Se a regra não for cumprida, a ECF gera um aviso."
+    }
+   ],
+   "regrasCampo": [
+    {
+     "campo": "VALOR",
+     "regras": [
+      {
+       "codigo": "REGRA_OBRIGATORIO_TIPO_DIFERENTE_R",
+       "texto": "Verifica se o campo está preenchido quando o tipo da linha é diferente de “R”.",
+       "tipo": "Erro"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|P500|15|CSLL POSTERGADA DE PERÍODOS DE APURAÇÃO ANTERIORES|10000,00|",
+    "|P500|: Identificação do tipo do registro.",
+    "|15|: Código da linha.",
+    "|CSLL POSTERGADA DE PERÍODOS DE APURAÇÃO ANTERIORES|: Descrição da linha.",
+    "|10000,00|: Valor da linha (R$ 10.000,00)."
+   ]
+  },
+  {
+   "codigo": "P990",
+   "nome": "Encerramento do Bloco P",
+   "ordem": 92,
+   "nivel": "1",
+   "ocorrencia": "[1;1]",
+   "chave": "[REG]",
+   "entrada": "F",
+   "saida": "O",
+   "descricao": [],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto fixo contendo a identificação do registro (P990).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[P990]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "QTD_LIN",
+     "descricao": "Quantidade total de registros do Bloco P.",
+     "tipo": "N",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [],
+   "exemplo": [
+    "|P990|1000|",
+    "|P990|: Identificação do tipo do registro.",
+    "|1000|: A quantidade total de registros do Bloco P é 1.000 (mil registros)."
+   ]
+  }
+ ]
+}

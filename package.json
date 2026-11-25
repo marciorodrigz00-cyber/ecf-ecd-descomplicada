@@ -1,0 +1,44 @@
+{
+  "name": "ecf-descomplicada",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build && node tools/achatar-segmentos.ts && node tools/csp-hashes/index.ts && node tools/security-txt.ts",
+    "serve": "node tools/servidor-local.ts",
+    "typecheck": "tsc --noEmit",
+    "lint": "oxlint --deny-warnings",
+    "validar:conteudo": "node .claude/hooks/validar-conteudo.mjs --todos",
+    "test": "vitest run",
+    "e2e": "playwright test",
+    "monitor": "node tools/monitor/index.ts",
+    "relatorio": "node tools/gerar-relatorio/index.ts"
+  },
+  "dependencies": {
+    "class-variance-authority": "0.7.1",
+    "clsx": "2.1.1",
+    "lucide-react": "1.79.0",
+    "motion": "14.14.0",
+    "next": "16.4.6",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "tailwind-merge": "3.7.1",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.14.1",
+    "@playwright/test": "1.65.1",
+    "@tailwindcss/postcss": "4.3.5",
+    "@types/node": "24.19.2",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "oxlint": "1.95.0",
+    "tailwindcss": "4.3.5",
+    "typescript": "7.0.2",
+    "vitest": "5.1.1"
+  }
+}

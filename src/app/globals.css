@@ -1,0 +1,149 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+/* Tokens em hex: tests/unit/contraste.test.ts lê estes valores e confere WCAG AA. */
+:root {
+  --fundo: #f6f8f2;
+  --superficie: #ffffff;
+  --tinta: #111508;
+  --suave: #4d5942;
+  --linha: #d6ddcb;
+  --controle: #74806a;
+  --marca: #3f6b0c;
+  --sobre-marca: #ffffff;
+  --realce: #86bc25;
+  --sobre-realce: #0a0f02;
+  --alerta: #8a4b00;
+  --alerta-fundo: #fff1dc;
+  --ok: #35600a;
+  --ok-fundo: #e6f3d3;
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  --fundo: #000000;
+  --superficie: #0d100a;
+  --tinta: #f3f6ee;
+  --suave: #a8b39b;
+  --linha: #2b3124;
+  --controle: #7d8a6d;
+  --marca: #86bc25;
+  --sobre-marca: #0a0f02;
+  --realce: #b5dd6a;
+  --sobre-realce: #0a0f02;
+  --alerta: #ffc57a;
+  --alerta-fundo: #33240f;
+  --ok: #9ad33b;
+  --ok-fundo: #16230a;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-fundo: var(--fundo);
+  --color-superficie: var(--superficie);
+  --color-tinta: var(--tinta);
+  --color-suave: var(--suave);
+  --color-linha: var(--linha);
+  --color-controle: var(--controle);
+  --color-marca: var(--marca);
+  --color-sobre-marca: var(--sobre-marca);
+  --color-realce: var(--realce);
+  --color-sobre-realce: var(--sobre-realce);
+  --color-alerta: var(--alerta);
+  --color-alerta-fundo: var(--alerta-fundo);
+  --color-ok: var(--ok);
+  --color-ok-fundo: var(--ok-fundo);
+  --font-sans: var(--fonte-texto), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--fonte-codigo), ui-monospace, monospace;
+}
+
+@layer base {
+  html {
+    scroll-padding-top: 6rem;
+    -webkit-text-size-adjust: none;
+    text-size-adjust: none;
+  }
+  body {
+    background: var(--fundo);
+    color: var(--tinta);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    overflow-wrap: break-word;
+  }
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+  h1:focus {
+    outline: none;
+  }
+  :focus-visible {
+    outline: 3px solid var(--marca);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  button,
+  select,
+  summary,
+  label:has(input) {
+    cursor: pointer;
+  }
+  dialog::backdrop {
+    background: rgb(0 0 0 / 0.5);
+  }
+}
+
+/* Nível: os dois textos estão no HTML e só um aparece. */
+[data-nivel="iniciante"] [data-so="profissional"],
+[data-nivel="profissional"] [data-so="iniciante"] {
+  display: none;
+}
+
+/* Um verde só: o grupo do bloco aparece no nome e no ícone, e o tom varia dentro dele. */
+[data-tom="0"] { --tom: 8%; }
+[data-tom="1"] { --tom: 12%; }
+[data-tom="2"] { --tom: 16%; }
+[data-tom="3"] { --tom: 20%; }
+[data-tom="4"] { --tom: 24%; }
+.bloco {
+  background: color-mix(in srgb, var(--marca) var(--tom), var(--superficie));
+  border-color: color-mix(in srgb, var(--marca) 45%, var(--superficie));
+}
+.bloco-icone {
+  color: var(--marca);
+}
+
+/* Ligações do mapa: o pontilhado corre no sentido do dado. */
+.fluxo {
+  fill: none;
+  stroke: var(--controle);
+  stroke-width: 1.5;
+  opacity: 0.6;
+}
+.fluxo-vivo {
+  stroke: var(--marca);
+  stroke-width: 2.5;
+  opacity: 1;
+  stroke-dasharray: 7 7;
+  animation: fluxo 1s linear infinite;
+}
+@keyframes fluxo {
+  to {
+    stroke-dashoffset: -14;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

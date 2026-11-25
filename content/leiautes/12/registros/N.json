@@ -1,0 +1,1257 @@
+{
+ "rastreio": {
+  "id": "arq-12-n",
+  "fonte": {
+   "id": "manual-12",
+   "url": "https://www.gov.br/sped/pt-br/assuntos/escrituracoes-digitais/ecf/manuais-e-documentos-tecnicos",
+   "trecho": "Seção do bloco N"
+  },
+  "norma": "ADE Cofis nº 2/2026",
+  "leiautes": [
+   "12"
+  ],
+  "vigencia": {
+   "acNormal": [
+    2025
+   ],
+   "situacaoEspecial": [
+    2026
+   ]
+  },
+  "verificadoEm": "2026-11-24",
+  "status": "extraido"
+ },
+ "bloco": "N",
+ "descricao": "Calcula o IRPJ e a CSLL com base no lucro real (estimativas mensais e ajuste anual ou valores trimestrais).",
+ "registros": [
+  {
+   "codigo": "N001",
+   "nome": "Abertura do Bloco N",
+   "ordem": 69,
+   "nivel": "1",
+   "ocorrencia": "[1;1]",
+   "chave": "[REG]",
+   "entrada": "F",
+   "saida": "O",
+   "descricao": [],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto fixo contendo a identificação do registro (N001).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[N001]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "IND_DAD",
+     "descricao": "Indicador de movimento:\n0 – Bloco com dados informados.\n1 – Bloco sem dados informados.",
+     "tipo": "N",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[0;1]",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_OCORRENCIA_UNITARIA_ARQ",
+     "texto": "Verifica se registro ocorreu apenas uma vez por arquivo, considerando a chave “N001” (REG). Se a regra não for cumprida, a ECF gera um erro."
+    }
+   ],
+   "regrasCampo": [],
+   "exemplo": [
+    "|N001|0|",
+    "|N001|: Identificação do tipo do registro.",
+    "|0|: Indica que o bloco possui dados informados."
+   ]
+  },
+  {
+   "codigo": "N030",
+   "nome": "Identificação dos Períodos e Formas de Apuração do IRPJ e da CSLL das Empresas Tributadas pelo Lucro Real",
+   "ordem": 70,
+   "nivel": "2",
+   "ocorrencia": "[0;13]",
+   "chave": "PER_APUR",
+   "entrada": "F",
+   "saida": "OC\n(Se 0010. FORMA_TRIB = “1”, “2”, “3” ou “4”)",
+   "descricao": [
+    "Registro de identificação dos períodos da escrituração necessários conforme definições de parâmetros do Bloco 0."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (N030).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[N030]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "DT_INI",
+     "descricao": "Data do Início do Período",
+     "tipo": "N",
+     "tamanho": "8",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "DT_FIN",
+     "descricao": "Data do Fim do período",
+     "tipo": "N",
+     "tamanho": "8",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 4,
+     "nome": "PER_APUR",
+     "descricao": "Período de apuração [para 0010.FORMA_APUR = “A”]:\nA00 – Receita Bruta/ Balanço de Suspensão e Redução Anual\nA01 – Balanço de Suspensão e Redução até Janeiro\nA02 – Balanço de Suspensão e Redução até Fevereiro\nA03 – Balanço de Suspensão e Redução até Março\nA04 – Balanço de Suspensão e Redução até Abril\nA05 – Balanço de Suspensão e Redução até Maio\nA06 – Balanço de Suspensão e Redução até Junho\nA07 – Balanço de Suspensão e Redução até Julho\nA08 – Balanço de Suspensão e Redução até Agosto\nA09 – Balanço de Suspensão e Redução até Setembro\nA10 – Balanço de Suspensão e Redução até Outubro\nA11 – Balanço de Suspensão e Redução até Novembro\nA12 – Balanço de Suspensão e Redução até Dezembro\nIndicador do período de referência [para 0010.FORMA_APUR = “T” OU (0010.FORMA_APUR = “A” E 0010.FORMA_TRIB = “2”)]:\nT01 – 1º Trimestre\nT02 – 2º Trimestre\nT03 – 3º Trimestre\nT04 – 4º Trimestre\nRegra: O período deve estar compreendido entre a data início e data fim da escrituração.\nRegra:\nSE 0010.FORMA_APUR = “A”\n- Deve existir um registro A00.\n- Deve existir um registro [A01..A012] para cada mês marcado no 0010.MES_BAL_RED [1..12] como “B” ou \"E\".\nSE 0010.FORMA_APUR = “T”\n- Deve existir um registro [T01..T04] para cada trimestre marcado no 0010.FORMA_TRIB_PER[1..4] como “R”",
+     "tipo": "C",
+     "tamanho": "3",
+     "decimal": "—",
+     "valores": "[A00; A01; A02; A03; A04; A05; A06; A07; A08; A09; A10; A11; A12; T01; T02; T03; T04]",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_DUPLICIDADE_DESPREZADA",
+     "texto": "Verifica se o registro já foi importado anteriormente, de acordo com a chave e os registros pais. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_PERIODO_DESPREZADO",
+     "texto": "Verifica se a linha deste período existe no arquivo de importação, mas não deve ser importado, pois as datas não compatíveis com o período da ECF. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_LINHA_ALTERADA",
+     "texto": "Verifica se a linha deste período existe no arquivo de importação, mas deve ser alterada, pois as datas não compatíveis com o período da ECF. Se a regra não for cumprida, a ECF gera um aviso."
+    }
+   ],
+   "regrasCampo": [],
+   "exemplo": [
+    "|N030|01012024|31032024|T01|",
+    "|N030|: Identificação do tipo do registro.",
+    "|01012024|: Data de início do período (01/01/2024).",
+    "|31032024|: Data de fim do período (31/03/2024).",
+    "|T01|: Período de apuração (T01 = 1º Trimestre)."
+   ]
+  },
+  {
+   "codigo": "N500",
+   "nome": "Base de Cálculo do IRPJ Sobre o Lucro Real Após as Compensações de Prejuízos",
+   "ordem": 71,
+   "nivel": "3",
+   "ocorrencia": "[0;N]",
+   "chave": "REG",
+   "entrada": "F",
+   "saida": "OC\n(Se 0010. FORMA_TRIB = “1”, “2”, “3” ou “4”)",
+   "descricao": [
+    "Apresenta a base de cálculo do IRPJ após as compensações de prejuízos."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (N500).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[N500]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "CODIGO",
+     "descricao": "Código, conforme tabela dinâmica do Sped (Disponibilizada no item III deste registro e no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "DESCRICAO",
+     "descricao": "Descrição, conforme tabela dinâmica do Sped (Disponibilizada no item III deste registro e no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 4,
+     "nome": "VALOR",
+     "descricao": "Valor",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_DUPLICIDADE_DESPREZADA",
+     "texto": "Verifica se o registro já foi importado anteriormente, de acordo com a chave e os registros pais. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_LINHA_DESPREZADA",
+     "texto": "Verifica se o registro existe na importação, mas não será importado por não existir na tabela dinâmica devido às configurações do bloco 0 ou da tabela dinâmica. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_LINHA_ATUALIZADA",
+     "texto": "Verifica se o registro está desatualizado em relação à tabela da RFB. Se a regra não for cumprida, a ECF gera um aviso."
+    }
+   ],
+   "regrasCampo": [
+    {
+     "campo": "VALOR",
+     "regras": [
+      {
+       "codigo": "REGRA_OBRIGATORIO_TIPO_DIFERENTE_R",
+       "texto": "Verifica se o campo está preenchido quando o tipo da linha é diferente de “R”.",
+       "tipo": "Erro"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|N500|1|Valor da base de cálculo do IRPJ|100000,00|",
+    "|N500|: Identificação do tipo do registro.",
+    "|1|: Código da linha.",
+    "|Valor da Base de Cálculo do IRPJ|: Descrição da linha.",
+    "|100000,00|: Valor da linha (R$ 100.000,00)."
+   ]
+  },
+  {
+   "codigo": "N600",
+   "nome": "Demonstração do Lucro da Exploração",
+   "ordem": 72,
+   "nivel": "3",
+   "ocorrencia": "[0;N]",
+   "chave": "CODIGO",
+   "entrada": "F",
+   "saida": "OC\n(Se (N030.PER_APUR = “A00” OU [T01..T04] OU ([A01..A012]) E (0010. MES_BAL_RED [1..12] = “B”) E 0020.IND_LUC_EXP = “S”)",
+   "descricao": [
+    "Devem preencher este registro as pessoas jurídicas submetidas à apuração trimestral ou anual do imposto sobre a renda com base no lucro real que gozem de benefícios fiscais calculados com base no lucro da exploração, tais como (PN CST n 49, de 1979):",
+    "a) empresas instaladas nas áreas de atuação da Superintendência do Desenvolvimento do Nordeste (Sudene) e/ou da Superintendência do Desenvolvimento da Amazônia (Sudam), que tenham direito à isenção ou redução do imposto, de acordo com as legislações respectivas;",
+    "b) empresas que tenham empreendimentos industriais ou agroindustriais, inclusive de construção civil, em operação nas áreas de atuação da Sudam e da Sudene, que optarem por depositar parte do imposto devido para reinvestimento, conforme a legislação aplicável;",
+    "c) a pessoa jurídica que tenha projeto aprovado no âmbito do Programa de Apoio ao Desenvolvimento Tecnológico da Indústria de Semicondutores (Padis), em ato conjunto do Ministério da Fazenda, do Ministério da Ciência e Tecnologia e do Ministério do Desenvolvimento, Indústria e Comércio Exterior, nos termos e condições estabelecidos pelo Poder Executivo (Lei n 11.484, de 2007, art. 5).",
+    "d) empresas que tenham empreendimentos fabricantes de máquinas, equipamentos, instrumentos e dispositivos, baseados em tecnologia digital, voltados para o programa de inclusão digital, cujo projeto tenha sido aprovado nos termos do caput do art. 1 da MP n 2.199-14, de 24 de agosto de 2001;",
+    "e) a Subsidiária da Fifa no Brasil e a Emissora Fonte da Fifa, na hipótese de ser pessoa jurídica domiciliada no Brasil em relação às atividades próprias e diretamente vinculadas à organização ou realização dos Eventos (Competições e as seguintes atividades relacionadas às Competições, oficialmente organizadas, chanceladas, patrocinadas ou apoiadas pela Subsidiária Fifa no Brasil) de que trata o inciso VI do art. 2 da Lei n 12.350, de 2010;",
+    "f) o Prestador de Serviços da Fifa de atividades diretamente relacionadas à realização dos Eventos (Competições e as seguintes atividades relacionadas às Competições, oficialmente organizadas, chanceladas, patrocinadas ou apoiadas pela Subsidiária Fifa no Brasil) de que trata o inciso VI do art. 2 da Lei n 12.350, de 2010;",
+    "g) as empresas vinculadas ao Comité International Olympique - CIO, e domiciliadas no Brasil, em relação aos fatos geradores decorrentes das atividades próprias e diretamente vinculadas à organização ou realização dos Eventos (Jogos e as atividades a eles relacionadas, oficialmente organizadas, chanceladas, patrocinadas, ou apoiadas pelo CIO, APO ou RIO 2016) de que trata o art. 9 da Lei n 12.780, de 2013;",
+    "h) O Comitê Organizador dos Jogos Olímpicos Rio 2016 - RIO 2016, em relação aos fatos geradores decorrentes das atividades próprias e diretamente vinculadas à organização ou realização dos Eventos (Jogos e as atividades a eles relacionadas, oficialmente organizadas, chanceladas, patrocinadas, ou apoiadas pelo CIO, APO ou RIO 2016, de que trata o art. 10 da Lei n 12.780, de 2013.",
+    "i) as empresas com receitas vinculadas ao Programa Emergencial de Retomada do Setor de Eventos (Perse), de acordo com a Instrução Normativa RFB nº 2195, de 23 de maio de 2024.",
+    "I) Considerações Gerais:",
+    "1) no caso de empresas que explorem a atividade rural (Lei n 8.023, de 1990, art. 2, com a redação dada pelo art. 17 da Lei n 9.250, de 1995), conjuntamente ou não com atividades em geral, a atividade rural não será segregada para fins de cálculo do lucro da exploração, sendo a receita auferida informada na linha correspondente à atividade incentivada a que fizer jus ou, caso não se enquadre nas linhas N600/2 a N600/17, incluída na linha N600/17;",
+    "2) a proporção que a receita líquida de cada atividade representa em relação à receita líquida total, calculada com base nas receitas líquidas informadas nas linhas N600/2 a N600/18, aplicada sobre o lucro da exploração do período de apuração (trimestral ou anual) do imposto, determina a parcela do lucro da exploração que corresponde a cada uma das atividades da empresa.",
+    "Atenção:",
+    "1) Os valores das linhas N600/50 a N600/66 serão calculados automaticamente pela ECF. Caso o sistema de contabilidade da empresa ofereça condições para apurar o lucro da exploração resultante de cada atividade incentivada, as informações prestadas nas linhas N600/2 a N600/48 terão caráter apenas informativo, podendo a pessoa jurídica alterar os valores das linhas N600/50 a N600/66 informando os efetivamente apurados (PN CST n 49, de 1979);",
+    "2) A pessoa jurídica que se utilizar indevidamente dos benefícios está sujeita ao pagamento do imposto em relação a cada período de apuração, acrescido de juros e multa, sem prejuízo das sanções penais cabíveis.",
+    "3) A isenção e as reduções do IRPJ e Adicional nos percentuais 50% a 12,5% encontram com prazo de vigência expirado a partir de 1º de janeiro de 2014. (Medida Provisória nº2199-14, de 2001, art. 1º, § 7º e Lei nº 9.532, de 1997, art. 3º, § 3º).",
+    "4) As reduções do IRPJ e Adicional nos percentuais de 70% a 33% de hotéis e outros empreendimentos turísticos, conforme projetos de construção aprovados até 31 de dezembro de 1985, pelo extinto Conselho Nacional de Turismo - CNTur, também encontram-se com prazo de vigência expirado, tendo em conta seus projetos tiveram prazo de aprovação até 31 de dezembro de 1985, com direito ao benefício até o total de dez anos, a partir da data da conclusão das obras (Decreto-Lei nº 1.439, de 30 de dezembro de 1975, art. 4º, Decreto-Lei nº 1.598, de 1977, art. 19, § 1º, alínea \"e\" , e Decreto-Lei nº 1.730, de 1979, art. 1º, inciso I)."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (N600).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[N600]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "CODIGO",
+     "descricao": "Código, conforme tabela dinâmica do Sped (Disponibilizada no item III deste registro e no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "DESCRICAO",
+     "descricao": "Descrição, conforme tabela dinâmica do Sped (Disponibilizada no item III deste registro e no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 4,
+     "nome": "VALOR",
+     "descricao": "Valor",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_DUPLICIDADE_DESPREZADA",
+     "texto": "Verifica se o registro já foi importado anteriormente, de acordo com a chave e os registros pais. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_LINHA_DESPREZADA",
+     "texto": "Verifica se o registro existe na importação, mas não será importado por não existir na tabela dinâmica devido às configurações do bloco 0 ou da tabela dinâmica. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_LINHA_ATUALIZADA",
+     "texto": "Verifica se o registro está desatualizado em relação à tabela da RFB. Se a regra não for cumprida, a ECF gera um aviso."
+    }
+   ],
+   "regrasCampo": [
+    {
+     "campo": "VALOR",
+     "regras": [
+      {
+       "codigo": "REGRA_OBRIGATORIO_TIPO_DIFERENTE_R",
+       "texto": "Verifica se o campo está preenchido quando o tipo da linha é diferente de “R”.",
+       "tipo": "Erro"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|N600|66|Parcela Correspondente às Demais Atividades|10000,00|",
+    "|N600|: Identificação do tipo do registro.",
+    "|66|: Código da linha.",
+    "|Parcela Correspondente às Demais Atividades|: Descrição da linha.",
+    "|10000,00|: Valor da linha (R$ 10.000,00)."
+   ]
+  },
+  {
+   "codigo": "N605",
+   "nome": "Contas Contábeis Utilizadas na Apuração do Lucro da Exploração",
+   "ordem": 73,
+   "nivel": "3",
+   "ocorrencia": "[0;N]",
+   "chave": "COD_CTA + COD_CCUS",
+   "entrada": "F",
+   "saida": "OC\n(Se N600(48.05) = “2” - Contabilidade)",
+   "descricao": [
+    "Caso a linha N600(48.05) - Tipo de Apuração do Lucro da Exploração seja igual a 2 (Contabilidade), as contas contábeis que formaram o valor da linha N600(48) deverão ser informadas neste registro."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (N605).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[N605]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "COD_CTA",
+     "descricao": "Código da conta contábil.\nObservação: código da conta informado deve constar no registro K355.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "COD_CCUS",
+     "descricao": "Código do centro de custos.\nObservação: código do centro de custos informado deve constar no registro K355, para o código de conta informado no campo N605.COD_CTA.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 4,
+     "nome": "VALOR",
+     "descricao": "Saldo utilizado.",
+     "tipo": "N",
+     "tamanho": "019",
+     "decimal": "002",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 5,
+     "nome": "IND_VALOR",
+     "descricao": "Indicador do saldo utilizado:\nD – Devedor\nC – Credor",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "[D;C]",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_SOMATORIO_N605_K355",
+     "texto": "Quando K355.COD_CTA/COD_CCUS for igual a N605.COD_CTA/COD_CCUS, o somatório do saldo da conta de resultado/centro de custos do registro K355 deve ser igual ao utilizado no somatório do registro N605, considerando o mesmo período de apuração e o mesmo indicador de saldo. Se a regra não for cumprida, a ECF gera um erro."
+    }
+   ],
+   "regrasCampo": [],
+   "exemplo": [
+    "|N605|11111|||10000,00|D|",
+    "|N605|: Identificação do tipo do registro.",
+    "|11111|: Código da conta (11111).",
+    "| |: Centro de custos (não há).",
+    "|10000,00|: Saldo utilizado (R$ 10.000,00).",
+    "|D|: Indicador de saldo utilizado (D)."
+   ]
+  },
+  {
+   "codigo": "N610",
+   "nome": "Cálculo da Isenção e Redução do Imposto Sobre o Lucro Real",
+   "ordem": 74,
+   "nivel": "3",
+   "ocorrencia": "[0;N]",
+   "chave": "CODIGO",
+   "entrada": "F",
+   "saida": "OC\n(Se 0020.IND_LUC_EXP = “S”)\nNão deve existir Se (N030.PER_APUR = [A01..A012] E 0010. MES_BAL_RED[1..12] = “E”)",
+   "descricao": [
+    "Este registro deve ser preenchido pelas pessoas jurídicas sujeitas à apuração do imposto de renda trimestral ou anual, que gozem dos benefícios fiscais de redução ou isenção desse imposto com base no lucro da exploração.",
+    "Atenção: Deve ser informado, neste registro, o valor do imposto passível de redução por reinvestimento, caso a pessoa jurídica seja beneficiada com essa redução, em conformidade com as instruções contidas na linha N610/77.",
+    "Linhas N610/03, N610/08, N610/13, N610/18, N610/23, N610/28, N610/33, N610/38, N610/43, N610/48, N610/53, N610/58, N610/63, N610/68 e N610/73 - Adicional",
+    "Estas linhas somente devem ser preenchidas se a pessoa jurídica apurar lucro real sujeito à incidência do adicional de que trata a linha N630/4.",
+    "O rateio toma como base a proporção entre o lucro da exploração de cada atividade e o lucro real da empresa aplicado sobre o montante do adicional. Se o lucro real for menor que o lucro da exploração, o rateio do adicional deve ser efetuado com base na proporção da receita líquida de cada atividade em relação à receita líquida total, indicada nas linhas N600/2 a N600/18.",
+    "Exemplo: A pessoa jurídica, na apuração anual do imposto, obteve os seguintes resultados em 31 de dezembro:",
+    "a) Lucro Real menor que o Lucro da Exploração:",
+    "Atividade Isenta:",
+    "Adicional da Linha N610/03 = (R$ 1.800.000,00 x R$ 201.600,00)/(R$ 6.000.000,00) = R$ 60.480,00",
+    "Atividade com Redução de 75%:",
+    "Adicional da Linha N610/58 = (R$ 900.000,00 x R$ 201.600,00)/(R$ 6.000.000,00) = R$ 30.240,00",
+    "b) Lucro Real igual ou maior que o Lucro da Exploração: Neste caso, o rateio do adicional é efetuado com base na proporção do lucro da exploração de cada uma das atividades relacionadas nas linhas N600/50 a N600/64 e o total do lucro real anual, conforme exemplo abaixo:",
+    "Atividade Isenta:",
+    "Adicional da Linha N610/03 = (R$ 100.000,00 x R$ 201.600,00)/(R$ 2.256.000,00) = R$ 8.936,17",
+    "Atividade com Isenção – Sudam e Sudene.",
+    "Adicional da Linha N610/63 = (R$ 200.000,00 + R$ 201.600,00)/(R$ 2.256.000,00) = R$ 17.872,34",
+    "Linha N610/77 - REDUÇÃO POR REINVESTIMENTO",
+    "As empresas que tenham empreendimentos industriais e agroindustriais, inclusive os de construção civil (Lei n 8.167, de 1991, art. 19, e Lei n 8.191, de 1991, art. 4, MP n 2.058, de 2000, art. 4, e reedições, Lei nº 9.532, de 1997, art. 2º, inciso I, e MP nº 2.199-14, de 2001, art. 3º, na redação dada pelo art. 69 da Lei nº 12.715, de 2012), em operação nas áreas de atuação da Sudam e da Sudene podem depositar no Banco da Amazônia S/A ou no Banco do Nordeste do Brasil S/A, para reinvestimento, 30% (trinta por cento) do valor do imposto devido, exceto adicional, pelos referidos empreendimentos, calculado sobre o lucro da exploração, acrescido de 50% (cinquenta por cento) de recursos próprios, ficando, porém, a liberação desses recursos condicionada à aprovação, pelas Agências do Desenvolvimento Regional, dos respectivos projetos técnico-econômicos de modernização ou complementação de equipamento.",
+    "Os incentivos de redução do imposto por reinvestimento podem ser utilizados somente em relação aos empreendimentos dos setores da economia considerados em ato do Poder Executivo prioritários para o desenvolvimento regional.",
+    "Atenção: A pessoa jurídica que se utilizar indevidamente do benefício estará sujeita ao pagamento do imposto em relação a cada período de apuração, acrescido de juros e multa, sem prejuízo das sanções penais cabíveis.",
+    "O valor decorrente da redução por reinvestimento deve ser indicado nesta linha.",
+    "Esse incentivo não pode ser usufruído cumulativamente com outros idênticos, salvo quando expressamente autorizado em Lei.",
+    "Atenção: A pessoa jurídica não pode optar pela aplicação em incentivos regionais (Registro N615) do valor do imposto de renda que serviu de base para o cálculo do incentivo fiscal previsto nesta linha.",
+    "Exemplo de Cálculo da Redução por Reinvestimento: A pessoa jurídica desenvolve atividades beneficiadas com isenção e redução de 75% (setenta e cinco por cento) do imposto. As atividades também estão amparadas com o incentivo de redução por reinvestimento. Assim temos:",
+    "Lucro da Exploração de Cada Atividade Incentivada:",
+    "Imposto Devido em Cada Atividade Incentivada (alíquota de 15%):",
+    "Valor passível de redução por reinvestimento: R$16.500,00 x 30% = R$ 4.950,00",
+    "No caso do exemplo acima, a pessoa jurídica pode fazer jus ao valor de R$ 4.950,00 a título de redução por reinvestimento, observadas as instruções contidas na linha N610/18."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (N610).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[N610]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "CODIGO",
+     "descricao": "Código, conforme tabela dinâmica do Sped (Disponibilizada no item III deste registro e no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "DESCRICAO",
+     "descricao": "Descrição, conforme tabela dinâmica do Sped (Disponibilizada no item III deste registro e no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 4,
+     "nome": "VALOR",
+     "descricao": "Valor",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_DUPLICIDADE_DESPREZADA",
+     "texto": "Verifica se o registro já foi importado anteriormente, de acordo com a chave e os registros pais. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_LINHA_DESPREZADA",
+     "texto": "Verifica se o registro existe na importação, mas não será importado por não existir na tabela dinâmica devido às configurações do bloco 0 ou da tabela dinâmica. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_LINHA_ATUALIZADA",
+     "texto": "Verifica se o registro está desatualizado em relação à tabela da RFB. Se a regra não for cumprida, a ECF gera um aviso."
+    }
+   ],
+   "regrasCampo": [
+    {
+     "campo": "VALOR",
+     "regras": [
+      {
+       "codigo": "REGRA_OBRIGATORIO_TIPO_DIFERENTE_R",
+       "texto": "Verifica se o campo está preenchido quando o tipo da linha é diferente de “R”.",
+       "tipo": "Erro"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|N610|77|REDUÇÃO POR REINVESTIMENTO|10000,00|",
+    "|N610|: Identificação do tipo do registro.",
+    "|77|: Código da linha.",
+    "|REDUÇÃO POR REINVESTIMENTO|: Descrição da linha.",
+    "|10000,00|: Valor da linha (R$ 10.000,00)."
+   ]
+  },
+  {
+   "codigo": "N615",
+   "nome": "Informações da Base de Cálculo dos Incentivos Fiscais",
+   "ordem": 75,
+   "nivel": "3",
+   "ocorrencia": "[0;N]",
+   "chave": "REG",
+   "entrada": "F",
+   "saida": "OC\n(Se N030 E 0020.IND_FIN=\"S\"\nExceto Se (N030.PER_APUR = [A01..A012] E 0010. MES_BAL_RED [1..12] = “E”))",
+   "descricao": [
+    "Este registro deve ser preenchido pelas pessoas jurídicas ou grupos de empresas coligadas de que trata o art. 9 da Lei n 8.167, de 1991, alterado pela Medida Provisória n 2.199-14, de 24 de agosto de 2001, titulares de empreendimento de setor da economia considerado, em ato do Poder Executivo, prioritário para o desenvolvimento regional, aprovado ou protocolizado até 2 de maio de 2001 nas áreas da Sudam e da Sudene (MP n 2.199-14, de 2001, art. 4 e MP n 2.145, de 2 de maio de 2001, art. 50, inciso XX, atuais MP n 2.156-5, de 2001, art. 32, inciso XVIII, e n 2.157-5, de 2001, art. 32, inciso IV), e MP nº 634, de 2013, arts. 1º e 2º.",
+    "Atenção:",
+    "1) As aplicações somente podem ser efetuadas até o final do prazo previsto para a implantação do projeto, desde que o projeto esteja em situação de regularidade, cumpridos todos os requisitos previstos e os cronogramas aprovados.",
+    "2) após 2 de maio de 2001, é vedada a aplicação nos fundos Finor e Finam pelas pessoas jurídicas que não se enquadram nas condições do art. 9 da Lei n 8.167, de 1991 (MP n 2.145, de 2 de maio de 2001, art. 50, inciso XX, atuais MP n 2.156-5, de 2001, art. 32, inciso XVIII, e n 2.157-5, de 2001, art. 32, inciso IV e Lei nº 12.995, de 2014), arts. 1º e 2º).",
+    "Exemplo 01:",
+    "Exemplo 02:",
+    "Exemplo 03:"
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (N615).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[N615]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "BASE_CALC",
+     "descricao": "Base de Cálculo: Base de cálculo dos incentivos fiscais: Para fins de determinação da base de cálculo dos incentivos, deve-se observar a forma de apuração do imposto de renda da pessoa jurídica, as deduções permitidas.\na) Regra Geral: O valor desta linha, quando a apuração do imposto de renda for com base no lucro real trimestral e no lucro real apurado em 31 de dezembro do ano-calendário (ajuste anual) será calculado pela seguinte fórmula:\nBASE_CALC = A - (B + C + D + E + F + G + H + I + J + L + M+ N + O + P), onde:\nA = Imposto de Renda devido à alíquota de 15% (Linha N630/3)\nB = Atividades Culturais e Artísticas (Linha N630/6) (art. 18, e §§ 1º e 3º, e art. 25 e 26 da Lei nº 8.313, de 1991, com as alterações do art. 1º, da Lei nº 9.874, de 1999, do art. 53 da MP nº 2.228, de 2001)\nC = Operações de Aquisição de Vale-Cultura (Linha N630/7) (Lei nº 12.761/2012, art. 10)\nD = Programa de Alimentação ao Trabalhador (Linha N630/8)\nE = Desenvolvimento Tecnológico Industrial/Agropecuário (Linha N630/9)\nF = Atividade Audiovisual (Linha N630/10)\nG = Fundo dos Direitos da Criança e do Adolescente (Linha N630/11)\nH = Fundos Nacional, Estaduais ou Municipais do Idoso (Linha N630/12) (Lei nº 12.213, de 2010, art. 3º).\nI = Atividades de Caráter Desportivo (Linha N630/13)\nJ = Programa Nacional de Apoio à Atenção Oncológica - PRONON (Linha N630/14) - (Lei nº 12.715/2012, arts. 1º e 4º)\nL = Programa Nacional de Apoio à Atenção da Saúde da Pessoa com Deficiência - PRONAS/PCD (Linha N630/15) (Lei nº 12.715, de 2012, arts. 3º e 4º)\nM= Valor da Remuneração da Prorrogação da Licença-Maternidade (Linha N630/16) (Lei nº 11.770, de 2008, art. 5º)\nN = 3,33 x Redução por Reinvestimento (Linha N630/18)\nO = Imposto devido no Brasil à alíquota de 15% incidente sobre lucros, rendimentos e ganhos de capital oriundos do exterior (Linha N630/19)\nP = Imposto de renda sobre a diferença entre o Custo Orçado e o Custo Efetivo (Linha N630/27)\nb) Pessoa Jurídica com Direito à Isenção e/ou Redução do Imposto\nA pessoa jurídica que tiver direito à redução ou isenção do imposto (Linha N630/17) deve, com base nas informações do Registro N610 - Cálculo da Isenção e Redução do Imposto Sobre o Lucro Real, deduzir do valor determinado pela aplicação da Regra Geral (item \"a\") o seguinte valor (Z):\nZ = [Linhas N610/7 + N610/12 + N610/17 + (N610/47 x 75%) + (N610/52 x 70%) + (N610/57x 50%) + (N610/62 x 33,33%) + (N610/67 x 25%) + (N610/72 x 12,50%)]\nO valor desta linha passa, então, a ser determinado pela seguinte fórmula:\nBASE_CALC = A - (Z + B + C + D + E + F + G + H + I + J + L + M + N + O + P)\nAtenção:\n1) Também compõe a base de cálculo dos incentivos (fórmula da letra a ou b) o valor correspondente à soma do imposto sobre a renda pago por SCP tributada com base no lucro real, exclusive adicional, das quais a declarante seja sócia ostensiva. Sendo que a opção somente poderá ser efetuada em relação à parte do imposto devido, exclusive o adicional, pertencente à pessoa jurídica sócia ostensiva, quer dizer, não pode ser efetivada em relação à parte do imposto que cabe aos demais sócios da SCP.\n2) Observar as instruções deste manual, com relação às deduções de incentivos fiscais, quando o imposto for calculado sobre a base de cálculo estimada.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "PER_INCEN_FINOR",
+     "descricao": "Percentual do Incentivo FINOR (até 6%).",
+     "tipo": "N",
+     "tamanho": "8",
+     "decimal": "4",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 4,
+     "nome": "VL_LIQ_INCEN_FINOR",
+     "descricao": "Valor Líquido do Incentivo FINOR.",
+     "tipo": "NS",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 5,
+     "nome": "PER_INCEN_FINAM",
+     "descricao": "Percentual do Incentivo FINAM (até 6%).",
+     "tipo": "N",
+     "tamanho": "8",
+     "decimal": "4",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 6,
+     "nome": "VL_LIQ_INCEN_FINAM",
+     "descricao": "Valor Líquido do Incentivo FINAM.",
+     "tipo": "NS",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 7,
+     "nome": "VL_TOTAL",
+     "descricao": "Total dos Incentivos.",
+     "tipo": "NS",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [
+    {
+     "campo": "BASE_CALC",
+     "regras": [
+      {
+       "codigo": "REGRA_BASE_CALC_ZERO",
+       "texto": "Verifica se N615.BASE_CALC é igual a zero e N615.PER_INCEN_FINOR + N615.PER_INCEN_FINAM + N615.PER_INCEN_FUNRES é igual a zero.",
+       "tipo": "Aviso"
+      },
+      {
+       "codigo": "REGRA_BASE_CAL_IGUAL",
+       "texto": "Verifica se N615.BASE_CALC é igual:\nN630(3) – (N630(6) + N630(7) + N630(8) + N630(9) + N630(10) + N630(11) + N630(12) + N630(13) + N630(14) + N630(15) + N630(16) + 3,33 x N630(18) + N630(19) + N630(27))",
+       "tipo": "Aviso"
+      },
+      {
+       "codigo": "REGRA_BASE_CAL_IGUAL_ISENCAO_REDUCAO",
+       "texto": "Verifica, quando 0020.IND_LUC_EXP igual a “S”, se N615.BASE_CALC é igual:\nN630(3) – (N610(7) + N610(12) + N610(17) + (N610(47) x 75%) + (N610(52) x 70%) + (N610(57) x 50%) + (N610(62) x 33,33%) + (N610(67) x 25%) + (N610(72) x 12,50%) + N630(6) + N630(7) + N630(8) + N630(9) + N630(10) + N630(11) + N630(12) + N630(13) + N630(14) + N630(15) + N630(16) + 3,33 x N630(18) + N630(19) + N630(27))",
+       "tipo": "Aviso"
+      }
+     ]
+    },
+    {
+     "campo": "PER_INCEN_FINOR",
+     "regras": [
+      {
+       "codigo": "REGRA_PERCENTUAL_MAIOR_6",
+       "texto": "Verifica se N615.PER_INCEN_FINOR é menor ou igual a “6”.",
+       "tipo": "Aviso"
+      },
+      {
+       "codigo": "REGRA_PERCENTUAL",
+       "texto": "Verifica se o valor informado no campo N615.PER_INCEN_FINOR está entre “0” e “100”.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "VL_LIQ_INCEN_FINOR",
+     "regras": [
+      {
+       "codigo": "REGRA_FINOR_LIQUIDO_DIFERENTE",
+       "texto": "Verifica se o valor informado em N615.VL_LIQ_INCEN_ FINOR é igual ao resultado da multiplicação de N615.PER_INCEN_FINOR por N615.BASE_CALC.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "PER_INCEN_FINAM",
+     "regras": [
+      {
+       "codigo": "REGRA_PERCENTUAL_MAIOR_6",
+       "texto": "Verifica se N615.PER_INCEN_FINAM é menor ou igual a “6”.",
+       "tipo": "Aviso"
+      },
+      {
+       "codigo": "REGRA_PERCENTUAL_MAIOR_6_GERAL",
+       "texto": "Verifica se N615.PER_INCEN_FINOR somado ao N615.PER_INCEN_FINAM é menor ou igual a “6”.",
+       "tipo": "Aviso"
+      },
+      {
+       "codigo": "REGRA_PERCENTUAL",
+       "texto": "Verifica se o valor informado no campo N615.PER_INCEN_FINOR está entre “0” e “100”.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "VL_LIQ_INCEN_FINAM",
+     "regras": [
+      {
+       "codigo": "REGRA_FINAM_LIQUIDO_DIFERENTE",
+       "texto": "Verifica se o valor informado em N615.VL_LIQ_INCEN_ FINAM é igual ao resultado da multiplicação de N615.PER_INCEN_FINAM por N615.BASE_CALC.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "VL_TOTAL",
+     "regras": [
+      {
+       "codigo": "REGRA_TOTAL_DIFERENTE",
+       "texto": "Verifica se N615.VL_LIQ_INCEN_ FINOR somado ao N615.VL_LIQ_INCEN_ FINAM é igual ao valor informado no campo N615.VL_TOTAL.",
+       "tipo": "Erro"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|N615|2000,00|3,00|60,00|3,00|60,00|120,00|",
+    "|N615|: Identificação do tipo do registro.",
+    "|2000,00|: Base de cálculo (R$ 2.000,00).",
+    "|3,00|: Percentual do incentivo FINOR (3,00%).",
+    "|2000,00|: Valor líquido do incentivo FINOR (R$ 60,00 = 3% x R$ 2.000,00).",
+    "|3,00|: Percentual do incentivo FINAM (3,00%).",
+    "|2000,00|: Valor líquido do incentivo FINAM (R$ 60,00 = 3% x R$ 2.000,00).",
+    "|120,00|: Total dos incentivos (R$ 60,00 + R$ 60,00 = R$ 120,00)."
+   ]
+  },
+  {
+   "codigo": "N620",
+   "nome": "Apuração do IRPJ Mensal por Estimativa",
+   "ordem": 76,
+   "nivel": "3",
+   "ocorrencia": "[0;N]",
+   "chave": "CODIGO",
+   "entrada": "F",
+   "saida": "OC\n(Se N030.PER_APUR = [A01..A12])",
+   "descricao": [
+    "Apresenta o cálculo do IRPJ mensal por estimativa."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (N620).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[N620]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "CODIGO",
+     "descricao": "Código, conforme tabela dinâmica do Sped (Disponibilizada no item III deste registro e no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "DESCRICAO",
+     "descricao": "Descrição, conforme tabela dinâmica do Sped (Disponibilizada no item III deste registro e no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 4,
+     "nome": "VALOR",
+     "descricao": "Valor",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_DUPLICIDADE_DESPREZADA",
+     "texto": "Verifica se o registro já foi importado anteriormente, de acordo com a chave e os registros pais. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_LINHA_DESPREZADA",
+     "texto": "Verifica se o registro existe na importação, mas não será importado por não existir na tabela dinâmica devido às configurações do bloco 0 ou da tabela dinâmica. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_LINHA_ATUALIZADA",
+     "texto": "Verifica se o registro está desatualizado em relação à tabela da RFB. Se a regra não for cumprida, a ECF gera um aviso."
+    }
+   ],
+   "regrasCampo": [
+    {
+     "campo": "VALOR",
+     "regras": [
+      {
+       "codigo": "REGRA_OBRIGATORIO_TIPO_DIFERENTE_R",
+       "texto": "Verifica se o campo está preenchido quando o tipo da linha é diferente de “R”.",
+       "tipo": "Erro"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|N620|7|(-) Operações de Caráter Cultural e Artístico|10000,00|",
+    "|N620|: Identificação do tipo do registro.",
+    "|7|: Código da linha.",
+    "|(-) Operações de Caráter Cultural e Artístico|: Descrição da linha.",
+    "|10000,00|: Valor da linha (R$ 10.000,00)."
+   ]
+  },
+  {
+   "codigo": "N630",
+   "nome": "Apuração do IRPJ Com Base no Lucro Real",
+   "ordem": 77,
+   "nivel": "3",
+   "ocorrencia": "[0;N]",
+   "chave": "CODIGO",
+   "entrada": "F",
+   "saida": "OC\n(Se N030.PER_APUR = “A00” OU [T01..T04])",
+   "descricao": [
+    "Apresenta o cálculo do IRPJ com base no lucro real."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (N630).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[N630]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "CODIGO",
+     "descricao": "Código, conforme tabela dinâmica do Sped (Disponibilizada no item III deste registro e no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "DESCRICAO",
+     "descricao": "Descrição, conforme tabela dinâmica do Sped (Disponibilizada no item III deste registro e no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 4,
+     "nome": "VALOR",
+     "descricao": "Valor",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_DUPLICIDADE_DESPREZADA",
+     "texto": "Verifica se o registro já foi importado anteriormente, de acordo com a chave e os registros pais. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_LINHA_DESPREZADA",
+     "texto": "Verifica se o registro existe na importação, mas não será importado por não existir na tabela dinâmica devido às configurações do bloco 0 ou da tabela dinâmica. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_LINHA_ATUALIZADA",
+     "texto": "Verifica se o registro está desatualizado em relação à tabela da RFB. Se a regra não for cumprida, a ECF gera um aviso."
+    }
+   ],
+   "regrasCampo": [
+    {
+     "campo": "VALOR",
+     "regras": [
+      {
+       "codigo": "REGRA_OBRIGATORIO_TIPO_DIFERENTE_R",
+       "texto": "Verifica se o campo está preenchido quando o tipo da linha é diferente de “R”.",
+       "tipo": "Erro"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|N630|21|(-) Imposto de Renda Mensal Pago por Estimativa|10000,00|",
+    "|N630|: Identificação do tipo do registro.",
+    "|21|: Código da linha.",
+    "|(-) Imposto de Renda Mensal Pago por Estimativa|: Descrição da linha.",
+    "|10000,00|: Valor da linha (R$ 10.000,00)."
+   ]
+  },
+  {
+   "codigo": "N650",
+   "nome": "Base de Cálculo da CSLL Após as Compensações da Base de Cálculo Negativa",
+   "ordem": 78,
+   "nivel": "3",
+   "ocorrencia": "[0;N]",
+   "chave": "REG",
+   "entrada": "F",
+   "saida": "OC\n(Se 0010. FORMA_TRIB = “1”, “2”, “3” ou “4”)",
+   "descricao": [
+    "Apresenta a base de cálculo da CSLL, após as compensações da base de cálculo negativa."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (N650).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[N650]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "CODIGO",
+     "descricao": "Código, conforme tabela dinâmica do Sped (Disponibilizada no item III deste registro e no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "DESCRICAO",
+     "descricao": "Descrição, conforme tabela dinâmica do Sped (Disponibilizada no item III deste registro e no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 4,
+     "nome": "VALOR",
+     "descricao": "Valor",
+     "tipo": "NS",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Não"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_DUPLICIDADE_DESPREZADA",
+     "texto": "Verifica se o registro já foi importado anteriormente, de acordo com a chave e os registros pais. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_LINHA_DESPREZADA",
+     "texto": "Verifica se o registro existe na importação, mas não será importado por não existir na tabela dinâmica devido às configurações do bloco 0 ou da tabela dinâmica. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_LINHA_ATUALIZADA",
+     "texto": "Verifica se o registro está desatualizado em relação à tabela da RFB. Se a regra não for cumprida, a ECF gera um aviso."
+    }
+   ],
+   "regrasCampo": [
+    {
+     "campo": "VALOR",
+     "regras": [
+      {
+       "codigo": "REGRA_OBRIGATORIO_TIPO_DIFERENTE_R",
+       "texto": "Verifica se o campo está preenchido quando o tipo da linha é diferente de “R”.",
+       "tipo": "Erro"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|N650|1|Valor da base de cálculo da CSLL|100000,00|",
+    "|N650|: Identificação do tipo do registro.",
+    "|1|: Código da linha.",
+    "|Valor da Base de Cálculo da CSLL|: Descrição da linha.",
+    "|100000,00|: Valor da linha (R$ 100.000,00)."
+   ]
+  },
+  {
+   "codigo": "N660",
+   "nome": "Apuração da CSLL Mensal por Estimativa",
+   "ordem": 79,
+   "nivel": "3",
+   "ocorrencia": "[0;N]",
+   "chave": "CODIGO",
+   "entrada": "F",
+   "saida": "OC\n(Se N030.PER_APUR = [A01..A12])",
+   "descricao": [
+    "Este registro é habilitado para a pessoa jurídica que apurou o imposto de renda com base no lucro real anual que optou por apurar a CSLL por estimativa mensal.",
+    "I) Apuração Anual da CSLL, com Recolhimentos Mensais sobre a Base de Cálculo Estimada",
+    "A pessoa jurídica que apurar anualmente o imposto sobre a renda com base no lucro real também deve apurar a CSLL anualmente com base no resultado ajustado, em 31 de dezembro de cada ano.",
+    "Os valores de CSLL efetivamente pagos calculados sobre a base de cálculo estimada mensalmente, no transcorrer do ano-calendário, podem ser deduzidos do valor de CSLL apurado anualmente (ajuste).",
+    "O valor da CSLL não pode ser deduzido para efeito de determinação do lucro real e da própria base de cálculo (Lei nº 9.316, de 1996, art. 1º).",
+    "I.1) Base de Cálculo",
+    "I.1.1) Pessoas Jurídicas de Natureza Comercial, Industrial ou de Prestação de Serviços",
+    "A base de cálculo da CSLL, em cada mês, será determinada pela soma:",
+    "1) de 12% (doze por cento) ou de 32% (trinta e dois por cento) da receita bruta auferida no período;",
+    "2) dos rendimentos e ganhos líquidos auferidos em aplicações financeiras de renda fixa e renda variável;",
+    "3) dos ganhos de capital, das demais receitas e dos resultados positivos decorrentes de receitas não compreendidas na atividade, no mês em que forem auferidos, inclusive:",
+    "a) os rendimentos auferidos nas operações de mútuo realizadas entre pessoas jurídicas ou entre pessoa jurídica e pessoa física;",
+    "b) os ganhos auferidos na alienação de participações societárias permanentes em sociedades coligadas e controladas, e de participações societárias que permaneceram no ativo da pessoa jurídica até o término do ano-calendário seguinte ao de suas aquisições;",
+    "c) os ganhos auferidos em operações de cobertura (hedge) realizadas em bolsas de valores, de mercadorias e de futuros ou no mercado de balcão;",
+    "d) a receita de locação de imóvel, quando não for este o objeto social da pessoa jurídica, deduzida dos encargos necessários à sua percepção;",
+    "e) os juros equivalentes à taxa do Sistema Especial de Liquidação e Custódia (Selic), para títulos federais, acumulada mensalmente, relativos a impostos e contribuições a serem restituídos ou compensados;",
+    "f) as variações monetárias ativas;",
+    "g) a diferença entre o valor em dinheiro ou o valor dos bens e direitos recebidos de instituição isenta, a título de devolução de patrimônio, e o valor em dinheiro ou o valor dos bens e direitos entregue para a formação do referido patrimônio (Lei nº 9.532, de 1997, art. 17, § 3º, e art. 81, inciso II);",
+    "h) os ganhos de capital auferidos na devolução de capital em bens e direitos.",
+    "Atenção:",
+    "1) A partir de 1º de setembro de 2003, o percentual da receita bruta considerado para efeito de determinação da base de cálculo da CSLL, a que se refere o item 1 acima, é de 32% (trinta e dois por cento), para as atividades de:",
+    "a) prestação de serviços em geral, observado o disposto no item seguinte;",
+    "b) intermediação de negócios;",
+    "c) administração, locação ou cessão de bens imóveis, móveis e direitos de qualquer natureza;",
+    "d) prestação cumulativa e contínua de serviços de assessoria creditícia, mercadológica, gestão de crédito, seleção de riscos, administração de contas a pagar e a receber, e compra de direitos creditórios resultantes de vendas mercantis a prazo ou de prestação de serviços (factoring).",
+    "e) prestação de serviços de construção, recuperação, reforma, ampliação ou melhoramento de infraestrutura vinculados a contrato de concessão de serviço público.",
+    "2) O percentual de receita bruta a ser considerado é de 12% (doze por cento) para as atividades de:",
+    "a) prestação de serviços hospitalares e de auxílio diagnóstico e terapia, fisioterapia e terapia ocupacional, fonoaudiologia, patologia clínica, imagenologia, radiologia, anatomia patológica e citopatologia, medicina nuclear e análises e patologias clínicas, exames por métodos gráficos, procedimentos endoscópicos, radioterapia, quimioterapia, diálise e oxigenoterapia hiperbárica, desde que a prestadora desses serviços seja organizada sob a forma de sociedade empresária e atenda às normas da Agência Nacional de Vigilância Sanitária (Anvisa);prestação de serviços hospitalares; e",
+    "b) de transporte, inclusive de carga, o percentual de receita bruta a ser considerado é de 12% (doze por cento).",
+    "3) No caso de atividades diversificadas, será aplicado o percentual correspondente a cada atividade.",
+    "4) A partir de 1º de janeiro de 2006, o percentual também passou a ser aplicado sobre a receita financeira da pessoa jurídica que explore atividades imobiliárias relativas a loteamento de terrenos, incorporação imobiliária, construção de prédios destinados à venda, bem como a venda de imóveis construídos ou adquiridos para a revenda, quando decorrente da comercialização de imóveis e for apurada por meio de índices ou coeficientes previstos em contrato. (Lei nº 11.196, de 2005, art. 34).",
+    "O ganho de capital, nas alienações de bens do ativo não-circulante, exceto realizável a longo prazo, e de ouro não considerado ativo financeiro, corresponde à diferença positiva verificada entre o valor da alienação e o respectivo valor contábil.",
+    "Para efeito de apuração do ganho de capital, considera-se valor contábil:",
+    "1) No caso de investimentos permanentes em:",
+    "a) participações societárias avaliadas pelo custo de aquisição, o valor de aquisição;",
+    "b) participações societárias avaliadas pelo valor de patrimônio líquido, a soma algébrica dos seguintes valores:",
+    "I. do patrimônio líquido pelo qual o investimento estiver registrado;",
+    "II. da mais-valia ou menos valia;",
+    "III. do ágio por rentabilidade futura (goodwill);",
+    "IV. da provisão para perdas, constituída até 31 de dezembro de 1995, quando dedutível.",
+    "2) No caso das aplicações em ouro, não considerado ativo financeiro, o valor de aquisição;",
+    "3) No caso dos demais bens e direitos do ativo não-circulante, exceto realizável a longo prazo, o custo de aquisição, diminuído dos encargos de depreciação, amortização ou exaustão acumulados e das perdas estimadas no valor de ativos; e",
+    "4) No caso de outros bens e direitos não classificados no ativo não-circulante, exceto realizável a longo prazo, considera-se valor contábil o custo de aquisição.",
+    "A baixa de investimento relevante e influente em sociedade coligada ou controlada deve ser precedida de avaliação pelo valor de patrimônio líquido, com base em balanço patrimonial ou balancete de verificação da coligada ou controlada, levantado na data da alienação ou liquidação ou até trinta dias, no máximo, antes dessa data.",
+    "O ganho de capital auferido na venda de bens do ativo não-circulante, exceto realizável a longo prazo, para recebimento do preço, no todo ou em parte, após o término do ano-calendário seguinte ao da contratação deve integrar a base de cálculo mensal da CSLL, podendo, para efeito de determinar o resultado ajustado, ser computado na proporção da parcela do preço recebida em cada mês.",
+    "As receitas financeiras decorrentes das variações monetárias dos direitos de crédito e das obrigações do contribuinte, em função da taxa de câmbio, são consideradas, para efeito de determinação da base de cálculo da CSLL, quando da liquidação da correspondente operação. À opção da pessoa jurídica, as variações monetárias podem ser consideradas segundo o regime de competência, o qual deve ser aplicado a todo o ano-calendário.",
+    "I.1.2) Efeito dos Balanços de Suspensão ou Redução no Pagamento da CSLL",
+    "A mesma forma de tributação adotada pela pessoa jurídica, para fins de apuração do imposto de renda, deve ser empregada para fins de apuração da CSLL.",
+    "Assim, a pessoa jurídica que levantou balanço ou balancete para suspender ou reduzir o pagamento do imposto de renda, em determinado mês do ano-calendário, deve apurar a base de cálculo da CSLL sobre o resultado do período apurado nesse mesmo balanço, ajustado pelas adições determinadas, pelas exclusões permitidas e pelas compensações de base de cálculo negativa da CSLL, observados os limites definidos na legislação pertinente.",
+    "A pessoa jurídica que levantar balanço ou balancete de suspensão ou redução do pagamento do IRPJ e da CSLL em 31 de dezembro deve computar os lucros, oriundos do exterior, disponibilizados nos termos do art. 1º da Lei nº 9.532, de 1997, observado o disposto no art. 74 da Medida Provisória nº 2.158-35 de 24 de agosto de 2001. A pessoa jurídica deve computar também os rendimentos e ganhos de capital, auferidos no exterior, nesse balanço ou balancete, para fins de incidência da CSLL.",
+    "Informações detalhadas sobre balanço de suspensão ou redução do pagamento do IRPJ e da CSLL podem ser encontradas nas explicações iniciais do Bloco L."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (N660).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[N660]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "CODIGO",
+     "descricao": "Código, conforme tabela dinâmica do Sped (Disponibilizada no item III deste registro e no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "DESCRICAO",
+     "descricao": "Descrição, conforme tabela dinâmica do Sped (Disponibilizada no item III deste registro e no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 4,
+     "nome": "VALOR",
+     "descricao": "Valor",
+     "tipo": "NS",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Não"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_DUPLICIDADE_DESPREZADA",
+     "texto": "Verifica se o registro já foi importado anteriormente, de acordo com a chave e os registros pais. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_LINHA_DESPREZADA",
+     "texto": "Verifica se o registro existe na importação, mas não será importado por não existir na tabela dinâmica devido às configurações do bloco 0 ou da tabela dinâmica. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_LINHA_ATUALIZADA",
+     "texto": "Verifica se o registro está desatualizado em relação à tabela da RFB. Se a regra não for cumprida, a ECF gera um aviso."
+    }
+   ],
+   "regrasCampo": [
+    {
+     "campo": "VALOR",
+     "regras": [
+      {
+       "codigo": "REGRA_OBRIGATORIO_TIPO_DIFERENTE_R",
+       "texto": "Verifica se o campo está preenchido quando o tipo da linha é diferente de “R”.",
+       "tipo": "Erro"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|N660|19|CSLL A PAGAR|10000,00|",
+    "|N660|: Identificação do tipo do registro.",
+    "|19|: Código da linha.",
+    "|CSLL A PAGAR|: Descrição da linha.",
+    "|10000,00|: Valor da linha (R$ 10.000,00)."
+   ]
+  },
+  {
+   "codigo": "N670",
+   "nome": "Apuração da CSLL Com Base no Lucro Real",
+   "ordem": 80,
+   "nivel": "3",
+   "ocorrencia": "[0;N]",
+   "chave": "CODIGO",
+   "entrada": "F",
+   "saida": "OC\n(Se N030.PER_APUR = “A00” OU [T01..T04])",
+   "descricao": [
+    "Este registro apresenta o cálculo da CSLL com base no lucro real."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (N670).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[N670]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "CODIGO",
+     "descricao": "Código, conforme tabela dinâmica do Sped (Disponibilizada no item III deste registro e no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "DESCRICAO",
+     "descricao": "Descrição, conforme tabela dinâmica do Sped (Disponibilizada no item III deste registro e no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 4,
+     "nome": "VALOR",
+     "descricao": "Valor",
+     "tipo": "NS",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Não"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_DUPLICIDADE_DESPREZADA",
+     "texto": "Verifica se o registro já foi importado anteriormente, de acordo com a chave e os registros pais. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_LINHA_DESPREZADA",
+     "texto": "Verifica se o registro existe na importação, mas não será importado por não existir na tabela dinâmica devido às configurações do bloco 0 ou da tabela dinâmica. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_LINHA_ATUALIZADA",
+     "texto": "Verifica se o registro está desatualizado em relação à tabela da RFB. Se a regra não for cumprida, a ECF gera um aviso."
+    }
+   ],
+   "regrasCampo": [
+    {
+     "campo": "VALOR",
+     "regras": [
+      {
+       "codigo": "REGRA_OBRIGATORIO_TIPO_DIFERENTE_R",
+       "texto": "Verifica se o campo está preenchido quando o tipo da linha é diferente de “R”.",
+       "tipo": "Erro"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|N670|23|CSLL POSTERGADA DE PERÍODOS DE APURAÇÃO ANTERIORES|10000,00|",
+    "|N670|: Identificação do tipo do registro.",
+    "|23|: Código da linha.",
+    "|CSLL POSTERGADA DE PERÍODOS DE APURAÇÃO ANTERIORES|: Descrição da linha.",
+    "|10000,00|: Valor da linha (R$ 10.000,00)."
+   ]
+  },
+  {
+   "codigo": "N990",
+   "nome": "Encerramento do Bloco N",
+   "ordem": 81,
+   "nivel": "1",
+   "ocorrencia": "[1;1]",
+   "chave": "[REG]",
+   "entrada": "F",
+   "saida": "O",
+   "descricao": [],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto fixo contendo a identificação do registro (N990).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[N990]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "QTD_LIN",
+     "descricao": "Quantidade total de registros do Bloco N.",
+     "tipo": "N",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [],
+   "exemplo": [
+    "|N990|2000|",
+    "|N990|: Identificação do tipo do registro.",
+    "|2000|: A quantidade total de registros do Bloco N é 2.000 (dois mil registros)."
+   ]
+  }
+ ]
+}

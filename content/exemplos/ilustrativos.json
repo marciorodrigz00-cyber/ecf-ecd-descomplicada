@@ -1,0 +1,435 @@
+{
+ "ano": 2025,
+ "itens": [
+  {
+   "registro": "C001",
+   "campos": [
+    "0"
+   ],
+   "nota": "O zero diz que o bloco tem dados. Na prática, o programa preenche este registro ao recuperar a ECD.",
+   "pendentes": []
+  },
+  {
+   "registro": "C040",
+   "campos": [
+    "0000000000000000000000000000000000000000",
+    "01072025",
+    "31122025",
+    "",
+    "99999999000100",
+    "1",
+    "",
+    "DIÁRIO GERAL",
+    "",
+    "G",
+    "N",
+    "N",
+    "0",
+    "0",
+    "1"
+   ],
+   "nota": "O hash da ECD é fictício. Na prática, o programa preenche este registro ao recuperar a ECD.",
+   "pendentes": [
+    "COD_VER_LC"
+   ]
+  },
+  {
+   "registro": "C050",
+   "campos": [
+    "01072025",
+    "01",
+    "A",
+    "4",
+    "1.1.1.01",
+    "1.1.1",
+    "BANCO"
+   ],
+   "nota": "A mesma conta que aparece no J050. Na prática, o programa preenche este registro ao recuperar a ECD.",
+   "pendentes": []
+  },
+  {
+   "registro": "C051",
+   "campos": [
+    "",
+    "1.01.01.02.01"
+   ],
+   "nota": "O vínculo da conta de banco com o plano referencial, igual ao do J051. Na prática, o programa preenche este registro ao recuperar a ECD.",
+   "pendentes": []
+  },
+  {
+   "registro": "C053",
+   "campos": [
+    "FT1234",
+    "1.2.1.02",
+    "02"
+   ],
+   "nota": "Grupo e natureza seguem o exemplo oficial do J053. Na prática, o programa preenche este registro ao recuperar a ECD.",
+   "pendentes": []
+  },
+  {
+   "registro": "C100",
+   "campos": [
+    "01072025",
+    "100",
+    "LOJA"
+   ],
+   "nota": "Centro de custos fictício. Na prática, o programa preenche este registro ao recuperar a ECD.",
+   "pendentes": []
+  },
+  {
+   "registro": "C150",
+   "campos": [
+    "01102025",
+    "31122025"
+   ],
+   "nota": "O período dos saldos que vêm logo abaixo. Na prática, o programa preenche este registro ao recuperar a ECD.",
+   "pendentes": []
+  },
+  {
+   "registro": "C155",
+   "campos": [
+    "1.1.1.01",
+    "",
+    "38000,00",
+    "D",
+    "610000,00",
+    "510000,00",
+    "138000,00",
+    "D",
+    "120"
+   ],
+   "nota": "Saldo inicial de 38.000 devedor, mais 610.000 de débitos, menos 510.000 de créditos: 138.000. O número da linha da ECD é fictício. Na prática, o programa preenche este registro ao recuperar a ECD.",
+   "pendentes": []
+  },
+  {
+   "registro": "C157",
+   "campos": [
+    "1.1.1.01",
+    "",
+    "38000,00",
+    "D",
+    "85"
+   ],
+   "nota": "Usado quando a empresa troca o plano de contas. Na prática, o programa preenche este registro ao recuperar a ECD.",
+   "pendentes": []
+  },
+  {
+   "registro": "C350",
+   "campos": [
+    "31122025"
+   ],
+   "nota": "A data em que o resultado foi apurado. Na prática, o programa preenche este registro ao recuperar a ECD.",
+   "pendentes": []
+  },
+  {
+   "registro": "C355",
+   "campos": [
+    "3.1.1.01",
+    "",
+    "700000,00",
+    "C",
+    "210"
+   ],
+   "nota": "A receita antes do encerramento, com o mesmo valor do K355. Na prática, o programa preenche este registro ao recuperar a ECD.",
+   "pendentes": []
+  },
+  {
+   "registro": "C990",
+   "campos": [
+    "12"
+   ],
+   "nota": "Conta as linhas do bloco, incluindo esta: uma de cada registro C deste site.",
+   "pendentes": []
+  },
+  {
+   "registro": "E001",
+   "campos": [
+    "0"
+   ],
+   "nota": "O zero diz que o bloco tem dados.",
+   "pendentes": []
+  },
+  {
+   "registro": "E010",
+   "campos": [
+    "01",
+    "1.01.01.02.01",
+    "Bancos Conta Movimento - No País",
+    "138000,00",
+    "D"
+   ],
+   "nota": "A natureza segue o código usado no L100, de onde os dados são recuperados. Na prática, o programa preenche este registro ao recuperar a ECF anterior. Mostra como o saldo final deste ano apareceria na ECF seguinte.",
+   "pendentes": []
+  },
+  {
+   "registro": "E015",
+   "campos": [
+    "1.1.1.01",
+    "",
+    "BANCO",
+    "138000,00",
+    "D"
+   ],
+   "nota": "Na prática, o programa preenche este registro ao recuperar a ECF anterior. Mostra como o saldo final deste ano apareceria na ECF seguinte.",
+   "pendentes": []
+  },
+  {
+   "registro": "E020",
+   "campos": [
+    "PF",
+    "PREJUÍZO FISCAL OPERACIONAL",
+    "30092025",
+    "",
+    "I",
+    "10800,00",
+    "D",
+    "1000"
+   ],
+   "nota": "É o prejuízo que sobrou para compensar: 10.800. Na prática, o programa preenche este registro ao recuperar a ECF anterior. Mostra como o saldo final deste ano apareceria na ECF seguinte.",
+   "pendentes": []
+  },
+  {
+   "registro": "E030",
+   "campos": [
+    "01102025",
+    "31122025",
+    "T04"
+   ],
+   "nota": "O período dos saldos que vêm logo abaixo.",
+   "pendentes": []
+  },
+  {
+   "registro": "E155",
+   "campos": [
+    "1.1.1.01",
+    "",
+    "38000,00",
+    "D",
+    "610000,00",
+    "510000,00",
+    "138000,00",
+    "D"
+   ],
+   "nota": "O mesmo movimento do K155, calculado pelo programa a partir da ECD.",
+   "pendentes": []
+  },
+  {
+   "registro": "E355",
+   "campos": [
+    "3.1.1.01",
+    "",
+    "700000,00",
+    "C"
+   ],
+   "nota": "O mesmo valor do K355, calculado pelo programa a partir da ECD.",
+   "pendentes": []
+  },
+  {
+   "registro": "E990",
+   "campos": [
+    "8"
+   ],
+   "nota": "Conta as linhas do bloco, incluindo esta: uma de cada registro E deste site.",
+   "pendentes": []
+  },
+  {
+   "registro": "X990",
+   "campos": [
+    "212"
+   ],
+   "nota": "O Manual explica este registro com o total de 212 linhas, mas não traz a linha.",
+   "pendentes": []
+  },
+  {
+   "registro": "0021",
+   "campos": [
+    "N",
+    "N",
+    "N",
+    "N",
+    "N",
+    "N",
+    "N",
+    "N",
+    "N",
+    "N",
+    "N",
+    "N",
+    "N",
+    "N",
+    "N",
+    "N",
+    "N"
+   ],
+   "nota": "A empresa não usa nenhum dos programas. O exemplo do Manual tem um campo a menos que a tabela.",
+   "pendentes": [],
+   "anos": [
+    2025
+   ]
+  },
+  {
+   "registro": "M510",
+   "campos": [
+    "1005",
+    "Provisões ou Perdas Estimadas Não Dedutíveis",
+    "I",
+    "20000,00",
+    "D",
+    "5000,00",
+    "C",
+    "0,00",
+    "D",
+    "15000,00",
+    "D"
+   ],
+   "nota": "Saldo de 20.000, menos 5.000 usados no período: 15.000. São os valores do M500. O exemplo do Manual não traz o tributo.",
+   "pendentes": []
+  },
+  {
+   "registro": "N605",
+   "campos": [
+    "3.1.1.01",
+    "",
+    "700000,00",
+    "C"
+   ],
+   "nota": "A Móveis Aurora não apura lucro da exploração: a linha só mostra o formato, com uma conta do K355.",
+   "pendentes": []
+  },
+  {
+   "registro": "X340",
+   "campos": [
+    "EMPRESA CONTROLADA",
+    "1111111111",
+    "1",
+    "249",
+    "N",
+    "S",
+    "",
+    "",
+    ""
+   ],
+   "nota": "Segue o exemplo do Manual, que não traz os dois últimos campos.",
+   "pendentes": [
+    "TIP_MOEDA"
+   ]
+  },
+  {
+   "registro": "X350",
+   "campos": [
+    "1000000,00",
+    "600000,00",
+    "400000,00",
+    "100000,00",
+    "0,00",
+    "40000,00",
+    "10000,00",
+    "450000,00",
+    "50000,00",
+    "0,00",
+    "0,00",
+    "500000,00",
+    "0,00",
+    "100000,00",
+    "400000,00"
+   ],
+   "nota": "Valores do exemplo do Manual, com o lucro arbitrado zerado. Lucro bruto: 1.000.000 − 600.000. Operacional: 400.000 + 100.000 − 40.000 − 10.000. Antes do imposto: 450.000 + 50.000. Líquido: 500.000 − 100.000.",
+   "pendentes": []
+  },
+  {
+   "registro": "X351",
+   "campos": [
+    "100000,00",
+    "500000,00",
+    "0,00",
+    "0,00",
+    "0,00",
+    "0,00",
+    "100000,00",
+    "500000,00",
+    "20000,00",
+    "100000,00",
+    "0,00",
+    "0,00",
+    "0,00",
+    "0,00",
+    "0,00"
+   ],
+   "nota": "Resultado de 100.000 na moeda estrangeira, convertido a uma cotação fictícia de 5 para 1. Todos os campos precisam ser informados, mesmo com zero.",
+   "pendentes": []
+  },
+  {
+   "registro": "M500",
+   "campos": [
+    "PROV",
+    "I",
+    "20000,00",
+    "D",
+    "5000,00",
+    "C",
+    "0,00",
+    "D",
+    "15000,00",
+    "D"
+   ],
+   "nota": "Saldo de 20.000, menos 5.000 usados no período: 15.000. O exemplo do Manual não traz o tributo.",
+   "pendentes": [],
+   "anos": [
+    2024
+   ]
+  },
+  {
+   "registro": "Y600",
+   "campos": [
+    "01072025",
+    "",
+    "105",
+    "PF",
+    "00000000000",
+    "SÓCIA FICTÍCIA UM",
+    "02",
+    "60,0000",
+    "60,0000",
+    "",
+    "",
+    "0,00",
+    "0,00",
+    "0,00",
+    "0,00",
+    "0,00"
+   ],
+   "nota": "Participação de uma sócia, sem rendimentos no ano: os cinco valores vão zerados, porque neste leiaute são obrigatórios. A quantidade de campos do exemplo do Manual é diferente da tabela.",
+   "pendentes": [],
+   "anos": [
+    2024
+   ]
+  },
+  {
+   "registro": "Y672",
+   "campos": [
+    "100000,00",
+    "100000,00",
+    "30000,00",
+    "45000,00",
+    "50000,00",
+    "314800,00",
+    "0,00",
+    "0,00",
+    "0,00",
+    "0,00",
+    "20000,00",
+    "25000,00",
+    "850000,00",
+    "0,00",
+    "0,00",
+    "359800,00",
+    "1"
+   ],
+   "nota": "Os valores da Café do Vale. A quantidade de campos do exemplo do Manual é diferente da tabela.",
+   "pendentes": [],
+   "anos": [
+    2024
+   ]
+  }
+ ]
+}

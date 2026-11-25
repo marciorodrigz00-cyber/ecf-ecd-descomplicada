@@ -1,0 +1,33 @@
+{
+  "id": "nov-outras-exclusoes",
+  "slug": "outras-exclusoes",
+  "data": "2026-06-30",
+  "tipo": "comunicado",
+  "titulo": "Justificativa para outras exclusões sem relacionamento",
+  "iniciante": "Empresas que lançam valores altos na linha genérica de exclusões precisam explicar o motivo à Receita.",
+  "profissional": "A partir da versão 12.1.0, exige Requerimento Web quando, ao mesmo tempo, os valores nas linhas 167.01 (M300A e M350A) e 341.01 (M350A e M350R, como escrito no comunicado) passam de R$ 20.000.000,00 e representam mais de 30% do total das exclusões. O requerimento pede justificativa, embasamento legal, segregação dos valores e memória de cálculo.",
+  "fazer": "Use a linha genérica só quando não houver linha específica para a exclusão.",
+  "registros": [
+    "M300",
+    "M350"
+  ],
+  "fonte": {
+    "id": "sped-comunicados",
+    "url": "https://www.gov.br/sped/pt-br/assuntos/comunicados/ecf/ecf-outras-exclusoes-sem-relacionamento",
+    "trecho": "Primeiro parágrafo e lista"
+  },
+  "norma": "Comunicado da ECF de 30/06/2026 (RFB)",
+  "leiautes": [
+    "12"
+  ],
+  "vigencia": {
+    "acNormal": [
+      2025
+    ],
+    "situacaoEspecial": [
+      2026
+    ]
+  },
+  "verificadoEm": "2026-11-25",
+  "status": "conferido"
+}

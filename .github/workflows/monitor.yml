@@ -1,0 +1,97 @@
+# Lê as fontes oficiais uma vez por dia e, se algo mudou, abre ou atualiza um Pull Request de rascunho.
+# Nunca faz merge e nunca grava fora de monitor/. Ver docs/adr/0007-novidades-e-monitor.md.
+name: Monitor de fontes oficiais
+
+on:
+  schedule:
+    - cron: "17 7 * * *"
+      timezone: "America/Sao_Paulo"
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: monitor
+  cancel-in-progress: false
+
+jobs:
+  ler:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    # Só este job executa código do projeto e fala com as fontes: não pode escrever no repositório.
+    permissions:
+      contents: read
+    outputs:
+      mudou: ${{ steps.mudanca.outputs.mudou }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+          package-manager-cache: false
+      - name: Ler as fontes
+        id: leitura
+        # Sem npm install: o monitor só usa o Node.
+        run: node tools/monitor/index.ts | tee -a "$GITHUB_STEP_SUMMARY"
+        shell: bash
+        continue-on-error: true
+      - name: Conferir o que mudou
+        id: mudanca
+        shell: bash
+        run: |
+          fora="$(git status --porcelain --untracked-files=all | cut -c4- | grep -v '^monitor/' || true)"
+          if [ -n "$fora" ]; then
+            echo "::error::O monitor alterou arquivos fora de monitor/"
+            exit 1
+          fi
+          if [ -n "$(git status --porcelain -- monitor/rascunhos)" ]; then
+            echo "mudou=sim" >> "$GITHUB_OUTPUT"
+            mkdir -p saida && cp -r monitor saida/
+          fi
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: steps.mudanca.outputs.mudou == 'sim'
+        with:
+          name: rascunho
+          path: saida/monitor
+          retention-days: 7
+      - name: Acusar fonte não lida
+        if: steps.leitura.outcome == 'failure'
+        run: |
+          echo "::error::Ao menos uma fonte não foi lida. Veja o resumo."
+          exit 1
+
+  propor:
+    needs: ler
+    # Roda mesmo se uma fonte falhou, desde que haja rascunho.
+    if: ${{ !cancelled() && needs.ler.outputs.mudou == 'sim' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: rascunho
+          path: monitor
+      - name: Abrir ou atualizar o Pull Request
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c monitor/rascunho
+          git add -- monitor
+          git diff --cached --quiet && exit 0
+          git commit -m "Rascunho do monitor de fontes oficiais"
+          git push --force origin monitor/rascunho
+          if [ "$(gh pr list --head monitor/rascunho --state open --json number --jq length)" = "0" ]; then
+            gh pr create --draft --head monitor/rascunho --title "Rascunho: mudança em fonte oficial" --body-file monitor/ultimo.md
+          else
+            gh pr edit monitor/rascunho --body-file monitor/ultimo.md
+          fi

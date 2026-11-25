@@ -1,0 +1,257 @@
+{
+  "rastreio": {
+    "id": "arq-grafo",
+    "fonte": {
+      "id": "manual-12",
+      "url": "https://www.gov.br/sped/pt-br/assuntos/escrituracoes-digitais/ecf/manuais-e-documentos-tecnicos",
+      "trecho": "Regras de validação dos registros citados em cada ligação"
+    },
+    "norma": "Manual de Orientação do Leiaute (ADE Cofis nº 2/2026 e nº 38/2024)",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": [
+        2025,
+        2026
+      ]
+    },
+    "verificadoEm": "2026-11-24",
+    "status": "conferido"
+  },
+  "externos": [
+    {
+      "id": "ECD",
+      "nome": "ECD do período"
+    },
+    {
+      "id": "ECFA",
+      "nome": "ECF anterior"
+    }
+  ],
+  "arestas": [
+    {
+      "de": "ECD",
+      "para": "C",
+      "o": "Contas e saldos recuperados",
+      "base": {
+        "registro": "C040",
+        "regra": null
+      }
+    },
+    {
+      "de": "ECFA",
+      "para": "E",
+      "o": "Saldos finais do ano anterior",
+      "base": {
+        "registro": "E010",
+        "regra": null
+      }
+    },
+    {
+      "de": "C",
+      "para": "E",
+      "o": "Saldos recalculados por período",
+      "base": {
+        "registro": "E355",
+        "regra": null
+      }
+    },
+    {
+      "de": "C",
+      "para": "J",
+      "o": "Plano de contas e natureza das contas",
+      "base": {
+        "registro": "J050",
+        "regra": "REGRA_NATUREZA_J050_C050"
+      }
+    },
+    {
+      "de": "E",
+      "para": "K",
+      "o": "Saldos iniciais e saldos calculados",
+      "base": {
+        "registro": "K155",
+        "regra": "REGRA_COMPATIBILIDADE_K155_E155"
+      }
+    },
+    {
+      "de": "J",
+      "para": "K",
+      "o": "Vínculo com o plano referencial",
+      "base": {
+        "registro": "K156",
+        "regra": "REGRA_CTA_REF_MAPEADA_J051"
+      }
+    },
+    {
+      "de": "K",
+      "para": "L",
+      "o": "Saldos por conta referencial",
+      "base": {
+        "registro": "L100",
+        "regra": "REGRA_COMPARA_CONT_REF_SF"
+      }
+    },
+    {
+      "de": "K",
+      "para": "P",
+      "o": "Saldos por conta referencial",
+      "base": {
+        "registro": "P100",
+        "regra": "REGRA_COMPARA_CONT_REF_SF"
+      }
+    },
+    {
+      "de": "K",
+      "para": "U",
+      "o": "Saldos por conta referencial",
+      "base": {
+        "registro": "U100",
+        "regra": "REGRA_COMPARA_CONT_REF_SF"
+      }
+    },
+    {
+      "de": "K",
+      "para": "M",
+      "o": "Contas ligadas às adições e exclusões",
+      "base": {
+        "registro": "M310",
+        "regra": "REGRA_VALIDA_CONTA_BALANCO_DRE"
+      }
+    },
+    {
+      "de": "E",
+      "para": "M",
+      "o": "Saldos da parte B",
+      "base": {
+        "registro": "M010",
+        "regra": "REGRA_SALDOS_M010_E020"
+      }
+    },
+    {
+      "de": "L",
+      "para": "M",
+      "o": "Lucro líquido antes do IRPJ",
+      "base": {
+        "registro": "M300",
+        "regra": null,
+        "tabela": "M300A, linha 2: fórmula com L300"
+      }
+    },
+    {
+      "de": "M",
+      "para": "N",
+      "o": "Base de cálculo depois das compensações",
+      "base": {
+        "registro": "N500",
+        "regra": null,
+        "tabela": "N500, linha 1: fórmula com M300"
+      }
+    },
+    {
+      "de": "Y",
+      "para": "N",
+      "o": "Retenções na fonte",
+      "base": {
+        "registro": "Y570",
+        "regra": "REGRA_EXISTE_IR_RET"
+      }
+    },
+    {
+      "de": "0",
+      "para": "J",
+      "o": "Forma de tributação define se o bloco existe",
+      "base": {
+        "registro": "J050",
+        "regra": null
+      }
+    },
+    {
+      "de": "0",
+      "para": "L",
+      "o": "Forma de tributação define se o bloco existe",
+      "base": {
+        "registro": "L030",
+        "regra": null
+      }
+    },
+    {
+      "de": "0",
+      "para": "P",
+      "o": "Forma de tributação define se o bloco existe",
+      "base": {
+        "registro": "P030",
+        "regra": null
+      }
+    },
+    {
+      "de": "0",
+      "para": "Q",
+      "o": "Tipo de escrituração define se o bloco existe",
+      "base": {
+        "registro": "Q100",
+        "regra": null
+      }
+    },
+    {
+      "de": "0",
+      "para": "T",
+      "o": "Forma de tributação define se o bloco existe",
+      "base": {
+        "registro": "T030",
+        "regra": null
+      }
+    },
+    {
+      "de": "0",
+      "para": "U",
+      "o": "Forma de tributação define se o bloco existe",
+      "base": {
+        "registro": "U030",
+        "regra": null
+      }
+    },
+    {
+      "de": "0",
+      "para": "V",
+      "o": "Resposta sobre DEREX",
+      "base": {
+        "registro": "V010",
+        "regra": null
+      }
+    },
+    {
+      "de": "0",
+      "para": "W",
+      "o": "Resposta sobre País-a-País",
+      "base": {
+        "registro": "W100",
+        "regra": null
+      }
+    },
+    {
+      "de": "0",
+      "para": "X",
+      "o": "Respostas que abrem cada registro",
+      "base": {
+        "registro": "X480",
+        "regra": null
+      }
+    },
+    {
+      "de": "0",
+      "para": "Y",
+      "o": "Respostas que abrem cada registro",
+      "base": {
+        "registro": "Y620",
+        "regra": null
+      }
+    }
+  ]
+}

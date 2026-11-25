@@ -1,0 +1,139 @@
+[
+  {
+    "id": "gov-servico-ecf",
+    "nome": "Serviço: Entregar Escrituração Contábil Fiscal",
+    "orgao": "Receita Federal",
+    "url": "https://www.gov.br/pt-br/servicos/entregar-escrituracao-contabil-fiscal",
+    "papel": "primaria"
+  },
+  {
+    "id": "rfb-download-ecf",
+    "nome": "Download do programa da ECF",
+    "orgao": "Receita Federal",
+    "url": "https://www.gov.br/receitafederal/pt-br/centrais-de-conteudo/download/sped/ecf",
+    "papel": "primaria"
+  },
+  {
+    "id": "gov-sped-ecf",
+    "nome": "Portal SPED: módulo ECF",
+    "orgao": "Receita Federal",
+    "url": "https://www.gov.br/sped/pt-br/assuntos/escrituracoes-digitais/ecf",
+    "papel": "primaria"
+  },
+  {
+    "id": "in-2004",
+    "nome": "Instrução Normativa RFB nº 2.004/2021",
+    "orgao": "Receita Federal",
+    "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/114966",
+    "papel": "primaria"
+  },
+  {
+    "id": "dl-1598",
+    "nome": "Decreto-Lei nº 1.598/1977",
+    "orgao": "Presidência da República",
+    "url": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del1598.htm",
+    "papel": "primaria"
+  },
+  {
+    "id": "lei-8218",
+    "nome": "Lei nº 8.218/1991",
+    "orgao": "Presidência da República",
+    "url": "https://www.planalto.gov.br/ccivil_03/leis/l8218.htm",
+    "papel": "primaria"
+  },
+  {
+    "id": "decreto-6022",
+    "nome": "Decreto nº 6.022/2007",
+    "orgao": "Presidência da República",
+    "url": "https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2007/decreto/d6022.htm",
+    "papel": "primaria"
+  },
+  {
+    "id": "normas-rfb",
+    "nome": "Busca de normas da Receita Federal",
+    "orgao": "Receita Federal",
+    "url": "https://normas.receita.fazenda.gov.br/sijut2consulta/consulta.action",
+    "papel": "primaria"
+  },
+  {
+    "id": "manual-12",
+    "nome": "Manual de Orientação do Leiaute 12 da ECF",
+    "orgao": "Receita Federal",
+    "url": "https://www.gov.br/sped/pt-br/assuntos/escrituracoes-digitais/ecf/manuais-e-documentos-tecnicos",
+    "papel": "primaria",
+    "observacao": "Versão de 23/07/2026, em Word e PDF."
+  },
+  {
+    "id": "manual-11",
+    "nome": "Manual de Orientação do Leiaute 11 da ECF",
+    "orgao": "Receita Federal",
+    "url": "https://www.gov.br/sped/pt-br/assuntos/escrituracoes-digitais/ecf/manuais-e-documentos-tecnicos",
+    "papel": "primaria",
+    "observacao": "Versão de 29/09/2025, em PDF. A cópia em Word do portal antigo foi conferida com este PDF."
+  },
+  {
+    "id": "tabelas-12",
+    "nome": "Tabelas dinâmicas do Leiaute 12",
+    "orgao": "Receita Federal",
+    "url": "https://www.gov.br/sped/pt-br/assuntos/escrituracoes-digitais/ecf/manuais-e-documentos-tecnicos",
+    "papel": "primaria",
+    "observacao": "Planilha com as linhas e fórmulas de cada registro."
+  },
+  {
+    "id": "lei-9249",
+    "nome": "Lei nº 9.249/1995",
+    "orgao": "Presidência da República",
+    "url": "https://www.planalto.gov.br/ccivil_03/leis/l9249.htm",
+    "papel": "primaria"
+  },
+  {
+    "id": "lei-7689",
+    "nome": "Lei nº 7.689/1988",
+    "orgao": "Presidência da República",
+    "url": "https://www.planalto.gov.br/ccivil_03/leis/l7689.htm",
+    "papel": "primaria"
+  },
+  {
+    "id": "lei-9065",
+    "nome": "Lei nº 9.065/1995",
+    "orgao": "Presidência da República",
+    "url": "https://www.planalto.gov.br/ccivil_03/leis/l9065.htm",
+    "papel": "primaria"
+  },
+  {
+    "id": "lei-9430",
+    "nome": "Lei nº 9.430/1996",
+    "orgao": "Presidência da República",
+    "url": "https://www.planalto.gov.br/ccivil_03/leis/l9430.htm",
+    "papel": "primaria"
+  },
+  {
+    "id": "in-1700",
+    "nome": "Instrução Normativa RFB nº 1.700/2017",
+    "orgao": "Receita Federal",
+    "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/81268",
+    "papel": "primaria"
+  },
+  {
+    "id": "in-1422",
+    "nome": "Instrução Normativa RFB nº 1.422/2013",
+    "orgao": "Receita Federal",
+    "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/48711",
+    "papel": "primaria",
+    "observacao": "Revogada pela IN RFB nº 2.004/2021."
+  },
+  {
+    "id": "sped-programa-ecf",
+    "nome": "Comunicado da versão 12.2.8 do programa da ECF",
+    "orgao": "Receita Federal",
+    "url": "https://www.gov.br/sped/pt-br/assuntos/comunicados/ecf/copy4_of_publicacao-da-versao-12-2-4-do-programa-da-ecf",
+    "papel": "primaria"
+  },
+  {
+    "id": "sped-comunicados",
+    "nome": "Comunicados da ECF no portal do Sped",
+    "orgao": "Receita Federal",
+    "url": "https://www.gov.br/sped/pt-br/assuntos/comunicados/ecf",
+    "papel": "primaria"
+  }
+]

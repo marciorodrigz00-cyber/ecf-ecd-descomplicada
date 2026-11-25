@@ -1,0 +1,353 @@
+[
+  {
+    "id": "ecf-conteudo",
+    "titulo": "O que a ECF informa",
+    "valor": {
+      "tipo": "texto",
+      "texto": "Todas as operações que influenciem a composição da base de cálculo e o valor devido do IRPJ e da CSLL"
+    },
+    "fonte": {
+      "id": "in-2004",
+      "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/114966",
+      "trecho": "art. 2º, caput"
+    },
+    "norma": "IN RFB nº 2.004/2021, art. 2º, caput",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-24",
+    "status": "conferido"
+  },
+  {
+    "id": "ecf-lalur",
+    "titulo": "A ECF é o Lalur",
+    "valor": {
+      "tipo": "texto",
+      "texto": "Para quem apura o IRPJ pelo lucro real, a ECF é o Livro de Apuração do Lucro Real"
+    },
+    "fonte": {
+      "id": "in-2004",
+      "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/114966",
+      "trecho": "art. 1º, § 2º"
+    },
+    "norma": "IN RFB nº 2.004/2021, art. 1º, § 2º",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-24",
+    "status": "conferido"
+  },
+  {
+    "id": "substitui-dipj",
+    "titulo": "Fim da DIPJ e do Lalur em papel",
+    "valor": {
+      "tipo": "texto",
+      "texto": "Desde 1º de janeiro de 2014, as pessoas jurídicas estão dispensadas do Lalur em meio físico e da entrega da DIPJ"
+    },
+    "fonte": {
+      "id": "in-2004",
+      "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/114966",
+      "trecho": "art. 5º, caput"
+    },
+    "norma": "IN RFB nº 2.004/2021, art. 5º, caput",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-24",
+    "status": "conferido"
+  },
+  {
+    "id": "recupera-ecd",
+    "titulo": "Dados que vêm da ECD",
+    "valor": {
+      "tipo": "texto",
+      "texto": "A ECF recupera o plano de contas e os saldos das contas de quem está obrigado à ECD do mesmo período"
+    },
+    "fonte": {
+      "id": "in-2004",
+      "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/114966",
+      "trecho": "art. 2º, I"
+    },
+    "norma": "IN RFB nº 2.004/2021, art. 2º, I",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-24",
+    "status": "conferido"
+  },
+  {
+    "id": "recupera-ecf-anterior",
+    "titulo": "Dados que vêm da ECF anterior",
+    "valor": {
+      "tipo": "texto",
+      "texto": "A ECF recupera os saldos finais da ECF do período imediatamente anterior, quando aplicável"
+    },
+    "fonte": {
+      "id": "in-2004",
+      "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/114966",
+      "trecho": "art. 2º, II"
+    },
+    "norma": "IN RFB nº 2.004/2021, art. 2º, II",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-24",
+    "status": "conferido"
+  },
+  {
+    "id": "plano-referencial",
+    "titulo": "Plano de contas referencial",
+    "valor": {
+      "tipo": "texto",
+      "texto": "As contas recuperadas da ECD são associadas ao plano de contas referencial definido pela Cofis"
+    },
+    "fonte": {
+      "id": "in-2004",
+      "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/114966",
+      "trecho": "art. 2º, III"
+    },
+    "norma": "IN RFB nº 2.004/2021, art. 2º, III",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-24",
+    "status": "conferido"
+  },
+  {
+    "id": "e-lalur",
+    "titulo": "e-Lalur",
+    "valor": {
+      "tipo": "texto",
+      "texto": "Detalha os ajustes do lucro líquido na apuração do lucro real, por uma tabela de adições e exclusões"
+    },
+    "fonte": {
+      "id": "in-2004",
+      "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/114966",
+      "trecho": "art. 2º, IV"
+    },
+    "norma": "IN RFB nº 2.004/2021, art. 2º, IV",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-24",
+    "status": "conferido"
+  },
+  {
+    "id": "e-lacs",
+    "titulo": "e-Lacs",
+    "valor": {
+      "tipo": "texto",
+      "texto": "Detalha os ajustes da base de cálculo da CSLL, por uma tabela de adições e exclusões"
+    },
+    "fonte": {
+      "id": "in-2004",
+      "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/114966",
+      "trecho": "art. 2º, V"
+    },
+    "norma": "IN RFB nº 2.004/2021, art. 2º, V",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-24",
+    "status": "conferido"
+  },
+  {
+    "id": "controle-saldos",
+    "titulo": "Controle de saldos futuros",
+    "valor": {
+      "tipo": "texto",
+      "texto": "Registra os valores a excluir, adicionar ou compensar em períodos seguintes, inclusive prejuízo fiscal e base negativa da CSLL"
+    },
+    "fonte": {
+      "id": "in-2004",
+      "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/114966",
+      "trecho": "art. 2º, VI"
+    },
+    "norma": "IN RFB nº 2.004/2021, art. 2º, VI",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-24",
+    "status": "conferido"
+  },
+  {
+    "id": "livro-caixa",
+    "titulo": "Livro Caixa no lucro presumido",
+    "valor": {
+      "tipo": "texto",
+      "texto": "Desde o ano-calendário de 2016, optantes do lucro presumido que usam a prerrogativa do livro caixa e têm receita bruta anual superior a R$ 1.200.000,00, ou proporcional ao período, apresentam o Demonstrativo de Livro Caixa"
+    },
+    "fonte": {
+      "id": "in-2004",
+      "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/114966",
+      "trecho": "art. 2º, VIII"
+    },
+    "norma": "IN RFB nº 2.004/2021, art. 2º, VIII",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-24",
+    "status": "conferido"
+  },
+  {
+    "id": "manual-cofis",
+    "titulo": "Quem define o leiaute",
+    "valor": {
+      "tipo": "texto",
+      "texto": "O Manual de Orientação do Leiaute é divulgado pela Cofis por Ato Declaratório Executivo publicado no DOU"
+    },
+    "fonte": {
+      "id": "in-2004",
+      "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/114966",
+      "trecho": "art. 4º"
+    },
+    "norma": "IN RFB nº 2.004/2021, art. 4º",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-24",
+    "status": "conferido"
+  },
+  {
+    "id": "assinatura",
+    "titulo": "Assinatura digital",
+    "valor": {
+      "tipo": "texto",
+      "texto": "A ECF é assinada com certificado emitido por entidade credenciada pela ICP-Brasil"
+    },
+    "fonte": {
+      "id": "in-2004",
+      "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/114966",
+      "trecho": "art. 3º, § 1º"
+    },
+    "norma": "IN RFB nº 2.004/2021, art. 3º, § 1º",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-24",
+    "status": "conferido"
+  },
+  {
+    "id": "sped",
+    "titulo": "O que é o Sped",
+    "valor": {
+      "tipo": "texto",
+      "texto": "Instrumento que unifica a recepção, validação, armazenamento e autenticação de livros e documentos da escrituração contábil e fiscal, em fluxo único e computadorizado"
+    },
+    "fonte": {
+      "id": "decreto-6022",
+      "url": "https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2007/decreto/d6022.htm",
+      "trecho": "art. 2º, redação do Decreto nº 7.979/2013"
+    },
+    "norma": "Decreto nº 6.022/2007, art. 2º",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-24",
+    "status": "conferido"
+  }
+]

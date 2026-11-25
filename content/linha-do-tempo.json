@@ -1,0 +1,218 @@
+[
+  {
+    "id": "t-sped",
+    "quando": {
+      "data": "2007-01-22"
+    },
+    "titulo": "Nasce o Sped",
+    "iniciante": "O governo cria um sistema único para receber livros e documentos digitais.",
+    "profissional": "Instituição do Sped, com fluxo único e computadorizado de informações.",
+    "fonte": {
+      "id": "decreto-6022",
+      "url": "https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2007/decreto/d6022.htm",
+      "trecho": "Arts. 1º e 2º"
+    },
+    "norma": "Decreto nº 6.022/2007",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-24",
+    "status": "conferido"
+  },
+  {
+    "id": "t-in1422",
+    "quando": {
+      "data": "2013-12-20"
+    },
+    "titulo": "Primeira norma da ECF",
+    "iniciante": "A Receita publica as regras do novo arquivo, antes de ele começar a valer.",
+    "profissional": "Publicação da primeira instrução normativa sobre a ECF, hoje revogada pela norma vigente.",
+    "fonte": {
+      "id": "in-1422",
+      "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/48711",
+      "trecho": "Art. 1º, caput, e anotação de revogação"
+    },
+    "norma": "IN RFB nº 1.422/2013",
+    "leiautes": [
+      "1"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2014
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-25",
+    "status": "conferido"
+  },
+  {
+    "id": "t-dipj",
+    "quando": {
+      "ano": 2014
+    },
+    "titulo": "A ECF substitui a DIPJ",
+    "iniciante": "A declaração antiga e o livro em papel saem de cena. A ECF passa a reunir tudo.",
+    "profissional": "Obrigatoriedade a partir deste ano-calendário, com dispensa da DIPJ e do Lalur em meio físico.",
+    "fonte": {
+      "id": "in-2004",
+      "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/114966",
+      "trecho": "Arts. 1º e 5º"
+    },
+    "norma": "IN RFB nº 2.004/2021",
+    "leiautes": [
+      "1"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2014
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-24",
+    "status": "conferido"
+  },
+  {
+    "id": "t-imunes",
+    "quando": {
+      "ano": 2015
+    },
+    "titulo": "Imunes e isentas entram",
+    "iniciante": "Todas as entidades imunes e isentas passam a entregar. A ECF também começa a aproveitar dados da ECF anterior.",
+    "profissional": "Obrigatoriedade para todas as imunes e isentas e recuperação dos saldos finais da ECF anterior.",
+    "fonte": {
+      "id": "manual-12",
+      "url": "https://www.gov.br/sped/pt-br/assuntos/escrituracoes-digitais/ecf/manuais-e-documentos-tecnicos",
+      "trecho": "Itens 1.1 e 1.4"
+    },
+    "norma": "Manual de Orientação do Leiaute 12",
+    "leiautes": [
+      "2"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2015
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-24",
+    "status": "conferido"
+  },
+  {
+    "id": "t-caixa",
+    "quando": {
+      "ano": 2016
+    },
+    "titulo": "Livro Caixa no arquivo",
+    "iniciante": "Parte das empresas do lucro presumido passa a mostrar o livro caixa.",
+    "profissional": "Demonstrativo de Livro Caixa para optantes do presumido acima do limite de receita.",
+    "fonte": {
+      "id": "in-2004",
+      "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/114966",
+      "trecho": "Art. 2º, VIII"
+    },
+    "norma": "IN RFB nº 2.004/2021",
+    "leiautes": [
+      "3"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2016
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-24",
+    "status": "conferido"
+  },
+  {
+    "id": "t-in2004",
+    "quando": {
+      "data": "2021-02-01"
+    },
+    "titulo": "Entra em vigor a norma atual",
+    "iniciante": "As regras espalhadas em várias instruções são reunidas em uma só.",
+    "profissional": "Vigência da instrução normativa que revogou nove anteriores sobre a ECF.",
+    "fonte": {
+      "id": "in-2004",
+      "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/114966",
+      "trecho": "Arts. 11 e 12"
+    },
+    "norma": "IN RFB nº 2.004/2021",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-24",
+    "status": "conferido"
+  },
+  {
+    "id": "t-l11",
+    "quando": {
+      "data": "2024-12-18"
+    },
+    "titulo": "Leiaute 11",
+    "iniciante": "Sai o manual usado para o ano-calendário 2024.",
+    "profissional": "Publicação do ato sobre o Manual do leiaute 11: ano-calendário 2024 e situações especiais de 2025.",
+    "fonte": {
+      "id": "normas-rfb",
+      "url": "https://normas.receita.fazenda.gov.br/sijut2consulta/consulta.action?numero_ato=38&ano_ato=2024",
+      "trecho": "Ementa e data de publicação"
+    },
+    "norma": "ADE Cofis nº 38/2024",
+    "leiautes": [
+      "11"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024
+      ],
+      "situacaoEspecial": [
+        2025
+      ]
+    },
+    "verificadoEm": "2026-11-24",
+    "status": "conferido"
+  },
+  {
+    "id": "t-l12",
+    "quando": {
+      "data": "2026-01-29"
+    },
+    "titulo": "Leiaute 12",
+    "iniciante": "Sai o manual usado para o ano-calendário 2025.",
+    "profissional": "Publicação do ato sobre o Manual do leiaute 12: ano-calendário 2025 e situações especiais de 2026.",
+    "fonte": {
+      "id": "normas-rfb",
+      "url": "https://normas.receita.fazenda.gov.br/sijut2consulta/consulta.action?numero_ato=2&ano_ato=2026",
+      "trecho": "Ementa e data de publicação"
+    },
+    "norma": "ADE Cofis nº 2/2026",
+    "leiautes": [
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2025
+      ],
+      "situacaoEspecial": [
+        2026
+      ]
+    },
+    "verificadoEm": "2026-11-24",
+    "status": "conferido"
+  }
+]

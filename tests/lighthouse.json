@@ -1,0 +1,97 @@
+{
+  "em": "2026-11-25",
+  "ambiente": "Lighthouse 13.6.0, celular simulado, servidor local com gzip, mediana de 3",
+  "paginas": {
+    "/": {
+      "performance": 89,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 66,
+      "lcp": 1109,
+      "tbt": 424,
+      "cls": 0,
+      "kb": 353
+    },
+    "/o-que-e": {
+      "performance": 97,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 66,
+      "lcp": 1097,
+      "tbt": 198,
+      "cls": 0,
+      "kb": 274
+    },
+    "/blocos": {
+      "performance": 95,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 66,
+      "lcp": 1109,
+      "tbt": 267,
+      "cls": 0,
+      "kb": 273
+    },
+    "/blocos/m": {
+      "performance": 97,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 66,
+      "lcp": 1090,
+      "tbt": 201,
+      "cls": 0,
+      "kb": 262
+    },
+    "/blocos/m/m300": {
+      "performance": 97,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 66,
+      "lcp": 1096,
+      "tbt": 195,
+      "cls": 0,
+      "kb": 263
+    },
+    "/simulador": {
+      "performance": 96,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 66,
+      "lcp": 1094,
+      "tbt": 217,
+      "cls": 0,
+      "kb": 275
+    },
+    "/glossario": {
+      "performance": 96,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 66,
+      "lcp": 1093,
+      "tbt": 210,
+      "cls": 0,
+      "kb": 280
+    },
+    "/novidades": {
+      "performance": 99,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 66,
+      "lcp": 948,
+      "tbt": 146,
+      "cls": 0,
+      "kb": 270
+    },
+    "/exemplos/lucro-real": {
+      "performance": 89,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 66,
+      "lcp": 1255,
+      "tbt": 446,
+      "cls": 0,
+      "kb": 317
+    }
+  },
+  "observacao": "SEO 66 por um único item (is-crawlable): o build local sai com noindex de propósito. As demais verificações de SEO passaram."
+}

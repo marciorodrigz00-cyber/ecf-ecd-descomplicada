@@ -1,0 +1,749 @@
+{
+ "rastreio": {
+  "id": "arq-12-u",
+  "fonte": {
+   "id": "manual-12",
+   "url": "https://www.gov.br/sped/pt-br/assuntos/escrituracoes-digitais/ecf/manuais-e-documentos-tecnicos",
+   "trecho": "Seção do bloco U"
+  },
+  "norma": "ADE Cofis nº 2/2026",
+  "leiautes": [
+   "12"
+  ],
+  "vigencia": {
+   "acNormal": [
+    2025
+   ],
+   "situacaoEspecial": [
+    2026
+   ]
+  },
+  "verificadoEm": "2026-11-24",
+  "status": "extraido"
+ },
+ "bloco": "U",
+ "descricao": "Apresenta o balanço patrimonial e a demonstração do resultado das imunes ou isentas. Apura o IRPJ e a CSLL quando forem obrigadas.",
+ "registros": [
+  {
+   "codigo": "U001",
+   "nome": "Abertura do Bloco U",
+   "ordem": 103,
+   "nivel": "1",
+   "ocorrencia": "[1;1]",
+   "chave": "[REG]",
+   "entrada": "F",
+   "saida": "O",
+   "descricao": [],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto fixo contendo a identificação do registro (U001).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[U001]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "IND_DAD",
+     "descricao": "Indicador de movimento:\n0 – Bloco com dados informados.\n1 – Bloco sem dados informados.",
+     "tipo": "N",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[0;1]",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_OCORRENCIA_UNITARIA_ARQ",
+     "texto": "Verifica se registro ocorreu apenas uma vez por arquivo, considerando a chave “U001” (REG). Se a regra não for cumprida, a ECF gera um erro."
+    }
+   ],
+   "regrasCampo": [],
+   "exemplo": [
+    "|U001|0|",
+    "|U001|: Identificação do tipo do registro.",
+    "|0|: Indica que o bloco possui dados informados."
+   ]
+  },
+  {
+   "codigo": "U030",
+   "nome": "Identificação dos Períodos e Formas de Apuração do IRPJ e da CSLL das Empresas Imunes e Isentas",
+   "ordem": 104,
+   "nivel": "2",
+   "ocorrencia": "[0;4]",
+   "chave": "PER_APUR",
+   "entrada": "F",
+   "saida": "OC\n(Se 0010. FORMA_TRIB = “8” ou “9”)",
+   "descricao": [
+    "Registro de identificação dos períodos da escrituração necessários conforme definições de parâmetros do Bloco 0."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (U030).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[U030]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "DT_INI",
+     "descricao": "Data do Início do Período",
+     "tipo": "N",
+     "tamanho": "8",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "DT_FIN",
+     "descricao": "Data do Fim do período",
+     "tipo": "N",
+     "tamanho": "8",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 4,
+     "nome": "PER_APUR",
+     "descricao": "Período de apuração (para 0010.APUR_CSLL = “A”):\nA00 – Anual\nA01 – Rec. Bruta de janeiro /Balanço suspensão redução até janeiro\nA02 – Rec. Bruta de fevereiro /Balanço suspensão redução até fevereiro\nA03 – Rec. Bruta de março /Balanço suspensão redução até março\nA04 – Rec. Bruta de abril /Balanço suspensão redução até abril\nA05 – Rec. Bruta de maio /Balanço suspensão redução até maio\nA06 – Rec. Bruta de junho /Balanço suspensão redução até junho\nA07 – Rec. Bruta de julho /Balanço suspensão redução até julho\nA08 – Rec. Bruta de agosto /Balanço suspensão redução até agosto\nA09 – Rec. Bruta de setembro /Balanço suspensão redução até setembro\nA10 – Rec. Bruta de outubro/Balanço suspensão redução até outubro\nA11 – Rec. Bruta de novembro /Balanço suspensão redução até novembro\nA12 – Rec. Bruta de dezembro/Balanço suspensão redução até dezembro\nPeríodo de apuração (para 0010.APUR_CSLL = “T”):\nT01 – 1º Trimestre\nT02 – 2º Trimestre\nT03 – 3º Trimestre\nT04 – 4º Trimestre",
+     "tipo": "C",
+     "tamanho": "3",
+     "decimal": "—",
+     "valores": "[A00; A01; A02; A03; A04; A05; A06; A07; A08; A09; A10; A11; A12; T01; T02; T03; T04]",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_DUPLICIDADE_DESPREZADA",
+     "texto": "Verifica se o registro já foi importado anteriormente, de acordo com a chave e os registros pais. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_PERIODO_DESPREZADO",
+     "texto": "Verifica se a linha deste período existe no arquivo de importação, mas não deve ser importado, pois as datas não compatíveis com o período da ECF. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_LINHA_ALTERADA",
+     "texto": "Verifica se a linha deste período existe no arquivo de importação, mas deve ser alterada, pois as datas não compatíveis com o período da ECF. Se a regra não for cumprida, a ECF gera um aviso."
+    }
+   ],
+   "regrasCampo": [],
+   "exemplo": [
+    "|U030|01012024|31032024|T01|",
+    "|U030|: Identificação do tipo do registro.",
+    "|01012024|: Data de início do período (01/01/2024).",
+    "|31032024|: Data de fim do período (31/03/2024).",
+    "|T01|: Período de apuração (T01 = 1º Trimestre)."
+   ]
+  },
+  {
+   "codigo": "U100",
+   "nome": "Balanço Patrimonial",
+   "ordem": 105,
+   "nivel": "3",
+   "ocorrencia": "[0;N]",
+   "chave": "CODIGO",
+   "entrada": "F",
+   "saida": "OC\n(Se 0010. FORMA_TRIB = “8” ou “9” E 0010. TIP_ESP_PRE = “C”)",
+   "descricao": [
+    "Apresenta o balanço patrimonial com base nas contas referenciais para o período de apuração. O saldo inicial pode ser replicado do registro E010/E015 ou preenchido. O saldo final será recuperado do registro K155/K156. Caso o bloco K não possua dados e for SCP (0000.TIP_ECF = 2), o saldo final poderá ser preenchido."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (U100).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[U100]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "CODIGO",
+     "descricao": "Código da Conta Referencial (Analíticas e Sintéticas), conforme tabela dinâmica do Sped (Disponibilizada no item II deste registro e no programa da ECF, no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+     "tipo": "C",
+     "tamanho": "50",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "DESCRICAO",
+     "descricao": "Descrição da Conta Referencial.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 4,
+     "nome": "TIPO",
+     "descricao": "Indicador do Tipo de Conta:\nS – Sintética\nA – Analítica",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S; A]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 5,
+     "nome": "NIVEL",
+     "descricao": "Nível da Conta.",
+     "tipo": "N",
+     "tamanho": "3",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 6,
+     "nome": "COD_NAT",
+     "descricao": "Natureza da Conta, conforme tabela do Sped (Disponibilizada no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+     "tipo": "C",
+     "tamanho": "2",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 7,
+     "nome": "COD_CTA_SUP",
+     "descricao": "Código da Conta Sintética de Nível Imediatamente Superior.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 8,
+     "nome": "VAL_CTA_REF_INI",
+     "descricao": "Saldo Inicial da Conta Referencial.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 9,
+     "nome": "IND_VAL_CTA_REF_INI",
+     "descricao": "Indicador da Situação do Saldo Inicial:\nD – Devedor\nC – Credor",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[D; C]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 10,
+     "nome": "VAL_CTA_REF_DEB",
+     "descricao": "Valor Total dos Débitos: Somatório dos valores mapeados.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 11,
+     "nome": "VAL_CTA_REF_CRED",
+     "descricao": "Valor Total dos Créditos: Somatório dos valores mapeados.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 12,
+     "nome": "VAL_CTA_REF_FIN",
+     "descricao": "Saldo Final da Conta Referencial",
+     "tipo": "C",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 13,
+     "nome": "IND_VAL_CTA_REF_FIN",
+     "descricao": "Indicador da Situação do Saldo Final:\nD – Devedor\nC – Credor",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[D; C]",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_COMPARA_CONT_REF_SI",
+     "texto": "Verifica se U100.VAL_CTA_REF_INI é igual ao somatório dos saldos iniciais dos registros K155 “pai” da mesma conta referencial, multiplicado pelo saldo final do registro K156 dividido pelo saldo final do registro K155 “pai”. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_COMPARA_CONT_REF_SF",
+     "texto": "Verifica, para cada período da escrturação, se o somatório do saldo final do registro K156 é igual a U100.VAL_CTA_REF_INI, para a mesma conta referencial. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_COMPATIBILIDADE_U100_E010",
+     "texto": "Verifica se o saldo inicial do primeiro período de apuração da escrituração é diferente dos saldos finais da ECF recuperada. O erro ocorre se (0010.FORMA_TRIB = “8” ou “9” e 0010.TIP_ESC_PRE = “C”) e 0010.HASH_ECF_ANTERIOR é diferente de vazio e U030.DT.INI é igual a 0000.DT_INI e (U100.VAL_CTA_REF_INI diferente de zero e não for localizada a mesma conta referencial no registro E010 ou U100.VAL_CTA_REF_INI diferente de E010.VAL_CTA_REF ou U100.IND_VAL_CTA_REF_INI diferente de E010.IND_VAL_CTA_REF). Se a regra não for cumprida, a ECF gera um erro."
+    },
+    {
+     "codigo": "REGRA_DUPLICIDADE_DESPREZADA",
+     "texto": "Verifica se o registro já foi importado anteriormente, de acordo com a chave e os registros pais. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_LINHA_DESPREZADA",
+     "texto": "Verifica se o registro existe na importação, mas não será importado por não existir na tabela dinâmica devido às configurações do bloco 0 ou da tabela dinâmica. Gera um aviso."
+    },
+    {
+     "codigo": "REGRA_LINHA_ATUALIZADA",
+     "texto": "Verifica se o registro está desatualizado em relação à tabela da RFB. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_BALANCO_SALDO_FINAL",
+     "texto": "Verifica se o saldo final do ativo é igual ao saldo final do passivo. Gera um erro, caso U030.PER_APUR = “T04”."
+    },
+    {
+     "codigo": "REGRA_BALANCO_SALDO_INICIAL",
+     "texto": "Verifica se o saldo inicial do ativo é igual ao saldo inicial do passivo. Gera um erro, caso U030.PER_APUR = “T01”."
+    }
+   ],
+   "regrasCampo": [
+    {
+     "campo": "VAL_CTA_REF_INI",
+     "regras": [
+      {
+       "codigo": "REGRA_BAL_SI_IGUAL_ANT",
+       "texto": "Verifica, no caso de forma de apuração trimestral – 0010.FORMA_APUR = “T” – se o valor do saldo incial – U100.VAL_CTA_REF_INI – do período atual é igual ao valor do saldo final – U100.VAL_CTA_REF_FIN – do período anterior.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "VAL_CTA_REF_DEB",
+     "regras": [
+      {
+       "codigo": "REGRA_COMPARA_CONT_REF_DEB",
+       "texto": "Verifica se o valor total dos débitos – U100.VAL_CTA_REF_DEB – é igual ao somatório dos débitos informados nos registro K156 – K156.VL_DEB.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "VAL_CTA_REF_CRED",
+     "regras": [
+      {
+       "codigo": "REGRA_COMPARA_CONT_REF_CRED",
+       "texto": "Verifica se o valor total dos créditos – U100.VAL_CTA_REF_CRED – é igual ao somatório dos créditos informados nos registro K156 – K156.VL_CRED.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "VAL_CTA_REF_FIN",
+     "regras": [
+      {
+       "codigo": "REGRA_VALIDACAO_SALDO_FINAL_BAL",
+       "texto": "Verifica se o valor do saldo final – U100.VAL_CTA_REF_FIN – é igual ao valor do saldo inicial – U100.VAL_CTA_REF_INI – somado ao valor total dos débitos – U100.VAL_CTA_REF_DEB – e subtraído do valor total dos créditos – U100.VAL_CTA_REF_CRED.",
+       "tipo": "Erro"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|U100|2.03.02.04.01|SUPERÁVIT/DÉFICIT ACUMULADO|A|5|03|2.03.02.04|10000,00|C|5000,00|15000,00|20000,00|C|",
+    "|U100|: Identificação do tipo do registro.",
+    "|2.03.02.04.01|: Código da linha.",
+    "|SUPERÁVIT/DÉFICIT ACUMULADO|: Descrição da linha.",
+    "|A|: Tipo da conta (A = Analítica).",
+    "|5|: Nível da conta.",
+    "|03|: Natureza da conta (03 = Contas do Patrimônio Líquido).",
+    "|2.03.02.04|: Código da conta superior.",
+    "|10000,00|: Valor do saldo inicial (R$ 10.000,00).",
+    "|C|: Indicador do sinal do saldo inicial da conta (C = Credor).",
+    "|5000,00|: Valor total dos débitos (R$ 5.000,00).",
+    "|15000,00|: Valor total dos créditos (R$ 15.000,00).",
+    "|20000,00|: Valor do saldo inicial (R$ 20.000,00).",
+    "|C|: Indicador do sinal do saldo final da conta (C = Credor)."
+   ]
+  },
+  {
+   "codigo": "U150",
+   "nome": "Demonstração do Resultado",
+   "ordem": 106,
+   "nivel": "3",
+   "ocorrencia": "[0;N]",
+   "chave": "CODIGO",
+   "entrada": "F",
+   "saida": "OC\n(Se 0010. FORMA_TRIB = “8” ou “9” E 0010. TIP_ESP_PRE = “C”)",
+   "descricao": [
+    "Apresenta a demonstração do resultado das empresas imunes e isentas. No caso de entidades fechadas de previdência complementar, será apresentado o plano de gestão administrativa (PGA)."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (U150).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[U150]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "CODIGO",
+     "descricao": "Código da Conta Referencial (Analíticas e Sintéticas), conforme tabela dinâmica do Sped (Disponibilizada no item III deste registro e no programa da ECF, no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+     "tipo": "C",
+     "tamanho": "50",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "DESCRICAO",
+     "descricao": "Descrição da Conta Referencial.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 4,
+     "nome": "TIPO",
+     "descricao": "Indicador do Tipo de Conta:\nS – Sintética\nA – Analítica",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S; A]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 5,
+     "nome": "NIVEL",
+     "descricao": "Nível da Conta.",
+     "tipo": "N",
+     "tamanho": "3",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 6,
+     "nome": "COD_NAT",
+     "descricao": "Natureza da Conta:\n04 – Contas de Resultado",
+     "tipo": "C",
+     "tamanho": "2",
+     "decimal": "—",
+     "valores": "[04]",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 7,
+     "nome": "COD_CTA_SUP",
+     "descricao": "Código da Conta Sintética de Nível Imediatamente Superior.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 8,
+     "nome": "VALOR",
+     "descricao": "Saldo Final da Conta Referencial.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 9,
+     "nome": "IND_VALOR",
+     "descricao": "Indicador do Sinal do Saldo Final:\nC – Credor\nD – Devedor",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[D; C]",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_DUPLICIDADE_DESPREZADA",
+     "texto": "Verifica se o registro já foi importado anteriormente, de acordo com a chave e os registros pais. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_LINHA_DESPREZADA",
+     "texto": "Verifica se o registro existe na importação, mas não será importado por não existir na tabela dinâmica devido às configurações do bloco 0 ou da tabela dinâmica. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_LINHA_ATUALIZADA",
+     "texto": "Verifica se o registro está desatualizado em relação à tabela da RFB. Se a regra não for cumprida, a ECF gera um aviso."
+    }
+   ],
+   "regrasCampo": [
+    {
+     "campo": "VALOR",
+     "regras": [
+      {
+       "codigo": "REGRA_OBRIGATORIO_TIPO_DIFERENTE_R",
+       "texto": "Verifica se o campo está preenchido quando o tipo da linha é diferente de “R”.",
+       "tipo": "Erro"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|U150|3.04.01.01| GANHOS NA ALIENAÇÃO DE BENS DE USO – FUNDO PARTIDÁRIO|A|4|04|3.04.01|10000,00|C|",
+    "|U150|: Identificação do tipo do registro.",
+    "|3.04.01.01|: Código da linha.",
+    "|GANHOS NA ALIENAÇÃO DE BENS DE USO – FUNDO PARTIDÁRIO|: Descrição da linha.",
+    "|A|: Tipo da conta (A = Analítica).",
+    "|4|: Nível da conta.",
+    "|04|: Natureza da conta (04 = Contas de Resultado).",
+    "|3.04.01|: Código da conta superior.",
+    "|10000,00|: Valor do saldo final (R$ 10.000,00).",
+    "|C|: Indicador do sinal do saldo final da conta (C = Credor)."
+   ]
+  },
+  {
+   "codigo": "U180",
+   "nome": "Cálculo do IRPJ das Empresas Imunes e Isentas",
+   "ordem": 107,
+   "nivel": "3",
+   "ocorrencia": "[0;N]",
+   "chave": "CODIGO",
+   "entrada": "F",
+   "saida": "OC\n(Se 0010. FORMA_TRIB = “8” ou “9” E 0010. FORMA_APUR_I = “A” ou “T”)",
+   "descricao": [
+    "Apresenta o cálculo do IRPJ das empresas imunes e isentas, no caso de receitas auferidas oriundas de atividades não relacionadas às atividades das empresas imunes e isentas."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (U180).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[U180]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "CODIGO",
+     "descricao": "Código, conforme tabela dinâmica do Sped (Disponibilizada no item III deste registro e no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "DESCRICAO",
+     "descricao": "Descrição, conforme tabela dinâmica do Sped (Disponibilizada no item III deste registro e no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 4,
+     "nome": "VALOR",
+     "descricao": "Valor",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_DUPLICIDADE_DESPREZADA",
+     "texto": "Verifica se o registro já foi importado anteriormente, de acordo com a chave e os registros pais. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_LINHA_DESPREZADA",
+     "texto": "Verifica se o registro existe na importação, mas não será importado por não existir na tabela dinâmica devido às configurações do bloco 0 ou da tabela dinâmica. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_LINHA_ATUALIZADA",
+     "texto": "Verifica se o registro está desatualizado em relação à tabela da RFB. Se a regra não for cumprida, a ECF gera um aviso."
+    }
+   ],
+   "regrasCampo": [
+    {
+     "campo": "VALOR",
+     "regras": [
+      {
+       "codigo": "REGRA_OBRIGATORIO_TIPO_DIFERENTE_R",
+       "texto": "Verifica se o campo está preenchido quando o tipo da linha é diferente de “R”.",
+       "tipo": "Erro"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|U180|12|IMPOSTO DE RENDA A PAGAR|10000,00|",
+    "|U180|: Identificação do tipo do registro.",
+    "|1|: Código da linha.",
+    "|IMPOSTO DE RENDA A PAGAR|: Descrição da linha.",
+    "|10000,00|: Valor da linha (R$ 10.000,00)."
+   ]
+  },
+  {
+   "codigo": "U182",
+   "nome": "Cálculo da Contribuição Social sobre o Lucro Líquido (CSLL) das Empresas Imunes e Isentas",
+   "ordem": 108,
+   "nivel": "3",
+   "ocorrencia": "[0;N]",
+   "chave": "CODIGO",
+   "entrada": "F",
+   "saida": "OC\n(Se 0010. FORMA_TRIB = “8” ou “9” E ((0010.APUR_CSLL = “A” ou “T”) OU (0010. FORMA_APUR_I = “A” ou “T”))",
+   "descricao": [
+    "Este registro deve ser preenchido pelas:",
+    "a) entidades sem fins lucrativos de que trata o inciso I do art. 12 do Decreto nº 3.048, de 6 de maio de 1999, que não se enquadrem na imunidade ou isenção da Lei nº 9.532, de 1997;",
+    "b) as associações de poupança e empréstimo.",
+    "Atenção: As entidades sujeitas a planificação contábil própria apuram a CSLL de acordo com essa planificação. Nesses casos, a contribuição social sobre o lucro líquido pode ser apurada anualmente ou trimestralmente. A pessoa jurídica imune ou isenta de IRPJ pode optar pela apuração anual da CSLL, que está sujeita ao pagamento da CSLL apurada sobre a base de cálculo estimada mensalmente ou sobre balanço ou balancete de suspensão ou redução."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (U182).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[U182]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "CODIGO",
+     "descricao": "Código, conforme tabela dinâmica do Sped (Disponibilizada no item III deste registro e no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+     "tipo": "C",
+     "tamanho": "6",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "DESCRICAO",
+     "descricao": "Descrição, conforme tabela dinâmica do Sped (Disponibilizada no item III deste registro e no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 4,
+     "nome": "VALOR",
+     "descricao": "Valor",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_DUPLICIDADE_DESPREZADA",
+     "texto": "Verifica se o registro já foi importado anteriormente, de acordo com a chave e os registros pais. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_LINHA_DESPREZADA",
+     "texto": "Verifica se o registro existe na importação, mas não será importado por não existir na tabela dinâmica devido às configurações do bloco 0 ou da tabela dinâmica. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_LINHA_ATUALIZADA",
+     "texto": "Verifica se o registro está desatualizado em relação à tabela da RFB. Se a regra não for cumprida, a ECF gera um aviso."
+    }
+   ],
+   "regrasCampo": [
+    {
+     "campo": "VALOR",
+     "regras": [
+      {
+       "codigo": "REGRA_OBRIGATORIO_TIPO_DIFERENTE_R",
+       "texto": "Verifica se o campo está preenchido quando o tipo da linha é diferente de “R”.",
+       "tipo": "Erro"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|U182|1|Base de Cálculo da CSLL|10000,00|",
+    "|U182|: Identificação do tipo do registro.",
+    "|1|: Código da linha.",
+    "|Base de Cálculo da CSLL|: Descrição da linha.",
+    "|10000,00|: Valor da linha (R$ 10.000,00)."
+   ]
+  },
+  {
+   "codigo": "U990",
+   "nome": "Encerramento do Bloco U",
+   "ordem": 109,
+   "nivel": "1",
+   "ocorrencia": "[1;1]",
+   "chave": "[REG]",
+   "entrada": "F",
+   "saida": "O",
+   "descricao": [],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto fixo contendo a identificação do registro (U990).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[U990]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "QTD_LIN",
+     "descricao": "Quantidade total de registros do Bloco U.",
+     "tipo": "N",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [],
+   "exemplo": [
+    "|U990|2000|",
+    "|U990|: Identificação do tipo do registro.",
+    "|2000|: A quantidade total de registros do Bloco U é 2.000 (dois mil registros)."
+   ]
+  }
+ ]
+}

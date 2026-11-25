@@ -1,0 +1,2490 @@
+{
+ "rastreio": {
+  "id": "arq-11-y",
+  "fonte": {
+   "id": "manual-11",
+   "url": "https://www.gov.br/sped/pt-br/assuntos/escrituracoes-digitais/ecf/manuais-e-documentos-tecnicos",
+   "trecho": "Seção do bloco Y"
+  },
+  "norma": "ADE Cofis nº 38/2024",
+  "leiautes": [
+   "11"
+  ],
+  "vigencia": {
+   "acNormal": [
+    2024
+   ],
+   "situacaoEspecial": [
+    2025
+   ]
+  },
+  "verificadoEm": "2026-11-24",
+  "status": "extraido"
+ },
+ "bloco": "Y",
+ "descricao": "Apresenta informações gerais da pessoa jurídica.",
+ "registros": [
+  {
+   "codigo": "Y001",
+   "nome": "Abertura do Bloco Y",
+   "ordem": 155,
+   "nivel": "1",
+   "ocorrencia": "[1;1]",
+   "chave": "[REG]",
+   "entrada": "F",
+   "saida": "O",
+   "descricao": [],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto fixo contendo a identificação do registro (Y001).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[Y001]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "IND_DAD",
+     "descricao": "Indicador de movimento:\n0 – Bloco com dados informados.\n1 – Bloco sem dados informados.",
+     "tipo": "N",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[0;1]",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_OCORRENCIA_UNITARIA_ARQ",
+     "texto": "Verifica se registro ocorreu apenas uma vez por arquivo, considerando a chave “Y001” (REG). Se a regra não for cumprida, a ECF gera um erro."
+    }
+   ],
+   "regrasCampo": [],
+   "exemplo": [
+    "|Y001|0|",
+    "|Y001|: Identificação do tipo do registro.",
+    "|0|: Indica que o bloco possui dados informados."
+   ]
+  },
+  {
+   "codigo": "Y520",
+   "nome": "Pagamentos/Recebimentos do Exterior ou de Não Residentes",
+   "ordem": 156,
+   "nivel": "2",
+   "ocorrencia": "[0;N]",
+   "chave": "TIP_EXT + PAIS + FORMA + NAT_OPER",
+   "entrada": "F",
+   "saida": "OC\n(Se 0020.IND_ REC_EXT = \"S\" OU 0020.IND_PGTO_EXT = \"S\")",
+   "descricao": [
+    "Este registro será habilitado somente para as pessoas jurídicas que receberam (0020.IND_REC_EXT = \"S\") ou pagaram, creditaram, entregaram, empregaram ou remeteram (0020.IND_PGTO_EXT = \"S\"), durante o ano-calendário, de pessoas físicas ou jurídicas, residentes ou domiciliadas no exterior ou de não-residentes:",
+    "- quaisquer valores mediante operações de câmbio de qualquer natureza;",
+    "- quaisquer valores por intermédio de transferências internacionais em reais (TIR), ou seja, provenientes de conta bancária em reais (R$) titulada por não-residente;",
+    "- quaisquer valores por intermédio de depósitos em contas bancárias mantidas no exterior;",
+    "- valores iguais ou superiores a R$ 120.000,00 (cento e vinte mil reais), equivalentes a R$ 10.000,00 por mês, por intermédio de cartões de crédito;",
+    "- valores em moeda nacional ou estrangeira, cheques ou cheques de viagem, convertidos em reais (R$) na data de cada operação, iguais ou superiores a R$ 120.000,00 (cento e vinte mil reais), equivalentes a R$ 10.000,00 por mês.",
+    "A pessoa jurídica deverá informar os valores consolidados por país, conforme registrado na sua apuração contábil."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (Y520)",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[Y520]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "TIP_EXT",
+     "descricao": "Tipo:\nR - Rendimentos Recebidos\nP – Pagamentos",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[R; P]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "PAIS",
+     "descricao": "País: País em que está situada a pessoa física ou jurídica que efetuou o pagamento ou beneficiária do pagamento.\nCódigo do País, conforme tabela do Sped (Disponibilizada no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+     "tipo": "N",
+     "tamanho": "3",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 4,
+     "nome": "FORMA",
+     "descricao": "Forma de Recebimento/Pagamento:\n“1” – Operação de Câmbio\n“2” – Transferência Internacional em Reais\n“3” – Cartão de Crédito\n“4” – Depósito em Conta do Exterior (só válido para TIP_EXT=\"R\")\n“5” – Utilização de Recursos Mantidos no Exterior (só válido para TIP_EXT=\"P\")\n“6” – Em Moeda Nacional ou Estrangeira",
+     "tipo": "N",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[1; 2; 3; 4; 5; 6]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 5,
+     "nome": "NAT_OPER",
+     "descricao": "Natureza da Operação: Código da natureza-fato específico correspondente à motivação do recebimento/pagamento, conforme § 1º do artigo 23 da Lei nº 4.131, de 03 de setembro de 1962, e que consta na Circular no 3.690, de 16 de dezembro de 2013, do Banco Central do Brasil.\nAtenção: As operações que não se enquadrem em nenhuma das classificações disponíveis serão identificadas pelo código que indique a melhor aproximação possível da natureza da transação.\nNatureza da operação, conforme tabela do Sped (Disponibilizada no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).\nObservação: O registro Y520 não possui informação de data em seus campos. Portanto, os códigos utilizados no campo Y520.NAT_OPER devem ser os vigentes em na darta final da ECF, para todas as operações ocorridas durante o ano da escrituração.",
+     "tipo": "N",
+     "tamanho": "5",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 6,
+     "nome": "VL_PERIODO",
+     "descricao": "Valor: Total dos valores recebidos ou pagos, provenientes do exterior ou destinados ao exterior, de acordo com o código indicativo da natureza da operação.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [
+    {
+     "campo": "TIP_EXT",
+     "regras": [
+      {
+       "codigo": "REGRA_TIP_EXT_PERMITIDO",
+       "texto": "Verifica, quando Y520.TIP_EXT igual a “P”, se 0020_IND_PGTO_EXT é igual a “S”, ou, quandoY520.TIP_EXT igual a “R”, se 0020_IND_REC_EXT é igual a “S”.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "FORMA",
+     "regras": [
+      {
+       "codigo": "REGRA_FORMA_PAGTO_INVALIDA",
+       "texto": "Verifica, quando Y520.TIP_EXT igual a “P”, se Y520.FORMA é diferente de “4”, ou, quando Y520.TIP_EXT igual a “R”, se Y520.FORMA é diferente de “5”.",
+       "tipo": "Erro"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|Y520|R|1|1|10500|100000,00|",
+    "|Y520|: Identificação do tipo do registro.",
+    "|R|: Rendimentos recebidos do exterior.",
+    "|1|: País (1 = Canadá).",
+    "|1|: Forma de recebimento (1 = Operação de Câmbio).",
+    "|10500|: Natureza da operação (10500 = Câmbio Simplificado Simultâneo",
+    "|100000,00: Valor recebido (R$ 100.000,00)."
+   ]
+  },
+  {
+   "codigo": "Y570",
+   "nome": "Demonstrativo do Imposto de Renda e CSLL Retidos na Fonte",
+   "ordem": 157,
+   "nivel": "2",
+   "ocorrencia": "[0;N]",
+   "chave": "CNPJ_FON + COD_REC",
+   "entrada": "F",
+   "saida": "F\nNão deve existir se 0010.FORMA_APUR_I = “D” E 0010.APUR_CSLL = “D”",
+   "descricao": [
+    "Neste registro devem ser prestadas informações sobre todo o imposto de renda (IRRF) e contribuição social sobre o lucro líquido (CSLL) retidos na fonte durante o período abrangido pela ECF, incidentes sobre as receitas que compõem a base de cálculo do tributo devido.",
+    "Não devem ser informados nesse registro:",
+    "- Valores retidos à título de IRRF sobre o pagamento de Juros sobre Capital Próprio e IRRF incidente sobre o pagamento efetuado a cooperativas que foram utilizados em compensações, nos termos do art. 81 da IN RFB 2055, de 2021; e",
+    "- Valores de retenção não utilizados, por opção da pessoa jurídica, na apuração do IRPJ e da CSLL."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (Y570).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[Y570]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "CNPJ_FON",
+     "descricao": "CNPJ: CNPJ da fonte pagadora",
+     "tipo": "C",
+     "tamanho": "14",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "NOM_EMP",
+     "descricao": "Nome Empresarial: Nome da pessoa jurídica responsável pela retenção e recolhimento da fonte que estiver sendo compensado.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 4,
+     "nome": "IND_ORG_PUB",
+     "descricao": "Indicador de Órgão Público:\nS - Sim\nN – Não\nSelecione “Sim” ou “Não” em relação à pessoa jurídica responsável pela retenção e recolhimento da fonte que estiver sendo compensado. Ao selecionar \"Sim\" serão disponibilizados os códigos de recolhimento utilizados pelos Órgãos Públicos Federais ou Entidades da Administração Pública Federal, ao selecionar \"Não\", serão disponibilizados os demais códigos.",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S; N]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 5,
+     "nome": "COD_REC",
+     "descricao": "Código de Receita Utilizado Para Recolhimento na Fonte, conforme tabela do Sped (Disponibilizada no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+     "tipo": "N",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 6,
+     "nome": "VL_REND",
+     "descricao": "Rendimento Bruto: Valor bruto do rendimento que originou a retenção.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 7,
+     "nome": "IR_RET",
+     "descricao": "IR Retido na Fonte: Valor de todo o imposto de renda retido na fonte durante o período abrangido pela declaração, incidente sobre as receitas que compõem a base de cálculo do tributo devido, independentemente de a empresa ter apurado prejuízo fiscal ou imposto de renda devido menor que o retido na fonte durante o período.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 8,
+     "nome": "CSLL_RET",
+     "descricao": "CSLL Retida na Fonte: Valor de toda a contribuição social sobre o lucro líquido retida na fonte durante o período abrangido pela declaração, incidente sobre as receitas que compõem a base de cálculo do tributo devido, independentemente de a empresa ter apurado base de cálculo negativa ou CSLL devida menor que a retida na fonte durante o período.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Não"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [
+    {
+     "campo": "COD_REC",
+     "regras": [
+      {
+       "codigo": "REGRA_COD_REC_ORP_PUB",
+       "texto": "Verifica, quando Y570.IND_ORG_PUB igual a “Sim”, se Y570.COD_REC é igual a 4085 ou 4397 ou 5928 ou 5936 ou 5944 ou 6147 ou 6175 ou 6188 ou 6190 ou 6228 ou 6256 ou 8739 ou 8767 ou 8850 ou 8863 ou 9060 ou 9997.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_COD_REC_ORP_PUB_NAO",
+       "texto": "Verifica, quando Y570.IND_ORG_PUB igual a “Não”, se Y570.COD_REC é igual a 0916 ou 0924 ou 1708 ou 1895 ou 3277 ou 3280 ou 3426 ou 5204 ou 5232 ou 5273 ou 5557 ou 5706 ou 5928 ou 5936 ou 5944 ou 5952 ou 5987 ou 6800 ou 6813 ou 8045 ou 8468 ou 9385 ou 9998 ou 9999.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "IR_RET",
+     "regras": [
+      {
+       "codigo": "REGRA_COD_REC_IR_RET",
+       "texto": "Verifica se Y570.IR_RET está preenchido quando Y570.COD_REC é igual a 5928 ou 5936 ou 5944 ou 6147 ou 6175 ou 6188 ou 6190 ou 6256 ou 8739 ou 8767 ou 8850 ou 8863 ou 9060 ou 9997 ou 0916 ou 0924 ou 1708 ou 1895 ou 3277 ou 3280 ou 3426 ou 5204 ou 5232 ou 5273 ou 5557 ou 5706 ou 5928 ou 5936 ou 5944 ou 6800 ou 6813 ou 8045 ou 8468 ou 9385 ou 9999.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_EXISTE_IR_RET",
+       "texto": "Verifica, quando (N620 (21) ou N620 (23) ou N620 (24) forem maiores que zero); ou (0010.COD_QUALIF_PJ = “1” e (N630 (20) ou N630 (21) ou N630 (22) forem maiores que zero); ou (0010.COD_QUALIF_PJ “1” e (N630 (17) ou N630 (18) ou N630 (19)) forem maiores que zero); ou (P300 (10) ou P300 (12) ou P300 (13) forem maiores que zero); ou (T150 (11) ou T150 (13) ou T150 (14) forem maiores que zero); se Y570.IR_RET está preenchido.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "CSLL_RET",
+     "regras": [
+      {
+       "codigo": "REGRA_COD_REC_CSLL_RET",
+       "texto": "Verifica se Y570.CSLL_RET está preenchido quando Y570.COD_REC é igual a 4085 ou 4397 ou 5928 ou 5936 ou 5944 ou 6147 ou 6175 ou 6188 ou 6190 ou 6228 ou 8739 ou 8767 ou 8850 ou 8863 ou 9060 ou 9997 ou 5952 ou 5987 ou 9998.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_EXISTE_CSLL_RET",
+       "texto": "Verifica, quando (N660 (14) ou N660 (15) ou N660 (16) ou N660 (17) forem maiores que zero); ou ((N670 (15) ou N670 (16) ou N670 (17) ou N670 (18)) forem maiores que zero); ou (P500 (9) ou P500 (10) ou P500 (11) ou P500 (12) forem maiores que zero); ou (T181 (11) ou T181 (12) ou T181 (13) ou T181 (14) forem maiores que zero); se Y570.CSLL_RET está preenchido.",
+       "tipo": "Erro"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|Y570|11111111000191|FONTE PAGADORA|S|5928|100000,00|1500,00|500,00|",
+    "|Y570|: Identificação do tipo do registro.",
+    "|CNPJ|: CNPJ da fonte pagadora (CNPJ: 11.111.111/0001-91).",
+    "|FONTE PAGADORA|: Nome empresarial da fonte pagadora.",
+    "|S|: Indicador de órgão público (Órgão Público = Sim).",
+    "|5928|: Código da receita (5928 = Rendimentos decorrentes de decisão da Justiça Federal).",
+    "|100000,00|: Rendimento bruto (R$ 100.000,00).",
+    "|1000,00|: IR Retido na Fonte (R$ 1.500,00).",
+    "|500,00|: CSLL Retida na Fonte (R$ 500,00)."
+   ]
+  },
+  {
+   "codigo": "Y590",
+   "nome": "Ativos no Exterior",
+   "ordem": 158,
+   "nivel": "2",
+   "ocorrencia": "[0;N]",
+   "chave": "TIP_ATIVO + DISCRIMINACAO",
+   "entrada": "F",
+   "saida": "OC\n(Se 0020.IND_ATIV_EXT = \"S\")",
+   "descricao": [
+    "Este registro deve ser preenchido por todas as pessoas jurídicas que possuem ativos no exterior (bens e direitos), salvo quando o valor contábil total dos ativos no exterior a declarar, convertido para reais (R$) no final do período abrangido pela ECF, for inferior a R$ 100.000,00 (cem mil reais). O valor do ativo no exterior é convertido em reais (R$) tomando-se por base a taxa de câmbio da moeda do país de origem, fixada para venda, pelo Banco Central do Brasil, correspondente à data de seu efetivo pagamento. Caso a moeda do país de origem não tenha cotação no Brasil, o seu valor é convertido em dólares dos Estados Unidos da América e, em seguida, em reais (R$)."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (Y590).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[Y590]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "TIP_ATIVO",
+     "descricao": "Tipo do Ativo que Possui no Exterior, conforme tabela do Sped (Disponibilizada no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+     "tipo": "C",
+     "tamanho": "14",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "PAIS",
+     "descricao": "Código do País: País onde se localiza o ativo no exterior, conforme tabela do Sped (Disponibilizada no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+     "tipo": "N",
+     "tamanho": "3",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 4,
+     "nome": "DISCRIMINACAO",
+     "descricao": "Discriminação: Detalhar, neste campo, as informações correspondentes aos ativos, tais como: tipo, localização, data de aquisição e de venda, de quem foi adquirido, a quem foi alienado, instituição que intermediou a operação, valor de aquisição e/ou de venda em moeda estrangeira, instituição financeira e agência, tratando-se de aplicação financeira ou depósito e, na hipótese de participações societárias, espécie de participação e empresa investida.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 5,
+     "nome": "VL_ANT",
+     "descricao": "Valor Anterior: Informar o valor contábil do ativo no exterior no final do período anterior.\nAtenção:\n1) Caso o período abrangido pela ECF não se inicie em 01/01, a exemplo de início de atividades ou ocorrência de situação especial no ano-calendário, deve ser informado o valor em reais (R$) do ativo no exterior na data de início do período abrangido pela ECF.\n2) Caso o ativo tenha sido adquirido no curso do período abrangido pela ECF, deve ser informado, neste campo, o valor \"zero\" e no campo “Discriminação” a data e o valor da aquisição.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 6,
+     "nome": "VL_ATUAL",
+     "descricao": "Valor Atual: Valor contábil do ativo no final do período atual.\nAtenção: Caso o ativo tenha sido alienado no curso do período abrangido pela ECF, deve ser informado, neste campo, o valor \"zero\" e no campo “Discriminação” a data e o valor da alienação.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_IND_PART_EXT_Y590",
+     "texto": "Verifica, quando 0020.IND_PART_EXT é igual a “S” (Sim) e 0020.IND_ATIV_EXT é igual a “N” (Não), se o registro Y590 foi preenchido. Se a regra não for cumprida, a ECF gera um aviso."
+    }
+   ],
+   "regrasCampo": [],
+   "exemplo": [
+    "|Y590|0331|249|10.000 AÇÕES DA COMPANHIA ABC ADQUIRIDAS EM 20/02/2014 POR MEIO DA BOLSA DE VALORES DE NOVA YORK POR U$ 100.000,00|0|300000,00|",
+    "|Y590|: Identificação do tipo do registro.",
+    "|0331|: Tipo do ativo no exterior (0331 = Ações).",
+    "|249|: Código do país (249 = Estados Unidos da América).",
+    "|10.000 AÇÕES DA COMPANHIA ABC ADQUIRIDAS EM 20/02/2014 POR MEIO DA BOLSA DE VALORES DE NOVA YORK POR U$ 100.000,00|: Discriminação do ativo.",
+    "|0|: Não há valor anterior, pois foi adquirida no período da ECF.",
+    "|300000,00|: Valor no final do período atual (R$ 300.000,00)."
+   ]
+  },
+  {
+   "codigo": "Y600",
+   "nome": "Identificação e Remuneração de Sócios, Titulares, Dirigentes e Conselheiros",
+   "ordem": 159,
+   "nivel": "2",
+   "ocorrencia": "[0;N]",
+   "chave": "—",
+   "entrada": "F",
+   "saida": "OC\n(Se 0010.FORMA_TRIB = \"1\" a \"7\")",
+   "descricao": [
+    "Este registro deve ser preenchido pela pessoa jurídica com os dados dos até 999 (novecentos e noventa e nove) sócios, dirigentes e conselheiros ou dos titulares que tenham recebido maiores remunerações no período da ECF, inclusive os titulares, sócios, dirigentes e conselheiros que tenham se retirado da pessoa jurídica no período da ECF e não fazem parte do quadro societário na data final.",
+    "Regras de preenchimento:",
+    "1 – Informar os 500 maiores dirigentes, conselheiros, sócios ou titulares na data final do período de apuração, ordenados pelo total dos campos Y600.VL_REM_TRAB; Y600.VL_LUC_DIV; Y600.VL_JUR_CAP e Y600. VL_DEM_REND;",
+    "Observação: No caso de ações em tesouraria, a sociedade deverá informar uma ocorrência do registro com Y600. IND_QUALIF_SOCIO = “PJ”, Y600.CPF_CNPJ = “CNPJ da própria sociedade”, Y600.DT_ALT_SOC = “31/12/Ano da Escrituração” e Y600.NOM_EMP = “Ações em Tesouraria”.",
+    "Observação: No caso de ações em free float (livre circulante), a sociedade deverá informar uma ocorrência do registro com Y600. IND_QUALIF_SOCIO = “PJ”, Y600.CPF_CNPJ = “CNPJ da própria sociedade”, Y600.DT_ALT_SOC = “31/12/Ano da Escrituração” e Y600.NOM_EMP = “Ações em Free Float”.",
+    "2 – Informar as 499 maiores alterações Y600.DT_ALT_SOC ocorridas durante o período, não contempladas pelo item 1.",
+    "Exemplos de eventos que devem ser registrados:",
+    "1- Alteração intermediária da porcentagem de participação no capital social da Pessoa Jurídica no curso do período de apuração.\n2- Aquisição e alienação de participação no capital social da Pessoa Jurídica no curso do período de apuração. Os dois eventos devem estar registrados.\n3- Alterações das porcentagens de free float e ações em tesouraria.\n4- Emissões ou cancelamentos de quotas/ ações, mesmo derivadas da conversão de outros valores mobiliários.\n5- Split ou inplit de ações.",
+    "Observação: Para os campos relativos a valores, eles devem ser informados em todos os casos, mesmo quando o valor seja “zero”."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (Y600).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[Y600]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "DT_ALT_SOC",
+     "descricao": "Data da Alteração no Quadro Societário. Pode ser uma data anterior ao ano da escrituração, inclusive da criação da Pessoa Jurídica.\nAtenção: No caso de preenchimento de Y600.DT_FIM_SOC, informar neste campo a data da última alteração da participação do sócio, antes da data da saída do quadro societário.\nObservação: No caso de administradores, diretores, dirigentes, presidentes ou conselheiros, adotar a data em que efetivamente começou a executar essas funções na entidade.",
+     "tipo": "N",
+     "tamanho": "8",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "DT_FIM_SOC",
+     "descricao": "Data da Saída do Quadro Societário.\nDeve ser preenchida somente se a saída do quadro societário ocorreu no ano da escrituração.",
+     "tipo": "N",
+     "tamanho": "8",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 4,
+     "nome": "PAIS",
+     "descricao": "País de Residência ou Domicílio da Pessoa Física ou Jurídica.\nCódigo do país, conforme tabela do Sped (Disponibilizada no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+     "tipo": "N",
+     "tamanho": "3",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 5,
+     "nome": "IND_QUALIF",
+     "descricao": "Indicador de Qualificação do Sócio, Titular, Dirigente ou Conselheiro:\nPF - Pessoa Física\nPJ - Pessoa Jurídica\nFI – Fundo de Investimento",
+     "tipo": "C",
+     "tamanho": "2",
+     "decimal": "—",
+     "valores": "[PF; PJ; FI]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 6,
+     "nome": "CPF_CNPJ",
+     "descricao": "CPF ou CNPJ do Sócio, Titular, Dirigente ou Conselheiro.\nObrigatório se Código do País for igual a \"105\" (Brasil)\nCaso contrário, pode ser preenchido com branco(s).\nSe IND_QUALIF_SOCIO =” PF” preencher com CPF. Senão, preencher com CNPJ.",
+     "tipo": "N",
+     "tamanho": "14",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 7,
+     "nome": "NOM_EMP",
+     "descricao": "Nome/Nome empresarial do Sócio, Titular, Dirigente ou Conselheiro.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 8,
+     "nome": "QUALIF",
+     "descricao": "Qualificação do Sócio, Titular, Dirigente ou Conselheiro.\nSe PAIS = “105” (Brasil) E IND_QUALIF_SOCIO = “PF”:\n01 – Acionista Pessoa Física Domiciliado no Brasil\n02 – Sócio Pessoa Física Domiciliado no Brasil\n09 – Titular\n10 – Administrador sem Vínculo Empregatício\n11 – Diretor sem Vínculo Empregatício\n12 – Presidente sem Vínculo Empregatício\n13 – Administrador com Vínculo Empregatício\n14 – Conselheiro de Administração ou Fiscal\n15 – Diretor com Vínculo Empregatício\n16 – Fundador\n17 – Presidente com Vínculo Empregatício\n18 – Usufrutuário de Quotas ou Ações\nSe PAIS = “105” (Brasil) E IND_QUALIF_SOCIO = \"PJ\":\n03 - Acionista Pessoa Jurídica Domiciliado no Brasil\n04 - Sócio Pessoa Jurídica Domiciliado no Brasil\n18 – Usufrutuário de Quotas ou Ações\nSe PAIS diferente de “105” (Brasil) E IND_QUALIF_SOCIO = \"PF\":\n05 - Acionista Pessoa Física Residente ou Domiciliado no Exterior\n06 - Sócio Pessoa Física Residente ou Domiciliado no Exterior\n14 – Conselheiro de Administração ou Fiscal\n18 – Usufrutuário de Quotas ou Ações\nSe PAIS diferente de “105” (Brasil) E IND_QUALIF_SOCIO = \"PJ\":\n07 - Acionista Pessoa Jurídica Residente ou Domiciliado no Exterior\n08 - Sócio Pessoa Jurídica Residente ou Domiciliado no Exterior\n18 – Usufrutuário de Quotas ou Ações\nObservação: Caso o sócio seja também administrador ou diretor, deve selecionar a opção 02 – Sócio Pessoa Física Domiciliado no Brasil ou 06 – Sócio Pessoa Física Domiciliado no Exterior.",
+     "tipo": "C",
+     "tamanho": "2",
+     "decimal": "—",
+     "valores": "[01; 02; 03; 04; 05; 06; 07; 08; 09; 10; 11; 12; 13; 14; 15; 16; 17; 18]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 9,
+     "nome": "PERC_CAP_TOT",
+     "descricao": "Percentual Relativo à Participação da Pessoa Física ou Jurídica, Sócio, Titular, Conselheiro ou Dirigente, no Capital Total.\nObservação: Caso o valor seja 100,00%, informe somente “100”.",
+     "tipo": "N",
+     "tamanho": "8",
+     "decimal": "4",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 10,
+     "nome": "PERC_CAP_VOT",
+     "descricao": "Percentual Relativo à Participação da Pessoa Física ou Jurídica, Sócio, Titular, Conselheiro ou Dirigente, no Capital Votante.\nObservação: Caso o valor seja 100,00%, informe somente “100”.",
+     "tipo": "N",
+     "tamanho": "8",
+     "decimal": "4",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 11,
+     "nome": "CPF_REP_LEG",
+     "descricao": "CPF do Representante Legal: No caso de residente ou domiciliado no exterior ou de pessoa física residente no Brasil legalmente representada.",
+     "tipo": "N",
+     "tamanho": "11",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 12,
+     "nome": "QUALIF_REP_LEG",
+     "descricao": "Qualificação do Representante Legal:\nObrigatório se CPF_REP_LEG é diferente de vazio\nSe IND_QUALIF_SOCIO = “PF”\n01 - Procurador\n02 - Curador\n03 - Mãe\n04 - Pai\n05 - Tutor\n06 – Outro\nSe IND_QUALIF_SOCIO = “PJ”\n01 - Procurador\n06 – Outro",
+     "tipo": "N",
+     "tamanho": "2",
+     "decimal": "—",
+     "valores": "[01; 02; 03; 04; 05; 06]",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 13,
+     "nome": "VL_REM_TRAB",
+     "descricao": "Remuneração do Trabalho: Valor, antes da dedução do imposto de renda retido na fonte, dos rendimentos pagos e escriturados, nos livros da escrituração contábil ou no livro Caixa, a título de remuneração a sócios, dirigentes e conselheiros pela prestação de serviços, ou quaisquer outros pagamentos, tais como: pró-labore e aluguéis.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 14,
+     "nome": "VL_LUC_DIV",
+     "descricao": "Lucros/Dividendos: Valor dos lucros e dividendos efetivamente pagos no ano-calendário a sócios ou a titular de empresa individual.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 15,
+     "nome": "VL_JUR_CAP",
+     "descricao": "Juros Sobre o Capital Próprio: Valor dos juros pagos ou creditados a titular, ou a sócios ou acionistas, a título de remuneração do capital próprio, antes de deduzido o imposto de renda na fonte, em conformidade com o disposto no art. 9º da Lei nº 9.249, de 1995.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 16,
+     "nome": "VL_DEM_REND",
+     "descricao": "Demais Rendimentos: Valor, antes da dedução do imposto de renda retido na fonte, dos demais rendimentos pagos ou creditados a sócios, a acionistas, a titular de empresa individual, a dirigentes ou a conselheiros, inclusive os lucros e dividendos não apurados em balanço e distribuídos.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 17,
+     "nome": "VL_IR_RET",
+     "descricao": "IR Retido na Fonte: Valor do imposto de renda retido na fonte por ocasião do pagamento de lucros ou dividendos não abrangidos pela isenção, e sobre os demais rendimentos pagos a sócios, a acionistas, a titular de empresa individual, a dirigentes ou a conselheiros.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [
+    {
+     "campo": "DATA_FIM_SOC",
+     "regras": [
+      {
+       "codigo": "REGRA_DATA_FIM_SOC",
+       "texto": "Verifica, caso Y600.DATA_FIM_SOC está preenchida, se está compreendida entre 0000.DT_INI e 0000.DT_FIN.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "CPF_CNPJ",
+     "regras": [
+      {
+       "codigo": "REGRA_OBRIGATORIO_BRASIL",
+       "texto": "Verifica se o Y600.CPF_CNPJ está preenchido somente quando Y600.PAIS for igual a “105” (Brasil).",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_VALIDA_CPF_CNPJ",
+       "texto": "Quando tamanho do campo igual 11, aplica a REGRA_VALIDA_CPF e quando o tamanho do campo igual a 14, aplica a REGRA_VALIDA_CNPJ.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_CPF_IND_QUALIF_PJ_FI",
+       "texto": "Verifica se Y600.IND_QUALIF for PJ ou FI e informar um CPF (11 dígitos).",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_CPF_IND_QUALIF_PF",
+       "texto": "Verifica se Y600.IND_QUALIF for PF e informar um CNPJ (14 dígitos).",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "QUALIF",
+     "regras": [
+      {
+       "codigo": "REGRA_Y600_QUALIF",
+       "texto": "Verifica, quando Y600.PAIS igual a “105” (Brasil) e Y600.IND_QUALIF_SOCIO igual a “PF”, se Y600.QUALIF é igual a “01”, “02”, “09”, “10”, “11”, “12”, “13”, “14”, “15”, “16” ou “17”; quando Y600.PAIS igual a “105” (Brasil) e Y600.IND_QUALIF_SOCIO igual a “PJ”, se Y600.QUALIF é igual a “03” ou “04”; quando Y600.PAIS é diferente de “105” (Brasil) e Y600.IND_QUALIF_SOCIO igual a “PF”, se Y600.QUALIF é igual a “05”, “06” ou “14”; quando Y600.PAIS é diferente de “105” (Brasil) e Y600.IND_QUALIF_SOCIO igual a “PJ”, se Y600.QUALIF é igual a “07” ou “08”.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "CPF_REP_LEG",
+     "regras": [
+      {
+       "codigo": "REGRA_VALIDA_CPF",
+       "texto": "Verifica se o CPF informado é válido.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "QUALIF_REP_LEG",
+     "regras": [
+      {
+       "codigo": "REGRA_QUALIF_REP_LEG_OBRIGATORIO",
+       "texto": "Verifica, caso Y600.CPF_REP_LEG esteja preenchido, se Y600.QUALIF_REP_LEG está preenchido. Caso Y600.CPF_REP_LEG não esteja preenchido, o campo Y600.QUALIF_REP_LEG não deve ser preenchido.",
+       "tipo": "Erro"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|Y600|01012012|105|PF|00000000000|FULANO SÓCIO|01|60,00|60,00|||100000,00|10000,00|5000,00|3000,00|9000,00|",
+    "|Y600|: Identificação do tipo do registro.",
+    "|01012012|: Data da última alteração societária (01/01/2012).",
+    "|105|: Código do país de residência ou domicílio do sócio ou titular (105 = Brasil).",
+    "|PF|: Indicador da natureza do sócio ou titular (PF = Pessoa Física).",
+    "|00000000000|: CPF ou CNPJ do sócio ou titular (CPF: 000.000.000-00).",
+    "|FULANO SÓCIO|: Nome ou nome empresarial do sócio ou titular.",
+    "|01|: Qualificação do sócio ou titular (01 = Acionista Pessoa Física Domiciliado no Brasil).",
+    "|60,00|: Percentual de participação do sócio ou titular no capital total (60%).",
+    "|60,00|: Percentual de participação do sócio ou titular no capital votante (60%).",
+    "||: Não há representante legal (CPF do representante legal não preenchido).",
+    "||: Não há representante legal (Qualificação do representante legal não preenchida).",
+    "|100000,00|: Rendimentos pagos e escriturados ao dirigente, conselheiro, sócio ou titular (R$ 100.000,00).",
+    "|10000,00|: Lucros e dividendos pagos ao dirigente, conselheiro, sócio ou titular (R$ 10.000,00).",
+    "|5000,00|: Juros sobre o capital próprio pagos ao dirigente, conselheiro, sócio ou titular (R$ 5.000,00).",
+    "|3000,00|: Demais rendimentos pagos ao dirigente, conselheiro, sócio ou titular (R$ 3.000,00).",
+    "|9000,00|: Imposto de renda retido na fonte em virtude do pagamento de lucros ou dividendos não abrangidos pela isenção e sobre os rendimentos pagos ao dirigente, conselheiro, sócio ou titular (R$ 9.000,00)."
+   ]
+  },
+  {
+   "codigo": "Y612",
+   "nome": "Identificação e Rendimentos de Dirigentes e Conselheiros – Imunes ou Isentas",
+   "ordem": 160,
+   "nivel": "2",
+   "ocorrencia": "[0;N]",
+   "chave": "CPF + QUALIF",
+   "entrada": "F",
+   "saida": "OC\n(Se 0010.FORMA_TRIB = \"8\" ou \"9\")",
+   "descricao": [
+    "Este registro deve ser preenchido pelas imunes ou isentas com dados dos 999 (novecentos e noventa e nove) maiores dirigentes e conselheiros, no período de apuração, inclusive os dirigentes e conselheiros que tenham saído das imunes ou isentas no período de apuração e não fazem parte das imunes ou isentas na data final do período de apuração. Os dirigentes e conselheiros devem ser informados, ainda não tenham recebido rendimento no período (nessa situação, o valor a ser informado será zero)."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (Y612).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[Y612]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "CPF",
+     "descricao": "CPF: CPF do dirigente ou conselheiro beneficiário dos rendimentos.",
+     "tipo": "N",
+     "tamanho": "11",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "NOME",
+     "descricao": "Nome: Nome do dirigente ou conselheiro beneficiário dos rendimentos.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 4,
+     "nome": "QUALIF",
+     "descricao": "Qualificação: Qualificação do dirigente ou conselheiro beneficiário dos rendimentos:\n10 - Administrador sem Vínculo Empregatício\n11 - Diretor sem Vínculo Empregatício\n12 – Presidente sem Vínculo Empregatício\n13 - Administrador com Vínculo Empregatício\n14 - Conselheiro de Administração ou Fiscal\n15 - Diretor com Vínculo Empregatício\n16 - Fundador\n17 - Presidente com Vínculo Empregatício",
+     "tipo": "N",
+     "tamanho": "2",
+     "decimal": "—",
+     "valores": "[10; 11; 12; 13; 14; 15; 16; 17]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 5,
+     "nome": "VL_REM_TRAB",
+     "descricao": "Rendimentos do Trabalho: Valor dos rendimentos pagos e escriturados, nos livros da escrituração contábil ou no livro Caixa, a título de remuneração a dirigentes ou conselheiros pela prestação de serviços, ou quaisquer outros pagamentos, tais como: pró-labore e aluguéis. Esses valores sujeitam-se à incidência do imposto de renda na fonte e na declaração de rendimentos dos beneficiários.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 6,
+     "nome": "VL_DEM_REND",
+     "descricao": "Demais Rendimentos: Valor de outros rendimentos não classificados como rendimento do trabalho, escriturados nos livros da escrituração contábil ou no livro Caixa, pagos aos dirigentes ou conselheiros. Esses valores sujeitam-se à incidência do imposto de renda na fonte e na declaração de rendimentos dos beneficiários.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 7,
+     "nome": "VL_IR_RET",
+     "descricao": "IR Retido na Fonte: Valor do imposto de renda retido na fonte por ocasião do pagamento dos rendimentos a dirigentes ou conselheiros da pessoa jurídica imune ou isenta de IRPJ.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [
+    {
+     "campo": "QUALIF",
+     "regras": [
+      {
+       "codigo": "REGRA_Y612_QUALIF",
+       "texto": "Verifica se o código utilizado em Y612.QUALIF é um dos códigos existentes na tabela de qualificação de dirigentes ou conselheiros.",
+       "tipo": "Erro"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|Y612|00000000000|FULANO DIRIGENTE|12|50000,00|10000,00|8000,00|",
+    "|Y612|: Identificação do tipo do registro.",
+    "|00000000000|: CPF do dirigente ou conselheiro (000.000.000-00).",
+    "|FULANO DIRIGENTE|: Nome do dirigente ou conselheiro.",
+    "|12|: Qualificação do dirigente ou conselheiro (12 = Presidente sem vínculo empregatício).",
+    "|50000,00|: Rendimentos do trabalho do dirigente ou conselheiro pagos e escriturados (R$ 50.000,00).",
+    "|10000,00|: Demais rendimento do dirigente ou conselheiro pagos e escriturados (R$ 10.000,00).",
+    "|8000,00|: Imposto de renda retido na fonte em função do pagamento de rendimentos a dirigentes ou conselheiros (R$ 8.000,00)."
+   ]
+  },
+  {
+   "codigo": "Y620",
+   "nome": "Participações Avaliadas Pelo Método de Equivalência Patrimonial",
+   "ordem": 161,
+   "nivel": "2",
+   "ocorrencia": "[0;N]",
+   "chave": "—",
+   "entrada": "F",
+   "saida": "OC\n(Se 0020.IND_PART_COLIG = \"S\")",
+   "descricao": [
+    "Este registro deve ser preenchido pela pessoa jurídica domiciliada no Brasil que teve participações avaliadas pelo método de equivalência patrimonial, no período de apuração, em capital de pessoa jurídica domiciliada no Brasil ou no exterior.",
+    "Observação: Este registro deve ser preenchido ainda que apenas para fins de informação do laudo disciplinado no art. 178, Instrução Normativa Nº 1.700/2017. Caso a participação societária já esteja extinta no período de apuração vinculado à ECF, os campos 07 a 11 devem estar zerados.",
+    "Para seu preenchimento, a pessoa jurídica declarante deve discriminar as empresas avaliadas pelo método de equivalência patrimonial em ordem cronológica da data de aquisição, limitado a 999 registros.",
+    "Regras de preenchimento:",
+    "1 – Informar as 500 maiores participações avaliadas pelo método de equivalência patrimonial existentes na data final do período de apuração.",
+    "2 – Informar as 499 maiores alterações no Y620.IND_RELAC ocorridas durante o período, não contempladas no item 1.",
+    "Exemplos de eventos que devem ser registrados:\n1- Aquisição de nova parcela de participação societária, estágios, seja com aquisição de controle ou ainda apenas mantendo a influência significativa.\n2- Aquisição ou perda de controle ou influência significativa devido apenas acordo de acionistas/cotistas, sem aquisição adicional ou venda de participação societária.\n3- Alienação da participação societária total, ou parcial, resultando em perda influência significativa.\n4- Aquisição e alienação de participação societária no curso do período de apuração. Os dois eventos devem estar registrados."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (Y620).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[Y620]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "DT_EVENTO",
+     "descricao": "Data do Evento: Data do evento societário que deu causa à classificação conforme o indicador do tipo de relacionamento (Y620.IND_RELAC) no formato DDMMYYYY.",
+     "tipo": "N",
+     "tamanho": "8",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "IND_RELAC",
+     "descricao": "Indicador do Tipo de Relacionamento:\n1 - Controle\n2 - Controle Conjunto\n3 - Influência Significativa\n4 - Outras causas para aplicar MEP (mesmo grupo ou controle comum)\n5 - Exclusão do MEP",
+     "tipo": "N",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 4,
+     "nome": "PAIS",
+     "descricao": "País: País onde a coligada ou controlada está domiciliada., conforme tabela do Sped (Disponibilizada no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+     "tipo": "N",
+     "tamanho": "3",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 5,
+     "nome": "CNPJ",
+     "descricao": "CNPJ: CNPJ da coligada ou controlada.\nObrigatório se PAIS = 105 (Brasil)\nCaso contrário, o campo deve ser nulo",
+     "tipo": "C",
+     "tamanho": "14",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 6,
+     "nome": "NOM_EMP",
+     "descricao": "Nome Empresarial: Nome empresarial da coligada ou controlada.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 7,
+     "nome": "VALOR_REAIS",
+     "descricao": "Valor Total da Participação em Reais (Cotação da data do evento).",
+     "tipo": "NS",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 8,
+     "nome": "VALOR_ESTR",
+     "descricao": "Valor Total da Participação em Moeda Original do País da Empresa Investida.",
+     "tipo": "NS",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 9,
+     "nome": "PERC_CAP_TOT",
+     "descricao": "Percentual de Participação no Capital Total da Coligada ou Controlada.",
+     "tipo": "N",
+     "tamanho": "8",
+     "decimal": "4",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 10,
+     "nome": "PERC_CAP_VOT",
+     "descricao": "Percentual de Participação no Capital Votante da Coligada ou Controlada.",
+     "tipo": "N",
+     "tamanho": "8",
+     "decimal": "4",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 11,
+     "nome": "RES_EQ_PAT",
+     "descricao": "Resultado de Equivalência Patrimonial",
+     "tipo": "NS",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 12,
+     "nome": "DATA_AQUIS",
+     "descricao": "Data da Primeira Aquisição da Participação Societária\nObservação: Poderá ser igual a Y600.DT_EVENTO se a primeira aquisição foi causa do MEP.",
+     "tipo": "C",
+     "tamanho": "8",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 13,
+     "nome": "IND_PROC_CART",
+     "descricao": "Sumário em Cartório: Informar se houve sumário registrado em cartório relativo ao Laudo de Avaliação do Valor Justo dos Ativos Líquidos da Investida (Mais-valia ou menos-valia) de acordo com o art. 178 da Instrução Normativa RFB nº 1.700, de 14 de março de 2017:\nS – Sim\nN = Não",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S; N]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 14,
+     "nome": "NUM_PROC_CART",
+     "descricao": "Número do Registro no Cartório: Informar o número do registro em cartório do sumário relativo ao Laudo de Avaliação do Valor Justo dos Ativos Líquidos da Investida (Mais-valia ou menos-valia) de acordo com o art. 178 da Instrução Normativa RFB nº 1.700, de 14 de março de 2017.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 15,
+     "nome": "NOME_CART",
+     "descricao": "Nome do Cartório: Informar o nome e endereço do cartório onde foi registrado o sumário relativo ao Laudo de Avaliação do Valor Justo dos Ativos Líquidos da Investida (Mais-valia ou menos-valia) de acordo com o art. 178 da Instrução Normativa RFB nº 1.700, de 14 de março de 2017.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 16,
+     "nome": "IND_PROC_RFB",
+     "descricao": "Laudo Protocolado na RFB: Informar se houve Laudo de Avaliação do Valor Justo dos Ativos Líquidos da Investida (Mais-valia ou menos-valia) de acordo com o art. 178 da Instrução Normativa RFB nº 1.700, de 14 de março de 2017, protocolado na RFB:\nS – Sim\nN = Não\nObservação: Deverá ser informado também para os casos de aquisição ou venda ocorridos antes do período a que se refere essa ECF.",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S; N]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 17,
+     "nome": "NUM_PROC_RFB",
+     "descricao": "Número do Processo: Informar o número do processo eletrônico do Laudo de Avaliação do Valor Justo dos Ativos Líquidos da Investida protocolado na RFB (Mais-valia ou menos-valia) de acordo com o art. 178 da Instrução Normativa RFB nº 1.700, de 14 de março de 2017.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_IND_PART_COLIG_Y620",
+     "texto": "Verifica, quando 0020.IND_PART_EXT é igual a “S” (Sim) e 0020.IND_PART_COLIG é igual a “N” (Não), se o registro Y620 foi preenchido. Se a regra não for cumprida, a ECF gera um aviso."
+    }
+   ],
+   "regrasCampo": [
+    {
+     "campo": "CNPJ",
+     "regras": [
+      {
+       "codigo": "REGRA_OBRIGATORIO_BRASIL",
+       "texto": "Obrigatório se Y620.PAIS for igual a \"105\" (Brasil). Caso contrário, não deve ser preenchido.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_CNPJ_DIFERENTE",
+       "texto": "Verifica se Y620.CNPJ é diferente do 0000.CNPJ.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_VALIDA_CNPJ",
+       "texto": "Verifica se a regra de formação do código é válida.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "NUM_PROC_CART",
+     "regras": [
+      {
+       "codigo": "REGRA_PREENCHER_IND_PROC_CART",
+       "texto": "Verifica, quando Y620.IND_PROC_CART igual a “S”, se o campo Y620.NUM_PROC_CART está preenchido.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_NAO_PREENCHER_IND_PROC_CART",
+       "texto": "Verifica, quando Y620.IND_PROC_CART igual a “N”, se o campo Y620.NUM_PROC_CART não está preenchido.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "NOME_CART",
+     "regras": [
+      {
+       "codigo": "REGRA_PREENCHER_IND_PROC_CART",
+       "texto": "Verifica, quando Y620.IND_PROC_CART igual a “S”, se o campo Y620.NOME_CART está preenchido.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_NAO_PREENCHER_IND_PROC_CART",
+       "texto": "Verifica, quando Y620.IND_PROC_CART igual a “N”, se o campo Y620.NOME_CART não está preenchido.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "NUM_PROC_RFB",
+     "regras": [
+      {
+       "codigo": "REGRA_PREENCHER_IND_PROC_RFB",
+       "texto": "Verifica, quando Y620.IND_PROC_RFB igual a “S”, se o campo Y620.NUM_PROC_RFB está preenchido.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_NAO_PREENCHER_IND_PROC_RFB",
+       "texto": "Verifica, quando Y620.IND_PROC_RFB igual a “N”, se o campo Y620.NUM_PROC_RFB não está preenchido.",
+       "tipo": "Erro"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|Y620|01012024|1|105|44444444000191|EMPRESA COLIGADA NO BRASIL|1000000,00|1000000,00|25,00|30,00|-100000,00|31102013|N|||N||",
+    "|Y620|: Identificação do tipo do registro.",
+    "|01012024|: Data do evento.",
+    "|1|: Indicador do tipo de relacionamento (1 = Controle).",
+    "|105|: País da coligada ou controlada (Brasil).",
+    "|44444444000191|: CNPJ da coligada ou controlada (44.444.444/0001-91).",
+    "|EMPRESA COLIGADA NO BRASIL|: Nome empresarial da coligada ou controlada.",
+    "|1000000,00|: Valor total da participação em reais (R$ 1.000.000,00).",
+    "|1000000,00|: Valor total da participação moeda original do país da empresa investida (R$ 1.000.000,00).",
+    "|25,00|: Percentual de participação no capital total (25%).",
+    "|30,00|: Percentual de participação no capital votante (30%).",
+    "|-100000,00|: Resultado da equivalência patrimonial (perda de R$ 100.000,00).",
+    "|31102014|: Data da aquisição da participação (31/10/2014).",
+    "|N|: Não houve sumário do laudo de avaliação registrado em cartório.",
+    "||: Não há número do registro em cartório.",
+    "||: Não há nome do cartório.",
+    "|N|: Não houve laudo de avaliação protocolado na RFB.",
+    "||: Não há número de processo na RFB."
+   ]
+  },
+  {
+   "codigo": "Y630",
+   "nome": "Fundos/Clubes de Investimento",
+   "ordem": 162,
+   "nivel": "2",
+   "ocorrencia": "[0;N]",
+   "chave": "CNPJ",
+   "entrada": "F",
+   "saida": "OC\n(Se 0020.IND_ADM_FUN_CLU = \"S\")",
+   "descricao": [
+    "Este registro deve ser preenchido pelas pessoas jurídicas administradoras de fundos ou clubes de investimento, e pelos fundos de investimento imobiliário de que trata a Lei nº 8.668, de 25 de junho de 1993, alterada pelos arts. 2º a 4o e 22 da Lei nº 9.779, de 19 de janeiro de 1999."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (Y630).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[Y630]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "CNPJ",
+     "descricao": "CNPJ: As administradoras de Fundos ou Clubes de Investimento devem informar, neste campo, o CNPJ de cada Fundo ou Clube de Investimento. Os fundos de investimento imobiliário de que trata a Lei nº 8.668, de 1993, alterada pelos arts. 2º a 4o e 22 da Lei nº 9.779, de 1999, devem informar o próprio CNPJ.",
+     "tipo": "C",
+     "tamanho": "14",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "QTE_QUOT",
+     "descricao": "Quantidade de Quotistas no Final do Período: Quantidade de quotistas do fundo ou clube, existente no final do período de apuração, para cada CNPJ informado. Atenção: No caso de encerramento indicar a quantidade de quotistas do fundo ou clube apurada/levantada pelo Administrador para a data da Assembleia de quotistas para fins de deliberar o encerramento, ou na data do evento de encerramento.",
+     "tipo": "N",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 4,
+     "nome": "QTE_QUOTA",
+     "descricao": "Quantidade de Quotas no Final do Período: Quantidade de quotas do fundo ou clube, existente no final do período de apuração, para cada CNPJ informado. Atenção: No caso de encerramento indicar a quantidade de quotas do fundo ou clube apurada/levantada pelo Administrador para a data da Assembleia de quotistas para fins de deliberar o encerramento, ou na data do evento de encerramento.",
+     "tipo": "N",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 5,
+     "nome": "PATR_FIN_PER",
+     "descricao": "Patrimônio no Final do Período: Patrimônio do fundo ou clube, existente no final do período de apuração, para cada CNPJ informado. Atenção: No caso de encerramento indicar o patrimônio do fundo ou clube apurado/levantado pelo Administrador para a data da Assembleia de quotistas para fins de deliberar o encerramento, ou na data do evento de encerramento.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 6,
+     "nome": "DAT_ABERT",
+     "descricao": "Data de Abertura: Indicar a data de abertura do fundo ou clube de investimento, para cada CNPJ informado.",
+     "tipo": "N",
+     "tamanho": "8",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 7,
+     "nome": "DAT_ENCER",
+     "descricao": "Data de Encerramento: Indicar a data de encerramento do fundo ou clube de investimento, para cada CNPJ informado.",
+     "tipo": "N",
+     "tamanho": "8",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [
+    {
+     "campo": "CNPJ",
+     "regras": [
+      {
+       "codigo": "REGRA_VALIDA_CNPJ",
+       "texto": "Verifica se a regra de formação do código é válida.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "DAT_ABERT",
+     "regras": [
+      {
+       "codigo": "REGRA_DATA_MAIOR_DT_FIN",
+       "texto": "Verifica se Y630.DT_ABERT foi preenchido com a data menor que a data informada em 0000.DT_FIN.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "DAT_ENCER",
+     "regras": [
+      {
+       "codigo": "REGRA_DATA_MAIOR_DT_FIN",
+       "texto": "Verifica se Y630.DT_ENCER foi preenchido com a data menor que a data informada em 0000.DT_FIN.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_DATA_ABERT_ENCER",
+       "texto": "Verifica se Y630.DT_ABERT foi preenchido com a data menor que a data informada em Y630.DAT_ENCER.",
+       "tipo": "Erro"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|Y630|44444444000191|100|5000000|100000000,00|10012010||",
+    "|Y630|: Identificação do tipo do registro.",
+    "|44444444000191|: CNPJ do fundo ou clube de investimento (44.444.444/0001-91).",
+    "|100|: Quantidade de quotistas (100 quotistas).",
+    "|5000000|: Quantidade de quotas (5.000.000 de quotas).",
+    "|100000000,00|: Patrimônio do fundo ou clube de investimento no final do período (R$ 100.000.000,00).",
+    "|10012010|: Data de abertura do fundo ou clube de investimento (01/01/2010).",
+    "||: Não há data de encerramento do fundo ou clube de investimento."
+   ]
+  },
+  {
+   "codigo": "Y640",
+   "nome": "Participações em Consórcios de Empresas",
+   "ordem": 163,
+   "nivel": "2",
+   "ocorrencia": "[0;N]",
+   "chave": "CNPJ",
+   "entrada": "F",
+   "saida": "OC\n(Se 0020.IND_PART_CONS = \"S\")",
+   "descricao": [
+    "Este registro deve ser preenchido pela pessoa jurídica participante de consórcio constituído nos termos do disposto nos arts. 278 e 279 da Lei nº 6.404, de 15 de dezembro de 1976."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (Y640).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[Y640]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "CNPJ",
+     "descricao": "CNPJ: CNPJ do consórcio no qual a pessoa jurídica participou no período a que se refere esta declaração.",
+     "tipo": "C",
+     "tamanho": "14",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "COND_DECL",
+     "descricao": "Condição do Declarante no Consórcio:\n1 – Líder\n2 – Participante\nAtenção: No caso de alteração da condição de liderança do consórcio no decorrer do ano-calendário, considera-se líder a pessoa jurídica que se enquadrar nessa condição no último dia do período a que se refere esta declaração ou na data de extinção do consórcio.",
+     "tipo": "N",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[1; 2]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 4,
+     "nome": "VL_CONS",
+     "descricao": "Receita do Consórcio: O líder indicará, neste campo, o valor do somatório das receitas auferidas por todos os consorciados no período considerado.\nAtenção: Este campo não deve ser preenchido para participante que não seja líder.\nObrigatório se COND_DECL=\"1\".\nSenão, não deve ser preenchido.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 5,
+     "nome": "CNPJ_LID",
+     "descricao": "CNPJ da Empresa Líder do Consórcio.",
+     "tipo": "C",
+     "tamanho": "14",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 6,
+     "nome": "VL_DECL",
+     "descricao": "Receita do Declarante no Consórcio: Receita auferida pelo declarante no período a que se refere esta declaração, observado o disposto no caput do art. 3º da IN RFB nº 1.199, de 2011.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [
+    {
+     "campo": "CNPJ_LID",
+     "regras": [
+      {
+       "codigo": "REGRA_CNPJ_LID",
+       "texto": "Verifica, caso Y640.COND_DECL = “1” (empresa líder), se Y640.CNPJ_LID é igual a 0000.CNPJ.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_VALIDA_CNPJ",
+       "texto": "Verifica se a regra de formação do código é válida.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "VL_DECL",
+     "regras": [
+      {
+       "codigo": "REGRA_VL_DECL_MENOR_VL_CONS",
+       "texto": "Verifica se o valor informado em Y640.VL_DECL é menor ou igual que o valor informado em Y640.VL_CONS.",
+       "tipo": "Erro"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|Y640|44444444000191|1|500000,00|22222222000191|400000,00|",
+    "|Y640|: Identificação do tipo do registro.",
+    "|44444444000191|: CNPJ do consórcio (44.444.444/0001-91).",
+    "|1|: Condição da declarante (1 = empresa líder – nesse caso, é obrigatório o preenchimento do Y650).",
+    "|500000,00|: Receita do consórcio (R$ 500.000,00).",
+    "|22222222000191|: CNPJ da empresa líder do consórcio (22.222.222/0001-91).",
+    "|400000,00|: Receita do declarante (R$ 400.000,00)."
+   ]
+  },
+  {
+   "codigo": "Y650",
+   "nome": "Participantes do Consórcio",
+   "ordem": 164,
+   "nivel": "3",
+   "ocorrencia": "[0;N]",
+   "chave": "CNPJ",
+   "entrada": "F",
+   "saida": "OC\n(Se Y640.COND_DECL=\"1\")",
+   "descricao": [
+    "Este registro deve ser preenchido quando a pessoa jurídica indicou ser líder de consórcio no registro Y640 (Y640.COND_DECL = “1”). Deverão ser indicados, neste registro, para cada um dos demais participantes do consórcio no qual a declarante é líder, o CNPJ do participante e a respectiva receita auferida, observado o disposto no caput do art. 3º da IN RFB nº 1.199, de 2011.",
+    "Não é necessário informar o CNPJ e a receita da empresa líder, pois já foram informados no registro Y640."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (Y650).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[Y650]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "CNPJ",
+     "descricao": "CNPJ da Empresa Participante do Consórcio.",
+     "tipo": "C",
+     "tamanho": "14",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "VL_PART",
+     "descricao": "Receita do Participante do Consórcio.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Não"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [
+    {
+     "campo": "VL_PART",
+     "regras": [
+      {
+       "codigo": "REGRA_SOMA_VL_PART",
+       "texto": "Verifica se o somatório das receitas dos participantes informadas em Y650.VL_PART dos registros Y650 filhos somado ao valor da receita da empresa líder informada no Y640.VL_DECL é igual ao Y640.VL_CONS.",
+       "tipo": "Erro"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|Y650|11111111000191|100000,00|",
+    "|Y650|: Identificação do tipo do registro.",
+    "|11111111000191|: CNPJ da empresa participante do consórcio (11.111.111/0001-91).",
+    "|100000,00|: Valor da receita da empresa participante (R$ 100.000,00)."
+   ]
+  },
+  {
+   "codigo": "Y660",
+   "nome": "Dados de Sucessoras",
+   "ordem": 165,
+   "nivel": "2",
+   "ocorrencia": "[0;N]",
+   "chave": "CNPJ",
+   "entrada": "F",
+   "saida": "OC\n(Se 0010.SIT_ESPECIAL = “2”, “3”, “5” ou “6”)",
+   "descricao": [
+    "Este registro deve ser preenchido pela pessoa jurídica que está obrigada a entregar a ECF relativa às situações especiais de fusão, cisão parcial, cisão total ou incorporação/incorporada, quando 0000.SIT_ESPECIAL for informado, com dados de sucessora(s)."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (Y660).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[Y660]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "CNPJ",
+     "descricao": "CNPJ da Pessoa Jurídica Resultante do Evento.",
+     "tipo": "C",
+     "tamanho": "14",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "NOM_EMP",
+     "descricao": "Nome Empresarial da Pessoa Jurídica Resultante do Evento.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 4,
+     "nome": "PERC_PAT_LIQ",
+     "descricao": "Percentual do Patrimônio Líquido Destinado: Percentual do patrimônio líquido da empresa sucedida destinado à pessoa jurídica resultante do evento.",
+     "tipo": "N",
+     "tamanho": "8",
+     "decimal": "4",
+     "valores": "—",
+     "obrigatorio": "Não"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [
+    {
+     "campo": "PERC_PAT_LIQ",
+     "regras": [
+      {
+       "codigo": "REGRA_PERC_PAT_CISAO_TOTAL",
+       "texto": "Verifica, quando 0000.SIT_ESPECIAL igual a “2” (Fusão), “3” (Incorporação/Incorporada) ou “5” (Cisão Total) se o somatório de Y660.PERC_PAT_LIQ é igual a 100%.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_PERC_PAT_CISAO_PARCIAL",
+       "texto": "Verifica, quando 0000.SIT_ESPECIAL igual a “6” (Cisão Parcial) se o somatório de Y660.PERC_PAT_LIQ é diferente do resultado da diferença de 100% e 0000.PAT_REMAN_CIS.",
+       "tipo": "Erro"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|Y660|11111111000191|EMPRESA SUCESSORA 1 LTDA|40,00|",
+    "|Y660|: Identificação do tipo do registro.",
+    "|11111111000191|: CNPJ da sucessora (11.111.111/0001-91).",
+    "|EMPRESA SUCESSORA 1 LTDA|: Nome empresarial da sucessora.",
+    "|40,00|: Percentual da sucedida destinada à sucessora (40%).",
+    "|Y660|22222222000191|EMPRESA SUCESSORA 2 LTDA|60,00|",
+    "|Y660|: Identificação do tipo do registro.",
+    "|22222222000191|: CNPJ da sucessora (22.222.222/0001-91).",
+    "|EMPRESA SUCESSORA 2 LTDA|: Nome empresarial da sucessora.",
+    "|60,00|: Percentual da sucedida destinada à sucessora (60%)."
+   ]
+  },
+  {
+   "codigo": "Y672",
+   "nome": "Outras Informações (Lucro Presumido ou Lucro Arbitrado)",
+   "ordem": 166,
+   "nivel": "2",
+   "ocorrencia": "[0;1]",
+   "chave": "REG",
+   "entrada": "F",
+   "saida": "OC\n(Se 0010.FORMA_TRIB = “6”\nOu\nSe 0010.FORMA_TRIB = “5” ou “7” e\n0010.TIP_ESC_PRE = “L”)",
+   "descricao": [
+    "A pessoa jurídica que apurou o imposto de renda com base no lucro presumido (que não recuperaram a ECD) ou arbitrado deve preencher esta ficha em consonância com as orientações a seguir:"
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (Y672).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[Y672]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "VL_CAPITAL_ANT",
+     "descricao": "Capital Registrado do Ano Anterior: Valor do capital registrado, em órgão competente, no fim do “Ano Imediatamente Anterior”.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 3,
+     "nome": "VL_CAPITAL",
+     "descricao": "Capital Registrado: Valor do capital registrado, em órgão competente, no fim do “Ano da Escrituração”.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 4,
+     "nome": "VL_ESTOQUE_ANT",
+     "descricao": "Estoques do Ano Anterior: Valor dos estoques no fim do “Ano Imediatamente Anterior”.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 5,
+     "nome": "VL_ESTOQUES",
+     "descricao": "Estoques: Valor dos estoques no fim do “Ano da Escrituração”.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 6,
+     "nome": "VL_CAIXA_ANT",
+     "descricao": "Saldo de Caixa e Bancos do Ano Anterior: Valor resultante da soma do saldo de caixa e dos saldos bancários registrados na escrituração comercial ou no livro Caixa, no fim do “Ano Imediatamente Anterior”.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 7,
+     "nome": "VL_CAIXA",
+     "descricao": "Saldo de Caixa e Bancos: Valor resultante da soma do saldo de caixa e dos saldos bancários registrados na escrituração comercial ou no livro Caixa, no fim do “Ano da Escrituração”.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 8,
+     "nome": "VL_APLIC_FIN_ANT",
+     "descricao": "Saldo de Aplicações Financeiras do Ano Anterior: Saldo das aplicações financeiras, seja no mercado de renda fixa, seja no mercado de renda variável, no fim do “Ano Imediatamente Anterior”.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 9,
+     "nome": "VL_APLIC_FIN",
+     "descricao": "Saldo de Aplicações Financeiras: Saldo das aplicações financeiras, seja no mercado de renda fixa, seja no mercado de renda variável, no fim do “Ano da Escrituração”.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 10,
+     "nome": "VL_CTA_REC_ANT",
+     "descricao": "Contas a Receber do Ano Anterior: Saldo das contas a receber no fim do “Ano Imediatamente Anterior”.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 11,
+     "nome": "VL_CTA_REC",
+     "descricao": "Contas a Receber: Saldo das contas a receber no fim do “Ano da Escrituração”.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 12,
+     "nome": "VL_CTA_PAG_ANT",
+     "descricao": "Contas a Pagar do Ano Anterior: Saldo das contas a pagar no fim do “Ano Imediatamente Anterior”.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 13,
+     "nome": "VL_CTA_PAG",
+     "descricao": "Contas a Pagar: Saldo das contas a pagar no fim do “Ano da Escrituração”.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 14,
+     "nome": "VL_COMPRA_MERC",
+     "descricao": "Compras de Mercadorias no Ano-Calendário: Valor das compras de mercadorias adquiridas no ano-calendário para revenda e as aquisições de materiais empregados nos produtos produzidos e serviços prestados.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 15,
+     "nome": "VL_COMPRA_ATIVO",
+     "descricao": "Compras de Elementos do Ativo no Ano-Calendário, Exceto os Classificáveis no Ativo Circulante e Ativo Não Circulante Realizável a Longo Prazo: Valor das aquisições de elementos do ativo no ano-calendário, exceto os classificáveis no ativo circulante e ativo não circulante realizável a longo prazo.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 16,
+     "nome": "VL_RECEITAS",
+     "descricao": "Receitas e Rendimentos Não Tributáveis ou Tributados Exclusivamente na Fonte;\nInformar, neste campo, o valor das seguintes receitas e rendimentos:\na) as recuperações de créditos que não representem ingressos de novas receitas;\nb) a reversão de saldo de provisões anteriormente constituídas;\nc) os lucros e dividendos decorrentes de participações societárias avaliadas pelo custo de aquisição e a contrapartida do ajuste por aumento do valor de investimentos avaliados pelo método da equivalência patrimonial;\nd) as importâncias recebidas na forma do caput do art. 18 da Lei nº 11.196, de 2005, desde que utilizadas integralmente na realização da pesquisa ou desenvolvimento de inovação tecnológica; e\ne) as receitas decorrentes de valores em espécie pagos ou creditados pelos Estados, Distrito Federal e Municípios, relativos ao Imposto sobre Operações relativas à Circulação de Mercadorias e sobre Prestações de Serviços de Transporte Interestadual e Intermunicipal e de Comunicação - ICMS e ao Imposto sobre Serviços de Qualquer Natureza - ISS, no âmbito de programas de concessão de crédito voltados ao estímulo à solicitação de documento fiscal na aquisição de mercadorias e serviços. (Art. 4º, da Lei nº 11.945, de 4 de junho de 2009).\nf) de debêntures emitidas por SPE e de fundos de investimentos, tributados exclusivamente na fonte, à alíquota de 15% (quinze por cento), quando auferidos por pessoa jurídica tributada com base no presumido ou arbitrado (arts. 2º e 3º da Lei nº 12.431, de 2011).",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 17,
+     "nome": "TOT_ATIVO",
+     "descricao": "Total do Ativo: Valor total do Ativo no fim do “Ano da Declaração”.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 18,
+     "nome": "IND_AVAL_ESTOQ",
+     "descricao": "Método de Avaliação de Estoques:\n1 – Custo Médio Ponderado\n2 – PEPS (Primeiro que entra, primeiro que sai)\n3 – Arbitramento - art. 296, Inc. I e II, do RIR/99\n4 – Custo Específico\n5 – Valor Realizável Líquido\n6 – Inventário Periódico\n7 – Outros\n8 – Não há (Exemplo: Empresas Prestadoras de Serviços)",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[1; 2; 3; 4; 5; 6; 7; 8]",
+     "obrigatorio": "Não"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [
+    {
+     "campo": "VL_CAPITAL_ANT",
+     "regras": [
+      {
+       "codigo": "REGRA_NAO_PREECHER_ESC_CONT",
+       "texto": "Verifica se Y672.VL_CAPITAL_ANT não está preenchido quando 0010.TIPO_ESC_PRE for igual a “C” (Contábil) e 0010.FORMA_TRIB = “5” (Lucro Presumido).",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "VL_CAPITAL",
+     "regras": [
+      {
+       "codigo": "REGRA_NAO_PREECHER_ESC_CONT",
+       "texto": "Verifica se o campo Y672.VL_CAPITAL não está preenchido quando o campo 0010.TIPO_ESC_PRE do registro 0010 for igual a “C” (Contábil) e 0010.FORMA_TRIB = “5” (Lucro Presumido).",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_Y672_CAPITAL_NAO_INFORMADO",
+       "texto": "Verifica se o campo Y762.VL_CAPITAL está preenchido quando 0010.FORMA_TRIB for igual a “5” (Lucro Presumido) e 0010.TIPO_ESC_PRE for igual a “L” (Livro Caixa) ou quando 0010.FORMA_TRIB for igual a “6” (Lucro Arbitrado) ou “7” (Presumido/Arbitrado).",
+       "tipo": "Aviso"
+      }
+     ]
+    },
+    {
+     "campo": "VL_ESTOQUE_ANT",
+     "regras": [
+      {
+       "codigo": "REGRA_NAO_PREECHER_ESC_CONT",
+       "texto": "Verifica se o campo Y672.VL_ESTOQUE_ANT não está preenchido quando 0010.TIPO_ESC_PRE for igual a “C” (Contábil) e 0010.FORMA_TRIB = “5” (Lucro Presumido).",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "VL_ESTOQUES",
+     "regras": [
+      {
+       "codigo": "REGRA_NAO_PREECHER_ESC_CONT",
+       "texto": "Verifica se Y672.VL_ESTOQUES não está preenchido quando 0010.TIPO_ESC_PRE for igual a “C” (Contábil) e 0010.FORMA_TRIB = “5” (Lucro Presumido).",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "VL_CAIXA_ANT",
+     "regras": [
+      {
+       "codigo": "REGRA_NAO_PREECHER_ESC_CONT",
+       "texto": "Verifica se Y672.VL_CAIXA_ANT não está preenchido quando 0010.TIPO_ESC_PRE for igual a “C” (Contábil) e 0010.FORMA_TRIB = “5” (Lucro Presumido).",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "VL_CAIXA",
+     "regras": [
+      {
+       "codigo": "REGRA_NAO_PREECHER_ESC_CONT",
+       "texto": "Verifica se Y672.VL_CAIXA não está preenchido quando 0010.TIPO_ESC_PRE for igual a “C” (Contábil) e 0010.FORMA_TRIB = “5” (Lucro Presumido).",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "VL_APLIC_FIN_ANT",
+     "regras": [
+      {
+       "codigo": "REGRA_NAO_PREECHER_ESC_CONT",
+       "texto": "Verifica se Y672.VL_APLIC_FIN_ANT não está preenchido quando 0010.TIPO_ESC_PRE for igual a “C” (Contábil) e 0010.FORMA_TRIB = “5” (Lucro Presumido).",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "VL_APLIC_FIN",
+     "regras": [
+      {
+       "codigo": "REGRA_NAO_PREECHER_ESC_CONT",
+       "texto": "Verifica se Y672.VL_APLIC_FIN não está preenchido quando 0010.TIPO_ESC_PRE for igual a “C” (Contábil) e 0010.FORMA_TRIB = “5” (Lucro Presumido).",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "VL_CTA_REC_ANT",
+     "regras": [
+      {
+       "codigo": "REGRA_NAO_PREECHER_ESC_CONT",
+       "texto": "Verifica se Y672.VL_CTA_REC_ANT não está preenchido quando 0010.TIPO_ESC_PRE for igual a “C” (Contábil) e 0010.FORMA_TRIB = “5” (Lucro Presumido).",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "VL_CTA_REC",
+     "regras": [
+      {
+       "codigo": "REGRA_NAO_PREECHER_ESC_CONT",
+       "texto": "Verifica se Y672.VL_CTA_REC não está preenchido quando 0010.TIPO_ESC_PRE for igual a “C” (Contábil) e 0010.FORMA_TRIB = “5” (Lucro Presumido).",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "VL_CTA_PAG_ANT",
+     "regras": [
+      {
+       "codigo": "REGRA_NAO_PREECHER_ESC_CONT",
+       "texto": "Verifica se Y672.VL_CTA_PAG_ANT não está preenchido quando 0010.TIPO_ESC_PRE for igual a “C” (Contábil) e 0010.FORMA_TRIB = “5” (Lucro Presumido).",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "VL_CTA_PAG",
+     "regras": [
+      {
+       "codigo": "REGRA_NAO_PREECHER_ESC_CONT",
+       "texto": "Verifica se Y672.VL_CTA_PAG não está preenchido quando 0010.TIPO_ESC_PRE for igual a “C” (Contábil) e 0010.FORMA_TRIB = “5” (Lucro Presumido).",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "IND_AVAL_ESTOQ",
+     "regras": [
+      {
+       "codigo": "REGRA_Y672_METODO",
+       "texto": "Verifica se Y672.IND_AVAL_ESTOQ não está preenchido, quando Y672.VL_ESTOQUES for maior que zero, 0010.FORMA_TRIB for igual a “5” (Lucro Presumido) ou “7” (Lucro Presumido/Arbitrado) e 0010TIPO_ESC_PRE for igual a “L” (Livro Caixa).",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_Y672_METODO_P100",
+       "texto": "Verifica se Y672.IND_AVAL_ESTOQ não está preenchido, quando 0010.FORMA_TRIB for igual a “5” (Lucro Presumido) ou “7” (Lucro Presumido/Arbitrado), 0010.TIPO_ESC_PRE for igual a “C” (Contábil) e P100(“1.01.03.01.21”) diferente de zero para qualquer período informado no registro P030.",
+       "tipo": "Erro"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|Y672|10000,00|20000,00|1000,00|2000,00|5000,00|6000,00|1000,00|2000,00|1000,00|2000,00|1000,00|2000,00|1000,00|2000,00|10000,00|100000,00|10000,00|10,00|2|2|",
+    "|Y672|: Identificação do tipo do registro.",
+    "|10000,00|: Capital registrado no ano imediatamente anterior (R$ 10.000,00)",
+    "|20000,00|: Capital registrado no ano da escrituração (R$ 20.000,00)",
+    "|1000,00|: Estoques no ano imediatamente anterior (R$ 1.000,00)",
+    "|2000,00|: Estoques no ano da escrituração (R$ 2.000,00)",
+    "|5000,00|: Caixa no ano imediatamente anterior (R$ 5.000,00)",
+    "|6000,00|: Caixa no ano da escrituração (R$ 6.000,00)",
+    "|1000,00|: Aplicações financeiras no ano imediatamente anterior (R$ 1.000,00)",
+    "|2000,00|: Aplicações financeiras no ano da escrituração (R$ 2.000,00)",
+    "|1000,00|: Conta a receber no ano imediatamente anterior (R$ 1.000,00)",
+    "|2000,00|: Conta a receber no ano da escrituração (R$ 2.000,00)",
+    "|1000,00|: Conta a pagar no ano imediatamente anterior (R$ 1.000,00)",
+    "|2000,00|: Conta a pagar no ano da escrituração (R$ 2.000,00)",
+    "|1000,00|: Compras de mercadorias no ano da escrituração (R$ 1.000,00)",
+    "|2000,00|: Compras do ativo, exceto ativo circulante e ativo não circulante realizável a longo prazo, no ano da escrituração (R$ 2.000,00)",
+    "|10000,00|: Receitas e rendimentos não tributáveis ou tributados exclusivamente na fonte no ano da escrituração (R$ 10.000,00)",
+    "|100000,00|: Total do ativo no ano da escrituração (R$ 100.000,00)",
+    "|10000,00|: Folha de pagamento sujeita à alíquota reduzida de que trata a Lei nº 11.774/2008 (R$ 10.000,00)",
+    "|10,00|: Alíquota reduzida de que trata a Lei nº 11.774/2008 (10%)",
+    "|2|: Regime de apuração das receitas (2 = Competência)",
+    "|2|: Método de avaliação de estoques (2 = PEPS)"
+   ]
+  },
+  {
+   "codigo": "Y680",
+   "nome": "Mês das Informações de Optantes pelo Refis (Lucro Real, Presumido e Arbitrado)",
+   "ordem": 167,
+   "nivel": "2",
+   "ocorrencia": "[0;12]",
+   "chave": "MÊS",
+   "entrada": "F",
+   "saida": "OC\n(Se 0010.OPT_REFIS=\"S\" E 0010.FORMA_TRIB ≠ “8” e “9”)",
+   "descricao": [
+    "Apresenta o mês relativo às informações das empresas optantes pelo REFIS."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (Y680).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[Y680]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "MES",
+     "descricao": "Mês:\n01 – Janeiro\n02 – Fevereiro\n03 – Março\n04 – Abril\n05 – Maio\n06 – Junho\n07 – Julho\n08 – Agosto\n09 – Setembro\n10 – Outubro\n11 – Novembro\n12 – Dezembro",
+     "tipo": "C",
+     "tamanho": "2",
+     "decimal": "—",
+     "valores": "[01; 02; 03; 04; 05; 06; 07; 08; 09; 10; 11; 12]",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [
+    {
+     "campo": "MES",
+     "regras": [
+      {
+       "codigo": "REGRA_MES_FORA_PERIODO",
+       "texto": "Verifica se Y680.MES está compreendido no período informado entre 0000.DT_INI e 0000.DT_FIN.",
+       "tipo": "Erro"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|Y680|01|",
+    "|Y680|: Identificação do tipo do registro.",
+    "|01|: Identificação do mês (janeiro)."
+   ]
+  },
+  {
+   "codigo": "Y681",
+   "nome": "Informações de Optantes pelo Refis (Lucros Real, Presumido e Arbitrado)",
+   "ordem": 168,
+   "nivel": "3",
+   "ocorrencia": "[0;12]",
+   "chave": "CODIGO",
+   "entrada": "F",
+   "saida": "OC\n(Se 0010.OPT_REFIS=\"S\" E 0010.FORMA_TRIB ≠ “8” e “9”)",
+   "descricao": [
+    "Este registro deve ser preenchido pela pessoa jurídica, exceto imune ou isenta, que optou pelo REFIS para os meses em que esteve submetida ao programa (indicados no registro Y680)."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (Y681).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[X681]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "CODIGO",
+     "descricao": "Código, conforme tabela dinâmica do Sped (Disponibilizada no item III deste registro e no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+     "tipo": "C",
+     "tamanho": "6",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "DESCRICAO",
+     "descricao": "Descrição, conforme tabela dinâmica do Sped (Disponibilizada no item III deste registro e no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 4,
+     "nome": "VALOR",
+     "descricao": "Valor",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_DUPLICIDADE_DESPREZADA",
+     "texto": "Verifica se o registro já foi importado anteriormente, de acordo com a chave e os registros pais. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_LINHA_DESPREZADA",
+     "texto": "Verifica se o registro existe na importação, mas não será importado por não existir na tabela dinâmica devido às configurações do bloco 0 ou da tabela dinâmica. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_LINHA_ATUALIZADA",
+     "texto": "Verifica se o registro está desatualizado em relação à tabela da RFB. Se a regra não for cumprida, a ECF gera um aviso."
+    }
+   ],
+   "regrasCampo": [],
+   "exemplo": [
+    "|Y681|1| Receita da Venda de Produtos de Fabricação Própria|100000,00|",
+    "|Y681|: Identificação do tipo do registro.",
+    "|1|: Código da linha da tabela dinâmica.",
+    "|Receita da Venda de Produtos de Fabricação Própria|: Descrição da linha da tabela dinâmica.",
+    "|1000000,00|: Valor da linha da tabela dinâmica (R$ 10.0000,00).",
+    "|Y681|2| Receita da Revenda de Mercadorias|100000,00|",
+    "|Y681|: Identificação do tipo do registro.",
+    "|2|: Código da linha da tabela dinâmica.",
+    "|Receita da Revenda de Mercadorias|: Descrição da linha da tabela dinâmica.",
+    "|1000000,00|: Valor da linha da tabela dinâmica (R$ 10.0000,00).",
+    "|Y681|3| Receita das Unidades Imobiliárias Vendidas|100000,00|",
+    "|Y681|: Identificação do tipo do registro.",
+    "|3|: Código da linha da tabela dinâmica.",
+    "|Receita das Unidades Imobiliárias Vendidas|: Descrição da linha da tabela dinâmica.",
+    "|1000000,00|: Valor da linha da tabela dinâmica (R$ 10.0000,00)."
+   ]
+  },
+  {
+   "codigo": "Y682",
+   "nome": "Informações de Optantes pelo Refis – Imunes ou Isentas",
+   "ordem": 169,
+   "nivel": "2",
+   "ocorrencia": "[0;12]",
+   "chave": "MÊS",
+   "entrada": "F",
+   "saida": "OC\n(Se 0010.OPT_REFIS=\"S\" E 0010.FORMA_TRIB = “8” e “9”)",
+   "descricao": [
+    "Este registro deve ser preenchido pela pessoa jurídica imune ou isenta que optou pelo REFIS para os meses em que esteve submetida ao programa.",
+    "No Y682.ACRES_PATR, deve ser informado o somatório das receitas auferidas em cada mês, independentemente de sua natureza."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (Y682).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[Y682]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "MES",
+     "descricao": "Mês:\n01 – Janeiro\n02 – Fevereiro\n03 – Março\n04 – Abril\n05 – Maio\n06 – Junho\n07 – Julho\n08 – Agosto\n09 – Setembro\n10 – Outubro\n11 – Novembro\n12 – Dezembro",
+     "tipo": "C",
+     "tamanho": "2",
+     "decimal": "—",
+     "valores": "[01; 02; 03; 04; 05; 06; 07; 08; 09; 10; 11; 12]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "ACRES_PATR",
+     "descricao": "Acréscimo Patrimonial no Mês.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [
+    {
+     "campo": "MES",
+     "regras": [
+      {
+       "codigo": "REGRA_MES_FORA_PERIODO",
+       "texto": "Verifica se Y682.MES está compreendido no período informado entre 0000.DT_INI e 0000.DT_FIN.",
+       "tipo": "Erro"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|Y682|01|100000,00|",
+    "|Y682|: Identificação do tipo do registro.",
+    "|01|: Identificação do mês (janeiro).",
+    "|100000,00|: Acréscimo patrimonial no mês de janeiro (R$ 100.000,00).",
+    "|Y682|02|200000,00|",
+    "|Y682|: Identificação do tipo do registro.",
+    "|02|: Identificação do mês (fevereiro).",
+    "|200000,00|: Acréscimo patrimonial no mês de fevereiro (R$ 200.000,00).",
+    "|Y682|03|111123,04|",
+    "|Y682|: Identificação do tipo do registro.",
+    "|03|: Identificação do mês (março).",
+    "|111123,04|: Acréscimo patrimonial no mês de março (R$ 111.123,04).",
+    "|Y682|04|500000,00|",
+    "|Y682|: Identificação do tipo do registro.",
+    "|04|: Identificação do mês (abril).",
+    "|500000,00|: Acréscimo patrimonial no mês de abril (R$ 500.000,00).",
+    "|Y682|11|2345678,10|",
+    "|Y682|: Identificação do tipo do registro.",
+    "|11|: Identificação do mês (novembro).",
+    "|2345678,10|: Acréscimo patrimonial no mês de novembro (R$ 2.345.678,10).",
+    "|Y682|12|1000000,00|",
+    "|Y682|: Identificação do tipo do registro.",
+    "|12|: Identificação do mês (dezembro).",
+    "|1000000,00|: Acréscimo patrimonial no mês de dezembro (R$ 1.000.000,00)."
+   ]
+  },
+  {
+   "codigo": "Y720",
+   "nome": "Informações de Períodos Anteriores",
+   "ordem": 170,
+   "nivel": "2",
+   "ocorrencia": "[0;1]",
+   "chave": "REG",
+   "entrada": "F",
+   "saida": "OC\nObrigatório se a entrega da escrituração é feita com atraso.",
+   "descricao": [
+    "Este registro é obrigatório para todas as pessoas jurídicas, no caso de transmissão de arquivos da ECF originais. A sua obrigatoriedade será verificada na hora da validação para a transmissão.",
+    "Para as pessoas jurídicas tributadas pelo lucro presumido, arbitrado ou imunes/isentas, apenas devem ser preenchidos os campos Y720.INTIMACAO e Y720.INT.ATRASO (de acordo com a regra prevista para o campo). Para as pessoas jurídicas tributadas pelo lucro real e para as formas de tributação mistas, além dos campos anteriormente citados e suas regras de obrigatoriedade, os demais campos do registro também serão preenchidos.",
+    "No caso das pessoas jurídicas tributadas pelo lucro real, a multa incidirá sobre o valor lucro líquido antes do Imposto de Renda da pessoa jurídica e da Contribuição Social sobre o Lucro Líquido, no período a que se refere a apuração.",
+    "Assim sendo, i) na forma de apuração trimestral, deverá ser considerado como base, o somatório dos resultados líquidos antes da incidência do Imposto de Renda da pessoa jurídica e da Contribuição Social sobre o lucro líquido de todos os trimestres a que se refere a ECF entregue em atraso, e ii) na forma de apuração anual, deverá ser considerado como base, o lucro líquido antes da incidência do Imposto de Renda da pessoa jurídica e da Contribuição Social sobre o lucro líquido do período da ECF entregue em atraso.",
+    "Observação: No caso de lucro real trimestral, o programa considera a soma dos quatro trimestres de apuração para verificar se há lucro ou prejuízo no período. Portanto, se a soma dos quatro trimestres de apuração for maior que zero, esse será o valor utilizado como base de cálculo da multa por atraso na entrega da ECF. Por outro lado, caso a soma algébrica dos quatro trimestres seja menor que zero, o contribuinte deverá informar o lucro líquido do último período de apuração informado neste registro, conforme previsto no parágrafo 4º do art. 8º-A do Decreto-Lei nº 1.598/1977.",
+    "Nos termos do parágrafo 4º do art. 8º-A do Decreto-Lei nº 1.598/1977, para a situação em que a empresa não tenha apresentado lucro líquido no período de apuração a que se refere a ECF, deverá ser utilizado como base de cálculo para a multa, o lucro líquido, antes do Imposto de Renda da Pessoa Jurídica e da Contribuição Social sobre o Lucro Líquido do último período de apuração em que a empresa apresentou lucro, atualizado pela taxa referencial do Sistema Especial de Liquidação e de Custódia - Selic, até o termo final de encerramento do período a que se refere a escrituração.",
+    "Ou seja, se a empresa não apresentou lucro no período da escrituração, deverá informar o lucro líquido do último período anterior a esse em que obteve lucro, ainda que em outro regime de tributação (Lucro Presumido, Arbitrado ou Simples Nacional) e atualizar esse valor, pela SELIC, até o termo final de encerramento do período a que se refere a escrituração. O programa está preparado para efetuar a atualização pela SELIC, automaticamente; logo deverá ser informado o lucro líquido em valores históricos.",
+    "Conforme está previsto no parágrafo 1º do art. 8º-A do Decreto-Lei nº 1.598/1977, há um limite para o valor da multa, estabelecido em função do valor da receita bruta total do ano-calendário anterior. Por isso, essa informação é exigida pelo programa no preenchimento deste registro (Campo 4 - REC_BRUT_ANT)."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (Y720).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[Y720]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "LUC_LIQ",
+     "descricao": "Lucro líquido antes da incidência do imposto sobre a renda e da contribuição social sobre o lucro líquido do último período de apuração informado, sem a atualização pela taxa referencial do Selic, pois o sistema efetuará o cálculo automaticamente.\nObservação: De acordo com o parágrafo único do art. 6º da Instrução Normativa RFB nº 2.004, de 18 de janeiro de 2022, na aplicação da multa de que trata o caput, quando não houver lucro líquido, antes do Imposto de Renda e da Contribuição Social, no período de apuração a que se refere a escrituração, deverá ser utilizado o último lucro líquido, antes do Imposto de Renda e da Contribuição Social informado, atualizado pela taxa referencial do Sistema Especial de Liquidação e de Custódia - Selic, até o termo final de encerramento do período a que se refere a escrituração.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "DT_LUC_LIQ",
+     "descricao": "Data do final do período de apuração do lucro líquido informado acima.",
+     "tipo": "N",
+     "tamanho": "8",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 4,
+     "nome": "REC_BRUT_ANT",
+     "descricao": "Receita bruta do período anterior.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 5,
+     "nome": "INTIMACAO",
+     "descricao": "Houve termo de intimação pela RFB para a entrega desta ECF?\nS – Sim\nN – Não",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S; N]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 6,
+     "nome": "INT_ATRASO",
+     "descricao": "A transmissão desta ECF está dentro do prazo previsto na intimação?\nS – Sim\nN – Não",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S; N]",
+     "obrigatorio": "Não"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [
+    {
+     "campo": "LUC_LIQ",
+     "regras": [
+      {
+       "codigo": "REGRA_OBRIGATORIO_LUCRO_REAL",
+       "texto": "Verifica se Y720.LUC_LIQ está preenchido quando 0010.FORMA_TRIB é igual a “1” (lucro real) ou “02” (lucro real/arbitrado) ou “03” (lucro presumido/real) ou “04” (lucro presumido/real/arbitrado).",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_NAO_PREENCHER_LUCRO_REAL",
+       "texto": "Verifica se Y720.LUC_LIQ não está preenchido quando 0010.FORMA_TRIB é igual a “5” (lucro presumido) ou “06” (lucro arbitrado) ou “07” (lucro presumido/arbitrado) ou “08” (imune) ou “09” (isenta).",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "DT_LUC_LIQ",
+     "regras": [
+      {
+       "codigo": "REGRA_MENOR_DT_INI_ESC",
+       "texto": "Verifica se Y720.DT_LUC_LIQ é menor ou igual que a 0000.DT_INI.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_OBRIGATORIO_LUCRO_REAL",
+       "texto": "Verifica se Y720.DT_LUC_LIQ está preenchido quando 0010.FORMA_TRIB é igual a “1” (lucro real) ou “02” (lucro real/arbitrado) ou “03” (lucro presumido/real) ou “04” (lucro presumido/real/arbitrado).",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_NAO_PREENCHER_LUCRO_REAL",
+       "texto": "Verifica se Y720.DT_LUC_LIQ não está preenchido quando 0010.FORMA_TRIB é igual a “5” (lucro presumido) ou “06” (lucro arbitrado) ou “07” (lucro presumido/arbitrado) ou “08” (imune) ou “09” (isenta).",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "REC_BRUT_ANT",
+     "regras": [
+      {
+       "codigo": "REGRA_OBRIGATORIO_LUCRO_REAL",
+       "texto": "Verifica se Y720.REC_BRUT_ANT está preenchido quando 0010.FORMA_TRIB é igual a “1” (lucro real) ou “02” (lucro real/arbitrado) ou “03” (lucro presumido/real) ou “04” (lucro presumido/real/arbitrado).",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_NAO_PREENCHER_LUCRO_REAL",
+       "texto": "Verifica se Y720.REC_BRUT_ANT não está preenchido quando 0010.FORMA_TRIB é igual a “5” (lucro presumido) ou “06” (lucro arbitrado) ou “07” (lucro presumido/arbitrado) ou “08” (imune) ou “09” (isenta).",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "INT_ATRASO",
+     "regras": [
+      {
+       "codigo": "REGRA_PRAZO_INTIMACAO_OBRIGATORIO",
+       "texto": "Verifica se Y720.INT_ATRASO está preenchido quando Y720.INTIMACAO é igual a “S” (Sim).",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_PRAZO_INTIMACAO_NAO_PREENCHER",
+       "texto": "Verifica se Y720.INT_ATRASO não está preenchido quando Y720.INTIMACAO é igual a “N” (Não).",
+       "tipo": "Erro"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|Y720|100000,00|31122021|100000000,00|N||",
+    "|Y720|: Identificação do tipo do registro.",
+    "|100000,00|: Lucro líquido antes da incidência do imposto sobre a renda e da contribuição social sobre o lucro líquido do último período de apuração informado, atualizado pela taxa referencial do Selic (R$ 100.000,00).",
+    "|31122021|: Data final do período de apuração do lucro líquido informado no campo anterior (31/12/2021).",
+    "|100000000,00|: Receita bruta do período anterior.",
+    "|N|: Não houve termo de intimação para entrega desta ECF.",
+    "||: O campo só é preenchido se houve termo de intimação para entrega da ECF."
+   ]
+  },
+  {
+   "codigo": "Y750",
+   "nome": "Informações da ECF Calculadas pelo PGE",
+   "ordem": 171,
+   "nivel": "2",
+   "ocorrencia": "[0;N]",
+   "chave": "CODIGO",
+   "entrada": "F",
+   "saida": "O",
+   "descricao": [
+    "Este registro será preenchido pelo próprio PGE da ECF, de acordo com as fórmulas estabelecidas em sua tabela dinâmica."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (Y750).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[Y750]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "CODIGO",
+     "descricao": "Código, conforme tabela dinâmica do Sped (Disponibilizada no item III deste registro e no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+     "tipo": "C",
+     "tamanho": "6",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "DESCRICAO",
+     "descricao": "Descrição, conforme tabela dinâmica do Sped (Disponibilizada no item III deste registro e no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 4,
+     "nome": "VALOR",
+     "descricao": "Valor",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_DUPLICIDADE_DESPREZADA",
+     "texto": "Verifica se o registro já foi importado anteriormente, de acordo com a chave e os registros pais. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_LINHA_DESPREZADA",
+     "texto": "Verifica se o registro existe na importação, mas não será importado por não existir na tabela dinâmica devido às configurações do bloco 0 ou da tabela dinâmica. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_LINHA_ATUALIZADA",
+     "texto": "Verifica se o registro está desatualizado em relação à tabela da RFB. Se a regra não for cumprida, a ECF gera um aviso."
+    }
+   ],
+   "regrasCampo": [],
+   "exemplo": []
+  },
+  {
+   "codigo": "Y800",
+   "nome": "Outras Informações",
+   "ordem": 172,
+   "nivel": "2",
+   "ocorrencia": "[0;N]",
+   "chave": "—",
+   "entrada": "F",
+   "saida": "F",
+   "descricao": [
+    "Este registro permite que seja anexado um arquivo em formato texto RTF (Rich Text Format), que se destina a receber informações que devam constar da ECF, tais como: laudos, relatórios, etc.",
+    "Exemplos de utilizações de informações a serem prestadas à administração pública através da anexação à ECF, em arquivos RTF, através deste registro:",
+    "O laudo de avaliação elaborado por perito independente que determina a mais ou menos-valia, correspondente à diferença entre o valor justo dos ativos líquidos da investida, na proporção da porcentagem da participação adquirida, e o valor do patrimônio líquido na época, por ocasião da aquisição da participação em investimento que deva ser avaliado pelo patrimônio líquido da investida. (Art. 20 do Decreto-Lei nº 1.598/1977, com a redação dada pela Lei nº 12.973/2014. Art. 178, § 2º da Instrução Normativa RFB nº 1.700/2017).",
+    "A memória de cálculo relacionada aos eventos de incorporação, fusão ou cisão, ocorridos até 31 de dezembro de 2017, cuja participação societária tenha sido adquirida até 31 de dezembro de 2014, apresentada pela empresa resultante do evento, evidenciando de forma analítica a evolução da amortização do ágio ou deságio desde a data de aquisição da participação societária até a data do evento, considerando os métodos e critérios vigentes em 31 de dezembro de 2007. (Art. 65 da Lei nº 12.973/2014 e arts. 192 e 193 da Instrução Normativa RFB nº 1.700/2017).",
+    "Item 15 do anexo IV da Instrução Normativa RFB nº 1.753, de 30 de outubro de 2017: Caso a pessoa jurídica adote somente uma conta de “ajuste da receita bruta”, o relacionamento será detalhado de acordo com a origem da diferença, conforme hipóteses previstas nos incisos e alíneas dos itens 1 e 2 do anexo IV, reproduzidos abaixo, por meio de demonstrativo auxiliar a ser apresentado na ECF. No demonstrativo, devem constar a origem a diferença relacionada com umas das hipóteses previstas nos itens 1 e 2 do anexo IV.",
+    "1. Os procedimentos contábeis relacionados abaixo, caso adotados pela pessoa jurídica, contemplam modificação ou adoção de novos métodos ou critérios contábeis:",
+    "I - o tratamento conferido às modificações contratuais (item 21 do CPC 47);",
+    "II - o reconhecimento de passivos em razão de obrigações contratuais relativas a:",
+    "a) garantias, exceto as contratadas com empresas de seguros e as contabilizadas como provisões (itens B30, B31 e B32 do CPC 47);",
+    "b) direitos não exercidos (item B46 do CPC 47); e",
+    "c) serviços de custódia, na hipótese de vendas para entrega futura (item B82 do CPC 47);",
+    "III - a aplicação dos critérios para a determinação do preço de transação em razão do reconhecimento de (itens 46, 47 e 48 do CPC 47):",
+    "a) contraprestações variáveis, nas hipóteses não previstas nos incisos I e II (itens 50 e 56 do CPC 47);",
+    "b) reavaliações da contraprestação variável (item 59 do CPC 47); e",
+    "c) contraprestações pagas ou a pagar (itens 70 a 72 do CPC 47); e",
+    "IV - a aplicação dos critérios para a alocação do preço de transação às obrigações de desempenho, nos casos não previstos nos incisos I e II (itens 73 e 74 do CPC 47).",
+    "2. Os procedimentos contábeis relacionados abaixo, caso adotados pela pessoa jurídica, contemplam métodos ou critérios contábeis que divergem da legislação tributária:",
+    "I - a aplicação do critério relativo à possibilidade de a entidade não receber a contraprestação a que tem direito na identificação do contrato (item 9.e do CPC 47); e",
+    "II - o reconhecimento de passivos em razão de obrigações contratuais relativas a:",
+    "a) direito à devolução (itens B21 a B27 do CPC 47); e",
+    "b) direitos de aquisição opcional de bens ou serviços adicionais ou com desconto (item B40 do CPC 47).",
+    "4) Número do processo eletrônico previsto no inciso IV, art. 13 da Instrução Normativa RFB nº 1.520, de 4 de dezembro de 2014.",
+    "O procedimento para anexar é o seguinte no próprio arquivo .txt:",
+    "1 – Digite o documento que deseja anexar no Word;",
+    "2 – Salve o documento como .rtf;",
+    "3 – Abra o documento no Bloco de Notas;",
+    "4 – Copie todo o conteúdo do arquivo aberto no Bloco de Notas;",
+    "5 – Cole o conteúdo copiado no registro Y800;",
+    "6 – Importe o arquivo, de acordo com o Leiaute da ECF, para o programa da ECF.",
+    "Funcionalidade de inclusão arquivo cadastrado no Y800 no programa da ECF:",
+    "1 – Selecionar a opção incluir arquivo rtf.\n2 – O sistema abre uma interface de localização de arquivo.\n3 – Selecionar somente arquivo \".RTF\" (formato RTF)\n4 – O sistema copia o arquivo para a pasta do sistema com o nome padronizado.\n5 – O sistema calcula o hash e armazena o nome o local e o hash da cópia do arquivo selecionado.\n6 – O sistema coloca o nome do arquivo no campo descrição.",
+    "Funcionalidade de exclusão arquivo cadastrado no Y800 no programa da ECF:",
+    "1 – Selecionar um registro e solicitar a exclusão (Botão \"-\").\n2 – O sistema exclui o registro Y800 e o arquivo na pasta.",
+    "É possível ver o arquivo em formato texto RTF em Relatório/Outras Informações."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (Y800).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[Y800]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "TIPO_DOC",
+     "descricao": "Tipo do Documento:\n001 - Memória de Cálculo - Incorporação\n002 - Laudo de Avaliação a Valor Justo\n003 – Outros",
+     "tipo": "N",
+     "tamanho": "3",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "DESCRICAO",
+     "descricao": "Descrição do Conteúdo do Documento.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 4,
+     "nome": "HASH",
+     "descricao": "Hash do arquivo incluído na escrituração. Este campo não deve ser informado no arquivo de importação pois será calculado pelo sistema (deve ser informado vazio).",
+     "tipo": "C",
+     "tamanho": "41",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 5,
+     "nome": "ARQ_RTF",
+     "descricao": "Sequência de Bytes: Sequência de bytes que representem um único arquivo no formato RTF (Rich Text Format).",
+     "tipo": "C",
+     "tamanho": "Não há limite",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 6,
+     "nome": "IND_FIM_RTF",
+     "descricao": "Indicador de Fim do Arquivo RTF. Texto fixo contendo “Y800FIM”.",
+     "tipo": "C",
+     "tamanho": "7",
+     "decimal": "—",
+     "valores": "[Y800FIM]",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [
+    {
+     "campo": "HASH",
+     "regras": [
+      {
+       "codigo": "REGRA_VALIDA_HASH_ARQUIVO",
+       "texto": "Verifica se o hash do conteúdo do arquivo é igual ao HASH armazenado",
+       "tipo": "Erro"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|Y800|001|Memória de Cálculo – Incoportação|1234567890ABCDEFABCDEFABCDEFAB1234567890|{\\rtf1\\ansi\\ansicpg1252\\uc1...|Y800FIM|",
+    "|Y800|: Identificação do tipo do registro.",
+    "|001|: Tipo do documento.",
+    "|Memória de Cálculo – Incorporação|: Descrição do documento.",
+    "|1234567890ABCDEFABCDEFABCDEFAB1234567890|: Hash do arquivo incluído.",
+    "|{\\rtf1\\ansi\\ansicpg1252\\uc1...|: Sequência de bytes que representem um único arquivo no formato RTF (Rich Text Format).",
+    "|Y800FIM|: Identificação o fim do arquivo."
+   ]
+  },
+  {
+   "codigo": "Y990",
+   "nome": "Encerramento do Bloco Y",
+   "ordem": 173,
+   "nivel": "1",
+   "ocorrencia": "[1;1]",
+   "chave": "[REG]",
+   "entrada": "F",
+   "saida": "O",
+   "descricao": [
+    "Este registro indica o encerramento do Bloco Y e informa o total de ocorrências dos registros pertencentes ao Bloco Y no arquivo da ECF."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto fixo contendo a identificação do registro (Y990).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[Y990]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "QTD_LIN",
+     "descricao": "Quantidade total de registros do Bloco Y.",
+     "tipo": "N",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [],
+   "exemplo": [
+    "|Y990|120|",
+    "|Y990|: Identificação do tipo do registro.",
+    "|120|: A quantidade total de registros do Bloco Y é 120 (cento e vinte registros)."
+   ]
+  }
+ ]
+}

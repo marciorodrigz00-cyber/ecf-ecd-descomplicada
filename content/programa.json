@@ -1,0 +1,57 @@
+{
+  "id": "programa-ecf",
+  "versao": "12.2.8",
+  "paginaAtualizadaEm": "2026-10-19",
+  "fonte": {
+    "id": "sped-programa-ecf",
+    "url": "https://www.gov.br/sped/pt-br/assuntos/comunicados/ecf/copy4_of_publicacao-da-versao-12-2-4-do-programa-da-ecf",
+    "trecho": "Comunicado da versão 12.2.8: ano-calendário 2025 e situações especiais de 2026 (leiaute 12), e anos-calendário anteriores (leiautes 1 a 11)"
+  },
+  "norma": "Programa da ECF (RFB)",
+  "leiautes": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "11",
+    "12"
+  ],
+  "vigencia": {
+    "acNormal": [
+      2014,
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024,
+      2025
+    ],
+    "situacaoEspecial": [
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024,
+      2025,
+      2026
+    ]
+  },
+  "verificadoEm": "2026-11-25",
+  "status": "conferido"
+}

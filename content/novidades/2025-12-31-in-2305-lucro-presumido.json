@@ -1,0 +1,31 @@
+{
+  "id": "nov-in-2305-lucro-presumido",
+  "slug": "in-2305-lucro-presumido",
+  "data": "2025-12-31",
+  "tipo": "norma",
+  "titulo": "Lucro presumido muda a partir de 2026",
+  "iniciante": "Empresas do lucro presumido com receita alta passam a calcular o imposto sobre uma parte maior da receita. A mudança não atinge o ano-calendário 2025.",
+  "profissional": "Acréscimo de 10% nos percentuais de presunção do IRPJ e da CSLL, só sobre a parcela da receita bruta total que exceder R$ 5.000.000,00 no ano-calendário, ou R$ 1.250.000,00 por trimestre. Vale desde 01/01/2026 para o IRPJ e 01/04/2026 para a CSLL. Os arts. 14 e 15 já tiveram a redação alterada.",
+  "fazer": "O simulador deste site cobre só os anos-calendário 2024 e 2025 e não aplica essa regra.",
+  "registros": [
+    "P200",
+    "P400"
+  ],
+  "fonte": {
+    "id": "normas-rfb",
+    "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/148694",
+    "trecho": "Arts. 3º, 14 e 15, § 2º"
+  },
+  "norma": "IN RFB nº 2.305/2025",
+  "leiautes": [
+    "12"
+  ],
+  "vigencia": {
+    "acNormal": [],
+    "situacaoEspecial": [
+      2026
+    ]
+  },
+  "verificadoEm": "2026-11-25",
+  "status": "conferido"
+}

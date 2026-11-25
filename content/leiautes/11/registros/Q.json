@@ -1,0 +1,247 @@
+{
+ "rastreio": {
+  "id": "arq-11-q",
+  "fonte": {
+   "id": "manual-11",
+   "url": "https://www.gov.br/sped/pt-br/assuntos/escrituracoes-digitais/ecf/manuais-e-documentos-tecnicos",
+   "trecho": "Seção do bloco Q"
+  },
+  "norma": "ADE Cofis nº 38/2024",
+  "leiautes": [
+   "11"
+  ],
+  "vigencia": {
+   "acNormal": [
+    2024
+   ],
+   "situacaoEspecial": [
+    2025
+   ]
+  },
+  "verificadoEm": "2026-11-24",
+  "status": "extraido"
+ },
+ "bloco": "Q",
+ "descricao": "Apresenta o demonstrativo do livro caixa para os casos previstos na legislação - A partir do leiaute 2.",
+ "registros": [
+  {
+   "codigo": "Q001",
+   "nome": "Abertura do Bloco Q",
+   "ordem": 93,
+   "nivel": "1",
+   "ocorrencia": "[1;1]",
+   "chave": "[REG]",
+   "entrada": "F",
+   "saida": "O",
+   "descricao": [],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto fixo contendo a identificação do registro (Q001).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[Q001]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "IND_DAD",
+     "descricao": "Indicador de movimento:\n0 – Bloco com dados informados.\n1 – Bloco sem dados informados.",
+     "tipo": "N",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[0;1]",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_OCORRENCIA_UNITARIA_ARQ",
+     "texto": "Verifica se registro ocorreu apenas uma vez por arquivo, considerando a chave “Q001” (REG). Se a regra não for cumprida, a ECF gera um erro."
+    }
+   ],
+   "regrasCampo": [],
+   "exemplo": [
+    "|Q001|0|",
+    "|Q001|: Identificação do tipo do registro.",
+    "|0|: Indica que o bloco possui dados informados."
+   ]
+  },
+  {
+   "codigo": "Q100",
+   "nome": "Demonstrativo do Livro Caixa",
+   "ordem": 94,
+   "nivel": "2",
+   "ocorrencia": "[0;N]",
+   "chave": "—",
+   "entrada": "F",
+   "saida": "FC\nSe (0010.FORMA_TRIB = “2” ou “4” ou “6” ou “7” ou\n(Se 0010. TIP_ESP_PRE = “L” E 0010.FORMA_TRIB = \"3\" ou \"5\" ou \"8\" ou \"9\")",
+   "descricao": [
+    "Este registro passou a existir a partir do leiaute 2 da ECF, sendo de preenchimento facultativo para o ano-calendário 2015, e passando a ser exigido a partir do ano-calendário 2016 para as empresas tributadas pelo Lucro Presumido, quando 0010.TIP_ESC_PRE for igual a “L” (Livro Caixa).",
+    "O demonstrativo deverá conter todos os registros constantes no “livro caixa” da pessoa jurídica. Não haverá edição deste registro no programa da ECF. Apenas, é possível importar um arquivo da ECF já contendo o registro no seu leiaute ou importar, a partir do PGE, um arquivo .csv com os dados do Livro Caixa (campos 2 a 7 do leiaute abaixo – não contém o campo 1), necessariamente, ordenado por data.",
+    "Exemplo de Livro Caixa no formato .CSV:",
+    "DATA;NUM_DOC;HIST;VL_ENTRADA;VL_SAIDA;SLD_FIN",
+    "01012024;1;SALDO ANTERIOR;1000,00;0;1000,00",
+    "02012024;2;RECEBIMENTO DE VENDA;10000,00;0;11000,00",
+    "02012024;3;PAGAMENTO DE FORNECEDORES;0;5000,00;6000,00",
+    "Observação:",
+    "O saldo de caixa no início do período deverá ser registrado na primeira ocorrência do registro Q100. Sugestão de Q100.HIST(Histórico): SALDO ANTERIOR."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto fixo contendo a identificação do registro (Q100).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[Q100]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "DATA",
+     "descricao": "Data da entrada ou da saída dos recursos.",
+     "tipo": "N",
+     "tamanho": "8",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "NUM_DOC",
+     "descricao": "Número do documento.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 4,
+     "nome": "HIST",
+     "descricao": "Histórico",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 5,
+     "nome": "VL_ENTRADA",
+     "descricao": "Valor de entrada dos recursos.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 6,
+     "nome": "VL_SAIDA",
+     "descricao": "Valor de saída dos recursos.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 7,
+     "nome": "SLD_FIN",
+     "descricao": "Saldo Final.",
+     "tipo": "NS",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_ENTRADA_SAIDA",
+     "texto": "Somente um dos campos Q100.VL_ENTRADA ou Q100.VL_SAIDA deve estar preenchido. Se a regra não for cumprida, o sistema gera um erro."
+    },
+    {
+     "codigo": "REGRA_SALDO_LC",
+     "texto": "O primeiro saldo final (Q100.SLD_FIN) é igual ao valor da entrada (Q100.VL_ENTRADA) menos o valor de saída (Q100.VL_SAIDA), mais o saldo final da linha anterior (a primeira linha não soma a linha final anterior). Se a regra não for cumprida, o sistema gera um erro."
+    },
+    {
+     "codigo": "REGRA_SALDO_LC_FOLGA",
+     "texto": "O valor absoluto do resultado saldo final da última linha menos o somatório das entradas mais o somatório das saídas deve ser menor ou igual 1,00. Se a regra não for cumprida, o sistema gera um erro."
+    }
+   ],
+   "regrasCampo": [
+    {
+     "campo": "DATA",
+     "regras": [
+      {
+       "codigo": "REGRA_MENOR_IGUAL_DT_FIN",
+       "texto": "Verifica se Q100.DATA é menor ou igual a 0000.DT_FIN.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_MAIOR_IGUAL_DT_INI",
+       "texto": "Verifica se Q100.DATA é maior ou igual a 0000.DT_INI.",
+       "tipo": "Erro"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|Q100|01092024|123|HISTORICO|1000,00|0,00|1000,00|",
+    "|Q100|: Identificação do tipo do registro.",
+    "|01092024|: Data de início do período (01/09/2024).",
+    "|123|: Número do documento (123).",
+    "|HISTORICO|: Histórico.",
+    "|1000,00|: Valor de entrada (R$ 1.000,00).",
+    "|0,00|: Valor de saída (R$ 0,00).",
+    "|1000,00|: Saldo (R$ 1.000,00)."
+   ]
+  },
+  {
+   "codigo": "Q990",
+   "nome": "Encerramento do Bloco Q",
+   "ordem": 95,
+   "nivel": "1",
+   "ocorrencia": "[1;1]",
+   "chave": "[REG]",
+   "entrada": "F",
+   "saida": "O",
+   "descricao": [],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto fixo contendo a identificação do registro (Q990).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[Q990]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "QTD_LIN",
+     "descricao": "Quantidade total de registros do Bloco Q.",
+     "tipo": "N",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [],
+   "exemplo": [
+    "|Q990|1000|",
+    "|Q990|: Identificação do tipo do registro.",
+    "|1000|: A quantidade total de registros do Bloco Q é 1.000 (mil registros)."
+   ]
+  }
+ ]
+}

@@ -1,0 +1,632 @@
+[
+  {
+    "id": "irpj-aliquota",
+    "titulo": "Alíquota do IRPJ",
+    "valor": {
+      "tipo": "percentual",
+      "pontosBase": 1500
+    },
+    "fonte": {
+      "id": "lei-9249",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l9249.htm",
+      "trecho": "art. 3º, caput"
+    },
+    "norma": "Lei nº 9.249/1995, art. 3º, caput",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-25",
+    "status": "conferido"
+  },
+  {
+    "id": "irpj-adicional",
+    "titulo": "Adicional do IRPJ",
+    "resumo": "Incide só sobre a parcela que exceder o limite do período.",
+    "valor": {
+      "tipo": "percentual",
+      "pontosBase": 1000
+    },
+    "fonte": {
+      "id": "lei-9249",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l9249.htm",
+      "trecho": "art. 3º, § 1º"
+    },
+    "norma": "Lei nº 9.249/1995, art. 3º, § 1º, redação da Lei nº 9.430/1996",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-25",
+    "status": "conferido"
+  },
+  {
+    "id": "irpj-adicional-limite",
+    "titulo": "Limite mensal do adicional",
+    "resumo": "Multiplicado pelo número de meses do período de apuração.",
+    "valor": {
+      "tipo": "dinheiro",
+      "centavos": 2000000
+    },
+    "fonte": {
+      "id": "lei-9249",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l9249.htm",
+      "trecho": "art. 3º, § 1º"
+    },
+    "norma": "Lei nº 9.249/1995, art. 3º, § 1º, redação da Lei nº 9.430/1996",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-25",
+    "status": "conferido"
+  },
+  {
+    "id": "irpj-adicional-integral",
+    "titulo": "Adicional sem deduções",
+    "valor": {
+      "tipo": "texto",
+      "texto": "O valor do adicional é recolhido integralmente, sem deduções"
+    },
+    "fonte": {
+      "id": "lei-9249",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l9249.htm",
+      "trecho": "art. 3º, § 4º"
+    },
+    "norma": "Lei nº 9.249/1995, art. 3º, § 4º",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-25",
+    "status": "conferido"
+  },
+  {
+    "id": "csll-aliquota",
+    "titulo": "Alíquota da CSLL",
+    "resumo": "Para as demais pessoas jurídicas. Instituições financeiras, seguradoras e outras têm alíquotas próprias e estão fora do simulador.",
+    "valor": {
+      "tipo": "percentual",
+      "pontosBase": 900
+    },
+    "fonte": {
+      "id": "lei-7689",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l7689.htm",
+      "trecho": "art. 3º, III"
+    },
+    "norma": "Lei nº 7.689/1988, art. 3º, III, incluído pela Lei nº 13.169/2015",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-25",
+    "status": "conferido"
+  },
+  {
+    "id": "comp-prejuizo",
+    "titulo": "Limite de compensação de prejuízo fiscal",
+    "resumo": "Sobre o lucro líquido ajustado pelas adições e exclusões.",
+    "valor": {
+      "tipo": "percentual",
+      "pontosBase": 3000
+    },
+    "fonte": {
+      "id": "lei-9065",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l9065.htm",
+      "trecho": "art. 15"
+    },
+    "norma": "Lei nº 9.065/1995, art. 15",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-25",
+    "status": "conferido"
+  },
+  {
+    "id": "comp-base-negativa",
+    "titulo": "Limite de compensação de base negativa da CSLL",
+    "resumo": "Sobre o resultado ajustado do período.",
+    "valor": {
+      "tipo": "percentual",
+      "pontosBase": 3000
+    },
+    "fonte": {
+      "id": "lei-9065",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l9065.htm",
+      "trecho": "art. 16"
+    },
+    "norma": "Lei nº 9.065/1995, art. 16",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-25",
+    "status": "conferido"
+  },
+  {
+    "id": "apuracao-trimestral",
+    "titulo": "Períodos trimestrais",
+    "valor": {
+      "tipo": "texto",
+      "texto": "O IRPJ é determinado por períodos trimestrais, encerrados em 31 de março, 30 de junho, 30 de setembro e 31 de dezembro"
+    },
+    "fonte": {
+      "id": "lei-9430",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l9430.htm",
+      "trecho": "art. 1º"
+    },
+    "norma": "Lei nº 9.430/1996, art. 1º",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-25",
+    "status": "conferido"
+  },
+  {
+    "id": "pres-irpj-geral",
+    "titulo": "Presunção do IRPJ: regra geral",
+    "resumo": "Comércio, indústria e transporte de carga, entre outros.",
+    "valor": {
+      "tipo": "percentual",
+      "pontosBase": 800
+    },
+    "fonte": {
+      "id": "lei-9249",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l9249.htm",
+      "trecho": "art. 15, caput"
+    },
+    "norma": "Lei nº 9.249/1995, art. 15, caput, redação da Lei nº 12.973/2014",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-25",
+    "status": "conferido"
+  },
+  {
+    "id": "pres-irpj-combustiveis",
+    "titulo": "Presunção do IRPJ: revenda de combustíveis",
+    "valor": {
+      "tipo": "percentual",
+      "pontosBase": 160
+    },
+    "fonte": {
+      "id": "lei-9249",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l9249.htm",
+      "trecho": "art. 15, § 1º, I"
+    },
+    "norma": "Lei nº 9.249/1995, art. 15, § 1º, I",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-25",
+    "status": "conferido"
+  },
+  {
+    "id": "pres-irpj-transporte",
+    "titulo": "Presunção do IRPJ: transporte, exceto de carga",
+    "valor": {
+      "tipo": "percentual",
+      "pontosBase": 1600
+    },
+    "fonte": {
+      "id": "lei-9249",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l9249.htm",
+      "trecho": "art. 15, § 1º, II, “a”"
+    },
+    "norma": "Lei nº 9.249/1995, art. 15, § 1º, II, “a”",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-25",
+    "status": "conferido"
+  },
+  {
+    "id": "pres-irpj-servicos",
+    "titulo": "Presunção do IRPJ: serviços em geral",
+    "resumo": "Há exceções, como serviços hospitalares nas condições da lei.",
+    "valor": {
+      "tipo": "percentual",
+      "pontosBase": 3200
+    },
+    "fonte": {
+      "id": "lei-9249",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l9249.htm",
+      "trecho": "art. 15, § 1º, III"
+    },
+    "norma": "Lei nº 9.249/1995, art. 15, § 1º, III",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-25",
+    "status": "conferido"
+  },
+  {
+    "id": "pres-csll-geral",
+    "titulo": "Presunção da CSLL: demais receitas",
+    "valor": {
+      "tipo": "percentual",
+      "pontosBase": 1200
+    },
+    "fonte": {
+      "id": "lei-9249",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l9249.htm",
+      "trecho": "art. 20, III"
+    },
+    "norma": "Lei nº 9.249/1995, art. 20, III, incluído pela Lei Complementar nº 167/2019",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-25",
+    "status": "conferido"
+  },
+  {
+    "id": "pres-csll-servicos",
+    "titulo": "Presunção da CSLL: serviços em geral",
+    "valor": {
+      "tipo": "percentual",
+      "pontosBase": 3200
+    },
+    "fonte": {
+      "id": "lei-9249",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l9249.htm",
+      "trecho": "art. 20, I"
+    },
+    "norma": "Lei nº 9.249/1995, art. 20, I, incluído pela Lei Complementar nº 167/2019",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-25",
+    "status": "conferido"
+  },
+  {
+    "id": "presumido-base",
+    "titulo": "Base do lucro presumido",
+    "valor": {
+      "tipo": "texto",
+      "texto": "Percentuais aplicados sobre a receita bruta de cada atividade no trimestre, deduzida das devoluções, vendas canceladas e descontos incondicionais"
+    },
+    "fonte": {
+      "id": "in-1700",
+      "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/81268",
+      "trecho": "art. 215, caput"
+    },
+    "norma": "Instrução Normativa RFB nº 1.700/2017, art. 215, caput",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-25",
+    "status": "conferido"
+  },
+  {
+    "id": "presumido-opcao",
+    "titulo": "Quem pode optar pelo presumido",
+    "valor": {
+      "tipo": "texto",
+      "texto": "Pessoa jurídica não obrigada ao lucro real com receita total no ano-calendário anterior de até R$ 78.000.000,00, ou R$ 6.500.000,00 por mês de atividade, se menos de 12 meses"
+    },
+    "fonte": {
+      "id": "in-1700",
+      "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/81268",
+      "trecho": "art. 214"
+    },
+    "norma": "Instrução Normativa RFB nº 1.700/2017, art. 214",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-25",
+    "status": "conferido"
+  },
+  {
+    "id": "lucro-real-conceito",
+    "titulo": "O que é lucro real",
+    "valor": {
+      "tipo": "texto",
+      "texto": "Lucro líquido do período antes da provisão para o IRPJ, ajustado pelas adições, exclusões ou compensações da legislação"
+    },
+    "fonte": {
+      "id": "in-1700",
+      "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/81268",
+      "trecho": "art. 61"
+    },
+    "norma": "Instrução Normativa RFB nº 1.700/2017, art. 61",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-25",
+    "status": "conferido"
+  },
+  {
+    "id": "provisoes",
+    "titulo": "Provisões",
+    "resumo": "A linha da exclusão está na orientação da linha 95 da tabela M300A.",
+    "valor": {
+      "tipo": "texto",
+      "texto": "Só são dedutíveis as provisões listadas na norma; as demais são adicionadas e, quando usadas ou revertidas, excluídas"
+    },
+    "fonte": {
+      "id": "in-1700",
+      "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/81268",
+      "trecho": "art. 70"
+    },
+    "norma": "Instrução Normativa RFB nº 1.700/2017, art. 70",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-25",
+    "status": "conferido"
+  },
+  {
+    "id": "multas-fiscais",
+    "titulo": "Multas por infrações fiscais",
+    "valor": {
+      "tipo": "texto",
+      "texto": "Não são dedutíveis no lucro real nem no resultado ajustado, salvo as compensatórias e as de infrações de que não resulte falta ou insuficiência de pagamento de tributo"
+    },
+    "fonte": {
+      "id": "in-1700",
+      "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/81268",
+      "trecho": "art. 132"
+    },
+    "norma": "Instrução Normativa RFB nº 1.700/2017, art. 132",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-25",
+    "status": "conferido"
+  },
+  {
+    "id": "csll-indedutivel",
+    "titulo": "CSLL não reduz o lucro real",
+    "valor": {
+      "tipo": "texto",
+      "texto": "A CSLL lançada como despesa é adicionada na apuração do lucro real"
+    },
+    "fonte": {
+      "id": "tabelas-12",
+      "url": "https://www.gov.br/sped/pt-br/assuntos/escrituracoes-digitais/ecf/manuais-e-documentos-tecnicos",
+      "trecho": "Tabela M300A, linha 9, orientação"
+    },
+    "norma": "Lei nº 9.316/1996, art. 1º, citada na tabela dinâmica M300A",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-25",
+    "status": "conferido"
+  },
+  {
+    "id": "formulas-ecf",
+    "titulo": "Fórmulas oficiais",
+    "resumo": "As fórmulas de alíquota, adicional, base e compensação são equivalentes nos leiautes 11 e 12 para períodos até 2025. O leiaute 12 traz outras para 2026.",
+    "valor": {
+      "tipo": "texto",
+      "texto": "O cálculo segue as fórmulas das tabelas dinâmicas M300A, M350A, N500, N630A, N650, N670, P200, P300, P400 e P500"
+    },
+    "fonte": {
+      "id": "tabelas-12",
+      "url": "https://www.gov.br/sped/pt-br/assuntos/escrituracoes-digitais/ecf/manuais-e-documentos-tecnicos",
+      "trecho": "Coluna Fórmula"
+    },
+    "norma": "Tabelas dinâmicas da ECF",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-25",
+    "status": "conferido"
+  },
+  {
+    "id": "lc-224",
+    "titulo": "Fora do simulador: regras novas",
+    "valor": {
+      "tipo": "texto",
+      "texto": "A Lei Complementar nº 224/2025 e a IN RFB nº 2.305/2025 alteraram o tratamento do IRPJ e da CSLL. As linhas ligadas a elas nas tabelas dinâmicas começam em 2026"
+    },
+    "fonte": {
+      "id": "manual-12",
+      "url": "https://www.gov.br/sped/pt-br/assuntos/escrituracoes-digitais/ecf/manuais-e-documentos-tecnicos",
+      "trecho": "Item 1.32 do Manual e coluna DT_INI das tabelas dinâmicas"
+    },
+    "norma": "Lei Complementar nº 224/2025 e IN RFB nº 2.305/2025, citadas no Manual do leiaute 12",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-25",
+    "status": "conferido"
+  },
+  {
+    "id": "arredondamento",
+    "titulo": "Arredondamento",
+    "valor": {
+      "tipo": "texto",
+      "texto": "O site arredonda cada resultado ao centavo, com metade para cima. O material lido não define a regra do programa"
+    },
+    "fonte": {
+      "id": "manual-12",
+      "url": "https://www.gov.br/sped/pt-br/assuntos/escrituracoes-digitais/ecf/manuais-e-documentos-tecnicos",
+      "trecho": "A conferir no programa da ECF"
+    },
+    "norma": "A verificar",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-25",
+    "status": "a-verificar"
+  }
+]

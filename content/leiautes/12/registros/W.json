@@ -1,0 +1,1774 @@
+{
+ "rastreio": {
+  "id": "arq-12-w",
+  "fonte": {
+   "id": "manual-12",
+   "url": "https://www.gov.br/sped/pt-br/assuntos/escrituracoes-digitais/ecf/manuais-e-documentos-tecnicos",
+   "trecho": "Seção do bloco W"
+  },
+  "norma": "ADE Cofis nº 2/2026",
+  "leiautes": [
+   "12"
+  ],
+  "vigencia": {
+   "acNormal": [
+    2025
+   ],
+   "situacaoEspecial": [
+    2026
+   ]
+  },
+  "verificadoEm": "2026-11-24",
+  "status": "extraido"
+ },
+ "bloco": "W",
+ "descricao": "Apresenta o Country by Country Report (Relatório País-a-País) - A partir do leiaute 3",
+ "registros": [
+  {
+   "codigo": "W001",
+   "nome": "Abertura do Bloco W",
+   "ordem": 116,
+   "nivel": "1",
+   "ocorrencia": "[1;1]",
+   "chave": "[REG]",
+   "entrada": "F",
+   "saida": "O",
+   "descricao": [],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto fixo contendo a identificação do registro (W001).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[W001]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "IND_DAD",
+     "descricao": "Indicador de movimento:\n0 – Bloco com dados informados.\n1 – Bloco sem dados informados.",
+     "tipo": "N",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[0;1]",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_OCORRENCIA_UNITARIA_ARQ",
+     "texto": "Verifica se registro ocorreu apenas uma vez por arquivo, considerando a chave “W001” (REG). Se a regra não for cumprida, a ECF gera um erro."
+    }
+   ],
+   "regrasCampo": [],
+   "exemplo": [
+    "|W001|0|",
+    "|W001|: Identificação do tipo do registro.",
+    "|0|: Indica que o bloco possui dados informados."
+   ]
+  },
+  {
+   "codigo": "W100",
+   "nome": "Informações sobre o Grupo Multinacional e a Entidade Declarante – Declaração País-a-País",
+   "ordem": 117,
+   "nivel": "2",
+   "ocorrencia": "[0;1]",
+   "chave": "REG",
+   "entrada": "F",
+   "saida": "OC\n(Se 0020.IND_PAIS_A_PAIS = \"S\")",
+   "descricao": [
+    "Este registro apresenta as informações sobre o grupo multinacional e a entidade declarante da Declaração País-a-País. Toda entidade residente no Brasil que seja integrante de um grupo multinacional deve preencher o registro."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (W100).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[W100]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "NOME_MULTINACIONAL",
+     "descricao": "Nome do Grupo Multinacional: Deve ser identificado o nome do grupo multinacional o qual o contribuinte integra.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "IND_CONTROLADORA",
+     "descricao": "Identifica se a Entidade é a Controladora Final do Grupo Multinacional.\nA Entidade é controladora final do grupo multinacional, conforme definição estabelecida no artigo 2º, inciso VI, da Instrução Normativa RFB nº 1.681/2016.?\nS - Sim\nN – Não",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S;N]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 4,
+     "nome": "NOME_CONTROLADORA",
+     "descricao": "Nome da Controladora Final.\nObservação: Caso a entidade não seja a controladora final do grupo multinacional do qual faz parte, deve identificar a entidade que possui essa posição, por meio do nome legal completo da entidade, incluindo a designação doméstica da forma legal, conforme indicado em seus documentos de constituição ou similares.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 5,
+     "nome": "JURISDICAO_CONTROLADORA",
+     "descricao": "Jurisdição de Residência para fins Tributários do Controlador Final, conforme tabela do Sped (Disponibilizada no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+     "tipo": "C",
+     "tamanho": "2",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 6,
+     "nome": "TIN_CONTROLADORA",
+     "descricao": "Tax Identification Number (TIN): Número de identificação fiscal utilizado pela administração tributária da jurisdição de residência para fins tributários do controlador final do grupo multinacional. Caso não exista o número, o campo deve ser preenchido com a expressão \"NOTIN\". Se o controlador final for residente no Brasil, informar o CNPJ.\nObservação: Este campo não deve ser preenchido quando a declarante da ECF for a controladora final (W100.IND_CONTROLADORA = Sim).",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 7,
+     "nome": "IND_ENTREGA",
+     "descricao": "Identifica a Entidade Responsável pela Entrega da Declaração País-a-País (entidade declarante).\nEntidade responsável pela entrega da Declaração País-a-País:\n1 - Grupo multinacional dispensado da entrega da Declaração País-a-País.\n2 - Controlador final do grupo multinacional.\n3 - Própria entidade declarante da ECF, na condição de Entidade Substituta ou de Preenchimento Local\n4 - Outra entidade, na condição de Entidade Substituta ou de Preenchimento Local",
+     "tipo": "N",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[1;2;3;4]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 8,
+     "nome": "IND_MODALIDADE",
+     "descricao": "Identifica a Modalidade de entrega da Declaração País-a-País:\n1 - Entidade substituta.\n2 - Preenchimento Local.\nSe IND_ENTREGA = \"3\" e IND_MODALIDADE = \"1\", então a própria entidade declarante da ECF é responsável pela entrega da Declaração País-a-País na condição de Entidade Substituta.\nSe IND_ENTREGA = \"4\" e IND_MODALIDADE = \"1\", então outra entidade é responsável pela entrega da Declaração País-a-País na condição de Entidade Substituta.\nSe IND_ENTREGA = \"3\" e IND_MODALIDADE = \"2\", então a própria entidade declarante da ECF é responsável pela entrega da Declaração País-a-País na condição de Preenchimento Local.\nSe IND_ENTREGA = \"4\" e IND_MODALIDADE = \"2\", então outra entidade é responsável pela entrega da Declaração País-a-País na condição de Preenchimento Local.",
+     "tipo": "N",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[1;2]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 9,
+     "nome": "NOME_SUBSTITUTA",
+     "descricao": "Nome da Entidade Substituta/Entidade Local: Caso a entidade declarante da Declaração País-a-País seja outra entidade, na condição de Entidade Substituta (residente no Brasil ou no exterior) ou de Preenchimento Local, o contribuinte deve identificá-la por meio do nome legal completo da entidade, incluindo a designação doméstica da forma legal, conforme indicado em seus documentos de constituição ou similares.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 10,
+     "nome": "JURISDICAO_SUBSTITUTA",
+     "descricao": "Jurisdição de Residência para fins Tributários da Entidade Substituta/Entidade Local, conforme tabela do Sped (Disponibilizada no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).\nObservação: O contribuinte deve indicar o país de residência para fins tributários da entidade declarante, seja ela entidade substituta residente no Brasil ou no exterior, ou outra entidade na condição de preenchimento local. Neste último caso, a jurisdição a ser informada deve ser obrigatoriamente Brasil (pois a modalidade de entrega da Declaração de preenchimento local só é admitida para entidades residentes no Brasil).",
+     "tipo": "C",
+     "tamanho": "2",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 11,
+     "nome": "TIN_SUBSTITUTA",
+     "descricao": "Tax Identification Number (TIN): Número de identificação fiscal utilizado pela administração tributária da jurisdição de residência para fins tributários da entidade substituta do grupo multinacional ou da entidade integrante local. Caso não exista o número, o campo deve ser preenchido com a expressão \"NOTIN\". Se a entidade for residente no Brasil, informar o CNPJ.",
+     "tipo": "N",
+     "tamanho": "14",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 12,
+     "nome": "DT_INI",
+     "descricao": "Data de Início do Período Societário.\nObservação: A Declaração País-a-País deve cobrir o ano fiscal do controlador final do grupo multinacional. Dessa forma, caso o contribuinte seja a entidade declarante na condição de entidade substituta ou na forma de preenchimento local, hipóteses em que o controlador final do grupo é residente no exterior, o ano fiscal de declaração deve ser o período societário do controlador final, mesmo que não coincida com o período societário do próprio contribuinte.\nExemplo: O ano fiscal do contribuinte brasileiro vai de 01/01/XXXX a 31/12/XXXX, enquanto que o ano fiscal do controlador final do grupo multinacional do qual faz parte, residente no exterior, vai de 01/10/XXXX a 30/09/XXXX. Nesse caso, o período que deve ser abrangido pela Declaração País-a-País, e que deve ser devidamente informado neste campo e no campo 13, é o ano fiscal do controlador final, ou seja, 01/10/XXXX a 30/09/XXXX.",
+     "tipo": "N",
+     "tamanho": "8",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 13,
+     "nome": "DT_FIN",
+     "descricao": "Data Final do Período Societário.\nObservações:\ni) O ano fiscal da Declaração País-a-País deve ser o ano fiscal encerrado imediatamente anterior, podendo, dessa forma, ter data final igual ou anterior à data final do período a que se refere a ECF.\nii) Caso o período a que se refere a Declaração País-a-País não corresponda a um ano completo, devem ser fornecidos esclarecimentos no campo de informações adicionais do registro W300.",
+     "tipo": "N",
+     "tamanho": "8",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 14,
+     "nome": "TIP_MOEDA",
+     "descricao": "Moeda: a entidade deve indicar qual a moeda utilizada nas informações em valores fornecidas na Declaração País-a-País, conforme tabela do Sped (Disponibilizada no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).\nObservação: As informações em valores da Declaração País-a-País devem ser prestadas em uma única moeda, que deve ser a moeda do controlador final do grupo multinacional.",
+     "tipo": "C",
+     "tamanho": "3",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 15,
+     "nome": "IND_IDIOMA",
+     "descricao": "Idioma Utilizado nas Informações Adicionais da Declaração País-a-País. Deve ser indicado o idioma utilizado nos campos de informações adicionais da DPP, fornecidas em texto livre, caso tenham sido prestadas:\nPT - Português.\nEN - Inglês.\nES - Espanhol.",
+     "tipo": "C",
+     "tamanho": "2",
+     "decimal": "—",
+     "valores": "[PT, EN, ES]",
+     "obrigatorio": "Não"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_W100_Y600",
+     "texto": "Verifica, quando W100.IND_CONTROLADORA é igual a “S” (Sim) e quando Y600.PAIS é diferente de “Brasil” e Y600.IND_QUAIF.SOCIO é igual a “PJ”, se o somatório do Y600.PERC_CAP_TOT é menor que 50% e se o somatório de Y600.PERC_CAP_VOT é menor que 50%. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_W100_W250",
+     "texto": "Verifica, quando W100.IND_ENTREGA é igual a “3” (Própria entidade declarante da ECF, na condição de Entidade Substituta ou de Preenchimento Local), se existe um registro X250.TIN igual ao W100.TIN_CONTROLADOR. Se a regra não for cumprida, a ECF gera um erro."
+    }
+   ],
+   "regrasCampo": [
+    {
+     "campo": "IND_CONTROLADORA",
+     "regras": [
+      {
+       "codigo": "REGRA_HABILITA_IND_CONTROLADORA",
+       "texto": "Caso 0000.SIT_ESPECIAL seja igual “0” (Normal – sem ocorrência de situação especial ou evento), o campo W100.IND_CONTROLADORA é habilitado. Caso contrário, o campo W100.IND_CONTROLADORA é desabilitado.",
+       "tipo": "Habilita"
+      },
+      {
+       "codigo": "REGRA_IND_CONTROLADORA_OBRIGATORIO",
+       "texto": "Verifica, quando 0000.SIT_ESPECIAL é igual “0” (Normal – sem ocorrência de situação especial ou evento), se o campo W100.IND_CONTROLADORA está preenchido.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_IND_CONTROLADORA_NAO_PREENCHER",
+       "texto": "Verifica, quando 0000.SIT_ESPECIAL é diferente de “0” (Normal – sem ocorrência de situação especial ou evento), se o campo W100.IND_CONTROLADORA não está preenchido.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "NOME_CONTROLADORA",
+     "regras": [
+      {
+       "codigo": "REGRA_HABILITA_CONTROLADORA_DIFERENTE",
+       "texto": "Caso W100.IND_CONTROLADORA seja igual a “N” (Não), o campo W100.NOME_CONTROLADORA é habilitado. Caso contrário, o campo W100.NOME_CONTROLADORA é desabilitado.",
+       "tipo": "Habilita"
+      },
+      {
+       "codigo": "REGRA_NOME_CONTROLADORA_OBRIGATORIO",
+       "texto": "Verifica, quando W100.IND_CONTROLADORA é igual a “N” (Não), se o campo W100.NOME_CONTROLADORA está preenchido.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_NOME_CONTROLADORA_NAO_PREENCHER",
+       "texto": "Verifica, quando W100.IND_CONTROLADORA é igual a “S” (Sim), se o campo W100.NOME_CONTROLADORA não está preenchido.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "JURISIDICAO_CONTROLADORA",
+     "regras": [
+      {
+       "codigo": "REGRA_HABILITA_CONTROLADORA_DIFERENTE",
+       "texto": "Caso W100.IND_CONTROLADORA seja igual a “N” (Não), o campo W100.JURISDICAO_CONTROLADORA é habilitado. Caso contrário, o campo W100.JURISDICAO_CONTROLADORA é desabilitado.",
+       "tipo": "a verificar"
+      },
+      {
+       "codigo": "REGRA_JURISDICAO_CONTROLADORA_OBRIGATORIO",
+       "texto": "Verifica, quando W100.IND_CONTROLADORA é igual a “N” (Não), se o campo W100.JURISDICAO_CONTROLADORA está preenchido.",
+       "tipo": "a verificar"
+      },
+      {
+       "codigo": "REGRA_JURISDICAO_CONTROLADORA_NAO_PREENCHER",
+       "texto": "Verifica, quando W100.IND_CONTROLADORA é igual a “S” (Sim), se o campo W100.JURISDICAO_CONTROLADORA não está preenchido.\nREGRA_EXISTE_JURISDICAO_W200 – Verifica, quando W100.IND_CONTROLADORA é igual “N” e W100.IND_ENTREGA = “3” (Própria entidade declarante da ECF, na condição de Entidade Substituta ou de Preenchimento Local)\ne o campo W100.JURISDICAO_CONTROLADORA está preenchido, se existe um registro W200 com o campo jurisdição igual ao campo W100.JURISDICAO_CONTROLADORA. Se a empresa declarante informa que não é a controladora, deve haver um registro W200 com a mesma Jurisdição.\nREGRA_EXISTE_TIN_JURISDICAO_W250 – Verifica, quando o campo W100.IND_CONTROLADORA é igual “N” e W100.IND_ENTREGA = “3”, se existe um registro W250 com os campos TIN e JURISDICAO_TIN iguais a um registro W100 com os campos TIN e JURISDICAO_CONTROLADORA. Deve existir registro W250 com o mesmo TIN e jurisdição da controladora informada no registro W100.",
+       "tipo": "a verificar"
+      }
+     ]
+    },
+    {
+     "campo": "TIN_CONTROLADORA",
+     "regras": [
+      {
+       "codigo": "REGRA_TIN_CONTROLADORA_OBRIGATORIO",
+       "texto": "Verifica, quando W100.IND_CONTROLADORA é igual a “N” (Não), se o campo W100.TIN_CONTROLADORA está preenchido.",
+       "tipo": "Habilita"
+      },
+      {
+       "codigo": "REGRA_TIN_CONTROLADORA_NAO_PREENCHER",
+       "texto": "Verifica, quando W100.IND_CONTROLADORA é igual a “S” (Sim), se o campo W100.TIN_CONTROLADORA não está preenchido.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_VALIDA_TIN_CONTROLADORA",
+       "texto": "Verifica, quando W100.JURISDICAO_CONTROLADORA for igual a “BR” (Brasil), se o campo W100.TIN_CONTROLADORA está preenchido com um CNPJ (aplica a REGRA_VALIDA_CNPJ: Verifica se o CNPJ informado é válido).",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_CNPJ_BASICO_DIFERENTE_CONTROLADORA",
+       "texto": "Verifica, quando W100.JURISDICAO_CONTROLADORA for igual a “BR” (Brasil), se o campo W100.TIN_CONTROLADORA está preenchido com um CNPJ e se o CNPJ básico informado é diferente do CNPJ básico do declarante da ECF, informado em 0000.CNPJ.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "IND_ENTREGA",
+     "regras": [
+      {
+       "codigo": "REGRA_IND_ENTREGA_OBRIGATORIO",
+       "texto": "Verifica, quando W100.IND_CONTROLADORA está preenchido, se o campo W100.IND_ENTREGA está preenchido.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_IND_ENTREGA_NAO_PREENCHER_SEM_ACORDO",
+       "texto": "Verifica, quando W100.IND_ENTREGA é igual a “2” (Controladora final do grupo multinacional) e W100.JURISDICAO_CONTROLADORA é diferente de “Brasil”, se o país informado no campo W100.JURISDICAO_CONTROLADORA consta na tabela de Acordo de Autoridades Competentes (A jurisdição de residência tributária da controladora final do grupo multinacional deve possuir Acordo de Autoridades Competentes com o Brasil para intercâmbio da Declaração País-a-País).",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_IND_ENTREGA_NAO_PREENCHER_FALHA_SISTEMICA",
+       "texto": "Verifica, quando W100.IND_ENTREGA é igual a “2” (Controladora final do grupo multinacional) e W100.JURISDICAO_CONTROLADORA é diferente de “Brasil”, se o país informado no campo W100.JURISDICAO_CONTROLADORA consta na tabela de Falha Sistêmica (A jurisdição de residência tributária da controladora final do grupo multinacional está enquadra na situação de falha sistêmica, conforme definido na IN RFB nº 1.681/2016).",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_IND_ENTREGA_JURISDICAO_BRASIL",
+       "texto": "Verifica, quando W100.JURISDICAO_CONTROLADORA for igual a “BR” (Brasil), se o campo W100.IND_ENTREGA é igual a “1” (Grupo multinacional dispensado da entrega da Declaração País-a-País) ou “2” (Controladora do grupo multinacional).",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_IND_ENTREGA_IND_CONTROLADORA",
+       "texto": "Verifica, quando W100.IND_CONTROLADORA for igual a “S” (Sim), se o campo W100.IND_ENTREGA é igual a “1” (Grupo multinacional dispensado da entrega da Declaração País-a-País) ou “2” (Controladora do grupo multinacional).",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "IND_MODALIDADE",
+     "regras": [
+      {
+       "codigo": "REGRA_HABILITA_IND_MODALIDADE",
+       "texto": "Caso W100.IND_ENTREGA seja igual a “3” (Própria entidade declarante) ou “4” (Outra entidade), o campo W100.IND_MODALIDADE é habilitado. Caso contrário, o campo W100.IND_MODALIDADE é desabilitado.",
+       "tipo": "Habilita"
+      },
+      {
+       "codigo": "REGRA_IND_MODALIDADE_OBRIGATORIO",
+       "texto": "Verifica, quando W100.IND_ENTREGA é igual a “3” (Própria entidade declarante) ou “4” (Outra entidade), se o campo W100.IND_MODALIDADE está preenchido.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_IND_MODALIDADE_NAO_PREENCHER_DISPENSADO",
+       "texto": "Verifica, quando W100.IND_ENTREGA é igual a “1” (Grupo multinacional dispensado da entrega da Declaração País-a-País) ou “2” (Controlador do grupo multinacional), se o campo W100.IND_MODALIDADE não está preenchido.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "NOME_SUBSTITUTA",
+     "regras": [
+      {
+       "codigo": "REGRA_HABILITA_NOME_SUBSTITUTA",
+       "texto": "Caso W100.IND_ENTREGA seja igual a “4” (Outra entidade), o campo W100.NOME_SUBSTITUTA é habilitado. Caso contrário, o campo W100.NOME_SUBSTITUTA é desabilitado.",
+       "tipo": "Habilita"
+      },
+      {
+       "codigo": "REGRA_NOME_SUBSTITUTA_OBRIGATORIO",
+       "texto": "Verifica, quando W100.IND_ENTREGA é igual a “4” (Outra entidade), se o campo W100.NOME_SUBSTITUTA está preenchido.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_NOME_SUBSTITUTA_NAO_PREENCHER",
+       "texto": "Verifica, quando W100.IND_ENTREGA é diferente de “4” (Outra entidade), se o campo W100.NOME_SUBSTITUTA não está preenchido.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "JURISDICAO_SUBSTITUTA",
+     "regras": [
+      {
+       "codigo": "REGRA_HABILITA_SUBSTITUTA",
+       "texto": "Caso W100.IND_ENTREGA seja igual a “4” (Outra entidade), o campo W100.JURISDICAO_SUBSTITUTA é habilitado. Caso contrário, o campo W100.JURISDICAO_SUBSTITUTA é desabilitado.",
+       "tipo": "Habilita"
+      },
+      {
+       "codigo": "REGRA_JURISDICAO_SUBSTITUTA_OBRIGATORIA",
+       "texto": "Verifica, quando W100.IND_ENTREGA é igual a “4” (Outra entidade), se o campo W100.JURISDICAO_SUBSTITUTA está preenchido.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_JURISDICAO_SUBSTITUTA_NAO_PREENCHER",
+       "texto": "Verifica, quando W100.IND_ENTREGA é diferente de “4” (Outra entidade), se o campo W100.JURISIDICAO_SUBSTITUTA não está preenchido.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_JURISDICAO_SUBSTITUTA_LOCAL",
+       "texto": "Verifica, quando W100.IND_ENTREGA é igual a “4” (Outra entidade) e W100.IND_MODALIDADE é igual a “2” (Preenchimento local), se W100.JURISDICAO_SUBSTITUTA é igual a “Brasil”.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_JURISDICAO_SUBSTITUTA_NAO_PREENCHER_SEM_ACORDO",
+       "texto": "Verifica, quando W100.IND_ENTREGA é igual a “4” (Outra entidade) e W100.IND_MODALIDADE é igual a “1” (Entidade substituta) e W100.JURISDICAO_SUBSTITUTA é diferente de “Brasil”, se o país informado no campo W100.JURISDICAO_SUBSTITUTA consta na tabela de Acordo de Autoridades Competentes (A jurisdição de residência para fins tributários da entidade substituta do grupo multinacional deve possuir Acordo de Autoridades Competentes com o Brasil para intercâmbio da Declaração País-a-País).",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_JURISDICAO_SUBSTITUTA_NAO_PREENCHER_FALHA_SISTEMICA",
+       "texto": "Verifica, quando W100.IND_ENTREGA é igual a “4” (Outra entidade) e W100.IND_MODALIDADE é igual a “1” (Entidade substituta) e W100.JURISDICAO_SUBSTITUTA é diferente de “Brasil”, se o país informado no campo W100.JURISDICAO_SUBSTITUTA consta na tabela de Falha Sistêmica (A jurisdição de residência tributária da entidade substituta do grupo multinacional está enquadrada na situação de falha sistêmica, conforme definido na IN RFB nº 1.681/2016).",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "TIN_SUBSTITUTA",
+     "regras": [
+      {
+       "codigo": "REGRA_HABILITA_SUBSTITUTA",
+       "texto": "Caso W100.IND_ENTREGA seja igual a “4” (Outra entidade), o campo W100.TIN_SUBSTITUTA é habilitado. Caso contrário, o campo W100.TIN_SUBSTITUTA é desabilitado.",
+       "tipo": "Habilita"
+      },
+      {
+       "codigo": "REGRA_TIN_SUBSTITUTA_OBRIGATORIO",
+       "texto": "Verifica, quando W100.IND_ENTREGA é igual a “4” (Outra entidade) e W100.JURISDICAO_SUBSTITUTA é igual a “Brasil”, se o campo W100.TIN_SUBSTITUTA está preenchido.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_TIN_SUBSTITUTA_NAO_PREENCHER",
+       "texto": "Verifica, quando W100.IND_ENTREGA é diferente de “4” (Outra entidade) ou W100.JURISDICAO_SUBSTITUTA é diferente de “Brasil”, se o campo W100.TIN_SUBSTITUTA não está preenchido.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_VALIDA_TIN_SUBSTITUTA",
+       "texto": "Verifica, quando W100.JURISDICAO_SUBSTITUTA for igual a “BR” (Brasil), se o campo W100.TIN_SUBSTITUTA está preenchido com um CNPJ (aplica a REGRA_VALIDA_CNPJ: Verifica se o CNPJ informado é válido).",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_CNPJ_BASICO_DIFERENTE_SUBSTITUTA",
+       "texto": "Verifica, quando W100.JURISDICAO_SUBSTITUTA for igual a “BR” (Brasil), se o campo W100.TIN_SUBSTITUTA está preenchido com um CNPJ e se o CNPJ básico informado é diferente do CNPJ básico do declarante da ECF, informado em 0000.CNPJ.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "DT_INI",
+     "regras": [
+      {
+       "codigo": "REGRA_HABILITA_DATA_PAIS_A_PAIS",
+       "texto": "Caso [W100.IND_CONTROLADORA seja igual a “S” (Sim) e W100.IND_ENTREGA seja igual a “2” (Controladora final do grupo multinacional)] ou [W100.IND_ENTREGA seja igual a “3” (Própria entidade declarante da ECF) e W100.IND_MODALIDADE esteja preenchido], o campo W100.DT_INI é habilitado.",
+       "tipo": "Habilita"
+      },
+      {
+       "codigo": "REGRA_DATA_PAIS_A_PAIS_OBRIGATORIO",
+       "texto": "Verifica, quando [W100.IND_CONTROLADORA seja igual a “S” (Sim) e W100.IND_ENTREGA seja igual a “2” (Controladora final do grupo multinacional)] ou [W100.IND_ENTREGA é igual a “3” (Própria entidade declarante da ECF) e W100.IND_MODALIDADE está preenchido], se o campo W100.DT_INI está preenchido.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_DATA_PAIS_A_PAIS_NAO_PREENCHER",
+       "texto": "Verifica, quando [W100.IND_CONTROLADORA é igual a “N” (Não) ou W100.IND_ENTREGA é diferente de “2”] e [W100.IND_ENTREGA é diferente a “3” (Própria entidade declarante da ECF) ou W100.IND_MODALIDADE não está preenchido], se o campo W100.DT_INI não está preenchido.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_DATA_MENOR_UM_ANO",
+       "texto": "Verifica se a diferença entre W100.DT_FIN e W100.DT_INI é menor ou igual a 366 dias (O período da Declaração País-a-País deve ser menor ou igual a 1 ano).",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "DT_FIN",
+     "regras": [
+      {
+       "codigo": "REGRA_HABILITA_DATA_PAIS_A_PAIS",
+       "texto": "Caso [W100.IND_CONTROLADORA seja igual a “S” (Sim) e W100.IND_ENTREGA seja igual a “2” (Controladora final do grupo multinacional)] ou [W100.IND_ENTREGA seja igual a “3” (Própria entidade declarante da ECF) e W100.IND_MODALIDADE esteja preenchido], o campo W100.DT_FIN é habilitado.",
+       "tipo": "Habilita"
+      },
+      {
+       "codigo": "REGRA_DATA_PAIS_A_PAIS_OBRIGATORIO",
+       "texto": "Verifica, quando [W100.IND_CONTROLADORA seja igual a “S” (Sim) e W100.IND_ENTREGA seja igual a “2” (Controladora final do grupo multinacional)] ou [W100.IND_ENTREGA é igual a “3” (Própria entidade declarante da ECF) e W100.IND_MODALIDADE está preenchido], se o campo W100.DT_FIN está preenchido.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_DATA_PAIS_A_PAIS_NAO_PREENCHER",
+       "texto": "Verifica, quando W100.IND_CONTROLADORA é igual a “N” (Não) e [W100.IND_ENTREGA é diferente a “3” (Própria entidade declarante da ECF) ou W100.IND_MODALIDADE não está preenchido], se o campo W100.DT_FIN não está preenchido.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_W100_DATA_MAIOR",
+       "texto": "Verifica se W100.DT_FIN é maior ou igual a W100.DT_INI.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_W100_DATA_MENOR_IGUAL_ECF",
+       "texto": "Verifica se W100.DT_FIN é maior ou igual a 0000.DT_INI e menor ou igual a 0000.DT_FIN.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "TIP_MOEDA",
+     "regras": [
+      {
+       "codigo": "REGRA_HABILITA_DATA_PAIS_A_PAIS",
+       "texto": "Caso [W100.IND_CONTROLADORA seja igual a “S” (Sim) e W100.IND_ENTREGA seja igual a “2” (Controladora final do grupo multinacional)] ou [W100.IND_ENTREGA seja igual a “3” (Própria entidade declarante da ECF) e W100.IND_MODALIDADE esteja preenchido], o campo W100.TIP_MOEDA é habilitado.",
+       "tipo": "Habilita"
+      },
+      {
+       "codigo": "REGRA_DATA_PAIS_A_PAIS_OBRIGATORIO",
+       "texto": "Verifica, quando [W100.IND_CONTROLADORA seja igual a “S” (Sim) e W100.IND_ENTREGA seja igual a “2” (Controladora final do grupo multinacional)] ou [W100.IND_ENTREGA é igual a “3” (Própria entidade declarante da ECF) e W100.IND_MODALIDADE está preenchido], se o campo W100.TIP_MOEDA está preenchido.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_DATA_PAIS_A_PAIS_NAO_PREENCHER",
+       "texto": "Verifica, quando W100.IND_CONTROLADORA é igual a “N” (Não) e [W100.IND_ENTREGA é diferente a “3” (Própria entidade declarante da ECF) ou W100.IND_MODALIDADE não está preenchido], se o campo W100.TIP_MOEDA não está preenchido.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "IND_IDIOMA",
+     "regras": [
+      {
+       "codigo": "REGRA_HABILITA_DATA_PAIS_A_PAIS",
+       "texto": "Caso [W100.IND_CONTROLADORA seja igual a “S” (Sim) e W100.IND_ENTREGA seja igual a “2” (Controladora final do grupo multinacional)] ou [W100.IND_ENTREGA seja igual a “3” (Própria entidade declarante da ECF) e W100.IND_MODALIDADE esteja preenchido], o campo W100.IND_IDIOMA é habilitado.",
+       "tipo": "Habilita"
+      },
+      {
+       "codigo": "REGRA_DATA_PAIS_A_PAIS_OBRIGATORIO",
+       "texto": "Verifica, quando [W100.IND_CONTROLADORA seja igual a “S” (Sim) e W100.IND_ENTREGA seja igual a “2” (Controladora final do grupo multinacional)] ou [W100.IND_ENTREGA é igual a “3” (Própria entidade declarante da ECF) e W100.IND_MODALIDADE está preenchido], se o campo W100.IND_IDIOMA está preenchido.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_DATA_PAIS_A_PAIS_NAO_PREENCHER",
+       "texto": "Verifica, quando W100.IND_CONTROLADORA é igual a “N” (Não) e [W100.IND_ENTREGA é diferente a “3” (Própria entidade declarante da ECF) ou W100.IND_MODALIDADE não está preenchido], se o campo W100.IND_IDIOMA não está preenchido.",
+       "tipo": "Erro"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|W100|MULTINACIONAL A|S|CONTROLADORA FINAL|105|11111111000191|2|||||01012024|31122024|11|PT|",
+    "|W100|: Identificação do tipo do registro.",
+    "|MULTINACIONAL A|: Nome do grupo multinacional.",
+    "|S|: Identifica se a entidade é controladora final do grupo multinacional (S = Sim).",
+    "|CONTROLADORA FINAL|: Nome da controladora final.",
+    "|11|: Jurisdição de residência tributária da controladora final.",
+    "|11111111000191|: CNPJ da controladora final (11.111.111/0001-91).",
+    "|2|: Identifica a entidade responsável pela entrega da Declaração País-a-País (2 = Controlador Final do Grupo Multinacional).",
+    "||: Indicador de modalidade.",
+    "||: Nome da substituta.",
+    "||: Jurisdição da substituta.",
+    "||: CNPJ da substituta.",
+    "|01012024|: Data de início da Declaração País-a-País (01/01/2024).",
+    "|31122024|: Data final da Declaração País-a-País (31/12/2024).",
+    "|11|: Moeda da Declaração País-a-País.",
+    "|PT|: Idioma da Declaração País-a-País (PT = Português)."
+   ]
+  },
+  {
+   "codigo": "W200",
+   "nome": "Declaração País-a-País",
+   "ordem": 118,
+   "nivel": "3",
+   "ocorrencia": "[0;N]\nObservação: Quando for obrigatório, deverá aparecer, no mínimo, duas vezes.",
+   "chave": "JURISDICAO",
+   "entrada": "F",
+   "saida": "OC\n(Se (W100.IND_CONTROLADORA = \"S\" e W100.IND_ENTREGA = \"2\") ou W100.IND_ENTREGA = \"3\")\nOu\n(Se (W100.IND_CONTROLADORA = \"N\" e W100.IND_ENTREGA = \"3\")",
+   "descricao": [
+    "Este registro apresenta as informações da Declaração País-a-País.",
+    "Devem ser indicadas todas as jurisdições nas quais o grupo multinacional opera (mesmo que esteja presente em determinada jurisdição apenas por meio de um estabelecimento permanente, por exemplo) e fornecidas as informações solicitadas de maneira agregada por jurisdição.",
+    "Todas as informações em valores devem ser fornecidas em unidades inteiras, ou seja, sem decimais, e os valores negativos devem ser identificados por sinal negativo. Exemplo: R$ -1000.",
+    "Os campos referentes a Receitas devem incluir valores provenientes de vendas de estoque e propriedades, de serviços, royalties, juros, prêmios e qualquer outro montante. Não devem ser incluídos como receitas pagamentos recebidos de outra entidade integrante do mesmo grupo multinacional que sejam considerados dividendos pela jurisdição tributária da entidade pagadora."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (W200).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[W200]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "JURISDICAO",
+     "descricao": "Jurisdição de Residência para fins Tributários, conforme tabela do Sped (Disponibilizada no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).\nA entidade declarante deve listar todas as jurisdições nas quais entidades integrantes do grupo multinacional são residentes para fins tributários e aquelas em que opera por meio de um estabelecimento permanente (ou seja, todas as jurisdições nas quais o grupo multinacional opera). Para cada uma dessas jurisdições, deverão ser fornecidas, de maneira agregada (isto é, somados os valores de todas as entidades integrantes do grupo multinacional presentes em cada jurisdição) as informações solicitadas nos campos subsequentes.\nObservação: Caso exista uma ou mais entidades integrantes do grupo multinacional que sejam consideradas sem residência para fins tributários, o campo W200.JURISDICAO deve ser preenchido com o código X5 (Sem residência para fins tribvutários). Para esse campo, deverão ser reportadas, de maneira agregada, as informações a respeito de todas as entidades integrantes do grupo multinacional consideradas sem residência para fins tributários.",
+     "tipo": "C",
+     "tamanho": "2",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "VL_REC_NAO_REL_EST",
+     "descricao": "Receitas Provenientes de Partes Não Relacionadas em Moeda Estrangeira (identificada no campo W100.TIP_MOEDA): O contribuinte deve informar a soma das receitas, em moeda estrangeira, de todas as entidades integrantes do grupo multinacional presentes na jurisdição tributária em questão que tenham sido geradas de transações com partes não relacionadas.\nObservação: Esse campo deve ser preenchido somente se W100.TIP_MOEDA for diferente de Real.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "0",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 4,
+     "nome": "VL_REC_NAO_REL",
+     "descricao": "Receitas Provenientes de Partes Não Relacionadas: O contribuinte deve informar a soma das receitas, em reais, de todas as entidades integrantes do grupo multinacional presentes na jurisdição tributária em questão que tenham sido geradas de transações com partes não relacionadas.\nObservação: Caso o campo W200.VL_REC_NAO_REL_EST seja informado, este campo será calculado pelo sistema, utilizando como base para conversão tabela do Banco Central para a data de 31 de dezembro do ano da Declaração.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "0",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 5,
+     "nome": "VL_REC_REL_EST",
+     "descricao": "Receitas Provenientes de Partes Relacionadas em Moeda Estrangeira (identificada no campo W100.TIP_MOEDA): O contribuinte deve informar a soma das receitas, em moeda estrangeira, de todas as entidades integrantes do grupo multinacional presentes na jurisdição tributária em questão que tenham sido geradas de transações com partes relacionadas.\nObservação: Esse campo deve ser preenchido somente se W100.TIP_MOEDA for diferente de Real.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "0",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 6,
+     "nome": "VL_REC_REL",
+     "descricao": "Receitas Provenientes de Partes Relacionadas: O contribuinte deve informar a soma das receitas, em reais, de todas as entidades integrantes do grupo multinacional presentes na jurisdição tributária em questão que tenham sido geradas de transações com partes relacionadas.\nObservação: Caso o campo W200.VL_REC_REL_EST seja informado, este campo será calculado pelo sistema, utilizando como base para conversão tabela do Banco Central para a data de 31 de dezembro do ano da Declaração.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "0",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 7,
+     "nome": "VL_REC_TOTAL_EST",
+     "descricao": "Receita Total em Moeda Estrangeira (identificada no campo W100.TIP_MOEDA): Soma das receitas provenientes de partes não relacionadas e das receitas provenientes de partes relacionadas, caso tenham sido informadas em moeda estrangeira. Este campo será calculado pelo sistema (W200.VL_REC_NAO_REL_EST + W200.VL_REC_REL_EST).",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "0",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 8,
+     "nome": "VL_REC_TOTAL",
+     "descricao": "Receita Total: Soma das receitas provenientes de partes não relacionadas e das receitas provenientes de partes relacionadas, caso tenham sido informadas em reais. Este campo será calculado pelo sistema (W200.VL_REC_NAO_REL + W200.VL_REC_REL).",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "0",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 9,
+     "nome": "VL_LUC_PREJ_ANTES_IR_EST",
+     "descricao": "Lucro ou Prejuízo Antes do IR em Moeda Estrangeira (identificada no campo W100.TIP_MOEDA): Deve ser reportada a soma do lucro (ou prejuízo) antes do imposto de renda, em moeda estrangeira, de todas as entidades integrantes do grupo multinacional presentes na jurisdição em questão. O lucro (ou prejuízo) antes do imposto de renda deve incluir todas as receitas e despesas extraordinárias.\nObservação: Esse campo deve ser preenchido somente se W100.TIP_MOEDA for diferente de Real.",
+     "tipo": "NS",
+     "tamanho": "19",
+     "decimal": "0",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 10,
+     "nome": "VL_LUC_PREJ_ANTES_IR",
+     "descricao": "Lucro ou Prejuízo Antes do IR: Deve ser reportada a soma do lucro (ou prejuízo) antes do imposto de renda, em reais, de todas as entidades integrantes do grupo multinacional presentes na jurisdição em questão. O lucro (ou prejuízo) antes do imposto de renda deve incluir todas as receitas e despesas extraordinárias.\nObservação: Caso o campo W200.VL_LUC_PREJ_ANTES_IR_EST seja informado, este campo será calculado pelo sistema, utilizando como base para conversão tabela do Banco Central para a data de 31 de dezembro do ano da Declaração.",
+     "tipo": "NS",
+     "tamanho": "19",
+     "decimal": "0",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 11,
+     "nome": "VL_IR_PAGO_EST",
+     "descricao": "Imposto de Renda Pago, em moeda estrangeira (identificada no campo W100.TIP_MOEDA): deve ser informado o montante total de imposto de renda efetivamente pago, em moeda estrangeira, durante o ano fiscal de declaração por todas as entidades integrantes do grupo multinacional presentes na jurisdição reportada. Nesse montante devem ser incluídos impostos pagos por uma entidade integrante a sua própria jurisdição de residência para fins tributários e para todas as outras jurisdições. Também estão incluídos valores pagos a título de imposto de renda retido na fonte por outras entidades (sejam elas independentes ou relacionadas) com relação a pagamentos realizados a uma entidade integrante do grupo multinacional. Dessa forma, se, por exemplo: a entidade A, residente na jurisdição A, recebe valores a título de juros na jurisdição B, o imposto retido na jurisdição B deve ser reportado pela entidade A (isto é, com referência à jurisdição em que a entidade A está situada).\nObservação: Esse campo deve ser preenchido somente se W100.TIP_MOEDA for diferente de Real.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "0",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 12,
+     "nome": "VL_IR_PAGO",
+     "descricao": "Imposto de Renda Pago: deve ser informado o montante total de imposto de renda efetivamente pago, em reais, durante o ano fiscal de declaração por todas as entidades integrantes do grupo multinacional presentes na jurisdição reportada. Nesse montante devem ser incluídos impostos pagos por uma entidade integrante a sua própria jurisdição de residência para fins tributários e para todas as outras jurisdições. Também estão incluídos valores pagos a título de imposto de renda retido na fonte por outras entidades (sejam elas independentes ou relacionadas) com relação a pagamentos realizados a uma entidade integrante do grupo multinacional. Dessa forma, se, por exemplo: a entidade A, residente na jurisdição A, recebe valores a título de juros na jurisdição B, o imposto retido na jurisdição B deve ser reportado pela entidade A (isto é, com referência à jurisdição em que a entidade A está situada).\nObservação: Caso o campo W200.VL_IR_PAGO_EST seja informado, este campo será calculado pelo sistema, utilizando como base para conversão tabela do Banco Central para a data de 31 de dezembro do ano da Declaração.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "0",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 13,
+     "nome": "VL_IR_DEVIDO_EST",
+     "descricao": "Imposto de Renda Devido, em moeda estrangeira (identificada no campo W100.TIP_MOEDA): Deve ser informada a soma do imposto de renda devido, em moeda estrangeira, sobre os lucros tributáveis ou prejuízos no ano fiscal de declaração de todas as entidades integrantes do grupo multinacional residentes para fins tributários na jurisdição reportada. A despesa deve refletir apenas operações realizadas no ano e não inclui impostos diferidos ou provisões para passivos tributários incertos.\nObservação: Esse campo deve ser preenchido somente se W100.TIP_MOEDA for diferente de Real.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "0",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 14,
+     "nome": "VL_IR_DEVIDO",
+     "descricao": "Imposto de Renda Devido: Deve ser informada a soma do imposto de renda devido, em reais, sobre os lucros tributáveis ou prejuízos no ano fiscal de declaração de todas as entidades integrantes do grupo multinacional residentes para fins tributários na jurisdição reportada. A despesa deve refletir apenas operações realizadas no ano e não inclui impostos diferidos ou provisões para passivos tributários incertos.\nObservação: Caso o campo W200.VL_IR_DEVIDO_EST seja informado, este campo será calculado pelo sistema, utilizando como base para conversão tabela do Banco Central para a data de 31 de dezembro do ano da Declaração.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "0",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 15,
+     "nome": "VL_CAP_SOC_EST",
+     "descricao": "Capital Social em Moeda Estrangeira (identificada no campo W100.TIP_MOEDA): A entidade declarante deve reportar a soma do capital social, em moeda estrangeira, de todas as entidades integrantes residentes para fins tributários na jurisdição informada. Quanto aos estabelecimentos permanentes, o capital social deve ser reportado pela entidade à qual o estabelecimento está relacionado, a menos que exista, na jurisdição onde o estabelecimento permanente está situado, a obrigatoriedade de um capital definido, para fins regulatórios. Nesse caso, o capital atribuído a um estabelecimento permanente deve ser especificado no campo de Informações Adicionais do registro W300.\nObservação: Esse campo deve ser preenchido somente se W100.TIP_MOEDA for diferente de Real.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "0",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 16,
+     "nome": "VL_CAP_SOC",
+     "descricao": "Capital Social: A entidade declarante deve reportar a soma do capital social, em reais, de todas as entidades integrantes residentes para fins tributários na jurisdição informada. Quanto aos estabelecimentos permanentes, o capital social deve ser reportado pela entidade à qual o estabelecimento está relacionado, a menos que exista, na jurisdição onde o estabelecimento permanente está situado, a obrigatoriedade de um capital definido, para fins regulatórios. Nesse caso, o capital atribuído a um estabelecimento permanente deve ser especificado no registro de Informações Adicionais do registro W300.\nObservação: Caso o campo W200.VL_CAP_SOC_EST seja informado, este campo será calculado pelo sistema, utilizando como base para conversão tabela do Banco Central para a data de 31 de dezembro do ano da Declaração.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "0",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 17,
+     "nome": "VL_LUC_ACUM_EST",
+     "descricao": "Lucros Acumulados em Moeda Estrangeira (identificada no campo W100.TIP_MOEDA): A entidade declarante deve reportar a soma do total de lucros acumulados, em moeda estrangeira, de todas as entidades integrantes do grupo multinacional residentes para fins tributários na jurisdição informada. No que diz respeito aos estabelecimentos permanentes, os lucros acumulados devem ser reportados pela entidade à qual o estabelecimento está relacionado.\nObservação: Esse campo deve ser preenchido somente se W100.TIP_MOEDA for diferente de Real.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "0",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 18,
+     "nome": "VL_LUC_ACUM",
+     "descricao": "Lucros Acumulados: A entidade declarante deve reportar a soma do total de lucros acumulados, em reais, de todas as entidades integrantes do grupo multinacional residentes para fins tributários na jurisdição informada. No que diz respeito aos estabelecimentos permanentes, os lucros acumulados devem ser reportados pela entidade à qual o estabelecimento está relacionado.\nObservação: Caso o campo W200.LUC_ACUM_EST seja informado, este campo será calculado pelo sistema, utilizando como base para conversão tabela do Banco Central para a data de 31 de dezembro do ano da Declaração.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "0",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 19,
+     "nome": "VL_ATIV_TANG_EST",
+     "descricao": "Ativos Tangíveis (exceto caixa e equivalentes de caixa) em Moeda Estrangeira (identificada no campo W100.TIP_MOEDA): Deve ser informada a soma do valor contábil líquido dos ativos tangíveis, em moeda estrangeira, de todas as entidades integrantes do grupo multinacional residentes para fins tributários na jurisdição indicada. Quanto aos estabelecimentos permanentes, seus ativos devem ser reportados com referência à jurisdição na qual o estabelecimento está situado. Para fins da Declaração País-a-País, ativos tangíveis não incluem caixa ou itens equivalentes de caixa, intangíveis ou ativos financeiros.\nObservação: Esse campo deve ser preenchido somente se W100.TIP_MOEDA for diferente de Real.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "0",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 20,
+     "nome": "VL_ATIV_TANG",
+     "descricao": "Ativos Tangíveis (exceto caixa e equivalentes de caixa): Deve ser informada a soma do valor contábil líquido dos ativos tangíveis, em reais, de todas as entidades integrantes do grupo multinacional residentes para fins tributários na jurisdição indicada. Quanto aos estabelecimentos permanentes, seus ativos devem ser reportados com referência à jurisdição na qual o estabelecimento está situado. Para fins da Declaração País-a-País, ativos tangíveis não incluem caixa ou itens equivalentes de caixa, intangíveis ou ativos financeiros.\nObservação: Caso o campo W200.VL_ATIV_TANG_EST seja informado, este campo será calculado pelo sistema, utilizando como base para conversão tabela do Banco Central para a data de 31 de dezembro do ano da Declaração.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "0",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 21,
+     "nome": "NUM_EMP",
+     "descricao": "Número de Empregados: Deve ser informado o número total de empregados, trabalhadores e demais colaboradores de todas as entidades integrantes do grupo multinacional residentes para fins tributários na jurisdição indicada. O número de empregados deve ser totalizado ao final do ano, e reportado com base na média registrada para o ano ou outro critério aplicado de maneira consistente entre as jurisdições do grupo e para todos os anos. Para fins da Declaração País-a-País, profissionais independentes contratados participantes das atividades operacionais ordinárias da entidade integrante devem ser reportados como empregados. Arredondamentos ou aproximações razoáveis do número de empregados são permitidas, desde que não gerem distorções relevantes à distribuição relativa de empregados entre as diversas jurisdições tributárias onde o grupo opera. Critérios consistentes devem ser aplicados de um ano para outro entre as entidades.",
+     "tipo": "N",
+     "tamanho": "7",
+     "decimal": "0",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [
+    {
+     "campo": "VL_REC_NAO_REL_EST",
+     "regras": [
+      {
+       "codigo": "REGRA_HABILITA_MOEDA_ESTRANGEIRA",
+       "texto": "Caso W100.TIP_MOEDA seja diferente de “Reais”, o campo W200.VL_REC_NAO_REL_EST deve ser habilitado. Caso contrário, o campo W200.VL_REC_NAO_REL_EST é desabilitado.",
+       "tipo": "Habilita"
+      },
+      {
+       "codigo": "REGRA_VALOR_ESTRANGEIRO_OBRIGATORIO",
+       "texto": "Verifica, quando W100.TIP_MOEDA é diferente de “Reais”, se o campo W200.VL_REC_NAO_REL_EST está preenchido.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_VALOR_ESTRANGEIRO_NAO_PREENCHER",
+       "texto": "Verifica, quando W100.TIP_MOEDA é igual a “Reais”, se o campo W200.VL_REC_NAO_REL_EST não está preenchido.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "VL_REC_NAO_REL",
+     "regras": [
+      {
+       "codigo": "REGRA_HABILITA_REAL",
+       "texto": "Caso W100.TIP_MOEDA seja igual a “Reais”, o campo W200.VL_REC_NAO_REL deve ser habilitado. Caso contrário, o campo W200.VL_REC_NAO_REL é desabilitado, pois é calculado automaticamente pelo sistema.",
+       "tipo": "Habilita"
+      },
+      {
+       "codigo": "REGRA_CALCULA_REAL_CNA",
+       "texto": "Caso o campo W100.TIP.MOEDA seja diferente de “Reais”, o campo W200.VL_REC_NAO_REL será igual ao resultado da multiplicação do campo W200.VL_REC_NAO_REL_EST pela taxa de câmbio para real em 31/12/ano da escrituração, conforme tabela do Sped (Disponibilizada no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "VL_REC_REL_EST",
+     "regras": [
+      {
+       "codigo": "REGRA_HABILITA_MOEDA_ESTRANGEIRA",
+       "texto": "Caso W100.TIP_MOEDA seja diferente de “Reais”, o campo W200.VL_REC_REL_EST deve ser habilitado. Caso contrário, o campo W200.VL_REC_REL_EST é desabilitado.",
+       "tipo": "Habilita"
+      },
+      {
+       "codigo": "REGRA_VALOR_ESTRANGEIRO_OBRIGATORIO",
+       "texto": "Verifica, quando W100.TIP_MOEDA é diferente de “Reais”, se o campo W200.VL_REC_REL_EST está preenchido.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_VALOR_ESTRANGEIRO_NAO_PREENCHER",
+       "texto": "Verifica, quando W100.TIP_MOEDA é igual a “Reais”, se o campo W200.VL_REC_REL_EST não está preenchido.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "VL_REC_REL",
+     "regras": [
+      {
+       "codigo": "REGRA_HABILITA_REAL",
+       "texto": "Caso W100.TIP_MOEDA seja igual a “Reais”, o campo W200.VL_REC_REL deve ser habilitado. Caso contrário, o campo W200.VL_REC_REL é desabilitado, pois é calculado automaticamente pelo sistema.",
+       "tipo": "Habilita"
+      },
+      {
+       "codigo": "REGRA_CALCULA_REAL_CNA",
+       "texto": "Caso o campo W100.TIP.MOEDA seja diferente de “Reais”, o campo W200.VL_REC_REL será igual ao resultado da multiplicação do campo W200.VL_REC_REL_EST pela taxa de câmbio para real em 31/12/ano da escrituração, conforme tabela do Sped (Disponibilizada no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "VL_REC_TOTAL_EST",
+     "regras": [
+      {
+       "codigo": "REGRA_VL_REC_TOTAL_EST_CNA",
+       "texto": "Verifica se o campo W200.VL_REC_TOTAL_EST é igual ao somatório dos campos W200.VL_REC_NAO_REL_EST e W200.VL_REC_REL_EST.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "VL_REC_TOTAL",
+     "regras": [
+      {
+       "codigo": "REGRA_VL_REC_TOTAL_CNA",
+       "texto": "Verifica se o campo W200.VL_REC_TOTAL é igual ao somatório dos campos W200.VL_REC_NAO_REL e W200.VL_REC_REL.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "VL_LUC_PREJ_ANTES_IR_EST",
+     "regras": [
+      {
+       "codigo": "REGRA_HABILITA_MOEDA_ESTRANGEIRA",
+       "texto": "Caso W100.TIP_MOEDA seja diferente de “Reais”, o campo W200.VL_LUC_PREJ_ANTES_IR_EST deve ser habilitado. Caso contrário, o campo W200.VL_LUC_PREJ_ANTES_IR_EST é desabilitado.",
+       "tipo": "Habilita"
+      },
+      {
+       "codigo": "REGRA_VALOR_ESTRANGEIRO_OBRIGATORIO",
+       "texto": "Verifica, quando W100.TIP_MOEDA é diferente de “Reais”, se o campo W200.VL_LUC_PREJ_ANTES_IR_EST está preenchido.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_VALOR_ESTRANGEIRO_NAO_PREENCHER",
+       "texto": "Verifica, quando W100.TIP_MOEDA é igual a “Reais”, se o campo W200.VL_LUC_PREJ_ANTES_IR_EST não está preenchido.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "VL_LUC_PREJ_ANTES_IR",
+     "regras": [
+      {
+       "codigo": "REGRA_HABILITA_REAL",
+       "texto": "Caso W100.TIP_MOEDA seja igual a “Reais”, o campo W200.VL_LUC_PREJ_ANTES_IR deve ser habilitado. Caso contrário, o campo W200.VL_LUC_PREJ_ANTES_IR é desabilitado.",
+       "tipo": "Habilita"
+      },
+      {
+       "codigo": "REGRA_CALCULA_REAL_CNA",
+       "texto": "Caso o campo W100.TIP.MOEDA seja diferente de “Reais”, o campo W200.VL_LUC_PREJ_ANTES_IR será igual ao resultado da multiplicação do campo W200.VL_LUC_PREJ_ANTES_IR_EST pela taxa de câmbio para real em 31/12/ano da escrituração, conforme tabela do Sped (Disponibilizada no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "VL_IR_PAGO_EST",
+     "regras": [
+      {
+       "codigo": "REGRA_HABILITA_MOEDA_ESTRANGEIRA",
+       "texto": "Caso W100.TIP_MOEDA seja diferente de “Reais”, o campo W200.VL_IR_PAGO_EST deve ser habilitado. Caso contrário, o campo W200.VL_IR_PAGO_EST é desabilitado, pois é calculado automaticamente pelo sistema.",
+       "tipo": "Habilita"
+      },
+      {
+       "codigo": "REGRA_VALOR_ESTRANGEIRO_OBRIGATORIO",
+       "texto": "Verifica, quando W100.TIP_MOEDA é diferente de “Reais”, se o campo W200.VL_IR_PAGO_EST está preenchido.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_VALOR_ESTRANGEIRO_NAO_PREENCHER",
+       "texto": "Verifica, quando W100.TIP_MOEDA é igual a “Reais”, se o campo W200.VL_IR_PAGO_EST não está preenchido.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "VL_IR_PAGO",
+     "regras": [
+      {
+       "codigo": "REGRA_HABILITA_REAL",
+       "texto": "Caso W100.TIP_MOEDA seja igual a “Reais”, o campo W200.VL_IR_PAGO deve ser habilitado. Caso contrário, o campo W200.VL_IR_PAGO é desabilitado, pois é calculado automaticamente pelo sistema.",
+       "tipo": "Habilita"
+      },
+      {
+       "codigo": "REGRA_CALCULA_REAL_CNA",
+       "texto": "Caso o campo W100.TIP.MOEDA seja diferente de “Reais”, o campo W200.VL_IR_PAGO será igual ao resultado da multiplicação do campo W200.VL_IR_PAGO_EST pela taxa de câmbio para real em 31/12/ano da escrituração, conforme tabela do Sped (Disponibilizada no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "VL_IR_DEVIDO_EST",
+     "regras": [
+      {
+       "codigo": "REGRA_HABILITA_MOEDA_ESTRANGEIRA",
+       "texto": "Caso W100.TIP_MOEDA seja diferente de “Reais”, o campo W200.VL_IR_DEVIDO_EST deve ser habilitado. Caso contrário, o campo W200.VL_IR_DEVIDO_EST é desabilitado.",
+       "tipo": "Habilita"
+      },
+      {
+       "codigo": "REGRA_VALOR_ESTRANGEIRO_OBRIGATORIO",
+       "texto": "Verifica, quando W100.TIP_MOEDA é diferente de “Reais”, se o campo W200.VL_IR_DEVIDO_EST está preenchido.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_VALOR_ESTRANGEIRO_NAO_PREENCHER",
+       "texto": "Verifica, quando W100.TIP_MOEDA é igual a “Reais”, se o campo W200.VL_IR_DEVIDO_EST não está preenchido.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "VL_IR_DEVIDO",
+     "regras": [
+      {
+       "codigo": "REGRA_HABILITA_REAL",
+       "texto": "Caso W100.TIP_MOEDA seja igual a “Reais”, o campo W200.VL_IR_DEVIDO deve ser habilitado. Caso contrário, o campo W200.VL_IR_DEVIDO é desabilitado, pois é calculado automaticamente pelo sistema.",
+       "tipo": "Habilita"
+      },
+      {
+       "codigo": "REGRA_CALCULA_REAL_CNA",
+       "texto": "Caso o campo W100.TIP.MOEDA seja diferente de “Reais”, o campo W200.VL_IR_DEVIDO será igual ao resultado da multiplicação do campo W200.VL_IR_DEVIDO_EST pela taxa de câmbio para real em 31/12/ano da escrituração, conforme tabela do Sped (Disponibilizada no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "VL_CAP_SOC_EST",
+     "regras": [
+      {
+       "codigo": "REGRA_HABILITA_MOEDA_ESTRANGEIRA",
+       "texto": "Caso W100.TIP_MOEDA seja diferente de “Reais”, o campo W200.VL_CAP_SOC_EST deve ser habilitado. Caso contrário, o campo W200.VL_CAP_SOC_EST é desabilitado.",
+       "tipo": "Habilita"
+      },
+      {
+       "codigo": "REGRA_VALOR_ESTRANGEIRO_OBRIGATORIO",
+       "texto": "Verifica, quando W100.TIP_MOEDA é diferente de “Reais”, se o campo W200.VL_CAP_SOC_EST está preenchido.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_VALOR_ESTRANGEIRO_NAO_PREENCHER",
+       "texto": "Verifica, quando W100.TIP_MOEDA é igual a “Reais”, se o campo W200.VL_CAP_SOC_EST não está preenchido.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "VL_CAP_SOC",
+     "regras": [
+      {
+       "codigo": "REGRA_HABILITA_REAL",
+       "texto": "Caso W100.TIP_MOEDA seja igual a “Reais”, o campo W200.VL_CAP_SOC deve ser habilitado. Caso contrário, o campo W200.VL_CAP_SOC é desabilitado, pois é calculado automaticamente pelo sistema.",
+       "tipo": "Habilita"
+      },
+      {
+       "codigo": "REGRA_CALCULA_REAL_CNA",
+       "texto": "Caso o campo W100.TIP.MOEDA seja diferente de “Reais”, o campo W200.VL_CAP_SOC será igual ao resultado da multiplicação do campo W200.VL_CAP_SOC_EST pela taxa de câmbio para real em 31/12/ano da escrituração, conforme tabela do Sped (Disponibilizada no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "VL_LUC_ACUM_EST",
+     "regras": [
+      {
+       "codigo": "REGRA_HABILITA_MOEDA_ESTRANGEIRA",
+       "texto": "Caso W100.TIP_MOEDA seja diferente de “Reais”, o campo W200.VL_LUC_ACUM_EST deve ser habilitado. Caso contrário, o campo W200.VL_LUC_ACUM_EST é desabilitado.",
+       "tipo": "Habilita"
+      },
+      {
+       "codigo": "REGRA_VALOR_ESTRANGEIRO_OBRIGATORIO",
+       "texto": "Verifica, quando W100.TIP_MOEDA é diferente de “Reais”, se o campo W200.VL_LUC_ACUM_EST está preenchido.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_VALOR_ESTRANGEIRO_NAO_PREENCHER",
+       "texto": "Verifica, quando W100.TIP_MOEDA é igual a “Reais”, se o campo W200.VL_LUC_ACUM_EST não está preenchido.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "VL_LUC_ACUM",
+     "regras": [
+      {
+       "codigo": "REGRA_HABILITA_REAL",
+       "texto": "Caso W100.TIP_MOEDA seja igual a “Reais”, o campo W200.LUC_ACUM deve ser habilitado. Caso contrário, o campo W200.LUC_ACUM é desabilitado, pois é calculado automaticamente pelo sistema.",
+       "tipo": "Habilita"
+      },
+      {
+       "codigo": "REGRA_CALCULA_REAL_CNA",
+       "texto": "Caso o campo W100.TIP.MOEDA seja diferente de “Reais”, o campo W200.VL_LUC_ACUM será igual ao resultado da multiplicação do campo W200.VL_LUC_ACUM_EST pela taxa de câmbio para real em 31/12/ano da escrituração, conforme tabela do Sped (Disponibilizada no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "VL_ATIV_TANG_EST",
+     "regras": [
+      {
+       "codigo": "REGRA_HABILITA_MOEDA_ESTRANGEIRA",
+       "texto": "Caso W100.TIP_MOEDA seja diferente de “Reais”, o campo W200.VL_ATIV_TANG_EST deve ser habilitado. Caso contrário, o campo W200.VL_ATIV_TANG_EST é desabilitado.",
+       "tipo": "Habilita"
+      },
+      {
+       "codigo": "REGRA_VALOR_ESTRANGEIRO_OBRIGATORIO",
+       "texto": "Verifica, quando W100.TIP_MOEDA é diferente de “Reais”, se o campo W200.VL_ATIV_TANG_EST está preenchido.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_VALOR_ESTRANGEIRO_NAO_PREENCHER",
+       "texto": "Verifica, quando W100.TIP_MOEDA é igual a “Reais”, se o campo W200.VL_ATIV_TANG_EST não está preenchido.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "VL_ATIV_TANG",
+     "regras": [
+      {
+       "codigo": "REGRA_HABILITA_REAL",
+       "texto": "Caso W100.TIP_MOEDA seja igual a “Reais”, o campo W200.ATIV_TANG deve ser habilitado. Caso contrário, o campo W200.ATIV_TANG é desabilitado, pois é calculado automaticamente pelo sistema.",
+       "tipo": "Habilita"
+      },
+      {
+       "codigo": "REGRA_CALCULA_REAL_CNA",
+       "texto": "Caso o campo W100.TIP.MOEDA seja diferente de “Reais”, o campo W200.VL_ATIV_TANG será igual ao resultado da multiplicação do campo W200.VL_ATIV_TANG_EST pela taxa de câmbio para real em 31/12/ano da escrituração, conforme tabela do Sped (Disponibilizada no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+       "tipo": "Erro"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|W200|21||100000000||200000000||300000000||30000000||4500000||3000000||100000000||25000000||50000000|2000|",
+    "|W200|: Identificação do tipo do registro.",
+    "|21|: Jurisdição de residência tributária da(s) entidade(s) integrante(s) do grupo multinacional.",
+    "||: Receitas provenientes de partes não relacionadas em moeda estrangeira.",
+    "|100000|: Receitas provenientes de partes não relacionadas em reais (R$ 100.000.000,00).",
+    "||: Receitas provenientes de partes relacionadas em moeda estrangeira.",
+    "|200000|: Receitas provenientes de partes relacionadas em reais (R$ 200.000.000,00).",
+    "||: Receita total em moeda estrangeira.",
+    "|300000|: Receita total em reais (R$ 300.000.000,00).",
+    "||: Lucro antes do IR em moeda estrangeira.",
+    "|30000|: Lucro antes do IR em reais (R$ 30.000.000,00).",
+    "||: IR pago em moeda estrangeira.",
+    "|4500|: IR pago em reais (R$ 4.500.000,00).",
+    "||: IR devido em moeda estrangeira.",
+    "|3000000|: IR devido em reais (R$ 3.000.000,00).",
+    "||: Capital social em moeda estrangeira.",
+    "|100000000|: Capital Social em reais (R$ 100.000.000,00).",
+    "||: Lucros acumulados em moeda estrangeira.",
+    "|25000000|: Lucros acumulados em reais.",
+    "||: Ativos tangíveis em moeda estrangeira.",
+    "|50000000|: Ativos tangíveis em reais.",
+    "|2000|: Número de empregados (2.000)."
+   ]
+  },
+  {
+   "codigo": "W250",
+   "nome": "Declaração País-a-País – Entidades Integrantes",
+   "ordem": 119,
+   "nivel": "4",
+   "ocorrencia": "[0;N]",
+   "chave": "—",
+   "entrada": "F",
+   "saida": "OC\n(Se (W100.IND_CONTROLADORA = \"S\" e W100.IND_ENTREGA = \"2\") ou W100.IND_ENTREGA = \"3\")\nOu\n(Se (W100.IND_CONTROLADORA = \"N\" e W100.IND_ENTREGA = \"3\")",
+   "descricao": [
+    "Neste registro deve ser apresenta a identificação de todas as entidades integrantes do grupo multinacional (incluindo a própria entidade declarante da DPP), por jurisdição (conforme as jurisdições indicadas no Registro W200 e a situação de entidades sem jurisdição de residência), e das atividades econômicas por elas desempenhadas.",
+    "A entidade declarante deve indicar a(s) principal(is) atividade(s) desempenhada(s) pela entidade integrante reportada nos campos 13 a 25 do registro W250, assinalando com “Sim” ao menos um campo dentre as opções disponíveis. As atividades que não sejam desempenhadas pela entidade integrante devem ser preenchidas com “Não”.",
+    "O campo 25 (“Outros”) somente deve ser preenchido com “Sim” caso as atividades desempenhadas pela entidade integrantes reportadas não possam ser adequadamente informadas dentre as opções disponíveis nos campos anteriores, ou a entidade exerça outra(s) atividades(s) não especificada(s) além da(s) já indicada(s) dentre as opções disponíveis nos campos anteriores. Caso o campo 25 seja assinalado com “Sim”, a(s) atividade(s) desempenhada(s) deve(m) ser descrita(s), em texto livre, no campo 26."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (W250).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[W250]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "JUR_DIFERENTE",
+     "descricao": "Jurisdição Tributária de Organização ou Incorporação, se diferente da jurisdição de residência para fins tributários, conforme tabela do Sped (Disponibilizada no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas): A entidade declarante deve informar a jurisdição sob cuja legislação a entidade integrante do grupo multinacional está estabelecida, se diferente da jurisdição de residência para fins tributários.",
+     "tipo": "C",
+     "tamanho": "2",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 3,
+     "nome": "NOME",
+     "descricao": "Nome/Razão Social da Entidade Integrante: Nome legal completo da entidade, incluindo a designação doméstica da forma legal, conforme indicado em seus documentos de constituição ou similares.\nCaso a entidade seja um estabelecimento permanente, deverá ser reportada com referência à jurisdição onde está situada, e seu nome deve ser seguido por (P.E.), designação que significa, em inglês, “Permanent Establishment” (Estabelecimento Permanente). Além disso, deve ser indicada a entidade legal ao qual o estabelecimento permanente está relacionado. Exemplo: ABC P.E. (XYZ Ltda – China)",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 4,
+     "nome": "TIN",
+     "descricao": "Tax Identification Number (TIN): Número de identificação fiscal utilizado pela administração tributária da jurisdição de residência para fins tributários da entidade integrante reportada. Caso a entidade integrante reportada possua esse número de identificação, a informação é de fornecimento obrigatório. Para entidades residentes no Brasil, deve ser informado o CNPJ.\nObservação: Caso não exista o número, deve ser incluída a expressão \"NOTIN\".",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 5,
+     "nome": "JURISDICAO_TIN",
+     "descricao": "Jurisdição de Emissão do TIN, conforme tabela do Sped (Disponibilizada no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+     "tipo": "C",
+     "tamanho": "2",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 6,
+     "nome": "NI",
+     "descricao": "Número de Identificação (NI): O campo deve ser preenchido em caso de existência de outro número de identificação da entidade, como um número de registro ou um número de identificação global da entidade (“Global Entity Identification Number” – EIN).",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 7,
+     "nome": "JURISDICAO_NI",
+     "descricao": "Jurisdição de Emissão do NI, conforme tabela do Sped (Disponibilizada no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).\nObservação: Caso a jurisdição de emissão do NI não seja conhecida, o campo deve ser deixado em branco.",
+     "tipo": "C",
+     "tamanho": "2",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 8,
+     "nome": "TIPO_NI",
+     "descricao": "Tipo do NI: Deve ser descrito, em texto livre, o tipo do número de identificação (NI) informado no W250.NI. Exemplo: número de identificação global da entidade (“Global Entity Identification Number” – EIN).",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 9,
+     "nome": "TIP_END",
+     "descricao": "Tipo do Endereço: A entidade declarante deve indicar, dentre as opções disponíveis de preenchimento do campo, o tipo do endereço da entidade integrante que está sendo reportada, o qual deverá ser descrito no campo seguinte.\nOECD302 - Residencial\nOECD303 - Comercial",
+     "tipo": "C",
+     "tamanho": "7",
+     "decimal": "—",
+     "valores": "[OECD301; OECD302; OECD303; OECD304; OECD305]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 10,
+     "nome": "ENDEREÇO",
+     "descricao": "Deve ser fornecido, em texto livre, o endereço completo de residência permanente da entidade integrante reportada.",
+     "tipo": "C",
+     "tamanho": "150",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 11,
+     "nome": "NUM_TEL",
+     "descricao": "Número de telefone completo da entidade integrante reportada.",
+     "tipo": "C",
+     "tamanho": "15",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 12,
+     "nome": "EMAIL",
+     "descricao": "Endereço de e-mail para contato com a entidade integrante reportada.",
+     "tipo": "C",
+     "tamanho": "115",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 13,
+     "nome": "ATIV_1",
+     "descricao": "Pesquisa e Desenvolvimento:\nS - Sim\nN – Não",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S; N]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 14,
+     "nome": "ATIV_2",
+     "descricao": "Gestão de Propriedade Intelectual:\nS - Sim\nN – Não",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S; N]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 15,
+     "nome": "ATIV_3",
+     "descricao": "Compras:\nS - Sim\nN – Não",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S; N]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 16,
+     "nome": "ATIV_4",
+     "descricao": "Manufatura ou Produção:\nS - Sim\nN – Não",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S; N]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 17,
+     "nome": "ATIV_5",
+     "descricao": "Vendas, Marketing ou Distribuição:\nS - Sim\nN – Não",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S; N]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 18,
+     "nome": "ATIV_6",
+     "descricao": "Serviços Administrativos, de Gestão ou de Suporte:\nS - Sim\nN – Não",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S; N]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 19,
+     "nome": "ATIV_7",
+     "descricao": "Prestação de Serviços a Partes Não Relacionadas:\nS - Sim\nN – Não",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S; N]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 20,
+     "nome": "ATIV_8",
+     "descricao": "Departamento Financeiro do Grupo:\nS - Sim\nN – Não",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S; N]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 21,
+     "nome": "ATIV_9",
+     "descricao": "Serviços Financeiros Regulamentados:\nS - Sim\nN – Não",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S; N]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 22,
+     "nome": "ATIV_10",
+     "descricao": "Seguro:\nS - Sim\nN – Não",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S; N]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 23,
+     "nome": "ATIV_11",
+     "descricao": "Gestão de Ações e Outros Instrumentos de Capital:\nS - Sim\nN – Não",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S; N]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 24,
+     "nome": "ATIV_12",
+     "descricao": "Inativa:\nS - Sim\nN – Não",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S; N]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 25,
+     "nome": "ATIV_13",
+     "descricao": "Outros:\nS - Sim\nN – Não",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S; N]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 26,
+     "nome": "DESC_OUTROS",
+     "descricao": "Descrição da Atividade Econômica Desempenhada, no caso de W250.ATIV_13 (Outros) igual a \"Sim\": Campo em texto livre para que a entidade declarante descreva as atividades econômicas desempenhadas pela entidade integrante reportada que não estejam especificadas dentre as opções disponíveis nos campos anteriores.\nConforme previsto na Instrução Normativa RFB nº 1.681/2016, artigo 9, § 3º, todas as informações em texto livre da Declaração País-a-País deverão ser fornecidas em um único idioma, a ser escolhido pela entidade declarante dentre as opções de português, inglês e espanhol.",
+     "tipo": "C",
+     "tamanho": "255",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 27,
+     "nome": "OBSERVAÇÃO",
+     "descricao": "Outras Informações: Campo de utilização opcional, para o fornecimento de informações adicionais sobre a entidade reportada.\nConforme previsto na Instrução Normativa RFB nº 1.681/2016, artigo 9, § 3º, todas as informações em texto livre da Declaração País-a-País deverão ser fornecidas em um único idioma, a ser escolhido pela entidade declarante dentre as opções de português, inglês e espanhol.",
+     "tipo": "C",
+     "tamanho": "1000",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_DECLARANTE_INTEGRANTE_PAIS_A_PAIS",
+     "texto": "Deve existir, pelo menos, um registro W250, com as oito primeiras posições do campo W250.TIN igual às oito primeiras posições do campo 0000.CNPJ."
+    },
+    {
+     "codigo": "REGRA_OBRIGATORIO_CAMPOS_W250",
+     "texto": "Pelo menos um dos campos 13 a 26 deve estar preenchido com o \"S\". Se a regra não for cumprida, o sistema gera um erro."
+    }
+   ],
+   "regrasCampo": [
+    {
+     "campo": "TIN",
+     "regras": [
+      {
+       "codigo": "REGRA_TIN_UNICO",
+       "texto": "Verifica se existe somente um registro W250 com o TIN informado em W250.TIN. A regra não é executada caso W250.TIN seja igual a “NOTIN”.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_VALIDA_TIN",
+       "texto": "Verifica, quando W250.JURISDICAO_TIN for igual a “BR” (Brasil), se o campo W250.TIN está preenchido com um CNPJ (aplica a REGRA_VALIDA_CNPJ: Verifica se o CNPJ informado é válido).",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "JURISDICAO_TIN",
+     "regras": [
+      {
+       "codigo": "REGRA_HABILITA_JURISDICAO_TIN",
+       "texto": "Caso W250.TIN seja diferente de “NOTIN”, o campo W250.JURISDICAO_TIN deve ser habilitado. Caso contrário, o campo W250.JURISDICAO_TIN é desabilitado.",
+       "tipo": "Habilita"
+      },
+      {
+       "codigo": "REGRA_JURISDICAO_TIN_OBRIGATORIO",
+       "texto": "Verifica, quando W250.TIN é diferente de “NOTIN”, se o campo W250.JURISDICAO_TIN está preenchido ou quando for igual a “NOTIN” e W100.IND_CONTROLADORA é igual a “N” e o campo W100.TIN_CONTROLADORA igual a “NOTIN”.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_JURISDICAO_TIN_NAO_PREENCHER",
+       "texto": "Verifica, quando W250.TIN é igual a “NOTIN”, se o campo W250.JURISDICAO_TIN não está preenchido, o campo W100.IND_CONTROLADORA é diferente “N” e o campo W100.TIN_CONTROLADORA diferente de “NOTIN”.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "JURISDICAO_NI",
+     "regras": [
+      {
+       "codigo": "REGRA_HABILITA_JURISDICAO_NI",
+       "texto": "Caso W250.NI esteja preenchido, o campo W250.JURISDICAO_NI deve ser habilitado. Caso contrário, o campo W250.JURISDICAO_NI é desabilitado.",
+       "tipo": "Habilita"
+      },
+      {
+       "codigo": "REGRA_JURISDICAO_IN_NAO_PREENCHER",
+       "texto": "Verifica, quando W250.NI não está preenchido, se o campo W250.JURISDICAO_NI não está preenchido.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "TIPO_NI",
+     "regras": [
+      {
+       "codigo": "REGRA_HABILITA_TIPO_NI",
+       "texto": "Caso W250.IN esteja preenchido, o campo W250.TIPO_NI deve ser habilitado. Caso contrário, o campo W250.TIPO_NI é desabilitado.",
+       "tipo": "Habilita"
+      },
+      {
+       "codigo": "REGRA_TIPO_NI_OBRIGATORIO",
+       "texto": "Verifica, quando W250.NI está preenchido, se o campo W250.TIPO_NI está preenchido.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_TIPO_NI_NAO_PREENCHER",
+       "texto": "Verifica, quando W250.NI não está preenchido, se o campo W250.TIPO_NI não está preenchido.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "DESC_OUTROS",
+     "regras": [
+      {
+       "codigo": "REGRA_HABILITA_DESC_OUTROS",
+       "texto": "Caso W250.ATIV_13 seja igual a “S” (Sim), o campo W250.DESC_OUTROS deve ser habilitado. Caso contrário, o campo W250.DESC_OUTROS é desabilitado.",
+       "tipo": "Habilita"
+      },
+      {
+       "codigo": "REGRA_DESC_OUTROS_OBRIGATORIO",
+       "texto": "Verifica, quando W250.ATIV_13 é igual a “S” (Sim), se o campo W250.DESC_OUTROS está preenchido.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_DESC_OUTROS_NAO_PREENCHER",
+       "texto": "Verifica, quando W250.ATIV_13 é igual a “N” (Não), se o campo W250.DESC_OUTROS não está preenchido.",
+       "tipo": "Erro"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|W250|DE|ENTIDADE INTEGRANTE 1|12345678|25||||OECD303|RUA ALFA 121 – PERDIZES – SÃO PAULO/SP – CEP: 20.000-000|551133334444|EMAIL@EMAIL.COM|S|N|N|N|N|N|N|N|N|N|N|N|N|||",
+    "|W200|: Identificação do tipo do registro.",
+    "|DE|: Alemanha.",
+    "|ENTIDADE INTEGRANTE 1|: Nome da entidade integrante.",
+    "|12345678|: Tax Identification Number (TIN).",
+    "|25|: Jurisdição de emissão do TIN.",
+    "||: Número de identificação.",
+    "||: Jurisdição de emissão do número de identificação.",
+    "||: Tipo do número de identificação.",
+    "|OECD303|: Tipo do Endereço (OECD303 = Comercial).",
+    "|RUA ALFA 121 – PERDIZES – SÃO PAULO/SP – CEP: 20.000-000|: Endereço.",
+    "|551133334444|: Telefone.",
+    "|EMAIL@EMAIL.COM|: Email.",
+    "|S|: Atividade de Pesquisa e Desenvolvimento (S = Sim).",
+    "|N|: Atividade de Gestão de Propriedade Intelectual (N = Não).",
+    "|N|: Atividade de Compras (N = Não).",
+    "|N|: Atividade de Manufatura ou Produção (N = Não).",
+    "|N|: Atividade de Vendas, Marketing ou Distribuição (N = Não).",
+    "|N|: Atividade de Serviços Administrativos de Gestão ou de Suporte (N = Não).",
+    "|N|: Atividade de Prestação de Serviços a Partes Não Relacionadas (N = Não).",
+    "|N|: Atividade de Departamento Financeito do Grupo (N = Não).",
+    "|N|: Atividade Serviços Financeiras Regulamentados (N = Não).",
+    "|N|: Atividade de Seguro (N = Não).",
+    "|N|: Atividade de Gestão de Ações e Outros Instrumentos de Capital (N = Não).",
+    "|N|: Inativa (N = Não).",
+    "|N|: Outros (N = Não).",
+    "||: Descrição de outras atividades econômicas desempenhadas.",
+    "||: Outras informações."
+   ]
+  },
+  {
+   "codigo": "W300",
+   "nome": "Observações Adicionais – Declaração País-a-País",
+   "ordem": 120,
+   "nivel": "2",
+   "ocorrencia": "[0;N]",
+   "chave": "—",
+   "entrada": "F",
+   "saida": "F",
+   "descricao": [
+    "Registro de utilização opcional pela entidade declarante, caso considere necessário fornecer esclarecimentos adicionais a respeito das informações reportadas na Declaração País-a-País (desde que não sejam referentes especificamente a uma entidade integrante do grupo, caso em que deve ser utilizado o campo 27 do Registro W250 relacionado à entidade em questão).",
+    "Neste registro, devem ser informados os padrões contábeis sob os quais os dados da DPP estão sendo reportados, bem como quais as fontes de dado utilizadas para a elaboração da Declaração. Em caso de mudança na fonte de dados de um ano para outro, a entidade declarante também deve utilizar esse Registro para justificar a decisão e as consequências sobre as informações apresentadas.",
+    "As informações adicionais devem ser fornecidas em texto livre, mediante preenchimento do campo 13 tantas vezes quantas forem necessárias. Opcionalmente, o contribuinte pode indicar sobre qual jurisdição as observações adicionais são referentes e/ou associá-las a um ou mais campos específicos da Declaração País-a-País, dentre as opções disponíveis, para facilitar a compreensão das informações.",
+    "Conforme previsto na Instrução Normativa RFB 1.681/2016, artigo 9, § 3 todas as informações em texto livre da Declaração País-a-País deverão ser fornecidas em um único idioma, a ser escolhido pela entidade declarante dentre as opções de português, inglês e espanhol."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (W300).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[W300]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "JURISDICAO",
+     "descricao": "Indicação da jurisdição tributária a que se referem as observações adicionais.\nCódigo do país, conforme tabela do Sped (Disponibilizada no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 3,
+     "nome": "IND_REC_NAO_REL",
+     "descricao": "O campo \"Receitas Provenientes de Partes Não Relacionadas\" (W200.VL_REC_NAO_REL) é tratado nestas observações adicionais?\nS - Sim\nN - Não",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S; N]",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 4,
+     "nome": "IND_REC_REL",
+     "descricao": "O campo \"Receitas Provenientes de Partes Relacionadas\" (W200.VL_REC_REL) é tratado nestas observações adicionais?\nS - Sim\nN - Não",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S; N]",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 5,
+     "nome": "IND_REC_TOTAL",
+     "descricao": "O campo \"Receita Total\" (W200.VL_REC_TOTAL) é tratado nestas observações adicionais?\nS - Sim\nN - Não",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S; N]",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 6,
+     "nome": "IND_LUC_PREJ_ANTES_IR",
+     "descricao": "O campo \"Lucro ou Prejuízo antes do IR\" (W200.VL_LUC_PREJ_ANTES_IR) é tratado nestas observações adicionais?\nS - Sim\nN - Não",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S; N]",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 7,
+     "nome": "IND_IR_PAGO",
+     "descricao": "O campo \"Imposto de Renda Pago\" (W200.VL_IR_PAGO) é tratado nestas observações adicionais?\nS - Sim\nN - Não",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S; N]",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 8,
+     "nome": "IND_IR_DEVIDO",
+     "descricao": "O campo \"Imposto de Renda Devido\" (W200.VL_IR_DEVIDO) é tratado nestas observações adicionais?\nS - Sim\nN - Não",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S; N]",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 9,
+     "nome": "IND_CAP_SOC",
+     "descricao": "O campo \"Capital Social\" (W200.VL_CAP_SOC) é tratado nestas observações adicionais?\nS - Sim\nN - Não",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S; N]",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 10,
+     "nome": "IND_LUC_ACUM",
+     "descricao": "O campo \"Lucros Acumulados\" (W200.VL_LUC_ACUM) é tratado nestas observações adicionais?\nS - Sim\nN - Não",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S; N]",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 11,
+     "nome": "IND_ATIV_TANG",
+     "descricao": "O campo \"Ativos Tangíveis\" (W200.VL_ATIV_TANG) é tratado nestas observações adicionais?\nS - Sim\nN - Não",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S; N]",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 12,
+     "nome": "IND_NUM_EMP",
+     "descricao": "O campo \"Número de Empregados\" (W200.NUM_EMP) é tratado nestas observações adicionais?\nS - Sim\nN - Não",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S; N]",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 13,
+     "nome": "OBSERVAÇÃO",
+     "descricao": "Observações.",
+     "tipo": "C",
+     "tamanho": "4000",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 14,
+     "nome": "FIM_OBSERVACAO",
+     "descricao": "Indicador de fim das observações. Texto fixo contendo “W300FIM”.",
+     "tipo": "C",
+     "tamanho": "7",
+     "decimal": "—",
+     "valores": "[W300FIM]",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [],
+   "exemplo": [
+    "|W300|105|S|N|N|N|N|N|N|N|N|N|OBSERVAÇÕES|W300FIM|",
+    "|W300|: Identificação do tipo do registro.",
+    "|105|: País.",
+    "|S|: O campo “Receitas Provenientes de Partes Não Relacionadas” é tratado nas observações adicionais? (S = Sim).",
+    "|N|: O campo “Receitas Provenientes de Parte Relacionadas” é tratado nas observações adicionais? (N = Não).",
+    "|N|: O campo “Receita Total” é tratado nas observações adicionais? (N = Não).",
+    "|N|: O campo “Lucros ou Prejuízos Antes do IR” é tratado nas observações adicionais? (N = Não).",
+    "|N|: O campo “Imposto de Renda Pago” é tratado nas observações adicionais? (N = Não).",
+    "|N|: O campo “Imposto de Renda Devido” é tratado nas observações adicionais? (N = Não).",
+    "|N|: O campo “Capital Social” é tratado nas observações adicionais? (N = Não).",
+    "|N|: O campo “Lucros Acumulados” é tratado nas observações adicionais? (N = Não).",
+    "|N|: O campo “Ativos Tangíveis” é tratado nas observações adicionais? (N = Não).",
+    "|N|: O campo “Número de Empregados” é tratado nas observações adicionais? (N = Não).",
+    "|OBSERVAÇÕES|: Observações.",
+    "|W300FIM|: Fim das observações."
+   ]
+  },
+  {
+   "codigo": "W990",
+   "nome": "Encerramento do Bloco W",
+   "ordem": 121,
+   "nivel": "1",
+   "ocorrencia": "[1;1]",
+   "chave": "[REG]",
+   "entrada": "F",
+   "saida": "O",
+   "descricao": [],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto fixo contendo a identificação do registro (W990).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[W990]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "QTD_LIN",
+     "descricao": "Quantidade total de registros do Bloco W.",
+     "tipo": "N",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [],
+   "exemplo": [
+    "|W990|200|",
+    "|W990|: Identificação do tipo do registro.",
+    "|200|: A quantidade total de registros do Bloco W é 200 (duzentos registros)."
+   ]
+  }
+ ]
+}

@@ -1,0 +1,288 @@
+{
+  "inicio": "natureza",
+  "perguntas": [
+    {
+      "id": "natureza",
+      "texto": "O que melhor descreve a organização?",
+      "ajuda": "Empresas públicas e sociedades de economia mista entram na primeira opção: a dispensa cita só órgãos públicos, autarquias e fundações públicas.",
+      "opcoes": [
+        {
+          "id": "pj",
+          "texto": "Empresa ou entidade com CNPJ",
+          "proximo": "atividade"
+        },
+        {
+          "id": "equiparada",
+          "texto": "Pessoa física equiparada a pessoa jurídica",
+          "proximo": "atividade"
+        },
+        {
+          "id": "publico",
+          "texto": "Órgão público, autarquia ou fundação pública",
+          "resultado": "dispensada-publico"
+        },
+        {
+          "id": "scp",
+          "texto": "Sociedade em Conta de Participação (SCP)",
+          "resultado": "obrigada-scp"
+        }
+      ]
+    },
+    {
+      "id": "atividade",
+      "texto": "Houve alguma atividade durante o ano?",
+      "ajuda": "Conta qualquer atividade operacional, não operacional, patrimonial ou financeira, inclusive rendimento de aplicação.",
+      "opcoes": [
+        {
+          "id": "sim",
+          "texto": "Sim, durante o ano",
+          "proximo": "simples"
+        },
+        {
+          "id": "parte",
+          "texto": "Só em parte do ano",
+          "proximo": "simples",
+          "complemento": "inatividade"
+        },
+        {
+          "id": "nao",
+          "texto": "Não, nenhuma em todo o ano",
+          "resultado": "dispensada-inativa"
+        }
+      ]
+    },
+    {
+      "id": "simples",
+      "texto": "Estava no Simples Nacional?",
+      "ajuda": "Considere o ano-calendário escolhido no topo da página.",
+      "opcoes": [
+        {
+          "id": "nao",
+          "texto": "Não",
+          "proximo": "ostensiva"
+        },
+        {
+          "id": "todo",
+          "texto": "Sim, o ano todo",
+          "resultado": "dispensada-simples"
+        },
+        {
+          "id": "saiu",
+          "texto": "Saiu do Simples durante o ano",
+          "proximo": "ostensiva",
+          "complemento": "simples-saida"
+        },
+        {
+          "id": "entrou",
+          "texto": "Entrou no Simples durante o ano",
+          "proximo": "ostensiva",
+          "complemento": "simples-entrada"
+        }
+      ]
+    },
+    {
+      "id": "ostensiva",
+      "texto": "É sócia ostensiva de alguma SCP?",
+      "ajuda": "A sócia ostensiva transmite a ECF de cada SCP, além da própria.",
+      "opcoes": [
+        {
+          "id": "nao",
+          "texto": "Não",
+          "proximo": "regime"
+        },
+        {
+          "id": "sim",
+          "texto": "Sim",
+          "proximo": "regime",
+          "complemento": "ostensiva"
+        }
+      ]
+    },
+    {
+      "id": "regime",
+      "texto": "Qual é a situação quanto ao IRPJ?",
+      "ajuda": "Se não souber, escolha a última opção: a obrigação de entregar não depende disso.",
+      "opcoes": [
+        {
+          "id": "real",
+          "texto": "Lucro real",
+          "resultado": "obrigada-real"
+        },
+        {
+          "id": "presumido",
+          "texto": "Lucro presumido",
+          "resultado": "obrigada-presumido"
+        },
+        {
+          "id": "arbitrado",
+          "texto": "Lucro arbitrado",
+          "resultado": "obrigada-arbitrado"
+        },
+        {
+          "id": "imune",
+          "texto": "Imune",
+          "resultado": "obrigada-imune"
+        },
+        {
+          "id": "isenta",
+          "texto": "Isenta",
+          "resultado": "obrigada-isenta"
+        },
+        {
+          "id": "nao-sei",
+          "texto": "Não sei",
+          "resultado": "obrigada-indefinido"
+        }
+      ]
+    }
+  ],
+  "resultados": [
+    {
+      "id": "dispensada-publico",
+      "situacao": "dispensada",
+      "titulo": "Não precisa entregar",
+      "iniciante": "Órgãos públicos, autarquias e fundações públicas estão fora da obrigação.",
+      "profissional": "Hipótese expressa de não aplicação da obrigatoriedade.",
+      "regras": [
+        "dispensa-publicos"
+      ]
+    },
+    {
+      "id": "dispensada-inativa",
+      "situacao": "dispensada",
+      "titulo": "Não precisa entregar a ECF",
+      "iniciante": "Sem nenhuma atividade o ano inteiro, a empresa é considerada inativa. Atenção: outras obrigações continuam valendo, e qualquer movimento, até um rendimento de aplicação, muda o resultado.",
+      "profissional": "Inatividade exige ausência total de atividade em todo o ano-calendário. Permanecem as obrigações acessórias da legislação específica.",
+      "regras": [
+        "dispensa-inativas",
+        "inatividade-anual"
+      ]
+    },
+    {
+      "id": "dispensada-simples",
+      "situacao": "dispensada",
+      "titulo": "Não precisa entregar",
+      "iniciante": "Quem ficou no Simples Nacional o ano todo está fora da obrigação.",
+      "profissional": "Hipótese expressa de não aplicação da obrigatoriedade a optantes.",
+      "regras": [
+        "dispensa-simples"
+      ]
+    },
+    {
+      "id": "obrigada-scp",
+      "situacao": "obrigada",
+      "titulo": "Sim: cada SCP tem a sua ECF",
+      "iniciante": "A SCP tem uma ECF só dela, transmitida à parte da ECF da sócia ostensiva.",
+      "profissional": "Transmissão separada para cada SCP, além da ECF da sócia ostensiva.",
+      "regras": [
+        "scp",
+        "prazo-regra-geral"
+      ]
+    },
+    {
+      "id": "obrigada-real",
+      "situacao": "obrigada",
+      "titulo": "Sim, precisa entregar",
+      "iniciante": "No lucro real, a ECF também é o livro em que o lucro é ajustado para calcular o imposto.",
+      "profissional": "A ECF é o Lalur. A recuperação da ECD é obrigatória e o programa exige a ECF anterior.",
+      "regras": [
+        "obrigados",
+        "ecf-lalur",
+        "recuperacao-obrigatoria",
+        "ecf-anterior-exigida",
+        "prazo-regra-geral"
+      ]
+    },
+    {
+      "id": "obrigada-presumido",
+      "situacao": "obrigada",
+      "titulo": "Sim, precisa entregar",
+      "iniciante": "O lucro presumido não dispensa a ECF. Dependendo do caso, ela também leva o livro caixa ou dados da ECD.",
+      "profissional": "Obrigada. Verifique a obrigatoriedade da ECD e a do Demonstrativo de Livro Caixa.",
+      "regras": [
+        "obrigados",
+        "recuperacao-obrigatoria",
+        "livro-caixa",
+        "prazo-regra-geral"
+      ]
+    },
+    {
+      "id": "obrigada-arbitrado",
+      "situacao": "obrigada",
+      "titulo": "Sim, precisa entregar",
+      "iniciante": "Quem apura pelo lucro arbitrado também entrega a ECF.",
+      "profissional": "Obrigada pela regra geral: o lucro arbitrado não consta entre as hipóteses de dispensa.",
+      "regras": [
+        "obrigados",
+        "prazo-regra-geral"
+      ]
+    },
+    {
+      "id": "obrigada-imune",
+      "situacao": "obrigada",
+      "titulo": "Sim, precisa entregar",
+      "iniciante": "Ser imune livra do imposto dentro das regras, mas não livra da ECF.",
+      "profissional": "Obrigada. Se também obrigada à ECD, recupera os dados na ECF.",
+      "regras": [
+        "obrigados",
+        "imunes-isentas",
+        "recuperacao-obrigatoria",
+        "prazo-regra-geral"
+      ]
+    },
+    {
+      "id": "obrigada-isenta",
+      "situacao": "obrigada",
+      "titulo": "Sim, precisa entregar",
+      "iniciante": "Ser isenta livra do imposto dentro das regras, mas não livra da ECF.",
+      "profissional": "Obrigada. Se também obrigada à ECD, recupera os dados na ECF.",
+      "regras": [
+        "obrigados",
+        "imunes-isentas",
+        "recuperacao-obrigatoria",
+        "prazo-regra-geral"
+      ]
+    },
+    {
+      "id": "obrigada-indefinido",
+      "situacao": "obrigada",
+      "titulo": "Sim, precisa entregar",
+      "iniciante": "Pelas suas respostas, a obrigação existe em qualquer regime. Confirme o regime com quem faz a contabilidade, porque ele muda o preenchimento.",
+      "profissional": "Fora das hipóteses de dispensa, a obrigação independe do regime. Ele define blocos e registros.",
+      "regras": [
+        "obrigados",
+        "prazo-regra-geral"
+      ]
+    }
+  ],
+  "complementos": [
+    {
+      "id": "inatividade",
+      "texto": "Movimento em parte do ano basta: a ECF cobre todo o período.",
+      "regras": [
+        "inatividade-anual"
+      ]
+    },
+    {
+      "id": "simples-saida",
+      "texto": "A ECF começa quando a empresa deixou o Simples.",
+      "regras": [
+        "simples-saida"
+      ]
+    },
+    {
+      "id": "simples-entrada",
+      "texto": "A ECF vai até o dia anterior à entrada no Simples.",
+      "regras": [
+        "simples-entrada"
+      ]
+    },
+    {
+      "id": "ostensiva",
+      "texto": "Além da própria ECF, transmita uma para cada SCP.",
+      "regras": [
+        "scp"
+      ]
+    }
+  ]
+}

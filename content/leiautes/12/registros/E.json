@@ -1,0 +1,637 @@
+{
+ "rastreio": {
+  "id": "arq-12-e",
+  "fonte": {
+   "id": "manual-12",
+   "url": "https://www.gov.br/sped/pt-br/assuntos/escrituracoes-digitais/ecf/manuais-e-documentos-tecnicos",
+   "trecho": "Seção do bloco E"
+  },
+  "norma": "ADE Cofis nº 2/2026",
+  "leiautes": [
+   "12"
+  ],
+  "vigencia": {
+   "acNormal": [
+    2025
+   ],
+   "situacaoEspecial": [
+    2026
+   ]
+  },
+  "verificadoEm": "2026-11-24",
+  "status": "extraido"
+ },
+ "bloco": "E",
+ "descricao": "Armazena, da ECF recuperada do período imediatamente anterior, os saldos finais das contas referenciais e da parte B (do e-LALUR e e-LACS).\nCalcula os saldos contábeis de acordo com o período de apuração do tributo.",
+ "registros": [
+  {
+   "codigo": "E001",
+   "nome": "Abertura do Bloco E",
+   "ordem": 21,
+   "nivel": "1",
+   "ocorrencia": "[1;1]",
+   "chave": "[REG]",
+   "entrada": "O",
+   "saida": "O",
+   "descricao": [],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto fixo contendo a identificação do registro (E001).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[E001]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "IND_DAD",
+     "descricao": "Indicador de movimento:\n0 – Bloco com dados informados.\n1 – Bloco sem dados informados.",
+     "tipo": "N",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[0;1]",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_OCORRENCIA_UNITARIA_ARQ",
+     "texto": "Verifica se registro ocorreu apenas uma vez por arquivo, considerando a chave “E001” (REG). Se a regra não for cumprida, a ECF gera um erro."
+    }
+   ],
+   "regrasCampo": [],
+   "exemplo": []
+  },
+  {
+   "codigo": "E010",
+   "nome": "Saldos Finais Recuperados da ECF Anterior",
+   "ordem": 22,
+   "nivel": "2",
+   "ocorrencia": "[0;N]",
+   "chave": "COD_CTA_REF",
+   "entrada": "N",
+   "saida": "OC\n(Se houver recuperação de dados da ECD)",
+   "descricao": [
+    "Este registro armazena as informações provenientes dos registros L100/L300 ou P100/P150 ou U100/U150 da ECF do período imediatamente anterior. O usuário solicitará a recuperação dos dados através da funcionalidade “Recuperar Saldos da ECF anterior”."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (E010).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[E010]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "COD_NAT",
+     "descricao": "Natureza da Conta.",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "COD_CTA_REF",
+     "descricao": "Código da Conta Referencial (Analíticas e Sintéticas).",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 4,
+     "nome": "DESC_CTA_REF",
+     "descricao": "Descrição da Conta Referencial.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 5,
+     "nome": "VAL_CTA_REF",
+     "descricao": "Valor Total da Conta Referencial.",
+     "tipo": "NS",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 6,
+     "nome": "IND_VAL_CTA_REF",
+     "descricao": "Indicador do Valor Total da Conta Referencial:\nC – Credor\nD – Devedor",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[D; C]",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [],
+   "exemplo": []
+  },
+  {
+   "codigo": "E015",
+   "nome": "Contas Contábeis Mapeadas",
+   "ordem": 23,
+   "nivel": "3",
+   "ocorrencia": "[0;N]",
+   "chave": "COD_CTA + COD_CCUS",
+   "entrada": "N",
+   "saida": "OC\n(Se houver recuperação de dados da ECD)",
+   "descricao": [
+    "Este registro armazena as informações provenientes dos registros K155/K156 da ECF do período imediatamente anterior. O usuário solicitará a recuperação dos dados através da funcionalidade “Recuperar Saldos da ECF anterior”."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (E015).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[E015]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "COD_CTA",
+     "descricao": "Código da Conta Contábil Analítica (K155).",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "COD_CCUS",
+     "descricao": "Código do Centro de Custos.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 4,
+     "nome": "DESC_CTA",
+     "descricao": "Descrição da Conta.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 5,
+     "nome": "VAL_CTA",
+     "descricao": "Saldo Final da Conta: Saldo final da conta do registro K156 do último período da ECF imediatamente anterior, referente a conta contábil e centro de custos identificados no registro K155 pai.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 6,
+     "nome": "IND_VAL_CTA",
+     "descricao": "Indicador do Saldo Final da Conta:\nC – Credor\nD – Devedor",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[D; C]",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_EXISTENCIA_MAPEAMENTO",
+     "texto": "Verifica se o mapeamento recuperado existe no mapeamento atual. O erro ocorre se (0010.FORMA_TRIB = “1”, “2”, “3” ou “4” ou (0010.FORMA_TRIB = “5”, “7”, “8” ou “9” e 0010.TIP_ESC_PRE = “C”) e quando existir o registro E015, não existir pelo menos um registro J051 considerando:\nE015.COD_CTA = J050.COD_CTA\nE015.COD_CCUS = J051.COD_CCUS\nE010.COD_CTA_REF = J051.COD_CTA_REF\nE010.VAL_CTA diferente de zero\nSe a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_EXISTENCIA_K155_E015",
+     "texto": "Verifica se o saldo inicial (K155) é igual ao somatório do saldo do registro E015 para a mesma conta contábil e centro de custo. O erro ocorre se existir ECF anterior recuperada (0000.HASH_ECF_ANTERIOR é diferente de vazio) e, para cada conta e centro de custo do registro K155 do primeiro período de apuração (K030.DT_INI = 0000.DT_INI) não existir um C157 para a mesma conta e centro de custo subordinado a um C150, onde:\nC150.DT_INI é maior ou igual a K030.DT_INI\nC150.DT_FIN é menor ou igual a K030.DT_FIN\ne o o saldo inicial (K155.VL_SLD_INI) for diferente do somatório de E015.VAL_CTA, onde:\nE015.COD_CTA = K155.COD_CTA; e\nE015.COD_CCUS = K155.COD_CCUS.\nSe a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_COMPATIBILIDADE_C155_E015",
+     "texto": "Verifica se o saldo final da ECF anterior é igual ao saldo inicial da primeira ECD do período dos registros C155. O erro ocorre se existir ECF anterior recuperada (0000.HASH_ECF_ANTERIOR é diferente de vazio) e, considerando os registros filhos de C150, onde (C150.DT_INI = 0000.DT_INI): Para cada conta e centro de custo do registro C155 que não possua filhos C157, o valor inicial do C155 é diferente de zero e não existe a mesma conta e centro de custo no registro E015 e a conta é C040.COD_NAT diferente de “4” (contas de resultado).\nSe a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_COMPATIBILIDADE_E015_C155_C157",
+     "texto": "Verifica a compatibilidade entre o registro E015 e os registros C155 ou C157. Para cada somatório por conta e centro de custo do registro E015 maior que zero e considerando os filos de C150, onde (C050.DT_INI = 0000.DT_INI):\nSe existir C157 para esta conta e centro de custos, o erro ocorre se o somatório de E015 for diferente do somatório de C157 para a mesma conta e centro de custos.\nSe não existir C157 para esta conta e centro de custos, o erro ocorre se o somatório de E015 for diferente do valor do saldo inicial de C155 para a mesma conta e centro de custos.\nSe a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_COMPATIBILIDADE_C157_E015",
+     "texto": "Verifica se o saldo final da ECF anterior é igual ao saldo inicial da primeira ECD do período dos registros C157. O erro ocorre se existir ECF anterior recuperada (0000.HASH_ECF_ANTERIOR é diferente de vazio) e, considerando os registros filhos de C150, onde (C150.DT_INI = 0000.DT_INI): Para cada conta e centro de custo do registro C157, o valor inicial do C157 é diferente de zero e não existe a mesma conta e centro de custo no registro E015 e a conta é C040.COD_NAT diferente de “4” (contas de resultado).\nSe a regra não for cumprida, a ECF gera um aviso."
+    }
+   ],
+   "regrasCampo": [],
+   "exemplo": []
+  },
+  {
+   "codigo": "E020",
+   "nome": "Saldos Finais das Contas na Parte B do e-Lalur da ECF Imediatamente Anterior",
+   "ordem": 24,
+   "nivel": "2",
+   "ocorrencia": "[0;N]",
+   "chave": "COD_CTA_B + TRIBUTO",
+   "entrada": "N",
+   "saida": "OC\n(Se houver recuperação de dados da ECD)",
+   "descricao": [
+    "Recuperação dos saldos finais das contas da parte B do e-LALUR que serão replicados automaticamente pelo sistema para o registro M010/M500."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (E020).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[E020]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "COD_CTA_B",
+     "descricao": "Código da Conta da Parte B: Código unívoco atribuído pela empresa à conta no e-Lalur.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "DESC_CTA_LAL",
+     "descricao": "Descrição da Conta.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 4,
+     "nome": "DT_AP_LAL",
+     "descricao": "Data de Criação: Data final do período de apuração em que a conta foi criada.",
+     "tipo": "C",
+     "tamanho": "8",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 5,
+     "nome": "DT_LIM_LAL",
+     "descricao": "Data Limite para a Exclusão, Adição ou Compensação do Valor Controlado, se houver.",
+     "tipo": "C",
+     "tamanho": "8",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 6,
+     "nome": "TRIBUTO",
+     "descricao": "Indicador de Tributo da Adição/Exclusão:\nI – Imposto de Renda Pessoa Jurídica\nC – Contribuição Social sobre o Lucro Líquido\nA – Ambos (IRPJ e CSLL)",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[I; C; A]",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 7,
+     "nome": "VL_SALDO_FIN",
+     "descricao": "Saldo Final do Período Anterior.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 8,
+     "nome": "IND_VL_SALDO_FIN",
+     "descricao": "Indicador de Saldo Final do Período Anterior:\nD – Para prejuízos ou valores que reduzam o lucro real ou a base de cálculo da contribuição social em períodos subsequentes.\nC – Para valores que aumentam o lucro real ou a base de cálculo na contribuição social em períodos subsequentes.",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[D; C]",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 9,
+     "nome": "COD_PB_RFB",
+     "descricao": "Código da tabela padrão da Parte B.",
+     "tipo": "C",
+     "tamanho": "6",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [],
+   "exemplo": []
+  },
+  {
+   "codigo": "E030",
+   "nome": "Identificação do Período",
+   "ordem": 25,
+   "nivel": "2",
+   "ocorrencia": "[0;13]",
+   "chave": "PER_APUR",
+   "entrada": "N",
+   "saida": "OC\n(Se houver recuperação de dados da ECD)",
+   "descricao": [
+    "Registro preenchido pelo sistema ao executar a funcionalidade de recuperar ECD. Calculado de acordo com os períodos fiscais determinados no Bloco 0:",
+    "- Trimestral;",
+    "- Anual; ou",
+    "- Mensal (para balanços de suspensão e redução)."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (E030).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[E030]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "DT_INI",
+     "descricao": "Data do Início do Período",
+     "tipo": "N",
+     "tamanho": "8",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "DT_FIN",
+     "descricao": "Data do Fim do período",
+     "tipo": "N",
+     "tamanho": "8",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 4,
+     "nome": "PER_APUR",
+     "descricao": "Período de Apuração [para 0010.FORMA_APUR = “A”]:\nA00 – Anual\nA01 – Rec. Bruta de janeiro /Balanço suspensão redução até janeiro\nA02 – Rec. Bruta de fevereiro /Balanço suspensão redução até fevereiro\nA03 – Rec. Bruta de março /Balanço suspensão redução até março\nA04 – Rec. Bruta de abril /Balanço suspensão redução até abril\nA05 – Rec. Bruta de maio /Balanço suspensão redução até maio\nA06 – Rec. Bruta de junho /Balanço suspensão redução até junho\nA07 – Rec. Bruta de julho /Balanço suspensão redução até julho\nA08 – Rec. Bruta de agosto /Balanço suspensão redução até agosto\nA09 – Rec. Bruta de setembro /Balanço suspensão redução até setembro\nA10 – Rec. Bruta de outubro/Balanço suspensão redução até outubro\nA11 – Rec. Bruta de novembro /Balanço suspensão redução até novembro\nA12 – Rec. Bruta de dezembro/Balanço suspensão redução até dezembro\nIndicador do período de referência [para 0010.FORMA_APUR = “T” OU (0010.FORMA_APUR = “A” E 0010.FORMA_TRIB = “2”)]:\nT01 – 1º Trimestre\nT02 – 2º Trimestre\nT03 – 3º Trimestre\nT04 – 4º Trimestre\nRegra: O período deve estar compreendido entre a data início e data fim da escrituração.\nRegra:\nSE 0010.FORMA_APUR = “A”\n- Deve existir um registro A00.\n- Deve existir um registro [A01..A012] para cada mês marcado no 0010.MES_BAL_RED [1..12] como “B”\nSE 0010.FORMA_APUR = “T”\n- Deve existir um registro [T01..T04] para cada trimestre marcado no 0010.FORMA_TRIB_PER[1..4] como “R”",
+     "tipo": "C",
+     "tamanho": "3",
+     "decimal": "—",
+     "valores": "[A00; A01; A02; A03; A04; A05; A06; A07; A08; A09; A10; A11; A12; T01; T02; T03; T04]",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [],
+   "exemplo": []
+  },
+  {
+   "codigo": "E155",
+   "nome": "Detalhes dos Saldos Contábeis Calculados com Base nas ECD",
+   "ordem": 26,
+   "nivel": "3",
+   "ocorrencia": "[0;N]",
+   "chave": "COD_CTA + COD_CCUS",
+   "entrada": "N",
+   "saida": "OC\n(Se houver recuperação de dados da ECD)",
+   "descricao": [
+    "Registro preenchido pelo sistema ao executar a funcionalidade de recuperar ECD. Calculado a partir dos registros recuperados C155 de acordo com os períodos fiscais."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (E155).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[E155]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "COD_CTA",
+     "descricao": "Código da Conta Analítica.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "COD_CCUS",
+     "descricao": "Código do Centro de Custos.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 4,
+     "nome": "VL_SLD_INI",
+     "descricao": "Valor do Saldo Inicial do Período.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 5,
+     "nome": "IND_VL_SLD_INI",
+     "descricao": "Indicador da Situação do Saldo Inicial:\nD – Devedor\nC – Credor",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[D; C]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 6,
+     "nome": "VL_DEB",
+     "descricao": "Valor Total dos Débitos no Período.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 7,
+     "nome": "VL_CRED",
+     "descricao": "Valor Total dos Créditos no Período.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 8,
+     "nome": "VL_SLD_FIN",
+     "descricao": "Valor do Saldo Final do Período.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 9,
+     "nome": "IND_VL_SLD_FIN",
+     "descricao": "Indicador da Situação do Saldo Final:\nD – Devedor\nC – Credor",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[D; C]",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_CONTA_FORA_ULTIMO_PLANO_DE_CONTAS",
+     "texto": "O erro ocorre se a conta calculada no registro E155 não existir no plano de contas da ECD com C040.DT_FIN igual a 0000.DT_FIN. Nessa situação, a conta não constará no registro E155."
+    }
+   ],
+   "regrasCampo": [],
+   "exemplo": []
+  },
+  {
+   "codigo": "E355",
+   "nome": "Detalhes dos Saldos das Contas de Resultado Antes do Encerramento",
+   "ordem": 27,
+   "nivel": "3",
+   "ocorrencia": "[0;N]",
+   "chave": "COD_CTA + COD_CCUS",
+   "entrada": "N",
+   "saida": "OC\n(Se houver recuperação de dados da ECD)",
+   "descricao": [
+    "Registro preenchido pelo sistema ao executar a funcionalidade de recuperar ECD. Calculado a partir dos registros recuperados C355 de acordo com os períodos fiscais."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (E355).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[E355]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "COD_CTA",
+     "descricao": "Código da Conta Analítica de Resultado.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "COD_CCUS",
+     "descricao": "Código do Centro de Custos.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 4,
+     "nome": "VL_SLD_FIN",
+     "descricao": "Valor do Saldo Final Antes do Lançamento de Encerramento.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 5,
+     "nome": "IND_VL_SLD_FIN",
+     "descricao": "Indicador da Situação do Saldo Final:\nD – Devedor.\nC – Credor.",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[D; C]",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_CONTA_FORA_ULTIMO_PLANO_DE_CONTAS",
+     "texto": "O erro ocorre se a conta calculada no registro E355 não existir no plano de contas da ECD com C040.DT_FIN igual a 0000.DT_FIN. Nessa situação, a conta não constará no registro E355."
+    }
+   ],
+   "regrasCampo": [],
+   "exemplo": []
+  },
+  {
+   "codigo": "E990",
+   "nome": "Encerramento do Bloco E",
+   "ordem": 28,
+   "nivel": "1",
+   "ocorrencia": "[1;1]",
+   "chave": "[REG]",
+   "entrada": "N",
+   "saida": "O",
+   "descricao": [],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto fixo contendo a identificação do registro (E990).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[E990]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "QTD_LIN",
+     "descricao": "Quantidade total de registros do Bloco E.",
+     "tipo": "N",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [],
+   "exemplo": []
+  }
+ ]
+}

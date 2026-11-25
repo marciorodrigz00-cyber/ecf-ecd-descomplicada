@@ -1,0 +1,35 @@
+{
+  "id": "nov-tabelas-dinamicas-setembro-2026",
+  "slug": "tabelas-dinamicas-setembro-2026",
+  "data": "2026-09-24",
+  "tipo": "leiaute",
+  "titulo": "Tabelas dinâmicas do leiaute 12 atualizadas",
+  "iniciante": "A Receita mudou linhas das tabelas que o programa usa para calcular os impostos. Quem usa sistema próprio precisa da versão nova.",
+  "profissional": "Planos referenciais do sistema financeiro (perfil B), linhas novas em N600 e N610 e datas de início e fim alteradas em N620 e N630. O mesmo comunicado lista as mudanças de julho.",
+  "fazer": "Baixe o arquivo atual na página de manuais e confira as linhas que a empresa usa.",
+  "registros": [
+    "N600",
+    "N610",
+    "N620",
+    "N630"
+  ],
+  "fonte": {
+    "id": "sped-comunicados",
+    "url": "https://www.gov.br/sped/pt-br/assuntos/comunicados/ecf/atualizacoes-do-arquivo-de-tabelas-dinamicas-leiaute-12",
+    "trecho": "Bloco de 24/09/2026"
+  },
+  "norma": "Tabelas dinâmicas da ECF",
+  "leiautes": [
+    "12"
+  ],
+  "vigencia": {
+    "acNormal": [
+      2025
+    ],
+    "situacaoEspecial": [
+      2026
+    ]
+  },
+  "verificadoEm": "2026-11-25",
+  "status": "conferido"
+}

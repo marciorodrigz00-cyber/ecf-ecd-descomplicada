@@ -1,0 +1,456 @@
+{
+ "rastreio": {
+  "id": "arq-12-9",
+  "fonte": {
+   "id": "manual-12",
+   "url": "https://www.gov.br/sped/pt-br/assuntos/escrituracoes-digitais/ecf/manuais-e-documentos-tecnicos",
+   "trecho": "Seção do bloco 9"
+  },
+  "norma": "ADE Cofis nº 2/2026",
+  "leiautes": [
+   "12"
+  ],
+  "vigencia": {
+   "acNormal": [
+    2025
+   ],
+   "situacaoEspecial": [
+    2026
+   ]
+  },
+  "verificadoEm": "2026-11-24",
+  "status": "extraido"
+ },
+ "bloco": "9",
+ "descricao": "Encerra o arquivo digital.",
+ "registros": [
+  {
+   "codigo": "9001",
+   "nome": "Abertura do Bloco 9",
+   "ordem": 175,
+   "nivel": "1",
+   "ocorrencia": "[1;1]",
+   "chave": "[REG]",
+   "entrada": "O",
+   "saida": "O",
+   "descricao": [
+    "Este registro indica se o Bloco 9 possui dados informados."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto fixo contendo a identificação do registro (9001).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[9001]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "IND_DAD",
+     "descricao": "Indicador de movimento:\n0 – Bloco com dados informados.\n1 – Bloco sem dados informados.",
+     "tipo": "N",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[0;1]",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_OCORRENCIA_UNITARIA_ARQ",
+     "texto": "Verifica se registro ocorreu apenas uma vez por arquivo, considerando a chave “9001” (REG). Se a regra não for cumprida, a ECF gera um erro."
+    }
+   ],
+   "regrasCampo": [],
+   "exemplo": [
+    "|9001|0|",
+    "|9001|: Identificação do tipo do registro.",
+    "|0|: Indica que o bloco possui dados informados."
+   ]
+  },
+  {
+   "codigo": "9100",
+   "nome": "Avisos da Escrituração",
+   "ordem": 176,
+   "nivel": "2",
+   "ocorrencia": "[1;N]",
+   "chave": "—",
+   "entrada": "F",
+   "saida": "O",
+   "descricao": [
+    "Registro inserido pelo sistema com as divergências apontadas pelas regras que geram advertências."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto fixo contendo a identificação do registro (9100).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[9100]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "NOM_REGRA",
+     "descricao": "Identificação da regra.",
+     "tipo": "N",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "MSG_REGRA",
+     "descricao": "Mensagem: Mensagem associada ao aviso.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 4,
+     "nome": "REGISTRO",
+     "descricao": "Registro: Registro onde ocorreu o aviso.",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 5,
+     "nome": "CAMPO",
+     "descricao": "Campo: Nome do campo no registro onde ocorreu.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 6,
+     "nome": "CONTEÚDO",
+     "descricao": "Conteúdo: Conteúdo do campo – Valor preenchido pelo usuário.",
+     "tipo": "NS",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 7,
+     "nome": "VALOR_ESPERADO",
+     "descricao": "Valor Original ou Calculado: Valor original ou calculado que era esperado como conteúdo do campo.",
+     "tipo": "NS",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 8,
+     "nome": "PER_APUR",
+     "descricao": "Período de Apuração Fiscal.",
+     "tipo": "C",
+     "tamanho": "3",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 9,
+     "nome": "COD_CTA",
+     "descricao": "Código da Conta.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 10,
+     "nome": "COD_CCUS",
+     "descricao": "Centro de Custos.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 11,
+     "nome": "COD_CTA_REF",
+     "descricao": "Código da Conta Referencial.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 12,
+     "nome": "CODIGO",
+     "descricao": "Código da linha na tabela dinâmica.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 13,
+     "nome": "NUM_ORDEM",
+     "descricao": "Número de Ordem (X300)",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 14,
+     "nome": "CNPJ_ESTAB",
+     "descricao": "CNPJ do Estabelecimento (Y540).",
+     "tipo": "C",
+     "tamanho": "14",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 15,
+     "nome": "CNAE",
+     "descricao": "CNAE (Y540)",
+     "tipo": "N",
+     "tamanho": "7",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 16,
+     "nome": "COD_CTA_B",
+     "descricao": "Código da Conta da Parte B.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 17,
+     "nome": "COD_TRIBUTO",
+     "descricao": "Tributo Relacionado à Conta da Parte B.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [],
+   "exemplo": []
+  },
+  {
+   "codigo": "9900",
+   "nome": "Registros do Arquivo",
+   "ordem": 177,
+   "nivel": "2",
+   "ocorrencia": "[1;N]",
+   "chave": "—",
+   "entrada": "O",
+   "saida": "O",
+   "descricao": [
+    "Este registro informa a quantidade total de registros por tipo de registro do arquivo da ECF. Devem ser mostradas a quantidade de ocorrências de todos os registros que aparecem no arquivo da ECF, inclusive do próprio registro 9900, que será preenchido por último. Além disso, deve ser informado o código da versão da tabela dinâmica utilizada (atualmente a versão é 1.00) e a identificação da tabela dinâmica utilizada (será preenchido pelo sistema). Ambos os campos (9900.VERSAO e 9900.ID_TAB_DIN), atualmente, são não obrigatórios."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto fixo contendo a identificação do registro (9900).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[9900]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "REG_BLC",
+     "descricao": "Registro: Registro que será totalizado em 9900.QTD_REG_BLC.",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "QTD_REG_BLC",
+     "descricao": "Total de Registros por Tipo: Total de registros do tipo informado em 9900.REG_BLC.",
+     "tipo": "N",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 4,
+     "nome": "VERSAO",
+     "descricao": "Versão: Versão da tabela dinâmica utilizada. Será preenchido somente para registros dinâmicos.",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 5,
+     "nome": "ID_TAB_DIN",
+     "descricao": "Identificação da Tabela Dinâmica Utilizada.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [],
+   "exemplo": [
+    "|9900|0000|1|||",
+    "|9900|: Identificação do tipo do registro.",
+    "|0000|: Será mostrado o total de ocorrência do registro 0000.",
+    "|1|: A quantidade total do registro 00000 no arquivo da ECF é 1.",
+    "|9900|0001|1|||",
+    "|9900|: Identificação do tipo do registro.",
+    "|0001|: Será mostrado o total de ocorrência do registro 0001.",
+    "|1|: A quantidade total do registro 0001 no arquivo da ECF é 1.",
+    "|9900|0010|1|||",
+    "|9900|: Identificação do tipo do registro.",
+    "|0010|: Será mostrado o total de ocorrência do registro 0010.",
+    "|1|: A quantidade total do registro 0010 no arquivo da ECF é 1.",
+    "|9900|0020|1|||",
+    "|9900|: Identificação do tipo do registro.",
+    "|0020|: Será mostrado o total de ocorrência do registro 0020.",
+    "|1|: A quantidade total do registro 0020 no arquivo da ECF é 1.",
+    "|9900|U100|302|11|SPEDECF_DINAMICA_U100_A|",
+    "|9900|: Identificação do tipo do registro.",
+    "|U100|: Será mostrado o total de ocorrência do registro U100.",
+    "|302|: A quantidade total do registro U100 no arquivo da ECF é 302.",
+    "|11|: Versão 11 da tabela dinâmica.",
+    "|SPEDECF_DINAMICA_U100_A|: Tabela dinâmica utilizada.",
+    "|9900|U150|213|11|SPEDECF_DINAMICA_U150_A|",
+    "|9900|: Identificação do tipo do registro.",
+    "|U150|: Será mostrado o total de ocorrência do registro U150.",
+    "|213|: A quantidade total do registro U150 no arquivo da ECF é 213.",
+    "|11|: Versão 11 da tabela dinâmica.",
+    "|SPEDECF_DINAMICA_U150_A|: Tabela dinâmica utilizada.",
+    "|9900|9990|1|||",
+    "|9900|: Identificação do tipo do registro.",
+    "|9990|: Será mostrado o total de ocorrência do registro 9990.",
+    "|1|: A quantidade total do registro 9990 no arquivo da ECF é 1.",
+    "|9900|9999|1|||",
+    "|9900|: Identificação do tipo do registro.",
+    "|9999|: Será mostrado o total de ocorrência do registro 9999.",
+    "|1|: A quantidade total do registro 9999 no arquivo da ECF é 1.",
+    "|9900|9900|43|||",
+    "|9900|: Identificação do tipo do registro.",
+    "|9900|: Será mostrado o total de ocorrência do registro 9900.",
+    "|43|: A quantidade total do registro 9900 no arquivo da ECF é 43."
+   ]
+  },
+  {
+   "codigo": "9990",
+   "nome": "Encerramento do Bloco 9",
+   "ordem": 178,
+   "nivel": "1",
+   "ocorrencia": "[1;1]",
+   "chave": "[REG]",
+   "entrada": "O",
+   "saida": "O",
+   "descricao": [
+    "Este registro informa a quantidade total de registros do Bloco 9. Há que se ressaltar que vários registros ocorrem mais de uma vez. Portanto, na contagem dos registros, deve-se levar em consideração todos os registros informados, ainda que repetidos."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto fixo contendo a identificação do registro (9990).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[9990]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "QTD_LIN",
+     "descricao": "Quantidade total de registros do Bloco 9.",
+     "tipo": "N",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [],
+   "exemplo": [
+    "|9990|46|",
+    "|9990|: Identificação do tipo do registro.",
+    "|46|: A quantidade total de registros do Bloco 9 é 46 (quarenta e seis registros)."
+   ]
+  },
+  {
+   "codigo": "9999",
+   "nome": "Encerramento do Arquivo Digital",
+   "ordem": 179,
+   "nivel": "1",
+   "ocorrencia": "[1;1]",
+   "chave": "[REG]",
+   "entrada": "O",
+   "saida": "O",
+   "descricao": [
+    "Este registro informa a quantidade total de registros (linhas) do arquivo da ECF. Há que se ressaltar que vários registros ocorrem mais de uma vez. Portanto, na contagem dos registros, deve-se levar em consideração todos os registros informados, ainda que repetidos."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto fixo contendo a identificação do registro (9999).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[9999]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "QTD_LIN",
+     "descricao": "Quantidade total de registros do arquivo.",
+     "tipo": "N",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [],
+   "exemplo": [
+    "|9999|8007|",
+    "|9999|: Identificação do tipo do registro.",
+    "|8007|: A quantidade total de registros do arquivo da ECF é 8.007 (oito mil e sete registros)."
+   ]
+  }
+ ]
+}

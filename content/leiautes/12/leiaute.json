@@ -1,0 +1,111 @@
+{
+  "id": "leiaute-12",
+  "numero": "12",
+  "anoCalendario": 2025,
+  "fonte": {
+    "id": "manual-12",
+    "url": "https://www.gov.br/sped/pt-br/assuntos/escrituracoes-digitais/ecf/manuais-e-documentos-tecnicos",
+    "trecho": "Manual atualizado em 23/07/2026"
+  },
+  "norma": "ADE Cofis nº 2/2026",
+  "leiautes": [
+    "12"
+  ],
+  "vigencia": {
+    "acNormal": [
+      2025
+    ],
+    "situacaoEspecial": [
+      2026
+    ]
+  },
+  "verificadoEm": "2026-11-24",
+  "status": "conferido",
+  "blocos": [
+    {
+      "letra": "0",
+      "nome": "Abertura, Identificação e Referências",
+      "familia": "identificacao"
+    },
+    {
+      "letra": "C",
+      "nome": "Informações Recuperadas da ECD",
+      "familia": "recuperacao"
+    },
+    {
+      "letra": "E",
+      "nome": "Informações Recuperadas da ECF Anterior e Cálculo Fiscal dos Dados Recuperados da ECD",
+      "familia": "recuperacao"
+    },
+    {
+      "letra": "J",
+      "nome": "Plano de Contas e Mapeamento",
+      "familia": "contabil"
+    },
+    {
+      "letra": "K",
+      "nome": "Saldos das Contas Contábeis e Referenciais",
+      "familia": "contabil"
+    },
+    {
+      "letra": "L",
+      "nome": "Lucro Líquido – Lucro Real",
+      "familia": "contabil"
+    },
+    {
+      "letra": "M",
+      "nome": "Livro Eletrônico de Apuração do Lucro Real (e-Lalur) e Livro Eletrônico de Apuração da Base de Cálculo da CSLL (e-Lacs)",
+      "familia": "apuracao"
+    },
+    {
+      "letra": "N",
+      "nome": "Cálculo do IRPJ e da CSLL – Lucro Real",
+      "familia": "apuracao"
+    },
+    {
+      "letra": "P",
+      "nome": "Lucro Presumido",
+      "familia": "apuracao"
+    },
+    {
+      "letra": "Q",
+      "nome": "Livro Caixa",
+      "familia": "contabil"
+    },
+    {
+      "letra": "T",
+      "nome": "Lucro Arbitrado",
+      "familia": "apuracao"
+    },
+    {
+      "letra": "U",
+      "nome": "Imunes e Isentas",
+      "familia": "apuracao"
+    },
+    {
+      "letra": "V",
+      "nome": "Declaração DEREX",
+      "familia": "internacional"
+    },
+    {
+      "letra": "W",
+      "nome": "Declaração País-a-País (Country-by-Country Report)",
+      "familia": "internacional"
+    },
+    {
+      "letra": "X",
+      "nome": "Informações Econômicas",
+      "familia": "informacoes"
+    },
+    {
+      "letra": "Y",
+      "nome": "Informações Gerais",
+      "familia": "informacoes"
+    },
+    {
+      "letra": "9",
+      "nome": "Encerramento do Arquivo Digital",
+      "familia": "identificacao"
+    }
+  ]
+}

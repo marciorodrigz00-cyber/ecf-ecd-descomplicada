@@ -1,0 +1,299 @@
+[
+  {
+    "id": "obrigados",
+    "titulo": "Quem está obrigado",
+    "valor": {
+      "tipo": "texto",
+      "texto": "Todas as pessoas jurídicas, inclusive as equiparadas, de forma centralizada pela matriz, a partir do ano-calendário de 2014"
+    },
+    "fonte": {
+      "id": "in-2004",
+      "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/114966",
+      "trecho": "art. 1º, caput"
+    },
+    "norma": "IN RFB nº 2.004/2021, art. 1º, caput",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-24",
+    "status": "conferido"
+  },
+  {
+    "id": "dispensa-simples",
+    "titulo": "Dispensa: Simples Nacional",
+    "valor": {
+      "tipo": "texto",
+      "texto": "A obrigatoriedade não se aplica às pessoas jurídicas optantes pelo Simples Nacional"
+    },
+    "fonte": {
+      "id": "in-2004",
+      "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/114966",
+      "trecho": "art. 1º, § 1º, I"
+    },
+    "norma": "IN RFB nº 2.004/2021, art. 1º, § 1º, I",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-24",
+    "status": "conferido"
+  },
+  {
+    "id": "dispensa-publicos",
+    "titulo": "Dispensa: setor público",
+    "valor": {
+      "tipo": "texto",
+      "texto": "A obrigatoriedade não se aplica aos órgãos públicos, às autarquias e às fundações públicas"
+    },
+    "fonte": {
+      "id": "in-2004",
+      "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/114966",
+      "trecho": "art. 1º, § 1º, II"
+    },
+    "norma": "IN RFB nº 2.004/2021, art. 1º, § 1º, II",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-24",
+    "status": "conferido"
+  },
+  {
+    "id": "dispensa-inativas",
+    "titulo": "Dispensa: inativas",
+    "valor": {
+      "tipo": "texto",
+      "texto": "A obrigatoriedade não se aplica à pessoa jurídica que não teve qualquer atividade operacional, não operacional, patrimonial ou financeira, inclusive aplicação no mercado financeiro ou de capitais, durante todo o ano-calendário. Ela continua sujeita às obrigações acessórias da legislação específica"
+    },
+    "fonte": {
+      "id": "in-2004",
+      "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/114966",
+      "trecho": "art. 1º, § 1º, III"
+    },
+    "norma": "IN RFB nº 2.004/2021, art. 1º, § 1º, III",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-24",
+    "status": "conferido"
+  },
+  {
+    "id": "scp",
+    "titulo": "Sociedades em Conta de Participação (SCP)",
+    "valor": {
+      "tipo": "texto",
+      "texto": "A ECF é transmitida separadamente para cada SCP, além da ECF da sócia ostensiva"
+    },
+    "fonte": {
+      "id": "in-2004",
+      "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/114966",
+      "trecho": "art. 1º, § 3º"
+    },
+    "norma": "IN RFB nº 2.004/2021, art. 1º, § 3º",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-24",
+    "status": "conferido"
+  },
+  {
+    "id": "imunes-isentas",
+    "titulo": "Imunes e isentas",
+    "valor": {
+      "tipo": "texto",
+      "texto": "A partir do ano-calendário 2015, todas as pessoas jurídicas imunes ou isentas estão obrigadas a entregar a ECF"
+    },
+    "fonte": {
+      "id": "manual-12",
+      "url": "https://www.gov.br/sped/pt-br/assuntos/escrituracoes-digitais/ecf/manuais-e-documentos-tecnicos",
+      "trecho": "Item 1.4. Mesmo conteúdo no Manual do leiaute 11"
+    },
+    "norma": "Manual de Orientação do Leiaute (ADE Cofis nº 2/2026 e nº 38/2024)",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-24",
+    "status": "conferido"
+  },
+  {
+    "id": "inatividade-anual",
+    "titulo": "Inatividade é do ano inteiro",
+    "valor": {
+      "tipo": "texto",
+      "texto": "O conceito de inatividade é anual: não existe inatividade mensal. Quem teve movimento em parte do ano entrega a ECF de todo o período"
+    },
+    "fonte": {
+      "id": "manual-12",
+      "url": "https://www.gov.br/sped/pt-br/assuntos/escrituracoes-digitais/ecf/manuais-e-documentos-tecnicos",
+      "trecho": "Item 1.30, sobre ECF omissa. Mesmo conteúdo no Manual do leiaute 11"
+    },
+    "norma": "Manual de Orientação do Leiaute (ADE Cofis nº 2/2026 e nº 38/2024)",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-24",
+    "status": "conferido"
+  },
+  {
+    "id": "simples-saida",
+    "titulo": "Saída do Simples durante o ano",
+    "valor": {
+      "tipo": "texto",
+      "texto": "Quem deixa o Simples Nacional no decorrer do ano passa a estar sujeito à ECF, com indicador de início de obrigatoriedade no curso do ano-calendário"
+    },
+    "fonte": {
+      "id": "manual-12",
+      "url": "https://www.gov.br/sped/pt-br/assuntos/escrituracoes-digitais/ecf/manuais-e-documentos-tecnicos",
+      "trecho": "Registro 0000, indicador de situação de início de período 4. Mesmo conteúdo no Manual do leiaute 11"
+    },
+    "norma": "Manual de Orientação do Leiaute (ADE Cofis nº 2/2026 e nº 38/2024)",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-24",
+    "status": "conferido"
+  },
+  {
+    "id": "simples-entrada",
+    "titulo": "Entrada no Simples durante o ano",
+    "valor": {
+      "tipo": "texto",
+      "texto": "No evento de inclusão no Simples Nacional, a ECF termina no dia anterior à data do evento"
+    },
+    "fonte": {
+      "id": "manual-12",
+      "url": "https://www.gov.br/sped/pt-br/assuntos/escrituracoes-digitais/ecf/manuais-e-documentos-tecnicos",
+      "trecho": "Registro 0000, situação especial 9. Mesmo conteúdo no Manual do leiaute 11"
+    },
+    "norma": "Manual de Orientação do Leiaute (ADE Cofis nº 2/2026 e nº 38/2024)",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-24",
+    "status": "conferido"
+  },
+  {
+    "id": "recuperacao-obrigatoria",
+    "titulo": "Quando recuperar a ECD",
+    "valor": {
+      "tipo": "texto",
+      "texto": "No lucro real, recuperar a ECD na ECF é obrigatório. No lucro presumido e nas imunes ou isentas, é obrigatório para quem está obrigado a entregar a ECD"
+    },
+    "fonte": {
+      "id": "manual-12",
+      "url": "https://www.gov.br/sped/pt-br/assuntos/escrituracoes-digitais/ecf/manuais-e-documentos-tecnicos",
+      "trecho": "Item 1.3. Mesmo conteúdo no Manual do leiaute 11"
+    },
+    "norma": "Manual de Orientação do Leiaute (ADE Cofis nº 2/2026 e nº 38/2024)",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-24",
+    "status": "conferido"
+  },
+  {
+    "id": "ordem-recuperacao",
+    "titulo": "Ordem no programa",
+    "valor": {
+      "tipo": "texto",
+      "texto": "Primeiro se cria a ECF no programa, ou se importa um arquivo da ECF; em seguida se recupera o arquivo da ECD"
+    },
+    "fonte": {
+      "id": "manual-12",
+      "url": "https://www.gov.br/sped/pt-br/assuntos/escrituracoes-digitais/ecf/manuais-e-documentos-tecnicos",
+      "trecho": "Item 1.3. Mesmo conteúdo no Manual do leiaute 11"
+    },
+    "norma": "Manual de Orientação do Leiaute (ADE Cofis nº 2/2026 e nº 38/2024)",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-24",
+    "status": "conferido"
+  }
+]

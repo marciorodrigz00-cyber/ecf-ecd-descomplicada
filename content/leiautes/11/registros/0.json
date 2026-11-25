@@ -1,0 +1,2034 @@
+{
+ "rastreio": {
+  "id": "arq-11-0",
+  "fonte": {
+   "id": "manual-11",
+   "url": "https://www.gov.br/sped/pt-br/assuntos/escrituracoes-digitais/ecf/manuais-e-documentos-tecnicos",
+   "trecho": "Seção do bloco 0"
+  },
+  "norma": "ADE Cofis nº 38/2024",
+  "leiautes": [
+   "11"
+  ],
+  "vigencia": {
+   "acNormal": [
+    2024
+   ],
+   "situacaoEspecial": [
+    2025
+   ]
+  },
+  "verificadoEm": "2026-11-24",
+  "status": "extraido"
+ },
+ "bloco": "0",
+ "descricao": "Abre o arquivo, identifica a pessoa jurídica e referência o período da ECF.",
+ "registros": [
+  {
+   "codigo": "0000",
+   "nome": "Abertura do Arquivo Digital e Identificação da Pessoa Jurídica",
+   "ordem": 0,
+   "nivel": "0",
+   "ocorrencia": "[1;1]",
+   "chave": "[REG]",
+   "entrada": "O",
+   "saida": "O",
+   "descricao": [
+    "Este registro identifica unicamente uma escrituração no PGE por meio dos seguintes campos:",
+    "- 0000.CNPJ – Campo CNPJ (CNPJ BÁSICO – 8 primeiras posições);",
+    "- 0000.COD_SCP – Campo CNPJ da SCP; e",
+    "- 0000.DT_FIN – Campo data fim da ECF.",
+    "Considerando a existência de apenas uma situação especial ou evento no ano, conforme tabela a seguir:",
+    "Observação: No caso de situação especial ocorrida em 31 de dezembro, somente será exigida do contribuinte a apresentação de uma ECF, de 1º de janeiro até 31 de dezembro do ano-calendário, com a informação de situação especial no campo 11 (indicador de situação especial)."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto fixo contendo a identificação do registro (0000).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[0000]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "NOME_ESC",
+     "descricao": "Texto fixo contendo a identificação do tipo de Sped (LECF).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[LECF]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "COD_VER",
+     "descricao": "Código da versão do leiaute.\nObservação: Para o ano-calendário 2024 e situações especiais de 205, o leiaute é o 0011.",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 4,
+     "nome": "CNPJ",
+     "descricao": "Preencher este campo com o número de inscrição no Cadastro Nacional da Pessoa Jurídica (CNPJ) do declarante.\nObservação: No caso de arquivo de Sociedade em Conta de Participação (SCP), deve ser informado neste campo o CNPJ do sócio ostensivo. O CNPJ da SCP, no caso de arquivo da SCP, será informado no campo 0000.COD_SCP.",
+     "tipo": "N",
+     "tamanho": "14",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 5,
+     "nome": "NOME",
+     "descricao": "Nome empresarial da pessoa jurídica ou da Sociedade em Conta de Participação (SCP).",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 6,
+     "nome": "IND_SIT_INI_PER",
+     "descricao": "Indicador do Início do Período:\n0 – Regular (Início no primeiro dia do ano).\n1 – Abertura (Início de atividades no ano-calendário).\n2 – Resultante de fusão ou cisão total.\n3 – Resultante de Mudança de Qualificação da Pessoa Jurídica.\n4 – Início de obrigatoriedade da entrega no curso do ano calendário - Exclusão do Simples.\n5 – Resultante de desenquadramento como imune ou isenta do IRPJ).\n6 – Realizou incorporação ou remanescente de cisão parcial.\n7 – Retorno às atividades de empresas inativas",
+     "tipo": "N",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[0; 1; 2; 3; 4]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 7,
+     "nome": "SIT_ESPECIAL",
+     "descricao": "Indicador de Situação Especial e Outros Eventos:\n0 – Normal (Sem ocorrência de situação especial ou evento)\n1 – Extinção\n2 – Fusão\n3 – Incorporação \\ Incorporada\n4 – Incorporação \\ Incorporadora\n5 – Cisão Total\n6 – Cisão Parcial\n7 – Mudança de Qualificação da Pessoa Jurídica\n8 – Desenquadramento de Imune/Isenta;\n9 – Inclusão no Simples Nacional",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[0; 1; 2; 3; 4; 5; 6; 7; 8; 9]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 8,
+     "nome": "PAT_REMAN_CIS",
+     "descricao": "Patrimônio Remanescente em Caso de Cisão (%).\nObservação: Necessário para o controle de saldos na conta da parte B do LALUR.",
+     "tipo": "N",
+     "tamanho": "8",
+     "decimal": "4",
+     "valores": "[0 a 100]",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 9,
+     "nome": "DT_SIT_ESP",
+     "descricao": "Data da Situação Especial ou Evento: Informar a data da deliberação do evento ou, em caso de extinção da pessoa jurídica, a data em que se ultimou a sua liquidação.",
+     "tipo": "N",
+     "tamanho": "8",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 10,
+     "nome": "DT_INI",
+     "descricao": "Data do Início do Período: Data inicial das informações contidas no arquivo. Este campo deve ser preenchido com a data inicial do período correspondente ao ano-calendário a que se referir a ECF.",
+     "tipo": "N",
+     "tamanho": "8",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 11,
+     "nome": "DT_FIN",
+     "descricao": "Data do Fim do Período: Data final das informações contidas no arquivo. A data correspondente ao período final é 31 de dezembro, no caso de situação normal. Nos demais casos, o período final é deve ser com base na data do evento.\nAtenção: Considera-se período final, nos casos de situação especial, as seguintes datas:\na) Extinção: A data em que se ultimou a liquidação da pessoa jurídica;\nb) Fusão, Incorporação/Incorporada, Incorporação/Incorporadora, Cisão Total, Cisão Parcial e Inclusão no Simples Nacional: A data da deliberação do evento de incorporação, fusão ou cisão.",
+     "tipo": "N",
+     "tamanho": "8",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 12,
+     "nome": "RETIFICADORA",
+     "descricao": "A pessoa jurídica deve assinalar este campo no caso de escrituração retificadora ou escrituração com mudança de forma de tributação:\nS – ECF retificadora\nN – ECF original\nF – ECF original com mudança de forma de tributação (Art. 7º, § 2º, da Instrução Normativa RFB nº 2.004/2021).\nA pessoa jurídica poderá efetuar a remessa de arquivo em retificação ao arquivo anteriormente remetido, observando-se a permissão, as regras e prazos estabelecidos pela Secretaria da Receita Federal do Brasil (RFB).\nAtenção: A substituição das ECF já transmitidas deverá ser feita na sua íntegra, pois a ECF não aceita arquivos complementares para o mesmo período informado. Como há controle de saldos, se houver substituição de uma ECF, pode haver a necessidade de substituição de ECF já transmitidas de anos posteriores.",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S; N; F]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 13,
+     "nome": "NUM_REC",
+     "descricao": "Número do Recibo da ECF Anterior (hashcode): Este campo deve ser preenchido com o número constante no recibo de entrega da ECF a ser retificada, nos casos de 0000.RETIFICADORA = “S” ou “F”.",
+     "tipo": "C",
+     "tamanho": "41",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 14,
+     "nome": "TIP_ECF",
+     "descricao": "Indicador do Tipo da ECF:\n0 – ECF de empresa não participante de SCP como sócio ostensivo.\n1 – ECF de empresa participante de SCP como sócio ostensivo.\n2 – ECF da SCP.",
+     "tipo": "N",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[0; 1; 2]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 15,
+     "nome": "COD_SCP",
+     "descricao": "CNPJ da SCP (ANEXOS I e VIII, da Instrução Normativa RFB nº 2.119, de 08 de dezembro de 2022).\nObservação: Só deve ser preenchido pela própria SCP (Não é preenchido pelo sócio ostensivo).",
+     "tipo": "N",
+     "tamanho": "14",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [
+    {
+     "campo": "COD_VER",
+     "regras": [
+      {
+       "codigo": "REGRA_LEIAUTE_VIGENTE",
+       "texto": "Verifica se o leiaute utilizado é válido para o período da escrituração.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "CNPJ",
+     "regras": [
+      {
+       "codigo": "REGRA_VALIDA_CNPJ",
+       "texto": "Verifica se a regra de formação do código é válida.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "PAT_REMAN_CIS",
+     "regras": [
+      {
+       "codigo": "REGRA_PAT_REMAN_CIS_OBRIGATORIO",
+       "texto": "Verifica se o campo foi preenchido quando 0000.SIT_ESPECIAL for igual a “6” (Cisão Parcial).",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_NAO_PREENCHER_SIT_ESP_CISAO_PARCIAL",
+       "texto": "Verifica se o campo está em branco quando 0000.SIT_ESPECIAL for diferente de “6” (Cisão Parcial).",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "DT_SIT_ESP",
+     "regras": [
+      {
+       "codigo": "REGRA_DT_SIT_OBRIGATORIO",
+       "texto": "Verifica se o campo foi preenchido quando 0000.SIT_ESPECIAL estiver preenchido e for diferente de “0” (Normal = Sem situação especial no período).",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_NAO_PREENCHER_SIT_ESP_NORMAL",
+       "texto": "Verifica se campo está em branco quando 0000.SIT_ESPECIAL for igual a “0” (Normal = Sem situação especial no período).",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "DT_INI",
+     "regras": [
+      {
+       "codigo": "REGRA_DATA_MINIMA",
+       "texto": "Verifica se 0000.DT_INI é maior que 01/01/2014.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_DT_INICIO_ESCRITURACAO",
+       "texto": "Verifica, quando o 0000.IND_SIT_INI_PER é igual a “0” (Normal), se 0000.DT_INI é igual a 01/01/XXXX.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_SEM_LEIAUTE",
+       "texto": "Verifica se, para o ano informado, há leiaute disponível.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_INTERPOLACAO_PGE",
+       "texto": "Verifica se existe no programa da ECF outra escrituração que compreende ou está compreendicda no período da escrituração a ser criada ou importada.",
+       "tipo": "Aviso"
+      },
+      {
+       "codigo": "REGRA_DATA_INI_MAIOR",
+       "texto": "Verifica se 0000.DT_FIN foi preenchido com a data maior que a data informada em 0000.DT_INI.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_ANO_DIFERENTE",
+       "texto": "Verifica se o ano informado em 0000.DT_FIN é igual ao ano informado em 0000.DT_INI.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "DT_FIN",
+     "regras": [
+      {
+       "codigo": "REGRA_DT_FINAL_ESCRITURACAO",
+       "texto": "Verifica, quando 0000.SIT_ESPECIAL for igual a “0” (Normal), se o dia e o mês em 0000.DT_FIN é igual a 31/12.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_EVENTO_ACONTECIMENTO",
+       "texto": "Verifica:\n- Quando 0000.SIT_ESPECIAL for igual a “1” (Extinção), “2” (Fusão), “3” (Incorporação/Incorporada), “4” (Incorporação/Incorporadora), “5” (Cisão Total) ou “6” (Cisão Parcial), se 0000.DT_FIN é igual a 0000.DT_SIT_ESP.\n- Quando 0000.SIT_ESPECIAL for “7” (Transformação), “8” (Desenquadramento de Imune e Isenta” ou “9” (Inclusão no Simples Nacional), se 0000.DT_FIN é igual a 0000.DT_SIT_ESP – 1.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "NUM_REC",
+     "regras": [
+      {
+       "codigo": "REGRA_REC_ANTERIOR_OBRIGATORIO",
+       "texto": "Verifica, quando o campo 0000.RETIFICADORA é igual a “S” (ECF Retificadora) ou “F” (ECF original com mudança de forma de tributação), se 0000.NUM_REC está preenchido.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_DV_RECIBO",
+       "texto": "Verifica se o número do recibo informado é válido.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_NRO_REC_ANTERIOR_NAO_SE_APLICA",
+       "texto": "Verifica, quando 0000.RETIFICADORA é igual a “N” (ECF Original), se 0000.NUM_REC não está preenchido.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "COD_SCP",
+     "regras": [
+      {
+       "codigo": "REGRA_SCP_OBRIGATORIO",
+       "texto": "Verifica, quando 0000.TIP_ECF é igual a “2” (ECF da SCP), se 0000.COD_SCP está preenchido.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_SCP_NAO_PREENCHER",
+       "texto": "Verifica, quando 0000.TIP_ECF é igual a “0” (ECF de empresa não participante de SCP como sócio ostensivo) ou “1” (ECF de empresa participante de SCP como sócio ostensivo), se 0000.COD_SCP não está preenchido.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_VALIDA_TAM_SCP",
+       "texto": "O campo 0000.COD_SCP da SCP deve conter exatamente 14 números.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_CNPJ_DIFERENTE_SCP",
+       "texto": "Verifica se 0000.COD_SCP é diferente de 0000.CNPJ.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_VALIDA_CNPJ",
+       "texto": "Verifica se a regra de formação do código é válida.",
+       "tipo": "Erro"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|0000|LECF|0011|11111111000191|EMPRESA TESTE|0|0|||01012024|31122024|N||0||",
+    "|0000|: Identificação do tipo do registro.",
+    "|LECF|: Identificação do tipo de Sped (LECF = Escrituração Contábil Fiscal).",
+    "|0009|: Código da versão do leiaute (Versão 0011).",
+    "|11111111000191|: CNPJ: (11.111.111/0001-91).",
+    "|EMPRESA TESTE|: Nome empresarial.",
+    "|0|: Indicador de início do período (0 = Regular – início no primeiro dia do ano).",
+    "|0|: Situação especial (0 = Normal – sem ocorrência de situação especial ou evento).",
+    "||: Patrimônio remanescente em caso de cisão (Não há).",
+    "||: Data da situação especial ou evento (Não há).",
+    "|01012024|: Data inicial das informações contidas no arquivo (01/01/2024).",
+    "|31122024|: Data final das informações contidas no arquivo (31/12/2024).",
+    "|N|: Escrituração original (não é retificadora).",
+    "||: Número do recibo da ECF a ser retificada (Não há).",
+    "|0|: Tipo da ECF (0 = ECF da empresa não participante de SCP).",
+    "||: Identificação da SCP (Não há)."
+   ]
+  },
+  {
+   "codigo": "0001",
+   "nome": "Abertura do Bloco 0",
+   "ordem": 1,
+   "nivel": "1",
+   "ocorrencia": "[1;1]",
+   "chave": "[REG]",
+   "entrada": "O",
+   "saida": "O",
+   "descricao": [],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto fixo contendo a identificação do registro (0001).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[0001]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "IND_DAD",
+     "descricao": "Indicador de movimento:\n0 – Bloco com dados informados.\n1 – Bloco sem dados informados.",
+     "tipo": "N",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[0;1]",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_OCORRENCIA_UNITARIA_ARQ",
+     "texto": "Verifica se registro ocorreu apenas uma vez por arquivo, considerando a chave “0001” (REG). Se a regra não for cumprida, a ECF gera um erro."
+    }
+   ],
+   "regrasCampo": [],
+   "exemplo": [
+    "|0001|0|",
+    "|0001|: Identificação do tipo do registro.",
+    "|0|: Indica que o bloco possui dados informados."
+   ]
+  },
+  {
+   "codigo": "0010",
+   "nome": "Parâmetros de Tributação",
+   "ordem": 2,
+   "nivel": "2",
+   "ocorrencia": "[1;1]",
+   "chave": "[REG]",
+   "entrada": "O",
+   "saida": "O",
+   "descricao": [
+    "Apresenta os parâmetros fiscais que identificam quais blocos e registros serão preenchidos.",
+    "O plano de contas referencial a ser utilizado segue as seguintes regras:",
+    "- Utilizar o plano de contas definido no campo 0010.COD_QUALIF_PJ.",
+    "- Se 0010.COD_QUALIF_PJ não estiver preenchido, verificar o campo 0010.APUR_CSLL.",
+    "- Se 0010.APUR_CSLL for igual a “A” (Anual) ou “T” (Trimestral), utilizar o plano de contas de imunes e isentas nos períodos correspondentes.",
+    "- Se 0010.FORMA_APUR_I for igual a “A” (Anual) ou “T” (Trimestral), utilizar o plano de contas de imunes e isentas nos períodos correspondentes."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto fixo contendo a identificação do registro (0010).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[0010]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "HASH_ECF_ANTERIOR",
+     "descricao": "Hashcode da ECF do período imediatamente anterior a ser recuperado. Campo preenchido automaticamente pelo sistema.",
+     "tipo": "C",
+     "tamanho": "40",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 3,
+     "nome": "OPT_REFIS",
+     "descricao": "Indicador de Optante pelo Refis:\nS - Sim\nN – Não\nA pessoa jurídica deve assinalar este campo quando for optante pelo Programa de Recuperação Fiscal (Refis).\nAtenção: Este campo só deve ser assinalado pela pessoa jurídica optante pelo Programa de Recuperação Fiscal (Refis), instituído pela Lei nº 9.964, de 10 de abril de 2000, e que dele não tenha sido excluída. A pessoa jurídica que for apenas optante pelo Parcelamento Especial (Paes) de que trata a Lei nº 10.684, de 30 de maio de 2003, e outros reparcelamentos não deve assinalar este campo.",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S;N]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 4,
+     "nome": "FORMA_TRIB",
+     "descricao": "Forma de Tributação:\n1 – Lucro Real.\n2 – Lucro Real/Arbitrado.\n3 – Lucro Presumido/Real.\n4 – Lucro Presumido/Real/Arbitrado.\n5 – Lucro Presumido.\n6 – Lucro Arbitrado.\n7 – Lucro Presumido/Arbitrado.\n8 – Imune do IRPJ.\n9 – Isenta do IRPJ.\nA forma de tributação do IRPJ (Imposto de Renda Sobre a Renda da Pessoa Jurídica) e, consequentemente, da CSLL (Contribuição Social Sobre o Lucro Líquido) adotada, indica que a pessoa jurídica tributada com base no:\n1) Lucro Real: Apurou imposto de renda com base no lucro real.\n2) Lucro Real/Arbitrado: Apurou imposto de renda com base no lucro real, com arbitramento da base de cálculo em algum trimestre do ano-calendário.\n3) Lucro Presumido/Real:\n- Optou pelo lucro presumido por força de ingresso no Refis e, no decorrer do ano-calendário, foi excluída do Programa e passou a ser obrigatoriamente tributada com base no lucro real.\n- Iniciou o ano-calendário pagando o imposto com base no lucro presumido e, em relação ao mesmo ano, incorreu em situação de obrigatoriedade de apuração pelo lucro real por ter auferido lucros, rendimentos ou ganhos de capital oriundos do exterior.\n4) Lucro Presumido/Real/Arbitrado: Além da tributação com base no lucro presumido e no lucro real, foi tributada pelo lucro arbitrado em algum trimestre do ano-calendário.\n5) Lucro Presumido: Apurou imposto de renda com base no lucro presumido.\n6) Lucro Arbitrado: Apurou imposto de renda com base no lucro arbitrado em todos os trimestres do ano-calendário.\n7) Lucro Presumido/Arbitrado: Apurou imposto de renda com base no lucro presumido, com arbitramento da base de cálculo em algum trimestre do ano-calendário.\n8) Imune do IRPJ: É imune do imposto de renda.\n9) Isenta do IRPJ: É isenta do imposto de renda.\nAtenção: Na hipótese de obrigatoriedade de apuração pelo lucro real por ter auferido lucros, rendimentos ou ganhos de capital oriundos do exterior, a pessoa jurídica deve apurar o IRPJ e a CSLL sob o regime de apuração pelo lucro real trimestral a partir, inclusive, do trimestre da ocorrência do fato.",
+     "tipo": "N",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[1;2;3;4;5;6;7;8;9]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 5,
+     "nome": "FORMA_APUR",
+     "descricao": "Indicador do Período de Apuração do IRPJ e da CSLL:\nT – Trimestral\nA – Anual",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[T;A]",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 6,
+     "nome": "COD_QUALIF_PJ",
+     "descricao": "Qualificação da Pessoa Jurídica:\n01 – PJ em Geral\n02 – PJ Componente do Sistema Financeiro\n03 – Sociedades Seguradoras, de Capitalização ou Entidade Aberta de Previdência Complementar\nAtenção: Não preencher no caso de imunes e isentas (preencher o 0010.TIP_ENT).",
+     "tipo": "C",
+     "tamanho": "2",
+     "decimal": "—",
+     "valores": "[01;02;03]",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 7,
+     "nome": "FORMA_TRIB_PER",
+     "descricao": "Forma de Tributação no Período: Forma de tributação no período considerando para cada trimestre no formato XXXX onde X é igual a:\n0 – ZERO – Não informado – trimestre não compreendido no período de apuração.\nR – Real\nP – Presumido\nA – Arbitrado\nE – Real Estimativa (somente utilizado no caso da observação abaixo).\nObservação: Caso 0010.FORMA_TRIB seja igual “3” (Presumido/Real) ou “4” (Presumido/Real/Arbitrado) e houver opção pelo REFIS (0010.OPT_REFIS), o período tributado pelo lucro real deve ter somente a forma de apuração trimestral (Caso em que deve ser utilizado “R” em 0010.FORMA_TRIB_PER) ou somente a forma de apuração correspondente à anual/estimativa (Caso em que deve ser utilizado “E” em 0010.FORMA_TRIB_PER)\n.",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[0;R;P;A;E]",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 8,
+     "nome": "MES_BAL_RED",
+     "descricao": "Forma de Apuração da Estimativa Mensal: Indicação da forma de apuração da estimativa mensal, quando 0010.FORMA_APUR = “A”, considerando o formato XXXXXXXXXXXX onde X é referente a um mês e é igual a:\n0 – Fora do Período: Fora do período de apuração/ Forma de tributação diferente de “R” ou “E”.\nE – Receita Bruta: Estimativa com base na receita bruta e acréscimos.\nB – Balanço ou Balancete: Estimativa com base no balanço ou balancete de suspensão/redução.\nOs meses correspondentes a trimestres marcados em 0010.FORMA_TRIB_PER como diferente de “R” e “E” devem estar preenchidos com zero “0”.\nOs meses correspondentes a trimestres marcados em 0010.FORMA_TRIB_PER iguais a “R” ou “E” devem estar preenchidos com “E” ou “B”.",
+     "tipo": "C",
+     "tamanho": "12",
+     "decimal": "—",
+     "valores": "[0;E;B]",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 9,
+     "nome": "TIP_ESC_PRE",
+     "descricao": "Escrituração:\nC – Obrigada a entregar a ECD ou entrega facultativa (haverá recuperação dos dados).\nL – Não obrigada a entregar a ECD/Livro Caixa (Opção do Lucro Presumido - parágrafo único do art. 45 da Lei nº 8.981, de 1995).\nAtenção:\n- Este campo deve ser preenchido pelas pessoas jurídicas tributadas pelo lucro presumido e as imunes ou isentas.\n- Caso a pessoa jurídica entregue a ECD facultativamente e não queira recuperar os dados da ECD, deve utilizar a opção “L”.",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[L;C]",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 10,
+     "nome": "TIP_ENT",
+     "descricao": "Tipo de Pessoa Jurídica Imune ou Isenta:\n01 – Assistência Social\n02 – Educacional\n03 – Sindicato de Trabalhadores\n04 – Associação Civil\n05 – Cultural\n06 – Entidade Fechada de Previdência Complementar\n07 – Filantrópica\n08 – Sindicato\n09 – Recreativa\n10 – Científica\n11 – Associação de Poupança e Empréstimo\n12 – Entidade Aberta de Previdência Complementar (Sem Fins Lucrativos)\n13 – Fifa e Entidades Relacionadas\n14 – CIO e Entidades Relacionadas\n15 – Partidos Políticos\n99 – Outras.\nObservação: Este campo é obrigatório para 0010.FORMA_TRIB igual a “8” (Imune do IRPJ) ou “9” (Isenta do IRPJ).\nCaso 0010.TIP_ENT = “01”, “02”, “03”, “04”, “05”, “07”, “08”, “09”, “10”, “13”, “14” ou “99”, os planos referenciais serão U100A e U150A.\nCaso 0010.TIP_ENT = “11”, os planos referenciais serão U100B e U150B.\nCaso 0010.TIP_ENT = “12”, os planos referenciais serão U100C e U150C.\nCaso 0010.TIP_ENT = “06”, os planos referenciais serão U100D e U150D.\nCaso 0010.TIP_ENT = “15”, os planos referenciais serão U100E e U150E.",
+     "tipo": "N",
+     "tamanho": "2",
+     "decimal": "—",
+     "valores": "[01;02;03;04;05;06;07;08;09;10;11;12;13;14;15;99]",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 11,
+     "nome": "FORMA_APUR_I",
+     "descricao": "Apuração do IRPJ para Imunes ou Isentas: Existência ou não de atividade não abrangida pela imunidade ou isenção e tributada pelo IRPJ (para imunes ou isentas):\nA – Anual\nT – Trimestral\nD – Desobrigada",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[A;T;D]",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 12,
+     "nome": "APUR_CSLL",
+     "descricao": "Apuração da CSLL para Imunes ou Isentas:\nA – Anual, se optou pela apuração da CSLL sobre a base de cálculo estimada, facultada a opção pelo levantamento de balanço ou balancete de suspensão ou redução.\nT – Trimestral, no caso de ter adotado a apuração trimestral da CSLL.\nD – Desobrigada, na hipótese de pessoa jurídica imune ou isenta da CSLL.\nAtenção:\n1) As entidades sem fins lucrativos de que trata o inciso I do art. 12 do Decreto nº 3.048, de 6 de maio de 1999, que não se enquadram na imunidade e isenção da Lei nº 9.532, de 10 de dezembro de 1997, estão sujeitas à CSLL, devendo apurar a base de cálculo e a contribuição devida nos termos da legislação comercial.\n2) As associações de poupança e empréstimo devem apurar a contribuição social sobre o lucro líquido.\n3) São isentas da CSLL as entidades fechadas de previdência complementar, relativamente aos fatos geradores ocorridos a partir de 1º de janeiro de 2002.\nObservação: Este campo é obrigatório para 0010.FORMA_TRIB igual a “8” (Imune do IRPJ) ou “9” (Isenta do IRPJ).",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[A;T;D]",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 13,
+     "nome": "IND_REC_RECEITA",
+     "descricao": "Critério de reconhecimento de receitas para empresas tributadas pelo Lucro Presumido (Art. 215, § 9º, Instrução Normativa RFB nº 1.700/2017):\n1. Regime de caixa\n2. Regime de competência\nEm relação aos fatos contábeis ocorridos a partir de 1º de janeiro de 2016, a obrigatoriedade de adotar a ECD alcança todas as pessoas jurídicas tributadas com base no lucro presumido que utilizem o regime de competência.\nEntão, caso a empresa tenha o reconhecimento de receitas pelo regime de competência, deve indicar no campo 9, a opção C – Obrigada a entregar a ECD.",
+     "tipo": "N",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[1;2]",
+     "obrigatorio": "Não"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [
+    {
+     "campo": "FORMA_TRIB",
+     "regras": [
+      {
+       "codigo": "REGRA_DESENQUADRAMENTO_IMUNE_ISENTA",
+       "texto": "Verifica, quando o campo 0000.SIT_ESPECIAL é igual a “8” (Desenquadramento de imune/isenta), se o campo 0010.FORMA_TRIB é igual a “8” (Imune) ou “9” (isenta).",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "FORMA_APUR",
+     "regras": [
+      {
+       "codigo": "REGRA_FORMA_APUR_VALIDA",
+       "texto": "Verifica:\n- Quando 0010.FORMA_APUR igual a “A” (Anual), se 0010.FORMA_TRIB igual a “1” (Lucro Real) ou “2” (Lucro Real/Arbitrado) ou [“3” (Lucro Presumido/Real) ou “4” (Lucro Presumido/Real/Arbitrado) e 0010.OPT_REFIS igual a “S”].\n- quando 0010.FORMA_APUR igual a “T” (Trimestral), se 0010.FORMA_TRIB igual a “1” (Lucro Real) ou “2” (Lucro Real/Arbitrado) ou “3” (Lucro Presumido/Real) ou “4” (Lucro Presumido/Real/Arbitrado) ou “5” (Lucro Presumido) ou “6” (Lucro Arbitrado) ou “7” (Lucro Presumido/Arbitrado).",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_NAO_PREENCHER_IMUNE",
+       "texto": "Verifica, quando 0010.FORMA_TRIB igual a “8” (Imune do IRPJ) ou “9” (Isento do IPRJ), se 0010.FORMA_APUR não foi preenchido.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "COD_QUALIF_PJ",
+     "regras": [
+      {
+       "codigo": "REGRA_COD_QUALIF_PJ",
+       "texto": "Verifica, quando 0010.FORMA_TRIB igual a “3” (Lucro Presumido/Real) ou “4” (Lucro Presumido/Real/Arbitrado) ou “5” (Lucro Presumido) ou “7” (Lucro Presumido/Arbitrado), se 0010.COD_QUALIF_PJ é igual a “01” (PJ em geral) ou “02” (PJ componente do sistema financeiro).",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_NAO_PREENCHER_IMUNE",
+       "texto": "Verifica, quando 0010.FORMA_TRIB igual a “8” (Imune do IRPJ) ou “9” (Isento do IPRJ), se 0010.COD_QUALIF_PJ não foi preenchido.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_COD_QUALIF_PJ_OBRIGATORIO",
+       "texto": "Verifica, quando se 0010.FORMA_TRIB igual a “1” (Lucro Real) ou “2” (Lucro Real/Arbitrado) ou “3” (Lucro Presumido/Real) ou “4” (Lucro Presumido/Real/Arbitrado) ou “5” (Lucro Presumido) ou “6” (Lucro Arbitrado) ou “7” (Lucro Presumido/Arbitrado), se 0010.COD_QUALIF_PJ foi preenchido.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "FORMA_TRIB_PER",
+     "regras": [
+      {
+       "codigo": "REGRA_NAO_PREENCHER_IMUNE",
+       "texto": "Verifica, quando 0010.FORMA_TRIB igual a “8” (Imune do IRPJ) ou “9” (Isento do IPRJ), se 0010.FORMA_TRIB_PER não foi preenchido.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_TRIBUT_INVALIDA",
+       "texto": "Verifica se 0010.FORMA_TRIB_PER está preenchido conforme regras abaixo relacionadas:\nSe 0010.FORMA_TRIB é igual a “1” (Lucro Real), então 0010.FORMA_TRIB_PER deve ser igual a “0” ou “R”.\nSe 0010.FORMA_TRIB é igual a “2” (Lucro Real/Arbitrado), então 0010.FORMA_TRIB_PER deve ser igual a “0”, “R”, ou “A”.\nSe 0010.FORMA_TRIB é igual a “3” (Lucro Presumido/Real) e 0010.OPT_REFIS é igual a \"N”, então 0010.FORMA_TRIB_PER deve ser igual a “0”, “P” ou “R”.\nSe 0010.FORMA_TRIB é igual a “3” (Lucro Presumido/Real) e 0010.OPT_REFIS é igual a \"S\" e 0010.FORMA_APUR é igual a “A”, então 0010.FORMA_TRIB_PER deve ser igual a “0”, “E” ou “P”.\nSe 0010.FORMA_TRIB é igual a “3” (Lucro Presumido/Real) e 0010.OPT_REFIS é igual a \"S\" e 0010.FORMA_APUR é igual a “T”, então 0010.FORMA_TRIB_PER deve ser igual a “0”, “R” ou “P”.\nSe 0010.FORMA_TRIB é igual a “4” (Lucro Presumido/Real/Arbitrado) e 0010.OPT_REFIS é igual a \"N\", então 0010.FORMA_TRIB_PER deve ser igual a “0”, “A”, “P” ou “R”.\nSe 0010.FORMA_TRIB é igual a “4” (Lucro Presumido/Real/Arbitrado) e 0010.OPT_REFIS é igual a \"S\" e 0010.FORMA_APUR é igual a “A”, então 0010.FORMA_TRIB_PER deve ser igual a “0”, “A”, “E” ou “P”.\nSe 0010.FORMA_TRIB é igual a “4” (Lucro Presumido/Real/Arbitrado) e 0010.OPT_REFIS é igual a \"S\" e 0010.FORMA_APUR é igual a “T”, então 0010.FORMA_TRIB_PER deve ser igual a “0”, “A”, “R” ou “P”.\nSe 0010.FORMA_TRIB é igual a “5” (Lucro Presumido), então 0010.FORMA_TRIB_PER deve ser igual a “0” ou “P”.\nSe 0010.FORMA_TRIB é igual a “6” (Lucro Arbitrado), então 0010.FORMA_TRIB_PER deve ser igual a “0” ou “A”.\nSe 0010.FORMA_TRIB é igual a “7” (Lucro Presumido/Arbitrado), então 0010.FORMA_TRIB_PER deve ser igual a “0”, “A” ou “P”.\nSe 0010.FORMA_TRIB é igual a “8” (Imune do IRPJ), então 0010.FORMA_TRIB_PER não deve ser preenchido.\nSe 0010.FORMA_TRIB é igual a “9” (Isento do IRPJ), então 0010.FORMA_TRIB_PER não deve ser preenchido.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_TRIBUT_PER_R_E",
+       "texto": "Verifica se os valores “R” e “E” aparecem simultaneamente em 0010.FORMA_TRIB_PER.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_PRESUMIDO_PRIMEIRO",
+       "texto": "Verifica, quando aparecerem “R”, “E” ou “P” em 0010.FORMA_TRIB_PER, se o “P” aparece primeiro.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_FORMA_TRIB_EXISTENTE",
+       "texto": "Verifica as regras abaixo:\n0010.FORMA_TRIB é igual a “2” (Lucro Real/Arbitrado) e 0010.FORMA_TRIB_PER não possui “R” ou não possui “A”.\nOu\n0010.FORMA_TRIB é igual a “3” (Lucro Presumido/Real) e 0010.FORMA_TRIB_PER não possui “P” ou não possui “R”.\nOu\n0010.FORMA_TRIB é igual a “4” (Lucro Presumido/Real/Arbitrado) e 0010.FORMA_TRIB_PER não possui “P” ou não possui “R” ou não possui “A”.\nOu\n0010.FORMA_TRIB é igual a “7” (Lucro Presumido/Arbitrado) e 0010.FORMA_TRIB_PER não possui “P” ou não possui “A”.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_FORM_TRIB_FORA_PERIODO",
+       "texto": "Verifica se os trimestres fora do período de escrituração são do tipo “0”.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_FORMA_TRIB_PER_OBRIGATORIO",
+       "texto": "Verifica se 0010.FORMA_TRIB_PER está preenchido quando 0010.FORMA_TRIB é diferente de “8” (Imune do IRPJ) ou “9” (Isenta do IRPJ).",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "MES_BAL_RED",
+     "regras": [
+      {
+       "codigo": "REGRA_MES_BAL_RED_OBRIGATORIO",
+       "texto": "Verifica se 0010.MES_BAL_RED foi preenchido, no caso de 0010.FORMA_APUR igual a “A” (Anual).",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_NAO_PREENCHER_TRIMESTRAL",
+       "texto": "Verifica se 0010.MES_BAL_RED não foi preenchido, no caso de 0010.FORMA_APUR igual a “T”.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_MES_BAL_RED_INVALIDO",
+       "texto": "Verifica se os meses correspondentes a trimestres marcados em 0010.FORMA_TRIB_PER estão preenchidos conforme as regras abaixo:\nSe 0010.FORMA_TRIB_PER for diferente de “R” e “E”, então 0010.MES_BAL_RED deve ser igual a “0”.\nSe 0010.FORMA_TRIB_PER é igual a “R” e “E”, então 0010.MES_BAL_RED debe ser igual a “0”, “E” ou “B”.\nREGRA_MES_BAL_RED _FORA_PERIODO: Verifica se os meses fora do período da escrituração ou arbitrados estão com o tipo “0”.\nREGRA_ NAO_PREENCHER_IMUNE: Verifica, quando 0010.FORMA_TRIB é igual a “8” (Imune do IRPJ) ou “9” (Isento do IPRJ), se MES_BAL_RED não foi preenchido.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "TIP_ESC_PRE",
+     "regras": [
+      {
+       "codigo": "REGRA_PREENCHER_TIP_ESC",
+       "texto": "Verifica, quando 0010.FORMA_TRIB é igual a “3” (Lucro Presumido/Real) ou “4” (Lucro Presumido/Real/Arbitrado) ou “5” (Lucro Presumido) ou “7” (Lucro Presumido/Arbitrado) ou “8” (Imune) ou “9” (Isenta), se 0010.TIP_ESC_PRE foi preenchido.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "TIP_ENT",
+     "regras": [
+      {
+       "codigo": "REGRA_PREENCHER_IMUNE",
+       "texto": "Verifica, quando 0010.FORMA_TRIB é igual a “8” (Imune de IRPJ) ou “9” (Isento do IPRJ), se 0010.TIP_ENT foi preenchido.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "FORMA_APUR_I",
+     "regras": [
+      {
+       "codigo": "REGRA_PREENCHER_IMUNE",
+       "texto": "Verifica, quando 0010.FORMA_TRIB é igual a “8” (Imune de IRPJ) ou “9” (Isento do IPRJ), se 0010.FORMA_APUR_I foi preenchido.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_APUR_IGUAL",
+       "texto": "Verifica se 00010.FORMA_APUR_I é igual a 0010.APUR_CSLL, quando 0010.APUR_CSLL for diferente de “D” (Desobrigado).",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "APUR_CSLL",
+     "regras": [
+      {
+       "codigo": "REGRA_PREENCHER_IMUNE",
+       "texto": "Verifica, quando 0010.FORMA_TRIB é igual a “8” (Imune de IRPJ) ou “9” (Isento do IPRJ), se 0010.APUR_CSLL foi preenchido.",
+       "tipo": "Erro"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|0010||N|1|T|01|RRRR||||||1|",
+    "|0010|: Identificação do tipo do registro.",
+    "||: Hashcode da ECF do período imediatamente anterior (Não há).",
+    "|N|: Indicador de optante pelo Refis (N = Não).",
+    "|1|: Forma de tributação do lucro (1 = Lucro Real).",
+    "|T|: Forma de apuração do IRPJ e da CSLL (T = Trimestral).",
+    "|01|: Qualificação da pessoa jurídica (01 = PJ em Geral).",
+    "|RRRR|: Forma de tributação no período (RRRR = Lucro Real nos quatro trimestres).",
+    "||: Forma de apuração da estimativa (Não há).",
+    "||: Tipo de escrituração (não obrigatório para o lucro real).",
+    "||: Tipo de pessoa jurídica imune ou isenta (não obrigatório para o lucro real).",
+    "||: Existência de atividade tributada pelo IRPJ para imunes ou isentas (não obrigatório para o lucro real).",
+    "||: Apuração da CSLL para imunes ou isentas (não obrigatório para o lucro real).",
+    "|1|: Regime de caixa."
+   ]
+  },
+  {
+   "codigo": "0020",
+   "nome": "Parâmetros Complementares",
+   "ordem": 3,
+   "nivel": "2",
+   "ocorrencia": "[1;1]",
+   "chave": "[REG]",
+   "entrada": "O",
+   "saida": "O",
+   "descricao": [
+    "Apresenta os parâmetros que identificam quais blocos e registros a serem preenchidos."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto fixo contendo a identificação do registro (0020).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[0020]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "IND_ALIQ_CSLL",
+     "descricao": "PJ Sujeita à Alíquota da CSLL de 9%; 15% ou 20%:\n1 – Alíquota de 9%\n3 – Alíquota de 20%\n4 – Alíquota de 15%",
+     "tipo": "N",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[1;3;4]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "IND_QTE_SCP",
+     "descricao": "Quantidade total de SCP do Sócio Ostensivo de SCP.",
+     "tipo": "N",
+     "tamanho": "3",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 4,
+     "nome": "IND_ADM_FUN_CLU",
+     "descricao": "Administradora de Fundos e Clubes de Investimento:\nS – Sim\nN – Não",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S;N]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 5,
+     "nome": "IND_PART_CONS",
+     "descricao": "Participações em Consórcios de Empresas:\nS – Sim\nN – Não\nA pessoa jurídica participante de consórcio constituído nos termos do disposto nos arts. 278 e 279 da Lei nº 6.404, de 15 de dezembro de 1976, deve assinalar este campo.\nAtenção: Somente deve ser assinalado este campo quando houver receita de pelo menos uma consorciada.",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S;N]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 6,
+     "nome": "IND_OP_EXT",
+     "descricao": "Operações com o Exterior:\nS – Sim\nN – Não\nA pessoa jurídica, inclusive instituição financeira ou companhia seguradora, conforme relacionadas no § 1º do art. 22 da Lei nº 8.212, de 1991, e no inciso II do art. 14 da Lei nº 9.718, de 1998, que realizou exportação/importação de bens, serviços ou direitos ou auferiu receitas financeiras ou incorreu em despesas financeiras em operações efetuadas com pessoa física ou jurídica residente ou domiciliada no exterior, ainda que essas operações não tenham sido realizadas com pessoa vinculada ou com pessoa residente ou domiciliada em país ou dependência com tributação favorecida ou cuja legislação interna oponha sigilo relativo à composição societária de pessoas jurídicas ou a sua titularidade, deve assinalar este campo.\nDeve também assinalar este campo a pessoa jurídica, inclusive instituição financeira ou companhia seguradora, que realizar as operações acima referidas por intermédio de interposta pessoa.",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S;N]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 7,
+     "nome": "IND_OP_VINC",
+     "descricao": "Operações com Pessoa Vinculada/Interposta Pessoa / País com Tributação Favorecida.\nS – Sim\nN – Não\nDeve assinalar este campo, a pessoa jurídica, inclusive instituição financeira ou companhia seguradora, conforme relacionadas no § 1º do art. 22 da Lei nº 8.212, de 1991, e no inciso II do art. 14 da Lei nº 9.718, de 1998, que realizou exportação/importação de bens, serviços ou direitos ou auferiu receitas financeiras ou incorreu em despesas financeiras em operações efetuadas com pessoa física ou jurídica residente ou domiciliada no exterior, considerada pela legislação brasileira:\na) pessoa vinculada;\nb) pessoa residente ou domiciliada em países com tributação favorecida ou cuja legislação interna oponha sigilo relativo à composição societária de pessoas jurídicas ou a sua titularidade; e\nc) a partir de 1º de janeiro de 2009, pessoa residente ou domiciliada no exterior, que goze, nos termos da legislação, de regime fiscal privilegiado (Art. 24-A da Lei nº 9.430, de 1996, instituído pela Lei nº 11.727, de 2008 e alterado pela Lei nº 14.596, de 2023).\nDeve também assinalar este campo a pessoa jurídica, inclusive instituição financeira ou companhia seguradora, que realizar as operações acima referidas por intermédio de interposta pessoa.",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S;N]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 8,
+     "nome": "IND_PJ_ENQUAD",
+     "descricao": "PJ Enquadrada nos artigos 48 ou 49 da Instrução Normativa RFB nº 1.312/2012:\nS – Sim\nN – Não",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S;N]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 9,
+     "nome": "IND_PART_EXT",
+     "descricao": "Participações no Exterior: A pessoa jurídica deve assinalar este campo, caso tenha participações no exterior.\nS – Sim\nN – Não",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S;N]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 10,
+     "nome": "IND_ATIV_RURAL",
+     "descricao": "Atividade Rural: A pessoa jurídica deve assinalar este campo, caso explore atividade rural.\nS – Sim\nN – Não",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S;N]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 11,
+     "nome": "IND_LUC_EXP",
+     "descricao": "Existência de Lucro da Exploração:\nS – Sim\nN – Não\nEste campo deve ser assinalado pelas pessoas jurídicas que adotam a forma de tributação pelo lucro real, inclusive se optantes pelo Refis, que gozem de benefícios fiscais calculados com base no lucro da exploração.",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S;N]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 12,
+     "nome": "IND_RED_ISEN",
+     "descricao": "Isenção e Redução do Imposto para Lucro Presumido:\nS – Sim\nN – Não\nA pessoa jurídica tributada pelo lucro presumido e optante pelo Refis deve assinalar este campo caso usufrua benefícios fiscais relativos a isenção ou redução do imposto de renda.",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S;N]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 13,
+     "nome": "IND_FIN",
+     "descricao": "Indicativo da Existência de FINOR/FINAM:\nS – Sim\nN – Não\nEste campo deve ser assinalado pelas pessoas jurídicas ou grupos de empresas coligadas de que trata o art. 9º da Lei nº 8.167, de 1991, alterado pela Medida Provisória nº 2.199-14, de 24 de agosto de 2001, titulares de empreendimento de setor da economia considerado, em ato do Poder Executivo, prioritário para o desenvolvimento regional, aprovado ou protocolizado até 2 de maio de 2001 nas áreas da Sudam e da Sudene ou do Grupo Executivo para Recuperação Econômica do Estado do Espírito Santo (Geres) (MP nº 2.199-14, de 2001, art. 4º, e MP nº 2.145, de 2 de maio de 2001, art. 50, XX, atuais MP nº 2.156-5, de 2001, art. 32, XVIII, e nº 2.157-5, de 2001, art. 32, IV).",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S;N]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 14,
+     "nome": "IND_PART_COLIG",
+     "descricao": "Participação Avaliada pelo Método de Equivalência Patrimonial:\nS – Sim\nN – Não\nA pessoa jurídica domiciliada no Brasil, que teve participações permanentes, no ano-calendário, em capital de pessoa jurídica domiciliada no Brasil ou no exterior, considerada, pela legislação brasileira, avaliada pelo método de equivalência patrimonial, deve assinalar este campo.",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S;N]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 15,
+     "nome": "IND_REC_EXT",
+     "descricao": "Recebimentos do Exterior ou de Não Residentes:\nS – Sim\nN – Não\nDeve assinalar este campo, a pessoa jurídica que recebeu, durante o ano-calendário, de pessoas físicas ou jurídicas, residentes ou domiciliadas no exterior ou de não-residentes:\n- quaisquer valores mediante operações de câmbio de qualquer natureza;\n- quaisquer valores por intermédio de transferências internacionais em reais (TIR), ou seja, provenientes de conta bancária em reais (R$) titulada por não-residente;\n- valores iguais ou superiores a R$ 120.000,00 (cento e vinte mil reais), equivalentes a R$ 10.000,00 por mês, por intermédio de cartões de crédito;\n- quaisquer valores por intermédio de depósitos em contas bancárias mantidas no exterior.",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S;N]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 16,
+     "nome": "IND_ATIV_EXT",
+     "descricao": "Ativos no Exterior:\nS – Sim\nN – Não\nPreenchida por todas as pessoas jurídicas (Sim), salvo quando o valor contábil total dos ativos a declarar, convertido para Reais no final do período abrangido pela ECF, for inferior a R$ 100.000,00 (cem mil reais) (Não).",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S;N]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 17,
+     "nome": "IND_PGTO_EXT",
+     "descricao": "Pagamentos ao Exterior ou a Não Residentes:\nS – Sim\nN – Não\nDeve assinalar este campo, a pessoa jurídica que tiver pagado, creditado, entregado, empregado ou remetido, durante o ano-calendário, a pessoas físicas ou jurídicas, residentes ou domiciliadas no exterior ou a não-residentes:\n- quaisquer valores mediante operações de câmbio de qualquer natureza;\n- quaisquer valores por intermédio de transferências internacionais em reais (TIR), ou seja, pela utilização de reais (R$) para crédito de conta bancária titulada por não-residentes;\n- valores iguais ou superiores a R$ 120.000,00 (cento e vinte mil reais), equivalentes a R$ 10.000,00 por mês, por intermédio de cartões de crédito;\n- quaisquer valores mediante a utilização de recursos mantidos no exterior.",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S;N]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 18,
+     "nome": "IND_E-COM_TI",
+     "descricao": "Comércio Eletrônico e Tecnologia da Informação:\nS – Sim\nN – Não\nA pessoa jurídica que efetuou durante o ano-calendário vendas de bens (tangíveis ou intangíveis) ou tiver prestado serviços, por meio da Internet, para pessoas físicas e jurídicas, residentes ou domiciliadas no Brasil ou no exterior, deve assinalar este campo. Ao assinalar este campo, são disponibilizados os registros X400 (Comércio Eletrônico e Tecnologia da Informação) e X410 (Comércio Eletrônico).",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S;N]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 19,
+     "nome": "IND_ROY_REC",
+     "descricao": "Royalties Recebidos do Brasil e do Exterior:\nS – Sim\nN – Não\nA pessoa jurídica que tiver recebido, durante o ano-calendário, de pessoas físicas ou jurídicas, residentes ou domiciliadas no Brasil ou no exterior, rendimentos a título de royalties relativos a: exploração econômica dos direitos patrimoniais do autor, de marcas, de patentes e de desenho industrial; exploração de know-how; exploração de franquias e exploração dos direitos relativos à propriedade intelectual referente a cultivares, deve preencher este campo com “Sim”.",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S;N]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 20,
+     "nome": "IND_ROY_PAG",
+     "descricao": "Royalties Pagos a Beneficiários do Brasil e do Exterior:\nS – Sim\nN – Não\nA pessoa jurídica que tiver efetuado pagamento ou remessa, durante o ano-calendário, a pessoas físicas ou jurídicas, residentes ou domiciliadas no Brasil ou no exterior, a título de royalties relativos a: exploração econômica dos direitos patrimoniais do autor, de marcas, de patentes e de desenho industrial; exploração de know-how; exploração de franquias e exploração dos direitos relativos à propriedade intelectual referente a cultivares, deve preencher este campo com “Sim”.",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S;N]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 21,
+     "nome": "IND_REND_SERV",
+     "descricao": "Rendimentos Relativos a Serviços, Juros e Dividendos Recebidos do Brasil e do Exterior:\nS – Sim\nN – Não\nA pessoa jurídica que tiver recebido, durante o ano-calendário, de pessoas físicas ou jurídicas, residentes ou domiciliadas no Brasil ou no exterior, rendimentos relativos a: serviços de assistência técnica, científica, administrativa e semelhantes que impliquem transferência de tecnologia; serviços técnicos e de assistência que não impliquem transferência de tecnologia; juros sobre capital próprio, bem como juros decorrentes de contratos de mútuo entre empresas ligadas e juros decorrentes de contratos de financiamento; dividendos decorrentes de participações em outras empresas, deve preencher este campo com “Sim”.",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S;N]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 22,
+     "nome": "IND_PGTO_REM",
+     "descricao": "Pagamentos ou Remessas a Título de Serviços, Juros e Dividendos a Beneficiários do Brasil e do Exterior:\nS – Sim\nN – Não\nA pessoa jurídica que tiver pagado ou remetido, durante o ano-calendário, a pessoas físicas ou jurídicas, residentes ou domiciliadas no Brasil ou no exterior, valores relativos a: serviços de assistência técnica, científica, administrativa e semelhantes que impliquem transferência de tecnologia; serviços técnicos e de assistência que não impliquem transferência de tecnologia; juros sobre capital próprio, bem como juros decorrentes de contratos de mútuo entre empresas ligadas e juros decorrentes de contratos de financiamento; dividendos decorrentes de participações em outras empresas, deve preencher este campo com “Sim”.\nAs pessoas jurídicas que realizaram pagamentos ou remessas ao exterior para as operações previstas no art. 1º, inc. II, III, IV, X, XI e XII, da Lei nº 9.481, de 1997, e art. 9º da Lei nº 11.774, de 2008.",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S;N]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 23,
+     "nome": "IND_INOV_TEC",
+     "descricao": "Inovação Tecnológica e Desenvolvimento Tecnológico:\nS – Sim\nN – Não\nA pessoa jurídica beneficiária de incentivos fiscais relativos às atividades de pesquisa tecnológica e desenvolvimento de inovação tecnológica de que tratam os arts. 17 a 26 da Lei nº 11.196, de 21 de novembro de 2005, ou a pessoa jurídica executora dos programas de desenvolvimento tecnológico industrial ou agropecuário (PDTI/PDTA) de que trata a Lei nº 8.661, de 1993, aprovados até 31 de dezembro de 2005, que não tenha migrado para o regime estabelecido nos arts. 17 a 26 da Lei nº 11.196, de 2005, deve preencher este campo com “Sim”.",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S;N]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 24,
+     "nome": "IND_CAP_INF",
+     "descricao": "Capacitação de Informática e Inclusão Digital:\nS – Sim\nN – Não\nA pessoa jurídica que tiver investido em atividades de pesquisa e desenvolvimento em tecnologia da informação no âmbito dos programas de capacitação e competitividade dos setores de informática e automação e tecnologias da informação de que trata a Lei nº 8.248, de 23 de outubro de 1991, a Lei nº 10.176, de 11 de janeiro de 2001, e a Lei nº 11.077, de 30 de dezembro de 2004, regulamentadas pelo Decreto nº 5.906, de 26 de setembro de 2006, ou tiver efetuado venda a varejo nos termos dos arts. 28 a 30 da Lei nº 11.196, de 2005, que dispõem sobre o programa de inclusão digital, deve preencher este campo com “Sim”.",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S;N]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 25,
+     "nome": "IND_PJ_HAB",
+     "descricao": "PJ Habilitada ao Repes, Recap, Padis, Reidi, Recine, Retid, Óleo Bunker, Reporto, RET II, RET PMCMV/PCVA, RET EEI, EBAS Imune, Repetro-Industrialização, Repetro-Nacional, Repetro-Permanente e Repetro-Temporário:\nS – Sim\nN – Não\nEste registro deverá ser preenchido pela pessoa jurídica:\na) habilitada ao Regime Especial de Tributação para a Plataforma de Exportação de Serviços de Tecnologia da Informação (Repes), instituído pela Lei nº 11.196, de 2005, com as alterações introduzidas pela Lei nº 11.774, de 17 de setembro de 2008 e pela Lei 12.715, de 17 de setembro de 2012, regulamentado pelo Decreto nº 5.712, de 2 de março de 2006, com as alterações introduzidas pelo Decreto nº 6.887, de 25 de junho de 2009; ou\nb) habilitada ao Regime Especial de Aquisição de Bens de Capital para Empresas Exportadoras (Recap) instituído pela Lei nº 11.196, de 2005, com as alterações introduzidas pela Lei nº 11.774, de 2008 e pela Lei 12.715, de 17 de setembro de 2012, regulamentado pelo Decreto nº 5.649, de 29 de dezembro de 2005, com as alterações posteriores; ou\nc) executora de projeto aprovado no âmbito do Programa de Apoio ao Desenvolvimento Tecnológico da Indústria de Semicondutores (Padis), instituído pela Lei nº 11.484, de 31 de maio de 2007, com alterações introduzidas pelo art. 20 c/c art. 139, I, “d” da Lei nº 12.249, de 11 de junho de 2010, regulamentado pelo Decreto nº 6.233, de 11 de outubro de 2007, com as alterações introduzidas pelo Decreto nº 6.887, de 2009; ou\nd) habilitada ou co-habilitada ao Regime Especial de Incentivos para o Desenvolvimento da Infraestrutura (Reidi), instituído pela Lei nº 11.488, de 15 de junho de 2007, com as alterações posteriores, regulamentado pelo Decreto nº 6.144, de 3 de julho de 2007, com as alterações introduzidas pelo Decreto nº 6.167, de 24 de julho de 2007 e pelo Decreto nº 6.416, de 28 de março de 2008; ou\ne) detentora de projeto de exibição cinematográfica aprovado no âmbito do Regime Especial de Tributação para Desenvolvimento da Atividade de Exibição Cinematográfica (Recine), instituído pela Lei nº 12.599, de 23 de março de 2012, regulamentada pelo Decreto nº 7.729, de 25 de maio de 2012; ou\nf) beneficiária do Regime Especial Tributário para a Indústria de Defesa (Retid), nos termos e condições estabelecidos na Lei nº 12.598, de 22 de março de 2012, ou\ng) habilitada a usufruir a suspensão do pagamento da Contribuição para o PIS/Pasep e da Cofins incidentes nas vendas no mercado interno de óleo combustível do tipo bunker destinado à navegação de cabotagem e de apoio portuário e marítimo e da Contribuição para o PIS/Pasep-Importação e da Cofins-Importação incidentes na sua importação, criada pelo art. 2º da Lei nº 11.774, de 17 de setembro de 2008.\nh) habilitada ao Regime Tributário para o Incentivo à Modernização e à Ampliação da Estrutura Portuária (Reporto), instituído pelo art. 13 da Lei nº 11.033, de 2004, regulamentado pelo Decreto nº 6.582, de 2008, e Decreto nº 8.033, de 2013.\ni) com opção efetivada pela RFB para o Regime Especial de Tributação Aplicável às Incorporações Imobiliárias objeto de patrimônio de afetação (RET-II), de que tratam os arts. 1º a 11-A da Lei nº 10.931, de 2 de agosto de 2004.\nj) com opção efetivada pela RFB para o Regime Especial de Tributação Aplicável às Construções de Unidades Habitacionais Contratadas no Âmbito do Programa Minha Casa, Minha Vida (RET-PMCMV), de que tratam os arts. 1º a 2º-A da Lei nº 12.024, de 27 de agosto de 2009, ou do Programa Casa Verde e Amarela (RET-PCVA), de que trata a Lei nº 14.118, de 2021\nk) com opção efetivada pela RFB para o Regime Especial de Tributação Aplicável às Construções ou Reformas de Estabelecimentos de Educação Infantil (RET-EEI), de que tratam os arts. 24 a 27 da Lei nº 12.715, de 17 de setembro de 2012, regulamentados pelos arts. 486 a 495 do Decreto nº 9.580, de 22 de novembro de 2018.\nl) entidade beneficente de assistência social (EBAS) imune de contribuições sociais, de que trata o parágrafo 7º do art. 195 da Constituição da República Federativa do Brasil, de 5 de outubro de 1988, e certificada nos termos da Lei Complementar nº 187, de 16 de dezembro de 2021.\nm) habilitada ao Regime Especial de Industrialização de Bens Destinados às Atividades de Exploração, de Desenvolvimento e de Produção de Petróleo, de Gás Natural e de Outros Hidrocarbonetos Fluidos (Repetro-Industrialização), instituído pelo art. 6º da Lei nº 13.586, de 28 de dezembro de 2017, regulamentado pelo Decreto nº 9.537, de 24 de outubro de 2018.\nn) habilitada ao Regime Aduaneiro Especial de Exportação e Importação de Bens Destinados às Atividades de Pesquisa e de Lavra das Jazidas de Petróleo e de Gás Natural (Repetro), de que tratam o art. 6º da Lei nº 12.276, de 30 de junho de 2010, o art. 61 da Lei nº 12.351, de 22 de dezembro de 2010, o art. 5º da Lei nº 13.586, de 28 de dezembro de 2017, e regulamentado pelos arts. 458 a 462 do Decreto nº 6.759, de 5 de fevereiro de 2009.\no) habilitada ao Regime Tributário e Aduaneiro Especial de Utilização Econômica de Bens Destinados às Atividades de Exploração, Desenvolvimento e Produção das Jazidas de Petróleo e de Gás Natural (Repetro-Sped), de que tratam o art. 6º da Lei nº 12.276, de 30 de junho de 2010, o art. 61 da Lei nº 12.351, de 22 de dezembro de 2010, o art. 5º da Lei nº 13.586, de 28 de dezembro de 2017, e regulamentado pelos arts. 372, 377, 426 e 462 do Decreto nº 6.759, de 5 de fevereiro de 2009.\nAinda a pessoa jurídica com opção efetivada pela RFB para os Regimes Especiais de Tributação Aplicáveis às Incorporações Imobiliárias objeto de patrimônio de afetação (RET-II), de que tratam os arts. 1º a 11-A da Lei nº 10.931, de 2 de agosto de 2004, às Construções de Unidades Habitacionais Contratadas no Âmbito do Programa Minha Casa, Minha Vida (RET-PMCMV), de que tratam os arts. 1º a 2º-A da Lei nº 12.024, de 27 de agosto de 2009, ou do Programa Casa Verde e Amarela (RET-PCVA), de que trata a Lei de Conversão da Medida Provisória nº 996, de 25 de agosto de 2020, e às Construções ou Reformas de Estabelecimentos de Educação Infantil (RET-EEI), de que tratam os arts. 24 a 27 da Lei nº 12.715, de 17 de setembro de 2012, regulamentados pelos arts. 486 a 495 do Decreto nº 9.580, de 22 de novembro de 2018.\nEntidade Beneficente de Assistência Social (EBAS) imune de contribuições sociais, de que trata o parágrafo 7º do art. 195 da Constituição da República Federativa do Brasil, de 5 de outubro de 1988, e certificada nos termos da Lei Complementar nº 187, de 16 de dezembro de 2021.\nHabilitada ao Regime Especial de Industrialização de Bens Destinados às Atividades de Exploração, de Desenvolvimento e de Produção de Petróleo, de Gás Natural e de Outros Hidrocarbonetos Fluidos (Repetro-Industrialização), instituído pelo art. 6º da Lei nº 13.586, de 28 de dezembro de 2017, e regulamentado pelo Decreto nº 9.537, de 24 de outubro de 2018.\nHabilitada ao Regime Aduaneiro Especial de Exportação e Importação de Bens Destinados às Atividades de Pesquisa e de Lavra das Jazidas de Petróleo e de Gás Natural (Repetro) ou no Regime Tributário e Aduaneiro Especial de Utilização Econômica de Bens Destinados às Atividades de Exploração, Desenvolvimento e Produção das Jazidas de Petróleo e de Gás Natural (Repetro-Sped), de que tratam o art. 6º da Lei nº 12.276, de 30 de junho de 2010, o art. 61 da Lei nº 12.351, de 22 de dezembro de 2010, o art. 5º da Lei nº 13.586, de 28 de dezembro de 2017, e regulamentado pelos arts. 372, 377, 426, 458 a 462 do Decreto nº 6.759, de 5 de fevereiro de 2009.",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S;N]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 26,
+     "nome": "IND_POLO_AM",
+     "descricao": "Pólo Industrial de Manaus e Amazônia Ocidental:\nS – Sim\nN – Não\nA pessoa jurídica que estiver localizada na área de atuação da Superintendência da Zona Franca de Manaus (Suframa) que seja beneficiária dos incentivos de que trata o Decreto-lei nº 288, de 28 de fevereiro de 1967, e alterações posteriores; a Lei nº 8.387, de 30 de dezembro de 1991, e alterações posteriores; ou o Decreto-lei nº 356, de 15 de agosto de 1968, e alterações posteriores (Amazônia Ocidental), deve preencher este campo com “Sim”.",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S;N]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 27,
+     "nome": "IND_ZON_EXP",
+     "descricao": "Zonas de Processamento de Exportação:\nS – Sim\nN – Não\nA pessoa jurídica autorizada a operar em Zonas de Processamento de Exportação, voltadas para a produção de bens a serem comercializados no exterior, de acordo com o estabelecido pela Lei nº 11.508, de 20 de julho de 2007 e pela Lei nº 11.732, de 30 de junho de 2008, deve preencher este campo com “Sim”.",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S;N]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 28,
+     "nome": "IND_AREA_COM",
+     "descricao": "Áreas de Livre Comércio:\nS – Sim\nN – Não\nA pessoa jurídica autorizada a operar nas Áreas de Livre Comércio de Boa Vista, Bonfim, Tabatinga, Macapá e Santana, Brasiléia, Cruzeiro do Sul ou Guajará-Mirim, beneficiária dos incentivos de que tratam a Lei nº 8.256, de 25 de novembro de 1991, a Lei nº 11.732, de 30 de junho de 2008, a Lei nº 7.965, de 22 de dezembro de 1989, a Lei nº 8.387, de 30 de dezembro de 1991, o Decreto nº 517, de 8 de maio de 1992, a Lei nº 8.857, de 8 de março de 1994, e a Lei nº 8.210, de 19 de julho de 1991, e alterações posteriores, deve preencher este campo com “Sim”.",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S;N]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 29,
+     "nome": "IND_PAIS_A_PAIS",
+     "descricao": "Entidade Integrante de Grupo Multinacional: A pessoa jurídica é entidade integrante de grupo multinacional, nos termos da Instrução Normativa RFB nº 1.681/2016?\nS - Sim\nN – Não",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S;N]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 30,
+     "nome": "IND_DEREX",
+     "descricao": "Declaração sobre utilização dos recursos em moeda estrangeira decorrentes do recebimento de exportações (DEREX)\nS – Sim\nN – Não",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S;N]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 31,
+     "nome": "IND_PR_TRANSF",
+     "descricao": "Opção pelas novas regras de preços de transferência no ano-calendário 2023 (Lei nº 14.956/2023):\nS – Sim\nN – Não",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S;N]",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [
+    {
+     "campo": "IND_ALIQ_CSLL",
+     "regras": [
+      {
+       "codigo": "REGRA_PREENCHIMENTO_IMUNE_ISENTA_DESOBRIGADA",
+       "texto": "Verifica, quando 0010.FORMA_TRIB é igual a “8” (Imune do IRPJ) ou “9” (Isento do IPRJ) e 0010. APUR_CSLL = “D” (Desobrigada), se 0020.IND_ALIQ_CSLL não está preenchido.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_PREENCHIMENTO_IND_ALIQ_CSSL",
+       "texto": "Verifica, quando o ano da ECF for maior ou igual a 2019, se o campo 0020.IND_ALIQ_CSLL é igual a “1” (9%) ou “4” (15%).",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "IND_QTE_SCP",
+     "regras": [
+      {
+       "codigo": "REGRA_SCP_NAO_PREENCHER_QTD",
+       "texto": "Verifica, quando 0000.TIP_ECF é igual a “0” (ECF de empresa não participante de SCP como sócio ostensivo) ou “2” (ECF da SCP), se 0020.IND_QTE_SCP não está preenchido.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_SCP_OBRIGATORIO_QTD",
+       "texto": "Verifica, quando 0000.TIP_ECF é igual a “1” (ECF de empresa participante de SCP como sócio ostensivo), se 0020.IND_QTE_SCP está preenchido.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_QTD_SCP",
+       "texto": "Verifica se 0020.IND_QTE_SCP é igual ao número de registros 0035 informados.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "IND_ADM_FUN_CLU",
+     "regras": [
+      {
+       "codigo": "REGRA_PREENCHIMENTO_IND_ADM_FUN_CLU",
+       "texto": "Verifica, quando 00010.FORMA_TRIB é igual a “8” (Imune do IRPJ) e 0010_TIP_ENT é diferente de “06” (Entidade Fechada de Previdência Complementar), “11” (Associação de Poupança e Empréstimo) e “12” (Entidade Aberta de Previdência Complementar Sem Fins Lucrativos), se 0020.IND_ADM_FUN_CLU está preenchido.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "IND_PART_CONS",
+     "regras": [
+      {
+       "codigo": "REGRA_PREENCHIMENTO_ATIV_13",
+       "texto": "Verifica, quando 0010_TIP_ENT é igual a “13” (Fifa e Entidades Relacionadas), se 0020.IND_PART_CONS é igual a “N”.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "IND_OP_EXT",
+     "regras": [
+      {
+       "codigo": "REGRA_PREENCHIMENTO_IMUNE_ISENTA",
+       "texto": "Verifica, quando 0010.FORMA_TRIB é igual a “8” (Imune do IRPJ) ou “9” (Isento do IPRJ), se 0020.IND_OP_EXT é igual a “N”.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "IND_OP_VINC",
+     "regras": [
+      {
+       "codigo": "REGRA_PREENCHIMENTO_IND_OP_VINC",
+       "texto": "Verifica, quando 0020.IND_OP_EXT é igual a “N”, se 0020.IND_OP_VINC também é igual a “N”.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "IND_PART_EXT",
+     "regras": [
+      {
+       "codigo": "REGRA_PREENCHIMENTO_IND_PART_EXT",
+       "texto": "Verifica as regras abaixo:\nSe 0010.FORMA_TRIB igual a “8” (Imune de IRPJ) ou “9” (Isento do IPRJ), então 0020.IND_PART_EXT deve ser igual a “N”.\nSe [0010.FORMA_TRIB é igual a “5” (Lucro Presumido) ou “7” (Lucro Presumido/Arbitrado)) e 0010.OPT_REFIS igual a “N”], então IND_PART_EXT deve ser igual a “N”.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "IND_ATIV_RURAL",
+     "regras": [
+      {
+       "codigo": "REGRA_PREENCHIMENTO_IND_ATIV_RURAL",
+       "texto": "Verifica, quando 0010.COD_QUALIF_PJ = “02” (PJ Componente do Sistema Financeiro) ou “03” (Sociedades Seguradoras, de Capitalização ou Entidade Aberta de Previdência Complementar), se 0020.IND_ATIV_RURAL é igual a “N”.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "IND_LUC_EXP",
+     "regras": [
+      {
+       "codigo": "REGRA_PREENCHIMENTO_IND_LUC_EXP",
+       "texto": "Verifica, quando 0010.COD_QUALIF_PJ é diferente de “01” (PJ em Geral) ou 0010.FORMA_TRIB é diferente de “1” (Lucro Real), “2” (Lucro Real/Arbitrado), “3” (Lucro Presumido/Real) ou “4” (Lucro Presumido/Real/Arbitrado), se 0020.IND_LUC_EXP é igual a “N”.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "IND_RED_ISEN",
+     "regras": [
+      {
+       "codigo": "REGRA_PREENCHIMENTO_IND_RED_ISEN",
+       "texto": "Verifica, quando 0010.OPT_REFIS é diferente de “S” ou 0010.COD_QUALIF_PJ é diferente de “01” (PJ em Geral) ou 0010.FORMA_TRIB é diferente de “5” (Lucro Presumido) ou “7” (Lucro Presumido/Arbitrado), se 0020.IND_RED_ISEN é igual a “N”.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "IND_FIN",
+     "regras": [
+      {
+       "codigo": "REGRA_PREENCHIMENTO_IND_FIN",
+       "texto": "Verifica, quando 0010.FORMA_TRIB é diferente de “1” (Lucro Real), “2” (Lucro Real/Arbitrado), “3” (Lucro Presumido/Real) ou “4” (Lucro Presumido/Real/Arbitrado), se 0020.IND_FIN é igual a “N”.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "IND_PART_COLIG",
+     "regras": [
+      {
+       "codigo": "REGRA_PREENCHIMENTO_ATIV_13",
+       "texto": "Verifica, quando 0010_TIP_ENT é igual a “13” (Fifa e Entidades Relacionadas), se 0020.IND_PART_COLIG é igual a “N”.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "IND_REC_EXT",
+     "regras": [
+      {
+       "codigo": "REGRA_PREENCHIMENTO_ATIV_13",
+       "texto": "Verifica, quando 0010_TIP_ENT é igual a “13” (Fifa e Entidades Relacionadas), se 0020.IND_REC_EXT é igual a “N”.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "IND_ATIV_EXT",
+     "regras": [
+      {
+       "codigo": "REGRA_PREENCHIMENTO_ATIV_13",
+       "texto": "Verifica, quando 0010_TIP_ENT é igual a “13” (Fifa e Entidades Relacionadas), se 0020.IND_ATIV_EXT é igual a “N”.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_PREENCHIMENTO_PJ",
+       "texto": "Verifica, quando 0010.COD_QUALIF_PJ diferente de “01” (PJ em Geral), se 0020.IND_ATIV_EXT é igual a “N”.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "IND_PGTO_EXT",
+     "regras": [
+      {
+       "codigo": "REGRA_PREENCHIMENTO_ATIV_13",
+       "texto": "Verifica, quando 0010_TIP_ENT é igual a “13” (Fifa e Entidades Relacionadas), se 0020.IND_PGTO_EXT é igual a “N”.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "IND_E-COM_TI",
+     "regras": [
+      {
+       "codigo": "REGRA_PREENCHIMENTO_ATIV_13",
+       "texto": "Verifica, quando 0010_TIP_ENT é igual a “13” (Fifa e Entidades Relacionadas), se 0020.IND_E-COM_TI é igual a “N”.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "IND_ROY_REC",
+     "regras": [
+      {
+       "codigo": "REGRA_PREENCHIMENTO_ATIV_13",
+       "texto": "Verifica, quando 0010_TIP_ENT é igual a “13” (Fifa e Entidades Relacionadas), se 0020.IND_ROY_REC é igual a “N”.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "IND_ROY_PAG",
+     "regras": [
+      {
+       "codigo": "REGRA_PREENCHIMENTO_ATIV_13",
+       "texto": "Verifica, quando 0010_TIP_ENT é igual a “13” (Fifa e Entidades Relacionadas), se 0020.IND_ROY_PAG é igual a “N”.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "IND_REND_SERV",
+     "regras": [
+      {
+       "codigo": "REGRA_PREENCHIMENTO_ATIV_13",
+       "texto": "Verifica, quando 0010_TIP_ENT é igual a “13” (Fifa e Entidades Relacionadas), se 0020.IND_REND_SERV é igual a “N”.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "IND_PGTO_REM",
+     "regras": [
+      {
+       "codigo": "REGRA_PREENCHIMENTO_ATIV_13",
+       "texto": "Verifica, quando 0010_TIP_ENT é igual a “13” (Fifa e Entidades Relacionadas), se 0020.IND_PGTO_REM é igual a “N”.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "IND_INOV_TEC",
+     "regras": [
+      {
+       "codigo": "REGRA_PREENCHIMENTO_IMUNE_ISENTA",
+       "texto": "Verifica, quando 0010.FORMA_TRIB é igual a “8” (Imune do IRPJ) ou “9” (Isento do IPRJ), se 0020.IND_NOV_TEC é igual a “N”.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "IND_CAP_INF",
+     "regras": [
+      {
+       "codigo": "REGRA_PREENCHIMENTO_IMUNE_ISENTA",
+       "texto": "Verifica, quando 0010.FORMA_TRIB é igual a “8” (Imune do IRPJ) ou “9” (Isento do IPRJ), se 0020.IND_CAP_INF é igual a “N”.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "IND_PJ_HAB",
+     "regras": [
+      {
+       "codigo": "REGRA_PREENCHIMENTO_IMUNE_ISENTA",
+       "texto": "Verifica, quando 0010.FORMA_TRIB é igual a “8” (Imune do IRPJ) ou “9” (Isento do IPRJ) e 0010.TIP_ENT é diferente de “14” (CIO e Entidades Relacionadas) , se 0020.IND_PJ_HAB é igual a “N”.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "IND_POLO_AM",
+     "regras": [
+      {
+       "codigo": "REGRA_PREENCHIMENTO_IMUNE_ISENTA",
+       "texto": "Verifica, quando 0010.FORMA_TRIB é igual a “8” (Imune do IRPJ) ou “9” (Isento do IPRJ), se 0020.IND_POLO_AM é igual a “N”.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "IND_ZON_EXP",
+     "regras": [
+      {
+       "codigo": "REGRA_PREENCHIMENTO_IMUNE_ISENTA",
+       "texto": "Verifica, quando 0010.FORMA_TRIB é igual a “8” (Imune do IRPJ) ou “9” (Isento do IPRJ), se 0020.IND_ZON_EXP é igual a “N”.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "IND_AREA_COM",
+     "regras": [
+      {
+       "codigo": "REGRA_PREENCHIMENTO_IMUNE_ISENTA",
+       "texto": "Verifica, quando 0010.FORMA_TRIB é igual a “8” (Imune do IRPJ) ou “9” (Isento do IPRJ), se 0020.IND_AREA_COM é igual a “N”.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "IND_PAIS_A_PAIS",
+     "regras": [
+      {
+       "codigo": "REGRA_PREENCHIMENTO_PAIS_A_PAIS",
+       "texto": "Verifica, quando 0000.TIP_ECF é igual a “2” (ECF da SCP), se 0020.IND_PAIS_A_PAIS é igual a “N”.",
+       "tipo": "Erro"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|0020|1|0|N|N|S|N|N|S|N|N|N|N|S|N|S|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|",
+    "|0020|: Identificação do tipo do registro.",
+    "|2|: PJ sujeita à alíquota da CSLL de 9%.",
+    "|0|: Quantidade de SCP da PJ (Não há SCP).",
+    "|N|: Administração de fundos e clubes de investimento (N = Não).",
+    "|N|: Participações em consórcio de empresa (N = Não).",
+    "|S|: Operações com o exterior (S = Sim).",
+    "|N|: Operações com pessoa vinculada/interposta pessoa/país com tributação favorecida (N = Não).",
+    "|N|: PJ enquadrada nos artigos 48 ou 49 da IN RFB nº 1.312/2012 (N = Não).",
+    "|S|: Participações no exterior (S = Sim).",
+    "|N|: Atividade rural (N = Não).",
+    "|N|: Lucro da exploração (N = Não).",
+    "|N|: Isenção e redução do imposto para lucro presumido (N = Não).",
+    "|N|: Finor/Finam/Funres (N = Não).",
+    "|S|: Participação permanente em coligadas ou controladas (S = Sim).",
+    "|N|: Rendimento do exterior ou de não residentes (N = Não).",
+    "|S|: Ativos no exterior (S = Sim).",
+    "|N|: Pagamentos ao exterior ou a não residentes (N = Não).",
+    "|N|: Comércio eletrônico e tecnologia da informação (N = Não).",
+    "|N|: Royalties recebidos do Brasil e do exterior (N = Não).",
+    "|N|: Royalties pagos a beneficiários do Brasil e do exterior (N = Não).",
+    "|N|: Rendimentos relativos a serviços, juros e dividendos recebidos do Brasil e do exterior (N = Não).",
+    "|N|: Pagamentos ou remessas a título de serviços, juros e dividendos a beneficiário do Brasil e do exterior (N = Não).",
+    "|N|: Inovação tecnológica e desenvolvimento tecnológico (N = Não).",
+    "|N|: Capacitação de informática e inclusão digital (N = Não).",
+    "|N|: PJ Habilitada no Repes, Recap, Padis, PATVD, Reidi, Repenec, Reicomp, Retaero, Recine, Resíduos Sólidos, Recopa, Copa do Mundo, Retid, REPNBL-Redes, Reif e Olimpíadas (N = Não).",
+    "|N|: Pólo industrial de Manaus e Amazônia Ocidental (N = Não).",
+    "|N|: Zonas de processamento de exportação (N = Não).",
+    "|N|: Áreas de livre comércio (N = Não).",
+    "|N|: Entidade Integrante de Grupo Multinacional (N = Não).",
+    "|N|: Derex (N = Não).",
+    "|N|: Opção pelas novas regras de preços de transferência no ano-calendário 2023 (N = Não)."
+   ]
+  },
+  {
+   "codigo": "0021",
+   "nome": "Parâmetros de Identificação dos Tipos de Programa",
+   "ordem": 4,
+   "nivel": "2",
+   "ocorrencia": "[0;1]",
+   "chave": "[REG]",
+   "entrada": "F",
+   "saida": "OC\n(Se 0020.IND_PJ_HAB = S)",
+   "descricao": [
+    "Identifica se a pessoa jurídica é:",
+    "a) habilitada ao Regime Especial de Tributação para a Plataforma de Exportação de Serviços de Tecnologia da Informação (Repes), instituído pela Lei nº 11.196, de 2005, com as alterações introduzidas pelas Leis nº 11.774, de 17 de setembro de 2008, e nº 12.715, de 17 de setembro de 2012, regulamentado pelo Decreto nº 5.712, de 2 de março de 2006, com as alterações introduzidas pelo Decreto nº 6.887, de 25 de junho de 2009; ou",
+    "b) habilitada ao Regime Especial de Aquisição de Bens de Capital para Empresas Exportadoras (Recap) instituído pela Lei nº 11.196, de 2005, com as alterações introduzidas pelas Leis nº 11.774, de 2008, e nº 12.715, de 17 de setembro de 2012, regulamentado pelo Decreto nº 5.649, de 29 de dezembro de 2005, com as alterações introduzidas pelo Decreto nº 6.887, de 2009; ou",
+    "c) executora de projeto aprovado no âmbito do Programa de Apoio ao Desenvolvimento Tecnológico da Indústria de Semicondutores (Padis), instituído pela Lei nº 11.484, de 31 de maio de 2007, com alterações introduzidas pelo art. 20 c/c art. 139, I, “d” da Lei nº 12.249, de 11 de junho de 2010, e pelo art. 57 da Lei nº 12.715, de 2012, regulamentado pelo Decreto nº 6.233, de 11 de outubro de 2007, com as alterações introduzidas pelo Decreto nº 6.887, de 2009; ou",
+    "d) habilitada ou co-habilitada ao Regime Especial de Incentivos para o Desenvolvimento da Infraestrutura (Reidi), instituído pela Lei nº 11.488, de 15 de junho de 2007, com as alterações introduzidas pela Lei nº 11.727, de 23 de junho de 2008, e pelo art. 21 c/c art. 139, I, “d” da Lei nº 12.249, de 2010, regulamentado pelo Decreto nº 6.144, de 3 de julho de 2007, com as alterações introduzidas pelo Decreto nº 6.167, de 24 de julho de 2007 e pelo Decreto nº 6.416, de 28 de março de 2008; ou",
+    "e) detentora de projeto de exibição cinematográfica aprovado no âmbito do Regime Especial de Tributação para Desenvolvimento da Atividade de Exibição Cinematográfica (Recine), instituído pela Lei nº 12.599, de 23 de março de 2012, regulamentada pelo Decreto nº 7.729, de 25 de maio de 2012; ou",
+    "f) beneficiária do Regime Especial Tributário para a Indústria de Defesa (Retid), nos termos e condições estabelecidos na Lei nº 12.598, de 22 de março de 2012, ou",
+    "g) habilitada a usufruir a suspensão do pagamento da Contribuição para o PIS/Pasep e da Cofins incidentes nas vendas no mercado interno de óleo combustível do tipo bunker destinado à navegação de cabotagem e de apoio portuário e marítimo e da Contribuição para o PIS/Pasep-Importação e da Cofins-Importação incidentes na sua importação, criada pelo art. 2º da Lei nº 11.774, de 17 de setembro de 2008.",
+    "h) habilitada ao Regime Tributário para o Incentivo à Modernização e à Ampliação da Estrutura Portuária (Reporto), instituído pelo art. 13 da Lei nº 11.033, de 2004, regulamentado pelo Decreto nº 6.582, de 2008, e Decreto nº 8.033, de 2013.",
+    "i) com opção efetivada pela RFB para o Regime Especial de Tributação Aplicável às Incorporações Imobiliárias objeto de patrimônio de afetação (RET-II), de que tratam os arts. 1º a 11-A da Lei nº 10.931, de 2 de agosto de 2004.",
+    "j) com opção efetivada pela RFB para o Regime Especial de Tributação Aplicável às Construções de Unidades Habitacionais Contratadas no Âmbito do Programa Minha Casa, Minha Vida (RET-PMCMV), de que tratam os arts. 1º a 2º-A da Lei nº 12.024, de 27 de agosto de 2009 Redação dada pela Lei nº 13.970, de 2019), ou do Programa Casa Verde e Amarela (RET-PCVA), de que trata a Lei de Conversão da Medida Provisória nº 996, de 25 de agosto de 2020.",
+    "k) com opção efetivada pela RFB para o Regime Especial de Tributação Aplicável às Construções ou Reformas de Estabelecimentos de Educação Infantil (RET-EEI), de que tratam os arts. 24 a 27 da Lei nº 12.715, de 17 de setembro de 2012, regulamentados pelos arts. 486 a 495 do Decreto nº 9.580, de 22 de novembro de 2018.",
+    "l) entidade beneficente de assistência social (EBAS) imune de contribuições sociais, de que trata o parágrafo 7º do art. 195 da Constituição da República Federativa do Brasil, de 5 de outubro de 1988, e certificada nos termos da Lei Complementar nº 187, de 16 de dezembro de 2021.",
+    "m) habilitada ao Regime Especial de Industrialização de Bens Destinados às Atividades de Exploração, de Desenvolvimento e de Produção de Petróleo, de Gás Natural e de Outros Hidrocarbonetos Fluidos (Repetro-Industrialização), instituído pelo art. 6º da Lei nº 13.586, de 28 de dezembro de 2017, regulamentado pelo Decreto nº 9.537, de 24 de outubro de 2018.",
+    "n) habilitada ao Regime Aduaneiro Especial de Exportação e Importação de Bens Destinados às Atividades de Pesquisa e de Lavra das Jazidas de Petróleo e de Gás Natural (Repetro), de que tratam o art. 6º da Lei nº 12.276, de 30 de junho de 2010, o art. 61 da Lei nº 12.351, de 22 de dezembro de 2010, o art. 5º da Lei nº 13.586, de 28 de dezembro de 2017, e regulamentado pelos arts. 458 a 462 do Decreto nº 6.759, de 5 de fevereiro de 2009.",
+    "o) habilitada ao Regime Tributário e Aduaneiro Especial de Utilização Econômica de Bens Destinados às Atividades de Exploração, Desenvolvimento e Produção das Jazidas de Petróleo e de Gás Natural (Repetro-Sped), de que tratam o art. 6º da Lei nº 12.276, de 30 de junho de 2010, o art. 61 da Lei nº 12.351, de 22 de dezembro de 2010, o art. 5º da Lei nº 13.586, de 28 de dezembro de 2017, e regulamentado pelos arts. 372, 377, 426 e 462 do Decreto nº 6.759, de 5 de fevereiro de 2009."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto fixo contendo a identificação do registro (0021).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[0021]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "IND_REPES",
+     "descricao": "Regime Especial de Tributação para a Plataforma de Exportação de Serviços de Tecnologia da Informação (Repes):\nS - Sim\nN – Não",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S;N]",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 3,
+     "nome": "IND_RECAP",
+     "descricao": "Regime Especial de Aquisição de Bens de Capital para Empresas Exportadoras (Recap):\nS - Sim\nN – Não",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S;N]",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 4,
+     "nome": "IND_PADIS",
+     "descricao": "Programa de Apoio ao Desenvolvimento Tecnológico da Indústria de Semicondutores (Padis):\nS - Sim\nN – Não",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S;N]",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 5,
+     "nome": "IND_REIDI",
+     "descricao": "Regime Especial de Incentivos para o Desenvolvimento da Infraestrutura (Reidi):\nS - Sim\nN – Não",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S;N]",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 6,
+     "nome": "IND_RECINE",
+     "descricao": "Regime Especial de Tributação para Desenvolvimento da Atividade de Exibição Cinematográfica (Recine):\nS - Sim\nN – Não",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S;N]",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 7,
+     "nome": "IND_RETID",
+     "descricao": "Regime Especial Tributário para a Indústria de Defesa (Retid):\nS - Sim\nN – Não",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S;N]",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 8,
+     "nome": "IND_OLEO_BUNKER",
+     "descricao": "Regime de Suspensão de Óleo Bunker:\nS - Sim\nN – Não",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S;N]",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 9,
+     "nome": "IND_REPORTO",
+     "descricao": "Regime Tributário para o Incentivo à Modernização e à Ampliação da Estrutura Portuária (Reporto):\nS - Sim\nN – Não",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S;N]",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 10,
+     "nome": "IND_RET_II",
+     "descricao": "Regime Especial de Tributação Aplicável às Incorporações Imobiliárias Objeto de Patrimônio de Afetação (RET-II):\nS - Sim\nN – Não",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S;N]",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 11,
+     "nome": "IND_RET_PMCMV",
+     "descricao": "Regime Especial de Tributação Aplicável às Construções de Unidades Habitacionais Contratadas no Âmbito do Programa Minha Casa, Minha Vida (RET-PMCMV):\nS - Sim\nN – Não",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S;N]",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 12,
+     "nome": "IND_RET_EEI",
+     "descricao": "Regime Especial de Tributação Aplicável às Construções ou Reformas de Estabelecimentos de Educação Infantil (RET-EEI):\nS - Sim\nN – Não",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S;N]",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 13,
+     "nome": "IND_EBAS",
+     "descricao": "Entidade Beneficente de Assistência Social (EBAS):\nS - Sim\nN – Não",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S;N]",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 14,
+     "nome": "IND_REPETRO_INDUSTRIALIZACAO",
+     "descricao": "Regime Especial de Industrialização de Bens Destinados às Atividades de Exploração, de Desenvolvimento e de Produção de Petróleo, de Gás Natural e de Outros Hidrocarbonetos Fluidos (REPETRO-INDUSTRIALIZAÇÃO):\nS - Sim\nN – Não",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S;N]",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 15,
+     "nome": "IND_REPETRO_NACIONAL",
+     "descricao": "Regime Tributário e Aduaneiro Especial de Utilização Econômica de Bens Destinados às Atividades de Exploração, Desenvolvimento e Produção das Jazidas de Petróleo e de Gás Natural, na modalidade REPETRO-NACONAL:\nS - Sim\nN – Não",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S;N]",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 16,
+     "nome": "IND_REPETRO_PERMANENTE",
+     "descricao": "Regime Tributário e Aduaneiro Especial de Utilização Econômica de Bens Destinados às Atividades de Exploração, Desenvolvimento e Produção das Jazidas de Petróleo e de Gás Natural, na modalidade REPETRO-PERMANENTE:\nS - Sim\nN – Não",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S;N]",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 17,
+     "nome": "IND_REPETRO_TEMPORARIO",
+     "descricao": "Regime Tributário e Aduaneiro Especial de Utilização Econômica de Bens Destinados às Atividades de Exploração, Desenvolvimento e Produção das Jazidas de Petróleo e de Gás Natural, na modalidade REPETRO-TEMPORARIO:\nS - Sim\nN – Não",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S;N]",
+     "obrigatorio": "Não"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [],
+   "exemplo": [
+    "|0021|S|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|",
+    "|0021|: Identificação do tipo do registro.",
+    "|S|: Repes (S = Sim).",
+    "|N|: Recap (S = Sim).",
+    "|N|: Padis (S = Sim).",
+    "|N|: Reidi (N = Não).",
+    "|N|: Recine (N = Não).",
+    "|N|: Retid (N = Não).",
+    "|N|: Óleo Bunker (N = Não).",
+    "|N|: Reporto (N = Não).",
+    "|N|: Ret-II (N = Não).",
+    "|N|: Ret-PMCMV (N = Não).",
+    "|N|: Ret-EEI (N = Não).",
+    "|N|: EBAS (N = Não).",
+    "|N|: Repetro-Industrialização (N = Não).",
+    "|N|: Repetro-Nacional (N = Não).",
+    "|N|: Repetro-Permanente (N = Não).",
+    "|N|: Repetro-Temporário (N = Não)."
+   ]
+  },
+  {
+   "codigo": "0030",
+   "nome": "Dados Cadastrais",
+   "ordem": 5,
+   "nivel": "2",
+   "ocorrencia": "[1;1]",
+   "chave": "[REG]",
+   "entrada": "O",
+   "saida": "O",
+   "descricao": [
+    "Apresenta os dados cadastrais da pessoa jurídica."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto fixo contendo a identificação do registro (0030).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[0030]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "COD_NAT",
+     "descricao": "Código da natureza jurídica, conforme tabela do Sped (Disponibilizada no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas/SPEDECF_LOCAL$SPEDECF_NATUREZA_JURIDICA).",
+     "tipo": "N",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "Código da Natureza Jurídica",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "CNAE_FISCAL",
+     "descricao": "Código da atividade econômica (CNAE-Fiscal), conforme tabela do Sped (Disponibilizada no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas/SPEDECF_LOCAL$SPEDECF_CNAE).\nAtenção: Se houver mais de uma atividade, indicar a de maior faturamento.",
+     "tipo": "N",
+     "tamanho": "7",
+     "decimal": "—",
+     "valores": "CNAE Fiscal",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 4,
+     "nome": "ENDERECO",
+     "descricao": "Endereço da pessoa jurídica.",
+     "tipo": "C",
+     "tamanho": "150",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 5,
+     "nome": "NUM",
+     "descricao": "Número",
+     "tipo": "C",
+     "tamanho": "6",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 6,
+     "nome": "COMPL",
+     "descricao": "Complemento",
+     "tipo": "C",
+     "tamanho": "50",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 7,
+     "nome": "BAIRRO",
+     "descricao": "Bairro/Distrito",
+     "tipo": "C",
+     "tamanho": "50",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 8,
+     "nome": "UF",
+     "descricao": "UF, conforme tabela do Sped (Disponibilizada no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas/SPEDECF_GLOBAL$UF_SIG_NOM).",
+     "tipo": "C",
+     "tamanho": "2",
+     "decimal": "—",
+     "valores": "Sigla da UF",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 9,
+     "nome": "COD_MUN",
+     "descricao": "Código do Município, conforme tabela do Sped (Disponibilizada no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas/SPEDECF_GLOBAL$SPEDCONTABIL_MUNICIPIOS).",
+     "tipo": "C",
+     "tamanho": "7",
+     "decimal": "—",
+     "valores": "Código do Município",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 10,
+     "nome": "CEP",
+     "descricao": "Código de Endereçamento Postal (CEP)",
+     "tipo": "C",
+     "tamanho": "8",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 11,
+     "nome": "NUM_TEL",
+     "descricao": "DDD + Número do Telefone",
+     "tipo": "N",
+     "tamanho": "15",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 12,
+     "nome": "EMAIL",
+     "descricao": "Correio eletrônico",
+     "tipo": "C",
+     "tamanho": "115",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [
+    {
+     "campo": "EMAIL",
+     "regras": [
+      {
+       "codigo": "REGRA_VALIDA_EMAIL",
+       "texto": "Verifica se, não existe “espaço”, se existe o caracter “@” precedido e seguido de pelo menos um caracter e se, após o “@”, existe, pelo menos, um ponto seguido de duas a quatro letras, em 0030.EMAIL.",
+       "tipo": "Erro"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|0030|2046|6204000|RUA TESTE|1234|BLOCO Z SALA 301|BAIRRO ECF|DF|5300108|71000000|6133333333|testeecf@ecf.gov.br|",
+    "|0030|: Identificação do tipo do registro.",
+    "|2046|: Código da natureza jurídica (2046 = Sociedade Anônima Aberta).",
+    "|6204000|: Código da atividade econômica (6204000 = Consultoria em tecnologia da informação).",
+    "|RUA TESTE|: Endereço.",
+    "|1234|: Número.",
+    "|BLOCO Z SALA 301|: Complemento.",
+    "|BAIRRO ECF|: Bairro.",
+    "|DF|: Sigla da Unidade da Federação (DF = Distrito Federal).",
+    "|5300108|: Código do Município (5300108 = Brasília).",
+    "|71000000|: CEP (71.000-000).",
+    "|6133333333|: Telefone com DDD (61-3333-3333).",
+    "|testeecf@ecf.gov.br|: Email."
+   ]
+  },
+  {
+   "codigo": "0035",
+   "nome": "Identificação das SCP",
+   "ordem": 6,
+   "nivel": "2",
+   "ocorrencia": "[0:N]",
+   "chave": "[REG]",
+   "entrada": "F",
+   "saida": "OC\n(Se 0000.TIP_ECF = 1)",
+   "descricao": [
+    "O registro só deve ser utilizado nas ECF das pessoas jurídicas sócias ostensivas que possuem Sociedades em Conta de Participação (SCP), para identificação das SCP da pessoa jurídica no período da escrituração."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto fixo contendo a identificação do registro (0035).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[0035]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "COD_SCP",
+     "descricao": "CNPJ da SCP (ANEXOS I e VIII, da Instrução Normativa RFB nº 2.119, de 08 de dezembro de 2022).",
+     "tipo": "C",
+     "tamanho": "14",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "NOME_SCP",
+     "descricao": "Descrição da SCP",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [
+    {
+     "campo": "COD_SCP",
+     "regras": [
+      {
+       "codigo": "REGRA_VALIDA_TAM_SCP",
+       "texto": "Verifica se o campo 0035.COD_SCP possui 14 caracteres.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_CNPJ_DIFERENTE_SCP",
+       "texto": "Verifica se o campo 0035.COD_SCP é diferente do campo 0000.CNPJ.",
+       "tipo": "Erro"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|0035|11111111000291|SCP TESTE 1|",
+    "|0035|: Identificação do tipo do registro.",
+    "|111111111000291|: CNPJ da SCP (11.111.111/0001-91).",
+    "|SCP TESTE 1|: Nome da SCP."
+   ]
+  },
+  {
+   "codigo": "0930",
+   "nome": "Identificação dos Signatários da ECF",
+   "ordem": 7,
+   "nivel": "2",
+   "ocorrencia": "[1;N]",
+   "chave": "[REG]",
+   "entrada": "F",
+   "saida": "O",
+   "descricao": [
+    "Informa os dados dos signatários da escrituração. São obrigatórias duas assinaturas: uma do contabilista e uma da pessoa jurídica, podendo ser utilizado certificado na nuvem, desde de que respeitadas as demais regras apresentadas a seguir.",
+    "Para a assinatura do contabilista só podem ser utilizados certificados digitais de pessoa física (e-CPF), do tipo A1 ou A3.",
+    "Para a assinatura da pessoa jurídica, poderá ser utilizado certificado digital válido, do tipo A1 ou A3:",
+    "1. O e-CNPJ do estabelecimento que contenha a mesma base do CNPJ (8 primeiros caracteres);",
+    "2. O e-CPF do representante legal da pessoa jurídica.",
+    "3.",
+    "3.1. O e-CPF do procurador (outorgado) constituído diretamente no e-CAC (Centro Virtual de Atendimento), a partir do e-CNPJ da pessoa jurídica (outorgante).",
+    "3.2. O e-CPF do procurador (outorgado) constituído nos termos da Instrução Normativa RFB nº 2.066/2022, por meio de procuração cadastrada no site da Receita Federal do Brasil e validada em qualquer uma de suas unidades, tendo como outorgante a pessoa jurídica.",
+    "3.3. O e-CNPJ do procurador (outorgado) constituído diretamente no e-CAC (Centro Virtual de Atendimento), a partir do e-CNPJ da pessoa jurídica (outorgante);",
+    "3.4. O e-CNPJ do procurador (outorgado) constituído nos termos da Instrução Normativa RFB n.º 2.066/2022, por meio de procuração cadastrada na página da Receita Federal do Brasil e validada em qualquer uma de suas unidades, tendo como outorgante a pessoa jurídica.",
+    "Cadastramento de Procuração Eletrônica ou Procuração RFB:",
+    "No site da RFB, http://receita.fazenda.gov.br, no menu “Serviços”, clicar em “Procurações Digitais” ou opcionalmente https://cav.receita.fazenda.gov.br/scripts/CAV/login/login.asp.",
+    "Para procuração Eletrônica, o caminho é o seguinte:",
+    "1. Login com certificado digital de pessoa jurídica ou representante legal/procurador;",
+    "2. Selecionar “Procuração eletrônica”;",
+    "3. Selecionar “Cadastrar Procuração” ou outra opção, se for o caso;",
+    "4. Selecionar “Solicitação de procuração para a Receita Federal do Brasil”;",
+    "5. Preencher os dados do formulário apresentado e selecionar a opção “Transmissão de Declarações/Arquivos, inclusive todos do CNPJ, com Assinatura Digital via Receitanet.”",
+    "6. Para finalizar, clicar em “Cadastrar procuração”, ou “Limpar” ou “Voltar”.",
+    "Observação: Na procuração eletrônica, é importante habilitar o serviço “ECF – Escrituração Contábil Fiscal” ou habilitar a opção para todos os serviços.",
+    "A assinatura digital será verificada quanto a sua existência, prazo e validade para a pessoa jurídica identificada na ECF, no início do processo de transmissão do arquivo digital.",
+    "Para Procuração RFB, selecione a opção “Solicitar uma procuração”, preencha as informações solicitadas e apresente, via processo, os documentos necessários para a análise, via processo digital, conforme orientações disponíveis em https://www.gov.br/pt-br/servicos/cadastrar-ou-cancelar-procuracao-para-acesso-ao-e-cac",
+    "Assinatura como procurador: O contador pode assinar a ECF como contador e procurador. Para assinar como procurador, é necessária a procuração eletrônica cadastrada no e-CAC. É importante ressaltar que o serviço ECF – Escrituração Contábil Fiscal – ou a opção para todos os serviços devem estar explicitamente habilitados na procuração eletrônica. Para o preenchimento do registro 0930, as duas linhas conterão os dados do contador (Nome e CPF, conforme e-CPF do contador). Uma linha será com a qualificação “Contabilista” e a outra linha será com a qualificação “Procurador”.",
+    "Observação: No caso de imunes ou isentas sem obrigatoriedade de entrega da ECD, o sistema somente exigirá a assinatura do representante legal ou procurador. Não será obrigatória a assinatura de um contador. Nos demais casos, o sistema exigirá a assinatura do representante legal ou procurador e do contador."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto fixo contendo a identificação do registro (0930).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[0930]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "IDENT_NOM",
+     "descricao": "Nome do Signatário",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "IDENT_CPF_CNPJ",
+     "descricao": "CPF/CNPJ:\nO tamanho do campo deve ser exatamente o informado na coluna “Tamanho”.",
+     "tipo": "N",
+     "tamanho": "CPF (11)\nCNPJ(14)",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 4,
+     "nome": "IDENT_QUALIF",
+     "descricao": "Código de qualificação do assinante, conforme tabela do Sped (Disponibilizada no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas/SPEDECF_LOCAL$SPEDECF_QUALIF_ASSINANTE).",
+     "tipo": "C",
+     "tamanho": "3",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 5,
+     "nome": "IND_CRC",
+     "descricao": "Número de inscrição do contabilista no Conselho Regional de Contabilidade.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 6,
+     "nome": "EMAIL",
+     "descricao": "E-mail do signatário",
+     "tipo": "C",
+     "tamanho": "60",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 7,
+     "nome": "FONE",
+     "descricao": "DDD e telefone do signatário",
+     "tipo": "C",
+     "tamanho": "14",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_OBRIGATORIO_ASSIN_CONTADOR",
+     "texto": "Verifica se existe, no mínimo, um registro 0930, cujo 0930.IDENT_QUALIF seja igual a 900 (Contador ou Contabilista), no caso de forma de tributação diferente de imunes/isentas (0010.FORMA_TRIB diferente de “8” ou “9”) ou 0010.TIP_ESC_PRE igual a “C” – Obrigada a entregar a ECD ou entrega facultativa) e, no mínimo, um registro 0930, cujo 0930.IDENT_QUALIF seja diferente de 900. Se a regra não for cumprida, o programa da ECF gera um erro."
+    },
+    {
+     "codigo": "REGRA_OCORRENCIA_0930",
+     "texto": "Verifica se o registro 0930 possui, no máximo, duas ocorrências. Se a regra não for cumprida, o programa da ECF gera um erro."
+    }
+   ],
+   "regrasCampo": [
+    {
+     "campo": "IDENT_CPF_CNPJ",
+     "regras": [
+      {
+       "codigo": "REGRA_CONTADOR_CPF",
+       "texto": "Verifica, quando 0930.IDENT_QUALIF igual a 900 (Contador ou Contabilista), se 0930.IDENT_CPF_CNPJ possui 11 caracteres.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_VALIDA_CPF_CNPJ",
+       "texto": "Verifica se a regra de formação do 0930.IDENT_CPF_CNPJ é válida.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "IND_CRC",
+     "regras": [
+      {
+       "codigo": "REGRA_OBRIGATORIO_CONTADOR",
+       "texto": "0930.IND_CRC obrigatório quando 0930.IDENT_QUALIF for igual a 900 (Contador ou Contabilista).",
+       "tipo": "Erro"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|0930|FULANO BELTRANO|12345678900|900|1SP123456|fulanobeltrano@email.com|61333344444|",
+    "|0930|: Identificação do tipo do registro.",
+    "|FULANO BELTRANO|: Nome do Signatário.",
+    "|12345678900|: CPF (123.456.789-00).",
+    "|900|: Código de Qualificação do Assinante (900 = Contador).",
+    "|1SP123456|: Número de Inscrição do Contabilista no Conselho Regional de Contabilidade.",
+    "|fulanobeltrano@email.com|: Email do signatário.",
+    "|6133334444|: DDD com telefone do signatário (61-3333-4444)."
+   ]
+  },
+  {
+   "codigo": "0990",
+   "nome": "Encerramento do Bloco 0",
+   "ordem": 8,
+   "nivel": "1",
+   "ocorrencia": "[1;1]",
+   "chave": "[REG]",
+   "entrada": "O",
+   "saida": "O",
+   "descricao": [],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto fixo contendo a identificação do registro (0990).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[0990]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "QTD_LIN",
+     "descricao": "Quantidade total de registros do Bloco 0",
+     "tipo": "N",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [],
+   "exemplo": [
+    "|0990|50|",
+    "|0990|: Identificação do tipo do registro.",
+    "|50|: A quantidade total de registros do Bloco 0 é 50 (cinquenta registros)."
+   ]
+  }
+ ]
+}

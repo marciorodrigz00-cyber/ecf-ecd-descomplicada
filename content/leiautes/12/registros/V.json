@@ -1,0 +1,415 @@
+{
+ "rastreio": {
+  "id": "arq-12-v",
+  "fonte": {
+   "id": "manual-12",
+   "url": "https://www.gov.br/sped/pt-br/assuntos/escrituracoes-digitais/ecf/manuais-e-documentos-tecnicos",
+   "trecho": "Seção do bloco V"
+  },
+  "norma": "ADE Cofis nº 2/2026",
+  "leiautes": [
+   "12"
+  ],
+  "vigencia": {
+   "acNormal": [
+    2025
+   ],
+   "situacaoEspecial": [
+    2026
+   ]
+  },
+  "verificadoEm": "2026-11-24",
+  "status": "extraido"
+ },
+ "bloco": "V",
+ "descricao": "Apresenta a declaração sobre utilização dos recursos em moeda estrangeira decorrentes do recebimento de exportações (DEREX) - A partir do leiaute 4",
+ "registros": [
+  {
+   "codigo": "V001",
+   "nome": "Abertura do Bloco V",
+   "ordem": 110,
+   "nivel": "1",
+   "ocorrencia": "[1;1]",
+   "chave": "[REG]",
+   "entrada": "F",
+   "saida": "O",
+   "descricao": [],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto fixo contendo a identificação do registro (V001).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[V001]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "IND_DAD",
+     "descricao": "Indicador de movimento:\n0 – Bloco com dados informados.\n1 – Bloco sem dados informados.",
+     "tipo": "N",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[0;1]",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_OCORRENCIA_UNITARIA_ARQ",
+     "texto": "Verifica se registro ocorreu apenas uma vez por arquivo, considerando a chave “V001” (REG). Se a regra não for cumprida, a ECF gera um erro."
+    }
+   ],
+   "regrasCampo": [],
+   "exemplo": [
+    "|V001|0|",
+    "|V001|: Identificação do tipo do registro.",
+    "|0|: Indica que o bloco possui dados informados."
+   ]
+  },
+  {
+   "codigo": "V010",
+   "nome": "DEREX - Instituição",
+   "ordem": 111,
+   "nivel": "2",
+   "ocorrencia": "[0;N]",
+   "chave": "REG",
+   "entrada": "F",
+   "saida": "OC\nObrigatório se 0020.ind_derex = S\nSenão\nNão deve Existir",
+   "descricao": [
+    "Este registro apresenta as instituições financeiras, o país e a moeda nos quais houve aplicações financeiras, investimentos e pagamento de obrigações próprias do exportador, conforme § 3º, art. 4º da Instrução Normativa RFB nº 1.801, de 26 de março de 2018."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (V010).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[V010]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "NOME_INSTITUICAO",
+     "descricao": "Nome da Instituição",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "PAIS",
+     "descricao": "Código do País da Instituição",
+     "tipo": "C",
+     "tamanho": "2",
+     "decimal": "—",
+     "valores": "Conforme tabela EFDFINANCEIRA_PAISES",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 4,
+     "nome": "TIP_MOEDA",
+     "descricao": "Deve ser selecionada a moeda utilizada na Declaração",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "Conforme tabela SPEDECF_CBC_MOEDA",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [
+    {
+     "campo": "PAIS",
+     "regras": [
+      {
+       "codigo": "REGRA_DIFERENTE_BRASIL",
+       "texto": "Verifica, quando V010.PAIS é igual “BR” (Brasil)",
+       "tipo": "Erro"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|V010|INSTITUICAO 1|DE|EUR|",
+    "|V010|: Identificação do tipo do registro.",
+    "|INSTITUICAO 1|: Nome da Instituição.",
+    "|DE|: Código do País da Instituição",
+    "|EUR|: Moeda utilizada na declaração"
+   ]
+  },
+  {
+   "codigo": "V020",
+   "nome": "Responsável pela Movimentação",
+   "ordem": 112,
+   "nivel": "3",
+   "ocorrencia": "[1;N]",
+   "chave": "REG",
+   "entrada": "F",
+   "saida": "O\nObrigatório se existir V010.",
+   "descricao": [
+    "Este registro apresenta as informações dos procuradores, representantes ou agentes no exterior, responsáveis pela movimentação das contas bancárias."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (V020).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[V020]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "NOME",
+     "descricao": "Nome do responsável",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "ENDERECO",
+     "descricao": "Endereço do responsável",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 4,
+     "nome": "TIPO_DO_C",
+     "descricao": "Tipo de documento do responsável",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "Conforme tabela SPEDECF_DEREX_DOCUMENTO",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 5,
+     "nome": "NI",
+     "descricao": "Número do documento do responsável",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 6,
+     "nome": "IDENT_CONTA",
+     "descricao": "Identificação das contas",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [],
+   "exemplo": [
+    "|V020|FULANO| RUA ALFA 121 – PERDIZES – SÃO PAULO/SP – CEP: 20.000-000|XX|12345678900|12345-6|",
+    "|V020|: Identificação do tipo do registro.",
+    "|FULANO|: Nome do Responsável.",
+    "|RUA ALFA, 121 - PERDIZES – SÃO PAULO/SP – CEP: 20.000-000|: Endereço do Responsável.",
+    "|PS|: Tipo de Documento do Responsável.: Passaporte.",
+    "|12345678900|: Número do documento do responsável.",
+    "|12345-6|: Identificação das Contas."
+   ]
+  },
+  {
+   "codigo": "V030",
+   "nome": "DEREX – Período - Mês",
+   "ordem": 113,
+   "nivel": "3",
+   "ocorrencia": "[1;12]",
+   "chave": "REG",
+   "entrada": "F",
+   "saida": "O\nObrigatório se existir V010.",
+   "descricao": [
+    "Neste registro deve ser informado o mês em que houve aplicações financeiras, investimentos e pagamento de obrigações próprias do exportador."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (V030).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[V030]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "MES",
+     "descricao": "Mês",
+     "tipo": "C",
+     "tamanho": "2",
+     "decimal": "—",
+     "valores": "01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [
+    {
+     "campo": "MES",
+     "regras": [
+      {
+       "codigo": "REGRA_MES_FORA_PERIODO",
+       "texto": "Verifica se o campo MES (Campo 02) está compreendido no período informado entre 0000.DT_INI (Campo 10 do Registro 0000) e 0000.DT_FIN (Campo 11 do Registro 0000).",
+       "tipo": "Erro"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|V030|01|",
+    "|V030|: Identificação do tipo do registro.",
+    "|01|: Mês"
+   ]
+  },
+  {
+   "codigo": "V100",
+   "nome": "Demonstrativo dos Recursos em Moeda Estrangeira Decorrentes do Recebimento de Exportações",
+   "ordem": 114,
+   "nivel": "4",
+   "ocorrencia": "[1;N]",
+   "chave": "—",
+   "entrada": "F",
+   "saida": "O\nObrigatório se existir V010.",
+   "descricao": [
+    "Este registro informa o código, a descrição e os valores de aplicações financeiras, investimentos e pagamento de obrigações próprias do exportador, na moeda informada no registro V010."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (V100).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[V100]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "CODIGO",
+     "descricao": "Identificação da linha, conforme tabela publicada pela RFB.",
+     "tipo": "C",
+     "tamanho": "2",
+     "decimal": "—",
+     "valores": "Conforme tabela SPEDECF_V100",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "DESCRICAO",
+     "descricao": "Descrição da linha, conforme tabela publicada pela RFB",
+     "tipo": "C",
+     "tamanho": "1000",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "—"
+    },
+    {
+     "numero": 4,
+     "nome": "VALOR",
+     "descricao": "Valor da Linha",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "—"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_DUPLICIDADE_DESPREZADA",
+     "texto": "Verifica se o registro já foi importado anteriormente, de acordo com a chave e os registros pais. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_LINHA_ATUALIZADA",
+     "texto": "Verifica se o registro está desatualizado em relação à tabela da RFB. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_LINHA_DESPREZADA",
+     "texto": "Verifica se o registro existe na importação, mas não será importado por não existir na tabela dinâmica devido às configurações do bloco 0 ou da tabela dinâmica. Se a regra não for cumprida, a ECF gera um aviso."
+    }
+   ],
+   "regrasCampo": [
+    {
+     "campo": "VALOR",
+     "regras": [
+      {
+       "codigo": "REGRA_OBRIGATORIO_TIPO_DIFERENTE_R",
+       "texto": "Verifica se o campo está preenchido quando o tipo da linha é diferente de “R”.",
+       "tipo": "Erro"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|V100|61|Aquisição de Bens|10000,00|",
+    "|V100|: Identificação do tipo do registro.",
+    "|61|: Identificação da linha, conforme tabela publicada pela RFB.",
+    "|Aquisição de Bens|: Descrição da linha, conforme tabela publicada pela RFB.",
+    "|10000,00|: Valor."
+   ]
+  },
+  {
+   "codigo": "V990",
+   "nome": "Encerramento do Bloco V",
+   "ordem": 115,
+   "nivel": "1",
+   "ocorrencia": "[1;1]",
+   "chave": "REG",
+   "entrada": "F",
+   "saida": "O\nObrigatório se existir V010.",
+   "descricao": [],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (V990).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[V990]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "QTD_LIN_M",
+     "descricao": "Quantidade total de registros do Grupo V",
+     "tipo": "N",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [],
+   "exemplo": [
+    "|V990|100|",
+    "|V990|: Identificação do tipo do registro.",
+    "|100|: A quantidade total de registros do Bloco V é 100 (cem registros)."
+   ]
+  }
+ ]
+}

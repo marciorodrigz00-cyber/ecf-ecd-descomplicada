@@ -1,0 +1,534 @@
+{
+  "slug": "lucro-real",
+  "ano": 2025,
+  "tipo": "real",
+  "titulo": "Móveis Aurora Ltda.",
+  "regime": "Lucro real trimestral",
+  "iniciante": [
+    "A Móveis Aurora abriu em julho, começou no prejuízo e lucrou no fim do ano. É um bom caso para ver o e-Lalur guardar um prejuízo e usá-lo depois.",
+    "No 3º trimestre há duas despesas que a lei não aceita agora: uma provisão para processo trabalhista e uma multa fiscal. No 4º, parte da provisão é revertida."
+  ],
+  "profissional": [
+    "Abertura no curso do ano, apuração trimestral, adição temporária com controle na parte B, adição definitiva, prejuízo fiscal no T03 e compensação limitada no T04.",
+    "Simplificações: não há tributos sobre vendas, encargos sobre a folha nem reserva legal."
+  ],
+  "inicio": "2025-07-01",
+  "fim": "2025-12-31",
+  "cadastro": {
+    "nome": "MÓVEIS AURORA LTDA",
+    "cnpj": "99999999000100",
+    "natJur": "2062",
+    "cnae": "4754701",
+    "endereco": "RUA FICTÍCIA",
+    "numero": "100",
+    "bairro": "CENTRO",
+    "uf": "SP",
+    "municipio": "3550308",
+    "cep": "00000000",
+    "telefone": "1100000000",
+    "email": "contato@exemplo.invalid"
+  },
+  "assinantes": [
+    {
+      "nome": "CONTADORA FICTÍCIA",
+      "cpf": "00000000000",
+      "qualif": "900",
+      "crc": "SP000000",
+      "email": "contabil@exemplo.invalid",
+      "fone": "1100000000"
+    },
+    {
+      "nome": "RESPONSÁVEL FICTÍCIO",
+      "cpf": "00000000000",
+      "qualif": "205",
+      "crc": "",
+      "email": "legal@exemplo.invalid",
+      "fone": "1100000000"
+    }
+  ],
+  "contas": [
+    {
+      "codigo": "1",
+      "nome": "ATIVO",
+      "natureza": "01",
+      "ref": null
+    },
+    {
+      "codigo": "1.1",
+      "nome": "ATIVO CIRCULANTE",
+      "natureza": "01",
+      "ref": null
+    },
+    {
+      "codigo": "1.1.1",
+      "nome": "DISPONÍVEL",
+      "natureza": "01",
+      "ref": null
+    },
+    {
+      "codigo": "1.1.1.01",
+      "nome": "BANCO",
+      "natureza": "01",
+      "ref": "1.01.01.02.01"
+    },
+    {
+      "codigo": "1.1.2",
+      "nome": "CRÉDITOS",
+      "natureza": "01",
+      "ref": null
+    },
+    {
+      "codigo": "1.1.2.01",
+      "nome": "CLIENTES",
+      "natureza": "01",
+      "ref": "1.01.02.02.01"
+    },
+    {
+      "codigo": "1.1.3",
+      "nome": "ESTOQUES",
+      "natureza": "01",
+      "ref": null
+    },
+    {
+      "codigo": "1.1.3.01",
+      "nome": "MERCADORIAS",
+      "natureza": "01",
+      "ref": "1.01.03.01.01"
+    },
+    {
+      "codigo": "1.2",
+      "nome": "ATIVO NÃO CIRCULANTE",
+      "natureza": "01",
+      "ref": null
+    },
+    {
+      "codigo": "1.2.1",
+      "nome": "IMOBILIZADO",
+      "natureza": "01",
+      "ref": null
+    },
+    {
+      "codigo": "1.2.1.01",
+      "nome": "MÓVEIS E UTENSÍLIOS",
+      "natureza": "01",
+      "ref": "1.02.03.01.07"
+    },
+    {
+      "codigo": "1.2.1.02",
+      "nome": "DEPRECIAÇÃO ACUMULADA",
+      "natureza": "01",
+      "ref": "1.02.03.01.30"
+    },
+    {
+      "codigo": "2",
+      "nome": "PASSIVO E PATRIMÔNIO LÍQUIDO",
+      "natureza": "02",
+      "ref": null
+    },
+    {
+      "codigo": "2.1",
+      "nome": "PASSIVO CIRCULANTE",
+      "natureza": "02",
+      "ref": null
+    },
+    {
+      "codigo": "2.1.1",
+      "nome": "FORNECEDORES",
+      "natureza": "02",
+      "ref": null
+    },
+    {
+      "codigo": "2.1.1.01",
+      "nome": "FORNECEDORES NACIONAIS",
+      "natureza": "02",
+      "ref": "2.01.01.03.01"
+    },
+    {
+      "codigo": "2.1.2",
+      "nome": "TRIBUTOS",
+      "natureza": "02",
+      "ref": null
+    },
+    {
+      "codigo": "2.1.2.01",
+      "nome": "IRPJ A RECOLHER",
+      "natureza": "02",
+      "ref": "2.01.01.09.13"
+    },
+    {
+      "codigo": "2.1.2.02",
+      "nome": "CSLL A RECOLHER",
+      "natureza": "02",
+      "ref": "2.01.01.09.14"
+    },
+    {
+      "codigo": "2.1.3",
+      "nome": "PROVISÕES",
+      "natureza": "02",
+      "ref": null
+    },
+    {
+      "codigo": "2.1.3.01",
+      "nome": "PROVISÃO TRABALHISTA",
+      "natureza": "02",
+      "ref": "2.01.01.15.05"
+    },
+    {
+      "codigo": "2.3",
+      "nome": "PATRIMÔNIO LÍQUIDO",
+      "natureza": "03",
+      "ref": null
+    },
+    {
+      "codigo": "2.3.1",
+      "nome": "CAPITAL",
+      "natureza": "03",
+      "ref": null
+    },
+    {
+      "codigo": "2.3.1.01",
+      "nome": "CAPITAL SOCIAL",
+      "natureza": "03",
+      "ref": "2.03.01.01.01"
+    },
+    {
+      "codigo": "2.3.2",
+      "nome": "RESULTADOS",
+      "natureza": "03",
+      "ref": null
+    },
+    {
+      "codigo": "2.3.2.01",
+      "nome": "LUCROS ACUMULADOS",
+      "natureza": "03",
+      "ref": "2.03.04.01.01"
+    },
+    {
+      "codigo": "2.3.2.02",
+      "nome": "PREJUÍZOS ACUMULADOS",
+      "natureza": "03",
+      "ref": "2.03.04.01.11"
+    },
+    {
+      "codigo": "3",
+      "nome": "RESULTADO",
+      "natureza": "04",
+      "ref": null
+    },
+    {
+      "codigo": "3.1",
+      "nome": "RESULTADO ANTES DOS TRIBUTOS",
+      "natureza": "04",
+      "ref": null
+    },
+    {
+      "codigo": "3.1.1",
+      "nome": "RECEITAS",
+      "natureza": "04",
+      "ref": null
+    },
+    {
+      "codigo": "3.1.1.01",
+      "nome": "REVENDA DE MERCADORIAS",
+      "natureza": "04",
+      "ref": "3.01.01.01.01.05"
+    },
+    {
+      "codigo": "3.1.1.02",
+      "nome": "REVERSÃO DE PROVISÃO",
+      "natureza": "04",
+      "ref": "3.01.01.05.01.10"
+    },
+    {
+      "codigo": "3.1.2",
+      "nome": "CUSTOS",
+      "natureza": "04",
+      "ref": null
+    },
+    {
+      "codigo": "3.1.2.01",
+      "nome": "CUSTO DAS MERCADORIAS VENDIDAS",
+      "natureza": "04",
+      "ref": "3.01.01.03.01.02"
+    },
+    {
+      "codigo": "3.1.3",
+      "nome": "DESPESAS",
+      "natureza": "04",
+      "ref": null
+    },
+    {
+      "codigo": "3.1.3.01",
+      "nome": "SALÁRIOS",
+      "natureza": "04",
+      "ref": "3.01.01.07.01.02"
+    },
+    {
+      "codigo": "3.1.3.02",
+      "nome": "ALUGUEL",
+      "natureza": "04",
+      "ref": "3.01.01.07.01.18"
+    },
+    {
+      "codigo": "3.1.3.03",
+      "nome": "DEPRECIAÇÃO",
+      "natureza": "04",
+      "ref": "3.01.01.07.01.23"
+    },
+    {
+      "codigo": "3.1.3.04",
+      "nome": "DESPESA COM PROVISÃO TRABALHISTA",
+      "natureza": "04",
+      "ref": "3.01.01.07.01.29"
+    },
+    {
+      "codigo": "3.1.3.05",
+      "nome": "MULTA FISCAL",
+      "natureza": "04",
+      "ref": "3.01.01.07.01.22"
+    },
+    {
+      "codigo": "3.2",
+      "nome": "TRIBUTOS SOBRE O LUCRO",
+      "natureza": "04",
+      "ref": null
+    },
+    {
+      "codigo": "3.2.1",
+      "nome": "CSLL E IRPJ",
+      "natureza": "04",
+      "ref": null
+    },
+    {
+      "codigo": "3.2.1.01",
+      "nome": "CSLL",
+      "natureza": "04",
+      "ref": "3.02.01.01.01.01"
+    },
+    {
+      "codigo": "3.2.1.02",
+      "nome": "IRPJ",
+      "natureza": "04",
+      "ref": "3.02.01.01.01.02"
+    }
+  ],
+  "papeis": {
+    "despesaCsll": "3.2.1.01",
+    "despesaIrpj": "3.2.1.02",
+    "csllARecolher": "2.1.2.02",
+    "irpjARecolher": "2.1.2.01",
+    "lucros": "2.3.2.01",
+    "prejuizos": "2.3.2.02"
+  },
+  "parteB": [
+    {
+      "codigo": "PF",
+      "nome": "PREJUÍZO FISCAL OPERACIONAL",
+      "padrao": "1000",
+      "tributo": "I"
+    },
+    {
+      "codigo": "BCN",
+      "nome": "BASE DE CÁLCULO NEGATIVA DA CSLL",
+      "padrao": "1003",
+      "tributo": "C"
+    },
+    {
+      "codigo": "PROV",
+      "nome": "PROVISÃO TRABALHISTA",
+      "padrao": "1005",
+      "tributo": "I"
+    },
+    {
+      "codigo": "PROV",
+      "nome": "PROVISÃO TRABALHISTA",
+      "padrao": "1005",
+      "tributo": "C"
+    }
+  ],
+  "periodos": [
+    {
+      "id": "T03",
+      "inicio": "2025-07-01",
+      "fim": "2025-09-30",
+      "meses": 3,
+      "lancamentos": [
+        {
+          "d": "1.1.1.01",
+          "c": "2.3.1.01",
+          "valor": 40000000,
+          "historico": "Sócios depositam o capital"
+        },
+        {
+          "d": "1.2.1.01",
+          "c": "1.1.1.01",
+          "valor": 24000000,
+          "historico": "Compra de móveis e utensílios"
+        },
+        {
+          "d": "1.1.3.01",
+          "c": "2.1.1.01",
+          "valor": 20000000,
+          "historico": "Compra de mercadorias a prazo"
+        },
+        {
+          "d": "2.1.1.01",
+          "c": "1.1.1.01",
+          "valor": 12000000,
+          "historico": "Pagamento a fornecedores"
+        },
+        {
+          "d": "1.1.2.01",
+          "c": "3.1.1.01",
+          "valor": 18000000,
+          "historico": "Vendas do trimestre"
+        },
+        {
+          "d": "3.1.2.01",
+          "c": "1.1.3.01",
+          "valor": 11000000,
+          "historico": "Custo do que foi vendido"
+        },
+        {
+          "d": "1.1.1.01",
+          "c": "1.1.2.01",
+          "valor": 13000000,
+          "historico": "Recebimento de clientes"
+        },
+        {
+          "d": "3.1.3.01",
+          "c": "1.1.1.01",
+          "valor": 10000000,
+          "historico": "Salários"
+        },
+        {
+          "d": "3.1.3.02",
+          "c": "1.1.1.01",
+          "valor": 3000000,
+          "historico": "Aluguel"
+        },
+        {
+          "d": "3.1.3.03",
+          "c": "1.2.1.02",
+          "valor": 600000,
+          "historico": "Depreciação do trimestre"
+        },
+        {
+          "d": "3.1.3.04",
+          "c": "2.1.3.01",
+          "valor": 2000000,
+          "historico": "Provisão para processo trabalhista"
+        },
+        {
+          "d": "3.1.3.05",
+          "c": "1.1.1.01",
+          "valor": 200000,
+          "historico": "Multa por infração fiscal"
+        }
+      ],
+      "ajustes": [
+        {
+          "linha": "6",
+          "conta": "3.1.3.04",
+          "parteB": "PROV",
+          "valor": 2000000,
+          "historico": "PROVISÃO TRABALHISTA NÃO DEDUTÍVEL"
+        },
+        {
+          "linha": "8.60",
+          "conta": "3.1.3.05",
+          "parteB": null,
+          "valor": 200000,
+          "historico": "MULTA POR INFRAÇÃO FISCAL"
+        }
+      ]
+    },
+    {
+      "id": "T04",
+      "inicio": "2025-10-01",
+      "fim": "2025-12-31",
+      "meses": 3,
+      "lancamentos": [
+        {
+          "d": "1.1.3.01",
+          "c": "2.1.1.01",
+          "valor": 40000000,
+          "historico": "Compra de mercadorias a prazo"
+        },
+        {
+          "d": "2.1.1.01",
+          "c": "1.1.1.01",
+          "valor": 38000000,
+          "historico": "Pagamento a fornecedores"
+        },
+        {
+          "d": "1.1.2.01",
+          "c": "3.1.1.01",
+          "valor": 70000000,
+          "historico": "Vendas do trimestre"
+        },
+        {
+          "d": "3.1.2.01",
+          "c": "1.1.3.01",
+          "valor": 38000000,
+          "historico": "Custo do que foi vendido"
+        },
+        {
+          "d": "1.1.1.01",
+          "c": "1.1.2.01",
+          "valor": 61000000,
+          "historico": "Recebimento de clientes"
+        },
+        {
+          "d": "3.1.3.01",
+          "c": "1.1.1.01",
+          "valor": 10000000,
+          "historico": "Salários"
+        },
+        {
+          "d": "3.1.3.02",
+          "c": "1.1.1.01",
+          "valor": 3000000,
+          "historico": "Aluguel"
+        },
+        {
+          "d": "3.1.3.03",
+          "c": "1.2.1.02",
+          "valor": 600000,
+          "historico": "Depreciação do trimestre"
+        },
+        {
+          "d": "2.1.3.01",
+          "c": "3.1.1.02",
+          "valor": 500000,
+          "historico": "Reversão de parte da provisão"
+        }
+      ],
+      "ajustes": [
+        {
+          "linha": "95",
+          "conta": "3.1.1.02",
+          "parteB": "PROV",
+          "valor": 500000,
+          "historico": "REVERSÃO DE PROVISÃO JÁ ADICIONADA"
+        }
+      ]
+    }
+  ],
+  "socios": [
+    {
+      "desde": "2025-07-01",
+      "nome": "SÓCIA FICTÍCIA UM",
+      "cpf": "00000000000",
+      "qualif": "02",
+      "percentual": "60,0000"
+    },
+    {
+      "desde": "2025-07-01",
+      "nome": "SÓCIO FICTÍCIO DOIS",
+      "cpf": "00000000000",
+      "qualif": "02",
+      "percentual": "40,0000"
+    }
+  ]
+}

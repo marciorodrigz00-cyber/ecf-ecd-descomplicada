@@ -1,0 +1,77 @@
+[
+  {
+    "id": "definicao",
+    "titulo": "O que é",
+    "iniciante": [
+      "A Escrituração Contábil Fiscal (ECF) é um arquivo digital que a empresa envia uma vez por ano à Receita Federal. Ele mostra como a contabilidade virou imposto.",
+      "Imagine a conta de um restaurante: a contabilidade é a lista do que foi consumido, e a ECF é a nota com o cálculo do total, linha por linha."
+    ],
+    "profissional": [
+      "Escrituração digital que informa todas as operações com efeito na base de cálculo e no valor devido de IRPJ e CSLL, transmitida pelo Sped e centralizada na matriz."
+    ],
+    "regras": [
+      "ecf-conteudo",
+      "obrigados",
+      "assinatura"
+    ]
+  },
+  {
+    "id": "origem",
+    "titulo": "De onde veio",
+    "iniciante": [
+      "Antes da ECF, as empresas entregavam a DIPJ e mantinham o Lalur, um livro de ajustes do lucro. A ECF tomou o lugar dos dois."
+    ],
+    "profissional": [
+      "Substitui a DIPJ e dispensa o Lalur em meio físico. Para o lucro real, a própria ECF é o Lalur."
+    ],
+    "regras": [
+      "substitui-dipj",
+      "ecf-lalur"
+    ]
+  },
+  {
+    "id": "ecd",
+    "titulo": "Relação com a ECD",
+    "iniciante": [
+      "A ECD é a contabilidade em formato digital. Quem é obrigado a entregá-la não redigita tudo: a ECF puxa de lá as contas e os saldos."
+    ],
+    "profissional": [
+      "Recuperação do plano de contas e dos saldos da ECD do mesmo período, associação ao plano referencial e recuperação dos saldos finais da ECF anterior."
+    ],
+    "regras": [
+      "recupera-ecd",
+      "plano-referencial",
+      "recupera-ecf-anterior",
+      "recuperacao-obrigatoria"
+    ]
+  },
+  {
+    "id": "lalur",
+    "titulo": "e-Lalur e e-Lacs",
+    "iniciante": [
+      "O lucro da contabilidade nem sempre é o lucro que paga imposto. O e-Lalur e o e-Lacs são as listas do que se soma e do que se tira para chegar ao valor tributável, um para o IRPJ e outro para a CSLL."
+    ],
+    "profissional": [
+      "e-Lalur e e-Lacs detalham adições e exclusões por tabelas da Cofis e controlam saldos para períodos seguintes, inclusive prejuízo fiscal e base negativa."
+    ],
+    "regras": [
+      "e-lalur",
+      "e-lacs",
+      "controle-saldos"
+    ]
+  },
+  {
+    "id": "sped",
+    "titulo": "Onde fica no Sped",
+    "iniciante": [
+      "O Sped é a porta única por onde entram os livros digitais. A ECF é um dos módulos que passam por essa porta."
+    ],
+    "profissional": [
+      "Módulo do Sped com leiaute definido em manual próprio, aprovado por ato da Cofis a cada versão."
+    ],
+    "regras": [
+      "sped",
+      "manual-cofis"
+    ]
+  }
+]

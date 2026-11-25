@@ -1,0 +1,1860 @@
+{
+ "rastreio": {
+  "id": "arq-11-m",
+  "fonte": {
+   "id": "manual-11",
+   "url": "https://www.gov.br/sped/pt-br/assuntos/escrituracoes-digitais/ecf/manuais-e-documentos-tecnicos",
+   "trecho": "Seção do bloco M"
+  },
+  "norma": "ADE Cofis nº 38/2024",
+  "leiautes": [
+   "11"
+  ],
+  "vigencia": {
+   "acNormal": [
+    2024
+   ],
+   "situacaoEspecial": [
+    2025
+   ]
+  },
+  "verificadoEm": "2026-11-24",
+  "status": "extraido"
+ },
+ "bloco": "M",
+ "descricao": "Apresenta os livros eletrônicos de escrituração e apuração do IRPJ (e-LALUR) e da CSLL (e-LACS) da pessoa jurídica tributada pelo lucro real - partes A e B.",
+ "registros": [
+  {
+   "codigo": "M001",
+   "nome": "Abertura do Bloco M",
+   "ordem": 51,
+   "nivel": "1",
+   "ocorrencia": "[1;1]",
+   "chave": "[REG]",
+   "entrada": "F",
+   "saida": "O",
+   "descricao": [],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto fixo contendo a identificação do registro (M001).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[M001]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "IND_DAD",
+     "descricao": "Indicador de movimento:\n0 – Bloco com dados informados.\n1 – Bloco sem dados informados.",
+     "tipo": "N",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[0;1]",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_OCORRENCIA_UNITARIA_ARQ",
+     "texto": "Verifica se registro ocorreu apenas uma vez por arquivo, considerando a chave “M001” (REG). Se a regra não for cumprida, a ECF gera um erro."
+    }
+   ],
+   "regrasCampo": [],
+   "exemplo": [
+    "|M001|0|",
+    "|M001|: Identificação do tipo do registro.",
+    "|0|: Indica que o bloco possui dados informados."
+   ]
+  },
+  {
+   "codigo": "M010",
+   "nome": "Identificação da Conta na Parte B do e-Lalur e do e-Lacs",
+   "ordem": 52,
+   "nivel": "2",
+   "ocorrencia": "[0;N]",
+   "chave": "COD_CTA_B + COD_TRIBUTO",
+   "entrada": "F",
+   "saida": "FC\n(Se 0010. FORMA_TRIB = “1”, “2”, “3” ou “4”).",
+   "descricao": [
+    "Cadastra os saldos iniciais no período da escrituração das contas da parte B utilizadas no e-LALUR e no e-LACS. O registro pode ser replicado da ECF anterior, importado e/ou editado."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto fixo contendo a identificação do registro (M010).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[M010]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "COD_CTA_B",
+     "descricao": "Código Unívoco Atribuído pela Pessoa Jurídica à Conta no e-Lalur",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "DESC_CTA_LAL",
+     "descricao": "Descrição da Conta.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 4,
+     "nome": "DT_AP_LAL",
+     "descricao": "Data Final: Data final do período de apuração em que a conta foi criada.",
+     "tipo": "C",
+     "tamanho": "8",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 5,
+     "nome": "COD_PB_RFB",
+     "descricao": "Código da tabela padrão da Parte B. Vide planilha PARTEB_PADRAO do arquivo “Tabelas_Dinamicas_ECF_Leiaute_11_AC2024_SIT_ESP_2025.xlsx” a partir do link http://sped.rfb.gov.br/pasta/show/1644.\nOs relacionamentos possíveis das contas padrão da Parte B do e-Lalur e do e-Lacs com as linhas da Parte A constam da planilha PARTEB_PARTEA do mesmo arquivo.",
+     "tipo": "C",
+     "tamanho": "6",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 6,
+     "nome": "DT_LIM_LAL",
+     "descricao": "Data Limite: Data limite para a exclusão, adição ou compensação do valor controlado, se houver.",
+     "tipo": "C",
+     "tamanho": "8",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 7,
+     "nome": "COD_TRIBUTO",
+     "descricao": "Indicador do Tributo da Adição/Exclusão:\nI – Imposto de Renda Pessoa Jurídica\nC – Contribuição Social sobre o Lucro Líquido;",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[I; C]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 8,
+     "nome": "VL_SALDO_INI",
+     "descricao": "Saldo Inicial: Saldo no período inicial desta escrituração.\nSe M010.DT_AP_LAL for no período da escrituração, então o valor deve ser zero",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 9,
+     "nome": "IND_VL_SALDO_INI",
+     "descricao": "Indicador do Saldo Inicial:\nD – Para prejuízos ou valores que reduzam o lucro real ou a base de cálculo da contribuição social em períodos subsequentes.\nC – Para valores que aumentem o lucro real ou a base de cálculo da contribuição social em períodos subsequentes.",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[D; C]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 10,
+     "nome": "CNPJ_SIT_ESP",
+     "descricao": "CNPJ da outra pessoa jurídica relacionada com evento originário da conta.\nExemplos:\n1- Identificar a investida no caso de valores (ganhos/perdas no novo AVJ) da participação societária anterior, nos caso de aquisições em estágios.\n2- Identificar a investida no caso de amortização de mais-valia e menos-valia.\n3- Identificar a investida no caso de impairment de goodwill, mais-valia e menos-valia.\n4- Identificar a investida no caso de ganho por compra vantajosa.\n5- Identificar a investida no caso registro do ágio gerado na aquisição de participação societária ocorrida até 31/12/2009.\n6 - Identificar a investida no caso de ágio gerado pela sistemática de transição disciplinada no art. 65, Lei Nº 12.973/14.\n7 - Identificar a pessoa jurídica antecessora no caso de conta incorporada devido a evento societário.",
+     "tipo": "N",
+     "tamanho": "14",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_EXISTENCIA_M010",
+     "texto": "Verifica se os saldos recuperados no registro E020 existem no registro M010. A advertência ocorre se 0010.FORMA_TRIB = “1”, “2”, “3” ou “4”, para cada E020 com VL_SALDO_FIN diferente de zero não localizado no registro M010."
+    },
+    {
+     "codigo": "REGRA_SALDOS_M010_E020",
+     "texto": "Verifica se os saldos recuperados no registro E020 são iguais aos saldos do registro M010. O erro ocorre se 0010.FORMA_TRIB = “1”, “2”, “3” ou “4”, para cada M010 localizado no registro E020 com conteúdo diferente em qualquer dos seguintes campos do registro M010:\nE020.VL_SALDO_FIN diferente de M010_VL_SALDO_INI\nOu\nE020.IND_VL_SALDO_FIN diferente de M010_IND_VL_SALDO_INI"
+    }
+   ],
+   "regrasCampo": [
+    {
+     "campo": "DT_AP_LAL",
+     "regras": [
+      {
+       "codigo": "REGRA_MENOR_IGUAL_DT_FIN",
+       "texto": "Verifica se M010.DT_AP_LAL é menor ou igual a 0000.DT_FIN.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_CONTA_PERIODO_ANTERIOR",
+       "texto": "Caso M010.DT_AP_LAL for menor que 0000.DT_INI e M010.COD_CTA_B e M010.COD_TRIBUTO não existirem no registro E020 (E020.COD_CTA_B e E020.TRIBUTO), o sistema gera um aviso (A data de criação da conta na parte B é anterior à data de início da ECF. Verifique se essa informação está correta).",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "COD_PB_RFB",
+     "regras": [
+      {
+       "codigo": "REGRA_M010_COD_PB_RFB_TRIBUTO",
+       "texto": "Verifica se o código padrão da Parte B preenchido – M010.COD_PB_RFB – existe na tabela padrão para o tributo informado no campo M010.COD_TRIBUTO.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_CONTA_PADRAO_E020_M010",
+       "texto": "Verifica, quando M010.COD_CTA_B é igual a E020.COD_CTA_B, M010.COD_TRIBUTO é igual a E020.TRIBUTO e E020.COD_PB_RFB é diferente de vazio, se E020.COD_PB_RFB é igual a M010.COD_PB_RFB.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_PARTE_B_PARTE_A",
+       "texto": "Verifica, quando é realizada uma adição/exclusão nos registro M300/M350, com relacionamento com conta da parte B, se o código da linha de adição/exclusão dos registros M300/M350 consta na tabela “SPEDECF_LOCAL$SPEDECF_PARTEB_PARTEA” (Relacionamento da Parte B com a ParteA) e se a conta padrão da parte B relacionada tem previsão de utilização com essa linha de adição/exclusão dos registro M300/M350, considerando o tipo de tributo (IRPJ ou CSLL) e a qualificação da pessoa jurídica (PJ em Geral, Financeira ou Seguradora), ou seja, verifica se existe uma linha na tabela “SPEDECF_LOCAL$SPEDECF_PARTEB_PARTEA” (ParteB_ParteA) onde:\nM010.COD_CTA_B = M305/M355.COD_CTA_B\nE\n(No caso de M305, M010.TRIBUTO deve ser igual a “I” (IRPJ) e, no caso de M355, M010.TRIBUTO deve ser igual a “C” (CSLL))\nE\nM010.COD_PB_RFB = ParteB_ParteA.COD_PB_RFB\nE\nM300/M350 (pai).CODIGO = ParteB_ParteA.CODIGO_PARTEA\nE\n0010.COD_QUALIF_PJ = ParteB_ParteA.COD_QUALIF.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "VL_SALDO_INI",
+     "regras": [
+      {
+       "codigo": "REGRA_DT_AP_ZERO",
+       "texto": "Verifica, quando M010.DT_AP_LAL estiver dentro do período de apuração, se M010.VL_SALDO_INI é igual a zero.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "CNPJ_SIT_ESP",
+     "regras": [
+      {
+       "codigo": "REGRA_VALIDA_CNPJ",
+       "texto": "Verifica se a regra de formação do código é válida.",
+       "tipo": "Erro"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|M010|101|CONTA DA PARTE B|01012018|1.001|31122026|I|1000,00|D||",
+    "|M010|: Identificação do tipo do registro.",
+    "|101|: Código da conta na parte B.",
+    "|CONTA DA PARTE B|: Descrição da conta.",
+    "|01012018|: Data da criação (01/01/2018).",
+    "|1.001|: Código padrão da Parte B.",
+    "|31122026|: Data limite para a exclusão, adição ou compensação do valor controlado (31/12/2026).",
+    "|I|: Tributo (I = Imposto de Renda Pessoa Jurídica).",
+    "|1000,00|: Valor do saldo inicial desta escrituração (R$ 1.000,00).",
+    "|D|: Indicador de saldo inicial.",
+    "||: CNPJ no caso de situação especial (não há)."
+   ]
+  },
+  {
+   "codigo": "M030",
+   "nome": "Identificação dos Períodos e Formas de Apuração do IRPJ e da CSLL das Empresas Tributadas pelo Lucro Real",
+   "ordem": 53,
+   "nivel": "2",
+   "ocorrencia": "[0;13]",
+   "chave": "PER_APUR",
+   "entrada": "F",
+   "saida": "OC\n(Se 0010. FORMA_TRIB = “1”, “2”, “3” ou “4”)",
+   "descricao": [
+    "Registro de identificação dos períodos da escrituração necessários conforme definições de parâmetros do Bloco 0."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (M030).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[M030]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "DT_INI",
+     "descricao": "Data do Início do Período",
+     "tipo": "N",
+     "tamanho": "8",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "DT_FIN",
+     "descricao": "Data do Fim do período",
+     "tipo": "N",
+     "tamanho": "8",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 4,
+     "nome": "PER_APUR",
+     "descricao": "Período de apuração [para 0010.FORMA_APUR = “A”]:\nA00 – Receita Bruta/ Balanço de Suspensão e Redução Anual\nA01 – Balanço de Suspensão e Redução até Janeiro\nA02 – Balanço de Suspensão e Redução até Fevereiro\nA03 – Balanço de Suspensão e Redução até Março\nA04 – Balanço de Suspensão e Redução até Abril\nA05 – Balanço de Suspensão e Redução até Maio\nA06 – Balanço de Suspensão e Redução até Junho\nA07 – Balanço de Suspensão e Redução até Julho\nA08 – Balanço de Suspensão e Redução até Agosto\nA09 – Balanço de Suspensão e Redução até Setembro\nA10 – Balanço de Suspensão e Redução até Outubro\nA11 – Balanço de Suspensão e Redução até Novembro\nA12 – Balanço de Suspensão e Redução até Dezembro\nIndicador do período de referência [para 0010.FORMA_APUR = “T” OU (0010.FORMA_APUR = “A” E 0010.FORMA_TRIB = “2”)]:\nT01 – 1º Trimestre\nT02 – 2º Trimestre\nT03 – 3º Trimestre\nT04 – 4º Trimestre\nRegra: O período deve estar compreendido entre a data início e data fim da escrituração.\nRegra:\nSE 0010.FORMA_APUR = “A”\n- Deve existir um registro A00.\n- Deve existir um registro [A01..A012] para cada mês marcado no 0010.MES_BAL_RED [1..12] como “B”\nSE 0010.FORMA_APUR = “T”\n- Deve existir um registro [T01..T04] para cada trimestre marcado no 0010.FORMA_TRIB_PER[1..4] como “R”",
+     "tipo": "C",
+     "tamanho": "3",
+     "decimal": "—",
+     "valores": "[A00; A01; A02; A03; A04; A05; A06; A07; A08; A09; A10; A11; A12; T01; T02; T03; T04]",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_DUPLICIDADE_DESPREZADA",
+     "texto": "Verifica se o registro já foi importado anteriormente, de acordo com a chave e os registros pais. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_PERIODO_DESPREZADO",
+     "texto": "Verifica se a linha deste período existe no arquivo de importação, mas não deve ser importado, pois as datas não compatíveis com o período da ECF. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_LINHA_ALTERADA",
+     "texto": "Verifica se a linha deste período existe no arquivo de importação, mas deve ser alterada, pois as datas não compatíveis com o período da ECF. Se a regra não for cumprida, a ECF gera um aviso."
+    }
+   ],
+   "regrasCampo": [],
+   "exemplo": [
+    "|M030|01012024|31032024|T01|",
+    "|M030|: Identificação do tipo do registro.",
+    "|01012024|: Data de início do período (01/01/2024).",
+    "|31032024|: Data de fim do período (31/03/2024).",
+    "|T01|: Período de apuração (T01 = 1º Trimestre)."
+   ]
+  },
+  {
+   "codigo": "M300",
+   "nome": "Demonstração do Lucro Real – Lançamentos da Parte A do e-Lalur",
+   "ordem": 54,
+   "nivel": "3",
+   "ocorrencia": "[0;N]",
+   "chave": "CODIGO",
+   "entrada": "F",
+   "saida": "OC\n(Se 0010. FORMA_TRIB_PER = “R” ou “E”)",
+   "descricao": [
+    "Apresenta os lançamentos da parte A do e-LALUR. Este registro demonstrará a apuração da base de cálculo da IRPJ anual, trimestral e nos meses com estimativa apurada com base no balanço/balancete."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (M300).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[M300]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "CODIGO",
+     "descricao": "Código do Lançamento no e-Lalur, conforme tabela dinâmica do Sped (Disponibilizada no item III deste registro e no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "DESCRICAO",
+     "descricao": "Descrição do Tipo de Lançamento no e-Lalur, conforme tabela dinâmica do Sped (Disponibilizada no item III deste registro e no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 4,
+     "nome": "TIPO_LANCAMENTO",
+     "descricao": "Indicador do Tipo de Lançamento:\nA- Adição\nE - Exclusão.\nP - Compensação de Prejuízo\nL - Lucro\nObservação: O tipo “R” (Rótulo) é para linhas de títulos, que aparecem na interface do programa. Portanto, não deve ser utilizado neste campo.",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[A; E; P; L]",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 5,
+     "nome": "IND_RELACAO",
+     "descricao": "Indicador de Relacionamento do Lançamento da Parte A:\n1 - Com Conta da Parte B\n2 - Com Conta Contábil\n3 – Com Conta da parte B e Conta Contábil\n4 - Sem Relacionamento\nObservação: O valor do lançamento do tipo 3 pode considerar o saldo contas da parte B ou somatório dos saldos das contas da parte B com os saldos das contas contábeis. Para isso, o valor do lançamento correto na parte A deve ser preenchido pela empresa.",
+     "tipo": "N",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[1; 2; 3; 4]",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 6,
+     "nome": "VALOR",
+     "descricao": "Valor do Lançamento no e-Lalur",
+     "tipo": "NS",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 7,
+     "nome": "HIST_LAN_LAL",
+     "descricao": "Histórico do Lançamento no e-Lalur",
+     "tipo": "C",
+     "tamanho": "500",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_VALOR_DETALHADO",
+     "texto": "Verifica, quando M300.IND_RELACAO for igual a “1” (com conta da parte B), se o M300.VALOR é igual ao somatório de M305.VALOR_CTA.\nVerifica, quando M300.IND_RELACAO for igual a “2” (com conta contábil) se o M300.VALOR é igual ao somatório de M310.VALOR_CTA.\nVerifica, quando M300.IND_RELACAO for igual a “3” (com conta da parte B e conta contábil) se o M300.VALOR é igual ao somatório de M305.VALOR_CTA ou é igual ao somatório de M310.VALOR_CTA ou é igual ao somatório de M305.VALOR_CTA com M310.VALOR_CTA.\nO somatorio deve fazer a seguinte conversão de sinais:\nSe M300.TIPO_LANCAMENTO = “A” (Adição) ou “L” (Lucro):\n- Se M305.IND_VL_CTA = “D”, então ”+” (valor positivo).\n- Se M305.IND_VL_CTA = “C”, então ”-” (valor negativo).\n- Se J050.COD_NAT = “4” (Conta de resultado) e M310.IND_VL_CTA = “D”, então ”+” (valor positivo).\n- Se J050.COD_NAT = “4” (Conta de resultado) e M310.IND_VL_CTA = “C”, então ”-” (valor negativo).\n- Se J050.COD_NAT = “1, 2 ou 3” (Conta de ativo, passivo ou patrimônio líquido) e M310.IND_VL_CTA = “D”, então ”-” (valor negativo).\n- Se J050.COD_NAT = “1, 2 ou 3” (Conta de ativo, passivo ou patrimônio líquido) e M310.IND_VL_CTA = “C”, então ”+” (valor positivo).\nSe M300.TIPO_LANCAMENTO = “E” (Exclusão) ou “P” (Prejuízo):\n- Se M305.IND_VL_CTA = “D”, então ”-” (valor negativo).\n- Se M305.IND_VL_CTA = “C”, então ”+” (valor positivo).\n- Se J050.COD_NAT = “4” (Conta de resultado) e M310.IND_VL_CTA = “D”, então ”-” (valor negativo).\n- Se J050.COD_NAT = “4” (Conta de resultado) e M310.IND_VL_CTA = “C”, então ”+” (valor positivo).\n- Se J050.COD_NAT = “1, 2 ou 3” (Conta de ativo, passivo ou patrimônio líquido) e M310.IND_VL_CTA = “D”, então ”+” (valor positivo).\n- Se J050.COD_NAT = “1, 2 ou 3” (Conta de ativo, passivo ou patrimônio líquido) e M310.IND_VL_CTA = “C”, então ”-” (valor negativo)."
+    },
+    {
+     "codigo": "REGRA_DUPLICIDADE_DESPREZADA",
+     "texto": "Verifica se o registro já foi importado anteriormente, de acordo com a chave e os registros pais. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_LINHA_DESPREZADA",
+     "texto": "Verifica se o registro existe na importação, mas não será importado por não existir na tabela dinâmica devido às configurações do bloco 0 ou da tabela dinâmica. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_LINHA_ATUALIZADA",
+     "texto": "Verifica se o registro está desatualizado em relação à tabela da RFB. Se a regra não for cumprida, a ECF gera um aviso."
+    }
+   ],
+   "regrasCampo": [
+    {
+     "campo": "TIPO_LANCAMENTO",
+     "regras": [
+      {
+       "codigo": "REGRA_OBRIGATORIO_TIPO_E",
+       "texto": "Verifica se M300.TIPO_LANCAMENTO não está preenchido quando o tipo de linha é “E”.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_NAO_PREENCHER_TIPO_DIFERENTE_E",
+       "texto": "Verifica se M300.TIP_LANCAMENTO está preenchido quando o tipo da linha é “E”.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_RELACAO_INEXISTENTE",
+       "texto": "- Verifica se existe, pelo menos, um registro M305/M355 filho e não existe um registro M310/M360 filho, quando M300.IND_RELACAO é igual a “1” (Com Conta da Parte B).\n- Verifica se não existe registro M305/M355 filho e existe, pelo menos, um registro M310/M360 filho, quando M300.IND_RELACAO é igual a “2” (Com Conta Contábil).\n- Verifica se existe, pelo menos, um registro M305/M355 filho e, pelo menos, um registro M310/M360 filho, quando M300.IND_RELACAO é igual a “3” (Com Conta da Parte B e Conta Contábil).\n- Verifica se não existe registro M305/M355 filho e se não existe um registro M310/M360 filho, quando M300.IND_RELACAO é igual a “4” (Com Conta da Parte B).",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "IND_RELACAO",
+     "regras": [
+      {
+       "codigo": "REGRA_IND_RELACAO",
+       "texto": "Verifica, quando M300.TIPO_LANCAMENTO for igual a “P” (compensação de prejuízo), se M300.IND_RELACAO é igual a “1” (com conta da parte B).",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_OBRIGATORIO_TIPO_E",
+       "texto": "Verifica se o campo M300.IND_RELACAO não está preenchido quando o tipo de linha é “E”.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_NAO_PREENCHER_TIPO_DIFERENTE_E",
+       "texto": "Verifica se o campo M300.IND_RELACAO está preenchido quando o tipo da linha é “E”.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "VALOR",
+     "regras": [
+      {
+       "codigo": "REGRA_OBRIGATORIO_TIPO_R",
+       "texto": "Verifica se o campo M300.VALOR não está preenchido quando o tipo de linha é “R”.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_NAO_PREENCHER_TIPO_DIFERENTE_R",
+       "texto": "Verifica se o campo M300.VALOR está preenchido quando o tipo da linha é “R”.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "HIST_LAN_LAL",
+     "regras": [
+      {
+       "codigo": "REGRA_NAO_PREENCHER_TIPO_DIFERENTE_E",
+       "texto": "Verifica se o campo M300.HIST_LAN_LAL está preenchido quando o tipo da linha é “E” e M300.IND_RELACAO = “4” (Sem relacionamento).",
+       "tipo": "Erro"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|M300|138|(-) Outras Exclusões|E|1|1000,00|LANÇAMENTO DE EXCLUSÃO XXXX|",
+    "|M300|: Identificação do tipo do registro.",
+    "|138|: Código do lançamento.",
+    "|(-) Outras Exclusões|: Descrição.",
+    "|E|: Tipo do lançamento (E = Exclusão).",
+    "|1|: Indicador de relacionamento (1 = Com Conta da Parte B).",
+    "|1000,00|: Valor (R$ 1.000,00)",
+    "|LANÇAMENTO DE EXCLUSÃO XXXX|: Histórico do lançamento."
+   ]
+  },
+  {
+   "codigo": "M305",
+   "nome": "Conta da Parte B do e-Lalur",
+   "ordem": 55,
+   "nivel": "4",
+   "ocorrencia": "[0;N]",
+   "chave": "COD_CTA_B",
+   "entrada": "F",
+   "saida": "OC\n(Se M300.IND_RELACAO = “1” ou “3”)",
+   "descricao": [
+    "Relacionamento do lançamento da parte A do e-Lalur com a conta da parte B do e-Lalur, de acordo com as regras abaixo:",
+    "- Se adição, debita conta da parte B e credita na parte A.\n- Se exclusão, credita conta da parte B e debita na parte A.\n- Se prejuízo, debita conta da parte B e credita na parte A."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (M305).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[M305]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "COD_CTA_B",
+     "descricao": "Código da Conta na Parte B: Código unívoco atribuído pelo contribuinte à conta no e-Lalur no registro M010.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "[M010.COD_CTA_B]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "VL_CTA",
+     "descricao": "Valor Total dos Lançamentos: Valor total dos lançamentos adicionados ou excluídos da conta.\nObservação: Valor deve ser menor ou igual ao saldo disponível do mesmo período de apuração da conta na parte B do registro M410.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 4,
+     "nome": "IND_VL_CTA",
+     "descricao": "Indicador do Valor Total dos Lançamentos:\nD – Para prejuízos ou valores que reduzam o lucro real em períodos subsequentes.\nC – Para valores que aumentam o lucro real em períodos subsequentes.",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[D; C]",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [
+    {
+     "campo": "COD_CTA_B",
+     "regras": [
+      {
+       "codigo": "REGRA_PARTE_B_PARTE_A",
+       "texto": "Verifica se a conta padrão da Parte B relacionada à conta da Parte B da pessoa jurídica titular da ECF possui relacionamento com a linha da parte A informada no registro M300.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "IND_VL_CTA",
+     "regras": [
+      {
+       "codigo": "REGRA_PEA",
+       "texto": "Verifica as regras abaixo:\n- Se faz adição na parte A (crédito na parte A), debita na conta da parte B.\n- Se faz exclusão na parte A (débito na parte A), credita conta da parte B.\n- Se compensa prejuízo na parte A (débito na parte A), credita conta da parte B.\nO erro ocorre se o campo M300.TIPO_LANCAMENTO é igual a:\n- “A” (adição) e M305.IND_VL_CTA é igual a “C”\n- “E” (exclusão) e M305.IND_VL_CTA é igual a “D”\n- “P” (compensação de prejuízos) e M305.IND_VL_CTA é igual a “D”",
+       "tipo": "Aviso"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|M305|101|2000,00|D|",
+    "|M305|: Identificação do tipo do registro.",
+    "|101|: Código da conta na parte B.",
+    "|2000,00|: Valor total dos lançamentos adicionados ou excluídos da conta (R$ 2.000,00).",
+    "|D|: Indicador do valor do lançamento (D = Prejuízos ou valores que reduzam a base de cálculo da contribuição social em períodos subsequentes)."
+   ]
+  },
+  {
+   "codigo": "M310",
+   "nome": "Contas Contábeis Relacionadas ao Lançamento da Parte A do e-Lalur",
+   "ordem": 56,
+   "nivel": "4",
+   "ocorrencia": "[0;N]",
+   "chave": "COD_CTA + COD_CCUS",
+   "entrada": "F",
+   "saida": "OC\n(Se M300.IND_RELACAO = “2” ou “3”)",
+   "descricao": [
+    "Relaciona os lançamentos da parte A do e-Lalur com as contas contábeis."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (M310).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[M310]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "COD_CTA",
+     "descricao": "Código da Conta Contábil (Plano de Contas da Pessoa Jurídica): Código da conta ou subconta contábil onde está registrado o valor a ser adicionado ou excluído, quando possível sua identificação (deve existir no J050).",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "[J050.COD_CTA]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "COD_CCUS",
+     "descricao": "Código do Centro de Custos (deve existir no J100).",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "[J100_COD_CCUS]",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 4,
+     "nome": "VL_CTA",
+     "descricao": "Valor da Conta Utilizado no Lançamento da Parte A.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 5,
+     "nome": "IND_VL_CTA",
+     "descricao": "Indicador do Valor do Lançamento:\nD – Devedor.\nC – Credor.",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[D; C]",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_REGISTRO_M312_OBRIGATORIO",
+     "texto": "Verifica se o registro M312 foi preenchido no caso de M310.VL_CTA, para o mesmo M310.COD_CTA e M310.COD_CCUS:\n- No caso de J050.COD_NAT igual a“1” (Ativo), “2” (Passivo) ou “3” (Patrimônio Líquido):\n- For diferente do saldo final da conta em K155.VL_SLD_FIN no período de apuração; ou\n- For diferente do resultado da diferença entre o saldo final da conta em K155.VL_SLD_FIN e o saldo inicial da conta em K155.VL_SLD_INI no período de apuração (saldo do período); ou\n- For diferente do total de débitos da conta em K155.VL_DEB; ou\n- For diferente do total de crédito da conta me K155_VL_CRED.\n- No caso de J050.COD_NAT igual “4” (Contas de Resultado), for diferente do saldo final da conta em K355.VL_SLD_FIN.\nSe a regra não for cumprida, o sistema gera um aviso."
+    }
+   ],
+   "regrasCampo": [
+    {
+     "campo": "COD_CTA",
+     "regras": [
+      {
+       "codigo": "REGRA_RELACIONAMENTO_PATRIMONIAL",
+       "texto": "Verifica se a conta é de resultado, exceto no caso de exclusão de juros sobre o capital próprio, conforme abaixo:\nPJ em Geral – M300(166.03), M300(340,04), M350(166.03) e M350(340.04)\nFinanceiras – M300(198.03) e M350(198.03)\nSeguradoras – M300(137.03) e M350(137.03)",
+       "tipo": "Aviso"
+      },
+      {
+       "codigo": "REGRA_VALIDA_CONTA_BALANCO_DRE",
+       "texto": "Verifica se o campo M310.COD_CTA e o campo M310.COD_CCUS existem no registro K155 ou no registro K355 para o mesmo período de apuração.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "VL_CTA",
+     "regras": [
+      {
+       "codigo": "REGRA_SALDO_CONTABIL_MENOR",
+       "texto": "Verifica se M310.VL_CTA é menor ou igual ao saldo final da conta no período menos os outros lançamentos no mesmo período de apuração para a parte A.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_OBRIGATORIA_M310_VL_CTA",
+       "texto": "Verifica se M310.VL_CTA foi preenchido quando M300. IND_RELACAO for igual a “2” (com conta contábil).",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "IND_VL_CTA",
+     "regras": [
+      {
+       "codigo": "REGRA_INDICADOR_CONTABIL_DIFERENTE",
+       "texto": "Verifica se o indicador do saldo final da conta no período é igual ao indicador do valor da conta utilizado no relacionamento M310.IND_VL_CTA.",
+       "tipo": "Aviso"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|M310|1.01.01.01||1000,00|D|",
+    "|M310|: Identificação do tipo do registro.",
+    "|1.01.01.01|: Código da conta contábil.",
+    "||: Código do centro de custos (não há).",
+    "|1000,00|: Valor da conta utilizado no lançamento da parte A do e-Lacs (R$ 1.000,00).",
+    "|D|: Indicador do valor da conta utilizado no lançamento da parte A do e-Lacs (D = Devedor)."
+   ]
+  },
+  {
+   "codigo": "M312",
+   "nome": "Números dos Lançamentos Relacionados à Conta Contábil",
+   "ordem": 57,
+   "nivel": "5",
+   "ocorrencia": "[0;N]",
+   "chave": "NUM_LCTO",
+   "entrada": "F",
+   "saida": "OC\n(Se M310.VL_CTA < M300.VR_LAN_LAL; ou M310.VL_CTA < K155.VL_SLD_FIN; ou M310.VL_CTA < (K155.VL_SLD_FIN – K155.VL_SLD_INI); ou M310.VL_CTA < K155.VL_DEB; ou M310.VL_CTA < K155.VL_CRED)",
+   "descricao": [
+    "Esse registro é de preenchimento facultativo para PJ Componente do Sistema Financeiro (0010.COD_QUALIF_PJ = “02”) ou Sociedades Seguradoras, de Capitalização ou Entidade Aberta de Previdência Complementar (0010.COD_QUALIF_PJ = “03”), que utilizam a forma de escrituração “B” (Balancetes Diários) na ECD e não informam lançamentos.",
+    "Nos demais casos, o registro apresenta o número dos lançamentos contábeis que foram informados na ECD relacionados ao lançamento da conta da parte A, quando não for utilizado, no caso de conta patrimonial:",
+    "I) O saldo total da conta contábil (M310.VL_CTA < K155.VL_SLD_FIN); ou",
+    "II) O saldo do período (saldo final – saldo inicial) da conta contábil (M310.VL_CTA < (K155.VL_SLD_FIN – K155.VL_SLD_INI); ou",
+    "III) O total de débitos da conta contábil no período (M310.VL_CTA < K155.VL_DEB); ou",
+    "IV) O total de créditos da conta contábil no período (M310.VL_CTA < K155.VL_CRED).",
+    "Apresenta o número dos lançamentos contábeis do período referenciado no registro M030, relacionados ao lançamento da conta da parte A, quando não for utilizado, no caso de conta resultado:",
+    "I) O saldo total da conta contábil (M310.VL_CTA < K355.VL_SLD_FIN).",
+    "Observação: No caso de apuração anual do IRPJ, se os números dos lançamentos já foram informados em períodos de apuração anteriores, não é necessário repeti-los."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (M312).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[M312]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "NUM_LCTO",
+     "descricao": "Número do Lançamento Descrito na ECD (Escrituração Contábil Digital) no campo 2 (NUM_LCTO) registro “I200 – Lançamento Contábil”.",
+     "tipo": "C",
+     "tamanho": "50",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_FINANCEIRAS_NAO_OBRIGATORIO",
+     "texto": "Se 0010.COD_QUALIF_PJ = “02” ou “03” ou 0010. FORMA_TRIB = “08” ou “09”, o registro é facultativo."
+    }
+   ],
+   "regrasCampo": [],
+   "exemplo": [
+    "|M312|12345|",
+    "|M312|: Identificação do tipo do registro.",
+    "|12345|: Número do lançamento."
+   ]
+  },
+  {
+   "codigo": "M315",
+   "nome": "Identificação de Processos Judiciais e Administrativos Referentes ao Lançamento",
+   "ordem": 58,
+   "nivel": "4",
+   "ocorrencia": "[0;N]",
+   "chave": "IND_PROC + NUM_PROC",
+   "entrada": "F",
+   "saida": "F",
+   "descricao": [
+    "Identifica os processos judiciais ou administrativos utilizados que embasaram adições menores que as previstas na legislação ou falta de adição e exclusões maiores que as previstas na legislação na parte A do e-Lalur (tratamento diverso do regramento fiscal). Os processos judiciais a serem utilizados e informados devem ter decisão definitiva, ou seja, transitado em julgado. Ver item 1.29 deste Manual (Ações Judiciais) para mais informações."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (M315).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[M315]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "IND_PROC",
+     "descricao": "Tipo do Processo:\n1 - Judicial\n2 – Administrativo",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[1; 2]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "NUM_PROC",
+     "descricao": "Número do Processo.",
+     "tipo": "C",
+     "tamanho": "20",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [],
+   "exemplo": [
+    "|M315|1|123456789|",
+    "|M315|: Identificação do tipo do registro.",
+    "|1|: Tipo do processo (1 = Judicial).",
+    "|123456789|: Número do processo."
+   ]
+  },
+  {
+   "codigo": "M350",
+   "nome": "Demonstração da Base de Cálculo da CSLL – Lançamentos da Parte A do e-Lacs",
+   "ordem": 59,
+   "nivel": "3",
+   "ocorrencia": "[0;N]",
+   "chave": "CODIGO",
+   "entrada": "F",
+   "saida": "OC\n(Se 0010. FORMA_TRIB_PER = “R” ou “E”)",
+   "descricao": [
+    "Apresenta os lançamentos da parte A do e-Lacs. Este registro demonstrará a apuração da base de cálculo da CSLL anual, trimestral e nos meses com estimativa apurada com base no balanço/balancete."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (M350).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[M350]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "CODIGO",
+     "descricao": "Código do Lançamento no e-Lalur, conforme tabela dinâmica do Sped (Disponibilizada no item III deste registro e no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "DESCRICAO",
+     "descricao": "Descrição do Tipo de Lançamento no e-Lalur, conforme tabela dinâmica do Sped (Disponibilizada no item III deste registro e no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 4,
+     "nome": "TIPO_LANCAMENTO",
+     "descricao": "Indicador do Tipo de Lançamento:\nA- Adição\nE - Exclusão.\nP - Compensação de Prejuízo\nL - Lucro\nObservação: O tipo “R” (Rótulo) é para linhas de títulos, que aparecem na interface do programa. Portanto, não deve ser utilizado neste campo.",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[A; E; P; L]",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 5,
+     "nome": "IND_RELACAO",
+     "descricao": "Indicador de Relacionamento do Lançamento da Parte A:\n1 - Com Conta da Parte B\n2 - Com Conta Contábil\n3 – Com Conta da parte B e Conta Contábil\n4 - Sem Relacionamento\nObservação: O valor do lançamento do tipo 3 pode considerar o saldo contas da parte B ou somatório dos saldos das contas da parte B com os saldos das contas contábeis. Para isso, o valor do lançamento correto na parte A deve ser preenchido pela empresa.",
+     "tipo": "N",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[1; 2; 3; 4]",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 6,
+     "nome": "VALOR",
+     "descricao": "Valor do Lançamento no e-Lalur",
+     "tipo": "NS",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 7,
+     "nome": "HIST_LAN_LAL",
+     "descricao": "Histórico do Lançamento no e-Lalur",
+     "tipo": "C",
+     "tamanho": "500",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_VALOR_DETALHADO_CSLL",
+     "texto": "Verifica, quando M350.IND_RELACAO for igual a “1” (com conta da parte B), se o M350.VALOR é igual ao somatório de M355.VALOR_CTA.\nVerifica, quando M350.IND_RELACAO for igual a “2” (com conta contábil) se o M350.VALOR é igual ao somatório de M360.VALOR_CTA.\nVerifica, quando M350.IND_RELACAO for igual a “3” (com conta da parte B e conta contábil) se o M350.VALOR é igual ao somatório de M355.VALOR_CTA ou é igual ao somatório de M360.VALOR_CTA ou é igual ao somatório de M355.VALOR_CTA com M360.VALOR_CTA.\nO somatorio deve fazer a seguinte conversão de sinais:\nSe M350.TIPO_LANCAMENTO = “A” (Adição) ou “L” (Lucro):\n- Se M355.IND_VL_CTA = “D”, então ”+” (valor positivo).\n- Se M355.IND_VL_CTA = “C”, então ”-” (valor negativo).\n- Se J050.COD_NAT = “4” (Conta de resultado) e M360.IND_VL_CTA = “D”, então ”+” (valor positivo).\n- Se J050.COD_NAT = “4” (Conta de resultado) e M360.IND_VL_CTA = “C”, então ”-” (valor negativo).\n- Se J050.COD_NAT = “1, 2 ou 3” (Conta de ativo, passivo ou patrimônio líquido) e M360.IND_VL_CTA = “D”, então ”-” (valor negativo).\n- Se J050.COD_NAT = “1, 2 ou 3” (Conta de ativo, passivo ou patrimônio líquido) e M360.IND_VL_CTA = “C”, então ”+” (valor positivo).\nSe M350.TIPO_LANCAMENTO = “E” (Exclusão) ou “P” (Prejuízo):\n- Se M355.IND_VL_CTA = “D”, então ”-” (valor negativo).\n- Se M355.IND_VL_CTA = “C”, então ”+” (valor positivo).\n- Se J050.COD_NAT = “4” (Conta de resultado) e M360.IND_VL_CTA = “D”, então ”-” (valor negativo).\n- Se J050.COD_NAT = “4” (Conta de resultado) e M360.IND_VL_CTA = “C”, então ”+” (valor positivo).\n- Se J050.COD_NAT = “1, 2 ou 3” (Conta de ativo, passivo ou patrimônio líquido) e M360.IND_VL_CTA = “D”, então ”+” (valor positivo).\n- Se J050.COD_NAT = “1, 2 ou 3” (Conta de ativo, passivo ou patrimônio líquido) e M360.IND_VL_CTA = “C”, então ”-” (valor negativo)."
+    },
+    {
+     "codigo": "REGRA_DUPLICIDADE_DESPREZADA",
+     "texto": "Verifica se o registro já foi importado anteriormente, de acordo com a chave e os registros pais. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_LINHA_DESPREZADA",
+     "texto": "Verifica se o registro existe na importação, mas não será importado por não existir na tabela dinâmica devido às configurações do bloco 0 ou da tabela dinâmica. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_LINHA_ATUALIZADA",
+     "texto": "Verifica se o registro está desatualizado em relação à tabela da RFB. Se a regra não for cumprida, a ECF gera um aviso."
+    }
+   ],
+   "regrasCampo": [
+    {
+     "campo": "TIPO_LANCAMENTO",
+     "regras": [
+      {
+       "codigo": "REGRA_OBRIGATORIO_TIPO_E",
+       "texto": "Verifica se o campo M350.TIPO_LANCAMENTO não está preenchido quando o tipo de linha é “E”.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_NAO_PREENCHER_TIPO_DIFERENTE_E",
+       "texto": "Verifica se o campo M350.TIP_LANCAMENTO está preenchido quando o tipo da linha é “E”.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_RELACAO_INEXISTENTE",
+       "texto": "- Verifica se existe, pelo menos, um registro M305/M355 filho e não existe um registro M310/M360 filho, quando M350.IND_RELACAO é igual a “1” (Com Conta da Parte B).\n- Verifica se não existe registro M305/M355 filho e existe, pelo menos, um registro M310/M360 filho, quando M350.IND_RELACAO é igual a “2” (Com Conta Contábil).\n- Verifica se existe, pelo menos, um registro M305/M355 filho e, pelo menos, um registro M310/M360 filho, quando M350.IND_RELACAO é igual a “3” (Com Conta da Parte B e Conta Contábil).\n- Verifica se não existe registro M305/M355 filho e se não existe um registro M310/M360 filho, quando M350.IND_RELACAO é igual a “4” (Com Conta da Parte B).",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "IND_RELACAO",
+     "regras": [
+      {
+       "codigo": "REGRA_IND_RELACAO",
+       "texto": "Verifica, quando M350.TIPO_LANCAMENTO for igual a “P” (compensação de prejuízo), se M350.IND_RELACAOé igual a “1” (com conta da parte B).",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_OBRIGATORIO_TIPO_E",
+       "texto": "Verifica se o campo M350.IND_RELACAO não está preenchido quando o tipo de linha é “E”.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_NAO_PREENCHER_TIPO_DIFERENTE_E",
+       "texto": "Verifica se o campo M350.IND_RELACAO está preenchido quando o tipo da linha é “E”.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "VALOR",
+     "regras": [
+      {
+       "codigo": "REGRA_OBRIGATORIO_TIPO_R",
+       "texto": "Verifica se o campo M350.VALOR não está preenchido quando o tipo de linha é “R”.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_NAO_PREENCHER_TIPO_DIFERENTE_R",
+       "texto": "Verifica se o campo M350.VALOR está preenchido quando o tipo da linha é “R”.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "HIST_LAN_LAL",
+     "regras": [
+      {
+       "codigo": "REGRA_NAO_PREENCHER_TIPO_DIFERENTE_E",
+       "texto": "Verifica se o campo M350.HIST_LAN_LAL está preenchido quando o tipo da linha é “E” e M350.IND_RELACAO = “4” (Sem Relacionamento).",
+       "tipo": "Erro"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|M350|138|(-) Outras Exclusões|E|1|1000,00|LANÇAMENTO DE EXCLUSÃO XXXX|",
+    "|M350|: Identificação do tipo do registro.",
+    "|138|: Código do lançamento.",
+    "|(-) Outras Exclusões|: Descrição.",
+    "|E|: Tipo do lançamento (E = Exclusão).",
+    "|1|: Indicador de relacionamento (1 = Com Conta da Parte B).",
+    "|1000,00|: Valor (R$ 1.000,00).",
+    "|LANÇAMENTO DE EXCLUSÃO XXXX|: Histórico do lançamento."
+   ]
+  },
+  {
+   "codigo": "M355",
+   "nome": "Conta da Parte B do e-Lacs",
+   "ordem": 60,
+   "nivel": "4",
+   "ocorrencia": "[0;N]",
+   "chave": "COD_CTA_B",
+   "entrada": "F",
+   "saida": "OC\n(Se M350.IND_RELACAO = “1” ou “3”)",
+   "descricao": [
+    "Relacionamento do lançamento da parte A do e-Lacs com a conta da parte B do e-Lacs, de acordo com as regras abaixo:",
+    "- Se adição, debita conta da parte B e credita na parte A.",
+    "- Se exclusão, credita conta da parte B e debita na parte A.",
+    "- Se prejuízo, debita conta da parte B e credita na parte A."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (M355).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[M355]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "COD_CTA_B",
+     "descricao": "Código da Conta na Parte B: Código unívoco atribuído pelo contribuinte à conta no e-Lacs no registro M010.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "[M010.COD_CTA_B]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "VL_CTA",
+     "descricao": "Valor Total dos Lançamentos: Valor total dos lançamentos adicionados ou excluídos da conta.\nObservação: Valor deve ser menor ou igual ao saldo disponível do mesmo período de apuração da conta na parte B do registro M410.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 4,
+     "nome": "IND_VL_CTA",
+     "descricao": "Indicador do Valor Total dos Lançamentos:\nD – Para prejuízos ou valores que reduzam o lucro real em períodos subsequentes.\nC – Para valores que aumentam o lucro real em períodos subsequentes.",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[D; C]",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [
+    {
+     "campo": "COD_CTA_B",
+     "regras": [
+      {
+       "codigo": "REGRA_PARTE_B_PARTE_A",
+       "texto": "Verifica se a conta padrão da Parte B relacionada à conta da Parte B da pessoa jurídica titular da ECF possui relacionamento com a linha da parte A informada no registro M300.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "IND_VL_CTA",
+     "regras": [
+      {
+       "codigo": "REGRA_PEA",
+       "texto": "Verifica as regras abaixo:\n- Se adição, debita na conta da parte B e credita na parte A\n- Se exclusão, credita conta da parte B e debita na parte A\n- Se prejuízo, credita conta da parte B e debita na parte A\nO erro ocorre se os campos M300.TIPO_LANCAMENTO é igual a:\n- “A” (adição) e M355.IND_VL_CTA é igual a “C”\n- “E” (exclusão) e M355.IND_VL_CTA é igual a “D”\n- “P” (compensação de prejuízos) e M355.IND_VL_CTA é igual a “D”",
+       "tipo": "Aviso"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|M355|101|2000,00|D|",
+    "|M355|: Identificação do tipo do registro.",
+    "|101|: Código da conta na parte B.",
+    "|2000,00|: Valor total dos lançamentos adicionados ou excluídos da conta (R$ 2.000,00).",
+    "|D|: Indicador do valor do lançamento (D = Prejuízos ou valores que reduzam a base de cálculo da contribuição social em períodos subsequentes)."
+   ]
+  },
+  {
+   "codigo": "M360",
+   "nome": "Contas Contábeis Relacionadas ao Lançamento da Parte A do e-Lacs",
+   "ordem": 61,
+   "nivel": "4",
+   "ocorrencia": "[0;N]",
+   "chave": "COD_CTA + COD_CCUS",
+   "entrada": "F",
+   "saida": "OC\n(Se M350.IND_RELACAO = “2” ou “3”)",
+   "descricao": [
+    "Relaciona os lançamentos da parte A do e-Lacs com as contas contábeis."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (M360).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[M360]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "COD_CTA",
+     "descricao": "Código da Conta Contábil (Plano de Contas da Pessoa Jurídica): Código da conta ou subconta contábil onde está registrado o valor a ser adicionado ou excluído, quando possível sua identificação (deve existir no J050).",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "[J050.COD_CTA]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "COD_CCUS",
+     "descricao": "Código do Centro de Custos (deve existir no J100).",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "[J100_COD_CCUS]",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 4,
+     "nome": "VL_CTA",
+     "descricao": "Valor da Conta Utilizado no Lançamento da Parte A.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 5,
+     "nome": "IND_VL_CTA",
+     "descricao": "Indicador do Valor do Lançamento:\nD – Devedor.\nC – Credor.",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[D; C]",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_REGISTRO_M362_OBRIGATORIO",
+     "texto": "Verifica se o registro M362 foi preenchido no caso de M360.VL_CTA, para o mesmo M360.COD_CTA e M360.COD_CCUS:\n- No caso de J050.COD_NAT igual “1” (Ativo), “2” (Passivo) ou “3” (Patrimônio Líquido):\n- For diferente do saldo final da conta em K155.VL_SLD_FIN no período de apuração; ou\n- For diferente do resultado da diferença entre o saldo final da conta em K155.VL_SLD_FIN e o saldo inicial da conta em K155.VL_SLD_INI no período de apuração (saldo do período); ou\n- For diferente do total de débitos da conta em K155.VL_DEB; ou\n- For diferente do total de crédito da conta me K155_VL_CRED.\n- No caso de J050.COD_NAT igual “4” (Contas de Resultado), for diferente do saldo final da conta em K355.VL_SLD_FIN.\nSe a regra não for cumprida, o sistema gera um aviso."
+    }
+   ],
+   "regrasCampo": [
+    {
+     "campo": "COD_CTA",
+     "regras": [
+      {
+       "codigo": "REGRA_RELACIONAMENTO_PATRIMONIAL",
+       "texto": "Verifica se a conta é de resultado, exceto no caso de exclusão de juros sobre o capital próprio, conforme abaixo:\nPJ em Geral – M300(166.03), M300(340,04), M350(166.03) e M350(340.04)\nFinanceiras – M300(198.03) e M350(198.03)\nSeguradoras – M300(137.03) e M350(137.03)",
+       "tipo": "Aviso"
+      },
+      {
+       "codigo": "REGRA_VALIDA_CONTA_BALANCO_DRE",
+       "texto": "Verifica se o campo M360.COD_CTA e o campo M360.COD_CCUS existem no registro K155 ou no registro K355 para o mesmo período de apuração.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "VL_CTA",
+     "regras": [
+      {
+       "codigo": "REGRA_SALDO_CONTABIL_MENOR",
+       "texto": "Verifica se M360.VL_CTA é menor ou igual ao saldo final da conta no período menos os outros lançamentos no mesmo período de apuração para a parte A.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_OBRIGATORIA_M310_VL_CTA",
+       "texto": "Verifica se M360.VL_CTA foi preenchido quando M300. IND_RELACAO for igual a “2” (com conta contábil).",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "IND_VL_CTA",
+     "regras": [
+      {
+       "codigo": "REGRA_INDICADOR_CONTABIL_DIFERENTE",
+       "texto": "Verifica se o indicador do saldo final da conta no período é igual ao indicador do valor da conta utilizado no relacionamento M360.IND_VL_CTA.",
+       "tipo": "Aviso"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|M360|1.01.01.01||1000,00|D|",
+    "|M360|: Identificação do tipo do registro.",
+    "|1.01.01.01|: Código da conta contábil.",
+    "||: Código do centro de custos (não há).",
+    "|1000,00|: Valor da conta utilizado no lançamento da parte A do e-Lacs (R$ 1.000,00).",
+    "|D|: Indicador do valor da conta utilizado no lançamento da parte A do e-Lacs (D = Devedor)."
+   ]
+  },
+  {
+   "codigo": "M362",
+   "nome": "Números dos Lançamentos Relacionados à Conta Contábil",
+   "ordem": 62,
+   "nivel": "5",
+   "ocorrencia": "[0;N]",
+   "chave": "NUM_LCTO",
+   "entrada": "F",
+   "saida": "F",
+   "descricao": [
+    "Esse registro é de preenchimento facultativo para PJ Componente do Sistema Financeiro (0010.COD_QUALIF_PJ = “02”) ou Sociedades Seguradoras, de Capitalização ou Entidade Aberta de Previdência Complementar (0010.COD_QUALIF_PJ = “03”), que utilizam a forma de escrituração “B” (Balancetes Diários) na ECD e não informam lançamentos.",
+    "Nos demais casos, o registro apresenta o número dos lançamentos contábeis que foram informados na ECD relacionados ao lançamento da conta da parte A, quando não for utilizado, no caso de conta patrimonial:",
+    "I) O saldo total da conta contábil (M360.VL_CTA < K155.VL_SLD_FIN); ou",
+    "II) O saldo do período (saldo final – saldo inicial) da conta contábil (M360.VL_CTA < (K155.VL_SLD_FIN – K155.VL_SLD_INI); ou",
+    "III) O total de débitos da conta contábil no período (M360.VL_CTA < K155.VL_DEB); ou",
+    "IV) O total de créditos da conta contábil no período (M360.VL_CTA < K155.VL_CRED).",
+    "Apresenta o número dos lançamentos contábeis do período referenciado no registro M030, relacionados ao lançamento da conta da parte A, quando não for utilizado, no caso de conta resultado:",
+    "I) O saldo total da conta contábil (M360.VL_CTA < K355.VL_SLD_FIN).",
+    "Observação: No caso de apuração anual da CSLL, se os números dos lançamentos já foram informados em períodos de apuração anteriores, não é necessário repeti-los."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (M362).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[M362]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "NUM_LCTO",
+     "descricao": "Número do Lançamento Descrito na ECD (Escrituração Contábil Digital) no campo 2 (NUM_LCTO) registro “I200 – Lançamento Contábil”.",
+     "tipo": "C",
+     "tamanho": "50",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_FINANCEIRAS_NAO_OBRIGATORIO",
+     "texto": "Se 0010.COD_QUALIF_PJ = “02” ou “03” ou 0010. FORMA_TRIB = “08” ou “09”, o registro é facultativo."
+    }
+   ],
+   "regrasCampo": [],
+   "exemplo": [
+    "|M362|12345|",
+    "|M362|: Identificação do tipo do registro.",
+    "|12345|: Número do lançamento."
+   ]
+  },
+  {
+   "codigo": "M365",
+   "nome": "Identificação de Processos Judiciais e Administrativos Referentes ao Lançamento",
+   "ordem": 63,
+   "nivel": "4",
+   "ocorrencia": "[0;N]",
+   "chave": "IND_PROC + NUM_PROC",
+   "entrada": "F",
+   "saida": "F",
+   "descricao": [
+    "Identifica os processos judiciais e administrativos utilizados que embasaram adições menores que as previstas na legislação ou falta de adição e exclusões maiores que as previstas na legislação na parte A do e-Lacs (tratamento diverso do regramento fiscal). Os processos judiciais a serem utilizados e informados devem ter decisão definitiva, ou seja, transitado em julgado. Ver item 1.29 deste Manual (Ações Judiciais) para mais informações."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (M365).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[M365]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "IND_PROC",
+     "descricao": "Tipo do Processo:\n1 - Judicial\n2 – Administrativo",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[1; 2]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "NUM_PROC",
+     "descricao": "Número do Processo.",
+     "tipo": "C",
+     "tamanho": "20",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [],
+   "exemplo": [
+    "|M365|1|123456789|",
+    "|M365|: Identificação do tipo do registro.",
+    "|1|: Tipo do processo (1 = Judicial).",
+    "|123456789|: Número do processo."
+   ]
+  },
+  {
+   "codigo": "M410",
+   "nome": "Lançamento na Conta da Parte B do e-Lalur e do e-Lacs sem Reflexo na Parte A",
+   "ordem": 64,
+   "nivel": "3",
+   "ocorrencia": "[0;N]",
+   "chave": "—",
+   "entrada": "F",
+   "saida": "F",
+   "descricao": [
+    "Apresenta os lançamentos em contas da parte B sem reflexos na parte A."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (M410).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[M410]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "COD_CTA_B",
+     "descricao": "Código da Conta do Lançamento (conta da Parte B)",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 3,
+     "nome": "COD_TRIBUTO",
+     "descricao": "Código do Tributo:\nI – Imposto de Renda\nC – Contribuição Social sobre o Lucro Líquido",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[I; C]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 4,
+     "nome": "VAL_LAN_LALB_PB",
+     "descricao": "Valor do Lançamento.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 5,
+     "nome": "IND_VAL_LAN_LALB_PB",
+     "descricao": "Indicador do Lançamento:\nCR – Crédito\nDB – Débito\nPF - Prejuízo do exercício.\nBC - Base de cálculo negativa da CSLL.\nObservação: O indicador PF refere-se ao prejuízo apurado no exercício em curso.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "[CR; DB; PF; BC]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 6,
+     "nome": "COD_CTA_B_CTP",
+     "descricao": "Código Unívoco da Contrapartida (conta da Parte B), caso seja necessária a transferência de saldo de uma conta na parte B para outra conta na parte B.\nNão preencher quando: IND_VAL_LAN_LA_LB_PB for igual a “PF” ou “BC”.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 7,
+     "nome": "HIST_LAN_LALB",
+     "descricao": "Histórico do Lançamento.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 8,
+     "nome": "IND_LAN_ANT",
+     "descricao": "Lançamento para Realização de Valores Cuja Tributação Tenha Sido Diferida:\nS – Sim\nN – Não\nObservação: Marca-se “Sim” neste campo quando o contribuinte, em período anterior, realizou valores controlados na parte B do e-Lalur/e-Lacs e deve reajustar os saldos das contas em início de período de apuração tributado pelo lucro real.",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S; N]",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_PREJUIZO_FISCAL",
+     "texto": "Verifica se o somatório dos lançamentos de prejuízo fiscal é igual ao valor da base de cálculo do IRPJ. Se a regra não for cumprida, a ECF gera um erro."
+    },
+    {
+     "codigo": "REGRA_BC_NEGATIVA",
+     "texto": "Verifica se o somatório dos lançamentos da base de cálculo negativa da CSLL é igual ao valor da base de cálculo da CSLL. Se a regra não for cumprida, a ECF gera um erro."
+    }
+   ],
+   "regrasCampo": [
+    {
+     "campo": "COD_CTA_B_CTP",
+     "regras": [
+      {
+       "codigo": "REGRA_MESMO_TRIBUTO",
+       "texto": "Se M410.COD_CTA_B_CTP for preenchido, as contas constantes do lançamento devem corresponder ao mesmo tributo (M010.TRIBUTO).",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_NAO_PREENCHER_CTP",
+       "texto": "Se M410.IND_VAL_LAN_LALB_PB igual a “PF” ou “BC”, campo M410.COD_CTA_B_CTP não deve ser preenchido.",
+       "tipo": "Erro"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|M410|101|I|1000,00|CR|202|LANÇAMENTO DE CRÉDITO EM VIRTUDE DA OCORRÊNCIA XXXX|N|",
+    "|M410|: Identificação do tipo do registro.",
+    "|101|: Código da conta da parte B.",
+    "|I|: Imposto de renda.",
+    "|1000,00|: Valor do lançamento (R$ 1.000,00).",
+    "|CR|: Indicador do lançamento (CR = Crédito).",
+    "|202|: Código da conta da parte B de contrapartida.",
+    "|LANÇAMENTO DE CRÉDITO EM VIRTUDE DA OCORRÊNCIA XXXX|: Histórico do lançamento.",
+    "|N|: Realização de valores cuja tributação tenha sido diferida (N = Não)."
+   ]
+  },
+  {
+   "codigo": "M415",
+   "nome": "Identificação de Processos Judiciais e Administrativos Referentes ao Lançamento",
+   "ordem": 65,
+   "nivel": "4",
+   "ocorrencia": "[0;N]",
+   "chave": "IND_PROC + NUM_PROC",
+   "entrada": "F",
+   "saida": "F",
+   "descricao": [
+    "Identifica os processos judiciais e administrativos utilizados que embasaram adições menores que as previstas na legislação ou falta de adição e exclusões maiores que as previstas na legislação na parte B do e-Lalur ou do e-Lacs (tratamento diverso do regramento fiscal). Os processos judiciais a serem utilizados e informados devem ter decisão definitiva, ou seja, transitado em julgado. Ver item 1.29 deste Manual (Ações Judiciais) para mais informações."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (M415).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[M415]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "IND_PROC",
+     "descricao": "Tipo do Processo:\n1 - Judicial\n2 – Administrativo",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[1; 2]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "NUM_PROC",
+     "descricao": "Número do Processo.",
+     "tipo": "C",
+     "tamanho": "20",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [],
+   "exemplo": [
+    "|M415|1|123456789|",
+    "|M415|: Identificação do tipo do registro.",
+    "|1|: Tipo do processo (1 = Judicial).",
+    "|123456789|: Número do processo."
+   ]
+  },
+  {
+   "codigo": "M500",
+   "nome": "Controle de Saldos das Contas da Parte B do e-Lalur e do e-Lacs",
+   "ordem": 66,
+   "nivel": "3",
+   "ocorrencia": "[0;N]",
+   "chave": "COD_CTA_B + COD_TRIBUTO",
+   "entrada": "F",
+   "saida": "F",
+   "descricao": [
+    "Apresenta a visão sintética do controle de saldos das contas da parte B do e-LALUR e e-LACS. Registro gerado pelo sistema a partir do saldo inicial e das movimentações.",
+    "- Os campos SD_FIM_LAL e IND_SD_FIM do último período serão transportados para o E020 da próxima ECF.",
+    "- Quando a escrituração for trimestral, o saldo final do período será transportado para o saldo inicial do período seguinte.",
+    "- O valor do SD_INI_LAL do primeiro período será igual ao saldo inicial do registro M010."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (M500).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[M500]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "COD_CTA_B",
+     "descricao": "Código Unívoco Atribuído Pelo Contribuinte à Conta no e-Lalur e no e-Lacs (deve existir no M010.COD_CTA_B)",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "[M010.COD_CTA_B]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "COD_TRIBUTO",
+     "descricao": "Código do Tributo:\nI – Imposto de Renda\nC – Contribuição Social Sobre o Lucro Líquido",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[I; C]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 4,
+     "nome": "SD_INI_LAL",
+     "descricao": "Saldo Inicial da Conta no Período de Apuração.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 5,
+     "nome": "IND_SD_INI_LAL",
+     "descricao": "Indicador de Saldo Inicial:\nD – Para prejuízos ou valores que serão excluídos do lucro real ou da base de cálculo da contribuição social em períodos subsequentes.\nC – Para valores que serão adicionados ao lucro real ou à base de cálculo da contribuição social em períodos subsequentes.",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[C; D]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 6,
+     "nome": "VL_LCTO_PARTE_A",
+     "descricao": "Somatório dos Lançamentos da Parte B com Reflexo na Parte A no Período.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 7,
+     "nome": "IND_VL_LCTO_PARTE_A",
+     "descricao": "Indicador do Somatório dos Lançamentos da Parte B com Reflexo na Parte A no período:\nC – Para prejuízos ou valores que serão excluídos do lucro real ou da base de cálculo da contribuição social em períodos subsequentes.\nD – Para valores que serão adicionados ao lucro real ou à base de cálculo da contribuição social em períodos subsequentes.",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[C; D]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 8,
+     "nome": "VL_LCTO_PARTEB",
+     "descricao": "Somatório dos Lançamentos da Parte B Sem Reflexo na Parte A no Período (entre contas da parte B).",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 9,
+     "nome": "IND_VL_LCTO_PARTEB",
+     "descricao": "Indicador Somatório dos Lançamentos da Parte B Sem Reflexo na Parte A no Período (entre contas da parte B):\nC – Para prejuízos ou valores que serão excluídos do lucro real ou da base de cálculo da contribuição social em períodos subsequentes.\nD – Para valores que serão adicionados ao lucro real ou à base de cálculo da contribuição social em períodos subsequentes.",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[C; D]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 10,
+     "nome": "SD_FIM_LAL",
+     "descricao": "Saldo Final da Conta no Período de Apuração.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 11,
+     "nome": "IND_SD_FIM_LAL",
+     "descricao": "Indicador de Saldo Final:\nD – Para prejuízos ou valores que serão excluídos do lucro real ou da base de cálculo da contribuição social em períodos subsequentes.\nC – Para valores que serão adicionados ao lucro real ou à base de cálculo da contribuição social em períodos subsequentes.",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[C; D]",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [],
+   "exemplo": [
+    "|M500|101|1000,00|C|500,00|D|100,00|D|400,00|C|",
+    "|M500|: Identificação do tipo do registro.",
+    "|101|: Código da conta da parte B (criado pelo contribuinte).",
+    "|1000,00|: Saldo inicial da conta da parte B (R$ 1.000,00).",
+    "|C|: Indicador do saldo inicial (C = Credor).",
+    "|500,00|: Valor do lançamento da parte B com reflexo na parte A (R$ 500,00).",
+    "|D|: Indicador do lançamento da parte B com reflexo na parte A (D = Devedor).",
+    "|100,00|: Valor do lançamento da parte B sem reflexo na parte A (R$ 100,00).",
+    "|D|: Indicador do lançamento da parte B sem reflexo na parte A (D = Devedor).",
+    "|400,00|: Saldo final da conta da parte B (R$ 400,00 = R$ 1.000,00 – R$ 500,00 – R$ 100,00).",
+    "|C|: Indicador do saldo final (C = Credor)."
+   ]
+  },
+  {
+   "codigo": "M510",
+   "nome": "Controle de Saldos das Contas Padrão da Parte B do e-Lalur e do e-Lacs",
+   "ordem": 67,
+   "nivel": "3",
+   "ocorrencia": "[0;N]",
+   "chave": "COD_CTA_B + COD_TRIBUTO",
+   "entrada": "F",
+   "saida": "F",
+   "descricao": [
+    "Apresenta a visão sintética do controle de saldos das contas padrão da parte B do e-LALUR e e-LACS. Registro gerado pelo sistema a partir do saldo inicial e das movimentações.",
+    "- Os campos SD_FIM_LAL e IND_SD_FIM do último período serão transportados para o E020 da próxima ECF.",
+    "- Quando a escrituração for trimestral, o saldo final do período será transportado para o saldo inicial do período seguinte.",
+    "- O valor do SD_INI_LAL do primeiro período será igual ao saldo inicial do registro M010."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (M510).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[M510]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "COD_PB_RFB",
+     "descricao": "Código da Conta Padrão da Parte B (deve existir no M010.COD_PB_RFB).",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "[M010.COD_CTA_B]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "DESCRICAO_PB_RFB",
+     "descricao": "Descrição da Conta Padrão da Parte B",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 4,
+     "nome": "COD_TRIBUTO",
+     "descricao": "Código do Tributo:\nI – Imposto de Renda\nC – Contribuição Social Sobre o Lucro Líquido",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[I; C]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 5,
+     "nome": "SD_INI_LAL",
+     "descricao": "Saldo Inicial da Conta no Período de Apuração.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 6,
+     "nome": "IND_SD_INI_LAL",
+     "descricao": "Indicador de Saldo Inicial:\nD – Para prejuízos ou valores que serão excluídos do lucro real ou da base de cálculo da contribuição social em períodos subsequentes.\nC – Para valores que serão adicionados ao lucro real ou à base de cálculo da contribuição social em períodos subsequentes.",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[C; D]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 7,
+     "nome": "VL_LCTO_PARTE_A",
+     "descricao": "Somatório dos Lançamentos da Parte B com Reflexo na Parte A no Período.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 8,
+     "nome": "IND_VL_LCTO_PARTE_A",
+     "descricao": "Indicador do Somatório dos Lançamentos da Parte B com Reflexo na Parte A no período:\nC – Para prejuízos ou valores que serão excluídos do lucro real ou da base de cálculo da contribuição social em períodos subsequentes.\nD – Para valores que serão adicionados ao lucro real ou à base de cálculo da contribuição social em períodos subsequentes.",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[C; D]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 9,
+     "nome": "VL_LCTO_PARTEB",
+     "descricao": "Somatório dos Lançamentos da Parte B Sem Reflexo na Parte A no Período (entre contas da parte B).",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 10,
+     "nome": "IND_VL_LCTO_PARTEB",
+     "descricao": "Indicador Somatório dos Lançamentos da Parte B Sem Reflexo na Parte A no Período (entre contas da parte B):\nC – Para prejuízos ou valores que serão excluídos do lucro real ou da base de cálculo da contribuição social em períodos subsequentes.\nD – Para valores que serão adicionados ao lucro real ou à base de cálculo da contribuição social em períodos subsequentes.",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[C; D]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 11,
+     "nome": "SD_FIM_LAL",
+     "descricao": "Saldo Final da Conta no Período de Apuração.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 12,
+     "nome": "IND_SD_FIM_LAL",
+     "descricao": "Indicador de Saldo Final:\nD – Para prejuízos ou valores que serão excluídos do lucro real ou da base de cálculo da contribuição social em períodos subsequentes.\nC – Para valores que serão adicionados ao lucro real ou à base de cálculo da contribuição social em períodos subsequentes.",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[C; D]",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [],
+   "exemplo": [
+    "|M510|1005|Provisões ou Perdas Estimadas Não Dedutíveis|1000,00|C|500,00|D|100,00|D|400,00|C|",
+    "|M510|: Identificação do tipo do registro.",
+    "|1005|: Código da conta padrão da parte B.",
+    "|Provisões ou Perdas Estimadas Não Dedutíveis|: Descrição da conta da parte B.",
+    "|1000,00|: Saldo inicial da conta da parte B (R$ 1.000,00).",
+    "|C|: Indicador do saldo inicial (C = Credor).",
+    "|500,00|: Valor do lançamento da parte B com reflexo na parte A (R$ 500,00).",
+    "|D|: Indicador do lançamento da parte B com reflexo na parte A (D = Devedor).",
+    "|100,00|: Valor do lançamento da parte B sem reflexo na parte A (R$ 100,00).",
+    "|D|: Indicador do lançamento da parte B sem reflexo na parte A (D = Devedor).",
+    "|400,00|: Saldo final da conta da parte B (R$ 400,00 = R$ 1.000,00 – R$ 500,00 – R$ 100,00).",
+    "|C|: Indicador do saldo final (C = Credor)."
+   ]
+  },
+  {
+   "codigo": "M990",
+   "nome": "Encerramento do Bloco M",
+   "ordem": 68,
+   "nivel": "1",
+   "ocorrencia": "[1;1]",
+   "chave": "[REG]",
+   "entrada": "N",
+   "saida": "O",
+   "descricao": [],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto fixo contendo a identificação do registro (M990).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[M990]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "QTD_LIN",
+     "descricao": "Quantidade total de registros do Bloco M.",
+     "tipo": "N",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [],
+   "exemplo": [
+    "|M990|2000|",
+    "|M990|: Identificação do tipo do registro.",
+    "|2000|: A quantidade total de registros do Bloco M é 2.000 (dois mil registros)."
+   ]
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+  "id": "nov-ade-cofis-38-2024",
+  "slug": "ade-cofis-38-2024",
+  "data": "2024-12-18",
+  "tipo": "norma",
+  "titulo": "Aprovado o Manual do leiaute 11",
+  "iniciante": "Saiu a norma que aprova o guia de preenchimento do ano-calendário 2024.",
+  "profissional": "O ato aprova o Manual de Orientação do Leiaute 11, publicado no DOU de 18/12/2024, seção 1, página 59, com vigência na data da publicação.",
+  "registros": [],
+  "fonte": {
+    "id": "normas-rfb",
+    "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/142111",
+    "trecho": "Arts. 1º e 2º"
+  },
+  "norma": "ADE Cofis nº 38/2024",
+  "leiautes": [
+    "11"
+  ],
+  "vigencia": {
+    "acNormal": [
+      2024
+    ],
+    "situacaoEspecial": [
+      2025
+    ]
+  },
+  "verificadoEm": "2026-11-25",
+  "status": "conferido"
+}

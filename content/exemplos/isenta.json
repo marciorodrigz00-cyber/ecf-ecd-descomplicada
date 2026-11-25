@@ -1,0 +1,65 @@
+{
+  "slug": "isenta",
+  "ano": 2025,
+  "tipo": "isenta",
+  "titulo": "Associação Cultural Girassol",
+  "regime": "Isenta, sem obrigação de ECD",
+  "iniciante": [
+    "A Girassol é uma associação cultural. Ela não paga IRPJ nem CSLL sobre a sua atividade, mas entrega a ECF para mostrar de onde veio e para onde foi o dinheiro."
+  ],
+  "profissional": [
+    "Isenta desobrigada de IRPJ e CSLL e da ECD: registros do bloco 0, X390 e Y612, com assinatura apenas do representante legal.",
+    "A isenção depende de requisitos legais que este exemplo não examina."
+  ],
+  "inicio": "2025-01-01",
+  "fim": "2025-12-31",
+  "cadastro": {
+    "nome": "ASSOCIAÇÃO CULTURAL GIRASSOL",
+    "cnpj": "99999996000100",
+    "natJur": "3999",
+    "cnae": "9493600",
+    "endereco": "RUA FICTÍCIA",
+    "numero": "100",
+    "bairro": "CENTRO",
+    "uf": "SP",
+    "municipio": "3550308",
+    "cep": "00000000",
+    "telefone": "1100000000",
+    "email": "contato@exemplo.invalid"
+  },
+  "assinantes": [
+    {
+      "nome": "RESPONSÁVEL FICTÍCIO",
+      "cpf": "00000000000",
+      "qualif": "205",
+      "crc": "",
+      "email": "legal@exemplo.invalid",
+      "fone": "1100000000"
+    }
+  ],
+  "tipoEntidade": "05",
+  "x390": {
+    "2": 18000000,
+    "3": 6000000,
+    "4": 1200000,
+    "5": 0,
+    "6": 9000000,
+    "7": 0,
+    "10": 15000000,
+    "11": 240000,
+    "12": 0,
+    "13": 160000,
+    "14": 11000000,
+    "15": 5800000
+  },
+  "dirigentes": [
+    {
+      "cpf": "00000000000",
+      "nome": "PRESIDENTA FICTÍCIA",
+      "qualif": "12",
+      "remuneracao": 4800000,
+      "demais": 0,
+      "ir": 0
+    }
+  ]
+}

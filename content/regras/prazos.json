@@ -1,0 +1,120 @@
+[
+  {
+    "id": "prazo-regra-geral",
+    "titulo": "Prazo de entrega (regra geral)",
+    "resumo": "Situações especiais (extinção, fusão, incorporação e cisão) têm regra própria.",
+    "valor": {
+      "tipo": "texto",
+      "texto": "Até o último dia útil de julho do ano seguinte ao ano-calendário da escrituração"
+    },
+    "fonte": {
+      "id": "in-2004",
+      "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/114966",
+      "trecho": "art. 3º, caput"
+    },
+    "norma": "IN RFB nº 2.004/2021, art. 3º, caput",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-24",
+    "status": "conferido"
+  },
+  {
+    "id": "prazo-especial-1",
+    "titulo": "Situações especiais de janeiro a abril",
+    "valor": {
+      "tipo": "texto",
+      "texto": "Até o último dia útil de julho do mesmo ano, nos casos de extinção, cisão, fusão ou incorporação"
+    },
+    "fonte": {
+      "id": "in-2004",
+      "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/114966",
+      "trecho": "art. 3º, § 2º, I"
+    },
+    "norma": "IN RFB nº 2.004/2021, art. 3º, § 2º, I",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": [
+        2025,
+        2026
+      ]
+    },
+    "verificadoEm": "2026-11-24",
+    "status": "conferido"
+  },
+  {
+    "id": "prazo-especial-2",
+    "titulo": "Situações especiais de maio a dezembro",
+    "valor": {
+      "tipo": "texto",
+      "texto": "Até o último dia útil do 3º mês subsequente ao do evento, nos casos de extinção, cisão, fusão ou incorporação"
+    },
+    "fonte": {
+      "id": "in-2004",
+      "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/114966",
+      "trecho": "art. 3º, § 2º, II"
+    },
+    "norma": "IN RFB nº 2.004/2021, art. 3º, § 2º, II",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": [
+        2025,
+        2026
+      ]
+    },
+    "verificadoEm": "2026-11-24",
+    "status": "conferido"
+  },
+  {
+    "id": "prazo-horario",
+    "titulo": "Horário limite",
+    "valor": {
+      "tipo": "texto",
+      "texto": "23h59min59s, horário de Brasília, do dia fixado para a entrega"
+    },
+    "fonte": {
+      "id": "in-2004",
+      "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/114966",
+      "trecho": "art. 3º, § 4º"
+    },
+    "norma": "IN RFB nº 2.004/2021, art. 3º, § 4º",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": [
+        2025,
+        2026
+      ]
+    },
+    "verificadoEm": "2026-11-24",
+    "status": "conferido"
+  }
+]

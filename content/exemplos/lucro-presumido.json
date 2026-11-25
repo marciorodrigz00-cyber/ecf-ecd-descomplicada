@@ -1,0 +1,228 @@
+{
+  "slug": "lucro-presumido",
+  "ano": 2025,
+  "tipo": "presumido",
+  "titulo": "Café do Vale Ltda.",
+  "regime": "Lucro presumido, com livro caixa",
+  "iniciante": [
+    "O Café do Vale vende produtos e presta serviço de buffet. No lucro presumido, a lei supõe uma parte da receita como lucro, e essa parte muda conforme a atividade.",
+    "Como a receita do ano passou do limite da regra do livro caixa, a ECF também leva o caixa da empresa."
+  ],
+  "profissional": [
+    "Atividades com percentuais diferentes, regime de caixa, sem recuperação da ECD, Demonstrativo de Livro Caixa e adicional do IRPJ só no T04.",
+    "O livro caixa está resumido por trimestre. Em uma escrituração de verdade, cada movimento é uma linha."
+  ],
+  "inicio": "2025-01-01",
+  "fim": "2025-12-31",
+  "cadastro": {
+    "nome": "CAFÉ DO VALE LTDA",
+    "cnpj": "99999998000100",
+    "natJur": "2062",
+    "cnae": "5611203",
+    "endereco": "RUA FICTÍCIA",
+    "numero": "100",
+    "bairro": "CENTRO",
+    "uf": "SP",
+    "municipio": "3550308",
+    "cep": "00000000",
+    "telefone": "1100000000",
+    "email": "contato@exemplo.invalid"
+  },
+  "assinantes": [
+    {
+      "nome": "CONTADORA FICTÍCIA",
+      "cpf": "00000000000",
+      "qualif": "900",
+      "crc": "SP000000",
+      "email": "contabil@exemplo.invalid",
+      "fone": "1100000000"
+    },
+    {
+      "nome": "RESPONSÁVEL FICTÍCIO",
+      "cpf": "00000000000",
+      "qualif": "205",
+      "crc": "",
+      "email": "legal@exemplo.invalid",
+      "fone": "1100000000"
+    }
+  ],
+  "periodos": [
+    {
+      "id": "T01",
+      "inicio": "2025-01-01",
+      "fim": "2025-03-31",
+      "meses": 3,
+      "receitas": {
+        "geral": 30000000,
+        "servicos": 4000000
+      },
+      "financeiras": 0,
+      "irrf": 0
+    },
+    {
+      "id": "T02",
+      "inicio": "2025-04-01",
+      "fim": "2025-06-30",
+      "meses": 3,
+      "receitas": {
+        "geral": 32000000,
+        "servicos": 5000000
+      },
+      "financeiras": 0,
+      "irrf": 0
+    },
+    {
+      "id": "T03",
+      "inicio": "2025-07-01",
+      "fim": "2025-09-30",
+      "meses": 3,
+      "receitas": {
+        "geral": 35000000,
+        "servicos": 6000000
+      },
+      "financeiras": 0,
+      "irrf": 0
+    },
+    {
+      "id": "T04",
+      "inicio": "2025-10-01",
+      "fim": "2025-12-31",
+      "meses": 3,
+      "receitas": {
+        "geral": 40000000,
+        "servicos": 7000000
+      },
+      "financeiras": 800000,
+      "irrf": 120000
+    }
+  ],
+  "caixaInicial": 5000000,
+  "caixa": [
+    {
+      "data": "2025-03-31",
+      "historico": "VENDAS E SERVIÇOS RECEBIDOS NO 1º TRIMESTRE",
+      "entrada": 34000000,
+      "saida": 0
+    },
+    {
+      "data": "2025-03-31",
+      "historico": "COMPRA DE MERCADORIAS DO 1º TRIMESTRE",
+      "entrada": 0,
+      "saida": 19000000
+    },
+    {
+      "data": "2025-03-31",
+      "historico": "SALÁRIOS E ENCARGOS DO 1º TRIMESTRE",
+      "entrada": 0,
+      "saida": 8000000
+    },
+    {
+      "data": "2025-03-31",
+      "historico": "ALUGUEL, TRIBUTOS E OUTRAS DESPESAS DO 1º TRIMESTRE",
+      "entrada": 0,
+      "saida": 3000000
+    },
+    {
+      "data": "2025-06-30",
+      "historico": "VENDAS E SERVIÇOS RECEBIDOS NO 2º TRIMESTRE",
+      "entrada": 37000000,
+      "saida": 0
+    },
+    {
+      "data": "2025-06-30",
+      "historico": "COMPRA DE MERCADORIAS DO 2º TRIMESTRE",
+      "entrada": 0,
+      "saida": 20000000
+    },
+    {
+      "data": "2025-06-30",
+      "historico": "SALÁRIOS E ENCARGOS DO 2º TRIMESTRE",
+      "entrada": 0,
+      "saida": 8200000
+    },
+    {
+      "data": "2025-06-30",
+      "historico": "ALUGUEL, TRIBUTOS E OUTRAS DESPESAS DO 2º TRIMESTRE",
+      "entrada": 0,
+      "saida": 3400000
+    },
+    {
+      "data": "2025-09-30",
+      "historico": "VENDAS E SERVIÇOS RECEBIDOS NO 3º TRIMESTRE",
+      "entrada": 41000000,
+      "saida": 0
+    },
+    {
+      "data": "2025-09-30",
+      "historico": "COMPRA DE MERCADORIAS DO 3º TRIMESTRE",
+      "entrada": 0,
+      "saida": 21500000
+    },
+    {
+      "data": "2025-09-30",
+      "historico": "SALÁRIOS E ENCARGOS DO 3º TRIMESTRE",
+      "entrada": 0,
+      "saida": 8500000
+    },
+    {
+      "data": "2025-09-30",
+      "historico": "ALUGUEL, TRIBUTOS E OUTRAS DESPESAS DO 3º TRIMESTRE",
+      "entrada": 0,
+      "saida": 3800000
+    },
+    {
+      "data": "2025-12-31",
+      "historico": "VENDAS E SERVIÇOS RECEBIDOS NO 4º TRIMESTRE",
+      "entrada": 47000000,
+      "saida": 0
+    },
+    {
+      "data": "2025-12-31",
+      "historico": "RENDIMENTO DE APLICAÇÃO, LÍQUIDO DO IR RETIDO",
+      "entrada": 680000,
+      "saida": 0
+    },
+    {
+      "data": "2025-12-31",
+      "historico": "COMPRA DE MERCADORIAS DO 4º TRIMESTRE",
+      "entrada": 0,
+      "saida": 24500000
+    },
+    {
+      "data": "2025-12-31",
+      "historico": "SALÁRIOS E ENCARGOS DO 4º TRIMESTRE",
+      "entrada": 0,
+      "saida": 9200000
+    },
+    {
+      "data": "2025-12-31",
+      "historico": "ALUGUEL, TRIBUTOS E OUTRAS DESPESAS DO 4º TRIMESTRE",
+      "entrada": 0,
+      "saida": 4100000
+    }
+  ],
+  "outras": {
+    "capitalAnterior": 10000000,
+    "capital": 10000000,
+    "estoqueAnterior": 3000000,
+    "estoque": 4500000,
+    "pagarAnterior": 2000000,
+    "pagar": 2500000,
+    "compras": 85000000,
+    "avaliacaoEstoque": "1"
+  },
+  "retencao": {
+    "cnpj": "99999997000199",
+    "nome": "BANCO FICTÍCIO S.A.",
+    "codigo": "3426"
+  },
+  "socios": [
+    {
+      "desde": "2018-05-10",
+      "nome": "SÓCIA FICTÍCIA TRES",
+      "cpf": "00000000000",
+      "qualif": "02",
+      "percentual": "100"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["eslint", "typescript", "unicorn", "oxc", "react", "jsx-a11y", "nextjs", "import", "vitest"],
+  "categories": { "correctness": "error" },
+  "env": { "browser": true, "node": true, "es2024": true },
+  "ignorePatterns": [".next/**", "out/**", "node_modules/**", "test-results/**", "playwright-report/**", "next-env.d.ts"],
+  "rules": {
+    "jsx-a11y/prefer-tag-over-role": "off",
+    "jsx-a11y/no-noninteractive-tabindex": ["error", { "tags": [], "roles": ["tabpanel", "region"] }],
+    "vitest/valid-expect": ["error", { "maxArgs": 2 }],
+    "vitest/require-to-throw-message": "off",
+    "vitest/no-conditional-expect": "off"
+  },
+  "overrides": [{ "files": ["src/app/layout.tsx"], "rules": { "nextjs/no-sync-scripts": "off" } }]
+}

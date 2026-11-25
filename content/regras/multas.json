@@ -1,0 +1,326 @@
+[
+  {
+    "id": "multa-qual",
+    "titulo": "Qual multa se aplica",
+    "valor": {
+      "tipo": "texto",
+      "texto": "Lucro real: multas do art. 8º-A do Decreto-Lei nº 1.598/1977. Demais pessoas jurídicas: multas do art. 12 da Lei nº 8.218/1991"
+    },
+    "fonte": {
+      "id": "in-2004",
+      "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/114966",
+      "trecho": "art. 6º, I e II"
+    },
+    "norma": "IN RFB nº 2.004/2021, art. 6º, I e II",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-24",
+    "status": "conferido"
+  },
+  {
+    "id": "multa-real-atraso",
+    "titulo": "Não entregar ou atrasar",
+    "valor": {
+      "tipo": "texto",
+      "texto": "0,25% do lucro líquido antes do IRPJ e da CSLL no período, por mês-calendário ou fração, limitada a 10%"
+    },
+    "fonte": {
+      "id": "dl-1598",
+      "url": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del1598.htm",
+      "trecho": "art. 8º-A, I"
+    },
+    "norma": "Decreto-Lei nº 1.598/1977, art. 8º-A, I, incluído pela Lei nº 12.973/2014",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-24",
+    "status": "conferido"
+  },
+  {
+    "id": "multa-real-erro",
+    "titulo": "Informação omitida, inexata ou incorreta",
+    "valor": {
+      "tipo": "texto",
+      "texto": "3% do valor omitido, inexato ou incorreto, não inferior a R$ 100,00"
+    },
+    "fonte": {
+      "id": "dl-1598",
+      "url": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del1598.htm",
+      "trecho": "art. 8º-A, II"
+    },
+    "norma": "Decreto-Lei nº 1.598/1977, art. 8º-A, II, incluído pela Lei nº 12.973/2014",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-24",
+    "status": "conferido"
+  },
+  {
+    "id": "multa-real-limite",
+    "titulo": "Teto da multa por atraso",
+    "valor": {
+      "tipo": "texto",
+      "texto": "R$ 100.000,00 para receita bruta total de até R$ 3.600.000,00 no ano-calendário anterior; R$ 5.000.000,00 nos demais casos"
+    },
+    "fonte": {
+      "id": "dl-1598",
+      "url": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del1598.htm",
+      "trecho": "art. 8º-A, § 1º"
+    },
+    "norma": "Decreto-Lei nº 1.598/1977, art. 8º-A, § 1º, incluído pela Lei nº 12.973/2014",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-24",
+    "status": "conferido"
+  },
+  {
+    "id": "multa-real-reducao",
+    "titulo": "Redução da multa por atraso",
+    "valor": {
+      "tipo": "texto",
+      "texto": "90% se entregue em até 30 dias após o prazo; 75% em até 60 dias; metade se depois disso, mas antes de procedimento de ofício; 25% se entregue no prazo da intimação"
+    },
+    "fonte": {
+      "id": "dl-1598",
+      "url": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del1598.htm",
+      "trecho": "art. 8º-A, § 2º"
+    },
+    "norma": "Decreto-Lei nº 1.598/1977, art. 8º-A, § 2º, incluído pela Lei nº 12.973/2014",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-24",
+    "status": "conferido"
+  },
+  {
+    "id": "multa-real-erro-reducao",
+    "titulo": "Correção do erro",
+    "valor": {
+      "tipo": "texto",
+      "texto": "Não é devida se corrigida antes de procedimento de ofício; é reduzida em 50% se corrigida no prazo da intimação"
+    },
+    "fonte": {
+      "id": "dl-1598",
+      "url": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del1598.htm",
+      "trecho": "art. 8º-A, § 3º"
+    },
+    "norma": "Decreto-Lei nº 1.598/1977, art. 8º-A, § 3º, incluído pela Lei nº 12.973/2014",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-24",
+    "status": "conferido"
+  },
+  {
+    "id": "multa-real-sem-lucro",
+    "titulo": "Sem lucro líquido no período",
+    "valor": {
+      "tipo": "texto",
+      "texto": "Usa-se o lucro líquido do último período informado, atualizado pela Selic até o fim do período da escrituração"
+    },
+    "fonte": {
+      "id": "dl-1598",
+      "url": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del1598.htm",
+      "trecho": "art. 8º-A, § 4º"
+    },
+    "norma": "Decreto-Lei nº 1.598/1977, art. 8º-A, § 4º, incluído pela Lei nº 12.973/2014",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-24",
+    "status": "conferido"
+  },
+  {
+    "id": "multa-demais-requisitos",
+    "titulo": "Arquivo fora dos requisitos",
+    "valor": {
+      "tipo": "texto",
+      "texto": "0,5% da receita bruta do período da escrituração"
+    },
+    "fonte": {
+      "id": "lei-8218",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8218.htm",
+      "trecho": "art. 12, I"
+    },
+    "norma": "Lei nº 8.218/1991, art. 12, I, redação da Lei nº 13.670/2018",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-24",
+    "status": "conferido"
+  },
+  {
+    "id": "multa-demais-erro",
+    "titulo": "Informação omitida ou incorreta",
+    "valor": {
+      "tipo": "texto",
+      "texto": "5% do valor da operação correspondente, limitada a 1% da receita bruta do período"
+    },
+    "fonte": {
+      "id": "lei-8218",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8218.htm",
+      "trecho": "art. 12, II"
+    },
+    "norma": "Lei nº 8.218/1991, art. 12, II, redação da Lei nº 13.670/2018",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-24",
+    "status": "conferido"
+  },
+  {
+    "id": "multa-demais-atraso",
+    "titulo": "Atraso",
+    "valor": {
+      "tipo": "texto",
+      "texto": "0,02% da receita bruta do período por dia de atraso, limitada a 1% dela"
+    },
+    "fonte": {
+      "id": "lei-8218",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8218.htm",
+      "trecho": "art. 12, III"
+    },
+    "norma": "Lei nº 8.218/1991, art. 12, III, redação da Lei nº 13.670/2018",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-24",
+    "status": "conferido"
+  },
+  {
+    "id": "multa-demais-reducao",
+    "titulo": "Redução",
+    "valor": {
+      "tipo": "texto",
+      "texto": "À metade, se cumprida após o prazo, mas antes de procedimento de ofício; a 75%, se cumprida no prazo da intimação"
+    },
+    "fonte": {
+      "id": "lei-8218",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8218.htm",
+      "trecho": "art. 12, parágrafo único"
+    },
+    "norma": "Lei nº 8.218/1991, art. 12, parágrafo único, redação da Lei nº 13.670/2018",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-24",
+    "status": "conferido"
+  },
+  {
+    "id": "multa-automatica",
+    "titulo": "Geração automática",
+    "valor": {
+      "tipo": "texto",
+      "texto": "A multa por atraso é calculada, gerada e cientificada no momento da transmissão fora do prazo, e a retificação posterior não a altera"
+    },
+    "fonte": {
+      "id": "manual-12",
+      "url": "https://www.gov.br/sped/pt-br/assuntos/escrituracoes-digitais/ecf/manuais-e-documentos-tecnicos",
+      "trecho": "Item 1.23. Mesmo conteúdo no Manual do leiaute 11"
+    },
+    "norma": "Manual de Orientação do Leiaute (ADE Cofis nº 2/2026 e nº 38/2024)",
+    "leiautes": [
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2024,
+        2025
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-24",
+    "status": "conferido"
+  }
+]

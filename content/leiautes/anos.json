@@ -1,0 +1,131 @@
+{
+  "rastreio": {
+    "id": "arq-leiaute-ano",
+    "fonte": {
+      "id": "manual-12",
+      "url": "https://www.gov.br/sped/pt-br/assuntos/escrituracoes-digitais/ecf/manuais-e-documentos-tecnicos",
+      "trecho": "Tabela “Leiaute, Período e Manual”, na introdução"
+    },
+    "norma": "Manual de Orientação do Leiaute 12 (ADE Cofis nº 2/2026)",
+    "leiautes": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "situacaoEspecial": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ]
+    },
+    "verificadoEm": "2026-11-25",
+    "status": "conferido"
+  },
+  "linhas": [
+    {
+      "leiaute": "1",
+      "anoCalendario": 2014,
+      "situacaoEspecial": 2015,
+      "ato": "ADE Cofis nº 60/2015"
+    },
+    {
+      "leiaute": "2",
+      "anoCalendario": 2015,
+      "situacaoEspecial": 2016,
+      "ato": "ADE Cofis nº 46/2016"
+    },
+    {
+      "leiaute": "3",
+      "anoCalendario": 2016,
+      "situacaoEspecial": 2017,
+      "ato": "ADE Cofis nº 30/2017"
+    },
+    {
+      "leiaute": "4",
+      "anoCalendario": 2017,
+      "situacaoEspecial": 2018,
+      "ato": "ADE Cofis nº 52/2018"
+    },
+    {
+      "leiaute": "5",
+      "anoCalendario": 2018,
+      "situacaoEspecial": 2019,
+      "ato": "ADE Cofis nº 84/2018 e nº 9/2019"
+    },
+    {
+      "leiaute": "6",
+      "anoCalendario": 2019,
+      "situacaoEspecial": 2020,
+      "ato": "ADE Cofis nº 70/2019"
+    },
+    {
+      "leiaute": "7",
+      "anoCalendario": 2020,
+      "situacaoEspecial": 2021,
+      "ato": "ADE Cofis nº 86/2020"
+    },
+    {
+      "leiaute": "8",
+      "anoCalendario": 2021,
+      "situacaoEspecial": 2022,
+      "ato": "ADE Cofis nº 1/2022"
+    },
+    {
+      "leiaute": "9",
+      "anoCalendario": 2022,
+      "situacaoEspecial": 2023,
+      "ato": "ADE Cofis nº 133/2022"
+    },
+    {
+      "leiaute": "10",
+      "anoCalendario": 2023,
+      "situacaoEspecial": 2024,
+      "ato": "ADE Cofis nº 59/2023"
+    },
+    {
+      "leiaute": "11",
+      "anoCalendario": 2024,
+      "situacaoEspecial": 2025,
+      "ato": "ADE Cofis nº 38/2024"
+    },
+    {
+      "leiaute": "12",
+      "anoCalendario": 2025,
+      "situacaoEspecial": 2026,
+      "ato": "ADE Cofis nº 2/2026"
+    }
+  ]
+}

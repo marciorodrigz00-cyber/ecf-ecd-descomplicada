@@ -1,0 +1,1081 @@
+{
+ "rastreio": {
+  "id": "arq-11-k",
+  "fonte": {
+   "id": "manual-11",
+   "url": "https://www.gov.br/sped/pt-br/assuntos/escrituracoes-digitais/ecf/manuais-e-documentos-tecnicos",
+   "trecho": "Seção do bloco K"
+  },
+  "norma": "ADE Cofis nº 38/2024",
+  "leiautes": [
+   "11"
+  ],
+  "vigencia": {
+   "acNormal": [
+    2024
+   ],
+   "situacaoEspecial": [
+    2025
+   ]
+  },
+  "verificadoEm": "2026-11-24",
+  "status": "extraido"
+ },
+ "bloco": "K",
+ "descricao": "Apresenta os saldos das contas contábeis patrimoniais e de resultado por período de apuração e o seu mapeamento para as contas referenciais.\nCaso haja recuperação da ECD, o bloco K pode ser construído automaticamente e é permitida a sua edição.\nO bloco K também pode ser importado, independentemente da recuperação da ECD.",
+ "registros": [
+  {
+   "codigo": "K001",
+   "nome": "Abertura do Bloco K",
+   "ordem": 35,
+   "nivel": "1",
+   "ocorrencia": "[1;1]",
+   "chave": "[REG]",
+   "entrada": "F",
+   "saida": "O",
+   "descricao": [],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto fixo contendo a identificação do registro (K001).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[K001]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "IND_DAD",
+     "descricao": "Indicador de movimento:\n0 – Bloco com dados informados.\n1 – Bloco sem dados informados.",
+     "tipo": "N",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[0;1]",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_OCORRENCIA_UNITARIA_ARQ",
+     "texto": "Verifica se registro ocorreu apenas uma vez por arquivo, considerando a chave “K001” (REG). Se a regra não for cumprida, a ECF gera um erro."
+    }
+   ],
+   "regrasCampo": [],
+   "exemplo": [
+    "|K001|0|",
+    "|K001|: Identificação do tipo do registro.",
+    "|0|: Indica que o bloco possui dados informados."
+   ]
+  },
+  {
+   "codigo": "K030",
+   "nome": "Identificação dos Períodos e Formas de Apuração do IRPJ e da CSLL no Ano-Calendário",
+   "ordem": 36,
+   "nivel": "2",
+   "ocorrencia": "[0;13]",
+   "chave": "PER_APUR",
+   "entrada": "F",
+   "saida": "OC\n(Se (0010. FORMA_TRIB = “1”, “2”, “3” ou “4”)\nOu (0010. FORMA_TRIB = “5” ou “7” ou “8” ou “9” E 0010.TIP_ESC_PRE = “C”))",
+   "descricao": [
+    "Registro de identificação dos períodos da escrituração necessários conforme definições de parâmetros do Bloco 0."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (K030).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[K030]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "DT_INI",
+     "descricao": "Data do Início do Período",
+     "tipo": "N",
+     "tamanho": "8",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "DT_FIN",
+     "descricao": "Data do Fim do período",
+     "tipo": "N",
+     "tamanho": "8",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 4,
+     "nome": "PER_APUR",
+     "descricao": "Período de Apuração [para 0010.FORMA_APUR = “A” ou (0010.FORMA_APUR_I = “A” OU 0010.APUR_CSLL = “A” E 0010.TIP_ESC_PRE = “C”)]:\nA00 – Anual\nA01 – Rec. Bruta de janeiro /Balanço suspensão redução até janeiro\nA02 – Rec. Bruta de fevereiro /Balanço suspensão redução até fevereiro\nA03 – Rec. Bruta de março /Balanço suspensão redução até março\nA04 – Rec. Bruta de abril /Balanço suspensão redução até abril\nA05 – Rec. Bruta de maio /Balanço suspensão redução até maio\nA06 – Rec. Bruta de junho /Balanço suspensão redução até junho\nA07 – Rec. Bruta de julho /Balanço suspensão redução até julho\nA08 – Rec. Bruta de agosto /Balanço suspensão redução até agosto\nA09 – Rec. Bruta de setembro /Balanço suspensão redução até setembro\nA10 – Rec. Bruta de outubro/Balanço suspensão redução até outubro\nA11 – Rec. Bruta de novembro /Balanço suspensão redução até novembro\nA12 – Rec. Bruta de dezembro/Balanço suspensão redução até dezembro\nIndicador do período de referência [para 0010.FORMA_APUR = “T” OU (0010.FORMA_APUR = “A” E 0010.FORMA_TRIB = “2”) ou (0010.FORMA_APUR_I = “T” OU 0010.APUR_CSLL = “T” E 0010.TIP_ESC_PRE = “C”)]:\nT01 – 1º Trimestre\nT02 – 2º Trimestre\nT03 – 3º Trimestre\nT04 – 4º Trimestre\nRegra: O período deve estar compreendido entre a data início e data fim da escrituração.\nPeríodo de Apuração [para 0010.FORMA_APUR_I = “D” OU 0010.APUR_CSLL = “D” E 0010.TIP_ESC_PRE = “C”)]:\nA00 – Anual",
+     "tipo": "C",
+     "tamanho": "3",
+     "decimal": "—",
+     "valores": "[A00; A01; A02; A03; A04; A05; A06; A07; A08; A09; A10; A11; A12; T01; T02; T03; T04]",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_DUPLICIDADE_DESPREZADA",
+     "texto": "Verifica se o registro já foi importado anteriormente, de acordo com a chave e os registros pais. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_PERIODO_DESPREZADO",
+     "texto": "Verifica se a linha deste período existe no arquivo de importação, mas não deve ser importado, pois as datas não compatíveis com o período da ECF. Se a regra não for cumprida, a ECF gera um aviso."
+    },
+    {
+     "codigo": "REGRA_LINHA_ALTERADA",
+     "texto": "Verifica se a linha deste período existe no arquivo de importação, mas deve ser alterada, pois as datas não compatíveis com o período da ECF. Se a regra não for cumprida, a ECF gera um aviso."
+    }
+   ],
+   "regrasCampo": [],
+   "exemplo": [
+    "|K030|01012024|31032024|T01|",
+    "|K030|: Identificação do tipo do registro.",
+    "|01012024|: Data de início do período (01/01/2024).",
+    "|31032024|: Data de fim do período (31/03/2024).",
+    "|T01|: Período de apuração (T01 = 1º Trimestre)."
+   ]
+  },
+  {
+   "codigo": "K155",
+   "nome": "Detalhes dos Saldos Contábeis (Depois do Encerramento do Resultado do Período)",
+   "ordem": 37,
+   "nivel": "3",
+   "ocorrencia": "[0;N]",
+   "chave": "COD_CTA + COD_CCUS",
+   "entrada": "F",
+   "saida": "OC\n(Se (0010. FORMA_TRIB = “1”, “2”, “3” ou “4”)\nOu (0010. FORMA_TRIB = “5” ou “7” ou “8” ou “9” E 0010.TIP_ESC_PRE = “C”))",
+   "descricao": [
+    "Registro onde devem ser informados os saldos iniciais, os saldos finais, os totais de débitos e os totais de créditos de todas as contas patrimoniais da escrituração societária da pessoa jurídica (Ativo, Passivo e Patrimonio Liquido), no período de apuração. Poderá ser preenchido das seguintes formas:",
+    "- Edição pelo programa da ECF;",
+    "- Calculado pelo sistema através da funcionalidade de recuperar ECD; e",
+    "- Importado de arquivo digital.",
+    "Observações:",
+    "1) Apresentar registros para todas as contas analíticas que tenham saldo (societário) ou movimento no período;",
+    "2) K155.IND_VL_SLD_INI e K155.IND_VL_SLD_FIN: Quando saldos iguais a zero, preencher com “D” ou “C”;",
+    "3) K155.VL_SLD_INI, K155.VL_DEB, K155.VL_CRED ou K155.VL_SLD_FIN: Na inexistência de saldo inicial, final ou de movimentação, preencher com zero.",
+    "4) K155.COD_CTA e K155.COD_CCUS: Informe o código constante do registro J050 e J051 respectivamente.",
+    "5) K155.VL_SLD_INI: Informe o valor do saldo da conta no início do período de apuração (K030.DT_FIN).",
+    "6) K155.VL_DEB e K155.VL_CRED: Informe os valores de movimentação em todo o período de apuração (entre K030.DT_INI e K030.DT_FIN).",
+    "7) K155.VL_SLD_FIN: Informe o valor do saldo da conta no fim do período de apuração (K030.DT_FIN).",
+    "Atenção: Os valores devem ser apurados e informados considerando todos os lançamentos (inclusive os de encerramento)."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (K155).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[K155]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "COD_CTA",
+     "descricao": "Código da Conta Analítica Patrimonial.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "COD_CCUS",
+     "descricao": "Código do Centro de Custos.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 4,
+     "nome": "VL_SLD_INI",
+     "descricao": "Valor do Saldo Inicial do Período.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 5,
+     "nome": "IND_VL_SLD_INI",
+     "descricao": "Indicador da Situação do Saldo Inicial:\nD – Devedor\nC – Credor",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[D; C]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 6,
+     "nome": "VL_DEB",
+     "descricao": "Valor Total dos Débitos no Período.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 7,
+     "nome": "VL_CRED",
+     "descricao": "Valor Total dos Créditos no Período.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 8,
+     "nome": "VL_SLD_FIN",
+     "descricao": "Valor do Saldo Final do Período.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 9,
+     "nome": "IND_VL_SLD_FIN",
+     "descricao": "Indicador da Situação do Saldo Final:\nD – Devedor\nC – Credor",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[D; C]",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_NATUREZA_PERMITIDA_PATRIMONIAL",
+     "texto": "Verifica se a conta informada no registro K155 possui J050.COD_NAT igual a “01” (Contas do Ativo), “2” (Contas do Passivo) ou “3” (Contas do Patrimônio Líquido). Se a regra não for cumprida, o sistema gera um erro."
+    },
+    {
+     "codigo": "REGRA_VALIDACAO_SOMA_SALDO_INICIAL",
+     "texto": "Verifica se soma de K155.VL_SLD_INI é igual a zero para cada período informado no registro K030 (considerando os indicadores de saldo devedor e credor). Se a regra não for cumprida e 0010.FORMA_TRIB_PER for igual a “R” (Lucro Real), o sistema gera um erro. Caso contrário, o sistema gera um aviso."
+    },
+    {
+     "codigo": "REGRA_VALIDACAO_SOMA_SALDO_FINAL",
+     "texto": "Verifica se soma de K155.VL_SLD_FIN é igual a zero para cada período informado no registro K030 (considerando os indicadores de saldo devedor e credor). Se a regra não for cumprida e 0010.FORMA_TRIB_PER for igual a “R” (Lucro Real), o sistema gera um erro. Caso contrário, o sistema gera um aviso."
+    },
+    {
+     "codigo": "REGRA_VALIDACAO_DEB_DIF_CRED",
+     "texto": "Verifica se a soma de K155.VL_DEB é igual à soma de K155.VL_CRED para cada período informado no registro K030 (considerando os indicadores de saldo devedor e credor). Se a regra não for cumprida e 0010.FORMA_TRIB_PER for igual a “R” (Lucro Real), o sistema gera um erro. Caso contrário, o sistema gera um aviso."
+    },
+    {
+     "codigo": "REGRA_BATIMENTO_K155",
+     "texto": "Verifica se todos os saldos finais dos códigos de conta e centro de custos constantes no registro K155 do período anterior são iguais aos saldos iniciais dos códigos de conta e centro de custos constantes no registro K155 do período atual. Se a regra não for cumprida, o sistema gera um erro."
+    },
+    {
+     "codigo": "REGRA_CONTA_ANALITICA",
+     "texto": "Verifica se a conta e o centro de custos estão no plano de contas (J050) como conta analítica. Se a regra não for cumprida, o sistema gera um erro."
+    },
+    {
+     "codigo": "REGRA_COMPATIBILIDADE_K155_E155",
+     "texto": "Verifica se os valores utilizados no registro K155 são iguais aos valores calculados do registro E155. Se a regra não for cumprida, o sistema gera um aviso."
+    },
+    {
+     "codigo": "REGRA_COMPATIBILIDADE_E155_K155",
+     "texto": "Verifica se os campos do registro E155 com algum valor maior que zero, são referenciados no registro K155 para o mesmo período de apuração. Se a regra não for cumprida, o sistema gera um aviso."
+    },
+    {
+     "codigo": "REGRA_SALDO_CONTABIL_MENOR",
+     "texto": "Verifica, para o mesmo período de apuração:\n- Se K155.IND_VL_CTA = M310.IND_VL_SLD_FIN e K155.VL_SLD_FIN é menor que o somatório de M310.VL_CTA.\n- Se K155.IND_VL_CTA = M360.IND_VL_SLD_FIN e K155.VL_SLD_FIN é menor que o somatório de M360.VL_CTA.\nSe a regra não for cumprida, o sistema gera um erro."
+    },
+    {
+     "codigo": "REGRA_EXISTENCIA_E015_K155",
+     "texto": "Verifica se os saldos recuperados existem no registro K155 atual. O erro ocorre se (0010.FORMA_TRIB = “1”, “2”, “3” ou “4”) ou (0010.FORMA_TRIB = “5”, “7”, “8” ou “9” e 0010.TIP_ESC_PRE = “C”) e se existir ECF anterior recuperada (0000.HASH_ECF_ANTERIOR é diferente de vazio) e, para cada conta e centro de custo existente no registro E015 com valor maior que zero, não existir pelo menos um registro K155, considerando para cada período K030.DT_INI = 0000.DT_INI (períodos de apuração iniciais) e:\nE015.COD_CTA = K155.COD_CTA; e\nE010.COD_CCUS = K155.COD_CCUS.\ne se não existir um registro C157 para a mesma conta e centro de custo subordinado a um C150, onde:\nC150.DT_INI é maior ou igual a K030.DT_INI; e\nC150.DT_FIN é menor ou igual a K030.DT_FIN. Se a regra não for cumprida, o sistema gera um aviso."
+    }
+   ],
+   "regrasCampo": [
+    {
+     "campo": "VL_SLD_FIN",
+     "regras": [
+      {
+       "codigo": "REGRA_MAPEAMENTO",
+       "texto": "Verifica se o somatório de K156.VAL_CTA_REF_FIN é igual ao K155.VL_SLD_FIN.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "IND_VL_SLD_FIN",
+     "regras": [
+      {
+       "codigo": "REGRA_VALIDACAO_SALDO_FINAL",
+       "texto": "Verifica se o valor de K155.VL_SLD_FIN é igual ao valor de K155.VL_SLD_INI somado aos valores dos campos K155.VL_DEB e K155.VL_CRED, considerando os indicadores de saldo devedor e credor do saldo inicial e do saldo final. Se a regra não for cumprida, o sistema gera um erro.",
+       "tipo": "Erro"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|K155|2328.2.0001||0,00|D|7500,00|5000,00|2500,00|D|",
+    "|K155|: Identificação do tipo do registro.",
+    "|2328.2.0001|: Código da conta analítica.",
+    "||: Código do centro de custos (Não há).",
+    "|0,00|: Valor do saldo inicial (R$ 0,00).",
+    "|D|: Indicador da situação do saldo inicial (D = Devedor).",
+    "|7500,00|: Valor total de débitos (R$ 7.500,00).",
+    "|5000,00|: Valor total de créditos (R$ 5.000,00).",
+    "|2500,00|: Valor do saldo final (R$ 2.500,00 = R$ 7.500,00 – R$ 5.000,00).",
+    "|D|: Indicador da situação do saldo final (D = Devedor)."
+   ]
+  },
+  {
+   "codigo": "K156",
+   "nome": "Mapeamento Referencial do Saldo",
+   "ordem": 38,
+   "nivel": "4",
+   "ocorrencia": "[0;N]",
+   "chave": "COD_CTA_REF",
+   "entrada": "F",
+   "saida": "OC\nLocalizar o J050.COD_CTA = K155.PAI_COD_CTA.\n(Se J050 possuir mais de uma conta referencial cadastrada no registro J051 para o mesmo centro de custo – Registro)",
+   "descricao": [
+    "Registro utilizado para mapeamento, por conta referencial, dos saldos de todas as contas patrimoniais da escrituração societária da pessoa jurídica (Ativo, Passivo e Patrimônio Líquido), nos respectivos períodos de apuração. Poderá ser preenchido das seguintes formas:",
+    "- Edição pelo programa da ECF;",
+    "- Calculado pelo sistema através da funcionalidade de recuperar ECD; e",
+    "- Importado de arquivo digital.",
+    "Observação: Se houver somente uma conta referencial no registro J051 mapeada a partir de uma conta contábil (plano de contas da pessoa jurídica), o próprio sistema preencherá o registro K156 (mapeamento de uma conta contábil para uma conta referencial). Caso contrário, ou seja, a conta contábil foi mapeada para mais de uma conta referencial, o registro K156 deverá ser preenchido pela pessoa jurídica."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (K156).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[K156]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "COD_CTA_REF",
+     "descricao": "Código da Conta no Plano de Contas Referencial, conforme tabela do Sped.\n(Disponibilizada no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "VL_SLD_INI",
+     "descricao": "Valor do Saldo Inicial do Período.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 4,
+     "nome": "IND_VL_SLD_INI",
+     "descricao": "Indicador da Situação do Saldo Inicial:\nD – Devedor\nC – Credor",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[D; C]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 5,
+     "nome": "VL_DEB",
+     "descricao": "Valor Total dos Débitos no Período.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 6,
+     "nome": "VL_CRED",
+     "descricao": "Valor Total dos Créditos no Período.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 7,
+     "nome": "VL_SLD_FIN",
+     "descricao": "Valor do Saldo Final do Período.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 8,
+     "nome": "IND_VL_SLD_FIN",
+     "descricao": "Indicador da Situação do Saldo Final:\nD – Devedor\nC – Credor",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[D; C]",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [
+    {
+     "campo": "COD_CTA_REF",
+     "regras": [
+      {
+       "codigo": "REGRA_CTA_REF_MAPEADA_J051",
+       "texto": "Verifica se o K156.COD_CTA_REF informado, foi utilizado no registro J051.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "VL_SLD_INI",
+     "regras": [
+      {
+       "codigo": "REGRA_VALIDA_SALDO_INICIAL",
+       "texto": "Verifica se o K156.VL_SLD_INI informado e igual ao saldo final do período imediatamente anterior. No primeiro período da ECF, verifica se K156.VL_SLD_INI é igual ao E010.VAL_CTA_REF (saldo final da conta referencial recuperado da ECF anterior).",
+       "tipo": "Erro"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|K156|1.01.01.01.01|0,00|D|7500,00|5000,00|2500,00|D|",
+    "|K156|: Identificação do tipo do registro.",
+    "|1.01.01.01.01|: Código da conta referencial (1.01.01.01 = Caixa Matriz).",
+    "|0,00|: Valor do saldo inicial (R$ 0,00).",
+    "|D|: Indicador da situação do saldo inicial (D = Devedor).",
+    "|7500,00|: Valor total de débitos (R$ 7.500,00).",
+    "|5000,00|: Valor total de créditos (R$ 5.000,00).",
+    "|2500,00|: Valor do saldo final (R$ 2.500,00 = R$ 7.500,00 – R$ 5.000,00).",
+    "|D|: Indicador da situação do saldo final (D = Devedor)."
+   ]
+  },
+  {
+   "codigo": "K355",
+   "nome": "Saldos Finais das Contas Contábeis de Resultado Antes do Encerramento",
+   "ordem": 39,
+   "nivel": "3",
+   "ocorrencia": "[0;N]",
+   "chave": "COD_CTA + COD_CCUS",
+   "entrada": "F",
+   "saida": "F",
+   "descricao": [
+    "Registro onde devem ser informados os saldos finais de todas as contas de resultado da escrituração societária da pessoa jurídica antes do encerramento. Poderá ser preenchido das seguintes formas:",
+    "- Edição pelo programa da ECF;",
+    "- Calculado pelo sistema através da funcionalidade de recuperar ECD; e",
+    "- Importado de arquivo digital."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (K355).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[K355]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "COD_CTA",
+     "descricao": "Código da Conta Analítica de Resultado.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "COD_CCUS",
+     "descricao": "Código do Centro de Custos.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 4,
+     "nome": "VL_SLD_FIN",
+     "descricao": "Valor do Saldo Final Antes do Lançamento de Encerramento.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 5,
+     "nome": "IND_VL_SLD_FIN",
+     "descricao": "Indicador da Situação do Saldo Final:\nD – Devedor.\nC – Credor.",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[D; C]",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_CONTA_ANALITICA",
+     "texto": "Verifica se a conta e o centro de custos estão no plano de contas (J050) como conta analítica. Se a regra não for cumprida, o sistema gera um erro."
+    },
+    {
+     "codigo": "REGRA_COMPATIBILIDADE_K355_E355",
+     "texto": "Verifica se os valores utilizados no registro K355 são iguais aos valores calculados do registro E355. Se a regra não for cumprida, o sistema gera um aviso."
+    },
+    {
+     "codigo": "REGRA_COMPATIBILIDADE_E355_K355",
+     "texto": "Verifica se os campos do registro E355 com algum valor maior que zero, são referenciados no registro K355 para o mesmo período de apuração. Se a regra não for cumprida, o sistema gera um aviso."
+    }
+   ],
+   "regrasCampo": [
+    {
+     "campo": "COD_CTA",
+     "regras": [
+      {
+       "codigo": "REGRA_NATUREZA_PERMITIDA_4",
+       "texto": "Verifica se a conta informada no registro K355 possui J050.COD_NAT igual a “04” (Contas de Resultado).",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "VL_SLD_FIN",
+     "regras": [
+      {
+       "codigo": "REGRA_MAPEAMENTO",
+       "texto": "Verifica se o somatório de K356.VAL_CTA_REF_FIN é igual ao K355.VL_SLD_FIN.",
+       "tipo": "Erro"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|K355|3.01.1234||5000,00|C|",
+    "|K355|: Identificação do tipo do registro.",
+    "|3.01.1234|: Código da conta analítica de resultado.",
+    "||: Código do centro de custos (Não há).",
+    "|5000,00|: Valor do saldo final da conta de resultado antes do encerramento (R$ 5.000,00).",
+    "|C|: Indicador de situação do saldo final (C = Credor)."
+   ]
+  },
+  {
+   "codigo": "K356",
+   "nome": "Mapeamento Referencial dos Saldos Finais das Contas Contábeis de Resultado Antes do Encerramento",
+   "ordem": 40,
+   "nivel": "4",
+   "ocorrencia": "[0;N]",
+   "chave": "COD_CTA_REF",
+   "entrada": "F",
+   "saida": "OC\nLocalizar o J050.COD_CTA = K155.PAI_COD_CTA.\n(Se J050 possuir mais de uma conta referencial cadastrada no registro J051 para o mesmo centro de custo – Registro)",
+   "descricao": [
+    "Registro onde devem ser mapeados, por conta referencial, os saldo finais de todas as contas de resultado da escrituração societária da pessoa jurídica nos respectivos períodos de apuração. Poderá ser preenchido das seguintes formas:",
+    "- Edição pelo programa da ECF;",
+    "- Calculado pelo sistema através da funcionalidade de recuperar ECD; e",
+    "- Importado de arquivo digital.",
+    "Observação: Se houver somente uma conta referencial no registro J051 mapeada a partir de uma conta contábil (plano de contas da pessoa jurídica), o próprio sistema preencherá o registro K356 (mapeamento de uma conta contábil para uma conta referencial). Caso contrário, ou seja, a conta contábil foi mapeada para mais de uma conta referencial, o registro K356 deverá ser preenchido pela pessoa jurídica."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (K356).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[K356]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "COD_CTA_REF",
+     "descricao": "Código da Conta no Plano de Contas Referencial, conforme tabela do Sped.\n(Disponibilizada no programa da ECF no diretório Arquivos de Programas/Programas Sped/ECf/SpedEcf/Recursos/Tabelas).",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "VL_SLD_FIN",
+     "descricao": "Valor do Saldo Final Antes do Lançamento de Encerramento.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 4,
+     "nome": "IND_VL_SLD_FIN",
+     "descricao": "Indicador da Situação do Saldo Final:\nD – Devedor\nC – Credor",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [
+    {
+     "campo": "COD_CTA_REF",
+     "regras": [
+      {
+       "codigo": "REGRA_CTA_REF_MAPEADA_J051",
+       "texto": "Verifica se o K356.COD_CTA_REF informado, foi utilizado no registro J051.",
+       "tipo": "Erro"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|K356|3.01.01.01.01.01|5000,00|C|",
+    "|K356|: Identificação do tipo do registro.",
+    "|3.01.01.01.01.01|: Código da conta referencial (3.01.01.01.01.01 = Receita de Exportação Direta de Mercadorias e Produtos).",
+    "|5000,00|: Valor do final mapeado (R$ 5.000,00).",
+    "|C|: Indicador da situação do saldo final (C = Credor)."
+   ]
+  },
+  {
+   "codigo": "K915",
+   "nome": "Justificativa para Divergência de Saldos Contábeis das Contas Patrimoniais Recuperados da ECD",
+   "ordem": 41,
+   "nivel": "2",
+   "ocorrencia": "[0;N]",
+   "chave": "COD_CTA, COD_CCUS, ID_REGRA",
+   "entrada": "F",
+   "saida": "FC\n(Se (0010.FORMA_TRIB = “1” ou “2” ou “3” ou “4”)\nOu (0010. FORMA_TRIB = “5” ou “7” ou “8” ou “9” E 0010.TIP_ESC_PRE = “C”))",
+   "descricao": [
+    "Registro onde deve ser apresentada a justificativa do erro ocorrido no K155 (contas patrimoniais), quando do descumprimento as suas regras: REGRA_COMPATIBILIDADE_K155_E155 ou REGRA_COMPATIBILIDADE_E155_K155.",
+    "Com o devido preenchimento da justificativa da diferença (campo K915_JUSTIFICATIVA preenchido), o erro se torna aviso, permitindo a entrega da ECF.",
+    "Este registro será excluído e incluído automaticamente pelo PGE da ECF durante o processo de verificação de pendência. Os campos de valores são calculados automaticamente."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (K915).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[K915]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "PER_APUR",
+     "descricao": "Período de Apuração [para 0010.FORMA_APUR = “A” ou (0010.FORMA_APUR_I = “A” OU 0010.APUR_CSLL = “A” E 0010.TIP_ESC_PRE = “C”)]:\nA00 – Anual\nA01 – Rec. Bruta de janeiro /Balanço suspensão redução até janeiro\nA02 – Rec. Bruta de fevereiro /Balanço suspensão redução até fevereiro\nA03 – Rec. Bruta de março /Balanço suspensão redução até março\nA04 – Rec. Bruta de abril /Balanço suspensão redução até abril\nA05 – Rec. Bruta de maio /Balanço suspensão redução até maio\nA06 – Rec. Bruta de junho /Balanço suspensão redução até junho\nA07 – Rec. Bruta de julho /Balanço suspensão redução até julho\nA08 – Rec. Bruta de agosto /Balanço suspensão redução até agosto\nA09 – Rec. Bruta de setembro /Balanço suspensão redução até setembro\nA10 – Rec. Bruta de outubro/Balanço suspensão redução até outubro\nA11 – Rec. Bruta de novembro /Balanço suspensão redução até novembro\nA12 – Rec. Bruta de dezembro/Balanço suspensão redução até dezembro\nIndicador do período de referência [para 0010.FORMA_APUR = “T” OU (0010.FORMA_APUR = “A” E 0010.FORMA_TRIB = “2”) ou (0010.FORMA_APUR_I = “T” OU 0010.APUR_CSLL = “T” E 0010.TIP_ESC_PRE = “C”)]:\nT01 – 1º Trimestre\nT02 – 2º Trimestre\nT03 – 3º Trimestre\nT04 – 4º Trimestre\nRegra: O período deve estar compreendido entre a data início e data fim da escrituração.\nPeríodo de Apuração [para 0010.FORMA_APUR_I = “D” OU 0010.APUR_CSLL = “D” E 0010.TIP_ESC_PRE = “C”)]:\nA00 – Anual",
+     "tipo": "C",
+     "tamanho": "3",
+     "decimal": "—",
+     "valores": "[A00; A01; A02; A03; A04; A05; A06; A07; A08; A09; A10; A11; A12; T01; T02; T03; T04]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "COD_CTA",
+     "descricao": "Código da conta contábil.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 4,
+     "nome": "COD_CCUS",
+     "descricao": "Código do centro de custos.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 5,
+     "nome": "ID_REGRA",
+     "descricao": "Identificação da regra que foi descumprida. O sistema deverá preencher com as seguintes regras:\nREGRA_COMPATIBILIDADE_K155_E155: (Verifica se os valores utilizados no registro K155 são iguais aos valores calculados do registro E155.)\nou\nREGRA_COMPATIBILIDADE_E155_K155: Verifica se os campos do registro E155 com algum valor maior que zero, são referenciados no registro K155 para o mesmo período de apuração.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 6,
+     "nome": "VL_SLD_INI_ESP",
+     "descricao": "Valor do saldo inicial recuperado da ECD para o período fiscal.\nEste campo será calculado automaticamente pelo PGE da ECF durante a validação do arquivo da ECF.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 7,
+     "nome": "IND_VL_SLD_INI_ESP",
+     "descricao": "Indicador de situação do saldo inicial esperado:\nD – Devedor; e\nC – Credor.\nEste campo será calculado automaticamente pelo PGE da ECF durante a validação do arquivo da ECF.",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[“D”; “C”]",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 8,
+     "nome": "VL_DEB_ESP",
+     "descricao": "Valor total de débitos recuperado da ECD para o período fiscal.\nEste campo será calculado automaticamente pelo PGE da ECF durante a validação do arquivo da ECF.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 9,
+     "nome": "VL_CRED_ESP",
+     "descricao": "Valor total de créditos recuperado da ECD para o período fiscal.\nEste campo será calculado automaticamente pelo PGE da ECF durante a validação do arquivo da ECF.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 10,
+     "nome": "VL_SLD_FIN_ESP",
+     "descricao": "Valor do saldo final recuperado da ECD para o período fiscal.\nEste campo será calculado automaticamente pelo PGE da ECF durante a validação do arquivo da ECF.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 11,
+     "nome": "IND_VL_SLD_FIN_ESP",
+     "descricao": "Indicador de situação do saldo final esperado:\nD – Devedor; e\nC – Credor.\nEste campo será calculado automaticamente pelo PGE da ECF durante a validação do arquivo da ECF.",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[“D”; “C”]",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 12,
+     "nome": "SLD_INI_PRE",
+     "descricao": "Saldo inicial preenchido no registro K155.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 13,
+     "nome": "IND_SLD_INI_PRE",
+     "descricao": "Indicador de situação do saldo inicial preenchido no registro K155:\nD – Devedor; e\nC – Credor.",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[“D”; “C”]",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 14,
+     "nome": "VL_DEB_PRE",
+     "descricao": "Valor total dos débitos preenchido no registro K155.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 15,
+     "nome": "VL_CRED_PRE",
+     "descricao": "Valor total dos créditos preenchido no registro K155.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 16,
+     "nome": "SLD_FIN_PRE",
+     "descricao": "Saldo final preenchido no registro K155.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 17,
+     "nome": "IND_SLD_FIN_PRE",
+     "descricao": "Indicador de situação do saldo final preenchido no registro K155:\nD – Devedor; e\nC – Credor.",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[“D”; “C”]",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 18,
+     "nome": "JUSTIFICATIVA",
+     "descricao": "Justificativa da divergência entre o(s) valor(es) calculado(s) pelo PGE da ECF e o(s) valor(es) preenchido(s).",
+     "tipo": "C",
+     "tamanho": "500",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [
+    {
+     "campo": "JUSTIFICATIVA",
+     "regras": [
+      {
+       "codigo": "REGRA_K915_JUSTIFICATIVA",
+       "texto": "Verifica se o campo K915.JUSTIFICATIVA está preenchido com 20 ou mais caracteres.",
+       "tipo": "Erro"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|K915|A00|1.1.1.1||REGRA_COMPATIBILIDADE_K155_E155|10|D|20|0|30|D|20|D|20|0|40|D|Alteração do saldo inicial da conta em virtude de correção do cálculo do ajuste a valor presente, conforme detalhe do cálculo: XXXXXXXXXXXXXXXXXXXXX|",
+    "|K915|: Identificação do tipo do registro.",
+    "|A00|: Período de apuração: A00 – Anual.",
+    "|1.1.1.1|: Código da conta contábil: 1.1.1.1.",
+    "||: Código do centro de custos: não há.",
+    "|REGRA_COMPATIBILIDADE_K155_E155|: Identificação da regra.",
+    "|10|: Valor do saldo inicial esperado: 10,00.",
+    "|D|: Indicador de situação do saldo inicial esperado: D = Devedor.",
+    "|20|: Valor total dos débitos esperado: 20,00.",
+    "|0|: Valor total dos créditos esperado: 0,00.",
+    "|30|: Valor do saldo final esperado: 30,00.",
+    "|D|: Indicador de situação do saldo final esperado: D = Devedor.",
+    "|10|: Valor do saldo inicial preenchido: 20,00.",
+    "|D|: Indicador de situação do saldo inicial preenchido: D = Devedor.",
+    "|20|: Valor total dos débitos preenchido: 20,00.",
+    "|0|: Valor total dos créditos preenchido: 0,00.",
+    "|40|: Valor do saldo final preenchido: 40,00.",
+    "|D|: Indicador de situação do saldo final esperado: D = Devedor.",
+    "|Alteração do saldo inicial da conta em virtude de correção do cálculo do ajuste a valor presente, conforme detalhe do cálculo: XXXXXXXXXXXXXXXXXXXXX|: Justificativa da divergência entre o valor(es) calculado(s) pelo PGE da ECF e o valor(es) preenchido(s)."
+   ]
+  },
+  {
+   "codigo": "K935",
+   "nome": "Justificativa para Divergência de Saldos Contábeis das Contas de Resultado Recuperados da ECD",
+   "ordem": 42,
+   "nivel": "2",
+   "ocorrencia": "[0;N]",
+   "chave": "COD_CTA, COD_CCUS, ID_REGRA",
+   "entrada": "F",
+   "saida": "FC\n(Se (0010.FORMA_TRIB = “1” ou “2” ou “3” ou “4”)\nOu (0010. FORMA_TRIB = “5” ou “7” ou “8” ou “9” E 0010.TIP_ESC_PRE = “C”))",
+   "descricao": [
+    "Registro onde deve ser apresentada a justificativa do erro ocorrido no K355 (contas de resultado), quando do descumprimento as suas regras: REGRA_COMPATIBILIDADE_K355_E355 ou REGRA_COMPATIBILIDADE_E355_K355.",
+    "Com o devido preenchimento da justificativa da diferença (campo K935_JUSTIFICATIVA preenchido), o erro se torna aviso, permitindo a entrega da ECF.",
+    "Este registro será excluído e incluído automaticamente pelo PGE da ECF durante o processo de verificação de pendência. Os campos de valores são calculados automaticamente."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (K935).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[K935]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "PER_APUR",
+     "descricao": "Período de Apuração [para 0010.FORMA_APUR = “A” ou (0010.FORMA_APUR_I = “A” OU 0010.APUR_CSLL = “A” E 0010.TIP_ESC_PRE = “C”)]:\nA00 – Anual\nA01 – Rec. Bruta de janeiro /Balanço suspensão redução até janeiro\nA02 – Rec. Bruta de fevereiro /Balanço suspensão redução até fevereiro\nA03 – Rec. Bruta de março /Balanço suspensão redução até março\nA04 – Rec. Bruta de abril /Balanço suspensão redução até abril\nA05 – Rec. Bruta de maio /Balanço suspensão redução até maio\nA06 – Rec. Bruta de junho /Balanço suspensão redução até junho\nA07 – Rec. Bruta de julho /Balanço suspensão redução até julho\nA08 – Rec. Bruta de agosto /Balanço suspensão redução até agosto\nA09 – Rec. Bruta de setembro /Balanço suspensão redução até setembro\nA10 – Rec. Bruta de outubro/Balanço suspensão redução até outubro\nA11 – Rec. Bruta de novembro /Balanço suspensão redução até novembro\nA12 – Rec. Bruta de dezembro/Balanço suspensão redução até dezembro\nIndicador do período de referência [para 0010.FORMA_APUR = “T” OU (0010.FORMA_APUR = “A” E 0010.FORMA_TRIB = “2”) ou (0010.FORMA_APUR_I = “T” OU 0010.APUR_CSLL = “T” E 0010.TIP_ESC_PRE = “C”)]:\nT01 – 1º Trimestre\nT02 – 2º Trimestre\nT03 – 3º Trimestre\nT04 – 4º Trimestre\nRegra: O período deve estar compreendido entre a data início e data fim da escrituração.\nPeríodo de Apuração [para 0010.FORMA_APUR_I = “D” OU 0010.APUR_CSLL = “D” E 0010.TIP_ESC_PRE = “C”)]:\nA00 – Anual",
+     "tipo": "C",
+     "tamanho": "3",
+     "decimal": "—",
+     "valores": "[A00; A01; A02; A03; A04; A05; A06; A07; A08; A09; A10; A11; A12; T01; T02; T03; T04]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "COD_CTA",
+     "descricao": "Código da conta contábil.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 4,
+     "nome": "COD_CCUS",
+     "descricao": "Código do centro de custos.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 5,
+     "nome": "ID_REGRA",
+     "descricao": "Identificação da regra que foi descumprida. O sistema deverá preencher com as seguintes regras:\nREGRA_COMPATIBILIDADE_K355_E355: Verifica se os valores utilizados no registro K355 são iguais aos valores calculados do registro E355.\nou\nREGRA_COMPATIBILIDADE_E355_K355: Verifica se os campos do registro E355 com algum valor maior que zero, são referenciados no registro K355 para o mesmo período de apuração.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 6,
+     "nome": "VL_SLD_FIN_ESP",
+     "descricao": "Valor do saldo final recuperado da ECD para o período fiscal.\nEste campo será calculado automaticamente pelo PGE da ECF durante a validação do arquivo da ECF.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 7,
+     "nome": "IND_VL_SLD_FIN_ESP",
+     "descricao": "Indicador de situação do saldo final esperado:\nD – Devedor; e\nC – Credor.\nEste campo será calculado automaticamente pelo PGE da ECF durante a validação do arquivo da ECF.",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[“D”; “C”]",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 8,
+     "nome": "SLD_FIN_PRE",
+     "descricao": "Saldo final preenchido no registro K355.",
+     "tipo": "N",
+     "tamanho": "19",
+     "decimal": "2",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 9,
+     "nome": "IND_SLD_FIN_PRE",
+     "descricao": "Indicador de situação do saldo final preenchido no registro K355:\nD – Devedor; e\nC – Credor.",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[“D”; “C”]",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 10,
+     "nome": "JUSTIFICATIVA",
+     "descricao": "Justificativa da divergência entre o(s) valor(es) calculado(s) pelo PGE da ECF e o(s) valor(es) preenchido(s).",
+     "tipo": "C",
+     "tamanho": "500",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [
+    {
+     "campo": "JUSTIFICATIVA",
+     "regras": [
+      {
+       "codigo": "REGRA_K935_JUSTIFICATIVA",
+       "texto": "Verifica se o campo K935.JUSTIFICATIVA está preenchido com 20 ou mais caracteres.",
+       "tipo": "Erro"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|K935|A00|3.1.1||REGRA_COMPATIBILIDADE_K355_E355|30|D|40|D|Alteração do saldo final da conta em virtude alteração da metodologia de cálculo conforme descrito a seguir: XXXXXXXXXXXXXXXXXXXXX|",
+    "|K915|: Identificação do tipo do registro.",
+    "|A00|: Período de apuração: A00 – Anual.",
+    "|3.1.1|: Código da conta contábil: 3.1.1.",
+    "||: Código do centro de custos: não há.",
+    "|REGRA_COMPATIBILIDADE_K355_E355|: Identificação da regra.",
+    "|30|: Valor do saldo final esperado: 30,00.",
+    "|D|: Indicador de situação do saldo final esperado: D = Devedor.",
+    "|40|: Valor do saldo final preenchido: 40,00.",
+    "|D|: Indicador de situação do saldo final esperado: D = Devedor.",
+    "|Alteração do saldo final da conta em virtude alteração da metodologia de cálculo conforme descrito a seguir: XXXXXXXXXXXXXXXXXXXXX|: Justificativa da divergência entre o valor(es) calculado(s) pelo PGE da ECF e o valor(es) preenchido(s)."
+   ]
+  },
+  {
+   "codigo": "K990",
+   "nome": "Encerramento do Bloco K",
+   "ordem": 43,
+   "nivel": "1",
+   "ocorrencia": "[1;1]",
+   "chave": "[REG]",
+   "entrada": "F",
+   "saida": "O",
+   "descricao": [],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto fixo contendo a identificação do registro (K990).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[K990]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "QTD_LIN",
+     "descricao": "Quantidade total de registros do Bloco K.",
+     "tipo": "N",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [],
+   "exemplo": [
+    "|K990|2000|",
+    "|K990|: Identificação do tipo do registro.",
+    "|2000|: A quantidade total de registros do Bloco K é 2.000 (dois mil registros)."
+   ]
+  }
+ ]
+}

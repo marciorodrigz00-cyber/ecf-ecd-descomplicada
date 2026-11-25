@@ -1,0 +1,959 @@
+{
+  "rastreio": {
+    "id": "arq-tabelas-12",
+    "fonte": {
+      "id": "tabelas-12",
+      "url": "https://www.gov.br/sped/pt-br/assuntos/escrituracoes-digitais/ecf/manuais-e-documentos-tecnicos",
+      "trecho": "Planilha de tabelas dinâmicas e planos referenciais do leiaute 12"
+    },
+    "norma": "Tabelas dinâmicas da ECF",
+    "leiautes": [
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2025
+      ],
+      "situacaoEspecial": [
+        2026
+      ]
+    },
+    "verificadoEm": "2026-11-25",
+    "status": "conferido"
+  },
+  "planos": {
+    "L100": [
+      {
+        "codigo": "1",
+        "descricao": "ATIVO",
+        "tipo": "S",
+        "superior": null,
+        "nivel": 1,
+        "natureza": "01"
+      },
+      {
+        "codigo": "1.01",
+        "descricao": "ATIVO CIRCULANTE",
+        "tipo": "S",
+        "superior": "1",
+        "nivel": 2,
+        "natureza": "01"
+      },
+      {
+        "codigo": "1.01.01",
+        "descricao": "DISPONIBILIDADES",
+        "tipo": "S",
+        "superior": "1.01",
+        "nivel": 3,
+        "natureza": "01"
+      },
+      {
+        "codigo": "1.01.01.02",
+        "descricao": "DEPÓSITOS BANCÁRIOS À VISTA",
+        "tipo": "S",
+        "superior": "1.01.01",
+        "nivel": 4,
+        "natureza": "01"
+      },
+      {
+        "codigo": "1.01.01.02.01",
+        "descricao": "Bancos Conta Movimento - No País",
+        "tipo": "A",
+        "superior": "1.01.01.02",
+        "nivel": 5,
+        "natureza": "01"
+      },
+      {
+        "codigo": "1.01.02",
+        "descricao": "CRÉDITOS",
+        "tipo": "S",
+        "superior": "1.01",
+        "nivel": 3,
+        "natureza": "01"
+      },
+      {
+        "codigo": "1.01.02.02",
+        "descricao": "DUPLICATAS A RECEBER",
+        "tipo": "S",
+        "superior": "1.01.02",
+        "nivel": 4,
+        "natureza": "01"
+      },
+      {
+        "codigo": "1.01.02.02.01",
+        "descricao": "Duplicatas a Receber – Operações com Partes Não Relacionadas - no País",
+        "tipo": "A",
+        "superior": "1.01.02.02",
+        "nivel": 5,
+        "natureza": "01"
+      },
+      {
+        "codigo": "1.01.03",
+        "descricao": "ESTOQUES",
+        "tipo": "S",
+        "superior": "1.01",
+        "nivel": 3,
+        "natureza": "01"
+      },
+      {
+        "codigo": "1.01.03.01",
+        "descricao": "ESTOQUES DE MERCADORIAS",
+        "tipo": "S",
+        "superior": "1.01.03",
+        "nivel": 4,
+        "natureza": "01"
+      },
+      {
+        "codigo": "1.01.03.01.01",
+        "descricao": "Mercadorias para Revenda",
+        "tipo": "A",
+        "superior": "1.01.03.01",
+        "nivel": 5,
+        "natureza": "01"
+      },
+      {
+        "codigo": "1.02",
+        "descricao": "ATIVO NÃO CIRCULANTE",
+        "tipo": "S",
+        "superior": "1",
+        "nivel": 2,
+        "natureza": "01"
+      },
+      {
+        "codigo": "1.02.03",
+        "descricao": "IMOBILIZADO",
+        "tipo": "S",
+        "superior": "1.02",
+        "nivel": 3,
+        "natureza": "01"
+      },
+      {
+        "codigo": "1.02.03.01",
+        "descricao": "IMOBILIZADO – AQUISIÇÃO",
+        "tipo": "S",
+        "superior": "1.02.03",
+        "nivel": 4,
+        "natureza": "01"
+      },
+      {
+        "codigo": "1.02.03.01.07",
+        "descricao": "Móveis, Utensílios e Instalações Comerciais",
+        "tipo": "A",
+        "superior": "1.02.03.01",
+        "nivel": 5,
+        "natureza": "01"
+      },
+      {
+        "codigo": "1.02.03.01.30",
+        "descricao": "(-) Depreciação Acumulada - Imobilizado",
+        "tipo": "A",
+        "superior": "1.02.03.01",
+        "nivel": 5,
+        "natureza": "01"
+      },
+      {
+        "codigo": "2",
+        "descricao": "PASSIVO",
+        "tipo": "S",
+        "superior": null,
+        "nivel": 1,
+        "natureza": "02"
+      },
+      {
+        "codigo": "2.01",
+        "descricao": "PASSIVO CIRCULANTE",
+        "tipo": "S",
+        "superior": "2",
+        "nivel": 2,
+        "natureza": "02"
+      },
+      {
+        "codigo": "2.01.01",
+        "descricao": "OBRIGAÇÕES DO CIRCULANTE",
+        "tipo": "S",
+        "superior": "2.01",
+        "nivel": 3,
+        "natureza": "02"
+      },
+      {
+        "codigo": "2.01.01.03",
+        "descricao": "FORNECEDORES – CIRCULANTE",
+        "tipo": "S",
+        "superior": "2.01.01",
+        "nivel": 4,
+        "natureza": "02"
+      },
+      {
+        "codigo": "2.01.01.03.01",
+        "descricao": "Fornecedores - Operações com Partes Não Relacionadas - No País – Circulante",
+        "tipo": "A",
+        "superior": "2.01.01.03",
+        "nivel": 5,
+        "natureza": "02"
+      },
+      {
+        "codigo": "2.01.01.09",
+        "descricao": "OBRIGAÇÕES FISCAIS – CIRCULANTE",
+        "tipo": "S",
+        "superior": "2.01.01",
+        "nivel": 4,
+        "natureza": "02"
+      },
+      {
+        "codigo": "2.01.01.09.13",
+        "descricao": "IRPJ a Recolher – Circulante",
+        "tipo": "A",
+        "superior": "2.01.01.09",
+        "nivel": 5,
+        "natureza": "02"
+      },
+      {
+        "codigo": "2.01.01.09.14",
+        "descricao": "CSLL a Recolher – Circulante",
+        "tipo": "A",
+        "superior": "2.01.01.09",
+        "nivel": 5,
+        "natureza": "02"
+      },
+      {
+        "codigo": "2.01.01.15",
+        "descricao": "PROVISÕES – CIRCULANTE",
+        "tipo": "S",
+        "superior": "2.01.01",
+        "nivel": 4,
+        "natureza": "02"
+      },
+      {
+        "codigo": "2.01.01.15.05",
+        "descricao": "Provisões de Natureza Trabalhista - Circulante",
+        "tipo": "A",
+        "superior": "2.01.01.15",
+        "nivel": 5,
+        "natureza": "02"
+      },
+      {
+        "codigo": "2.03",
+        "descricao": "PATRIMÔNIO LÍQUIDO",
+        "tipo": "S",
+        "superior": "2",
+        "nivel": 2,
+        "natureza": "03"
+      },
+      {
+        "codigo": "2.03.01",
+        "descricao": "CAPITAL SOCIAL",
+        "tipo": "S",
+        "superior": "2.03",
+        "nivel": 3,
+        "natureza": "03"
+      },
+      {
+        "codigo": "2.03.01.01",
+        "descricao": "CAPITAL REALIZADO - DE RESIDENTE NO PAÍS",
+        "tipo": "S",
+        "superior": "2.03.01",
+        "nivel": 4,
+        "natureza": "03"
+      },
+      {
+        "codigo": "2.03.01.01.01",
+        "descricao": "Capital Subscrito de Domiciliados e Residentes no País",
+        "tipo": "A",
+        "superior": "2.03.01.01",
+        "nivel": 5,
+        "natureza": "03"
+      },
+      {
+        "codigo": "2.03.04",
+        "descricao": "OUTRAS CONTAS DO PATRIMÔNIO LÍQUIDO",
+        "tipo": "S",
+        "superior": "2.03",
+        "nivel": 3,
+        "natureza": "03"
+      },
+      {
+        "codigo": "2.03.04.01",
+        "descricao": "OUTRAS CONTAS DO PATRIMÔNIO LÍQUIDO",
+        "tipo": "S",
+        "superior": "2.03.04",
+        "nivel": 4,
+        "natureza": "03"
+      },
+      {
+        "codigo": "2.03.04.01.01",
+        "descricao": "Lucros Acumulados e/ou Saldo à Disposição da Assembleia",
+        "tipo": "A",
+        "superior": "2.03.04.01",
+        "nivel": 5,
+        "natureza": "03"
+      },
+      {
+        "codigo": "2.03.04.01.11",
+        "descricao": "(-) Prejuízos Acumulados",
+        "tipo": "A",
+        "superior": "2.03.04.01",
+        "nivel": 5,
+        "natureza": "03"
+      }
+    ],
+    "L300": [
+      {
+        "codigo": "3",
+        "descricao": "RESULTADO LÍQUIDO DO PERÍODO",
+        "tipo": "S",
+        "superior": null,
+        "nivel": 1,
+        "natureza": "04"
+      },
+      {
+        "codigo": "3.01",
+        "descricao": "RESULTADO LÍQUIDO DO PERÍODO ANTES DO IRPJ E DA CSLL - ATIVIDADE GERAL",
+        "tipo": "S",
+        "superior": "3",
+        "nivel": 2,
+        "natureza": "04"
+      },
+      {
+        "codigo": "3.01.01",
+        "descricao": "RESULTADO OPERACIONAL",
+        "tipo": "S",
+        "superior": "3.01",
+        "nivel": 3,
+        "natureza": "04"
+      },
+      {
+        "codigo": "3.01.01.01",
+        "descricao": "RECEITA LIQUIDA",
+        "tipo": "S",
+        "superior": "3.01.01",
+        "nivel": 4,
+        "natureza": "04"
+      },
+      {
+        "codigo": "3.01.01.01.01",
+        "descricao": "RECEITA BRUTA",
+        "tipo": "S",
+        "superior": "3.01.01.01",
+        "nivel": 5,
+        "natureza": "04"
+      },
+      {
+        "codigo": "3.01.01.01.01.05",
+        "descricao": "Receita da Revenda de Mercadorias no Mercado Interno",
+        "tipo": "A",
+        "superior": "3.01.01.01.01",
+        "nivel": 6,
+        "natureza": "04"
+      },
+      {
+        "codigo": "3.01.01.03",
+        "descricao": "CUSTO DOS BENS E SERVIÇOS",
+        "tipo": "S",
+        "superior": "3.01.01",
+        "nivel": 4,
+        "natureza": "04"
+      },
+      {
+        "codigo": "3.01.01.03.01",
+        "descricao": "CUSTO DOS BENS E SERVIÇOS VENDIDOS DAS ATIVIDADES EM GERAL",
+        "tipo": "S",
+        "superior": "3.01.01.03",
+        "nivel": 5,
+        "natureza": "04"
+      },
+      {
+        "codigo": "3.01.01.03.01.02",
+        "descricao": "(-) Custo das Mercadorias Revendidas",
+        "tipo": "A",
+        "superior": "3.01.01.03.01",
+        "nivel": 6,
+        "natureza": "04"
+      },
+      {
+        "codigo": "3.01.01.05",
+        "descricao": "OUTRAS RECEITAS OPERACIONAIS",
+        "tipo": "S",
+        "superior": "3.01.01",
+        "nivel": 4,
+        "natureza": "04"
+      },
+      {
+        "codigo": "3.01.01.05.01",
+        "descricao": "OUTRAS RECEITAS OPERACIONAIS DAS ATIVIDADES EM GERAL",
+        "tipo": "S",
+        "superior": "3.01.01.05",
+        "nivel": 5,
+        "natureza": "04"
+      },
+      {
+        "codigo": "3.01.01.05.01.10",
+        "descricao": "Reversão dos Saldos das Provisões",
+        "tipo": "A",
+        "superior": "3.01.01.05.01",
+        "nivel": 6,
+        "natureza": "04"
+      },
+      {
+        "codigo": "3.01.01.07",
+        "descricao": "DESPESAS OPERACIONAIS",
+        "tipo": "S",
+        "superior": "3.01.01",
+        "nivel": 4,
+        "natureza": "04"
+      },
+      {
+        "codigo": "3.01.01.07.01",
+        "descricao": "DESPESAS OPERACIONAIS DAS ATIVIDADES EM GERAL",
+        "tipo": "S",
+        "superior": "3.01.01.07",
+        "nivel": 5,
+        "natureza": "04"
+      },
+      {
+        "codigo": "3.01.01.07.01.02",
+        "descricao": "(-) Ordenados, Salários, Gratificações e Outras Remunerações a Empregados",
+        "tipo": "A",
+        "superior": "3.01.01.07.01",
+        "nivel": 6,
+        "natureza": "04"
+      },
+      {
+        "codigo": "3.01.01.07.01.18",
+        "descricao": "(-) Aluguéis",
+        "tipo": "A",
+        "superior": "3.01.01.07.01",
+        "nivel": 6,
+        "natureza": "04"
+      },
+      {
+        "codigo": "3.01.01.07.01.22",
+        "descricao": "(-) Multas",
+        "tipo": "A",
+        "superior": "3.01.01.07.01",
+        "nivel": 6,
+        "natureza": "04"
+      },
+      {
+        "codigo": "3.01.01.07.01.23",
+        "descricao": "(-) Encargos de Depreciação",
+        "tipo": "A",
+        "superior": "3.01.01.07.01",
+        "nivel": 6,
+        "natureza": "04"
+      },
+      {
+        "codigo": "3.01.01.07.01.29",
+        "descricao": "(-) Demais Provisões",
+        "tipo": "A",
+        "superior": "3.01.01.07.01",
+        "nivel": 6,
+        "natureza": "04"
+      },
+      {
+        "codigo": "3.02",
+        "descricao": "PROVISÃO PARA CSLL E IRPJ",
+        "tipo": "S",
+        "superior": "3",
+        "nivel": 2,
+        "natureza": "04"
+      },
+      {
+        "codigo": "3.02.01",
+        "descricao": "PROVISÃO PARA CSLL E IRPJ",
+        "tipo": "S",
+        "superior": "3.02",
+        "nivel": 3,
+        "natureza": "04"
+      },
+      {
+        "codigo": "3.02.01.01",
+        "descricao": "PROVISÃO PARA CSLL E IRPJ",
+        "tipo": "S",
+        "superior": "3.02.01",
+        "nivel": 4,
+        "natureza": "04"
+      },
+      {
+        "codigo": "3.02.01.01.01",
+        "descricao": "PROVISÃO PARA CSLL E IRPJ",
+        "tipo": "S",
+        "superior": "3.02.01.01",
+        "nivel": 5,
+        "natureza": "04"
+      },
+      {
+        "codigo": "3.02.01.01.01.01",
+        "descricao": "(-) Provisão para Contribuição Social sobre o Lucro Líquido (Atividade Geral)",
+        "tipo": "A",
+        "superior": "3.02.01.01.01",
+        "nivel": 6,
+        "natureza": "04"
+      },
+      {
+        "codigo": "3.02.01.01.01.02",
+        "descricao": "(-) Provisão para Imposto de Renda - Pessoa Jurídica (Atividade Geral e Rural)",
+        "tipo": "A",
+        "superior": "3.02.01.01.01",
+        "nivel": 6,
+        "natureza": "04"
+      }
+    ]
+  },
+  "lalur": {
+    "M300": [
+      {
+        "codigo": "2",
+        "descricao": "Lucro Líquido Antes do IRPJ",
+        "tipo": "CNA",
+        "formula": "T_DRE(L300(\"3.01\") + L300(\"3.02.01.01.01.01\"))",
+        "lancamento": "L"
+      },
+      {
+        "codigo": "6",
+        "descricao": "Provisões ou perdas estimadas não dedutíveis",
+        "tipo": "E",
+        "lancamento": "A"
+      },
+      {
+        "codigo": "8.60",
+        "descricao": "Multas por infrações fiscais",
+        "tipo": "E",
+        "lancamento": "A"
+      },
+      {
+        "codigo": "9",
+        "descricao": "Contribuição Social Sobre o Lucro Líquido - CSLL",
+        "tipo": "CA",
+        "formula": "SE (L300(\"3.02.01.01.01.01\")< 0) ENTAO 0 SENAO (L300(\"3.02.01.01.01.01\")) FIM_SE",
+        "lancamento": "A"
+      },
+      {
+        "codigo": "93",
+        "descricao": "SOMA DAS ADIÇÕES (IRPJ)",
+        "tipo": "CNA",
+        "formula": "SOMA (M300(6:\"92.99\"))",
+        "lancamento": "A"
+      },
+      {
+        "codigo": "95",
+        "descricao": "(-) Reversão ou uso de provisões ou perdas estimadas não dedutíveis",
+        "tipo": "E",
+        "lancamento": "E"
+      },
+      {
+        "codigo": "168",
+        "descricao": "SOMA DAS EXCLUSÕES (IRPJ)",
+        "tipo": "CNA",
+        "formula": "SOMA (M300(95:\"167.99\"))",
+        "lancamento": "E"
+      },
+      {
+        "codigo": "169",
+        "descricao": "LUCRO REAL ANTES DA COMPENSAÇÃO DE PREJUÍZOS DO PRÓPRIO PERÍODO DE APURAÇÃO",
+        "tipo": "CNA",
+        "formula": "M300(2) + M300(93) - M300(168)",
+        "lancamento": "L"
+      },
+      {
+        "codigo": "171",
+        "descricao": "LUCRO REAL APÓS A COMPENSAÇÃO DOS PREJUÍZOS DO PRÓPRIO PERÍODO DE APURAÇÃO",
+        "tipo": "CNA",
+        "formula": "M300(169) - M300(170) + M300(344)",
+        "lancamento": "L"
+      },
+      {
+        "codigo": "173",
+        "descricao": "(-) Compensação de Prejuízos Fiscais de Períodos Anteriores - Atividades em Geral",
+        "tipo": "E",
+        "lancamento": "P"
+      },
+      {
+        "codigo": "175",
+        "descricao": "LUCRO REAL",
+        "tipo": "CNA",
+        "formula": "M300(171) - M300(173) - M300(174)",
+        "lancamento": "L"
+      }
+    ],
+    "M350": [
+      {
+        "codigo": "2",
+        "descricao": "Lucro Antes da CSLL",
+        "tipo": "CNA",
+        "formula": "T_DRE(L300(\"3.01\"))",
+        "lancamento": "L"
+      },
+      {
+        "codigo": "6",
+        "descricao": "Provisões ou perdas estimadas não dedutíveis",
+        "tipo": "E",
+        "lancamento": "A"
+      },
+      {
+        "codigo": "8.60",
+        "descricao": "Multas por infrações fiscais",
+        "tipo": "E",
+        "lancamento": "A"
+      },
+      {
+        "codigo": "93",
+        "descricao": "SOMA DAS ADIÇÕES (CSLL)",
+        "tipo": "CNA",
+        "formula": "SOMA (M350(6:”92.99”))",
+        "lancamento": "A"
+      },
+      {
+        "codigo": "95",
+        "descricao": "(-) Reversão ou uso de provisões ou perdas estimadas não dedutíveis",
+        "tipo": "E",
+        "lancamento": "E"
+      },
+      {
+        "codigo": "168",
+        "descricao": "SOMA DAS EXCLUSÕES (CSLL)",
+        "tipo": "CNA",
+        "formula": "SOMA (M350(95:”167.99”))",
+        "lancamento": "E"
+      },
+      {
+        "codigo": "169",
+        "descricao": "BASE DE CÁLCULO ANTES DA COMPENSAÇÃO DE BC NEGATIVA DO PRÓPRIO PERÍODO DE APURAÇÃO",
+        "tipo": "CNA",
+        "formula": "M350(2) + M350(93) - M350(168)",
+        "lancamento": "L"
+      },
+      {
+        "codigo": "171",
+        "descricao": "BASE DE CÁLCULO ANTES DA COMPENSAÇÃO DE BC NEGATIVA DE PERÍODOS ANTERIORES",
+        "tipo": "CNA",
+        "formula": "M350(169) - M350(170) + M(344)",
+        "lancamento": "L"
+      },
+      {
+        "codigo": "173",
+        "descricao": "(-) Compensação de Base de Cálculo Negativa da CSLL de Períodos Anteriores - Atividades em Geral",
+        "tipo": "E",
+        "lancamento": "P"
+      },
+      {
+        "codigo": "175",
+        "descricao": "BASE DE CÁLCULO DA CSLL",
+        "tipo": "CNA",
+        "formula": "M350(171) - M350(173) - M350(174)",
+        "lancamento": "L"
+      }
+    ]
+  },
+  "linhas": {
+    "N500": [
+      {
+        "codigo": "1",
+        "descricao": "Valor da base de cálculo do IRPJ",
+        "tipo": "CNA",
+        "formula": "SE (0010.COD_QUALIF_PJ( ) = \"01\") ENTAO SE (M300(175) <= 0 E M300(349) <= 0) ENTAO M300(175) + M300(349) SENAO DEBITO(M300(175))+DEBITO(M300(349)) FIM_SE SENAO SE (0010.COD_QUALIF_PJ( )= \"02\") ENTAO M300(203) SENAO SE (0010.COD_QUALIF_PJ( ) = \"03\") ENTAO M300(142) SENAO 0 FIM_SE FIM_SE FIM_SE"
+      }
+    ],
+    "N630": [
+      {
+        "codigo": "1",
+        "descricao": "BASE DE CÁLCULO DO IRPJ",
+        "tipo": "CNA",
+        "formula": "N500(1)"
+      },
+      {
+        "codigo": "3",
+        "descricao": "À Alíquota de 15%",
+        "tipo": "CNA",
+        "formula": "SE (N630(1) > 0) ENTAO N630(1)*0,15 SENAO 0 FIM_SE"
+      },
+      {
+        "codigo": "4",
+        "descricao": "Adicional",
+        "tipo": "CNA",
+        "formula": "SE (N630(1) <= 20000 * MESES_PERIODO()) ENTAO 0 SENAO (N630(1) - 20000 * MESES_PERIODO()) * 0,1 FIM_SE"
+      },
+      {
+        "codigo": "20",
+        "descricao": "(-) Imposto de Renda Retido na Fonte",
+        "tipo": "E"
+      },
+      {
+        "codigo": "26",
+        "descricao": "IMPOSTO DE RENDA A PAGAR",
+        "tipo": "CNA",
+        "formula": "Até 31/12/2025 SOMA(N630(3:4)) - SOMA(N630(6:25)) A partir de 01/01/2026 SOMA(N630(3:4)) - SOMA(N630(6:25)) + (N630(6) + N630(8) + N630(10) + N630(11) + N630(12) + N630(13) + N630(14) + N630(15) + N630(16) + N630(\"16.10\"))"
+      }
+    ],
+    "N650": [
+      {
+        "codigo": "1",
+        "descricao": "Valor da Base de Cálculo da CSLL",
+        "tipo": "CNA",
+        "formula": "SE (0010.COD_QUALIF_PJ( ) = \"01\") ENTAO SE (M350(175) <= 0 E M350(349) <= 0) ENTAO M350(175) + M350(349) SENAO DEBITO(M350(175))+DEBITO(M350(349)) FIM_SE SENAO SE (0010.COD_QUALIF_PJ( )= \"02\") ENTAO M350(203) SENAO SE (0010.COD_QUALIF_PJ( ) = \"03\") ENTAO M350(142) SENAO 0 FIM_SE FIM_SE FIM_SE"
+      }
+    ],
+    "N670": [
+      {
+        "codigo": "1",
+        "descricao": "BASE DE CÁLCULO DA CSLL",
+        "tipo": "CNA",
+        "formula": "N650(1)"
+      },
+      {
+        "codigo": "2",
+        "descricao": "Contribuição Social sobre o Lucro Líquido por Atividade",
+        "tipo": "CNA",
+        "formula": "SE (N670(1) <= 0) ENTAO 0 SENAO SE (0020.IND_ALIQ_CSLL() = \"1\") ENTAO N670(1) * 0,09 SENAO SE (0020.IND_ALIQ_CSLL() = \"3\") ENTAO N670(1) * 0,20 SENAO N670(1) * 0,15 FIM_SE FIM_SE FIM_SE"
+      },
+      {
+        "codigo": "4",
+        "descricao": "TOTAL DA CONTRIBUIÇÃO SOCIAL SOBRE O LUCRO LÍQUIDO",
+        "tipo": "CNA",
+        "formula": "N670(2) + N670(3)"
+      },
+      {
+        "codigo": "17",
+        "descricao": "(-) CSLL Retida na Fonte por Pessoas Jurídicas de Direito Privado (Lei n° 10.833/2003, art. 30)",
+        "tipo": "E"
+      },
+      {
+        "codigo": "21",
+        "descricao": "CSLL A PAGAR",
+        "tipo": "CNA",
+        "formula": "N670(4) - SOMA(N670(6:\"20:99\"))"
+      }
+    ],
+    "P200": [
+      {
+        "codigo": "2",
+        "descricao": "Receita Bruta Sujeita ao Percentual de 1,6%",
+        "tipo": "E"
+      },
+      {
+        "codigo": "4",
+        "descricao": "Receita Bruta Sujeita ao Percentual de 8%",
+        "tipo": "E"
+      },
+      {
+        "codigo": "6",
+        "descricao": "Receita Bruta Sujeita ao Percentual de 16%",
+        "tipo": "E"
+      },
+      {
+        "codigo": "8",
+        "descricao": "Receita Bruta Sujeita ao Percentual de 32%",
+        "tipo": "E"
+      },
+      {
+        "codigo": "10",
+        "descricao": "RESULTADO DA APLICAÇÃO DOS PERCENTUAIS SOBRE A RECEITA BRUTA AJUSTADO",
+        "tipo": "CNA",
+        "formula": "SE (((P200(2)*0,016) + (P200(4)*0,08) + (P200(6)*0,16) + (P200(8)*0,32) + (P200(9)*0,384)) > 0) ENTAO ((P200(2)*0,016) + (P200(4)*0,08) + (P200(6)*0,16) + (P200(8)*0,32) + (P200(9)*0,384)) SENAO 0 FIM_SE"
+      },
+      {
+        "codigo": "11",
+        "descricao": "Rendimentos e Ganhos Líquidos de Aplicações de Renda Fixa e Renda Variável",
+        "tipo": "E"
+      },
+      {
+        "codigo": "20",
+        "descricao": "Demais Receitas e Ganhos de Capital",
+        "tipo": "E"
+      },
+      {
+        "codigo": "26",
+        "descricao": "BASE DE CÁLCULO DO IMPOSTO SOBRE O LUCRO PRESUMIDO",
+        "tipo": "CNA",
+        "formula": "Até 31/12/2025 SE (SOMA(P200(10:21)) - SOMA(P200(22:”25.99”)) > 0) ENTAO (SOMA(P200(10:21)) - SOMA(P200(22:”25.99”))) SENAO 0 FIM_SE A partir de 01/01/2026 SE (SOMA(P200(10:21)) - (P200(22) + P200(23) + P200(24) + P200(25) + P200(\"25.01\") + P200(\"25.02\")) > 0) ENTAO (SOMA(P200(10:21)) - (P200(22) + P200(23) + P200(24) + P200(25) + P200(\"25.01\") + P200(\"25.02\")) + SOMA(P200(\"25.210\":\"25.250\"))) SEN"
+      }
+    ],
+    "P300": [
+      {
+        "codigo": "1",
+        "descricao": "BASE DE CÁLCULO DO IMPOSTO SOBRE O LUCRO PRESUMIDO",
+        "tipo": "CA",
+        "formula": "P200(26)"
+      },
+      {
+        "codigo": "3",
+        "descricao": "À Alíquota de 15%",
+        "tipo": "CNA",
+        "formula": "SE (P300(1) > 0) ENTAO P300(1) * 0,15 SENAO 0 FIM_SE"
+      },
+      {
+        "codigo": "4",
+        "descricao": "Adicional",
+        "tipo": "CNA",
+        "formula": "SE (P300(1) <= (20000 * MESES_PERIODO())) ENTAO 0 SENAO (P300(1) - (20000 * MESES_PERIODO())) * 0,10 FIM_SE"
+      },
+      {
+        "codigo": "10",
+        "descricao": "(-) Imposto de Renda Retido na Fonte",
+        "tipo": "E"
+      },
+      {
+        "codigo": "15",
+        "descricao": "IMPOSTO DE RENDA A PAGAR",
+        "tipo": "CNA",
+        "formula": "SOMA(P300(3:5)) - SOMA(P300(7:14))"
+      }
+    ],
+    "P400": [
+      {
+        "codigo": "2",
+        "descricao": "Receita Bruta Sujeita ao Percentual de 12%",
+        "tipo": "E"
+      },
+      {
+        "codigo": "4",
+        "descricao": "Receita Bruta Sujeita ao Percentual de 32%",
+        "tipo": "E"
+      },
+      {
+        "codigo": "6",
+        "descricao": "RESULTADO DA APLICAÇÃO DOS PERCENTUAIS SOBRE A RECEITA BRUTA AJUSTADO",
+        "tipo": "CNA",
+        "formula": "SE ((P400(2) * 0,12) + (P400(4) * 0,32) + (P400(5) * 0,384) > 0) ENTAO (P400(2) * 0,12) + (P400(4) * 0,32) + (P400(5) * 0,384) SENAO 0 FIM_SE"
+      },
+      {
+        "codigo": "7",
+        "descricao": "Rendimentos e Ganhos Líquidos de Aplicações de Renda Fixa e Renda Variável",
+        "tipo": "CA",
+        "formula": "P200(11)"
+      },
+      {
+        "codigo": "16",
+        "descricao": "Demais Receitas e Ganhos de Capital",
+        "tipo": "CA",
+        "formula": "P200(20)"
+      },
+      {
+        "codigo": "21",
+        "descricao": "BASE DE CÁLCULO DA CSLL",
+        "tipo": "CNA",
+        "formula": "Até 31/12/2025 SOMA(P400(6:17)) - SOMA(P400(18:20)) A partir de 01/01/2026 SE (SOMA(P400(6:17)) - SOMA(P400(18:20)) > 0) ENTAO (SOMA(P400(6:17)) + SOMA(P400(\"20.210\":\"20.230\")) - SOMA(P400(18:20))) SENAO 0 FIM_SE"
+      }
+    ],
+    "P500": [
+      {
+        "codigo": "1",
+        "descricao": "BASE DE CÁLCULO DA CSLL",
+        "tipo": "CA",
+        "formula": "P400(21)"
+      },
+      {
+        "codigo": "2",
+        "descricao": "CSLL Apurada",
+        "tipo": "CNA",
+        "formula": "SE (P500(1) < 0) ENTAO 0 SENAO SE (0000.DT_INI()>=\"2022-01-01\") ENTAO SE(0020.IND_ALIQ_CSLL()=\"1\")ENTAO P500(1)*0,09 SENAO SE(0020.IND_ALIQ_CSLL()=\"3\") ENTAO P500(1)*0,20 SENAO P500(1)*0,15 FIM_SE FIM_SE FIM_SE FIM_SE|"
+      },
+      {
+        "codigo": "4",
+        "descricao": "TOTAL DA CONTRIBUIÇÃO SOCIAL SOBRE O LUCRO LÍQUIDO",
+        "tipo": "CNA",
+        "formula": "SOMA(P500(2:3))"
+      },
+      {
+        "codigo": "11",
+        "descricao": "(-) CSLL Retida na Fonte por Pessoas Jurídicas de Direito Privado (Lei n° 10.833/2003, art. 30)",
+        "tipo": "E"
+      },
+      {
+        "codigo": "13",
+        "descricao": "CSLL A PAGAR",
+        "tipo": "CNA",
+        "formula": "P500(4) - SOMA(P500(6:12))"
+      }
+    ],
+    "X390": [
+      {
+        "codigo": "1",
+        "descricao": "ORIGEM DE RECURSOS",
+        "tipo": "R"
+      },
+      {
+        "codigo": "2",
+        "descricao": "Contribuições de Associados ou Sindicalizados",
+        "tipo": "E"
+      },
+      {
+        "codigo": "3",
+        "descricao": "Receita da Venda de Bens ou da Prestação de Serviços",
+        "tipo": "E"
+      },
+      {
+        "codigo": "4",
+        "descricao": "Rendimentos de Aplicações Financeiras de Renda Fixa",
+        "tipo": "E"
+      },
+      {
+        "codigo": "5",
+        "descricao": "Ganhos Líquidos Auferidos no Mercado de Renda Variável",
+        "tipo": "E"
+      },
+      {
+        "codigo": "6",
+        "descricao": "Doações e Subvenções",
+        "tipo": "E"
+      },
+      {
+        "codigo": "7",
+        "descricao": "Outros Recursos",
+        "tipo": "E"
+      },
+      {
+        "codigo": "8",
+        "descricao": "TOTAL",
+        "tipo": "CNA",
+        "formula": "SOMA (X390(2:7))"
+      },
+      {
+        "codigo": "9",
+        "descricao": "APLICAÇÃO DE RECURSOS",
+        "tipo": "R"
+      },
+      {
+        "codigo": "10",
+        "descricao": "Ordenados, Gratificações e Outros Pagamentos, Inclusive Encargos Sociais",
+        "tipo": "E"
+      },
+      {
+        "codigo": "11",
+        "descricao": "IR Retido sobre Rendimentos de Aplicações Financeiras de Renda Fixa",
+        "tipo": "E"
+      },
+      {
+        "codigo": "12",
+        "descricao": "IR Retido ou Pago sobre Ganhos Líquidos Auferidos no Mercado de Renda Variável",
+        "tipo": "E"
+      },
+      {
+        "codigo": "13",
+        "descricao": "Impostos, Taxas e Contribuições",
+        "tipo": "E"
+      },
+      {
+        "codigo": "14",
+        "descricao": "Despesas de Manutenção",
+        "tipo": "E"
+      },
+      {
+        "codigo": "15",
+        "descricao": "Outras Despesas",
+        "tipo": "E"
+      },
+      {
+        "codigo": "16",
+        "descricao": "TOTAL",
+        "tipo": "CNA",
+        "formula": "SOMA (X390(10:15))"
+      },
+      {
+        "codigo": "17",
+        "descricao": "SUPERAVIT/DEFICIT",
+        "tipo": "CNA",
+        "formula": "X390(8) - X390(16)"
+      }
+    ]
+  }
+}

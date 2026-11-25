@@ -1,0 +1,49 @@
+# Confere cada Pull Request. Somente leitura, sem segredos.
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  conferir:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+          package-manager-cache: false
+      - name: O rascunho do monitor só pode trazer arquivos de monitor/
+        if: github.head_ref == 'monitor/rascunho'
+        env:
+          BASE: ${{ github.base_ref }}
+        shell: bash
+        run: |
+          fora="$(git diff --name-only "origin/$BASE...HEAD" | grep -v '^monitor/' || true)"
+          if [ -n "$fora" ]; then
+            echo "::error::Há mudança fora de monitor/. Escreva a novidade em outro ramo."
+            exit 1
+          fi
+      - run: npm ci --ignore-scripts
+      - run: npm audit --omit=dev --audit-level=high
+      - run: npm run typecheck
+      - run: npm run lint
+      - run: npm run validar:conteudo
+      - run: npm run build
+        env:
+          NEXT_TELEMETRY_DISABLED: "1"
+      - run: npm test
+      - run: npx playwright test

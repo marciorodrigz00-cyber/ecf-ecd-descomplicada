@@ -1,0 +1,1386 @@
+[
+ {
+  "id": "adicao",
+  "termo": "adição",
+  "sinonimos": [
+   "adições"
+  ],
+  "dica": true,
+  "iniciante": "Valor que se soma ao lucro da contabilidade para chegar ao lucro tributável.",
+  "profissional": "Ajuste que aumenta o lucro líquido na apuração do lucro real ou do resultado ajustado.",
+  "regras": [
+   "lucro-real-conceito"
+  ],
+  "registros": [
+   "M300",
+   "M350"
+  ],
+  "fonte": {
+   "id": "in-1700",
+   "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/81268",
+   "trecho": "art. 61"
+  },
+  "norma": "Instrução Normativa RFB nº 1.700/2017, art. 61",
+  "leiautes": [
+   "11",
+   "12"
+  ],
+  "vigencia": {
+   "acNormal": [
+    2024,
+    2025
+   ],
+   "situacaoEspecial": []
+  },
+  "verificadoEm": "2026-11-25",
+  "status": "conferido"
+ },
+ {
+  "id": "adicional",
+  "termo": "adicional do IRPJ",
+  "sinonimos": [
+   "adicional"
+  ],
+  "dica": false,
+  "iniciante": "Parcela extra do IRPJ, só sobre o lucro que passa de um limite.",
+  "profissional": "Incide sobre a parcela da base que excede o limite mensal da Lei nº 9.249/1995, multiplicado pelos meses do período.",
+  "regras": [
+   "irpj-adicional",
+   "irpj-adicional-limite"
+  ],
+  "registros": [],
+  "fonte": {
+   "id": "lei-9249",
+   "url": "https://www.planalto.gov.br/ccivil_03/leis/l9249.htm",
+   "trecho": "art. 3º, § 1º"
+  },
+  "norma": "Lei nº 9.249/1995, art. 3º, § 1º, redação da Lei nº 9.430/1996",
+  "leiautes": [
+   "11",
+   "12"
+  ],
+  "vigencia": {
+   "acNormal": [
+    2024,
+    2025
+   ],
+   "situacaoEspecial": []
+  },
+  "verificadoEm": "2026-11-25",
+  "status": "conferido"
+ },
+ {
+  "id": "balanco-suspensao",
+  "termo": "balanço de suspensão ou redução",
+  "sinonimos": [
+   "balanços de suspensão ou redução",
+   "balancete de suspensão"
+  ],
+  "dica": true,
+  "iniciante": "Balanço feito no meio do ano para pagar menos, ou não pagar, a estimativa do mês.",
+  "profissional": "Demonstra que o imposto devido no período é inferior ao calculado sobre a base estimada.",
+  "regras": [],
+  "registros": [
+   "N620"
+  ],
+  "fonte": {
+   "id": "manual-12",
+   "url": "https://www.gov.br/sped/pt-br/assuntos/escrituracoes-digitais/ecf/manuais-e-documentos-tecnicos",
+   "trecho": "Registro N620. Mesmo conteúdo no Manual do leiaute 11"
+  },
+  "norma": "Manual de Orientação do Leiaute (ADE Cofis nº 2/2026 e nº 38/2024)",
+  "leiautes": [
+   "11",
+   "12"
+  ],
+  "vigencia": {
+   "acNormal": [
+    2024,
+    2025
+   ],
+   "situacaoEspecial": []
+  },
+  "verificadoEm": "2026-11-25",
+  "status": "conferido"
+ },
+ {
+  "id": "base-negativa",
+  "termo": "base negativa",
+  "sinonimos": [
+   "base de cálculo negativa",
+   "bases negativas"
+  ],
+  "dica": true,
+  "iniciante": "O prejuízo na conta da CSLL. Também pode abater bases futuras, com limite.",
+  "profissional": "Base de cálculo negativa da CSLL, compensável com resultados posteriores no limite da Lei nº 9.065/1995.",
+  "regras": [
+   "comp-base-negativa"
+  ],
+  "registros": [],
+  "fonte": {
+   "id": "lei-9065",
+   "url": "https://www.planalto.gov.br/ccivil_03/leis/l9065.htm",
+   "trecho": "art. 16"
+  },
+  "norma": "Lei nº 9.065/1995, art. 16",
+  "leiautes": [
+   "11",
+   "12"
+  ],
+  "vigencia": {
+   "acNormal": [
+    2024,
+    2025
+   ],
+   "situacaoEspecial": []
+  },
+  "verificadoEm": "2026-11-25",
+  "status": "conferido"
+ },
+ {
+  "id": "campo",
+  "termo": "campo",
+  "sinonimos": [],
+  "dica": false,
+  "iniciante": "Cada informação dentro de uma linha, separada por barras verticais.",
+  "profissional": "Na falta de informação, o campo vazio é encerrado logo em seguida pelo delimitador.",
+  "regras": [],
+  "registros": [],
+  "fonte": {
+   "id": "manual-12",
+   "url": "https://www.gov.br/sped/pt-br/assuntos/escrituracoes-digitais/ecf/manuais-e-documentos-tecnicos",
+   "trecho": "Capítulo 2, formato dos campos. Mesmo conteúdo no Manual do leiaute 11"
+  },
+  "norma": "Manual de Orientação do Leiaute (ADE Cofis nº 2/2026 e nº 38/2024)",
+  "leiautes": [
+   "11",
+   "12"
+  ],
+  "vigencia": {
+   "acNormal": [
+    2024,
+    2025
+   ],
+   "situacaoEspecial": []
+  },
+  "verificadoEm": "2026-11-25",
+  "status": "conferido"
+ },
+ {
+  "id": "certificado",
+  "termo": "certificado digital",
+  "sinonimos": [
+   "ICP-Brasil"
+  ],
+  "dica": true,
+  "iniciante": "Assinatura eletrônica que prova quem está enviando.",
+  "profissional": "A ECF é assinada com certificado emitido por entidade credenciada pela ICP-Brasil.",
+  "regras": [
+   "assinatura"
+  ],
+  "registros": [
+   "0930"
+  ],
+  "fonte": {
+   "id": "in-2004",
+   "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/114966",
+   "trecho": "art. 3º, § 1º"
+  },
+  "norma": "IN RFB nº 2.004/2021, art. 3º, § 1º",
+  "leiautes": [
+   "11",
+   "12"
+  ],
+  "vigencia": {
+   "acNormal": [
+    2024,
+    2025
+   ],
+   "situacaoEspecial": []
+  },
+  "verificadoEm": "2026-11-25",
+  "status": "conferido"
+ },
+ {
+  "id": "conta-analitica",
+  "termo": "conta analítica",
+  "sinonimos": [
+   "contas analíticas"
+  ],
+  "dica": true,
+  "iniciante": "A conta que recebe lançamentos. As sintéticas só somam.",
+  "profissional": "O mapeamento para o plano referencial é feito só nas contas analíticas; as sintéticas não são mapeadas.",
+  "regras": [],
+  "registros": [
+   "J050"
+  ],
+  "fonte": {
+   "id": "manual-12",
+   "url": "https://www.gov.br/sped/pt-br/assuntos/escrituracoes-digitais/ecf/manuais-e-documentos-tecnicos",
+   "trecho": "Item 1.12, mapeamento. Mesmo conteúdo no Manual do leiaute 11"
+  },
+  "norma": "Manual de Orientação do Leiaute (ADE Cofis nº 2/2026 e nº 38/2024)",
+  "leiautes": [
+   "11",
+   "12"
+  ],
+  "vigencia": {
+   "acNormal": [
+    2024,
+    2025
+   ],
+   "situacaoEspecial": []
+  },
+  "verificadoEm": "2026-11-25",
+  "status": "conferido"
+ },
+ {
+  "id": "csll",
+  "termo": "CSLL",
+  "sinonimos": [
+   "Contribuição Social sobre o Lucro Líquido"
+  ],
+  "dica": true,
+  "iniciante": "Contribuição calculada sobre o lucro, ao lado do IRPJ.",
+  "profissional": "Contribuição Social sobre o Lucro Líquido. Na ECF, tem apuração própria, separada da do IRPJ.",
+  "regras": [
+   "csll-aliquota"
+  ],
+  "registros": [
+   "N670",
+   "P500"
+  ],
+  "fonte": {
+   "id": "lei-7689",
+   "url": "https://www.planalto.gov.br/ccivil_03/leis/l7689.htm",
+   "trecho": "art. 3º, III"
+  },
+  "norma": "Lei nº 7.689/1988, art. 3º, III, incluído pela Lei nº 13.169/2015",
+  "leiautes": [
+   "11",
+   "12"
+  ],
+  "vigencia": {
+   "acNormal": [
+    2024,
+    2025
+   ],
+   "situacaoEspecial": []
+  },
+  "verificadoEm": "2026-11-25",
+  "status": "conferido"
+ },
+ {
+  "id": "dctf",
+  "termo": "DCTF",
+  "sinonimos": [
+   "Declaração de Débitos e Créditos de Tributos Federais"
+  ],
+  "dica": true,
+  "iniciante": "Declaração de débitos e créditos de tributos federais. Precisa combinar com a ECF.",
+  "profissional": "Se a ECF retificadora altera IRPJ ou CSLL informados em DCTF, a DCTF também é retificada.",
+  "regras": [
+   "retificacao-dctf"
+  ],
+  "registros": [],
+  "fonte": {
+   "id": "in-2004",
+   "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/114966",
+   "trecho": "art. 10"
+  },
+  "norma": "IN RFB nº 2.004/2021, art. 10",
+  "leiautes": [
+   "11",
+   "12"
+  ],
+  "vigencia": {
+   "acNormal": [
+    2024,
+    2025
+   ],
+   "situacaoEspecial": []
+  },
+  "verificadoEm": "2026-11-25",
+  "status": "conferido"
+ },
+ {
+  "id": "pais-a-pais",
+  "termo": "Declaração País-a-País",
+  "sinonimos": [
+   "País-a-País",
+   "Country-by-Country Report"
+  ],
+  "dica": true,
+  "iniciante": "Relatório de grupos multinacionais, com dados de cada país em que atuam.",
+  "profissional": "Country-by-Country Report, informado no bloco W da ECF.",
+  "regras": [],
+  "registros": [
+   "W100",
+   "W200"
+  ],
+  "fonte": {
+   "id": "manual-12",
+   "url": "https://www.gov.br/sped/pt-br/assuntos/escrituracoes-digitais/ecf/manuais-e-documentos-tecnicos",
+   "trecho": "Bloco W. Mesmo conteúdo no Manual do leiaute 11"
+  },
+  "norma": "Manual de Orientação do Leiaute (ADE Cofis nº 2/2026 e nº 38/2024)",
+  "leiautes": [
+   "11",
+   "12"
+  ],
+  "vigencia": {
+   "acNormal": [
+    2024,
+    2025
+   ],
+   "situacaoEspecial": []
+  },
+  "verificadoEm": "2026-11-25",
+  "status": "conferido"
+ },
+ {
+  "id": "derex",
+  "termo": "DEREX",
+  "sinonimos": [],
+  "dica": true,
+  "iniciante": "Declaração sobre recursos em moeda estrangeira que vieram de exportações.",
+  "profissional": "Declaração tratada no bloco V da ECF.",
+  "regras": [],
+  "registros": [
+   "V010",
+   "V100"
+  ],
+  "fonte": {
+   "id": "manual-12",
+   "url": "https://www.gov.br/sped/pt-br/assuntos/escrituracoes-digitais/ecf/manuais-e-documentos-tecnicos",
+   "trecho": "Registro V100. Mesmo conteúdo no Manual do leiaute 11"
+  },
+  "norma": "Manual de Orientação do Leiaute (ADE Cofis nº 2/2026 e nº 38/2024)",
+  "leiautes": [
+   "11",
+   "12"
+  ],
+  "vigencia": {
+   "acNormal": [
+    2024,
+    2025
+   ],
+   "situacaoEspecial": []
+  },
+  "verificadoEm": "2026-11-25",
+  "status": "conferido"
+ },
+ {
+  "id": "dipj",
+  "termo": "DIPJ",
+  "sinonimos": [],
+  "dica": true,
+  "iniciante": "A declaração antiga, que a ECF substituiu.",
+  "profissional": "Declaração de Informações Econômico-Fiscais da Pessoa Jurídica, dispensada desde 1º de janeiro de 2014.",
+  "regras": [
+   "substitui-dipj"
+  ],
+  "registros": [],
+  "fonte": {
+   "id": "in-2004",
+   "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/114966",
+   "trecho": "art. 5º, caput"
+  },
+  "norma": "IN RFB nº 2.004/2021, art. 5º, caput",
+  "leiautes": [
+   "11",
+   "12"
+  ],
+  "vigencia": {
+   "acNormal": [
+    2024,
+    2025
+   ],
+   "situacaoEspecial": []
+  },
+  "verificadoEm": "2026-11-25",
+  "status": "conferido"
+ },
+ {
+  "id": "e-lacs",
+  "termo": "e-Lacs",
+  "sinonimos": [
+   "Livro Eletrônico de Apuração da Base de Cálculo da CSLL"
+  ],
+  "dica": true,
+  "iniciante": "O mesmo que o e-Lalur, mas para a CSLL.",
+  "profissional": "Livro Eletrônico de Apuração da Base de Cálculo da CSLL: detalha os ajustes da base, por tabela de adições e exclusões.",
+  "regras": [
+   "e-lacs"
+  ],
+  "registros": [
+   "M350"
+  ],
+  "fonte": {
+   "id": "in-2004",
+   "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/114966",
+   "trecho": "art. 2º, V"
+  },
+  "norma": "IN RFB nº 2.004/2021, art. 2º, V",
+  "leiautes": [
+   "11",
+   "12"
+  ],
+  "vigencia": {
+   "acNormal": [
+    2024,
+    2025
+   ],
+   "situacaoEspecial": []
+  },
+  "verificadoEm": "2026-11-25",
+  "status": "conferido"
+ },
+ {
+  "id": "e-lalur",
+  "termo": "e-Lalur",
+  "sinonimos": [
+   "Lalur",
+   "Livro Eletrônico de Apuração do Lucro Real"
+  ],
+  "dica": true,
+  "iniciante": "A parte do arquivo que transforma o lucro da contabilidade no lucro que paga imposto.",
+  "profissional": "Livro Eletrônico de Apuração do Lucro Real: detalha os ajustes do lucro líquido, por tabela de adições e exclusões.",
+  "regras": [
+   "e-lalur",
+   "ecf-lalur"
+  ],
+  "registros": [
+   "M300"
+  ],
+  "fonte": {
+   "id": "in-2004",
+   "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/114966",
+   "trecho": "art. 2º, IV"
+  },
+  "norma": "IN RFB nº 2.004/2021, art. 2º, IV",
+  "leiautes": [
+   "11",
+   "12"
+  ],
+  "vigencia": {
+   "acNormal": [
+    2024,
+    2025
+   ],
+   "situacaoEspecial": []
+  },
+  "verificadoEm": "2026-11-25",
+  "status": "conferido"
+ },
+ {
+  "id": "ecd",
+  "termo": "ECD",
+  "sinonimos": [
+   "Escrituração Contábil Digital"
+  ],
+  "dica": true,
+  "iniciante": "A contabilidade da empresa em arquivo digital. A ECF aproveita as contas e os saldos dela.",
+  "profissional": "Escrituração Contábil Digital, disciplinada pela IN RFB nº 2.003/2021. Suas contas e saldos são recuperados na ECF.",
+  "regras": [
+   "recupera-ecd"
+  ],
+  "registros": [
+   "C040"
+  ],
+  "fonte": {
+   "id": "manual-12",
+   "url": "https://www.gov.br/sped/pt-br/assuntos/escrituracoes-digitais/ecf/manuais-e-documentos-tecnicos",
+   "trecho": "Capítulo 1, relação de normas. Mesmo conteúdo no Manual do leiaute 11"
+  },
+  "norma": "Manual de Orientação do Leiaute (ADE Cofis nº 2/2026 e nº 38/2024)",
+  "leiautes": [
+   "11",
+   "12"
+  ],
+  "vigencia": {
+   "acNormal": [
+    2024,
+    2025
+   ],
+   "situacaoEspecial": []
+  },
+  "verificadoEm": "2026-11-25",
+  "status": "conferido"
+ },
+ {
+  "id": "ecf",
+  "termo": "ECF",
+  "sinonimos": [
+   "Escrituração Contábil Fiscal"
+  ],
+  "dica": true,
+  "iniciante": "O arquivo em que a empresa mostra à Receita como chegou ao IRPJ e à CSLL do ano.",
+  "profissional": "Escrituração Contábil Fiscal: informa as operações que influenciam a base de cálculo e o valor devido do IRPJ e da CSLL.",
+  "regras": [
+   "ecf-conteudo"
+  ],
+  "registros": [],
+  "fonte": {
+   "id": "in-2004",
+   "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/114966",
+   "trecho": "art. 2º, caput"
+  },
+  "norma": "IN RFB nº 2.004/2021, art. 2º, caput",
+  "leiautes": [
+   "11",
+   "12"
+  ],
+  "vigencia": {
+   "acNormal": [
+    2024,
+    2025
+   ],
+   "situacaoEspecial": []
+  },
+  "verificadoEm": "2026-11-25",
+  "status": "conferido"
+ },
+ {
+  "id": "retificadora",
+  "termo": "ECF retificadora",
+  "sinonimos": [
+   "retificadora"
+  ],
+  "dica": true,
+  "iniciante": "Uma nova ECF que substitui a anterior por inteiro.",
+  "profissional": "Tem a mesma natureza da retificada, substitui-a integralmente e passa a ser a ativa na base do Sped.",
+  "regras": [
+   "retificacao"
+  ],
+  "registros": [],
+  "fonte": {
+   "id": "manual-12",
+   "url": "https://www.gov.br/sped/pt-br/assuntos/escrituracoes-digitais/ecf/manuais-e-documentos-tecnicos",
+   "trecho": "Capítulo 1, retificação. Mesmo conteúdo no Manual do leiaute 11"
+  },
+  "norma": "Manual de Orientação do Leiaute (ADE Cofis nº 2/2026 e nº 38/2024)",
+  "leiautes": [
+   "11",
+   "12"
+  ],
+  "vigencia": {
+   "acNormal": [
+    2024,
+    2025
+   ],
+   "situacaoEspecial": []
+  },
+  "verificadoEm": "2026-11-25",
+  "status": "conferido"
+ },
+ {
+  "id": "exclusao",
+  "termo": "exclusão",
+  "sinonimos": [
+   "exclusões"
+  ],
+  "dica": true,
+  "iniciante": "Valor que se tira do lucro da contabilidade para chegar ao lucro tributável.",
+  "profissional": "Ajuste que reduz o lucro líquido na apuração do lucro real ou do resultado ajustado.",
+  "regras": [
+   "lucro-real-conceito"
+  ],
+  "registros": [
+   "M300",
+   "M350"
+  ],
+  "fonte": {
+   "id": "in-1700",
+   "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/81268",
+   "trecho": "art. 61"
+  },
+  "norma": "Instrução Normativa RFB nº 1.700/2017, art. 61",
+  "leiautes": [
+   "11",
+   "12"
+  ],
+  "vigencia": {
+   "acNormal": [
+    2024,
+    2025
+   ],
+   "situacaoEspecial": []
+  },
+  "verificadoEm": "2026-11-25",
+  "status": "conferido"
+ },
+ {
+  "id": "hash",
+  "termo": "hashcode",
+  "sinonimos": [
+   "hash"
+  ],
+  "dica": true,
+  "iniciante": "Código que identifica um arquivo, como uma impressão digital.",
+  "profissional": "O hashcode da ECF anterior é informado no registro 0010 e conferido com a base do Sped no lucro real.",
+  "regras": [],
+  "registros": [
+   "0010",
+   "C040"
+  ],
+  "fonte": {
+   "id": "manual-12",
+   "url": "https://www.gov.br/sped/pt-br/assuntos/escrituracoes-digitais/ecf/manuais-e-documentos-tecnicos",
+   "trecho": "Item 1.3, recuperação da ECF anterior. Mesmo conteúdo no Manual do leiaute 11"
+  },
+  "norma": "Manual de Orientação do Leiaute (ADE Cofis nº 2/2026 e nº 38/2024)",
+  "leiautes": [
+   "11",
+   "12"
+  ],
+  "vigencia": {
+   "acNormal": [
+    2024,
+    2025
+   ],
+   "situacaoEspecial": []
+  },
+  "verificadoEm": "2026-11-25",
+  "status": "conferido"
+ },
+ {
+  "id": "imune-isenta",
+  "termo": "imunes e isentas",
+  "sinonimos": [
+   "imunes ou isentas",
+   "imune ou isenta"
+  ],
+  "dica": true,
+  "iniciante": "Entidades com regras próprias de imposto, como a associação do nosso exemplo. Também entregam a ECF.",
+  "profissional": "Estão obrigadas à ECF desde o ano-calendário 2015 e usam o bloco U e o registro X390.",
+  "regras": [
+   "imunes-isentas"
+  ],
+  "registros": [
+   "U030",
+   "X390"
+  ],
+  "fonte": {
+   "id": "manual-12",
+   "url": "https://www.gov.br/sped/pt-br/assuntos/escrituracoes-digitais/ecf/manuais-e-documentos-tecnicos",
+   "trecho": "Item 1.4. Mesmo conteúdo no Manual do leiaute 11"
+  },
+  "norma": "Manual de Orientação do Leiaute (ADE Cofis nº 2/2026 e nº 38/2024)",
+  "leiautes": [
+   "11",
+   "12"
+  ],
+  "vigencia": {
+   "acNormal": [
+    2024,
+    2025
+   ],
+   "situacaoEspecial": []
+  },
+  "verificadoEm": "2026-11-25",
+  "status": "conferido"
+ },
+ {
+  "id": "inativa",
+  "termo": "inativa",
+  "sinonimos": [
+   "inativas",
+   "inatividade"
+  ],
+  "dica": true,
+  "iniciante": "Empresa sem nenhuma movimentação no ano inteiro.",
+  "profissional": "Pessoa jurídica sem qualquer atividade operacional, não operacional, patrimonial ou financeira em todo o ano-calendário.",
+  "regras": [
+   "dispensa-inativas",
+   "inatividade-anual"
+  ],
+  "registros": [],
+  "fonte": {
+   "id": "in-2004",
+   "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/114966",
+   "trecho": "art. 1º, § 1º, III"
+  },
+  "norma": "IN RFB nº 2.004/2021, art. 1º, § 1º, III",
+  "leiautes": [
+   "11",
+   "12"
+  ],
+  "vigencia": {
+   "acNormal": [
+    2024,
+    2025
+   ],
+   "situacaoEspecial": []
+  },
+  "verificadoEm": "2026-11-25",
+  "status": "conferido"
+ },
+ {
+  "id": "irpj",
+  "termo": "IRPJ",
+  "sinonimos": [
+   "Imposto sobre a Renda da Pessoa Jurídica"
+  ],
+  "dica": true,
+  "iniciante": "O imposto de renda das empresas. É um dos dois tributos que a ECF demonstra.",
+  "profissional": "Imposto sobre a Renda da Pessoa Jurídica. A alíquota e o adicional estão na Lei nº 9.249/1995.",
+  "regras": [
+   "irpj-aliquota"
+  ],
+  "registros": [
+   "N630",
+   "P300"
+  ],
+  "fonte": {
+   "id": "lei-9249",
+   "url": "https://www.planalto.gov.br/ccivil_03/leis/l9249.htm",
+   "trecho": "art. 3º, caput"
+  },
+  "norma": "Lei nº 9.249/1995, art. 3º, caput",
+  "leiautes": [
+   "11",
+   "12"
+  ],
+  "vigencia": {
+   "acNormal": [
+    2024,
+    2025
+   ],
+   "situacaoEspecial": []
+  },
+  "verificadoEm": "2026-11-25",
+  "status": "conferido"
+ },
+ {
+  "id": "leiaute",
+  "termo": "leiaute",
+  "sinonimos": [
+   "layout"
+  ],
+  "dica": false,
+  "iniciante": "O formato do arquivo em determinado ano. Muda de número quando as regras mudam.",
+  "profissional": "Estrutura do arquivo, com numeração própria por ano-calendário e situações especiais.",
+  "regras": [],
+  "registros": [
+   "0000"
+  ],
+  "fonte": {
+   "id": "manual-12",
+   "url": "https://www.gov.br/sped/pt-br/assuntos/escrituracoes-digitais/ecf/manuais-e-documentos-tecnicos",
+   "trecho": "Capítulo 1, tabela de leiautes. Mesmo conteúdo no Manual do leiaute 11"
+  },
+  "norma": "Manual de Orientação do Leiaute (ADE Cofis nº 2/2026 e nº 38/2024)",
+  "leiautes": [
+   "11",
+   "12"
+  ],
+  "vigencia": {
+   "acNormal": [
+    2024,
+    2025
+   ],
+   "situacaoEspecial": []
+  },
+  "verificadoEm": "2026-11-25",
+  "status": "conferido"
+ },
+ {
+  "id": "livro-caixa",
+  "termo": "livro caixa",
+  "sinonimos": [],
+  "dica": true,
+  "iniciante": "Registro das entradas e saídas de dinheiro.",
+  "profissional": "Optantes do presumido que usam a prerrogativa do livro caixa, acima do limite de receita da norma, apresentam o demonstrativo na ECF.",
+  "regras": [
+   "livro-caixa"
+  ],
+  "registros": [
+   "Q100"
+  ],
+  "fonte": {
+   "id": "in-2004",
+   "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/114966",
+   "trecho": "art. 2º, VIII"
+  },
+  "norma": "IN RFB nº 2.004/2021, art. 2º, VIII",
+  "leiautes": [
+   "11",
+   "12"
+  ],
+  "vigencia": {
+   "acNormal": [
+    2024,
+    2025
+   ],
+   "situacaoEspecial": []
+  },
+  "verificadoEm": "2026-11-25",
+  "status": "conferido"
+ },
+ {
+  "id": "lucro-arbitrado",
+  "termo": "lucro arbitrado",
+  "sinonimos": [],
+  "dica": true,
+  "iniciante": "Uma das formas de tributação da ECF. A conta dele fica no bloco T.",
+  "profissional": "Forma de tributação apurada nos registros T120 a T181 da ECF.",
+  "regras": [],
+  "registros": [
+   "T120",
+   "T150"
+  ],
+  "fonte": {
+   "id": "manual-12",
+   "url": "https://www.gov.br/sped/pt-br/assuntos/escrituracoes-digitais/ecf/manuais-e-documentos-tecnicos",
+   "trecho": "Registro T120. Mesmo conteúdo no Manual do leiaute 11"
+  },
+  "norma": "Manual de Orientação do Leiaute (ADE Cofis nº 2/2026 e nº 38/2024)",
+  "leiautes": [
+   "11",
+   "12"
+  ],
+  "vigencia": {
+   "acNormal": [
+    2024,
+    2025
+   ],
+   "situacaoEspecial": []
+  },
+  "verificadoEm": "2026-11-25",
+  "status": "conferido"
+ },
+ {
+  "id": "lucro-presumido",
+  "termo": "lucro presumido",
+  "sinonimos": [],
+  "dica": true,
+  "iniciante": "Regime em que o lucro é estimado por uma porcentagem da receita.",
+  "profissional": "Base formada por percentuais aplicados sobre a receita bruta de cada atividade, somada às demais receitas.",
+  "regras": [
+   "presumido-base",
+   "presumido-opcao"
+  ],
+  "registros": [
+   "P200",
+   "P400"
+  ],
+  "fonte": {
+   "id": "in-1700",
+   "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/81268",
+   "trecho": "art. 215, caput"
+  },
+  "norma": "Instrução Normativa RFB nº 1.700/2017, art. 215, caput",
+  "leiautes": [
+   "11",
+   "12"
+  ],
+  "vigencia": {
+   "acNormal": [
+    2024,
+    2025
+   ],
+   "situacaoEspecial": []
+  },
+  "verificadoEm": "2026-11-25",
+  "status": "conferido"
+ },
+ {
+  "id": "lucro-real",
+  "termo": "lucro real",
+  "sinonimos": [],
+  "dica": true,
+  "iniciante": "Regime em que o imposto sai do lucro da contabilidade, com ajustes.",
+  "profissional": "Lucro líquido do período antes da provisão para o IRPJ, ajustado pelas adições, exclusões ou compensações da legislação.",
+  "regras": [
+   "lucro-real-conceito"
+  ],
+  "registros": [
+   "M300",
+   "N630"
+  ],
+  "fonte": {
+   "id": "in-1700",
+   "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/81268",
+   "trecho": "art. 61"
+  },
+  "norma": "Instrução Normativa RFB nº 1.700/2017, art. 61",
+  "leiautes": [
+   "11",
+   "12"
+  ],
+  "vigencia": {
+   "acNormal": [
+    2024,
+    2025
+   ],
+   "situacaoEspecial": []
+  },
+  "verificadoEm": "2026-11-25",
+  "status": "conferido"
+ },
+ {
+  "id": "manual",
+  "termo": "Manual de Orientação",
+  "sinonimos": [],
+  "dica": true,
+  "iniciante": "O guia oficial que explica cada campo da ECF.",
+  "profissional": "Divulgado pela Cofis por Ato Declaratório Executivo publicado no Diário Oficial da União.",
+  "regras": [
+   "manual-cofis"
+  ],
+  "registros": [],
+  "fonte": {
+   "id": "in-2004",
+   "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/114966",
+   "trecho": "art. 4º"
+  },
+  "norma": "IN RFB nº 2.004/2021, art. 4º",
+  "leiautes": [
+   "11",
+   "12"
+  ],
+  "vigencia": {
+   "acNormal": [
+    2024,
+    2025
+   ],
+   "situacaoEspecial": []
+  },
+  "verificadoEm": "2026-11-25",
+  "status": "conferido"
+ },
+ {
+  "id": "ocorrencia",
+  "termo": "ocorrência",
+  "sinonimos": [],
+  "dica": false,
+  "iniciante": "Quantas vezes um registro pode aparecer.",
+  "profissional": "Indica se pode haver um ou vários registros para o respectivo registro pai.",
+  "regras": [],
+  "registros": [],
+  "fonte": {
+   "id": "manual-12",
+   "url": "https://www.gov.br/sped/pt-br/assuntos/escrituracoes-digitais/ecf/manuais-e-documentos-tecnicos",
+   "trecho": "Capítulo 2, organização dos registros. Mesmo conteúdo no Manual do leiaute 11"
+  },
+  "norma": "Manual de Orientação do Leiaute (ADE Cofis nº 2/2026 e nº 38/2024)",
+  "leiautes": [
+   "11",
+   "12"
+  ],
+  "vigencia": {
+   "acNormal": [
+    2024,
+    2025
+   ],
+   "situacaoEspecial": []
+  },
+  "verificadoEm": "2026-11-25",
+  "status": "conferido"
+ },
+ {
+  "id": "parte-b",
+  "termo": "parte B",
+  "sinonimos": [],
+  "dica": true,
+  "iniciante": "A caderneta que guarda valores para usar nos próximos anos, como prejuízos.",
+  "profissional": "Controle dos valores a excluir, adicionar ou compensar em períodos seguintes, inclusive prejuízo fiscal e base negativa da CSLL.",
+  "regras": [
+   "controle-saldos"
+  ],
+  "registros": [
+   "M010",
+   "M500"
+  ],
+  "fonte": {
+   "id": "in-2004",
+   "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/114966",
+   "trecho": "art. 2º, VI"
+  },
+  "norma": "IN RFB nº 2.004/2021, art. 2º, VI",
+  "leiautes": [
+   "11",
+   "12"
+  ],
+  "vigencia": {
+   "acNormal": [
+    2024,
+    2025
+   ],
+   "situacaoEspecial": []
+  },
+  "verificadoEm": "2026-11-25",
+  "status": "conferido"
+ },
+ {
+  "id": "programa",
+  "termo": "PGE",
+  "sinonimos": [
+   "programa gerador",
+   "Programa Gerador da ECF"
+  ],
+  "dica": true,
+  "iniciante": "O programa da Receita que confere, assina e envia a ECF.",
+  "profissional": "Programa gerador da ECF. Todo arquivo passa por ele para validação, assinatura digital, transmissão e visualização.",
+  "regras": [],
+  "registros": [],
+  "fonte": {
+   "id": "manual-12",
+   "url": "https://www.gov.br/sped/pt-br/assuntos/escrituracoes-digitais/ecf/manuais-e-documentos-tecnicos",
+   "trecho": "Capítulo 2, informações gerais. Mesmo conteúdo no Manual do leiaute 11"
+  },
+  "norma": "Manual de Orientação do Leiaute (ADE Cofis nº 2/2026 e nº 38/2024)",
+  "leiautes": [
+   "11",
+   "12"
+  ],
+  "vigencia": {
+   "acNormal": [
+    2024,
+    2025
+   ],
+   "situacaoEspecial": []
+  },
+  "verificadoEm": "2026-11-25",
+  "status": "conferido"
+ },
+ {
+  "id": "plano-referencial",
+  "termo": "plano de contas referencial",
+  "sinonimos": [
+   "plano referencial",
+   "contas referenciais",
+   "conta referencial"
+  ],
+  "dica": true,
+  "iniciante": "O plano de contas padrão da Receita. Cada conta da empresa é ligada a uma conta dele.",
+  "profissional": "As contas recuperadas da ECD são associadas ao plano de contas referencial definido pela Cofis.",
+  "regras": [
+   "plano-referencial"
+  ],
+  "registros": [
+   "J051",
+   "L100"
+  ],
+  "fonte": {
+   "id": "in-2004",
+   "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/114966",
+   "trecho": "art. 2º, III"
+  },
+  "norma": "IN RFB nº 2.004/2021, art. 2º, III",
+  "leiautes": [
+   "11",
+   "12"
+  ],
+  "vigencia": {
+   "acNormal": [
+    2024,
+    2025
+   ],
+   "situacaoEspecial": []
+  },
+  "verificadoEm": "2026-11-25",
+  "status": "conferido"
+ },
+ {
+  "id": "prejuizo-fiscal",
+  "termo": "prejuízo fiscal",
+  "sinonimos": [
+   "prejuízos fiscais"
+  ],
+  "dica": true,
+  "iniciante": "Quando a conta do imposto dá negativa. Pode abater lucros futuros, com limite.",
+  "profissional": "Resultado negativo da apuração do lucro real, compensável com lucros posteriores no limite da Lei nº 9.065/1995.",
+  "regras": [
+   "comp-prejuizo"
+  ],
+  "registros": [
+   "M410"
+  ],
+  "fonte": {
+   "id": "lei-9065",
+   "url": "https://www.planalto.gov.br/ccivil_03/leis/l9065.htm",
+   "trecho": "art. 15"
+  },
+  "norma": "Lei nº 9.065/1995, art. 15",
+  "leiautes": [
+   "11",
+   "12"
+  ],
+  "vigencia": {
+   "acNormal": [
+    2024,
+    2025
+   ],
+   "situacaoEspecial": []
+  },
+  "verificadoEm": "2026-11-25",
+  "status": "conferido"
+ },
+ {
+  "id": "provisao",
+  "termo": "provisão",
+  "sinonimos": [
+   "provisões"
+  ],
+  "dica": true,
+  "iniciante": "Valor reservado para um gasto provável. Em geral, não reduz o imposto na hora.",
+  "profissional": "Só são dedutíveis as provisões listadas na norma; as demais são adicionadas e, quando usadas ou revertidas, excluídas.",
+  "regras": [
+   "provisoes"
+  ],
+  "registros": [
+   "M300"
+  ],
+  "fonte": {
+   "id": "in-1700",
+   "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/81268",
+   "trecho": "art. 70"
+  },
+  "norma": "Instrução Normativa RFB nº 1.700/2017, art. 70",
+  "leiautes": [
+   "11",
+   "12"
+  ],
+  "vigencia": {
+   "acNormal": [
+    2024,
+    2025
+   ],
+   "situacaoEspecial": []
+  },
+  "verificadoEm": "2026-11-25",
+  "status": "conferido"
+ },
+ {
+  "id": "recuperacao",
+  "termo": "recuperação",
+  "sinonimos": [
+   "recuperar"
+  ],
+  "dica": false,
+  "iniciante": "Trazer para a ECF os dados que já estão na ECD ou na ECF do ano anterior.",
+  "profissional": "No lucro real, recuperar a ECD é obrigatório. Nos demais casos, depende da obrigação de entregar a ECD.",
+  "regras": [
+   "recuperacao-obrigatoria",
+   "ordem-recuperacao"
+  ],
+  "registros": [],
+  "fonte": {
+   "id": "manual-12",
+   "url": "https://www.gov.br/sped/pt-br/assuntos/escrituracoes-digitais/ecf/manuais-e-documentos-tecnicos",
+   "trecho": "Item 1.3. Mesmo conteúdo no Manual do leiaute 11"
+  },
+  "norma": "Manual de Orientação do Leiaute (ADE Cofis nº 2/2026 e nº 38/2024)",
+  "leiautes": [
+   "11",
+   "12"
+  ],
+  "vigencia": {
+   "acNormal": [
+    2024,
+    2025
+   ],
+   "situacaoEspecial": []
+  },
+  "verificadoEm": "2026-11-25",
+  "status": "conferido"
+ },
+ {
+  "id": "registro",
+  "termo": "registro",
+  "sinonimos": [],
+  "dica": false,
+  "iniciante": "Uma linha do arquivo. O código diz o bloco e o assunto, como M300.",
+  "profissional": "Linha iniciada e terminada por barra vertical, com campos separados por ela e organização hierárquica.",
+  "regras": [],
+  "registros": [],
+  "fonte": {
+   "id": "manual-12",
+   "url": "https://www.gov.br/sped/pt-br/assuntos/escrituracoes-digitais/ecf/manuais-e-documentos-tecnicos",
+   "trecho": "Capítulo 2, formato dos campos. Mesmo conteúdo no Manual do leiaute 11"
+  },
+  "norma": "Manual de Orientação do Leiaute (ADE Cofis nº 2/2026 e nº 38/2024)",
+  "leiautes": [
+   "11",
+   "12"
+  ],
+  "vigencia": {
+   "acNormal": [
+    2024,
+    2025
+   ],
+   "situacaoEspecial": []
+  },
+  "verificadoEm": "2026-11-25",
+  "status": "conferido"
+ },
+ {
+  "id": "scp",
+  "termo": "SCP",
+  "sinonimos": [
+   "Sociedade em Conta de Participação",
+   "Sociedades em Conta de Participação"
+  ],
+  "dica": true,
+  "iniciante": "Sociedade ligada a uma sócia ostensiva. Cada uma entrega a própria ECF.",
+  "profissional": "Sociedade em Conta de Participação: a ECF é transmitida separadamente para cada SCP, além da ECF da sócia ostensiva.",
+  "regras": [
+   "scp"
+  ],
+  "registros": [
+   "0035"
+  ],
+  "fonte": {
+   "id": "in-2004",
+   "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/114966",
+   "trecho": "art. 1º, § 3º"
+  },
+  "norma": "IN RFB nº 2.004/2021, art. 1º, § 3º",
+  "leiautes": [
+   "11",
+   "12"
+  ],
+  "vigencia": {
+   "acNormal": [
+    2024,
+    2025
+   ],
+   "situacaoEspecial": []
+  },
+  "verificadoEm": "2026-11-25",
+  "status": "conferido"
+ },
+ {
+  "id": "simples",
+  "termo": "Simples Nacional",
+  "sinonimos": [],
+  "dica": true,
+  "iniciante": "Regime simplificado de impostos. Quem está nele o ano todo não entrega a ECF.",
+  "profissional": "A obrigatoriedade da ECF não se aplica às pessoas jurídicas optantes.",
+  "regras": [
+   "dispensa-simples",
+   "simples-saida"
+  ],
+  "registros": [],
+  "fonte": {
+   "id": "in-2004",
+   "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/114966",
+   "trecho": "art. 1º, § 1º, I"
+  },
+  "norma": "IN RFB nº 2.004/2021, art. 1º, § 1º, I",
+  "leiautes": [
+   "11",
+   "12"
+  ],
+  "vigencia": {
+   "acNormal": [
+    2024,
+    2025
+   ],
+   "situacaoEspecial": []
+  },
+  "verificadoEm": "2026-11-25",
+  "status": "conferido"
+ },
+ {
+  "id": "situacao-especial",
+  "termo": "situação especial",
+  "sinonimos": [
+   "situações especiais"
+  ],
+  "dica": true,
+  "iniciante": "Mudanças grandes na vida da empresa, como extinção, fusão, cisão ou incorporação.",
+  "profissional": "Extinção, fusão, incorporação e cisão total ou parcial, com prazo de entrega próprio.",
+  "regras": [
+   "prazo-especial-1"
+  ],
+  "registros": [
+   "0000"
+  ],
+  "fonte": {
+   "id": "manual-12",
+   "url": "https://www.gov.br/sped/pt-br/assuntos/escrituracoes-digitais/ecf/manuais-e-documentos-tecnicos",
+   "trecho": "Capítulo 1, introdução. Mesmo conteúdo no Manual do leiaute 11"
+  },
+  "norma": "Manual de Orientação do Leiaute (ADE Cofis nº 2/2026 e nº 38/2024)",
+  "leiautes": [
+   "11",
+   "12"
+  ],
+  "vigencia": {
+   "acNormal": [
+    2024,
+    2025
+   ],
+   "situacaoEspecial": []
+  },
+  "verificadoEm": "2026-11-25",
+  "status": "conferido"
+ },
+ {
+  "id": "sped",
+  "termo": "Sped",
+  "sinonimos": [
+   "Sistema Público de Escrituração Digital"
+  ],
+  "dica": true,
+  "iniciante": "O sistema do governo que recebe os livros e documentos digitais das empresas.",
+  "profissional": "Unifica a recepção, a validação, o armazenamento e a autenticação de livros e documentos, em fluxo único e computadorizado.",
+  "regras": [
+   "sped"
+  ],
+  "registros": [],
+  "fonte": {
+   "id": "decreto-6022",
+   "url": "https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2007/decreto/d6022.htm",
+   "trecho": "art. 2º, redação do Decreto nº 7.979/2013"
+  },
+  "norma": "Decreto nº 6.022/2007, art. 2º",
+  "leiautes": [
+   "11",
+   "12"
+  ],
+  "vigencia": {
+   "acNormal": [
+    2024,
+    2025
+   ],
+   "situacaoEspecial": []
+  },
+  "verificadoEm": "2026-11-25",
+  "status": "conferido"
+ },
+ {
+  "id": "tabela-dinamica",
+  "termo": "tabela dinâmica",
+  "sinonimos": [
+   "tabelas dinâmicas"
+  ],
+  "dica": true,
+  "iniciante": "Listas de linhas que a Receita publica e atualiza, usadas em vários registros.",
+  "profissional": "Nos registros com tabela dinâmica, basta informar o código da linha e o valor; a descrição é preenchida pelo programa.",
+  "regras": [],
+  "registros": [],
+  "fonte": {
+   "id": "manual-12",
+   "url": "https://www.gov.br/sped/pt-br/assuntos/escrituracoes-digitais/ecf/manuais-e-documentos-tecnicos",
+   "trecho": "Capítulo 1, informações sobre tabelas dinâmicas. Mesmo conteúdo no Manual do leiaute 11"
+  },
+  "norma": "Manual de Orientação do Leiaute (ADE Cofis nº 2/2026 e nº 38/2024)",
+  "leiautes": [
+   "11",
+   "12"
+  ],
+  "vigencia": {
+   "acNormal": [
+    2024,
+    2025
+   ],
+   "situacaoEspecial": []
+  },
+  "verificadoEm": "2026-11-25",
+  "status": "conferido"
+ }
+]

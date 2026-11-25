@@ -1,0 +1,599 @@
+{
+ "rastreio": {
+  "id": "arq-11-j",
+  "fonte": {
+   "id": "manual-11",
+   "url": "https://www.gov.br/sped/pt-br/assuntos/escrituracoes-digitais/ecf/manuais-e-documentos-tecnicos",
+   "trecho": "Seção do bloco J"
+  },
+  "norma": "ADE Cofis nº 38/2024",
+  "leiautes": [
+   "11"
+  ],
+  "vigencia": {
+   "acNormal": [
+    2024
+   ],
+   "situacaoEspecial": [
+    2025
+   ]
+  },
+  "verificadoEm": "2026-11-24",
+  "status": "extraido"
+ },
+ "bloco": "J",
+ "descricao": "Apresenta o mapeamento do plano de contas contábil para o plano de contas referencial.\nCaso a ECD recuperada possua o mapeamento para o plano de contas referencial válido na ECF, o bloco J pode ser construído automaticamente e é permitida a sua edição.",
+ "registros": [
+  {
+   "codigo": "J001",
+   "nome": "Abertura do Bloco J",
+   "ordem": 29,
+   "nivel": "1",
+   "ocorrencia": "[1;1]",
+   "chave": "[REG]",
+   "entrada": "F",
+   "saida": "O",
+   "descricao": [],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto fixo contendo a identificação do registro (J001).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[J001]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "IND_DAD",
+     "descricao": "Indicador de movimento:\n0 – Bloco com dados informados.\n1 – Bloco sem dados informados.",
+     "tipo": "N",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[0;1]",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_OCORRENCIA_UNITARIA_ARQ",
+     "texto": "Verifica se registro ocorreu apenas uma vez por arquivo, considerando a chave “J001” (REG). Se a regra não for cumprida, a ECF gera um erro."
+    }
+   ],
+   "regrasCampo": [],
+   "exemplo": [
+    "|J001|0|",
+    "|J001|: Identificação do tipo do registro.",
+    "|0|: Indica que o bloco possui dados informados."
+   ]
+  },
+  {
+   "codigo": "J050",
+   "nome": "Plano de Contas do Contribuinte",
+   "ordem": 30,
+   "nivel": "2",
+   "ocorrencia": "[0;N]",
+   "chave": "DT_ALT + COD_CTA",
+   "entrada": "F",
+   "saida": "OC\n(Se (0010. FORMA_TRIB = “1”, “2”, “3” ou “4”)\nOu (0010. FORMA_TRIB = “5” ou “7” ou “8” ou “9” E 0010.TIP_ESC_PRE = “C”))",
+   "descricao": [
+    "Registro onde deve ser informado o plano de contas da empresa."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto fixo contendo a identificação do registro (J050).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[J050]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "DT_ALT",
+     "descricao": "Data de Atualização (inclusão/ alteração).",
+     "tipo": "N",
+     "tamanho": "8",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "COD_NAT",
+     "descricao": "Código da Natureza da Conta Analítica ou Sintética:\n01 – Contas do Ativo\n02 – Contas do Passivo\n03 – Contas do Patrimônio Líquido\n04 – Contas de Resultado\n05 – Contas de Compensação\n09 – Outras",
+     "tipo": "C",
+     "tamanho": "2",
+     "decimal": "—",
+     "valores": "[01; 02; 03; 04; 05; 09]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 4,
+     "nome": "IND_CTA",
+     "descricao": "Indicador do Tipo de Conta:\nS - Sintética (grupo de contas)\nA - Analítica (conta)",
+     "tipo": "C",
+     "tamanho": "1",
+     "decimal": "—",
+     "valores": "[S; A]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 5,
+     "nome": "NÍVEL",
+     "descricao": "Nível da Conta Analítica/Sintética: Número crescente a partir da conta de menor detalhamento. Deve ser acrescido de “1” a cada mudança de nível.\nExemplo:\nNível 1 = Ativo\nNível 2 = Ativo Circulante\nNível 3 = Disponível\nNível 4 = Caixa Geral\nNível 5 = Caixa",
+     "tipo": "N",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 6,
+     "nome": "COD_CTA",
+     "descricao": "Código da Conta Analítica/Sintética.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 7,
+     "nome": "COD_CTA_SUP",
+     "descricao": "Código da Conta Sintética de Nível Imediatamente Superior.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 8,
+     "nome": "CTA",
+     "descricao": "Nome da Conta Analítica.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_REGISTRO_OBRIGATORIO_J051",
+     "texto": "Verifica se existe, pelo menos, um registro J051 caso o J050.IND_CTA seja igual a “A” (analítica) e J050.COD_NAT igual a “01” (Contas do Ativo), “02” (Contas do Passivo), “03” (Contas do Patrimônio Líquido) ou “04” (Contas de Resultado). Se a regra não for cumprida, a ECF gera um erro."
+    }
+   ],
+   "regrasCampo": [
+    {
+     "campo": "DT_ALT",
+     "regras": [
+      {
+       "codigo": "REGRA_DT_ALT_DATA_MAIOR",
+       "texto": "Verifica se J050.DT_ALT é menor ou igual a 0000.DT_FIN.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "COD_NAT",
+     "regras": [
+      {
+       "codigo": "REGRA_NATUREZA_J050_C050",
+       "texto": "Verifica se a conta informada no registro J050 (J050.COD_CTA) existe no registro C050 (C050.COD_CTA) e se possui a mesma natureza (J050.COD_NAT = C050.COD_NAT).",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "NIVEL",
+     "regras": [
+      {
+       "codigo": "REGRA_MAIOR_QUE_UM",
+       "texto": "Verifica se o valor informado para J050.NIVEL é maior ou igual a 1.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_ANALITICA_NIVEL4",
+       "texto": "Verifica se J050.NIVEL é maior ou igual a quatro (4) para uma conta analítica patrimonial.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "COD_CTA_SUP",
+     "regras": [
+      {
+       "codigo": "REGRA_COD_CTA_SUP_OBRIGATORIO",
+       "texto": "Verifica se J050.NIVEL é maior que 1. Caso afirmativo, executa a REGRA_CAMPO_OBRIGATORIO (Verifica se o campo foi preenchido com algum valor diferente de vazio e do caractere “espaço”).",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_CTA_DE_NIVEL_SUPERIOR_INVALIDA",
+       "texto": "Verifica se J050.NVEL é maior que 1. Caso afirmativo, verifica as seguintes regras:",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_CONTA_NO_PLANO_CONTAS",
+       "texto": "Verifica se J050.COD_CTA_SUP existe no plano de contas (Registro J050).",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_CONTA_NIVEL_SUPERIOR_NAO_SINTETICA",
+       "texto": "Localiza o registro em que o J050.COD_CTA tenha o mesmo valor do J050.COD_CTA_SUP. Neste registro, o J050.IND_CTA deve ser igual a \"S\" (Sintética).",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_NIVEL_DE_CONTA_NIVEL_SUPERIOR_INVALIDO",
+       "texto": "Localiza o registro em que o J050.COD_CTA tenha o mesmo valor do J050.COD_CTA_SUP. Neste registro, o J050.NIVEL deve ser menor que o nível atual.\nVerifica se J050.NIVEL maior que 2. Se afirmativo, verifica a regra: REGRA_NATUREZA_CONTA (Verifica se a conta de nível superior tem a mesma natureza (J050.COD_NAT) da subconta).",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_CONTA_SUPERIOR_NAO_SE_APLICA",
+       "texto": "Verifica, caso J050.NIVEL seja igual “1”, se J050.COD_CTA_SUP não foi informado.",
+       "tipo": "Erro"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|J050|01012014|01|S|1|1||Ativo Sintética 1|",
+    "|J050|: Identificação do tipo do registro.",
+    "|01012014|: Data da inclusão/alteração: 01012014 (01/01/2014).",
+    "|01|: Código da natureza da conta/Grupo de Contas (01 = Conta do Ativo).",
+    "|S|: Indicador do tipo de conta (S = Conta Sintética).",
+    "|1|: Nível da conta (1 = Conta de Nível 1).",
+    "|1|: Código da Conta Analítica/Grupo de Contas.",
+    "||: Código da Conta Sintética/Grupo de Contas de Nível Imediatamente Superior (Não há).",
+    "|Ativo Sintética 1|: Nome da Conta Analítica/Grupo de Contas.",
+    "|J050|01012014|01|S|2|1.1|1|Ativo Sintética 2|",
+    "|J050|: Identificação do tipo do registro.",
+    "|01012014|: Data da inclusão/alteração: 01012014 (01/01/2014).",
+    "|01|: Código da natureza da conta/Grupo de Contas (01 = Conta do Ativo).",
+    "|S|: Indicador do tipo de conta (S = Conta Sintética).",
+    "|2|: Nível da conta (2 = Conta de Nível 2).",
+    "|1.1|: Código da Conta Analítica/Grupo de Contas.",
+    "|1|: Código da Conta Sintética/Grupo de Contas de Nível Imediatamente Superior.",
+    "|Ativo Sintética 2|: Nome da Conta Analítica/Grupo de Contas.",
+    "|J050|01012014|01|S|3|1.1.1|1.1|Ativo Sintética 3|",
+    "|J050|: Identificação do tipo do registro.",
+    "|01012014|: Data da inclusão/alteração: 01012014 (01/01/2014).",
+    "|01|: Código da natureza da conta/Grupo de Contas (01 = Conta do Ativo).",
+    "|S|: Indicador do tipo de conta (S = Conta Sintética).",
+    "|3|: Nível da conta (3 = Conta de Nível 3).",
+    "|1.1.1|: Código da Conta Analítica/Grupo de Contas.",
+    "|1.1|: Código da Conta Sintética/Grupo de Contas de Nível Imediatamente Superior.",
+    "|Ativo Sintética 3|: Nome da Conta Analítica/Grupo de Contas.",
+    "|J050|01012014|01|A|4|1.1.1.1|1.1.1.1|Ativo Analítica 1|",
+    "|J050|: Identificação do tipo do registro.",
+    "|01012014|: Data da inclusão/alteração: 01012014 (01/01/2014).",
+    "|01|: Código da natureza da conta/Grupo de Contas (01 = Conta do Ativo).",
+    "|A|: Indicador do tipo de conta (A = Conta Analítica).",
+    "|4|: Nível da conta (4 = Conta de Nível 4).",
+    "|1.1.1.1|: Código da Conta Analítica/Grupo de Contas.",
+    "|1.1.1|: Código da Conta Sintética/Grupo de Contas de Nível Imediatamente Superior.",
+    "|Ativo Analítica 1|: Nome da Conta Analítica/Grupo de Contas."
+   ]
+  },
+  {
+   "codigo": "J051",
+   "nome": "Plano de Contas Referencial",
+   "ordem": 31,
+   "nivel": "3",
+   "ocorrencia": "Se J050.IND_CTA = “A” [1:N]\nSenão [0]",
+   "chave": "COD_CTA_REF + COD_CCUS",
+   "entrada": "F",
+   "saida": "OC\n(Se (J050.IND_CTA = “A”) E (J050.COD_NAT = “01” ou “02” ou “03” ou “04”)\nOu (0010. FORMA_TRIB = “5” ou “7” ou “8” ou “9” E 0010.TIP_ESC_PRE = “C”)",
+   "descricao": [
+    "Registro destinado a informar o plano de contas referencial da instituição gestora, referenciando com as respectivas contas do plano de contas da pessoa jurídica.",
+    "Somente devem ser referenciadas as contas analíticas com natureza de conta (J050.COD_NAT) igual a “01” (contas de ativo), “02” (contas de passivo), “03” (patrimônio líquido) e “04” (contas de resultado).",
+    "Observação:",
+    "1.- Caso a empresa se utilize de centro de custos para referenciamento na ECD, da mesma forma deve proceder para referenciamento na ECF",
+    "2.- Caso a pessoa jurídica utilize subcontas auxiliares conforme previsão dos arts. 295, 296, 298 e 299 da Instrução Normativa RFB nº 1.700, de 14 de março de 2017, as subcontas auxiliares devem ser mapeadas para a conta referencial “pai” da respectiva subconta.",
+    "Exemplo:"
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (J051).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[J051]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "COD_CCUS",
+     "descricao": "Código do Centro de Custos.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Não"
+    },
+    {
+     "numero": 3,
+     "nome": "COD_CTA_REF",
+     "descricao": "Código da Conta no Plano de Contas Referencial Definido em 0010.COD_QUALIF_PJ, conforme tabela publicada no Sped.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [
+    {
+     "campo": "COD_CCUS",
+     "regras": [
+      {
+       "codigo": "REGRA_CCUS_NO_CENTRO_CUSTOS",
+       "texto": "Verifica se o código do centro de custos J051.COD_CCUS existe no registro J100 (Centro de Custos).",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "COD_CTA_REF",
+     "regras": [
+      {
+       "codigo": "REGRA_NAO_EXISTE_COD_CTA_REF",
+       "texto": "Verifica se o J051.COD_CTA_REF existe no plano de contas referencial.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_COD_CTA_REF_SINTETICA",
+       "texto": "Verifica se conta informada é sintética no plano de contas referencial.",
+       "tipo": "Erro"
+      },
+      {
+       "codigo": "REGRA_NATUREZA_REF",
+       "texto": "Verifica se a natureza da conta referencial utilizada é igual a natureza da conta contábil do registro J050.",
+       "tipo": "Erro"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|J051||1.01.01.01.01|",
+    "|J051|: Identificação do tipo do registro.",
+    "||: Código do centro de custo (Não há).",
+    "|1.01.01.01.01|: Código da conta referencial (1.01.01.01.01 = Caixa Matriz)."
+   ]
+  },
+  {
+   "codigo": "J053",
+   "nome": "Subcontas Correlatas",
+   "ordem": 32,
+   "nivel": "3",
+   "ocorrencia": "[0;N]",
+   "chave": "COD_CNT_CORR",
+   "entrada": "F",
+   "saida": "F",
+   "descricao": [
+    "Registro utilizado para demonstrar os grupos (J053.COD_IDT) compostos de uma conta “pai” e uma ou mais subcontas correlatas. É possível utilizar o mesmo código de identificação do grupo para mais de um conjunto de conta “pai” e subconta(s).",
+    "Exemplo: Grupo 1 – Conta pai (informada no registro J050) = Veículos / Subconta = Ajuste a Valor Presente (AVP) (também deve estar informada no J050).",
+    "Grupo 2 – Conta pai (informada no registro J050) = Depreciação Acumulada/ Subconta = Ajuste a Valor Presente de Depreciação (também deve estar informada no J050).",
+    "Observação: De acordo com o artigo 300, §§ 3° e 4º, da Instrução Normativa RFB nº 1.700/2017, caso a própria conta do ativo ou passivo seja utilizada como subconta correlata, o registro I053 não deve ser informado."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (J053).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[J053]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "COD_IDT",
+     "descricao": "Código de Identificação do Grupo Formado por Conta-Subconta(s).\n(Criado pela pessoa jurídica).",
+     "tipo": "C",
+     "tamanho": "6",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "COD_CNT_CORR",
+     "descricao": "Código da Subconta Correlata.\n(Deve estar no plano de contas e só pode estar relacionada a um único grupo)",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 4,
+     "nome": "NAT_SUB_CNT",
+     "descricao": "Natureza da Subconta Correlata.\n(Conforme tabela de natureza da subconta )",
+     "tipo": "C",
+     "tamanho": "2",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [
+    {
+     "codigo": "REGRA_REGISTRO_PARA_CONTA_ANALITICA",
+     "texto": "O registro J053 somente poderá existir quando o valor do campo J050.IND_CTA for igual a “A” (Analítica). Se a regra não for cumprida, a ECF gera um erro (O erro ocorre se existe o registro J053 e J050.IND_CTA é diferente de “A”)."
+    },
+    {
+     "codigo": "REGRA_COD_CTA_DUPLICIDADE",
+     "texto": "Verifica se J053.COD_CNT_CORR pertence a uma única conta no plano de contas (J050.COD_CTA). Se a regra não for cumprida, a ECF gera um erro."
+    },
+    {
+     "codigo": "REGRA_SUB_CONTA_PAI",
+     "texto": "Verifica se a subconta não possui filhos J053. Se a regra não for cumprida, o sistema gera um erro (O erro ocorre se a conta J050.COD_CTA possui registros filhos J053 e essa conta já foi subconta em outro grupo)."
+    }
+   ],
+   "regrasCampo": [
+    {
+     "campo": "COD_IDT",
+     "regras": [
+      {
+       "codigo": "REGRA_COD_IDT_UNICO_POR_CONTA",
+       "texto": "Verifica se todos os J053 filhos de uma conta do plano de contas (J050.COD_CTA) possuem o mesmo J053.COD_IDT. O erro ocorre se os filhos de uma conta do plano de contas (J050) possuem J053.COD_IDT diferentes entre si.",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "COD_CNT_CORR",
+     "regras": [
+      {
+       "codigo": "REGRA_SUBCONTA_NO_PLANO_CONTAS",
+       "texto": "Verifica se a subconta informada no registro J053 (J053.COD_CNT_CORR) existe no plano de contas (J050.COD_CTA).",
+       "tipo": "Erro"
+      }
+     ]
+    },
+    {
+     "campo": "NAT_SUB_CNT",
+     "regras": [
+      {
+       "codigo": "REGRA_NAT_090_UNICA_POR_CONTA",
+       "texto": "Verifica se existe no máximo duas subcontas de natureza 90 ou 91 ou 92 ou 93 ou 95 (J053.NAT_SUB_CNT) para cada conta (J050.COD_CTA).",
+       "tipo": "Erro"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|J053|FT1234|1.05.01.10|02|",
+    "|J053|: Identificação do tipo do registro.",
+    "|FT1234|: Código de identificação do grupo conta-subconta(s).",
+    "|1.05.01.10|: Código da subconta correlata.",
+    "|02|: Natureza da subconta correlata (02 = SUBCONTA TBU - CONTROLADA DIRETA NO EXTERIOR)."
+   ]
+  },
+  {
+   "codigo": "J100",
+   "nome": "Centro de Custos",
+   "ordem": 33,
+   "nivel": "2",
+   "ocorrencia": "[0;N]",
+   "chave": "DT_ALT + COD_CCUS",
+   "entrada": "F",
+   "saida": "FC\n(Se (0010.FORMA_TRIB = “1” ou “2” ou “3” ou “4”)\nOu (0010. FORMA_TRIB = “5” ou “7” ou “8” ou “9” E 0010.TIP_ESC_PRE = “C”))",
+   "descricao": [
+    "Registro destinado à informação dos centros de custos utilizados pela pessoa jurídica."
+   ],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto Fixo Contendo a Identificação do Registro (J100).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[J100]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "DT_ALT",
+     "descricao": "Data da Inclusão/Alteração.",
+     "tipo": "N",
+     "tamanho": "8",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 3,
+     "nome": "COD_CCUS",
+     "descricao": "Código do Centro de Custos.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 4,
+     "nome": "CCUS",
+     "descricao": "Nome do Centro de Custos.",
+     "tipo": "C",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [
+    {
+     "campo": "DT_ALT",
+     "regras": [
+      {
+       "codigo": "REGRA_DT_ALT_DATA_MAIOR",
+       "texto": "Verifica se J100.DT_ALT é menor ou igual a 0000.DT_FIN.",
+       "tipo": "Erro"
+      }
+     ]
+    }
+   ],
+   "exemplo": [
+    "|J100|01012024|1234|CENTRO DE CUSTOS 1234|",
+    "|J100|: Identificação do tipo do registro.",
+    "|01012024|: Data da alteração (01/01/2024).",
+    "|1234|: Código do centro de custos.",
+    "|CENTRO DE CUSTOS 1234|: Nome do centro de custos."
+   ]
+  },
+  {
+   "codigo": "J990",
+   "nome": "Encerramento do Bloco J",
+   "ordem": 34,
+   "nivel": "1",
+   "ocorrencia": "[1;1]",
+   "chave": "[REG]",
+   "entrada": "F",
+   "saida": "O",
+   "descricao": [],
+   "campos": [
+    {
+     "numero": 1,
+     "nome": "REG",
+     "descricao": "Texto fixo contendo a identificação do registro (J990).",
+     "tipo": "C",
+     "tamanho": "4",
+     "decimal": "—",
+     "valores": "[J990]",
+     "obrigatorio": "Sim"
+    },
+    {
+     "numero": 2,
+     "nome": "QTD_LIN",
+     "descricao": "Quantidade total de registros do Bloco J.",
+     "tipo": "N",
+     "tamanho": "—",
+     "decimal": "—",
+     "valores": "—",
+     "obrigatorio": "Sim"
+    }
+   ],
+   "regrasRegistro": [],
+   "regrasCampo": [],
+   "exemplo": [
+    "|J990|2000|",
+    "|J990|: Identificação do tipo do registro.",
+    "|2000|: A quantidade total de registros do Bloco J é 2.000 (dois mil registros)."
+   ]
+  }
+ ]
+}

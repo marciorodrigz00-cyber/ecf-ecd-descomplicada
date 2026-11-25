@@ -1,0 +1,29 @@
+{
+  "id": "nov-ade-cofis-2-2026",
+  "slug": "ade-cofis-2-2026",
+  "data": "2026-01-29",
+  "tipo": "norma",
+  "titulo": "Aprovado o Manual do leiaute 12",
+  "iniciante": "Saiu a norma que aprova o guia de preenchimento do ano-calendário 2025.",
+  "profissional": "O ato aprova o Manual de Orientação do Leiaute 12, publicado no DOU de 29/01/2026, seção 1, página 55, com vigência na data da publicação.",
+  "registros": [],
+  "fonte": {
+    "id": "normas-rfb",
+    "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/149043",
+    "trecho": "Arts. 1º e 2º"
+  },
+  "norma": "ADE Cofis nº 2/2026",
+  "leiautes": [
+    "12"
+  ],
+  "vigencia": {
+    "acNormal": [
+      2025
+    ],
+    "situacaoEspecial": [
+      2026
+    ]
+  },
+  "verificadoEm": "2026-11-25",
+  "status": "conferido"
+}

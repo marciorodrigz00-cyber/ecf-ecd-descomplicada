@@ -1,0 +1,65 @@
+{
+  "id": "nov-programa-12-2-2",
+  "slug": "programa-12-2-2",
+  "data": "2026-07-28",
+  "tipo": "programa",
+  "titulo": "Programa da ECF: versão 12.2.2",
+  "iniciante": "Saiu uma versão nova do programa que monta e envia a ECF. Ela substitui a anterior.",
+  "profissional": "Corrige erro de data no registro W100 e melhora a geração e a recuperação da cópia de segurança. A versão 12.2.1 seguiu aceita até o fim do prazo de entrega. Serve para o leiaute 12 e, conforme o comunicado, também para originais e retificadoras dos leiautes 1 a 11.",
+  "fazer": "Confira na página oficial de download qual é a versão atual antes de instalar.",
+  "registros": [
+    "W100"
+  ],
+  "fonte": {
+    "id": "sped-comunicados",
+    "url": "https://www.gov.br/sped/pt-br/assuntos/comunicados/ecf/copy4_of_publicacao-da-versao-12-1-7-do-programa-da-ecf",
+    "trecho": "Texto do comunicado"
+  },
+  "norma": "Programa da ECF (RFB)",
+  "leiautes": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "11",
+    "12"
+  ],
+  "vigencia": {
+    "acNormal": [
+      2014,
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024,
+      2025
+    ],
+    "situacaoEspecial": [
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024,
+      2025,
+      2026
+    ]
+  },
+  "verificadoEm": "2026-11-25",
+  "status": "conferido"
+}
