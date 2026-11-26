@@ -2,10 +2,11 @@
 
 import { ChevronRight, Menu, X } from "lucide-react";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useRef } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { Suspense, useEffect, useRef } from "react";
 import { Busca } from "@/components/busca";
 import { cn } from "@/lib/cn";
+import { ENDERECO_MUDOU } from "@/lib/parametros";
 import { preferenciasAgora } from "@/lib/preferencias";
 import { SECOES, anoDaUrl, caminhoBase, rota, secaoDoCaminho, type Ausentes } from "@/lib/rotas";
 import { BotaoTema, SeletorAno, SeletorNivel } from "./controles";
@@ -45,6 +46,15 @@ function ItensMenu({ padrao, vertical, aoIr }: { padrao: number; vertical?: bool
   );
 }
 
+/** Sem tela. O Suspense deixa só este pedaço fora do HTML gerado; o resto da página continua estático. */
+function AvisoEndereco() {
+  const busca = useSearchParams().toString();
+  useEffect(() => {
+    window.dispatchEvent(new Event(ENDERECO_MUDOU));
+  }, [busca]);
+  return null;
+}
+
 export function Cabecalho({ anos, padrao, ausentes }: Props) {
   const pathname = usePathname();
   const router = useRouter();
@@ -58,23 +68,39 @@ export function Cabecalho({ anos, padrao, ausentes }: Props) {
     entradaTratada = true;
     const pref = preferenciasAgora().ano;
     if (pathname === "/" && pref !== null && pref !== padrao && anos.includes(pref)) {
-      router.replace(rota("/", pref, padrao));
+      // Leva junto a seleção que veio no link.
+      router.replace(rota("/", pref, padrao) + window.location.search);
     }
   }, [anos, padrao, pathname, router]);
 
-  // Nova seção: leva o foco ao título, sem mexer na rolagem que o navegador já fez.
+  // Voltar e Avançar devolvem a rolagem de antes: só a ida por link começa no topo.
+  const historico = useRef<string | null>(null);
+  useEffect(() => {
+    const anotar = () => {
+      historico.current = window.location.pathname;
+    };
+    window.addEventListener("popstate", anotar);
+    return () => window.removeEventListener("popstate", anotar);
+  }, []);
+
+  // Nova seção: começa no topo, com o foco no título. O Next mantém a rolagem quando a página nova já está visível.
   useEffect(() => {
     if (anterior.current === pathname) return;
     anterior.current = pathname;
     const h1 = document.querySelector<HTMLElement>("h1");
     h1?.setAttribute("tabindex", "-1");
     h1?.focus({ preventScroll: true });
+    if (historico.current !== pathname && !window.location.hash) window.scrollTo(0, 0);
+    historico.current = null;
   }, [pathname]);
 
   const fechar = () => dialogo.current?.close();
 
   return (
     <header className="border-b border-linha bg-superficie">
+      <Suspense fallback={null}>
+        <AvisoEndereco />
+      </Suspense>
       <div className="mx-auto flex max-w-[92rem] items-center justify-between gap-4 px-4 py-3 sm:px-6">
         <Link
           href={rota("/", ano, padrao)}

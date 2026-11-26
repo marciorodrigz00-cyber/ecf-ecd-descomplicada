@@ -31,7 +31,8 @@ test("[CT-067] feed: filtros, detalhe, F5 e Voltar", async ({ page }) => {
   await page.goBack();
   await expect(page).toHaveURL(/programa-12-2-2$/);
   await page.goBack();
-  await expect(itens(page)).toHaveCount(15);
+  // O filtro de leiaute continua no endereço.
+  await expect(itens(page)).toHaveCount(14);
 });
 
 test("[CT-068] novidades nos dois anos, com endereço canônico único", async ({ page }) => {

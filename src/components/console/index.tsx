@@ -8,6 +8,7 @@ import { ICONES } from "@/components/ecf/icones";
 import { registrarFeito, registrarVisita } from "@/components/layout/trilha";
 import { Cartao, Nivel, estiloBotao } from "@/components/ui";
 import { cn } from "@/lib/cn";
+import { useParametros } from "@/lib/parametros";
 import type { ResumoRegistro } from "@/lib/exemplos/por-registro";
 
 type Situacao = "sim" | "depende" | "nao";
@@ -39,7 +40,6 @@ const POS: Record<string, readonly [number, number]> = {
 const INICIAL: Record<string, string> = { real: "M", presumido: "P", arbitrado: "T", imune: "U", isenta: "U" };
 const TEXTO_SITUACAO: Record<Situacao, string> = { sim: "Existe", depende: "Depende da situação", nao: "Não existe" };
 const ABAS = ["ligacoes", "registros", "erros", "regime"] as const;
-type Aba = (typeof ABAS)[number];
 const INTERVALO = 4000;
 const chip =
   "inline-flex min-h-11 items-center gap-2 rounded-lg border border-linha bg-fundo px-4 font-medium text-tinta hover:border-marca aria-pressed:border-marca aria-pressed:bg-marca aria-pressed:font-semibold aria-pressed:text-sobre-marca";
@@ -53,9 +53,13 @@ function traco([x1, y1]: readonly [number, number], [x2, y2]: readonly [number, 
 }
 
 export function Console({ nos, ligacoes, regimes, ano }: Props) {
-  const [regime, setRegime] = useState(regimes[0]!.id);
-  const [sel, setSel] = useState("M");
-  const [aba, setAba] = useState<Aba>("ligacoes");
+  const padrao = { regime: regimes[0]!.id, bloco: "M", aba: "ligacoes" };
+  const [{ regime, bloco: sel, aba }, mudar] = useParametros(padrao, (lidos) => {
+    const r = regimes.some((x) => x.id === lidos.regime) ? lidos.regime : padrao.regime;
+    const no = nos.find((n) => n.id === lidos.bloco);
+    const some = !no || no.bloco?.celulas[r] === "nao";
+    return { regime: r, bloco: some ? (INICIAL[r] ?? padrao.bloco) : no.id, aba: (ABAS as readonly string[]).includes(lidos.aba) ? lidos.aba : padrao.aba };
+  });
   const [aberto, setAberto] = useState<string | null>(null);
   const [passo, setPasso] = useState<number | null>(null);
   const [tocando, setTocando] = useState(false);
@@ -69,9 +73,8 @@ export function Console({ nos, ligacoes, regimes, ano }: Props) {
   const atual = nos.find((n) => n.id === sel)!;
   const vizinhos = new Set(ativas.flatMap((l) => (l.de === sel ? [l.para] : l.para === sel ? [l.de] : [])));
 
-  function abrir(id: string, novaAba: Aba = aba) {
-    setSel(id);
-    setAba(novaAba);
+  function abrir(id: string, novaAba = aba) {
+    mudar({ bloco: id, aba: novaAba });
     setAberto(null);
     if (nos.find((n) => n.id === id)?.bloco) registrarVisita(id);
   }
@@ -83,7 +86,7 @@ export function Console({ nos, ligacoes, regimes, ano }: Props) {
   function mudarRegime(id: string) {
     setTocando(false);
     setPasso(null);
-    setRegime(id);
+    mudar({ regime: id });
     const no = nos.find((n) => n.id === sel)!;
     if (no.bloco && no.bloco.celulas[id] === "nao") abrir(INICIAL[id]!, "ligacoes");
   }
@@ -248,7 +251,7 @@ export function Console({ nos, ligacoes, regimes, ano }: Props) {
         {atual.bloco && (
           <div role="group" aria-label="Conteúdo do bloco" className="mt-4 flex flex-wrap gap-2">
             {ABAS.map((a) => (
-              <button key={a} type="button" aria-pressed={aba === a} onClick={() => { setTocando(false); setAba(a); setAberto(null); }} className={chip}>
+              <button key={a} type="button" aria-pressed={aba === a} onClick={() => { setTocando(false); mudar({ aba: a }); setAberto(null); }} className={chip}>
                 {a === "ligacoes" ? "Ligações" : a === "registros" ? `Registros (${atual.bloco!.registros.length})` : a === "erros" ? `Erros comuns (${atual.bloco!.erros.length})` : "Em cada regime"}
               </button>
             ))}

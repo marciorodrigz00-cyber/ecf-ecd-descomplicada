@@ -2,9 +2,10 @@
 
 import { Check, CircleHelp, Minus } from "lucide-react";
 import Link from "next/link";
-import { useId, useState } from "react";
+import { useId } from "react";
 import { Etiqueta } from "@/components/ui";
 import { ordinal } from "@/lib/formatos";
+import { useParametros } from "@/lib/parametros";
 import type { Regime, Situacao } from "@/schemas";
 import { ICONES } from "./icones";
 
@@ -38,8 +39,12 @@ export type CartaoBloco = {
 };
 
 export function BlocosPorRegime({ blocos, regimes }: { blocos: CartaoBloco[]; regimes: { id: Regime; nome: string }[] }) {
-  const [regime, setRegime] = useState<Regime | null>(null);
-  const [soAplicaveis, setSo] = useState(false);
+  const [valores, mudar] = useParametros({ regime: "", so: "" }, (lidos) => ({
+    regime: regimes.some((r) => r.id === lidos.regime) ? lidos.regime : "",
+    so: lidos.so === "previstos" ? "previstos" : "",
+  }));
+  const regime = regimes.find((r) => r.id === valores.regime)?.id ?? null;
+  const soAplicaveis = valores.so === "previstos";
   const id = useId();
   const lista = regime && soAplicaveis ? blocos.filter((b) => b.celulas[regime] !== "nao") : blocos;
   return (
@@ -52,7 +57,7 @@ export function BlocosPorRegime({ blocos, regimes }: { blocos: CartaoBloco[]; re
           <select
             id={id}
             value={regime ?? ""}
-            onChange={(e) => setRegime((e.target.value || null) as Regime | null)}
+            onChange={(e) => mudar({ regime: e.target.value })}
             className="mt-1 min-h-11 rounded-lg border border-controle bg-superficie px-3"
           >
             <option value="">Todos</option>
@@ -68,7 +73,7 @@ export function BlocosPorRegime({ blocos, regimes }: { blocos: CartaoBloco[]; re
             type="checkbox"
             checked={soAplicaveis}
             disabled={!regime}
-            onChange={(e) => setSo(e.target.checked)}
+            onChange={(e) => mudar({ so: e.target.checked ? "previstos" : "" })}
             className="size-5 accent-marca"
           />
           Esconder os não previstos

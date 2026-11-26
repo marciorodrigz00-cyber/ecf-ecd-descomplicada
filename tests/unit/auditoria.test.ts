@@ -84,7 +84,8 @@ describe.skipIf(!temBuild)("Auditoria do site gerado", () => {
     }
   });
 
-  test("[SG-027] nada sensível no pacote publicado", () => {
+  // Lê o site inteiro: em disco lento passa dos 5 s do limite padrão.
+  test("[SG-027] nada sensível no pacote publicado", { timeout: 60_000 }, () => {
     expect(arquivos.filter((f) => /\.(?:map|env|tsx?|ya?ml|lock|pem|key)$|(^|\/)(?:package(?:-lock)?\.json|\.git|node_modules|vercel\.json|CLAUDE\.md|\.claude)(\/|$)/.test(f))).toEqual([]);
     const ruins: [string, RegExp][] = [
       ["segredo", /-----BEGIN [A-Z ]*PRIVATE KEY|\bgh[pousr]_\w{30,}|\bAKIA[0-9A-Z]{16}\b|\bsk-[A-Za-z0-9]{30,}|\bnpm_\w{30,}/],
