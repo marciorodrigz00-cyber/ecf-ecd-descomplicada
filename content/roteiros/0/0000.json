@@ -1,0 +1,100 @@
+{
+  "rastreio": {
+    "id": "roteiro-0000",
+    "fonte": {
+      "id": "manual-12",
+      "url": "https://www.gov.br/sped/pt-br/assuntos/escrituracoes-digitais/ecf/manuais-e-documentos-tecnicos",
+      "trecho": "Registro 0000: campos, obrigatoriedade e regras de validação"
+    },
+    "norma": "ADE Cofis nº 2/2026",
+    "leiautes": ["12"],
+    "vigencia": { "acNormal": [2025], "situacaoEspecial": [2026] },
+    "verificadoEm": "2026-11-26",
+    "status": "conferido"
+  },
+  "registro": "0000",
+  "ano": 2025,
+  "empresa": { "origem": "lucro-real", "nome": "Móveis Aurora Ltda., empresa fictícia do lucro real" },
+  "linha": { "campos": {} },
+  "fatos": [
+    {
+      "texto": {
+        "iniciante": "A empresa é a Móveis Aurora Ltda. O CNPJ é fictício e inválido de propósito, para nunca coincidir com o de uma empresa real.",
+        "profissional": "Móveis Aurora Ltda., CNPJ fictício 99999999000100, com dígitos verificadores inválidos de propósito."
+      },
+      "campos": ["CNPJ", "NOME"]
+    },
+    {
+      "texto": {
+        "iniciante": "Ela começou a funcionar em 1º de julho de 2025. Por isso, a escrituração vai de 01/07 a 31/12/2025.",
+        "profissional": "Início de atividades no ano-calendário: IND_SIT_INI_PER = 1 (abertura), DT_INI 01072025 e DT_FIN 31122025."
+      },
+      "campos": ["IND_SIT_INI_PER", "DT_INI", "DT_FIN"]
+    },
+    {
+      "texto": {
+        "iniciante": "Não passou por fusão, cisão nem outro evento especial, e esta é a primeira entrega, não uma correção.",
+        "profissional": "SIT_ESPECIAL = 0 (sem evento), sem PAT_REMAN_CIS e DT_SIT_ESP; RETIFICADORA = N, sem NUM_REC."
+      },
+      "campos": ["SIT_ESPECIAL", "PAT_REMAN_CIS", "DT_SIT_ESP", "RETIFICADORA", "NUM_REC"]
+    },
+    {
+      "texto": {
+        "iniciante": "Não é sócia ostensiva de SCP.",
+        "profissional": "TIP_ECF = 0; COD_SCP e EVENTO_SCP vazios."
+      },
+      "campos": ["TIP_ECF", "COD_SCP", "EVENTO_SCP"]
+    },
+    {
+      "texto": {
+        "iniciante": "O arquivo é de 2025, então usa o leiaute 12.",
+        "profissional": "NOME_ESC = LECF; COD_VER = 0012, o leiaute do AC 2025."
+      },
+      "campos": ["NOME_ESC", "COD_VER"]
+    }
+  ],
+  "decisao": null,
+  "regras": [
+    { "campo": "COD_VER", "codigo": "REGRA_LEIAUTE_VIGENTE", "simulada": true },
+    { "campo": "CNPJ", "codigo": "REGRA_VALIDA_CNPJ", "simulada": false, "motivo": "O CNPJ da Móveis Aurora é inválido de propósito, para nunca coincidir com o de uma empresa real. O programa da ECF acusaria este erro." },
+    { "campo": "PAT_REMAN_CIS", "codigo": "REGRA_PAT_REMAN_CIS_OBRIGATORIO", "simulada": true },
+    { "campo": "PAT_REMAN_CIS", "codigo": "REGRA_NAO_PREENCHER_SIT_ESP_CISAO_PARCIAL", "simulada": true },
+    { "campo": "DT_SIT_ESP", "codigo": "REGRA_DT_SIT_OBRIGATORIO", "simulada": true },
+    { "campo": "DT_SIT_ESP", "codigo": "REGRA_NAO_PREENCHER_SIT_ESP_NORMAL", "simulada": true },
+    { "campo": "DT_INI", "codigo": "REGRA_DATA_MINIMA", "simulada": true },
+    { "campo": "DT_INI", "codigo": "REGRA_DT_INICIO_ESCRITURACAO", "simulada": true },
+    { "campo": "DT_INI", "codigo": "REGRA_SEM_LEIAUTE", "simulada": true },
+    { "campo": "DT_INI", "codigo": "REGRA_INTERPOLACAO_PGE", "simulada": false, "motivo": "Depende das outras escriturações já abertas no programa da ECF." },
+    { "campo": "DT_INI", "codigo": "REGRA_DATA_INI_MAIOR", "simulada": true },
+    { "campo": "DT_INI", "codigo": "REGRA_ANO_DIFERENTE", "simulada": true },
+    { "campo": "DT_FIN", "codigo": "REGRA_DT_FINAL_ESCRITURACAO", "simulada": true },
+    { "campo": "DT_FIN", "codigo": "REGRA_EVENTO_ACONTECIMENTO", "simulada": true },
+    { "campo": "NUM_REC", "codigo": "REGRA_REC_ANTERIOR_OBRIGATORIO", "simulada": true },
+    { "campo": "NUM_REC", "codigo": "REGRA_DV_RECIBO", "simulada": false, "motivo": "O Manual não descreve o cálculo do dígito do recibo. Nesta ECF original, NUM_REC fica vazio." },
+    { "campo": "NUM_REC", "codigo": "REGRA_NRO_REC_ANTERIOR_NAO_SE_APLICA", "simulada": true },
+    { "campo": "COD_SCP", "codigo": "REGRA_SCP_OBRIGATORIO", "simulada": true },
+    { "campo": "COD_SCP", "codigo": "REGRA_SCP_NAO_PREENCHER", "simulada": true },
+    { "campo": "COD_SCP", "codigo": "REGRA_VALIDA_TAM_SCP", "simulada": true },
+    { "campo": "COD_SCP", "codigo": "REGRA_CNPJ_DIFERENTE_SCP", "simulada": true },
+    { "campo": "COD_SCP", "codigo": "REGRA_VALIDA_CNPJ", "simulada": true },
+    { "campo": "EVENTO_SCP", "codigo": "REGRA_EVENTO_SCP_OBRIGATORIO", "simulada": true },
+    { "campo": "EVENTO_SCP", "codigo": "REGRA_EVENTO_SCP_NAO_PREENCHER", "simulada": true }
+  ],
+  "erro": {
+    "campo": "DT_FIN",
+    "valor": "30122025",
+    "regra": "REGRA_DT_FINAL_ESCRITURACAO",
+    "explicacao": {
+      "iniciante": "A data final foi digitada como 30/12/2025.",
+      "profissional": "DT_FIN = 30122025 com SIT_ESPECIAL = 0."
+    },
+    "comoCorrigir": {
+      "iniciante": "Sem evento especial, o período termina em 31 de dezembro: use 31122025.",
+      "profissional": "Sem situação especial, DT_FIN é 31/12 do ano de DT_INI."
+    }
+  },
+  "paraQueServe": {
+    "iniciante": "É a primeira linha do arquivo. Diz qual é a empresa, qual período o arquivo cobre e se é uma entrega normal, uma correção ou a ECF de uma SCP.",
+    "profissional": "Abertura do arquivo e identificação da pessoa jurídica: CNPJ, período (DT_INI e DT_FIN), situação no início do período, situação especial, retificação e tipo de ECF quanto à SCP. O CNPJ e o período identificam a escrituração no programa."
+  }
+}

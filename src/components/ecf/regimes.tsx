@@ -15,10 +15,32 @@ export const ROTULO: Record<Situacao, { texto: string; tom: "ok" | "alerta" | "n
   nao: { texto: "Não previsto", tom: "neutro", Icone: Minus },
 };
 
+export const SIGNIFICADO: Record<Situacao, string> = {
+  sim: "o Manual prevê o bloco para esse regime",
+  depende: "o bloco só existe se uma condição do Manual for atendida",
+  nao: "o Manual não prevê o bloco para esse regime",
+};
+
+/** Legenda visível das etiquetas Previsto, Depende e Não previsto. */
+export function LegendaSituacao() {
+  return (
+    <dl data-testid="legenda-situacao" className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-sm">
+      {(Object.keys(ROTULO) as Situacao[]).map((s) => (
+        <div key={s} className="flex flex-wrap items-center gap-2">
+          <dt>
+            <EtiquetaSituacao s={s} />
+          </dt>
+          <dd className="text-suave">{SIGNIFICADO[s]}</dd>
+        </div>
+      ))}
+    </dl>
+  );
+}
+
 export function EtiquetaSituacao({ s }: { s: Situacao }) {
   const { texto, tom, Icone } = ROTULO[s];
   return (
-    <Etiqueta tom={tom}>
+    <Etiqueta tom={tom} title={SIGNIFICADO[s]}>
       <Icone aria-hidden size={16} />
       {texto}
     </Etiqueta>
@@ -29,6 +51,9 @@ export type CartaoBloco = {
   letra: string;
   nome: string;
   familia: string;
+  /** Grupo didático, criado por este site. */
+  grupo: string;
+  ecd: boolean;
   tom: number;
   /** posição no leiaute, calculada antes de filtrar */
   posicao: number;
@@ -79,6 +104,7 @@ export function BlocosPorRegime({ blocos, regimes }: { blocos: CartaoBloco[]; re
           Esconder os não previstos
         </label>
       </div>
+      {regime && <LegendaSituacao />}
       <p role="status" className="mb-4 text-suave">
         Mostrando {lista.length} de {blocos.length} blocos
       </p>
@@ -95,9 +121,10 @@ export function BlocosPorRegime({ blocos, regimes }: { blocos: CartaoBloco[]; re
                 <Icone aria-hidden className="bloco-icone shrink-0" size={26} />
                 <span className="min-w-0">
                   <span className="block font-mono font-semibold">
-                    Bloco {b.letra} <span className="text-sm font-medium">· {ordinal(b.posicao)} do arquivo</span>
+                    Bloco {b.letra} <span className="text-sm font-medium">· {ordinal(b.posicao)} do arquivo · {b.grupo}</span>
                   </span>
                   <span className="block font-semibold">{b.nome}</span>
+                  {b.ecd && <Etiqueta className="mt-1">dados da ECD</Etiqueta>}
                   <span data-so="iniciante" className="mt-1 block">
                     {b.objetivo}
                   </span>

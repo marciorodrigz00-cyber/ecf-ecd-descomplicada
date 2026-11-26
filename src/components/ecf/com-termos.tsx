@@ -27,12 +27,24 @@ export function comTermos(texto: string, vistos: Set<string> = new Set()): React
     if (!alvo || vistos.has(alvo.t.id)) continue;
     vistos.add(alvo.t.id);
     saida.push(texto.slice(fim, m.index));
-    saida.push(
+    const termo = (
       <Termo key={m.index} iniciante={alvo.t.iniciante} profissional={alvo.t.profissional}>
         {m[0]}
-      </Termo>,
+      </Termo>
     );
-    fim = m.index + m[0].length;
+    // A pontuação logo depois do termo fica na mesma linha que ele.
+    const pontuacao = /^[.,;:!?)»”]+/.exec(texto.slice(m.index + m[0].length))?.[0] ?? "";
+    saida.push(
+      pontuacao ? (
+        <span key={m.index} className="whitespace-nowrap">
+          {termo}
+          {pontuacao}
+        </span>
+      ) : (
+        termo
+      ),
+    );
+    fim = m.index + m[0].length + pontuacao.length;
   }
   if (fim === 0) return texto;
   saida.push(texto.slice(fim));

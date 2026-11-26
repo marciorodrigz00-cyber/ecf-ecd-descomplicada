@@ -1,0 +1,91 @@
+{
+  "rastreio": {
+    "id": "roteiro-m300",
+    "fonte": {
+      "id": "manual-12",
+      "url": "https://www.gov.br/sped/pt-br/assuntos/escrituracoes-digitais/ecf/manuais-e-documentos-tecnicos",
+      "trecho": "Registro M300: campos, obrigatoriedade e regras de validação"
+    },
+    "norma": "ADE Cofis nº 2/2026",
+    "leiautes": ["12"],
+    "vigencia": { "acNormal": [2025], "situacaoEspecial": [2026] },
+    "verificadoEm": "2026-11-26",
+    "status": "conferido"
+  },
+  "registro": "M300",
+  "ano": 2025,
+  "empresa": { "origem": "lucro-real", "nome": "Móveis Aurora Ltda., empresa fictícia do lucro real" },
+  "linha": { "campos": { "CODIGO": "6" }, "periodo": "T03" },
+  "fatos": [
+    {
+      "texto": {
+        "iniciante": "No 3º trimestre, a Móveis Aurora registrou uma provisão de R$ 20.000,00 para um processo trabalhista. A lei não deixa deduzir essa despesa agora: ela volta para o lucro como adição.",
+        "profissional": "Provisão trabalhista não dedutível, 20.000,00 em T03: adição na linha 6 da tabela dinâmica M300A (linha do tipo E)."
+      },
+      "campos": ["CODIGO", "DESCRICAO", "VALOR", "HIST_LAN_LAL"]
+    },
+    {
+      "texto": {
+        "iniciante": "A adição fica ligada à conta da despesa na contabilidade e a uma conta de controle do e-Lalur, para ser excluída quando a provisão for revertida.",
+        "profissional": "TIPO_LANCAMENTO = A e IND_RELACAO = 3: há um M305 (conta PROV da parte B, 20.000,00 D) e um M310 (conta 3.1.3.04, 20.000,00 D)."
+      },
+      "campos": ["TIPO_LANCAMENTO", "IND_RELACAO"]
+    }
+  ],
+  "decisao": {
+    "pergunta": {
+      "iniciante": "A empresa apura o imposto pelo lucro real neste trimestre?",
+      "profissional": "0010.FORMA_TRIB_PER tem R ou E no período?"
+    },
+    "sim": {
+      "iniciante": "Então a parte A do e-Lalur é preenchida, uma linha da tabela da Receita por vez.",
+      "profissional": "M300 gerado para o período, linha a linha da tabela dinâmica M300A."
+    },
+    "nao": {
+      "iniciante": "Então não há M300: a parte A do e-Lalur só existe no lucro real.",
+      "profissional": "Sem R ou E em 0010.FORMA_TRIB_PER, o M300 não é gerado."
+    }
+  },
+  "legendas": {
+    "CODIGO": {
+      "iniciante": "O número da linha na tabela da Receita. A linha 6 é para provisões que a lei não deixa deduzir.",
+      "profissional": "Código do lançamento na tabela dinâmica M300A."
+    },
+    "IND_RELACAO": {
+      "iniciante": "3 quer dizer que o valor está ligado a uma conta de controle do e-Lalur e a uma conta da contabilidade.",
+      "profissional": "3: com conta da parte B (M305) e conta contábil (M310)."
+    }
+  },
+  "regras": [
+    { "campo": "*", "codigo": "REGRA_VALOR_DETALHADO", "simulada": true },
+    { "campo": "*", "codigo": "REGRA_DUPLICIDADE_DESPREZADA", "simulada": false, "motivo": "Acontece na importação do arquivo para o programa da ECF." },
+    { "campo": "*", "codigo": "REGRA_LINHA_DESPREZADA", "simulada": false, "motivo": "Depende das configurações do bloco 0 e da tabela dinâmica dentro do programa." },
+    { "campo": "*", "codigo": "REGRA_LINHA_ATUALIZADA", "simulada": false, "motivo": "Depende da versão da tabela dinâmica da Receita instalada no programa." },
+    { "campo": "TIPO_LANCAMENTO", "codigo": "REGRA_OBRIGATORIO_TIPO_E", "simulada": true },
+    { "campo": "TIPO_LANCAMENTO", "codigo": "REGRA_NAO_PREENCHER_TIPO_DIFERENTE_E", "simulada": false, "motivo": "O texto do Manual diz o mesmo que a regra anterior (campo preenchido na linha do tipo E); só o nome fala em linhas de outro tipo. E a tabela dinâmica oficial dá tipo de lançamento também às linhas de total. Fica a verificar." },
+    { "campo": "TIPO_LANCAMENTO", "codigo": "REGRA_RELACAO_INEXISTENTE", "simulada": true },
+    { "campo": "IND_RELACAO", "codigo": "REGRA_IND_RELACAO", "simulada": true },
+    { "campo": "IND_RELACAO", "codigo": "REGRA_OBRIGATORIO_TIPO_E", "simulada": true },
+    { "campo": "IND_RELACAO", "codigo": "REGRA_NAO_PREENCHER_TIPO_DIFERENTE_E", "simulada": false, "motivo": "O texto do Manual diz o mesmo que a regra anterior (campo preenchido na linha do tipo E); só o nome fala em linhas de outro tipo. Fica a verificar." },
+    { "campo": "VALOR", "codigo": "REGRA_OBRIGATORIO_TIPO_R", "simulada": false, "motivo": "Vale para linhas do tipo R (rótulo), e a tabela dinâmica do M300 neste leiaute não tem nenhuma. Além disso, os textos desta regra e da seguinte dizem o oposto um do outro. Fica a verificar." },
+    { "campo": "VALOR", "codigo": "REGRA_NAO_PREENCHER_TIPO_DIFERENTE_R", "simulada": false, "motivo": "Mesmo caso da regra anterior: não há linha do tipo R na tabela dinâmica do M300, e os dois textos se contradizem. Fica a verificar." },
+    { "campo": "HIST_LAN_LAL", "codigo": "REGRA_NAO_PREENCHER_TIPO_DIFERENTE_E", "simulada": true }
+  ],
+  "erro": {
+    "campo": "VALOR",
+    "valor": "25000,00",
+    "regra": "REGRA_VALOR_DETALHADO",
+    "explicacao": {
+      "iniciante": "O valor da adição foi digitado como 25.000,00, mas as contas ligadas a ela somam 20.000,00.",
+      "profissional": "M300.VALOR = 25.000,00; M305 e M310 somam 20.000,00 cada."
+    },
+    "comoCorrigir": {
+      "iniciante": "O valor da linha precisa bater com as contas ligadas a ela.",
+      "profissional": "Com IND_RELACAO = 3, M300.VALOR precisa ser igual à soma do M305, à do M310 ou às duas somadas, com a conversão de sinais do Manual."
+    }
+  },
+  "paraQueServe": {
+    "iniciante": "É a parte A do e-Lalur: uma linha para cada valor que leva do lucro da contabilidade ao lucro que paga IRPJ, na ordem da tabela da Receita.",
+    "profissional": "Demonstração do lucro real, parte A do e-Lalur: adições, exclusões e compensação, linha a linha da tabela dinâmica M300A, com o vínculo à parte B (M305) e às contas contábeis (M310)."
+  }
+}

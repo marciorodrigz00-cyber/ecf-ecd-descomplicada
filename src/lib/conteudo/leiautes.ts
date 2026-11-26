@@ -12,6 +12,14 @@ const arquivoDivergencias = ler("divergencias.json", S.Divergencias);
 export const divergencias = arquivoDivergencias.itens;
 export const legendas = ler("legendas.json", S.Legendas);
 
+/** Fonte única do nome de um bloco: oficial, do leiaute do ano; curto e descrição, dos textos didáticos. */
+export function nomeBloco(letra: string, ano: number): { letra: string; nome: string; curto: string; objetivo: string; ecd: boolean } {
+  const oficial = leiauteDoAno(ano).blocos.find((b) => b.letra === letra);
+  if (!oficial) throw new Error(`Bloco ${letra} não existe no AC ${ano}`);
+  const d = didatico(letra);
+  return { letra, nome: oficial.nome, curto: d.curto, objetivo: d.objetivo, ecd: d.ecd === true };
+}
+
 for (const a of [arquivoDidatico, regimes, grafo, arquivoDivergencias, legendas]) conferirRastreio(a.rastreio);
 
 type Dados = { registros: Registro[]; descricoes: Map<string, string>; conferidos: z.infer<typeof S.Conferidos> };

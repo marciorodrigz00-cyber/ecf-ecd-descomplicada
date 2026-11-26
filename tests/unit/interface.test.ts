@@ -8,6 +8,7 @@ import { exemploDoManual, exemploIlustrativo, ilustrativos, resumoRegistro } fro
 import { TOTAL_BLOCOS, conquistas } from "@/lib/preferencias/conquistas";
 import { PADRAO, interpretar } from "@/lib/preferencias/modelo";
 import { SECOES } from "@/lib/rotas";
+import { roteiros } from "@/lib/simulacao/montar";
 
 describe("Exemplo por registro", () => {
   test("[CN-039] todo registro tem exemplo, menos dois que só o programa preenche", () => {
@@ -112,7 +113,8 @@ describe("Exemplo por registro", () => {
   test.skipIf(!existsSync("out"))("[RD-004] um arquivo de exemplos por bloco e por ano, leve", () => {
     for (const ano of anos) {
       const arq = readdirSync(path.join("out", "dados", String(ano)));
-      expect(arq.sort()).toEqual(["busca.json", ...leiauteDoAno(ano).blocos.map((b) => `${b.letra.toLowerCase()}.json`)].sort());
+      const doAno = roteiros.filter((r) => r.ano === ano).map((r) => `roteiro-${r.registro.toLowerCase()}.json`);
+      expect(arq.sort()).toEqual(["busca.json", ...doAno, ...leiauteDoAno(ano).blocos.map((b) => `${b.letra.toLowerCase()}.json`)].sort());
       for (const a of arq) expect(statSync(path.join("out", "dados", String(ano), a)).size, a).toBeLessThan(600_000);
     }
     const m = JSON.parse(readFileSync("out/dados/2025/m.json", "utf8"));

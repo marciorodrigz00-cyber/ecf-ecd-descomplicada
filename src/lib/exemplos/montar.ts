@@ -34,7 +34,7 @@ function bloco0(e: Base, tributacao: string[], abertura: boolean): Linha[] {
       abertura ? "Abre o arquivo. O indicador 1 diz que a empresa começou a operar neste ano, então não há ECF anterior." : "Abre o arquivo, com a empresa, o leiaute e o período."),
     l("0001", ["0"], "Abre o bloco 0, com dados."),
     l("0010", tributacao, "Diz como a empresa é tributada. É daqui que o programa decide quais blocos existem."),
-    l("0020", ["1", "0", ...Array.from({ length: 28 }, () => "N"), ""].slice(0, 31), "Responde “não” a todas as situações especiais e informa a alíquota da CSLL das demais pessoas jurídicas."),
+    l("0020", ["1", "", ...Array.from({ length: 28 }, () => "N"), ""].slice(0, 31), "Responde “não” a todas as situações especiais e informa a alíquota da CSLL das demais pessoas jurídicas."),
     l("0030", [c.natJur, c.cnae, c.endereco, c.numero, "", c.bairro, c.uf, c.municipio, c.cep, c.telefone, c.email], "Dados cadastrais."),
     ...e.assinantes.map((a) => l("0930", [a.nome, a.cpf, a.qualif, a.crc, a.email, a.fone], a.qualif === "900" ? "Quem assina como responsável pela contabilidade." : "Quem assina pela entidade.")),
   ];

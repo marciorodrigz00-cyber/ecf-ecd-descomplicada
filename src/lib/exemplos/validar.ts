@@ -21,7 +21,10 @@ export function validarArquivo(linhas: readonly Linha[], leiaute: (reg: string) 
       const v = l.campos[i]!;
       const onde = `${l.reg}.${c.nome}="${v}"`;
       if (v === "") {
-        if (c.obrigatorio === "Sim") erros.push(`${onde}: obrigatório vazio`);
+        // O próprio Manual manda deixar vazio em certas condições (ex.: 0020.IND_QTE_SCP, REGRA_SCP_NAO_PREENCHER_QTD),
+        // mesmo com “Sim” na coluna de obrigatório: aí a condição é conferida pela regra, não aqui.
+        const podeFicarVazio = r.regrasCampo.some((g) => g.campo === c.nome && g.regras.some((x) => /NAO_PREENCHER/.test(x.codigo)));
+        if (c.obrigatorio === "Sim" && !podeFicarVazio) erros.push(`${onde}: obrigatório vazio`);
         return;
       }
       if (/[|\r\n]/.test(v)) erros.push(`${onde}: caractere proibido`);

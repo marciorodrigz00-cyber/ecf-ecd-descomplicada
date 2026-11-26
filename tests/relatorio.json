@@ -1,6 +1,6 @@
 {
-  "versao": "validação pós-publicação, com correções",
-  "risco": "Bateria completa sobre o build local com as correções da validação pós-publicação. O risco que resta não está no código testado: o conteúdo foi conferido com as fontes, mas nenhum contador o revisou; a regra de arredondamento e dois campos de exemplo estão a verificar; e os arquivos de exemplo não passaram pelo programa da ECF. A versão publicada foi conferida antes destas correções. O nome do site inclui a ECD, que ainda não tem conteúdo: o aviso está em todas as páginas.",
+  "versao": "etapa 1 e pilotos da simulação de preenchimento",
+  "risco": "Bateria completa sobre o build local com as correções da validação pós-publicação. O risco que resta não está no código testado: o conteúdo foi conferido com as fontes, mas nenhum contador o revisou; a regra de arredondamento e dois campos de exemplo estão a verificar; e os arquivos de exemplo não passaram pelo programa da ECF. A versão publicada foi conferida antes destas correções. O nome do site inclui a ECD, que ainda não tem conteúdo: o aviso está em todas as páginas. A simulação de preenchimento cobre só 4 registros-piloto; as regras em código seguem o texto do Manual e foram conferidas com casos feitos à mão, não pelo programa da ECF.",
   "bugs": [
     {
       "id": "BUG-001",
@@ -472,6 +472,214 @@
       "obtido": "Tudo voltava ao padrão e o endereço não mudava.",
       "tecnico": "src/lib/parametros.ts, com lista fechada de valores. Os valores do simulador ficam fora do endereço de propósito: são dados digitados pela pessoa.",
       "evidencia": "Testes de F5, link recebido, Voltar e valores hostis."
+    },
+    {
+      "id": "BUG-029",
+      "titulo": "Nome prometia ECD sem conteúdo de ECD",
+      "severidade": "Média",
+      "modulos": [
+        "SM",
+        "CN"
+      ],
+      "casos": [
+        "SM-006",
+        "AC-020"
+      ],
+      "situacao": "Corrigido",
+      "passos": "Abrir qualquer página.",
+      "esperado": "Deixar claro que a ECD ainda não tem conteúdo.",
+      "obtido": "O aviso só aparecia no rodapé e na home.",
+      "tecnico": "Selo “ECD em breve” no cabeçalho e no título da home; blocos C, E, J e K com a etiqueta “dados da ECD” e uma frase sobre o que é de cada escrituração.",
+      "evidencia": "Conferência de 26/11/2026 no site gerado; spec docs/specs/etapa-1-inconsistencias.md."
+    },
+    {
+      "id": "BUG-030",
+      "titulo": "Mapa da home mostrava 13 blocos sem dizer por quê",
+      "severidade": "Média",
+      "modulos": [
+        "CT"
+      ],
+      "casos": [
+        "CT-110"
+      ],
+      "situacao": "Corrigido",
+      "passos": "Abrir a home e contar os blocos do mapa.",
+      "esperado": "Contagem e regime visíveis.",
+      "obtido": "13 blocos, sem aviso; a conquista falava em 17.",
+      "tecnico": "src/components/console/index.tsx: “Regime escolhido… Mostrando N de 17 blocos”; conquista diz “em qualquer regime”.",
+      "evidencia": "Conferência de 26/11/2026 no site gerado; spec docs/specs/etapa-1-inconsistencias.md."
+    },
+    {
+      "id": "BUG-031",
+      "titulo": "Bloco E com o mesmo nome curto de um item externo do mapa",
+      "severidade": "Média",
+      "modulos": [
+        "CN"
+      ],
+      "casos": [
+        "CN-070"
+      ],
+      "situacao": "Corrigido",
+      "passos": "Ver o mapa da home.",
+      "esperado": "Nomes únicos.",
+      "obtido": "“ECF anterior” para o bloco E e para a ECF do ano anterior.",
+      "tecnico": "Nome curto do bloco E: “Dados recuperados”. nomeBloco() em src/lib/conteudo/leiautes.ts é a fonte única.",
+      "evidencia": "Conferência de 26/11/2026 no site gerado; spec docs/specs/etapa-1-inconsistencias.md."
+    },
+    {
+      "id": "BUG-032",
+      "titulo": "Data de verificação sem dizer a que se refere",
+      "severidade": "Baixa",
+      "modulos": [
+        "CN"
+      ],
+      "casos": [
+        "CN-073"
+      ],
+      "situacao": "Corrigido",
+      "passos": "Ver a home.",
+      "esperado": "Cada data com rótulo.",
+      "obtido": "“· verificado em 25/11/2026” ao lado de outra data de 24/11.",
+      "tecnico": "Rótulo “comunicado verificado em”; teste varre todas as páginas geradas.",
+      "evidencia": "Conferência de 26/11/2026 no site gerado; spec docs/specs/etapa-1-inconsistencias.md."
+    },
+    {
+      "id": "BUG-033",
+      "titulo": "Rótulos de tabela dinâmica pareciam código de registro",
+      "severidade": "Baixa",
+      "modulos": [
+        "CN"
+      ],
+      "casos": [
+        "CN-071"
+      ],
+      "situacao": "Corrigido",
+      "passos": "Ver a ligação L → M no mapa.",
+      "esperado": "Tabela identificada e registro citado.",
+      "obtido": "“M300A, linha 2” com link para o M300; o mesmo em “N500, linha 1”.",
+      "tecnico": "content/grafo.json: “Tabela dinâmica M300A (registro M300)” e “Tabela dinâmica N500 (registro N500)”. O segundo caso foi achado pelo teste novo.",
+      "evidencia": "Conferência de 26/11/2026 no site gerado; spec docs/specs/etapa-1-inconsistencias.md."
+    },
+    {
+      "id": "BUG-034",
+      "titulo": "Erro sobre quantidade de SCP não citava o 0035",
+      "severidade": "Baixa",
+      "modulos": [
+        "CN"
+      ],
+      "casos": [
+        "CN-071"
+      ],
+      "situacao": "Corrigido",
+      "passos": "Ver os erros comuns do bloco 0.",
+      "esperado": "Texto com os dois registros envolvidos.",
+      "obtido": "Só citava o 0020. O registro está certo: REGRA_QTD_SCP fica em 0020.IND_QTE_SCP nos Manuais 11 e 12.",
+      "tecnico": "content/blocos.json: o texto cita o 0020 e o 0035.",
+      "evidencia": "Conferência de 26/11/2026 no site gerado; spec docs/specs/etapa-1-inconsistencias.md."
+    },
+    {
+      "id": "BUG-035",
+      "titulo": "Nome e objetivo repetidos nas páginas de bloco",
+      "severidade": "Baixa",
+      "modulos": [
+        "CN"
+      ],
+      "casos": [
+        "CN-072"
+      ],
+      "situacao": "Corrigido",
+      "passos": "Abrir /blocos/m.",
+      "esperado": "Nome oficial uma vez.",
+      "obtido": "Nome oficial no título e no mapa; objetivo começando com o nome (M, W, X e Y).",
+      "tecnico": "Mapa usa o nome curto; objetivos reescritos sem repetir o nome.",
+      "evidencia": "Conferência de 26/11/2026 no site gerado; spec docs/specs/etapa-1-inconsistencias.md."
+    },
+    {
+      "id": "BUG-036",
+      "titulo": "Grupos de blocos citados e não mostrados",
+      "severidade": "Baixa",
+      "modulos": [
+        "CN",
+        "AC"
+      ],
+      "casos": [
+        "AC-020"
+      ],
+      "situacao": "Corrigido",
+      "passos": "Abrir /blocos.",
+      "esperado": "Grupo visível em cada card.",
+      "obtido": "A nota citava grupos que não apareciam.",
+      "tecnico": "Grupo no card e nota dizendo que os grupos são do site, não do Manual.",
+      "evidencia": "Conferência de 26/11/2026 no site gerado; spec docs/specs/etapa-1-inconsistencias.md."
+    },
+    {
+      "id": "BUG-037",
+      "titulo": "“Para que serve” com texto do bloco em todos os registros",
+      "severidade": "Média",
+      "modulos": [
+        "CN"
+      ],
+      "casos": [
+        "CN-072"
+      ],
+      "situacao": "Corrigido",
+      "passos": "Abrir /blocos/0/0035 no nível iniciante.",
+      "esperado": "Texto que fale do registro.",
+      "obtido": "Primeiro parágrafo igual ao objetivo do bloco em todos os registros.",
+      "tecnico": "O texto do bloco virou “Sobre o bloco X”. Textos próprios: lista em docs/revisao/para-que-serve.md.",
+      "evidencia": "Conferência de 26/11/2026 no site gerado; spec docs/specs/etapa-1-inconsistencias.md."
+    },
+    {
+      "id": "BUG-038",
+      "titulo": "Logo lido como “ECF e ECDdescomplicada”",
+      "severidade": "Baixa",
+      "modulos": [
+        "AC"
+      ],
+      "casos": [
+        "AC-020"
+      ],
+      "situacao": "Corrigido",
+      "passos": "Ler o cabeçalho com leitor de tela.",
+      "esperado": "Nome com espaço e destino.",
+      "obtido": "Palavras grudadas.",
+      "tecnico": "Nome acessível “ECF e ECD descomplicada, página inicial”.",
+      "evidencia": "Conferência de 26/11/2026 no site gerado; spec docs/specs/etapa-1-inconsistencias.md."
+    },
+    {
+      "id": "BUG-039",
+      "titulo": "Etiquetas e abreviações sem legenda",
+      "severidade": "Média",
+      "modulos": [
+        "AC"
+      ],
+      "casos": [
+        "AC-020"
+      ],
+      "situacao": "Corrigido",
+      "passos": "Escolher um regime em /blocos; ver o mapa.",
+      "esperado": "Legenda visível.",
+      "obtido": "Previsto, Depende, Não previsto e “ECF ant.” sem explicação.",
+      "tecnico": "LegendaSituacao em blocos, página de bloco e roteiro; legenda do mapa com abbr e texto oculto.",
+      "evidencia": "Conferência de 26/11/2026 no site gerado; spec docs/specs/etapa-1-inconsistencias.md."
+    },
+    {
+      "id": "BUG-040",
+      "titulo": "Pontuação sozinha na linha depois de um termo do glossário",
+      "severidade": "Baixa",
+      "modulos": [
+        "RS",
+        "CN"
+      ],
+      "casos": [
+        "CT-094"
+      ],
+      "situacao": "Corrigido",
+      "passos": "Abrir /blocos/k em 1280 px.",
+      "esperado": "“plano referencial.” na mesma linha.",
+      "obtido": "O ponto caía sozinho na linha seguinte, também no site publicado.",
+      "tecnico": "src/components/ecf/com-termos.tsx: termo e pontuação seguinte num span sem quebra.",
+      "evidencia": "Captura de tela local e do site publicado em 26/11/2026."
     }
   ],
   "aprovados": [
@@ -498,9 +706,11 @@
     "Lighthouse em nove páginas: acessibilidade 100, boas práticas 100 e desempenho de 89 a 99, sem deslocamento de layout.",
     "Todos os links internos e âncoras do site e do índice de busca levam a lugares que existem.",
     "Nenhum dado pessoal, segredo, mapa de código ou caminho interno no site gerado nem nos arquivos do repositório.",
-    "Armazenamento cheio ou bloqueado não quebra o site."
+    "Armazenamento cheio ou bloqueado não quebra o site.",
+    "Simulação de preenchimento dos 4 pilotos: cada roteiro cobre todas as regras do Manual, o cenário normal passa e o de erro falha na regra indicada, conferido no build, no hook e nos testes."
   ],
   "acoes": [
+    "Avaliar os pilotos da simulação e aprovar a spec de escala para os demais registros.",
     "Revisão por contador: regras, exemplos, textos dos blocos e seleção de erros.",
     "Validar os três arquivos de exemplo no programa da ECF e confirmar a regra de arredondamento.",
     "Esclarecer o tipo de campo D, que o trecho lido do Manual não define.",

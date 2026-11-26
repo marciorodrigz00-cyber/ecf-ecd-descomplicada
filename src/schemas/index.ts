@@ -264,6 +264,8 @@ export const Didatico = z.strictObject({
   objetivo: texto,
   analogia: texto,
   origem: texto,
+  /** Os dados chegam da ECD: o bloco é da ECF, mas o conteúdo vem da escrituração contábil. */
+  ecd: z.literal(true).optional(),
   erros: z
     .array(z.strictObject({ titulo: texto, comoEvitar: texto, registro: texto, regra: texto.nullable() }))
     .min(1),
@@ -306,6 +308,39 @@ export const Legendas = z.strictObject({
   entrada: texto,
   saida: texto,
 });
+
+const Nivelado = z.strictObject({ iniciante: texto, profissional: texto });
+
+/** Roteiro da simulação de preenchimento de um registro. Só o que não sai dos dados; a linha é gerada por código. */
+export const Roteiro = z
+  .strictObject({
+    rastreio: Rastreio,
+    registro: z.string().regex(/^[0-9A-Z]\d{3}$/),
+    ano,
+    empresa: z.strictObject({
+      /** “manual”: dados de teste do Manual; “lucro-real”: empresa fictícia do site. */
+      origem: z.enum(["manual", "lucro-real"]),
+      nome: texto,
+      aviso: texto.optional(),
+    }),
+    /** Manual: todos os valores. Empresa do site: os valores que escolhem a linha. */
+    linha: z.strictObject({ campos: z.record(texto, z.string()), periodo: texto.optional() }),
+    /** Valores de outros registros que as regras usam quando o exemplo não traz o arquivo todo. */
+    extras: z.record(z.string().regex(/^[0-9A-Z]\d{3}\.[A-Z_]+$/), z.string()).optional(),
+    fatos: z.array(z.strictObject({ texto: Nivelado, campos: z.array(texto).min(1) })).min(1),
+    /** Pergunta de obrigatoriedade; a condição vem do leiaute. Nula para registro obrigatório. */
+    decisao: z.strictObject({ pergunta: Nivelado, sim: Nivelado, nao: Nivelado }).nullable(),
+    legendas: z.record(texto, Nivelado).optional(),
+    /** Todas as regras do Manual para o registro, simuladas ou com o motivo de não serem. */
+    regras: z
+      .array(z.strictObject({ campo: texto, codigo: z.string().regex(/^REGRA_[A-Z0-9_]+$/), simulada: z.boolean(), motivo: texto.optional() }))
+      .min(1)
+      .refine((rs) => rs.every((r) => r.simulada || r.motivo), "regra não simulada precisa de motivo"),
+    erro: z.strictObject({ campo: texto, valor: z.string(), regra: z.string().regex(/^REGRA_[A-Z0-9_]+$/), explicacao: Nivelado, comoCorrigir: Nivelado }),
+    paraQueServe: Nivelado,
+  })
+  .refine((r) => r.regras.some((x) => x.codigo === r.erro.regra && x.simulada), "o cenário de erro precisa usar uma regra simulada");
+
 export const Divergencias = z.strictObject({
   rastreio: Rastreio,
   itens: z.array(z.strictObject({ onde: texto, leiautes: z.array(texto).min(1), texto })),
@@ -436,3 +471,4 @@ export type Leiaute = z.infer<typeof Leiaute>;
 export type Programa = z.infer<typeof Programa>;
 export type Familia = z.infer<typeof Familia>;
 export type Status = z.infer<typeof Status>;
+export type Roteiro = z.infer<typeof Roteiro>;

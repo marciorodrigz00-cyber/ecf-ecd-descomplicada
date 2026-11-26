@@ -190,5 +190,19 @@
       "Última Modificação: 29/07/2026"
     ],
     "vistoEm": "2026-11-25"
+  },
+  "comunicado-programa": {
+    "hash": "6784d0b6d16f0671ca1ac895dee8c1ba66c614d5e5597aa5be7d11463fa63fd5",
+    "linhas": [
+      "Publicação da Versão 12.2.8 do Programa da ECF",
+      "Foi publicada a versão 12.2.8 do programa da ECF, que deve ser utilizado para transmissões de arquivos da ECF referentes ao ano-calendário 2025 e situações especiais de 2026 (leiaute 12).",
+      "As alterações em relação a versão anterior são:",
+      "* Correção de erro envolvendo relat´ório de Pastas e Fichas; e",
+      "* Melhorias de desempenho.",
+      "As instruções referentes ao leiaute 12 constam no Manual da ECF e no arquivo de Tabelas Dinâmicas, publicados no link: https://www.gov.br/sped/pt-br/assuntos/escrituracoes-digitais/ecf .",
+      "A versão 12.2.8 também deve ser utilizada para transmissão de ECF referentes a anos-calendário anteriores (leiautes 1 a 11), sejam elas originais ou retificadoras.",
+      "O programa está disponível no link abaixo, a partir da área de downloads do sítio do Sped: https://www.gov.br/receitafederal/pt-br/centrais-de-conteudo/download/sped/ecf ."
+    ],
+    "vistoEm": "2026-11-26"
   }
 }

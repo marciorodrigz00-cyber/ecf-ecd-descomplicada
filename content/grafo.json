@@ -141,7 +141,7 @@
       "base": {
         "registro": "M300",
         "regra": null,
-        "tabela": "M300A, linha 2: fórmula com L300"
+        "tabela": "Tabela dinâmica M300A (registro M300), linha 2: fórmula com L300"
       }
     },
     {
@@ -151,7 +151,7 @@
       "base": {
         "registro": "N500",
         "regra": null,
-        "tabela": "N500, linha 1: fórmula com M300"
+        "tabela": "Tabela dinâmica N500 (registro N500), linha 1: fórmula com M300"
       }
     },
     {

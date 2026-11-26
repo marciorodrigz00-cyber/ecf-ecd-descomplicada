@@ -45,8 +45,8 @@
      "regra": "REGRA_FORMA_APUR_VALIDA"
     },
     {
-     "titulo": "Informar quantidade de SCP diferente das identificadas",
-     "comoEvitar": "Conte as SCP listadas e repita o mesmo número nos parâmetros.",
+     "titulo": "Informar no 0020 uma quantidade de SCP diferente do número de registros 0035",
+     "comoEvitar": "Conte os registros 0035 e repita o mesmo número no campo IND_QTE_SCP do 0020.",
      "registro": "0020",
      "regra": "REGRA_QTD_SCP"
     }
@@ -71,11 +71,12 @@
      "registro": "E015",
      "regra": "REGRA_COMPATIBILIDADE_C155_E015"
     }
-   ]
+   ],
+   "ecd": true
   },
   {
    "letra": "E",
-   "curto": "ECF anterior",
+   "curto": "Dados recuperados",
    "objetivo": "Traz os saldos finais da ECF do ano passado e calcula os saldos do período a partir da ECD. Também é preenchido pelo programa.",
    "analogia": "É a página “continua do volume anterior”.",
    "origem": "ECF anterior transmitida e dados recuperados da ECD.",
@@ -92,7 +93,8 @@
      "registro": "E015",
      "regra": "REGRA_EXISTENCIA_MAPEAMENTO"
     }
-   ]
+   ],
+   "ecd": true
   },
   {
    "letra": "J",
@@ -119,7 +121,8 @@
      "registro": "J050",
      "regra": "REGRA_ANALITICA_NIVEL4"
     }
-   ]
+   ],
+   "ecd": true
   },
   {
    "letra": "K",
@@ -146,7 +149,8 @@
      "registro": "K915",
      "regra": "REGRA_K915_JUSTIFICATIVA"
     }
-   ]
+   ],
+   "ecd": true
   },
   {
    "letra": "L",
@@ -172,7 +176,7 @@
   {
    "letra": "M",
    "curto": "e-Lalur e e-Lacs",
-   "objetivo": "É o e-Lalur e o e-Lacs: parte do lucro contábil, soma adições, tira exclusões e guarda o que fica para os próximos anos.",
+   "objetivo": "Começa no lucro contábil, soma adições, tira exclusões e guarda o que fica para os próximos anos.",
    "analogia": "É a planilha que transforma lucro contábil em lucro que paga imposto, com uma caderneta de saldos ao lado.",
    "origem": "Resultado do bloco L, contas do bloco K e saldos da ECF anterior.",
    "erros": [
@@ -325,7 +329,7 @@
   {
    "letra": "W",
    "curto": "País-a-País",
-   "objetivo": "Informa dados do grupo multinacional por jurisdição: a Declaração País-a-País.",
+   "objetivo": "Informa os dados do grupo multinacional separados por jurisdição.",
    "analogia": "É o mapa de onde o grupo atua.",
    "origem": "Dados consolidados do grupo multinacional.",
    "erros": [
@@ -346,7 +350,7 @@
   {
    "letra": "X",
    "curto": "Informações econômicas",
-   "objetivo": "Reúne informações econômicas: incentivos fiscais, operações com o exterior, participações e, para imunes e isentas, origem e uso dos recursos.",
+   "objetivo": "Reúne incentivos fiscais, operações com o exterior, participações e, para imunes e isentas, origem e uso dos recursos.",
    "analogia": "É o questionário sobre o que a empresa faz além da conta do imposto.",
    "origem": "Contratos, controles gerenciais e parâmetros do bloco 0.",
    "erros": [
@@ -367,7 +371,7 @@
   {
    "letra": "Y",
    "curto": "Informações gerais",
-   "objetivo": "Traz informações gerais: sócios e dirigentes, retenções na fonte, participações e dados para multa por atraso.",
+   "objetivo": "Traz sócios e dirigentes, retenções na fonte, participações e dados para multa por atraso.",
    "analogia": "É a ficha cadastral ampliada.",
    "origem": "Contrato social, folha, comprovantes de retenção.",
    "erros": [

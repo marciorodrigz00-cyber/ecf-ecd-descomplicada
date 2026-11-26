@@ -2,6 +2,7 @@ import { existsSync, readFileSync, readdirSync } from "node:fs";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { RAIZ, relativo } from "./entrada.mjs";
+import { conferirRoteiro } from "./roteiros.mjs";
 
 /**
  * Cada arquivo de content/ precisa estar aqui. Modos:
@@ -10,6 +11,7 @@ import { RAIZ, relativo } from "./entrada.mjs";
  *  arquivo  a rastreabilidade vale para o arquivo inteiro (chave "rastreio")
  *  citacao  texto que precisa citar regras existentes
  *  apoio    sem regra fiscal própria: só o schema (catálogo de fontes, controle, dados fictícios)
+ *  roteiro  simulação de preenchimento: schema, rastreio e conferência com o Manual e o motor de regras
  */
 const MAPA = [
   [/^content\/regras\/[\w-]+\.json$/, "Regra", "itens"],
@@ -34,6 +36,7 @@ const MAPA = [
   [/^content\/exemplos\/lucro-presumido\.json$/, "ExemploPresumido", "apoio"],
   [/^content\/exemplos\/ilustrativos\.json$/, "ExemplosIlustrativos", "apoio"],
   [/^content\/exemplos\/isenta\.json$/, "ExemploIsenta", "apoio"],
+  [/^content\/roteiros\/[0-9a-z]\/[0-9a-z]{4}\.json$/, "Roteiro", "roteiro"],
 ];
 
 const RASTREIO = new Set(["fonte", "norma", "leiautes", "vigencia", "verificadoEm"]);
@@ -138,6 +141,15 @@ export async function validarArquivo(arquivo) {
     if (!dado?.rastreio) erros.push({ item: "(arquivo inteiro)", faltam: camposAusentes({}), schema: r.success ? [] : mensagens(r.error) });
     else conferir(dado.rastreio, "(arquivo inteiro)", r);
     for (const p of pendencias(dado)) avisos.push(`${rel} › ${p}: trecho "a verificar"`);
+  } else if (modo === "roteiro") {
+    const r = schema.safeParse(dado);
+    if (!dado?.rastreio) erros.push({ item: "(arquivo inteiro)", faltam: camposAusentes({}), schema: r.success ? [] : mensagens(r.error) });
+    else conferir(dado.rastreio, "(arquivo inteiro)", r);
+    if (r.success) {
+      const extra = await conferirRoteiro(rel, r.data);
+      if (extra.erros.length) erros.push({ item: dado.registro, faltam: [], schema: extra.erros });
+      avisos.push(...extra.avisos);
+    }
   } else {
     const r = schema.safeParse(dado);
     if (!r.success) erros.push({ item: "(arquivo)", faltam: [], schema: mensagens(r.error) });

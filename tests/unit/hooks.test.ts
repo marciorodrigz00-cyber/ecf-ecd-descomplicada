@@ -106,7 +106,6 @@ describe("Hooks do projeto", () => {
       "git stash list",
       "npm run build",
       "npm.cmd run e2e",
-      "npm install --save-exact -D oxlint",
       "npm ci",
       "npx playwright test -g login",
       "node .claude/hooks/validar-conteudo.mjs --todos",
@@ -188,6 +187,16 @@ describe("Hooks do projeto", () => {
       expect([linha.anoCalendario, linha.ato], l.numero).toEqual([l.anoCalendario, l.norma]);
     }
     for (const x of rastreaveis) expect(x.leiautes, x.id).toEqual(leiautesDaVigencia(x.vigencia));
+  });
+
+  test("[SG-032] dependência nova precisa de aprovação; o lockfile pode ser reinstalado", () => {
+    const novas = ["npm install remotion", "npm.cmd i -D vitest@5", "npm add zod", "pnpm add zod", "pnpm i lodash", "yarn add x", "git status; npm install lodash", "npm install --save-dev @types/x", "npm install --save-exact -D oxlint"];
+    for (const c of novas) expect(motivoComando(c), c).toMatch(/dependência nova/);
+    const livres = ["npm install", "npm i", "npm ci", "npm.cmd ci", "npm install --no-audit", "yarn", "npm run build", "npm test -- install", "grep -n install package.json"];
+    for (const c of livres) expect(motivoComando(c), c).toBeNull();
+    const r = rodar("bloquear-sensivel.mjs", { tool_name: "Bash", tool_input: { command: "npm install remotion" } });
+    expect(r.saida).toBe(2);
+    expect(r.erro).toMatch(/dependência nova/);
   });
 
   test("[SG-023] hook Stop não entra em laço", () => {

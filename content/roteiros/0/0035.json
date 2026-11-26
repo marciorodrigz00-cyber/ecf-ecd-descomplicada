@@ -1,0 +1,85 @@
+{
+  "rastreio": {
+    "id": "roteiro-0035",
+    "fonte": {
+      "id": "manual-12",
+      "url": "https://www.gov.br/sped/pt-br/assuntos/escrituracoes-digitais/ecf/manuais-e-documentos-tecnicos",
+      "trecho": "Registro 0035: exemplo de preenchimento, obrigatoriedade e regras de validação"
+    },
+    "norma": "ADE Cofis nº 2/2026",
+    "leiautes": ["12"],
+    "vigencia": { "acNormal": [2025], "situacaoEspecial": [2026] },
+    "verificadoEm": "2026-11-26",
+    "status": "conferido"
+  },
+  "registro": "0035",
+  "ano": 2025,
+  "empresa": {
+    "origem": "manual",
+    "nome": "EMPRESA TESTE, dados de teste do Manual",
+    "aviso": "No exemplo do Manual, o 0000 da EMPRESA TESTE tem TIP_ECF = 0, o que dispensaria o 0035. Aqui o TIP_ECF foi trocado para 1, para o exemplo fazer sentido."
+  },
+  "linha": { "campos": { "COD_SCP": "11111111000291", "NOME_SCP": "SCP TESTE 1" } },
+  "extras": { "0000.CNPJ": "11111111000191", "0000.TIP_ECF": "1" },
+  "fatos": [
+    {
+      "texto": {
+        "iniciante": "A EMPRESA TESTE (CNPJ 11.111.111/0001-91) é sócia ostensiva de uma Sociedade em Conta de Participação, a SCP: é ela quem aparece e responde perante terceiros.",
+        "profissional": "0000.TIP_ECF = 1: ECF de pessoa jurídica sócia ostensiva de SCP. 0000.CNPJ = 11111111000191."
+      },
+      "campos": ["0000.TIP_ECF", "0000.CNPJ"]
+    },
+    {
+      "texto": {
+        "iniciante": "A SCP tem CNPJ próprio, 11.111.111/0002-91, e se chama SCP TESTE 1.",
+        "profissional": "SCP com CNPJ 11111111000291 e descrição SCP TESTE 1."
+      },
+      "campos": ["COD_SCP", "NOME_SCP"]
+    }
+  ],
+  "decisao": {
+    "pergunta": {
+      "iniciante": "A empresa é sócia ostensiva de alguma SCP?",
+      "profissional": "0000.TIP_ECF = 1?"
+    },
+    "sim": {
+      "iniciante": "Então o 0035 entra no arquivo: uma linha para cada SCP.",
+      "profissional": "Obrigatório condicional: uma linha 0035 por SCP. A quantidade de linhas precisa bater com 0020.IND_QTE_SCP (REGRA_QTD_SCP)."
+    },
+    "nao": {
+      "iniciante": "Então o 0035 não existe nesta ECF. Ele só aparece na ECF de quem é sócia ostensiva de SCP.",
+      "profissional": "Com 0000.TIP_ECF = 0 ou 2, o 0035 não é gerado."
+    }
+  },
+  "legendas": {
+    "COD_SCP": {
+      "iniciante": "O CNPJ da SCP, com 14 caracteres, sem pontos, barra nem traço.",
+      "profissional": "CNPJ da SCP, conforme os anexos I, VIII e XV da IN RFB nº 2.119/2022."
+    },
+    "NOME_SCP": {
+      "iniciante": "O nome da SCP. Pode ficar vazio.",
+      "profissional": "Descrição da SCP; campo não obrigatório."
+    }
+  },
+  "regras": [
+    { "campo": "COD_SCP", "codigo": "REGRA_VALIDA_TAM_SCP", "simulada": true },
+    { "campo": "COD_SCP", "codigo": "REGRA_CNPJ_DIFERENTE_SCP", "simulada": true }
+  ],
+  "erro": {
+    "campo": "COD_SCP",
+    "valor": "11111111000191",
+    "regra": "REGRA_CNPJ_DIFERENTE_SCP",
+    "explicacao": {
+      "iniciante": "Aqui foi digitado o CNPJ da própria empresa no lugar do CNPJ da SCP.",
+      "profissional": "COD_SCP igual a 0000.CNPJ."
+    },
+    "comoCorrigir": {
+      "iniciante": "Use o CNPJ da SCP, que é diferente do CNPJ da sócia ostensiva.",
+      "profissional": "Informe em COD_SCP o CNPJ próprio da SCP."
+    }
+  },
+  "paraQueServe": {
+    "iniciante": "Lista as SCP de que a empresa é sócia ostensiva, uma por linha, com o CNPJ e o nome de cada uma.",
+    "profissional": "Identifica as SCP da sócia ostensiva no período: uma linha por SCP, com CNPJ (COD_SCP) e descrição. Só existe com 0000.TIP_ECF = 1, e o número de linhas precisa bater com 0020.IND_QTE_SCP."
+  }
+}

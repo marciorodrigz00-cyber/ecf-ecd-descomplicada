@@ -6,7 +6,7 @@ import { MarcarEstudada } from "@/components/layout/progresso";
 import { Atalhos, CartaoTrilha, Conquistas } from "@/components/layout/trilha";
 import { CaixaRolavel, Cartao, Etiqueta, Nivel } from "@/components/ui";
 import { ANO_PADRAO, fontes, leiauteDoAno, linhaDoTempo, novidades, programa, rastreaveis, regra, regras } from "@/lib/conteudo";
-import { conferencia, didatico, divergencias, grafo, legendas, linhaRegime, regimes, registrosDoBloco } from "@/lib/conteudo/leiautes";
+import { conferencia, didatico, divergencias, grafo, legendas, linhaRegime, nomeBloco, regimes, registrosDoBloco } from "@/lib/conteudo/leiautes";
 import { data, inteiro } from "@/lib/formatos";
 import { SECOES, rota, type Secao } from "@/lib/rotas";
 import { AVISO_ECD } from "@/lib/seo";
@@ -35,15 +35,16 @@ export function Inicio({ ano }: { ano: number }) {
     ...grafo.externos.map((x) => ({ id: x.id, letra: x.id === "ECFA" ? "ECF" : x.id, curto: x.nome, bloco: null })),
     ...leiaute.blocos.map((b) => {
       const d = didatico(b.letra);
+      const n = nomeBloco(b.letra, ano);
       const l = linhaRegime(b.letra);
       return {
         id: b.letra,
         letra: b.letra,
-        curto: d.curto,
+        curto: n.curto,
         bloco: {
-          nome: b.nome,
+          nome: n.nome,
           href: ir(`/blocos/${b.letra.toLowerCase()}`),
-          objetivo: d.objetivo,
+          objetivo: n.objetivo,
           analogia: d.analogia,
           nota: l.nota,
           celulas: l.celulas,
@@ -165,7 +166,7 @@ export function Inicio({ ano }: { ano: number }) {
             </p>
             <p className="mt-2 text-suave">Confira sempre a página oficial antes de instalar.</p>
             <p className="mt-4 text-sm text-suave">
-              <LinkFonte fonte={programa.fonte} /> · verificado em{" "}
+              <LinkFonte fonte={programa.fonte} /> · comunicado verificado em{" "}
               {data(programa.verificadoEm)}
             </p>
           </Cartao>

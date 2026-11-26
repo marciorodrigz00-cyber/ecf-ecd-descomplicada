@@ -7,7 +7,7 @@ import { Botao, Cartao } from "@/components/ui";
 import { cn } from "@/lib/cn";
 import { salvar, usePreferencias } from "@/lib/preferencias";
 import type { Regime } from "@/schemas";
-import { EtiquetaSituacao, type CartaoBloco } from "./regimes";
+import { EtiquetaSituacao, SIGNIFICADO, type CartaoBloco } from "./regimes";
 
 export type PassoBloco = CartaoBloco & { origem: string; erros: { titulo: string; comoEvitar: string }[] };
 
@@ -93,7 +93,10 @@ export function Roteiro({ blocos, regimes }: { blocos: PassoBloco[]; regimes: { 
               Bloco {atual.letra}: {atual.nome}
             </h2>
             <p className="mt-3">
-              <EtiquetaSituacao s={atual.celulas[regime.id]} /> <span className="text-suave">{atual.nota}</span>
+              <EtiquetaSituacao s={atual.celulas[regime.id]} />{" "}
+              <span className="text-suave">
+                ({SIGNIFICADO[atual.celulas[regime.id]]}) {atual.nota}
+              </span>
             </p>
             <p className="mt-4 text-lg">{atual.objetivo}</p>
             <h3 className="mt-5 font-semibold">De onde vêm os dados</h3>
