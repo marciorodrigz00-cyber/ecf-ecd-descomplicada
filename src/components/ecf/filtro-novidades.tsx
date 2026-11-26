@@ -1,15 +1,18 @@
 "use client";
 
-import { useState } from "react";
 import { cn } from "@/lib/cn";
+import { useParametros } from "@/lib/parametros";
 
 type Opcao = { valor: string; texto: string };
 export type ItemFiltravel = { id: string; tipo: string; leiautes: string[]; corpo: React.ReactNode };
 
 /** Filtro do feed. Sem JavaScript, todos os itens ficam visíveis. */
 export function FiltroNovidades({ itens, tipos, leiaute }: { itens: ItemFiltravel[]; tipos: Opcao[]; leiaute: string }) {
-  const [tipo, setTipo] = useState("");
-  const [soLeiaute, setSoLeiaute] = useState(false);
+  const [{ tipo, so }, mudar] = useParametros({ tipo: "", so: "" }, (lidos) => ({
+    tipo: tipos.some((t) => t.valor === lidos.tipo) ? lidos.tipo : "",
+    so: lidos.so === "leiaute" ? "leiaute" : "",
+  }));
+  const soLeiaute = so === "leiaute";
   const visiveis = itens.filter((i) => (tipo === "" || i.tipo === tipo) && (!soLeiaute || i.leiautes.includes(leiaute)));
   return (
     <div>
@@ -19,7 +22,7 @@ export function FiltroNovidades({ itens, tipos, leiaute }: { itens: ItemFiltrave
             key={o.valor}
             type="button"
             aria-pressed={tipo === o.valor}
-            onClick={() => setTipo(o.valor)}
+            onClick={() => mudar({ tipo: o.valor })}
             className={cn(
               "min-h-11 rounded-lg border border-controle px-4",
               tipo === o.valor ? "bg-marca font-semibold text-sobre-marca" : "bg-superficie text-tinta hover:bg-fundo",
@@ -29,7 +32,7 @@ export function FiltroNovidades({ itens, tipos, leiaute }: { itens: ItemFiltrave
           </button>
         ))}
         <label className="ml-1 flex min-h-11 items-center gap-2">
-          <input type="checkbox" checked={soLeiaute} onChange={(e) => setSoLeiaute(e.target.checked)} className="size-5 accent-marca" />
+          <input type="checkbox" checked={soLeiaute} onChange={(e) => mudar({ so: e.target.checked ? "leiaute" : "" })} className="size-5 accent-marca" />
           Só as que valem para o leiaute {leiaute}
         </label>
       </div>

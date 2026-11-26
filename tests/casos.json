@@ -167,6 +167,8 @@
   { "id": "CT-097", "modulo": "Funcional", "caso": "Busca respeita o ano e avisa quando falha", "severidade": "Média" },
   { "id": "CT-098", "modulo": "Funcional", "caso": "Glossário: filtro, letras, nível, F5 e âncora", "severidade": "Média" },
   { "id": "CT-099", "modulo": "Funcional", "caso": "Dica por mouse, foco, Esc e toque", "severidade": "Alta" },
+  { "id": "CT-100", "modulo": "Funcional", "caso": "Links do conteúdo abrem no topo; Voltar devolve a rolagem", "severidade": "Baixa" },
+  { "id": "CT-101", "modulo": "Funcional", "caso": "Seleção do mapa e filtros vivem no endereço: F5, link e Voltar", "severidade": "Baixa" },
   { "id": "RD-005", "modulo": "Rede e Storage", "caso": "Busca rápida e índice leve", "severidade": "Média" },
   { "id": "CN-050", "modulo": "Conteúdo", "caso": "Termos do glossário com fonte e referências vivas", "severidade": "Alta" },
   { "id": "CN-051", "modulo": "Conteúdo", "caso": "Termos conferidos à mão", "severidade": "Média" },
@@ -188,9 +190,11 @@
   { "id": "CN-061", "modulo": "Conteúdo", "caso": "Aviso educacional e aviso sobre a ECD em todas as páginas", "severidade": "Alta" },
   { "id": "RD-006", "modulo": "Rede e Storage", "caso": "Armazenamento cheio ou bloqueado não quebra o site", "severidade": "Média" },
   { "id": "RD-007", "modulo": "Rede e Storage", "caso": "Nenhum recurso pedido duas vezes nas páginas principais", "severidade": "Média" },
+  { "id": "RD-008", "modulo": "Rede e Storage", "caso": "Arquivos com hash no nome ficam guardados; páginas e dados são reconferidos", "severidade": "Baixa" },
   { "id": "SG-027", "modulo": "Segurança", "caso": "Nada sensível no pacote publicado: segredo, mapa, caminho interno ou eval", "severidade": "Alta" },
   { "id": "SG-028", "modulo": "Segurança", "caso": "Links externos só para fontes oficiais, com rel seguro", "severidade": "Média" },
   { "id": "SG-029", "modulo": "Segurança", "caso": "Rajada de 20 leituras e caminhos malformados", "severidade": "Média" },
   { "id": "SG-030", "modulo": "Segurança", "caso": "Repositório sem dado pessoal, segredo ou arquivo indevido", "severidade": "Alta" },
+  { "id": "SG-031", "modulo": "Segurança", "caso": "Parâmetros do endereço só aceitam valores da lista e nunca executam", "severidade": "Alta" },
   { "id": "PF-001", "modulo": "Desempenho", "caso": "Lighthouse nas páginas principais", "severidade": "Média" }
 ]

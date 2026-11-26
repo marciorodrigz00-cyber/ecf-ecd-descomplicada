@@ -12,7 +12,7 @@ const PORTA = Number(process.env.PORTA ?? 4173);
 const RELATAR = process.env.CSP_REPORT_ONLY === "1";
 const { headers, redirects } = JSON.parse(readFileSync("vercel.json", "utf8")) as {
   redirects: { source: string; destination: string }[];
-  headers: { headers: { key: string; value: string }[] }[];
+  headers: { source: string; headers: { key: string; value: string }[] }[];
 };
 const TIPOS: Record<string, string> = {
   ".html": "text/html; charset=utf-8",
@@ -75,15 +75,16 @@ createServer((req, res) => {
       return "";
     });
   }
-  for (const { key, value } of headers.flatMap((h) => h.headers)) {
+  // Só as regras do vercel.json valem, cada uma no seu caminho: nada simulado aqui esconde o que a Vercel faria.
+  for (const { key, value } of headers.filter((h) => new RegExp(`^${h.source}$`).test(caminho)).flatMap((h) => h.headers)) {
     // Em http local, estes dois forçariam HTTPS; são conferidos no vercel.json e no preview.
     if (key === "Strict-Transport-Security") continue;
     if (key !== "Content-Security-Policy") res.setHeader(key, value);
     else if (!RELATAR) res.setHeader(key, value.replace("; upgrade-insecure-requests", ""));
     else res.setHeader("Content-Security-Policy-Report-Only", [value.replace("; upgrade-insecure-requests", ""), meta].filter(Boolean));
   }
-  // A Vercel comprime texto e guarda os arquivos com hash no nome; sem isso, medir desempenho aqui não diria nada.
-  if (caminho.startsWith("/_next/static/")) res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
+  // Padrão da Vercel para arquivo estático sem regra própria. Ela também comprime texto.
+  if (!res.hasHeader("Cache-Control")) res.setHeader("Cache-Control", "public, max-age=0, must-revalidate");
   const texto = /^(?:text|application\/(?:json|xml))|svg/.test(tipo) ? Buffer.from(html ?? readFileSync(achado, "utf8")) : null;
   const gzip = texto !== null && /\bgzip\b/.test(String(req.headers["accept-encoding"] ?? ""));
   if (gzip) res.setHeader("Content-Encoding", "gzip");

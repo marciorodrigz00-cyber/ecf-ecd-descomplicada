@@ -1,6 +1,6 @@
 {
-  "versao": "auditoria final, fase 8",
-  "risco": "Auditoria completa, sobre o build local. Todos os casos foram reexecutados, menos a medição do Lighthouse, feita à parte no mesmo dia, e nenhum defeito conhecido ficou aberto. O risco que resta não está no código testado: o conteúdo foi conferido com as fontes, mas nenhum contador o revisou; a regra de arredondamento e dois campos de exemplo estão a verificar; os arquivos de exemplo não passaram pelo programa da ECF; e o comportamento na Vercel e no GitHub só poderá ser visto depois de publicar. O nome do site inclui a ECD, que ainda não tem conteúdo: o aviso está em todas as páginas.",
+  "versao": "validação pós-publicação, com correções",
+  "risco": "Bateria completa sobre o build local com as correções da validação pós-publicação. O risco que resta não está no código testado: o conteúdo foi conferido com as fontes, mas nenhum contador o revisou; a regra de arredondamento e dois campos de exemplo estão a verificar; e os arquivos de exemplo não passaram pelo programa da ECF. A versão publicada foi conferida antes destas correções. O nome do site inclui a ECD, que ainda não tem conteúdo: o aviso está em todas as páginas.",
   "bugs": [
     {
       "id": "BUG-001",
@@ -403,6 +403,75 @@
       "obtido": "Caminho /c/... lido como pasta do projeto.",
       "tecnico": ".claude/hooks/lib/comandos.mjs: a conversão só vale no Windows. Achado por leitura; o Linux não foi executado.",
       "evidencia": "Leitura do código."
+    },
+    {
+      "id": "BUG-024",
+      "titulo": "Teste de vazamento estourava o próprio limite de tempo",
+      "severidade": "Baixa",
+      "modulos": [
+        "SG"
+      ],
+      "casos": [
+        "SG-027"
+      ],
+      "situacao": "Corrigido",
+      "passos": "Rodar npm test depois de um build.",
+      "esperado": "Todos os testes aprovados.",
+      "obtido": "SG-027 passou de 5 s em 4 de 4 execuções (5,5 a 6,0 s nas três medidas).",
+      "tecnico": "tests/unit/auditoria.test.ts: limite de 60 s, porque o teste lê o site inteiro.",
+      "evidencia": "Saída do Vitest antes e depois."
+    },
+    {
+      "id": "BUG-025",
+      "titulo": "Arquivos que nunca mudam eram reconferidos a cada visita",
+      "severidade": "Baixa",
+      "modulos": [
+        "RD"
+      ],
+      "casos": [
+        "RD-008"
+      ],
+      "situacao": "Corrigido",
+      "passos": "Ler o Cache-Control de um arquivo de /_next/static/ no site publicado.",
+      "esperado": "public, max-age=31536000, immutable.",
+      "obtido": "public, max-age=0, must-revalidate.",
+      "tecnico": "vercel.json: regra só para /_next/static/. O servidor local simulava a regra e escondia a falta; agora só aplica o vercel.json. Falta confirmar na Vercel depois de publicar.",
+      "evidencia": "Cabeçalhos lidos na produção e no build local."
+    },
+    {
+      "id": "BUG-026",
+      "titulo": "Quatro links abriam a página um pouco abaixo do topo",
+      "severidade": "Baixa",
+      "modulos": [
+        "CT"
+      ],
+      "casos": [
+        "CT-100"
+      ],
+      "situacao": "Corrigido",
+      "passos": "Em 1440 px, rolar /exemplos até o fim e abrir um exemplo.",
+      "esperado": "Rolagem 0.",
+      "obtido": "Rolagem de 82 px nos três exemplos e de 14 px em uma novidade.",
+      "tecnico": "src/components/layout/cabecalho.tsx: ida por link começa no topo; Voltar, Avançar e âncora não mudam.",
+      "evidencia": "Captura de tela em 1440 px; medição por link."
+    },
+    {
+      "id": "BUG-027",
+      "titulo": "Seleção do mapa e filtros se perdiam no F5",
+      "severidade": "Baixa",
+      "modulos": [
+        "CT"
+      ],
+      "casos": [
+        "CT-101",
+        "SG-031"
+      ],
+      "situacao": "Corrigido",
+      "passos": "Escolher o bloco K na home, ou um filtro em novidades ou glossário, e apertar F5.",
+      "esperado": "Mesma seleção, com endereço próprio.",
+      "obtido": "Tudo voltava ao padrão e o endereço não mudava.",
+      "tecnico": "src/lib/parametros.ts, com lista fechada de valores. Os valores do simulador ficam fora do endereço de propósito: são dados digitados pela pessoa.",
+      "evidencia": "Testes de F5, link recebido, Voltar e valores hostis."
     }
   ],
   "aprovados": [
@@ -432,17 +501,17 @@
     "Armazenamento cheio ou bloqueado não quebra o site."
   ],
   "acoes": [
-    "Validar os três arquivos de exemplo no programa da ECF e confirmar a regra de arredondamento.",
     "Revisão por contador: regras, exemplos, textos dos blocos e seleção de erros.",
+    "Validar os três arquivos de exemplo no programa da ECF e confirmar a regra de arredondamento.",
     "Esclarecer o tipo de campo D, que o trecho lido do Manual não define.",
+    "Publicar as correções e conferir o cache na Vercel.",
+    "Corrigir os acentos da descrição do repositório no GitHub (BUG-028, fora do código).",
     "Abrir C:\\dev\\ecf-descomplicada no Claude Code e confirmar o disparo real dos hooks.",
-    "Ligar o monitor no GitHub: permissões, proteção do ramo e primeira execução.",
-    "Antes de publicar: usuário do GitHub, para o e-mail oculto e o security.txt.",
-    "Na prévia da Vercel: conferir cabeçalhos, HSTS, 404 e 405.",
     "Baixa: reduzir o JavaScript da página inicial e da do exemplo do lucro real, as duas com desempenho 89."
   ],
   "fora": [
-    "Cabeçalhos, 405 e 400 foram testados no servidor local, que lê o vercel.json. O comportamento da Vercel não foi testado; HSTS só foi conferido no arquivo.",
+    "POST e outros métodos na Vercel: o projeto só permite GET e HEAD fora do computador. Localmente, 405.",
+    "As correções desta versão ainda não foram conferidas no site publicado.",
     "Leitor de tela real, dispositivos físicos, Firefox, Safari e Edge.",
     "Revisão humana por contador: os itens estão como “conferido”, não “revisado”.",
     "Situações fora do quiz: transformação, extinção, fusão, cisão, incorporação e desenquadramento de imune ou isenta. Os prazos de extinção, fusão, cisão e incorporação aparecem em tabela, mas o quiz não as pergunta.",
@@ -451,14 +520,11 @@
     "Simulador: anual por estimativa, incentivos, atividade rural, instituições financeiras e regras da LC 224/2025.",
     "Tabelas dinâmicas: só as linhas usadas nos exemplos foram importadas.",
     "Hooks: testados com a entrada que o Claude Code envia, mas não dentro de uma sessão aberta na pasta do projeto.",
-    "Workflows: sintaxe e permissões conferidas, mas não executados no GitHub.",
     "DOU: leitura manual; INLABS não construído.",
     "O Bloco S está fora do escopo por decisão do usuário.",
-    "Cabeçalhos e domínio reais: só no preview da Vercel.",
-    "Rate limit e cache de borda: não há rota de API; o site é estático.",
-    "CI no Linux: não executado."
+    "Rate limit: não há rota de API. A proteção automática da Vercel barrou o endereço do teste depois de cerca de 60 leituras seguidas."
   ],
   "reaproveitados": [
-    "PF-001: as notas do Lighthouse vêm de tests/lighthouse.json, medidas no mesmo dia e na mesma versão do código; o teste confere os limites. Todos os demais casos foram revalidados nesta execução."
+    "PF-001: as notas do Lighthouse vêm de tests/lighthouse.json, medidas na fase 8, antes destas correções; o teste confere os limites. Todos os demais casos foram revalidados nesta execução."
   ]
 }

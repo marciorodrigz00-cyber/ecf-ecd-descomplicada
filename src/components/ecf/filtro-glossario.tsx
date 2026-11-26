@@ -1,13 +1,15 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
+import type { ReactNode } from "react";
 import { normalizar } from "@/lib/busca";
+import { useParametros } from "@/lib/parametros";
 
+const MAXIMO = 60;
 type Item = { id: string; letra: string; chave: string; corpo: ReactNode };
 
 /** Filtro do glossário. Sem JavaScript, todos os termos aparecem. Esconder não desmonta: os links #termo seguem valendo. */
 export function FiltroGlossario({ itens }: { itens: Item[] }) {
-  const [texto, setTexto] = useState("");
+  const [{ termo: texto }, mudar] = useParametros({ termo: "" }, (lidos) => ({ termo: lidos.termo.slice(0, MAXIMO) }));
   const q = normalizar(texto);
   const visiveis = new Set(itens.filter((i) => i.chave.includes(q)).map((i) => i.id));
   const letras = [...new Set(itens.map((i) => i.letra))];
@@ -20,9 +22,10 @@ export function FiltroGlossario({ itens }: { itens: Item[] }) {
         id="filtro-glossario"
         type="search"
         autoComplete="off"
-        maxLength={60}
+        maxLength={MAXIMO}
         value={texto}
-        onChange={(e) => setTexto(e.target.value)}
+        // Espera a pessoa parar de digitar para mexer no endereço.
+        onChange={(e) => mudar({ termo: e.target.value }, 300)}
         className="mt-1 min-h-11 w-full max-w-md rounded-lg border border-controle bg-superficie px-3"
       />
       <p role="status" className="mt-3 text-suave">
