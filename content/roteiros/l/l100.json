@@ -1,0 +1,90 @@
+{
+  "rastreio": {
+    "id": "roteiro-l100",
+    "fonte": {
+      "id": "manual-12",
+      "url": "https://www.gov.br/sped/pt-br/assuntos/escrituracoes-digitais/ecf/manuais-e-documentos-tecnicos",
+      "trecho": "Registro L100: campos, obrigatoriedade e regras de validação"
+    },
+    "norma": "ADE Cofis nº 2/2026",
+    "leiautes": ["12"],
+    "vigencia": { "acNormal": [2025], "situacaoEspecial": [2026] },
+    "verificadoEm": "2026-11-26",
+    "status": "conferido"
+  },
+  "registro": "L100",
+  "ano": 2025,
+  "empresa": { "origem": "lucro-real", "nome": "Móveis Aurora Ltda., empresa fictícia do lucro real" },
+  "linha": { "campos": { "CODIGO": "1.01.01.02.01" }, "periodo": "T04" },
+  "fatos": [
+    {
+      "texto": {
+        "iniciante": "No 4º trimestre, a conta do banco começou com R$ 38.000,00, recebeu R$ 610.000,00 e pagou R$ 510.000,00. Terminou com R$ 138.000,00.",
+        "profissional": "T04: saldo inicial 38.000,00 D, débitos 610.000,00, créditos 510.000,00, saldo final 138.000,00 D."
+      },
+      "campos": ["VAL_CTA_REF_INI", "IND_VAL_CTA_REF_INI", "VAL_CTA_REF_DEB", "VAL_CTA_REF_CRED", "VAL_CTA_REF_FIN", "IND_VAL_CTA_REF_FIN"]
+    },
+    {
+      "texto": {
+        "iniciante": "Essa conta corresponde, no plano padrão da Receita, a “Bancos Conta Movimento – No País”, uma conta do ativo.",
+        "profissional": "Conta referencial analítica 1.01.01.02.01, nível 5, natureza 01 (ativo), superior 1.01.01.02."
+      },
+      "campos": ["CODIGO", "DESCRICAO", "TIPO", "NIVEL", "COD_NAT", "COD_CTA_SUP"]
+    }
+  ],
+  "decisao": {
+    "pergunta": {
+      "iniciante": "A empresa está no lucro real e fecha balanço neste período (trimestre, ano ou mês de balanço de redução)?",
+      "profissional": "L030.PER_APUR é T01 a T04, A00, ou mês com balanço de redução (0010.MES_BAL_RED = B)?"
+    },
+    "sim": {
+      "iniciante": "Então o balanço do trimestre vai no L100, conta por conta do plano padrão da Receita.",
+      "profissional": "L100 gerado no período, uma linha por conta referencial."
+    },
+    "nao": {
+      "iniciante": "Então não há L100 neste período.",
+      "profissional": "Fora dessas condições, o L100 não é gerado."
+    }
+  },
+  "legendas": {
+    "IND_VAL_CTA_REF_INI": {
+      "iniciante": "D quer dizer saldo devedor, o normal para contas do ativo, como o banco.",
+      "profissional": "D: devedor; C: credor."
+    },
+    "VAL_CTA_REF_FIN": {
+      "iniciante": "O saldo do fim: o do começo, mais o que entrou, menos o que saiu.",
+      "profissional": "Saldo final da conta referencial."
+    }
+  },
+  "regras": [
+    { "campo": "*", "codigo": "REGRA_COMPARA_CONT_REF_SI", "simulada": true },
+    { "campo": "*", "codigo": "REGRA_COMPARA_CONT_REF_SF", "simulada": false, "motivo": "O texto do Manual compara a soma dos saldos finais do K156 com o saldo inicial do L100, o que parece erro de digitação. Fica a verificar." },
+    { "campo": "*", "codigo": "REGRA_COMPATIBILIDADE_L100_E010", "simulada": false, "motivo": "Depende do E010, que só existe quando a ECF do ano anterior é recuperada. A Móveis Aurora começou em 2025 e não tem ECF anterior." },
+    { "campo": "*", "codigo": "REGRA_DUPLICIDADE_DESPREZADA", "simulada": false, "motivo": "Acontece na importação do arquivo para o programa da ECF." },
+    { "campo": "*", "codigo": "REGRA_LINHA_DESPREZADA", "simulada": false, "motivo": "Depende das configurações do bloco 0 e da tabela dinâmica dentro do programa." },
+    { "campo": "*", "codigo": "REGRA_LINHA_ATUALIZADA", "simulada": false, "motivo": "Depende da versão da tabela dinâmica da Receita instalada no programa." },
+    { "campo": "*", "codigo": "REGRA_BALANCO_SALDO_FINAL", "simulada": true },
+    { "campo": "*", "codigo": "REGRA_BALANCO_SALDO_INICIAL", "simulada": true },
+    { "campo": "VAL_CTA_REF_INI", "codigo": "REGRA_BAL_SI_IGUAL_ANT", "simulada": true },
+    { "campo": "VAL_CTA_REF_DEB", "codigo": "REGRA_COMPARA_CONT_REF_DEB", "simulada": true },
+    { "campo": "VAL_CTA_REF_CRED", "codigo": "REGRA_COMPARA_CONT_REF_CRED", "simulada": true },
+    { "campo": "VAL_CTA_REF_FIN", "codigo": "REGRA_VALIDACAO_SALDO_FINAL_BAL", "simulada": true }
+  ],
+  "erro": {
+    "campo": "VAL_CTA_REF_FIN",
+    "valor": "148000,00",
+    "regra": "REGRA_VALIDACAO_SALDO_FINAL_BAL",
+    "explicacao": {
+      "iniciante": "O saldo final foi digitado como 148.000,00, mas 38.000 + 610.000 − 510.000 dá 138.000.",
+      "profissional": "VAL_CTA_REF_FIN = 148.000,00 D; inicial + débitos − créditos = 138.000,00 D."
+    },
+    "comoCorrigir": {
+      "iniciante": "O saldo final é sempre o inicial, mais as entradas, menos as saídas.",
+      "profissional": "VAL_CTA_REF_FIN = VAL_CTA_REF_INI + VAL_CTA_REF_DEB − VAL_CTA_REF_CRED, com os indicadores D e C."
+    }
+  },
+  "paraQueServe": {
+    "iniciante": "É o balanço da empresa no formato da Receita: uma linha por conta, com o saldo do começo, o que entrou, o que saiu e o saldo do fim do período.",
+    "profissional": "Balanço patrimonial por conta referencial e período (L030): saldo inicial, débitos, créditos e saldo final com indicador D/C. Pelo Manual, o saldo inicial pode ser replicado do E010/E015 ou preenchido, e o saldo final é recuperado do K155/K156, sem edição. O ativo precisa fechar com o passivo."
+  }
+}

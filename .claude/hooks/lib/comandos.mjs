@@ -108,10 +108,31 @@ function tocaSensivel(cmd) {
     .find((p) => arquivoSensivel(p) && !/^(?:credentials?|secrets?)$/i.test(p));
 }
 
+/** Instalação de pacote novo (npm/pnpm i|install|add <pacote>, yarn add). "npm install" e "npm ci" sem pacote seguem o lockfile. */
+export function dependenciaNova(cmd) {
+  for (const simples of separar(cmd)) {
+    const ps = palavras(simples);
+    const k = ps.findIndex((p) => /^(?:npm|pnpm|yarn)(?:\.cmd|\.exe|\.ps1)?$/i.test(p));
+    if (k < 0) continue;
+    const gerente = ps[k].toLowerCase().replace(/\..*$/, "");
+    const resto = ps.slice(k + 1);
+    const v = resto.findIndex((p) => !p.startsWith("-"));
+    if (v < 0) continue;
+    const verbo = resto[v].toLowerCase();
+    const instala = gerente === "yarn" ? verbo === "add" : /^(?:i|in|ins|inst|insta|instal|install|isntall|add)$/.test(verbo);
+    if (!instala) continue;
+    const pacotes = resto.slice(v + 1).filter((p) => !p.startsWith("-"));
+    if (pacotes.length) return `${gerente} ${verbo} ${pacotes.join(" ")}`;
+  }
+  return null;
+}
+
 /** Motivo do bloqueio, ou null. */
 export function motivoComando(cmd) {
   const plano = cmd.replace(/[`^](?=\w)/g, "");
   for (const [re, nome] of PROIBIDOS) if (re.test(plano)) return nome;
+  const dep = dependenciaNova(plano);
+  if (dep) return `instalação de dependência nova (${dep.slice(0, 80)})`;
   const rem = remocaoRecursiva(plano);
   if (rem) return `remoção recursiva fora de pastas geradas (${rem.slice(0, 80)})`;
   const sens = tocaSensivel(plano);

@@ -140,6 +140,10 @@ export function Console({ nos, ligacoes, regimes, ano }: Props) {
             </button>
           )}
         </div>
+        <p role="status" data-testid="mapa-contagem" className="mb-4 text-suave">
+          Regime escolhido: {regimes.find((r) => r.id === regime)!.nome}. Mostrando {ordem.length} de {nos.filter((n) => n.bloco).length} blocos; os
+          outros não existem neste regime.
+        </p>
         {passo !== null && (
           <div role="group" aria-label="Percurso" className="mb-4 flex flex-wrap items-center gap-2 rounded-lg border border-marca p-2">
             <span data-testid="percurso" className="px-2 font-mono">

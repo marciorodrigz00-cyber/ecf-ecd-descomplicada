@@ -102,14 +102,20 @@ export function Cabecalho({ anos, padrao, ausentes }: Props) {
         <AvisoEndereco />
       </Suspense>
       <div className="mx-auto flex max-w-[92rem] items-center justify-between gap-4 px-4 py-3 sm:px-6">
-        <Link
-          href={rota("/", ano, padrao)}
-          prefetch={false}
-          className="flex min-h-11 shrink-0 items-center gap-3 font-mono text-lg font-semibold text-tinta no-underline"
-        >
-          <span className="rounded-md bg-marca px-2 whitespace-nowrap text-sobre-marca">ECF e ECD</span>
-          <span className="sr-only sm:not-sr-only">descomplicada</span>
-        </Link>
+        <span className="flex shrink-0 items-center gap-2">
+          <Link
+            href={rota("/", ano, padrao)}
+            prefetch={false}
+            aria-label="ECF e ECD descomplicada, página inicial"
+            className="flex min-h-11 items-center gap-3 font-mono text-lg font-semibold text-tinta no-underline"
+          >
+            <span className="rounded-md bg-marca px-2 whitespace-nowrap text-sobre-marca">ECF e ECD</span>{" "}
+            <span className="sr-only sm:not-sr-only">descomplicada</span>
+          </Link>
+          <span data-testid="ecd-em-breve" className="hidden rounded-md border border-controle px-1.5 py-0.5 text-xs font-medium whitespace-nowrap text-suave md:inline">
+            ECD em breve
+          </span>
+        </span>
         <span className="flex min-w-0 flex-1 justify-end xl:justify-start">
           <Busca padrao={padrao} />
         </span>

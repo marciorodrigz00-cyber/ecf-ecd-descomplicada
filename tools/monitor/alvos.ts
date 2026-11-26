@@ -1,4 +1,6 @@
-/** O que o monitor lê. Endereços fixos no código: nada vem de fora. */
+import { readFileSync } from "node:fs";
+
+/** O que o monitor lê. Endereços fixos no código ou no conteúdo revisado do site: nada vem de fora. */
 export type Alvo = {
   id: string;
   nome: string;
@@ -8,6 +10,8 @@ export type Alvo = {
   tipo: "plone-lista" | "plone-pagina" | "norma" | "html";
   /** Só para html: trechos que interessam. Cada um precisa ser encontrado, senão a estrutura mudou. */
   trechos?: RegExp[];
+  /** Alguma linha lida precisa casar com esta expressão; senão, a fonte não diz o que o site afirma. */
+  exige?: RegExp;
   confianca: "primaria" | "secundaria";
 };
 
@@ -15,7 +19,21 @@ const SPED = "https://www.gov.br/sped/++api++/pt-br/assuntos/";
 const VER = "https://www.gov.br/sped/pt-br/assuntos/";
 const NORMAS = "https://normasinternet2.receita.fazenda.gov.br/";
 
+/** Comunicado citado no site como fonte da versão do programa. O endereço do gov.br pode herdar nome de outra versão. */
+const programa = JSON.parse(readFileSync(new URL("../../content/programa.json", import.meta.url), "utf8")) as { versao: string; fonte: { url: string } };
+if (!programa.fonte.url.startsWith(`${VER}comunicados/ecf/`)) throw new Error("Comunicado do programa fora do portal do Sped");
+const versao = programa.versao.replaceAll(".", "\\.");
+
 export const ALVOS: readonly Alvo[] = [
+  {
+    id: "comunicado-programa",
+    nome: `Comunicado da versão ${programa.versao} do programa da ECF`,
+    url: programa.fonte.url.replace(VER, SPED),
+    pagina: programa.fonte.url,
+    tipo: "plone-pagina",
+    exige: new RegExp(`Vers[ãa]o ${versao}(?!\\.?\\d)`, "i"),
+    confianca: "primaria",
+  },
   {
     id: "programa-ecf",
     nome: "Download do programa da ECF",

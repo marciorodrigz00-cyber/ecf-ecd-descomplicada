@@ -21,7 +21,7 @@
         2026
       ]
     },
-    "verificadoEm": "2026-11-24",
+    "verificadoEm": "2026-11-26",
     "status": "conferido"
   },
   "itens": [
@@ -76,6 +76,88 @@
         "12"
       ],
       "texto": "A descrição diz que o registro é obrigatório para todas na entrega original; a tabela de obrigatoriedade diz que só na entrega com atraso. Os exemplos supõem entrega no prazo e não o trazem."
+    },
+    {
+      "onde": "0035",
+      "leiautes": [
+        "11",
+        "12"
+      ],
+      "texto": "No exemplo, a linha traz o CNPJ da SCP como 11111111000291 (14 dígitos, final 0002-91). A explicação ao lado escreve 111111111000291 (15 dígitos) e formata como 11.111.111/0001-91. O site usa o valor da linha."
+    },
+    {
+      "onde": "M300",
+      "leiautes": [
+        "11",
+        "12"
+      ],
+      "texto": "REGRA_OBRIGATORIO_TIPO_R diz que confere se M300.VALOR não está preenchido na linha do tipo R; REGRA_NAO_PREENCHER_TIPO_DIFERENTE_R, se está preenchido na mesma linha. Os dois textos dizem o oposto, e a tabela dinâmica do M300 não tem linha do tipo R. A simulação não usa essas duas regras."
+    },
+    {
+      "onde": "M300",
+      "leiautes": [
+        "11",
+        "12"
+      ],
+      "texto": "Em REGRA_RELACAO_INEXISTENTE, o caso IND_RELACAO = 4 aparece como “Com Conta da Parte B”. O campo IND_RELACAO define 4 como “Sem Relacionamento”."
+    },
+    {
+      "onde": "L100",
+      "leiautes": [
+        "11",
+        "12"
+      ],
+      "texto": "REGRA_COMPARA_CONT_REF_SF compara a soma dos saldos finais do K156 com L100.VAL_CTA_REF_INI, o saldo inicial, embora o nome indique saldo final. A simulação não usa esta regra."
+    },
+    {
+      "onde": "L100",
+      "leiautes": [
+        "11",
+        "12"
+      ],
+      "texto": "VAL_CTA_REF_FIN aparece com tipo C (texto), 19 posições e 2 decimais; os outros valores do registro são do tipo N. O site mantém o tipo do Manual."
+    },
+    {
+      "onde": "M300",
+      "leiautes": [
+        "12"
+      ],
+      "texto": "REGRA_OBRIGATORIO_TIPO_E e REGRA_NAO_PREENCHER_TIPO_DIFERENTE_E, em TIPO_LANCAMENTO e IND_RELACAO, têm textos que só falam da linha do tipo E (campo preenchido). O nome da segunda sugere “não preencher em linha de outro tipo”, mas o texto não diz isso, e a tabela dinâmica oficial traz tipo de lançamento também nas linhas de total. A simulação não usa a segunda regra nesses dois campos."
+    },
+    {
+      "onde": "0000",
+      "leiautes": [
+        "12"
+      ],
+      "texto": "REGRA_DT_FINAL_ESCRITURACAO pede DT_FIN em 31/12 quando SIT_ESPECIAL = 0 “OU” EVENTO_SCP = 0. Lido ao pé da letra, uma ECF de SCP sem situação especial e com evento de SCP também teria de terminar em 31/12. A simulação segue o texto."
+    },
+    {
+      "onde": "0000",
+      "leiautes": [
+        "12"
+      ],
+      "texto": "REGRA_DATA_MINIMA diz “maior que 01/01/2014”, mas 01/01/2014 é o início do primeiro ano-calendário da ECF. A simulação aceita a própria data."
+    },
+    {
+      "onde": "0000",
+      "leiautes": [
+        "12"
+      ],
+      "texto": "No exemplo do Manual, a linha do 0000 tem 15 campos depois do REG; o leiaute tem 16 (falta EVENTO_SCP)."
+    },
+    {
+      "onde": "0020",
+      "leiautes": [
+        "12"
+      ],
+      "texto": "IND_QTE_SCP aparece como obrigatório “Sim”, mas REGRA_SCP_NAO_PREENCHER_QTD manda deixar o campo vazio quando 0000.TIP_ECF é 0 ou 2. O site segue a regra: na Móveis Aurora (TIP_ECF = 0), o campo fica vazio."
+    },
+    {
+      "onde": "L100",
+      "leiautes": [
+        "12"
+      ],
+      "texto": "REGRA_COMPATIBILIDADE_L100_E010 aparece duas vezes, com textos diferentes: um gera aviso e o outro, erro. O site mostra os dois textos e o tipo “Aviso/Erro”."
     }
   ]
 }

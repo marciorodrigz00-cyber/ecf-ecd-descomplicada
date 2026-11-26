@@ -100,6 +100,21 @@ export function MapaBlocos({ nos, arestas, inicial = "M" }: { nos: NoMapa[]; are
         })}
       </svg>
 
+      <ul data-testid="legenda-mapa" className="mt-4 flex flex-wrap gap-x-5 gap-y-1 text-sm text-suave">
+        <li>
+          <strong className="font-mono text-tinta">ECD</strong>: escrituração contábil do mesmo período, de onde vêm contas e saldos
+        </li>
+        <li>
+          <abbr title="ECF anterior" className="font-mono font-semibold text-tinta no-underline">
+            ECF ant.
+          </abbr>
+          <span className="sr-only"> (ECF anterior)</span>: a ECF do ano anterior, de onde vêm os saldos iniciais
+        </li>
+        <li>
+          <strong className="font-mono text-tinta">Letras</strong>: blocos da ECF
+        </li>
+      </ul>
+
       <div aria-live="polite" data-testid="mapa-painel" className="mt-5">
         <h3 className="text-xl font-bold">
           {atual.href ? (

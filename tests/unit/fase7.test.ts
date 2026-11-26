@@ -91,8 +91,11 @@ describe("Glossário", () => {
     expect(t("situacao-especial").profissional).toMatch(/Extinção, fusão, incorporação e cisão/);
   });
 
-  const marcas = (n: ReactNode) => (Array.isArray(n) ? n : [n]).filter((x) => isValidElement(x)).map((x) => (x as { props: { children: string } }).props.children);
-  const plano = (n: ReactNode) => (Array.isArray(n) ? n : [n]).map((x) => (isValidElement(x) ? (x as { props: { children: string } }).props.children : x)).join("");
+  // O termo seguido de pontuação vem dentro de um <span> que impede a quebra de linha entre eles.
+  const itens = (n: ReactNode): ReactNode[] =>
+    (Array.isArray(n) ? n : [n]).flatMap((x) => (isValidElement(x) && x.type === "span" ? itens((x as { props: { children: ReactNode } }).props.children) : [x]));
+  const marcas = (n: ReactNode) => itens(n).filter((x) => isValidElement(x)).map((x) => (x as { props: { children: string } }).props.children);
+  const plano = (n: ReactNode) => itens(n).map((x) => (isValidElement(x) ? (x as { props: { children: string } }).props.children : x)).join("");
   test("[CT-094] dica: o termo mais longo, uma vez, em palavra inteira e sem mudar o texto", () => {
     expect(marcas(comTermos("A ECF usa o plano de contas referencial."))).toEqual(["ECF", "plano de contas referencial"]);
     expect(marcas(comTermos("ECF e ECF e ECF."))).toEqual(["ECF"]);
@@ -105,7 +108,11 @@ describe("Glossário", () => {
     const vistos = new Set<string>();
     comTermos("A CSLL", vistos);
     expect(marcas(comTermos("outra CSLL", vistos))).toEqual([]);
-    for (const s of ["", "sem termo", "ECF", "x ECF", "ECF e CSLL, <b>e-Lalur</b> {{7*7}}", "IRPJ"]) expect(plano(comTermos(s))).toBe(s);
+    for (const s of ["", "sem termo", "ECF", "x ECF", "ECF e CSLL, <b>e-Lalur</b> {{7*7}}", "IRPJ", "o plano referencial.", "ECF), CSLL;"]) expect(plano(comTermos(s))).toBe(s);
+    // Pontuação colada ao termo não fica sozinha na linha seguinte.
+    const n = comTermos("o plano referencial.");
+    const grupo = (Array.isArray(n) ? n : [n]).find((x) => isValidElement(x) && x.type === "span");
+    expect(grupo && (grupo as { props: { className: string } }).props.className).toBe("whitespace-nowrap");
   });
 });
 

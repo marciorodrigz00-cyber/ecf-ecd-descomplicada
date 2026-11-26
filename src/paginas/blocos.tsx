@@ -5,7 +5,7 @@ import { ICONES } from "@/components/ecf/icones";
 import { MapaBlocos } from "@/components/ecf/mapa";
 import { EtiquetaStatus, LinkFonte, Selo } from "@/components/ecf/rastreio";
 import { BaseLegal } from "@/components/ecf/base-legal";
-import { BlocosPorRegime, EtiquetaSituacao, type CartaoBloco } from "@/components/ecf/regimes";
+import { BlocosPorRegime, EtiquetaSituacao, LegendaSituacao, type CartaoBloco } from "@/components/ecf/regimes";
 import { comTermos } from "@/components/ecf/com-termos";
 import { ExemploCampoACampo } from "@/components/ecf/exemplo-registro";
 import { Roteiro } from "@/components/ecf/roteiro";
@@ -20,12 +20,15 @@ import {
   legendas,
   linhaRegime,
   mudancas,
+  nomeBloco,
   regimes,
   registroDoAno,
   registrosDoBloco,
   statusRegistro,
 } from "@/lib/conteudo/leiautes";
 import { resumoRegistro } from "@/lib/exemplos/por-registro";
+import { roteiroDe } from "@/lib/simulacao/montar";
+import { SecaoSimulacao } from "@/components/simulacao";
 import { data, inteiro, ordinal, semQuebra } from "@/lib/formatos";
 import { rota } from "@/lib/rotas";
 import type { Registro } from "@/schemas";
@@ -38,12 +41,14 @@ function cartoes(ano: number): CartaoBloco[] {
   const { blocos } = leiauteDoAno(ano);
   return blocos.map((b, i) => ({
     letra: b.letra,
-    nome: b.nome,
+    nome: nomeBloco(b.letra, ano).nome,
+    ecd: nomeBloco(b.letra, ano).ecd,
     familia: b.familia,
+    grupo: NOME_FAMILIA[b.familia],
     tom: tomDoBloco(b, blocos),
     posicao: i + 1,
     href: ir(urlBloco(b.letra), ano),
-    objetivo: didatico(b.letra).objetivo,
+    objetivo: nomeBloco(b.letra, ano).objetivo,
     nota: linhaRegime(b.letra).nota,
     celulas: linhaRegime(b.letra).celulas,
   }));
@@ -56,7 +61,7 @@ function Mapa({ ano, inicial }: { ano: number; inicial?: string }) {
       inicial={inicial}
       nos={[
         ...grafo.externos.map((x) => ({ id: x.id, nome: x.nome, href: null, familia: null })),
-        ...blocos.map((b) => ({ id: b.letra, nome: `Bloco ${b.letra}: ${b.nome}`, href: ir(urlBloco(b.letra), ano), familia: b.familia })),
+        ...blocos.map((b) => ({ id: b.letra, nome: `Bloco ${b.letra}: ${nomeBloco(b.letra, ano).curto}`, href: ir(urlBloco(b.letra), ano), familia: b.familia })),
       ]}
       arestas={grafo.arestas.map((a) => ({
         de: a.de,
@@ -87,9 +92,9 @@ export function Blocos({ ano }: { ano: number }) {
         </h2>
         <BlocosPorRegime blocos={cartoes(ano)} regimes={regimes.regimes} />
         <p className="mt-4 max-w-prose text-sm text-suave">
-          Os nomes são os do Manual de Orientação. Os grupos são didáticos. “Depende” quer dizer que o bloco só
-          existe se uma condição do Manual for atendida. As formas mistas de tributação seguem as condições de cada
-          registro.
+          Os nomes são os do Manual de Orientação. Os grupos ({Object.values(NOME_FAMILIA).join(", ")}) foram criados por
+          este site para facilitar o estudo: o Manual não usa essa divisão. As formas mistas de tributação seguem as
+          condições de cada registro.
         </p>
       </section>
       <section aria-labelledby="t-mapa">
@@ -119,6 +124,18 @@ function Obrigatoriedade({ valor }: { valor: string }) {
   );
 }
 
+/** Blocos que recebem dados da ECD: deixa claro o que é de cada escrituração. */
+function AvisoEcd() {
+  return (
+    <p data-testid="aviso-ecd" className="mt-3 flex max-w-prose flex-wrap items-baseline gap-2">
+      <Etiqueta>dados da ECD</Etiqueta>
+      <span className="text-suave">
+        A ECD é a escrituração contábil da empresa. Este bloco faz parte da ECF, mas o conteúdo dele vem da ECD.
+      </span>
+    </p>
+  );
+}
+
 export function PaginaBloco({ letra, ano }: { letra: string; ano: number }) {
   const { blocos } = leiauteDoAno(ano);
   const bloco = blocos.find((b) => b.letra.toLowerCase() === letra)!;
@@ -145,6 +162,7 @@ export function PaginaBloco({ letra, ano }: { letra: string; ano: number }) {
         <h1 className="text-3xl font-bold sm:text-4xl">
           Bloco {bloco.letra}: {bloco.nome}
         </h1>
+        {nomeBloco(bloco.letra, ano).ecd && <AvisoEcd />}
         <div className="mt-4 max-w-prose text-lg">
           <Nivel so="iniciante">
             <p>{comTermos(d.objetivo, vistos.iniciante)}</p>
@@ -173,6 +191,7 @@ export function PaginaBloco({ letra, ano }: { letra: string; ano: number }) {
             </div>
           ))}
         </dl>
+        <LegendaSituacao />
         <p className="mt-3 text-suave">
           {linha.nota} Base:{" "}
           {linha.base.map((c, n) => (
@@ -343,6 +362,7 @@ export function PaginaRegistro({ codigo, ano }: { codigo: string; ano: number })
   const m = mudancas(codigo, ano);
   const outroAno = leiautes.find((l) => l.anoCalendario !== ano && !registroDoAno(codigo, l.anoCalendario));
   const resumo = resumoRegistro(codigo, ano);
+  const roteiro = roteiroDe(codigo, ano);
   return (
     <div className="space-y-10">
       <MarcarVisita codigo={codigo} />
@@ -372,11 +392,17 @@ export function PaginaRegistro({ codigo, ano }: { codigo: string; ano: number })
         <h2 id="t-para" className="mb-3 text-2xl font-bold">
           Para que serve
         </h2>
-        <Nivel so="iniciante">
-          <p className="mb-3 max-w-prose text-suave">
-            Este registro faz parte do bloco {bloco}. {didatico(bloco).objetivo}
-          </p>
-        </Nivel>
+        {roteiro && (
+          <div data-testid="para-que-serve" className="mb-4 max-w-prose text-lg">
+            <Nivel so="iniciante">
+              <p>{roteiro.paraQueServe.iniciante}</p>
+            </Nivel>
+            <Nivel so="profissional">
+              <p>{roteiro.paraQueServe.profissional}</p>
+            </Nivel>
+          </div>
+        )}
+        {roteiro && r.descricao.length > 0 && <h3 className="mb-2 font-semibold">No Manual</h3>}
         {r.descricao.length > 0 ? (
           <div className="max-w-prose space-y-2">
             {r.descricao.map((p, n) => (
@@ -388,6 +414,11 @@ export function PaginaRegistro({ codigo, ano }: { codigo: string; ano: number })
         ) : (
           <p className="text-suave">O Manual não traz descrição para este registro.</p>
         )}
+        <Nivel so="iniciante">
+          <p data-testid="sobre-o-bloco" className="mt-4 max-w-prose rounded-lg border border-linha bg-fundo px-4 py-3 text-suave">
+            <strong className="text-tinta">Sobre o bloco {bloco}:</strong> {nomeBloco(bloco, ano).objetivo}
+          </p>
+        </Nivel>
         <dl className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {[
             ["Obrigatoriedade na transmissão", <Obrigatoriedade key="s" valor={r.saida} />],
@@ -405,7 +436,7 @@ export function PaginaRegistro({ codigo, ano }: { codigo: string; ano: number })
 
       <section aria-labelledby="t-preenchido">
         <h2 id="t-preenchido" className="mb-3 text-2xl font-bold">
-          Exemplo preenchido
+          Veja o preenchimento
         </h2>
         {resumo.exemplos.length === 0 && <p className="max-w-prose text-suave">{resumo.semExemplo}</p>}
         <div className="space-y-4">
@@ -418,6 +449,11 @@ export function PaginaRegistro({ codigo, ano }: { codigo: string; ano: number })
             </details>
           ))}
         </div>
+        {roteiro && (
+          <div className="mt-4">
+            <SecaoSimulacao codigo={codigo} url={`/dados/${ano}/roteiro-${codigo.toLowerCase()}.json`} />
+          </div>
+        )}
       </section>
 
       {m && m.mudanca && (

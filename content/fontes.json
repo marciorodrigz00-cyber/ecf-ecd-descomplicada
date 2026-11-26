@@ -127,7 +127,8 @@
     "nome": "Comunicado da versão 12.2.8 do programa da ECF",
     "orgao": "Receita Federal",
     "url": "https://www.gov.br/sped/pt-br/assuntos/comunicados/ecf/copy4_of_publicacao-da-versao-12-2-4-do-programa-da-ecf",
-    "papel": "primaria"
+    "papel": "primaria",
+    "observacao": "O endereço herdou o nome de uma cópia da página da versão 12.2.4. Aberta em 26/11/2026, a página tem o título “Publicação da Versão 12.2.8 do Programa da ECF”. O monitor confere o título todo dia."
   },
   {
     "id": "sped-comunicados",

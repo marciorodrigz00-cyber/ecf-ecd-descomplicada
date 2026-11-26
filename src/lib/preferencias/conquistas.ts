@@ -16,7 +16,7 @@ export function conquistas(p: Preferencias, totalSecoes: number): Conquista[] {
     item("quiz", "Sei quem entrega", "Chegue ao resultado do quiz", fez("quiz"), 1),
     item("simulador", "Mão na massa", "Mude um valor no simulador", fez("simulador"), 1),
     item("registros", "Leitor de registros", "Abra 10 registros", p.registros.length, 10),
-    item("blocos", "Todos os blocos", `Abra os ${TOTAL_BLOCOS} blocos cobertos`, p.blocos.length, TOTAL_BLOCOS),
+    item("blocos", "Todos os blocos", `Abra os ${TOTAL_BLOCOS} blocos cobertos, em qualquer regime`, p.blocos.length, TOTAL_BLOCOS),
     item("meia-trilha", "Meia trilha", "Estude metade das seções", secoes, Math.ceil(totalSecoes / 2)),
     item("trilha", "Trilha concluída", "Estude todas as seções", secoes, totalSecoes),
   ];

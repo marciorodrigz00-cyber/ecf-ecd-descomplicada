@@ -13,6 +13,13 @@ export type ParteExemplo = {
   valor: string;
   /** Como o próprio Manual lê este valor, quando a lista dele bate com a linha. */
   leitura: string | null;
+  tipo: string;
+  tamanho: string;
+  obrigatorio: string;
+  /** Valores válidos do leiaute, quando o Manual lista. */
+  valores: string | null;
+  /** Códigos das regras do Manual para este campo. */
+  regras: string[];
 };
 export type ExemploRegistro = {
   origem: "ficticio" | "ilustrativo" | "manual";
@@ -53,7 +60,17 @@ function trecho(paragrafos: string[], max = 900): Pick<ResumoRegistro, "descrica
 
 function decompor(r: Registro, valores: string[], leituras: (string | null)[] = []): ParteExemplo[] | null {
   if (valores.length !== r.campos.length) return null;
-  return r.campos.map((c, i) => ({ nome: c.nome, descricao: cortar(c.descricao, 400), valor: valores[i]!, leitura: leituras[i] ?? null }));
+  return r.campos.map((c, i) => ({
+    nome: c.nome,
+    descricao: cortar(c.descricao, 400),
+    valor: valores[i]!,
+    leitura: leituras[i] ?? null,
+    tipo: c.tipo,
+    tamanho: c.tamanho,
+    obrigatorio: c.obrigatorio,
+    valores: c.valores && c.valores !== "—" ? cortar(c.valores, 300) : null,
+    regras: r.regrasCampo.find((g) => g.campo === c.nome)?.regras.map((x) => x.codigo) ?? [],
+  }));
 }
 
 /** "|A|B|" → ["A", "B"]. */

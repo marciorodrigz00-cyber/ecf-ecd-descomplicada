@@ -38,9 +38,10 @@ function textos(x: unknown, saida: string[] = [], fundo = 0): string[] {
   return saida;
 }
 
-export function extrair(alvo: Pick<Alvo, "tipo" | "trechos">, corpo: string): string[] {
+export function extrair(alvo: Pick<Alvo, "tipo" | "trechos" | "exige">, corpo: string): string[] {
   const linhas = extrairBruto(alvo, corpo).flatMap((l) => partir(l));
   if (linhas.length === 0) throw new Error("Nada encontrado: a estrutura da página pode ter mudado");
+  if (alvo.exige && !linhas.some((l) => alvo.exige!.test(l))) throw new Error("A página não cita o que o site afirma: conferir a fonte");
   if (linhas.length > MAX_LINHAS) throw new Error("Linhas demais");
   return linhas;
 }
