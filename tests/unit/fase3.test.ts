@@ -119,6 +119,8 @@ describe("Conteúdo fiscal", () => {
     expect([...hosts].sort()).toEqual([
       "normas.receita.fazenda.gov.br",
       "normasinternet2.receita.fazenda.gov.br",
+      // Notícias do STF sobre as ações contra a LC 224 (etapa 4).
+      "noticias.stf.jus.br",
       "www.gov.br",
       "www.planalto.gov.br",
     ]);

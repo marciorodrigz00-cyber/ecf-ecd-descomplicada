@@ -1,0 +1,78 @@
+{
+  "id": "padis",
+  "nome": "PADIS (semicondutores)",
+  "curto": "PADIS",
+  "iniciante": "Empresas habilitadas no programa de semicondutores têm redução do imposto sobre o lucro e créditos ligados ao IRPJ e à CSLL. Esse incentivo ficou fora da redução.",
+  "profissional": "Redução das alíquotas do IR e do adicional sobre o lucro da exploração nas vendas dos dispositivos e créditos financeiros de IRPJ e de CSLL para empresas habilitadas no PADIS (Lei nº 11.484/2007). Excetuado (política industrial de semicondutores) e listado no Anexo Único.",
+  "comoFunciona": "Depende de habilitação. A redução sobre o lucro da exploração aparece no Bloco N (N600 e N610).",
+  "baseLegal": [
+    {
+      "norma": "Lei nº 11.484/2007, arts. 1º a 11",
+      "url": "https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2007/lei/l11484.htm"
+    },
+    {
+      "norma": "IN RFB nº 2.305/2025, Anexo Único, itens 11 (IRPJ) e 12 (CSLL)",
+      "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/148694"
+    }
+  ],
+  "tributos": [
+    "IRPJ",
+    "CSLL"
+  ],
+  "regimes": [
+    "real"
+  ],
+  "fruicao": "reducao-imposto",
+  "setorRegiao": "Semicondutores",
+  "situacao": "excetuado",
+  "porQue": "Exceção da LC nº 224/2025 para a política industrial de semicondutores (art. 4º, § 8º, XIII); Anexo Único, itens 11 (IRPJ) e 12 (CSLL).",
+  "porAno": [
+    {
+      "ac": 2026,
+      "efeito": "Sem redução.",
+      "regras": [],
+      "status": "conferido",
+      "fonte": {
+        "id": "in-2305",
+        "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/148694",
+        "trecho": "Anexo Único, itens 11 (IRPJ) e 12 (CSLL)"
+      }
+    },
+    {
+      "ac": 2027,
+      "efeito": "A exceção do § 8º, XIII, não foi alterada pela LC nº 239/2026. Falta orientação da Receita Federal para 2027.",
+      "regras": [
+        "lc239-inicio"
+      ],
+      "status": "a-verificar",
+      "fonte": {
+        "id": "lc-239",
+        "url": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp239.htm",
+        "trecho": "art. 4º (nova redação do art. 4º da LC nº 224/2025) e art. 15"
+      }
+    }
+  ],
+  "registros": [
+    "N600",
+    "N610"
+  ],
+  "fonte": {
+    "id": "in-2305",
+    "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/148694",
+    "trecho": "Anexo Único, itens 11 (IRPJ) e 12 (CSLL)"
+  },
+  "norma": "LC nº 224/2025, art. 4º, § 8º, XIII",
+  "status": "conferido",
+  "leiautes": [
+    "12"
+  ],
+  "vigencia": {
+    "acNormal": [
+      2026
+    ],
+    "situacaoEspecial": [
+      2026
+    ]
+  },
+  "verificadoEm": "2026-11-27"
+}

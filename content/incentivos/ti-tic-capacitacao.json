@@ -1,0 +1,76 @@
+{
+  "id": "ti-tic-capacitacao",
+  "nome": "TI e TIC: capacitação de pessoal em software",
+  "curto": "TI e TIC",
+  "iniciante": "Empresas de tecnologia podem descontar do lucro tributável gastos com capacitação de quem desenvolve programas de computador. Esse incentivo ficou fora da redução.",
+  "profissional": "Exclusão do lucro líquido, para efeito de apuração do lucro real, dos custos e despesas com capacitação de pessoal que atua no desenvolvimento de programas de computador (Lei nº 11.774/2008, art. 13-A). Listado no Anexo Único.",
+  "comoFunciona": "A exclusão é feita na parte A do e-Lalur.",
+  "baseLegal": [
+    {
+      "norma": "Lei nº 11.774/2008, art. 13-A",
+      "url": "https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2008/lei/l11774.htm"
+    },
+    {
+      "norma": "IN RFB nº 2.305/2025, Anexo Único, item 31",
+      "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/148694"
+    }
+  ],
+  "tributos": [
+    "IRPJ"
+  ],
+  "regimes": [
+    "real"
+  ],
+  "fruicao": "exclusao",
+  "setorRegiao": "Tecnologia da informação e comunicação",
+  "situacao": "excetuado",
+  "porQue": "Anexo Único da IN RFB nº 2.305/2025, item 31.",
+  "porAno": [
+    {
+      "ac": 2026,
+      "efeito": "Sem redução.",
+      "regras": [],
+      "status": "conferido",
+      "fonte": {
+        "id": "in-2305",
+        "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/148694",
+        "trecho": "Anexo Único, item 31"
+      }
+    },
+    {
+      "ac": 2027,
+      "efeito": "O Anexo Único se refere à LOA de 2026. Falta orientação da Receita Federal para 2027.",
+      "regras": [
+        "lc239-inicio"
+      ],
+      "status": "a-verificar",
+      "fonte": {
+        "id": "lc-239",
+        "url": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp239.htm",
+        "trecho": "art. 4º (nova redação do art. 4º da LC nº 224/2025) e art. 15"
+      }
+    }
+  ],
+  "registros": [
+    "M300"
+  ],
+  "fonte": {
+    "id": "in-2305",
+    "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/148694",
+    "trecho": "Anexo Único, item 31"
+  },
+  "norma": "IN RFB nº 2.305/2025, art. 17 e Anexo Único",
+  "status": "conferido",
+  "leiautes": [
+    "12"
+  ],
+  "vigencia": {
+    "acNormal": [
+      2026
+    ],
+    "situacaoEspecial": [
+      2026
+    ]
+  },
+  "verificadoEm": "2026-11-27"
+}

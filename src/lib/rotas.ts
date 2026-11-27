@@ -93,7 +93,7 @@ export function rota(base: string, ano: number, padrao: number): string {
   return base === "/" ? `/ac/${ano}` : `/ac/${ano}${base}`;
 }
 
-const AVULSAS = ["fontes", "preencher", "meu-progresso"];
+const AVULSAS = ["fontes", "preencher", "meu-progresso", "incentivos"];
 /** Códigos de registro que não existem em cada ano. */
 export type Ausentes = Readonly<Record<number, readonly string[]>>;
 

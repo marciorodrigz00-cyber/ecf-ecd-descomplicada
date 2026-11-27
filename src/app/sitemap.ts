@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { ANO_PADRAO, anos, leiauteDoAno, novidades } from "@/lib/conteudo";
 import { registrosDoAno } from "@/lib/conteudo/leiautes";
+import { incentivos } from "@/lib/conteudo/incentivos";
 import { exemplos } from "@/lib/exemplos";
 import { SECOES, rota } from "@/lib/rotas";
 import { SITE } from "@/lib/seo";
@@ -24,7 +25,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   };
   return [
     ...anos.flatMap(doAno),
-    // A novidade é uma só, qualquer que seja o ano.
+    // Incentivos e novidades são os mesmos em qualquer ano.
+    { url: `${SITE}/incentivos`, lastModified: incentivos.map((i) => i.verificadoEm).sort().at(-1)! },
+    ...incentivos.map((i) => ({ url: `${SITE}/incentivos/${i.id}`, lastModified: i.verificadoEm })),
     ...novidades.map((n) => ({ url: `${SITE}/novidades/${n.slug}`, lastModified: n.verificadoEm })),
   ];
 }

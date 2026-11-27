@@ -88,7 +88,7 @@ test("[CT-101] filtros de novidades, blocos e glossário no endereço", async ({
   await expect(page).toHaveURL(/\/novidades\?tipo=[a-z-]+&so=leiaute$/);
   await page.reload();
   await expect(page.getByRole("button", { name: "Norma", exact: true })).toHaveAttribute("aria-pressed", "true");
-  await expect(page.locator("main [role=status]")).toHaveText("Mostrando 2 de 15.");
+  await expect(page.locator("main [role=status]")).toHaveText("Mostrando 3 de 17.");
   await page.getByRole("button", { name: "Tudo" }).click();
   await page.getByLabel("Só as que valem para o leiaute 12").uncheck();
   await expect(page).toHaveURL(/\/novidades$/);
@@ -132,7 +132,7 @@ test("[SG-031] parâmetros do endereço só aceitam valores da lista e nunca exe
     await abrir(page, `/blocos?regime=${v}&bloco=${v}&aba=${v}`);
     await expect(page.locator('[data-no="M"]')).toHaveAttribute("aria-pressed", "true");
     await abrir(page, `/novidades?tipo=${v}&so=${v}`);
-    await expect(page.locator("main [role=status]")).toHaveText("Mostrando 15 de 15.");
+    await expect(page.locator("main [role=status]")).toHaveText("Mostrando 17 de 17.");
     await abrir(page, `/blocos?regime=${v}&so=${v}`);
     await expect(page.locator("main [role=status]").first()).toHaveText("Mostrando 17 de 17 blocos");
     await abrir(page, `/glossario?termo=${v}`);

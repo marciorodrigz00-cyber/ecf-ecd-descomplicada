@@ -138,6 +138,39 @@
   "status": "conferido"
  },
  {
+  "id": "beneficio-tributario",
+  "termo": "benefício tributário",
+  "sinonimos": [
+   "benefícios tributários",
+   "incentivo fiscal",
+   "incentivos fiscais"
+  ],
+  "dica": true,
+  "iniciante": "Regra que faz a empresa pagar menos imposto do que pagaria pela regra geral.",
+  "profissional": "Para a LC nº 224/2025, o que se afasta do sistema padrão de tributação; no IRPJ e na CSLL, o padrão é o lucro real sem descontos ou benefícios. Nem todo gasto tributário é benefício: despesas operacionais ficam fora.",
+  "regras": [],
+  "registros": [],
+  "fonte": {
+   "id": "pr-lc224",
+   "url": "https://www.gov.br/receitafederal/pt-br/centrais-de-conteudo/publicacoes/perguntas-e-respostas/beneficios-fiscais/perguntas-e-respostas-reducao-dos-incentivos-e-beneficios-tributarios-v5-final.pdf",
+   "trecho": "perguntas 5 e 7"
+  },
+  "norma": "LC nº 224/2025, art. 4º, §§ 2º e 3º",
+  "leiautes": [
+   "12"
+  ],
+  "vigencia": {
+   "acNormal": [
+    2026
+   ],
+   "situacaoEspecial": [
+    2026
+   ]
+  },
+  "verificadoEm": "2026-11-27",
+  "status": "conferido"
+ },
+ {
   "id": "campo",
   "termo": "campo",
   "sinonimos": [],
@@ -336,6 +369,38 @@
    "situacaoEspecial": []
   },
   "verificadoEm": "2026-11-25",
+  "status": "conferido"
+ },
+ {
+  "id": "dgt",
+  "termo": "demonstrativo de gastos tributários",
+  "sinonimos": [
+   "DGT",
+   "gastos tributários"
+  ],
+  "dica": true,
+  "iniciante": "Lista oficial, anexa ao orçamento federal, dos benefícios fiscais e de quanto eles custam aos cofres públicos.",
+  "profissional": "Demonstrativo do art. 165, § 6º, da Constituição, anexo à lei orçamentária. A LC nº 224/2025 reduz os incentivos nele discriminados (o da LOA de 2026; com a LC nº 239/2026, o do respectivo exercício).",
+  "regras": [],
+  "registros": [],
+  "fonte": {
+   "id": "lc-224",
+   "url": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp224.htm",
+   "trecho": "art. 4º, § 2º, I"
+  },
+  "norma": "LC nº 224/2025, art. 4º, § 2º, I",
+  "leiautes": [
+   "12"
+  ],
+  "vigencia": {
+   "acNormal": [
+    2026
+   ],
+   "situacaoEspecial": [
+    2026
+   ]
+  },
+  "verificadoEm": "2026-11-27",
   "status": "conferido"
  },
  {
@@ -611,6 +676,35 @@
   "status": "conferido"
  },
  {
+  "id": "fruicao",
+  "termo": "fruição",
+  "sinonimos": [],
+  "dica": false,
+  "iniciante": "O uso, pela empresa, de um benefício fiscal a que ela tem direito.",
+  "profissional": "Aproveitamento efetivo do incentivo ou benefício, nas condições da lei que o concede.",
+  "regras": [],
+  "registros": [],
+  "fonte": {
+   "id": "in-2305",
+   "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/148694",
+   "trecho": "art. 16, IV"
+  },
+  "norma": "IN RFB nº 2.305/2025, art. 16, IV",
+  "leiautes": [
+   "12"
+  ],
+  "vigencia": {
+   "acNormal": [
+    2026
+   ],
+   "situacaoEspecial": [
+    2026
+   ]
+  },
+  "verificadoEm": "2026-11-27",
+  "status": "conferido"
+ },
+ {
   "id": "hash",
   "termo": "hashcode",
   "sinonimos": [
@@ -848,6 +942,38 @@
    "situacaoEspecial": []
   },
   "verificadoEm": "2026-11-25",
+  "status": "conferido"
+ },
+ {
+  "id": "lucro-da-exploracao",
+  "termo": "lucro da exploração",
+  "sinonimos": [],
+  "dica": true,
+  "iniciante": "O lucro que vem da atividade principal da empresa, calculado à parte para medir alguns incentivos regionais e setoriais.",
+  "profissional": "Lucro líquido ajustado que serve de base para isenções e reduções do imposto, como as da Sudam e da Sudene. Demonstrado no registro N600 da ECF.",
+  "regras": [],
+  "registros": [
+   "N600",
+   "N610"
+  ],
+  "fonte": {
+   "id": "dl-1598",
+   "url": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del1598.htm",
+   "trecho": "art. 19"
+  },
+  "norma": "Decreto-Lei nº 1.598/1977, art. 19",
+  "leiautes": [
+   "11",
+   "12"
+  ],
+  "vigencia": {
+   "acNormal": [
+    2024,
+    2025
+   ],
+   "situacaoEspecial": []
+  },
+  "verificadoEm": "2026-11-27",
   "status": "conferido"
  },
  {
@@ -1188,6 +1314,37 @@
   "status": "conferido"
  },
  {
+  "id": "reducao-linear",
+  "termo": "redução linear",
+  "sinonimos": [
+   "redução linear de benefícios"
+  ],
+  "dica": true,
+  "iniciante": "Corte igual, em percentual, aplicado de uma vez a vários incentivos fiscais.",
+  "profissional": "Redução dos incentivos e benefícios federais prevista no art. 4º da LC nº 224/2025 e disciplinada pela IN RFB nº 2.305/2025, aplicada cumulativamente em cada modalidade do benefício.",
+  "regras": [],
+  "registros": [],
+  "fonte": {
+   "id": "in-2305",
+   "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/148694",
+   "trecho": "art. 1º"
+  },
+  "norma": "IN RFB nº 2.305/2025, art. 1º",
+  "leiautes": [
+   "12"
+  ],
+  "vigencia": {
+   "acNormal": [
+    2026
+   ],
+   "situacaoEspecial": [
+    2026
+   ]
+  },
+  "verificadoEm": "2026-11-27",
+  "status": "conferido"
+ },
+ {
   "id": "registro",
   "termo": "registro",
   "sinonimos": [],
@@ -1282,6 +1439,37 @@
    "situacaoEspecial": []
   },
   "verificadoEm": "2026-11-25",
+  "status": "conferido"
+ },
+ {
+  "id": "sistema-padrao",
+  "termo": "sistema padrão de tributação",
+  "sinonimos": [
+   "sistema padrão"
+  ],
+  "dica": true,
+  "iniciante": "A regra geral, sem nenhum benefício, usada como comparação para medir quanto um incentivo reduz o imposto.",
+  "profissional": "Referência para verificar se uma alíquota ou base é benefício. Para o IRPJ e a CSLL, as normas do lucro real sem descontos ou benefícios.",
+  "regras": [],
+  "registros": [],
+  "fonte": {
+   "id": "lc-224",
+   "url": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp224.htm",
+   "trecho": "art. 4º, § 3º, I"
+  },
+  "norma": "LC nº 224/2025, art. 4º, § 3º",
+  "leiautes": [
+   "12"
+  ],
+  "vigencia": {
+   "acNormal": [
+    2026
+   ],
+   "situacaoEspecial": [
+    2026
+   ]
+  },
+  "verificadoEm": "2026-11-27",
   "status": "conferido"
  },
  {

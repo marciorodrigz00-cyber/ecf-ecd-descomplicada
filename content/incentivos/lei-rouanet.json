@@ -1,0 +1,79 @@
+{
+  "id": "lei-rouanet",
+  "nome": "Lei Rouanet (incentivo à cultura)",
+  "curto": "Lei Rouanet",
+  "iniciante": "Empresas do lucro real que patrocinam ou fazem doações a projetos culturais aprovados podem abater parte disso do imposto de renda. A partir de 2026, o limite ficou menor.",
+  "profissional": "Dedução do IRPJ devido das doações e patrocínios a projetos culturais (Lei nº 8.313/1991). A Receita Federal incluiu este caso no Perguntas e Respostas em 30/07/2026: a redução se aplica ao limite máximo de dedução.",
+  "comoFunciona": "Apura-se o IRPJ à alíquota de 15%, calcula-se o limite de dedução da lei do incentivo, aplica-se 90% sobre ele e compara-se com o valor doado ou patrocinado.",
+  "baseLegal": [
+    {
+      "norma": "Lei nº 8.313/1991, arts. 18 e 26",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8313cons.htm"
+    },
+    {
+      "norma": "Lei nº 9.532/1997, art. 6º, II",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l9532.htm"
+    }
+  ],
+  "tributos": [
+    "IRPJ"
+  ],
+  "regimes": [
+    "real"
+  ],
+  "fruicao": "deducao-imposto",
+  "situacao": "reduzido",
+  "porQue": "Perguntas e Respostas, pergunta 21.1 (incluída em 30/07/2026); LC nº 224/2025, art. 4º, § 4º, V.",
+  "porAno": [
+    {
+      "ac": 2026,
+      "efeito": "O limite de dedução do imposto passa a ser 90% do limite previsto na lei.",
+      "regras": [
+        "lc224-deducao-imposto",
+        "lc224-inicio-irpj"
+      ],
+      "status": "conferido",
+      "fonte": {
+        "id": "pr-lc224",
+        "url": "https://www.gov.br/receitafederal/pt-br/centrais-de-conteudo/publicacoes/perguntas-e-respostas/beneficios-fiscais/perguntas-e-respostas-reducao-dos-incentivos-e-beneficios-tributarios-v5-final.pdf",
+        "trecho": "pergunta 21.1"
+      }
+    },
+    {
+      "ac": 2027,
+      "efeito": "A LC nº 239/2026 passa a usar o demonstrativo de gastos tributários da lei orçamentária de cada ano. Se este benefício continuar alcançado em 2027, a redução sobe de 10% para 20%. Falta orientação da Receita Federal sobre as datas e a lista.",
+      "regras": [
+        "lc239-inicio"
+      ],
+      "status": "a-verificar",
+      "fonte": {
+        "id": "lc-239",
+        "url": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp239.htm",
+        "trecho": "art. 4º (nova redação do art. 4º da LC nº 224/2025) e art. 15"
+      }
+    }
+  ],
+  "registros": [
+    "N620",
+    "N630"
+  ],
+  "fonte": {
+    "id": "pr-lc224",
+    "url": "https://www.gov.br/receitafederal/pt-br/centrais-de-conteudo/publicacoes/perguntas-e-respostas/beneficios-fiscais/perguntas-e-respostas-reducao-dos-incentivos-e-beneficios-tributarios-v5-final.pdf",
+    "trecho": "pergunta 21.1"
+  },
+  "norma": "LC nº 224/2025, art. 4º, § 4º, V",
+  "status": "conferido",
+  "leiautes": [
+    "12"
+  ],
+  "vigencia": {
+    "acNormal": [
+      2026
+    ],
+    "situacaoEspecial": [
+      2026
+    ]
+  },
+  "verificadoEm": "2026-11-27"
+}

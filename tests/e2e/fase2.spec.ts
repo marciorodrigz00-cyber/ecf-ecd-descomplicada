@@ -56,7 +56,7 @@ test("[CT-001][CT-002] menu, item ativo, breadcrumb, topo e foco", async ({ page
   await page.setViewportSize({ width: 1440, height: 700 });
   await pronta(page, "/");
   await page.evaluate(() => scrollTo(0, document.body.scrollHeight));
-  const menu = page.locator("[data-lateral]").getByRole("navigation", { name: "Menu principal" });
+  const menu = page.locator("[data-lateral]").getByRole("navigation", { name: "Principal", exact: true });
   for (const [nome, slug, trilha] of [["Blocos e registros", "blocos", "Blocos"], ["Simulador", "simulador", "Simulador"], ["Glossário", "glossario", "Glossário"]] as const) {
     await menu.getByRole("link", { name: nome, exact: true }).click();
     await expect(page).toHaveURL(new RegExp(`/${slug}$`));

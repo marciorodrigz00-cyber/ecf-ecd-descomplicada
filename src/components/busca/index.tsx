@@ -7,12 +7,14 @@ import { agrupar, buscar, preparar, type Indice, type LinhaIndice, type Resultad
 import { cn } from "@/lib/cn";
 import { anoDaUrl } from "@/lib/rotas";
 
-const NOME: Record<TipoItem, string> = { bloco: "Bloco", registro: "Registro", campo: "Campo", termo: "Glossário", secao: "Página", novidade: "Novidade", regra: "Regra" };
-const GRUPO: Record<TipoItem, string> = { bloco: "Blocos", registro: "Registros", campo: "Campos", termo: "Glossário", secao: "Páginas", novidade: "Novidades", regra: "Regras de validação" };
+const NOME: Record<TipoItem, string> = { bloco: "Bloco", registro: "Registro", campo: "Campo", termo: "Glossário", secao: "Página", novidade: "Novidade", regra: "Regra", incentivo: "Incentivo" };
+const GRUPO: Record<TipoItem, string> = { bloco: "Blocos", registro: "Registros", campo: "Campos", termo: "Glossário", secao: "Páginas", novidade: "Novidades", regra: "Regras de validação", incentivo: "Incentivos fiscais" };
 const guardados = new Map<number, Indice>();
 type Carga = { ano: number; estado: "carregando" | "erro" | "pronto" };
 /** Qualquer botão de busca abre o mesmo diálogo, que existe uma vez só na página. */
 const ABRIR_BUSCA = "ecf:abrir-busca";
+/** O botão de menu da barra superior abre a gaveta, que vive no cabeçalho. */
+export const ABRIR_MENU = "ecf:abrir-menu";
 
 export function BotaoBusca({ compacto = false, className }: { compacto?: boolean; className?: string }) {
   return (
@@ -22,15 +24,15 @@ export function BotaoBusca({ compacto = false, className }: { compacto?: boolean
       aria-haspopup="dialog"
       aria-label={compacto ? "Buscar" : undefined}
       className={cn(
-        "flex min-h-11 min-w-11 items-center justify-center gap-3 rounded-lg border border-controle bg-fundo px-3 text-suave hover:border-marca",
+        "flex min-h-11 min-w-11 items-center justify-center gap-3 rounded-lg border border-linha bg-superficie px-3 text-suave transition-[border-color] hover:border-controle",
         className,
       )}
     >
-      <Search aria-hidden size={20} className="shrink-0" />
+      <Search aria-hidden size={18} strokeWidth={1.5} className="shrink-0" />
       {!compacto && (
         <>
-          <span className="min-w-0 flex-1 truncate text-left">Buscar…</span>
-          <kbd className="shrink-0 rounded border border-controle px-1.5 font-mono text-xs">Ctrl K</kbd>
+          <span className="min-w-0 flex-1 truncate text-left">Buscar registro, bloco ou termo…</span>
+          <kbd className="hidden shrink-0 rounded border border-linha px-1.5 font-mono text-xs sm:block">Ctrl K</kbd>
         </>
       )}
     </button>

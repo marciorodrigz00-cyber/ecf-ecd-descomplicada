@@ -8,6 +8,8 @@ export const HOSTS_OFICIAIS = [
   "normas.receita.fazenda.gov.br",
   "www.planalto.gov.br",
   "www.in.gov.br",
+  // Notícias do STF sobre ações que questionam normas citadas (só para a situação judicial).
+  "noticias.stf.jus.br",
 ] as const;
 
 const texto = z.string().trim().min(1);
@@ -340,6 +342,75 @@ export const Roteiro = z
     paraQueServe: Nivelado,
   })
   .refine((r) => r.regras.some((x) => x.codigo === r.erro.regra && x.simulada), "o cenário de erro precisa usar uma regra simulada");
+
+/** Situação de um incentivo diante da LC nº 224/2025 (etapa 4). */
+export const SITUACOES_LC224 = ["reduzido", "excetuado", "nao-beneficio", "a-verificar"] as const;
+export const FRUICOES = ["presuncao", "deducao-imposto", "reducao-imposto", "exclusao", "despesa-dedutivel", "credito", "isencao"] as const;
+const fonteCitada = z.strictObject({ id: texto, url: urlOficial, trecho: texto });
+const codigoRegistro = z.string().regex(/^[0-9A-Z]\d{3}$/);
+
+/** Ficha de incentivo: content/incentivos/<slug>.json. O carregador confere fontes, registros e regras. */
+export const Incentivo = z
+  .strictObject({
+    ...rastreavel,
+    id: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
+    nome: texto,
+    curto: texto,
+    iniciante: texto,
+    profissional: texto,
+    /** Como a pessoa jurídica usa o benefício: quem pode, o que fazer. */
+    comoFunciona: texto,
+    baseLegal: z.array(z.strictObject({ norma: texto, url: urlOficial })).min(1),
+    tributos: z.array(z.enum(["IRPJ", "CSLL"])).min(1),
+    /** Vazio quando as fontes lidas não dizem quais regimes podem usar. */
+    regimes: z.array(z.enum(REGIMES)),
+    fruicao: z.enum(FRUICOES),
+    setorRegiao: texto.optional(),
+    situacao: z.enum(SITUACOES_LC224),
+    /** Por que a situação é essa, com o dispositivo. */
+    porQue: texto,
+    /** Efeito em cada ano-calendário. A camada da LC nº 239/2026 pode ficar "a verificar" sozinha. */
+    porAno: z
+      .array(z.strictObject({ ac: ano, efeito: texto, regras: z.array(texto), status: Status, fonte: fonteCitada }))
+      .min(1),
+    /** Onde o incentivo aparece na ECF (leiaute 12). */
+    registros: z.array(codigoRegistro),
+    /** O que ainda falta conferir, obrigatório quando a situação é "a verificar". */
+    falta: texto.optional(),
+    judicial: z
+      .strictObject({ texto, verificadoEm: z.iso.date(), fontes: z.array(fonteCitada).min(1) })
+      .optional(),
+    exemplo: z
+      .discriminatedUnion("tipo", [
+        z.strictObject({
+          tipo: z.literal("deducao"),
+          titulo: texto,
+          irDevido15: z.number().int().positive(),
+          limitePb: z.number().int().positive(),
+          valoresDoados: z.array(z.number().int().nonnegative()).min(1),
+          fonte: fonteCitada,
+        }),
+        z.strictObject({
+          tipo: z.literal("presumido"),
+          titulo: texto,
+          receitas: z.array(z.strictObject({ atividade: texto, centavos: z.number().int().nonnegative(), presIrpjPb: z.number().int().positive() })).min(1),
+          fonte: fonteCitada,
+        }),
+      ])
+      .optional(),
+  })
+  .refine(exigeRevisor, msgRevisor)
+  .refine(temLeiaute, msgLeiaute)
+  .refine(temAno, msgAno)
+  .refine((i) => i.situacao !== "a-verificar" || Boolean(i.falta), { message: "situação 'a verificar' exige o que falta conferir", path: ["falta"] })
+  .refine((i) => new Set(i.porAno.map((p) => p.ac)).size === i.porAno.length, { message: "ano-calendário repetido", path: ["porAno"] });
+export type Incentivo = z.infer<typeof Incentivo>;
+
+/** content/lc224.json: linha do tempo da lei e o que muda na ECF por ano-calendário. */
+export const PaginaLc224 = z.strictObject({
+  linha: z.array(Evento).min(1),
+  naEcf: z.array(z.strictObject({ quando: texto, texto, status: Status, fonte: fonteCitada })).min(1),
+});
 
 export const Divergencias = z.strictObject({
   rastreio: Rastreio,

@@ -577,10 +577,10 @@
   },
   {
     "id": "lc-224",
-    "titulo": "Fora do simulador: regras novas",
+    "titulo": "LC nº 224/2025: só a partir do AC 2026",
     "valor": {
       "tipo": "texto",
-      "texto": "A Lei Complementar nº 224/2025 e a IN RFB nº 2.305/2025 alteraram o tratamento do IRPJ e da CSLL. As linhas ligadas a elas nas tabelas dinâmicas começam em 2026"
+      "texto": "A Lei Complementar nº 224/2025 e a IN RFB nº 2.305/2025 alteraram o IRPJ e a CSLL a partir de 2026. Nos anos-calendário 2024 e 2025 elas não se aplicam; o modo AC 2026 do simulador mostra o acréscimo do lucro presumido. As linhas ligadas a elas nas tabelas dinâmicas começam em 2026"
     },
     "fonte": {
       "id": "manual-12",

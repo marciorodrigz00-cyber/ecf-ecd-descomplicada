@@ -1,4 +1,5 @@
 import { ANO_PADRAO, glossario, leiauteDoAno, novidades } from "@/lib/conteudo";
+import { incentivos } from "@/lib/conteudo/incentivos";
 import { ancorasDasRegras, ancorasDosCampos, didatico, registrosDoAno } from "@/lib/conteudo/leiautes";
 import { exemplos } from "@/lib/exemplos";
 import { SECOES, rota } from "@/lib/rotas";
@@ -16,6 +17,8 @@ export function montarIndice(ano: number): LinhaIndice[] {
     ...SECOES.map((s): LinhaIndice => [n("secao"), "", s.titulo, ir(`/${s.slug}`), `${s.curto} ${s.profissional}`]),
     [n("secao"), "", "Roteiro de preenchimento", ir("/preencher"), "passo a passo preencher"],
     [n("secao"), "", "Fontes e verificações", ir("/fontes"), "fonte oficial norma"],
+    [n("secao"), "", "Incentivos fiscais", ir("/incentivos"), "incentivo benefício redução linear LC 224 lucro presumido"],
+    ...incentivos.map((i): LinhaIndice => [n("incentivo"), "", i.nome, ir(`/incentivos/${i.id}`), `${i.curto} ${i.tributos.join(" ")}`]),
     ...exemplos.map((e): LinhaIndice => [n("secao"), "", `Exemplo: ${e.dados.titulo}`, ir(`/exemplos/${e.dados.slug}`), `${e.dados.regime} empresa fictícia`]),
     ...glossario.map((t): LinhaIndice => [n("termo"), "", t.termo, ir(`/glossario#${t.id}`), t.sinonimos.join(" ")]),
     ...registros.map((r): LinhaIndice => [n("registro"), r.codigo, r.nome, ir(registro(r.codigo)), `bloco ${r.codigo[0]}`]),

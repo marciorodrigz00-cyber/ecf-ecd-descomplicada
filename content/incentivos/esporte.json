@@ -1,0 +1,75 @@
+{
+  "id": "esporte",
+  "nome": "Incentivo ao esporte",
+  "curto": "Esporte",
+  "iniciante": "Empresas do lucro real que apoiam projetos esportivos aprovados podem abater esse valor do imposto de renda, até um limite. A partir de 2026, esse limite ficou menor.",
+  "profissional": "Dedução do IRPJ devido prevista na LC nº 222/2025 para a pessoa jurídica do lucro real. A Receita Federal entende que a redução alcança também o aumento do limite que a LC nº 222/2025 prevê a partir de 2028.",
+  "comoFunciona": "O cálculo segue o da pergunta 21 do Perguntas e Respostas: aplica-se 90% sobre o limite legal de dedução e compara-se com o valor efetivamente aplicado no projeto.",
+  "baseLegal": [
+    {
+      "norma": "LC nº 222/2025, arts. 9º e 23",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp222.htm"
+    }
+  ],
+  "tributos": [
+    "IRPJ"
+  ],
+  "regimes": [
+    "real"
+  ],
+  "fruicao": "deducao-imposto",
+  "situacao": "reduzido",
+  "porQue": "Consta do demonstrativo de gastos tributários da LOA de 2026 (Perguntas e Respostas, perguntas 21 e 36).",
+  "porAno": [
+    {
+      "ac": 2026,
+      "efeito": "O limite de dedução do imposto passa a ser 90% do limite previsto na lei.",
+      "regras": [
+        "lc224-deducao-imposto",
+        "lc224-inicio-irpj"
+      ],
+      "status": "conferido",
+      "fonte": {
+        "id": "pr-lc224",
+        "url": "https://www.gov.br/receitafederal/pt-br/centrais-de-conteudo/publicacoes/perguntas-e-respostas/beneficios-fiscais/perguntas-e-respostas-reducao-dos-incentivos-e-beneficios-tributarios-v5-final.pdf",
+        "trecho": "perguntas 21 e 36"
+      }
+    },
+    {
+      "ac": 2027,
+      "efeito": "A LC nº 239/2026 passa a usar o demonstrativo de gastos tributários da lei orçamentária de cada ano. Se este benefício continuar alcançado em 2027, a redução sobe de 10% para 20%. Falta orientação da Receita Federal sobre as datas e a lista.",
+      "regras": [
+        "lc239-inicio"
+      ],
+      "status": "a-verificar",
+      "fonte": {
+        "id": "lc-239",
+        "url": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp239.htm",
+        "trecho": "art. 4º (nova redação do art. 4º da LC nº 224/2025) e art. 15"
+      }
+    }
+  ],
+  "registros": [
+    "N620",
+    "N630"
+  ],
+  "fonte": {
+    "id": "pr-lc224",
+    "url": "https://www.gov.br/receitafederal/pt-br/centrais-de-conteudo/publicacoes/perguntas-e-respostas/beneficios-fiscais/perguntas-e-respostas-reducao-dos-incentivos-e-beneficios-tributarios-v5-final.pdf",
+    "trecho": "perguntas 21 e 36"
+  },
+  "norma": "LC nº 224/2025, art. 4º, § 4º, V",
+  "status": "conferido",
+  "leiautes": [
+    "12"
+  ],
+  "vigencia": {
+    "acNormal": [
+      2026
+    ],
+    "situacaoEspecial": [
+      2026
+    ]
+  },
+  "verificadoEm": "2026-11-27"
+}

@@ -4,7 +4,7 @@ import { ChevronRight, Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useRef, useState } from "react";
-import { Busca, BotaoBusca } from "@/components/busca";
+import { ABRIR_MENU, Busca, BotaoBusca } from "@/components/busca";
 import { ENDERECO_MUDOU } from "@/lib/parametros";
 import { preferenciasAgora } from "@/lib/preferencias";
 import { anoDaUrl, caminhoBase, rota, secaoDoCaminho, type Ausentes } from "@/lib/rotas";
@@ -31,7 +31,6 @@ export function Cabecalho({ anos, padrao, ausentes, regimes, leiautes, blocos }:
   const router = useRouter();
   const gaveta = useRef<HTMLDialogElement>(null);
   const anterior = useRef(pathname);
-  const ano = anoDaUrl(pathname, padrao);
 
   // Preferência de ano só atua ao entrar pela home.
   useEffect(() => {
@@ -70,6 +69,16 @@ export function Cabecalho({ anos, padrao, ausentes, regimes, leiautes, blocos }:
   const fechar = () => gaveta.current?.close();
   const lateral = { padrao, leiautes, blocos };
 
+  // O botão de menu fica na barra superior; a gaveta, aqui.
+  useEffect(() => {
+    const abrir = () => {
+      setGavetaAberta(true);
+      if (!gaveta.current?.open) gaveta.current?.showModal();
+    };
+    window.addEventListener(ABRIR_MENU, abrir);
+    return () => window.removeEventListener(ABRIR_MENU, abrir);
+  }, []);
+
   return (
     <>
       <Suspense fallback={null}>
@@ -78,32 +87,6 @@ export function Cabecalho({ anos, padrao, ausentes, regimes, leiautes, blocos }:
       <Busca padrao={padrao} />
       <PainelPerfil anos={anos} padrao={padrao} ausentes={ausentes} regimes={regimes} />
       <Lateral {...lateral} />
-
-      <header className="flex items-center gap-2 border-b border-linha bg-superficie px-3 py-2 lg:hidden">
-        <button
-          type="button"
-          aria-label="Abrir menu"
-          aria-haspopup="dialog"
-          onClick={() => {
-            setGavetaAberta(true);
-            if (!gaveta.current?.open) gaveta.current?.showModal();
-          }}
-          className="grid size-11 shrink-0 place-items-center rounded-lg border border-controle"
-        >
-          <Menu aria-hidden size={22} />
-        </button>
-        <Link
-          href={rota("/", ano, padrao)}
-          prefetch={false}
-          className="flex min-h-11 min-w-0 flex-1 items-center gap-2 font-mono font-semibold text-tinta no-underline"
-        >
-          <span className="rounded-md bg-marca px-2 py-0.5 whitespace-nowrap text-sobre-marca">ECF e ECD</span>
-          <span className="truncate">
-            <span className="sr-only"> </span>descomplicada<span className="sr-only">, página inicial</span>
-          </span>
-        </Link>
-        <BotaoBusca compacto />
-      </header>
 
       <dialog
         ref={gaveta}
@@ -126,12 +109,43 @@ export function Cabecalho({ anos, padrao, ausentes, regimes, leiautes, blocos }:
   );
 }
 
+/** Barra superior fina e fixa: busca centralizada na área de conteúdo; no celular, também o botão de menu e a marca. */
+export function BarraTopo({ padrao }: { padrao: number }) {
+  const pathname = usePathname();
+  const ano = anoDaUrl(pathname, padrao);
+  return (
+    <header className="sticky top-0 z-20 border-b border-linha bg-fundo">
+      <div className="mx-auto flex h-16 w-full max-w-[70rem] items-center gap-2 px-4 sm:px-6 lg:px-10">
+        <button
+          type="button"
+          aria-label="Abrir menu"
+          aria-haspopup="dialog"
+          onClick={() => window.dispatchEvent(new Event(ABRIR_MENU))}
+          className="grid size-11 shrink-0 place-items-center rounded-lg border border-linha text-tinta lg:hidden"
+        >
+          <Menu aria-hidden size={20} strokeWidth={1.5} />
+        </button>
+        <Link
+          href={rota("/", ano, padrao)}
+          prefetch={false}
+          className="grid size-11 shrink-0 place-items-center rounded-lg bg-marca text-xs font-bold text-sobre-marca no-underline lg:hidden"
+        >
+          ECF<span className="sr-only"> descomplicada, página inicial</span>
+        </Link>
+        <div className="flex min-w-0 flex-1 justify-center">
+          <BotaoBusca className="w-full max-w-[35rem]" />
+        </div>
+      </div>
+    </header>
+  );
+}
+
 const EXEMPLOS: Record<string, string> = {
   "lucro-real": "Lucro real",
   "lucro-presumido": "Lucro presumido",
   isenta: "Isenta",
 };
-const AVULSAS: Record<string, string> = { fontes: "Fontes", preencher: "Roteiro", "meu-progresso": "Meu progresso" };
+const AVULSAS: Record<string, string> = { fontes: "Fontes", preencher: "Roteiro", "meu-progresso": "Meu progresso", incentivos: "Incentivos fiscais" };
 
 export function Breadcrumb({ padrao }: { padrao: number }) {
   const pathname = usePathname();
@@ -147,11 +161,12 @@ export function Breadcrumb({ padrao }: { padrao: number }) {
       ? [{ href: `/blocos/${partes[1]}`, texto: `Bloco ${partes[1].toUpperCase()}` }]
       : []),
     ...(secao?.slug === "novidades" && partes[1] ? [{ href: base, texto: "Detalhe" }] : []),
+    ...(partes[0] === "incentivos" && partes[1] ? [{ href: base, texto: "Ficha" }] : []),
     ...(secao?.slug === "exemplos" && partes[1] ? [{ href: base, texto: EXEMPLOS[partes[1]] ?? "Exemplo" }] : []),
     ...(secao?.slug === "blocos" && partes[2] ? [{ href: base, texto: partes[2].toUpperCase() }] : []),
   ];
   return (
-    <nav aria-label="Você está em" className="mx-auto w-full max-w-[84rem] px-4 pt-6 text-sm sm:px-6 lg:px-10">
+    <nav aria-label="Você está em" className="mx-auto w-full max-w-[70rem] px-4 pt-6 text-sm sm:px-6 lg:px-10">
       <ol className="flex flex-wrap items-center gap-1 text-suave">
         {trilha.map((t, i) => (
           <li key={t.href} className="flex items-center gap-1">

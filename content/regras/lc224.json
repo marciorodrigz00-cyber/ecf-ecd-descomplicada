@@ -1,0 +1,298 @@
+[
+  {
+    "id": "lc224-acrescimo-presuncao",
+    "titulo": "Lucro presumido: acréscimo nos percentuais de presunção (AC 2026)",
+    "resumo": "Só sobre a parcela da receita bruta que passa do limite; o percentual de cada atividade é multiplicado por 1,1",
+    "valor": {
+      "tipo": "percentual",
+      "pontosBase": 1000
+    },
+    "fonte": {
+      "id": "in-2305",
+      "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/148694",
+      "trecho": "art. 14 e art. 15, § 3º (redação da IN RFB nº 2.306/2026)"
+    },
+    "norma": "LC nº 224/2025, art. 4º, § 4º, VII (redação original), e § 5º; IN RFB nº 2.305/2025, arts. 14 e 15",
+    "leiautes": [
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2026
+      ],
+      "situacaoEspecial": [
+        2026
+      ]
+    },
+    "verificadoEm": "2026-11-26",
+    "status": "conferido"
+  },
+  {
+    "id": "lc224-limite-anual",
+    "titulo": "Lucro presumido: limite anual sem acréscimo",
+    "resumo": "Contam só as receitas sujeitas aos percentuais de presunção; receitas financeiras e ganhos de capital ficam fora",
+    "valor": {
+      "tipo": "dinheiro",
+      "centavos": 500000000
+    },
+    "fonte": {
+      "id": "pr-lc224",
+      "url": "https://www.gov.br/receitafederal/pt-br/centrais-de-conteudo/publicacoes/perguntas-e-respostas/beneficios-fiscais/perguntas-e-respostas-reducao-dos-incentivos-e-beneficios-tributarios-v5-final.pdf",
+      "trecho": "perguntas 11 e 11.1"
+    },
+    "norma": "LC nº 224/2025, art. 4º, § 5º; IN RFB nº 2.305/2025, art. 15, caput",
+    "leiautes": [
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2026
+      ],
+      "situacaoEspecial": [
+        2026
+      ]
+    },
+    "verificadoEm": "2026-11-26",
+    "status": "conferido"
+  },
+  {
+    "id": "lc224-limite-trimestral",
+    "titulo": "Lucro presumido: limite proporcional por trimestre",
+    "resumo": "A sobra de um trimestre pode ser usada nos seguintes do mesmo ano; no último trimestre há ajuste pelo limite anual",
+    "valor": {
+      "tipo": "dinheiro",
+      "centavos": 125000000
+    },
+    "fonte": {
+      "id": "in-2305",
+      "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/148694",
+      "trecho": "art. 15, §§ 2º, 4º e 5º (redação da IN RFB nº 2.306/2026)"
+    },
+    "norma": "IN RFB nº 2.305/2025, art. 15, § 2º",
+    "leiautes": [
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2026
+      ],
+      "situacaoEspecial": [
+        2026
+      ]
+    },
+    "verificadoEm": "2026-11-26",
+    "status": "conferido"
+  },
+  {
+    "id": "lc224-inicio-irpj",
+    "titulo": "Início da redução para o IRPJ",
+    "resumo": "Vale para os benefícios de IRPJ e do Imposto de Importação; no lucro presumido, o acréscimo do IRPJ vale desde o 1º trimestre de 2026",
+    "valor": {
+      "tipo": "data",
+      "data": "2026-01-01"
+    },
+    "fonte": {
+      "id": "in-2305",
+      "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/148694",
+      "trecho": "art. 3º, I"
+    },
+    "norma": "LC nº 224/2025, art. 14, III; IN RFB nº 2.305/2025, art. 3º, I",
+    "leiautes": [
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2026
+      ],
+      "situacaoEspecial": [
+        2026
+      ]
+    },
+    "verificadoEm": "2026-11-26",
+    "status": "conferido"
+  },
+  {
+    "id": "lc224-inicio-csll",
+    "titulo": "Início da redução para a CSLL",
+    "resumo": "Vale para os benefícios de CSLL e dos demais tributos; no lucro presumido, o acréscimo da CSLL vale a partir do 2º trimestre de 2026, com limite anual de três quartos do valor cheio",
+    "valor": {
+      "tipo": "data",
+      "data": "2026-04-01"
+    },
+    "fonte": {
+      "id": "pr-lc224",
+      "url": "https://www.gov.br/receitafederal/pt-br/centrais-de-conteudo/publicacoes/perguntas-e-respostas/beneficios-fiscais/perguntas-e-respostas-reducao-dos-incentivos-e-beneficios-tributarios-v5-final.pdf",
+      "trecho": "perguntas 6, 12 e 13; IN RFB nº 2.305/2025, art. 3º, II"
+    },
+    "norma": "LC nº 224/2025, art. 14, I, a; IN RFB nº 2.305/2025, art. 3º, II",
+    "leiautes": [
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2026
+      ],
+      "situacaoEspecial": [
+        2026
+      ]
+    },
+    "verificadoEm": "2026-11-26",
+    "status": "conferido"
+  },
+  {
+    "id": "lc224-deducao-imposto",
+    "titulo": "Incentivos deduzidos do imposto devido: parte do limite que continua valendo (AC 2026)",
+    "resumo": "Aplica-se ao limite fixado na lei do incentivo; o valor doado acima do novo limite não é deduzido",
+    "valor": {
+      "tipo": "percentual",
+      "pontosBase": 9000
+    },
+    "fonte": {
+      "id": "pr-lc224",
+      "url": "https://www.gov.br/receitafederal/pt-br/centrais-de-conteudo/publicacoes/perguntas-e-respostas/beneficios-fiscais/perguntas-e-respostas-reducao-dos-incentivos-e-beneficios-tributarios-v5-final.pdf",
+      "trecho": "perguntas 21 e 21.1, com os exemplos 1 e 2"
+    },
+    "norma": "LC nº 224/2025, art. 4º, § 4º, V (redação original)",
+    "leiautes": [
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2026
+      ],
+      "situacaoEspecial": [
+        2026
+      ]
+    },
+    "verificadoEm": "2026-11-26",
+    "status": "conferido"
+  },
+  {
+    "id": "lc239-acrescimo-presuncao",
+    "titulo": "Lucro presumido: acréscimo nos percentuais de presunção depois da LC nº 239/2026",
+    "resumo": "O percentual está no texto da lei; a data de início para o IRPJ e para a CSLL ainda não tem orientação da Receita Federal",
+    "valor": {
+      "tipo": "percentual",
+      "pontosBase": 2000
+    },
+    "fonte": {
+      "id": "lc-239",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp239.htm",
+      "trecho": "art. 4º (nova redação do art. 4º, § 4º, VII, da LC nº 224/2025) e art. 15"
+    },
+    "norma": "LC nº 239/2026, arts. 4º e 15",
+    "leiautes": [],
+    "vigencia": {
+      "acNormal": [
+        2027
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-26",
+    "status": "a-verificar"
+  },
+  {
+    "id": "lc239-deducao-imposto",
+    "titulo": "Incentivos deduzidos do imposto devido: parte que continua valendo depois da LC nº 239/2026",
+    "resumo": "O percentual está no texto da lei; a data de início por tributo ainda não tem orientação da Receita Federal",
+    "valor": {
+      "tipo": "percentual",
+      "pontosBase": 8000
+    },
+    "fonte": {
+      "id": "lc-239",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp239.htm",
+      "trecho": "art. 4º (nova redação do art. 4º, § 4º, V, da LC nº 224/2025) e art. 15"
+    },
+    "norma": "LC nº 239/2026, arts. 4º e 15",
+    "leiautes": [],
+    "vigencia": {
+      "acNormal": [
+        2027
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-26",
+    "status": "a-verificar"
+  },
+  {
+    "id": "lc239-inicio",
+    "titulo": "Início dos efeitos da LC nº 239/2026",
+    "resumo": "A lei separa os tributos sujeitos à noventena dos demais; qual data vale para o IRPJ e qual para a CSLL é leitura deste site, ainda sem orientação da Receita Federal",
+    "valor": {
+      "tipo": "texto",
+      "texto": "1º/01/2027 para os tributos não sujeitos à noventena; 1º/03/2027 para os sujeitos a ela"
+    },
+    "fonte": {
+      "id": "lc-239",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp239.htm",
+      "trecho": "art. 15, I e II"
+    },
+    "norma": "LC nº 239/2026, art. 15",
+    "leiautes": [],
+    "vigencia": {
+      "acNormal": [
+        2027
+      ],
+      "situacaoEspecial": []
+    },
+    "verificadoEm": "2026-11-26",
+    "status": "a-verificar"
+  },
+  {
+    "id": "lc224-csll-transitoria",
+    "titulo": "CSLL de instituições financeiras e de pagamento: alíquotas transitórias",
+    "resumo": "Na ECF, o campo 0020.IND_ALIQ_CSLL ganhou as opções 7 (9% para 12%) e 8 (15% para 17,5%)",
+    "valor": {
+      "tipo": "texto",
+      "texto": "12% para instituições de pagamento e outras do inciso II-B, e 17,5% para as do inciso II-C, até 31/12/2027; a partir de 2028, 15% e 20%"
+    },
+    "fonte": {
+      "id": "lc-224",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp224.htm",
+      "trecho": "art. 7º (nova redação do art. 3º da Lei nº 7.689/1988) e art. 14, I, b"
+    },
+    "norma": "LC nº 224/2025, art. 7º; Manual da ECF, leiaute 12, item 1.32",
+    "leiautes": [
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2026
+      ],
+      "situacaoEspecial": [
+        2026
+      ]
+    },
+    "verificadoEm": "2026-11-27",
+    "status": "conferido"
+  },
+  {
+    "id": "lc224-jcp",
+    "titulo": "Juros sobre o capital próprio: imposto retido na fonte",
+    "resumo": "Não é incentivo; é outra mudança da mesma lei",
+    "valor": {
+      "tipo": "percentual",
+      "pontosBase": 1750
+    },
+    "fonte": {
+      "id": "lc-224",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp224.htm",
+      "trecho": "art. 8º (nova redação do art. 9º, § 2º, da Lei nº 9.249/1995) e art. 14, III"
+    },
+    "norma": "LC nº 224/2025, art. 8º",
+    "leiautes": [
+      "12"
+    ],
+    "vigencia": {
+      "acNormal": [
+        2026
+      ],
+      "situacaoEspecial": [
+        2026
+      ]
+    },
+    "verificadoEm": "2026-11-27",
+    "status": "conferido"
+  }
+]

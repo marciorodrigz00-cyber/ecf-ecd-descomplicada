@@ -1,0 +1,37 @@
+{
+  "id": "nov-lc-224-2025",
+  "slug": "lc-224-2025",
+  "data": "2025-12-26",
+  "tipo": "norma",
+  "titulo": "Lei Complementar nº 224/2025: redução dos incentivos fiscais",
+  "iniciante": "Uma lei de dezembro de 2025 cortou parte dos incentivos fiscais federais a partir de 2026. No lucro presumido, a parte da receita que passa de R$ 5 milhões no ano passou a usar percentuais de presunção maiores.",
+  "profissional": "Redução linear dos incentivos e benefícios de PIS/Cofins, IRPJ, CSLL, II, IPI e contribuição previdenciária patronal que estão no demonstrativo de gastos tributários, com exceções; acréscimo nos percentuais de presunção do lucro presumido sobre a receita acima do limite. Regulamentada pelo Decreto nº 12.808/2025, pela Portaria MF nº 3.278/2025 e pela IN RFB nº 2.305/2025. A LC nº 239/2026 alterou os percentuais a partir de 2027.",
+  "fazer": "Quem é do lucro presumido e fatura acima do limite precisa aplicar o acréscimo no IRPJ desde o 1º trimestre de 2026 e na CSLL a partir do 2º. Quem usa incentivos do lucro real precisa recalcular os limites de dedução.",
+  "registros": [
+    "P200",
+    "P300",
+    "P400",
+    "P500",
+    "N630",
+    "0020"
+  ],
+  "fonte": {
+    "id": "lc-224",
+    "url": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp224.htm",
+    "trecho": "art. 4º e art. 14"
+  },
+  "norma": "Lei Complementar nº 224, de 26/12/2025",
+  "leiautes": [
+    "12"
+  ],
+  "vigencia": {
+    "acNormal": [
+      2026
+    ],
+    "situacaoEspecial": [
+      2026
+    ]
+  },
+  "verificadoEm": "2026-11-27",
+  "status": "conferido"
+}

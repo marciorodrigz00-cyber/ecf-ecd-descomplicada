@@ -1,0 +1,85 @@
+{
+  "id": "sudam-sudene",
+  "nome": "SUDAM e SUDENE: redução de 75% do imposto sobre o lucro da exploração",
+  "curto": "SUDAM e SUDENE",
+  "iniciante": "Empresas com projeto aprovado nas áreas da SUDAM e da SUDENE pagam menos imposto de renda sobre o lucro da atividade incentivada. Para a Receita Federal, quem já tinha o projeto aprovado e em execução até o fim de 2025 fica fora da redução.",
+  "profissional": "Redução de 75% do imposto sobre a renda e adicionais calculados com base no lucro da exploração, para projetos de setores prioritários nas áreas da Sudam e da Sudene, protocolizados e aprovados até 31/12/2028 (MP nº 2.199-14/2001, art. 1º). Não está no Anexo Único da IN RFB nº 2.305/2025.",
+  "comoFunciona": "O lucro da exploração é demonstrado no N600, e a redução é calculada no N610.",
+  "baseLegal": [
+    {
+      "norma": "MP nº 2.199-14/2001, art. 1º",
+      "url": "https://www.planalto.gov.br/ccivil_03/mpv/2199-14.htm"
+    }
+  ],
+  "tributos": [
+    "IRPJ"
+  ],
+  "regimes": [
+    "real"
+  ],
+  "fruicao": "reducao-imposto",
+  "setorRegiao": "Áreas da Sudam e da Sudene, setores prioritários",
+  "situacao": "a-verificar",
+  "porQue": "Não está no Anexo Único. Pela pergunta 22 do Perguntas e Respostas (sobre a SUDAM), a redução não se aplica quando, até 31/12/2025, o projeto de investimento já estava aprovado e em execução; o investimento não precisa estar concluído (LC nº 224/2025, art. 4º, § 8º, IV).",
+  "falta": "Conferir se o benefício consta do demonstrativo de gastos tributários da LOA de 2026, a aplicação à SUDENE (a pergunta 22 trata da SUDAM) e a forma de cálculo da redução para projetos aprovados depois de 2025, que ainda não tem exemplo oficial.",
+  "porAno": [
+    {
+      "ac": 2026,
+      "efeito": "Projeto aprovado e em execução até 31/12/2025: sem redução. Demais casos: a verificar.",
+      "regras": [],
+      "status": "a-verificar",
+      "fonte": {
+        "id": "pr-lc224",
+        "url": "https://www.gov.br/receitafederal/pt-br/centrais-de-conteudo/publicacoes/perguntas-e-respostas/beneficios-fiscais/perguntas-e-respostas-reducao-dos-incentivos-e-beneficios-tributarios-v5-final.pdf",
+        "trecho": "pergunta 22"
+      }
+    },
+    {
+      "ac": 2027,
+      "efeito": "A LC nº 239/2026 passa a usar o demonstrativo de gastos tributários da lei orçamentária de cada ano. Se este benefício continuar alcançado em 2027, a redução sobe de 10% para 20%. Falta orientação da Receita Federal sobre as datas e a lista.",
+      "regras": [
+        "lc239-inicio"
+      ],
+      "status": "a-verificar",
+      "fonte": {
+        "id": "lc-239",
+        "url": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp239.htm",
+        "trecho": "art. 4º (nova redação do art. 4º da LC nº 224/2025) e art. 15"
+      }
+    }
+  ],
+  "registros": [
+    "N600",
+    "N610"
+  ],
+  "judicial": {
+    "texto": "A ADI 7920 (Confederação Nacional da Indústria), com o ministro André Mendonça, questiona a regra que só preserva benefícios por prazo certo quando a contrapartida for investimento aprovado até 31/12/2025. Nenhuma decisão foi localizada na notícia lida.",
+    "verificadoEm": "2026-11-27",
+    "fontes": [
+      {
+        "id": "stf-adi-7920",
+        "url": "https://noticias.stf.jus.br/postsnoticias/cni-contesta-lei-que-reduz-incentivos-fiscais/",
+        "trecho": "notícia de 21/01/2026"
+      }
+    ]
+  },
+  "fonte": {
+    "id": "pr-lc224",
+    "url": "https://www.gov.br/receitafederal/pt-br/centrais-de-conteudo/publicacoes/perguntas-e-respostas/beneficios-fiscais/perguntas-e-respostas-reducao-dos-incentivos-e-beneficios-tributarios-v5-final.pdf",
+    "trecho": "pergunta 22"
+  },
+  "norma": "LC nº 224/2025, art. 4º, § 8º, IV",
+  "status": "a-verificar",
+  "leiautes": [
+    "12"
+  ],
+  "vigencia": {
+    "acNormal": [
+      2026
+    ],
+    "situacaoEspecial": [
+      2026
+    ]
+  },
+  "verificadoEm": "2026-11-27"
+}

@@ -1,6 +1,7 @@
 "use client";
 
 import { Eraser, Lightbulb } from "lucide-react";
+import Link from "next/link";
 import { useId, useState } from "react";
 import { registrarFeito } from "@/components/layout/trilha";
 import { Botao, Cartao } from "@/components/ui";
@@ -36,7 +37,11 @@ const PRESUMIDO: Campo[] = [
   { id: "csllRetidaP", rotulo: "CSLL retida na fonte" },
 ];
 
+/** Modo do lucro presumido com a LC 224: base do ano anterior mais a camada da lei (valores de content/regras/lc224.json). */
+export type ModoLc224 = { ac: number; base: Parametros; limiteTrimestre: number; acrescimoPb: number; trimestreInicioCsll: number; href: string };
+
 type Props = {
+  lc224: ModoLc224;
   parametros: Parametros;
   regras: Record<string, RegraCitada>;
   /** Valores iniciais, vindos das empresas fictícias de content/exemplos. */
@@ -44,13 +49,16 @@ type Props = {
   ano: number;
 };
 
-export function Simulador({ parametros, regras, inicial, ano }: Props) {
+export function Simulador({ parametros, regras, inicial, ano, lc224 }: Props) {
   const [regime, setRegime] = useState<"real" | "presumido">("real");
+  const [regrasAno, setRegrasAno] = useState<"ano" | "lc224">("ano");
+  const [trimestre, setTrimestre] = useState(1);
   const [meses, setMeses] = useState(3);
   const [mesmos, setMesmos] = useState(true);
   const [textos, setTextos] = useState<Record<string, string>>(inicial);
   const id = useId();
   const real = regime === "real";
+  const modoLc224 = !real && regrasAno === "lc224";
   const campos = real ? [...REAL.slice(0, 3), ...(mesmos ? [] : CSLL), ...REAL.slice(3)] : PRESUMIDO;
   const erros: Record<string, string> = {};
   const ler = (k: string): bigint => {
@@ -88,7 +96,9 @@ export function Simulador({ parametros, regras, inicial, ano }: Props) {
       financeiras: ler("financeiras"), demais: ler("demais"), irRetido: ler("irRetidoP"), csllRetida: ler("csllRetidaP"), meses,
     };
     if (Object.keys(erros).length === 0) {
-      const r = lucroPresumido(entrada, parametros);
+      const r = modoLc224
+        ? lucroPresumido(entrada, lc224.base, { trimestre, limiteTrimestre: BigInt(lc224.limiteTrimestre), acrescimoPb: lc224.acrescimoPb, trimestreInicioCsll: lc224.trimestreInicioCsll })
+        : lucroPresumido(entrada, parametros);
       blocos = r.blocos;
       totais = { irpj: r.irpj.pagar, csll: r.csll.pagar, total: r.total };
     }
@@ -112,6 +122,49 @@ export function Simulador({ parametros, regras, inicial, ano }: Props) {
               ))}
             </div>
           </fieldset>
+          {!real && (
+            <fieldset className="mt-5">
+              <legend className="font-semibold">Regras</legend>
+              <div className="mt-2 flex flex-wrap gap-2">
+                {([["ano", `AC ${ano}`], ["lc224", `AC ${lc224.ac}, com a LC 224`]] as const).map(([v, r]) => (
+                  <label
+                    key={v}
+                    className="flex min-h-11 items-center gap-2 rounded-lg border border-controle px-4 has-checked:border-marca has-checked:bg-fundo has-checked:font-semibold has-focus-visible:outline-3 has-focus-visible:outline-marca"
+                  >
+                    <input type="radio" name={`${id}-regras`} checked={regrasAno === v} onChange={() => setRegrasAno(v)} className="size-5 accent-marca outline-none" />
+                    {r}
+                  </label>
+                ))}
+              </div>
+            </fieldset>
+          )}
+          {modoLc224 && (
+            <div data-testid="sim-lc224">
+              <label htmlFor={`${id}-tri`} className="mt-4 block font-medium">
+                Trimestre de {lc224.ac}
+              </label>
+              <select
+                id={`${id}-tri`}
+                value={trimestre}
+                onChange={(e) => setTrimestre(Number(e.target.value))}
+                className="mt-1 min-h-11 rounded-lg border border-controle bg-superficie px-3"
+              >
+                {[1, 2, 3, 4].map((t) => (
+                  <option key={t} value={t}>
+                    {t}º trimestre
+                  </option>
+                ))}
+              </select>
+              <p className="mt-2 text-sm text-suave">
+                O acréscimo vale só para a receita acima do limite do trimestre{trimestre < lc224.trimestreInicioCsll ? "; neste trimestre, ainda não na CSLL" : ""}. A
+                simulação não usa a sobra de limite de trimestres anteriores nem o ajuste do último trimestre. Os demais percentuais são os do AC {lc224.ac - 1}, ainda não
+                conferidos um a um para {lc224.ac}.{" "}
+                <Link href={lc224.href} prefetch={false} className="inline-flex min-h-6 items-center underline underline-offset-4">
+                  Como funciona
+                </Link>
+              </p>
+            </div>
+          )}
           <label htmlFor={`${id}-meses`} className="mt-5 block font-medium">
             Meses de atividade no trimestre
           </label>
@@ -253,7 +306,7 @@ export function Simulador({ parametros, regras, inicial, ano }: Props) {
           </section>
         ))}
         <p className="mt-6 text-sm text-suave">
-          Simulação para estudo, com as regras do ano-calendário {ano}. Não cobre estimativas mensais, incentivos,
+          Simulação para estudo, com as regras do ano-calendário {modoLc224 ? lc224.ac : ano}. Não cobre estimativas mensais, incentivos,
           atividade rural nem instituições financeiras.
         </p>
       </div>

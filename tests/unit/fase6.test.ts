@@ -265,7 +265,8 @@ describe("Novidades", () => {
       for (const r of n.registros) expect(registroDoAno(r, 2025) ?? registroDoAno(r, 2024), r).toBeTruthy();
       expect(JSON.stringify(n)).not.toMatch(/\bS\d{3}\b|Bloco S/);
     }
-    const base = novidades[0]!;
+    // Modelo: a novidade conferida mais recente (a da LC 239 fica "a verificar" e aceita leiaute vazio).
+    const base = novidades.find((n) => n.status === "conferido")!;
     for (const ruim of [{ ...base, fonte: { ...base.fonte, url: "https://evil.com/" } }, { ...base, leiautes: [] }, { ...base, slug: "../x" }, { ...base, status: "revisado" }, { ...base, data: "19/10/2026" }, { ...base, extra: 1 }]) {
       expect(Novidade.safeParse(ruim).success).toBe(false);
     }

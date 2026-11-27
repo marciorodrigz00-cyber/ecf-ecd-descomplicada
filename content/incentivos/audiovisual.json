@@ -1,0 +1,73 @@
+{
+  "id": "audiovisual",
+  "nome": "Incentivo ao audiovisual",
+  "curto": "Audiovisual",
+  "iniciante": "Empresas do lucro real que investem ou patrocinam obras audiovisuais aprovadas podem abater parte disso do imposto de renda. Ainda falta conferir se a redução da LC nº 224/2025 se aplica.",
+  "profissional": "Dedução do imposto de renda devido de investimentos e patrocínios em obras audiovisuais (Lei nº 8.685/1993, arts. 1º e 1º-A), até o ano-calendário de 2029. Não está no Anexo Único da IN RFB nº 2.305/2025.",
+  "comoFunciona": "Se alcançado, a redução seguiria a regra das deduções do imposto devido: 90% do limite legal em 2026.",
+  "baseLegal": [
+    {
+      "norma": "Lei nº 8.685/1993, arts. 1º e 1º-A",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8685.htm"
+    }
+  ],
+  "tributos": [
+    "IRPJ"
+  ],
+  "regimes": [
+    "real"
+  ],
+  "fruicao": "deducao-imposto",
+  "situacao": "a-verificar",
+  "porQue": "Não está no Anexo Único e não tem resposta própria no Perguntas e Respostas.",
+  "falta": "Conferir se consta do demonstrativo de gastos tributários da LOA de 2026.",
+  "porAno": [
+    {
+      "ac": 2026,
+      "efeito": "A verificar.",
+      "regras": [],
+      "status": "a-verificar",
+      "fonte": {
+        "id": "pr-lc224",
+        "url": "https://www.gov.br/receitafederal/pt-br/centrais-de-conteudo/publicacoes/perguntas-e-respostas/beneficios-fiscais/perguntas-e-respostas-reducao-dos-incentivos-e-beneficios-tributarios-v5-final.pdf",
+        "trecho": "pergunta 21 (regra geral das deduções do imposto devido)"
+      }
+    },
+    {
+      "ac": 2027,
+      "efeito": "A LC nº 239/2026 passa a usar o demonstrativo de gastos tributários da lei orçamentária de cada ano. Se este benefício continuar alcançado em 2027, a redução sobe de 10% para 20%. Falta orientação da Receita Federal sobre as datas e a lista.",
+      "regras": [
+        "lc239-inicio"
+      ],
+      "status": "a-verificar",
+      "fonte": {
+        "id": "lc-239",
+        "url": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp239.htm",
+        "trecho": "art. 4º (nova redação do art. 4º da LC nº 224/2025) e art. 15"
+      }
+    }
+  ],
+  "registros": [
+    "N620",
+    "N630"
+  ],
+  "fonte": {
+    "id": "pr-lc224",
+    "url": "https://www.gov.br/receitafederal/pt-br/centrais-de-conteudo/publicacoes/perguntas-e-respostas/beneficios-fiscais/perguntas-e-respostas-reducao-dos-incentivos-e-beneficios-tributarios-v5-final.pdf",
+    "trecho": "pergunta 21 (regra geral das deduções do imposto devido)"
+  },
+  "norma": "LC nº 224/2025, art. 4º, § 2º, I",
+  "status": "a-verificar",
+  "leiautes": [
+    "12"
+  ],
+  "vigencia": {
+    "acNormal": [
+      2026
+    ],
+    "situacaoEspecial": [
+      2026
+    ]
+  },
+  "verificadoEm": "2026-11-27"
+}

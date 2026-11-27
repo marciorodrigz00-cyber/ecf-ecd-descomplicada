@@ -121,22 +121,21 @@ export function IndicadorPerfil({ padrao, leiautes, compacto = false }: { padrao
         window.dispatchEvent(new Event(ABRIR_PERFIL));
       }}
       className={cn(
-        "flex min-h-11 w-full items-center gap-2 rounded-lg px-2 text-left font-mono text-xs tracking-wide text-suave uppercase hover:bg-fundo hover:text-tinta",
-        compacto && "justify-center px-0",
+        "flex min-h-11 w-full items-center gap-2 rounded-lg px-2 py-1 text-left text-tinta hover:bg-fundo",
+        compacto && "justify-center px-0 text-suave hover:text-tinta",
       )}
     >
       {compacto ? (
-        <UserRound aria-hidden size={20} />
+        <UserRound aria-hidden size={20} strokeWidth={1.5} />
       ) : (
-        <>
-          <span aria-hidden className="size-2 shrink-0 rounded-full bg-marca" />
-          <span className="min-w-0">
-            <span className="sr-only">Meu perfil: </span>
-            {resumo} ·{" "}
-            <span data-so="iniciante">Iniciante</span>
+        <span className="min-w-0 leading-snug">
+          <span className="block text-xs text-suave">Meu perfil</span>
+          <span className="block text-sm">
+            <span className="sr-only">: </span>
+            {resumo} · <span data-so="iniciante">Iniciante</span>
             <span data-so="profissional">Profissional</span>
           </span>
-        </>
+        </span>
       )}
     </button>
   );

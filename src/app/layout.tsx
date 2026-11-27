@@ -1,13 +1,13 @@
 import type { Metadata, Viewport } from "next";
-import { IBM_Plex_Mono, Instrument_Sans } from "next/font/google";
-import { Breadcrumb, Cabecalho, LinkAno } from "@/components/layout/cabecalho";
+import { IBM_Plex_Mono, Inter } from "next/font/google";
+import { BarraTopo, Breadcrumb, Cabecalho, LinkAno } from "@/components/layout/cabecalho";
 import { OuvirAtalhos } from "@/components/layout/trilha";
 import { ANO_PADRAO, anos, leiauteDoAno } from "@/lib/conteudo";
 import { ausentesPorAno, nomeBloco, regimes } from "@/lib/conteudo/leiautes";
 import { AVISO_ECD, DESCRICAO, INDEXAR, NOME_SITE, SITE } from "@/lib/seo";
 import "./globals.css";
 
-const texto = Instrument_Sans({ subsets: ["latin"], display: "swap", variable: "--fonte-texto" });
+const texto = Inter({ subsets: ["latin"], display: "swap", variable: "--fonte-texto" });
 const codigo = IBM_Plex_Mono({
   subsets: ["latin"],
   weight: ["500", "600"],
@@ -28,7 +28,7 @@ const AUSENTES = ausentesPorAno();
 const LEIAUTES = Object.fromEntries(anos.map((a) => [a, leiauteDoAno(a).numero]));
 const BLOCOS = Object.fromEntries(anos.map((a) => [a, leiauteDoAno(a).blocos.map((b) => ({ letra: b.letra, curto: nomeBloco(b.letra, a).curto }))]));
 
-export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#000000", colorScheme: "dark light" };
+export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#0e0f0c", colorScheme: "dark light" };
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -47,14 +47,18 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <OuvirAtalhos padrao={ANO_PADRAO} />
         <Cabecalho anos={anos} padrao={ANO_PADRAO} ausentes={AUSENTES} regimes={regimes.regimes} leiautes={LEIAUTES} blocos={BLOCOS} />
         <div className="flex min-h-dvh flex-col lg:pl-[var(--lateral)]">
+          <BarraTopo padrao={ANO_PADRAO} />
           <Breadcrumb padrao={ANO_PADRAO} />
-          <main id="conteudo" tabIndex={-1} className="mx-auto w-full max-w-[84rem] flex-1 px-4 py-8 outline-none sm:px-6 lg:px-10">
+          <main id="conteudo" tabIndex={-1} className="mx-auto w-full max-w-[70rem] flex-1 px-4 py-8 outline-none sm:px-6 lg:px-10">
             {children}
           </main>
-          <footer className="border-t border-linha">
-            <div className="mx-auto max-w-[84rem] space-y-1 px-4 py-6 text-xs text-suave sm:px-6 lg:px-10">
+          <footer className="mt-8">
+            <div className="mx-auto max-w-[70rem] space-y-1 border-t border-linha px-4 py-6 text-sm text-suave sm:px-6 lg:px-10">
               <p className="font-semibold">Conteúdo educacional; não substitui orientação de profissional contábil nem a legislação oficial.</p>
               <p>
+                <span data-testid="ecd-em-breve" className="mr-2 inline-block rounded border border-linha px-1.5 text-xs font-medium">
+                  ECD em breve
+                </span>
                 {AVISO_ECD} Projeto independente, sem vínculo com a Receita Federal.{" "}
                 <LinkAno base="/fontes" padrao={ANO_PADRAO}>
                   Fontes e verificações

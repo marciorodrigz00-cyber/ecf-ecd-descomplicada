@@ -7,6 +7,23 @@ function pontos(id: string, ano: number): number {
   return valor.pontosBase;
 }
 
+/**
+ * Simulador do AC 2026 (lucro presumido): base do AC 2025 mais a camada da LC nº 224/2025.
+ * Os percentuais-base são os do AC 2025; a interface avisa que, para 2026, eles ainda não foram conferidos um a um.
+ */
+export function parametrosLc224() {
+  const acrescimo = regra("lc224-acrescimo-presuncao", 2026).valor;
+  const limite = regra("lc224-limite-trimestral", 2026).valor;
+  const inicioCsll = regra("lc224-inicio-csll", 2026).valor;
+  if (acrescimo.tipo !== "percentual" || limite.tipo !== "dinheiro" || inicioCsll.tipo !== "data") throw new Error("Regras da LC 224 com tipo inesperado");
+  const mes = Number(inicioCsll.data.slice(5, 7));
+  return {
+    ac: regra("lc224-acrescimo-presuncao", 2026).vigencia.acNormal[0]!,
+    base: parametros(2025),
+    lc224: { limiteTrimestre: BigInt(limite.centavos), acrescimoPb: acrescimo.pontosBase, trimestreInicioCsll: Math.floor((mes - 1) / 3) + 1 },
+  };
+}
+
 /** Parâmetros do ano, sempre a partir das regras rastreáveis. */
 export function parametros(ano: number): Parametros {
   const limite = regra("irpj-adicional-limite", ano).valor;

@@ -9,17 +9,17 @@ const itens = (page: Page) => page.locator("main ol > li h2");
 
 test("[CT-067] feed: filtros, detalhe, F5 e Voltar", async ({ page }) => {
   await abrir(page, "/novidades");
-  await expect(itens(page)).toHaveCount(15);
-  await expect(itens(page).first()).toHaveText("Programa da ECF: versão 12.2.8");
+  await expect(itens(page)).toHaveCount(17);
+  await expect(itens(page).first()).toHaveText("LC nº 239/2026 dobra a redução dos incentivos a partir de 2027");
   const norma = page.getByRole("button", { name: "Norma", exact: true });
   await norma.dblclick();
   await expect(norma).toHaveAttribute("aria-pressed", "true");
-  await expect(itens(page)).toHaveCount(3);
-  await expect(page.locator("main [role=status]")).toHaveText("Mostrando 3 de 15.");
+  await expect(itens(page)).toHaveCount(5);
+  await expect(page.locator("main [role=status]")).toHaveText("Mostrando 5 de 17.");
   await page.getByLabel("Só as que valem para o leiaute 12").check();
-  await expect(itens(page)).toHaveCount(2);
+  await expect(itens(page)).toHaveCount(3);
   await page.getByRole("button", { name: "Tudo" }).click();
-  await expect(itens(page)).toHaveCount(14);
+  await expect(itens(page)).toHaveCount(15);
   await page.getByRole("link", { name: "Programa da ECF: versão 12.2.2" }).click();
   await expect(page).toHaveURL(/\/novidades\/programa-12-2-2$/);
   await page.reload();
@@ -32,7 +32,7 @@ test("[CT-067] feed: filtros, detalhe, F5 e Voltar", async ({ page }) => {
   await expect(page).toHaveURL(/programa-12-2-2$/);
   await page.goBack();
   // O filtro de leiaute continua no endereço.
-  await expect(itens(page)).toHaveCount(14);
+  await expect(itens(page)).toHaveCount(15);
 });
 
 test("[CT-068] novidades nos dois anos, com endereço canônico único", async ({ page }) => {

@@ -1,0 +1,94 @@
+{
+  "id": "pat",
+  "nome": "Programa de Alimentação do Trabalhador (PAT)",
+  "curto": "PAT",
+  "iniciante": "Empresas que dão alimentação aos empregados por meio do PAT podem abater uma parte desse gasto do imposto de renda. A partir de 2026, o limite desse abatimento ficou menor.",
+  "profissional": "Incentivo de IRPJ operacionalizado como dedução do imposto devido à alíquota de 15%, dentro do limite legal. Consta do demonstrativo de gastos tributários; a redução incide sobre o limite de dedução (90% do limite em 2026).",
+  "comoFunciona": "A pessoa jurídica do lucro real calcula o IRPJ à alíquota de 15%, calcula o limite de dedução previsto na lei do incentivo e aplica 90% sobre esse limite. Se o valor gasto passar do novo limite, a dedução fica no limite; se ficar abaixo, deduz tudo.",
+  "baseLegal": [
+    {
+      "norma": "Lei nº 6.321/1976, art. 1º",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l6321.htm"
+    },
+    {
+      "norma": "Lei nº 9.532/1997, arts. 5º e 6º, I",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l9532.htm"
+    }
+  ],
+  "tributos": [
+    "IRPJ"
+  ],
+  "regimes": [
+    "real"
+  ],
+  "fruicao": "deducao-imposto",
+  "situacao": "reduzido",
+  "porQue": "Está no demonstrativo de gastos tributários da LOA de 2026 e não foi excetuado (Perguntas e Respostas, pergunta 21; LC nº 224/2025, art. 4º, § 4º, V).",
+  "porAno": [
+    {
+      "ac": 2026,
+      "efeito": "O limite de dedução do imposto passa a ser 90% do limite previsto na lei do incentivo.",
+      "regras": [
+        "lc224-deducao-imposto",
+        "lc224-inicio-irpj"
+      ],
+      "status": "conferido",
+      "fonte": {
+        "id": "pr-lc224",
+        "url": "https://www.gov.br/receitafederal/pt-br/centrais-de-conteudo/publicacoes/perguntas-e-respostas/beneficios-fiscais/perguntas-e-respostas-reducao-dos-incentivos-e-beneficios-tributarios-v5-final.pdf",
+        "trecho": "pergunta 21"
+      }
+    },
+    {
+      "ac": 2027,
+      "efeito": "A LC nº 239/2026 passa a usar o demonstrativo de gastos tributários da lei orçamentária de cada ano. Se este benefício continuar alcançado em 2027, a redução sobe de 10% para 20%. Falta orientação da Receita Federal sobre as datas e a lista.",
+      "regras": [
+        "lc239-inicio"
+      ],
+      "status": "a-verificar",
+      "fonte": {
+        "id": "lc-239",
+        "url": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp239.htm",
+        "trecho": "art. 4º (nova redação do art. 4º da LC nº 224/2025) e art. 15"
+      }
+    }
+  ],
+  "registros": [
+    "N620",
+    "N630"
+  ],
+  "exemplo": {
+    "tipo": "deducao",
+    "titulo": "exemplo genérico da Receita Federal para incentivos deduzidos do imposto (limite de 4% sobre IRPJ de R$ 10.000,00)",
+    "irDevido15": 1000000,
+    "limitePb": 400,
+    "valoresDoados": [
+      100000,
+      20000
+    ],
+    "fonte": {
+      "id": "pr-lc224",
+      "url": "https://www.gov.br/receitafederal/pt-br/centrais-de-conteudo/publicacoes/perguntas-e-respostas/beneficios-fiscais/perguntas-e-respostas-reducao-dos-incentivos-e-beneficios-tributarios-v5-final.pdf",
+      "trecho": "pergunta 21, exemplos 1 e 2"
+    }
+  },
+  "fonte": {
+    "id": "pr-lc224",
+    "url": "https://www.gov.br/receitafederal/pt-br/centrais-de-conteudo/publicacoes/perguntas-e-respostas/beneficios-fiscais/perguntas-e-respostas-reducao-dos-incentivos-e-beneficios-tributarios-v5-final.pdf",
+    "trecho": "pergunta 21"
+  },
+  "norma": "LC nº 224/2025, art. 4º, § 4º, V",
+  "status": "conferido",
+  "leiautes": [
+    "12"
+  ],
+  "vigencia": {
+    "acNormal": [
+      2026
+    ],
+    "situacaoEspecial": [
+      2026
+    ]
+  },
+  "verificadoEm": "2026-11-27"
+}

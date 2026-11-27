@@ -1,0 +1,25 @@
+{
+  "id": "nov-lc-239-2026",
+  "slug": "lc-239-2026",
+  "data": "2026-11-24",
+  "tipo": "norma",
+  "titulo": "LC nº 239/2026 dobra a redução dos incentivos a partir de 2027",
+  "iniciante": "Uma lei de novembro de 2026 aumenta o corte dos incentivos fiscais de 10% para 20% a partir de 2027, inclusive o acréscimo do lucro presumido. A Receita Federal ainda não publicou orientação.",
+  "profissional": "Nova redação do art. 4º da LC nº 224/2025: 20% nas modalidades do § 4º (80% do benefício, acréscimo de 20% na presunção) e referência ao demonstrativo de gastos tributários da LOA de cada exercício. Efeitos pelo art. 15: 1º/01/2027 para os tributos não sujeitos à noventena e 1º/03/2027 para os sujeitos a ela.",
+  "registros": [],
+  "fonte": {
+    "id": "lc-239",
+    "url": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp239.htm",
+    "trecho": "arts. 4º e 15"
+  },
+  "norma": "Lei Complementar nº 239, de 24/11/2026",
+  "leiautes": [],
+  "vigencia": {
+    "acNormal": [
+      2027
+    ],
+    "situacaoEspecial": []
+  },
+  "verificadoEm": "2026-11-27",
+  "status": "a-verificar"
+}
