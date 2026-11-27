@@ -39,11 +39,11 @@ export function SeletorNivel() {
 }
 
 /** Cada ano é um endereço: por isso são links, e não um campo. */
-export function SeletorAno({ anos, padrao, ausentes }: { anos: number[]; padrao: number; ausentes: Ausentes }) {
+export function SeletorAno({ anos, padrao, ausentes, rotulo = "Ano-calendário" }: { anos: number[]; padrao: number; ausentes: Ausentes; rotulo?: string }) {
   const pathname = usePathname();
   const atual = anoDaUrl(pathname, padrao);
   return (
-    <div role="group" aria-label="Ano-calendário" className="flex items-center gap-2 text-sm">
+    <div role="group" aria-label={rotulo} className="flex items-center gap-2 text-sm">
       <span aria-hidden className="text-suave">
         Ano-calendário
       </span>

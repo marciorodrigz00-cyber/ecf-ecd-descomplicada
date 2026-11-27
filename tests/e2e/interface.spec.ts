@@ -1,7 +1,7 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test, type Page } from "@playwright/test";
 
-async function abrir(page: Page, url = "/") {
+async function abrir(page: Page, url = "/blocos") {
   await page.goto(url);
   await page.waitForLoadState("networkidle");
 }
@@ -37,7 +37,8 @@ test("[CT-073] mapa: regime, bloco, ligações e abas", async ({ page }) => {
   await page.getByRole("link", { name: "Abrir o bloco Y" }).click();
   await expect(page).toHaveURL(/\/blocos\/y$/);
   await page.goBack();
-  await expect(page.locator("h1")).toHaveText("Como os dados percorrem a ECF");
+  await expect(page.locator("h1")).toHaveText("Blocos e preenchimento");
+  await expect(page.getByRole("heading", { name: "Como os dados percorrem a ECF" })).toBeVisible();
 });
 
 test("[CT-074] registro aberto no mapa mostra o que é e o exemplo, campo a campo", async ({ page }) => {
@@ -89,7 +90,7 @@ test("[CT-075] falha ao buscar o exemplo avisa e permite tentar de novo", async 
 });
 
 test("[CT-076] ano 2024 traz o leiaute 11, sem exemplo fictício", async ({ page }) => {
-  await abrir(page, "/ac/2024");
+  await abrir(page, "/ac/2024/blocos");
   await expect(page.getByTestId("selo")).toContainText("leiaute 11");
   await no(page, "0").click();
   await page.getByRole("button", { name: /^Registros \(/ }).click();
@@ -103,7 +104,6 @@ test("[CT-076] ano 2024 traz o leiaute 11, sem exemplo fictício", async ({ page
 test("[CT-077] percurso: anda, pausa, volta, termina e vira conquista", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await abrir(page);
-  await expect(conquista(page, "percurso")).toHaveAttribute("data-feita", "false");
   await page.getByRole("button", { name: "Percorrer passo a passo" }).click();
   const p = page.getByTestId("percurso");
   await expect(p).toHaveText("1 de 13");
@@ -115,9 +115,11 @@ test("[CT-077] percurso: anda, pausa, volta, termina e vira conquista", async ({
     await expect(p).toHaveText(`${i} de 13`);
   }
   await expect(page.getByRole("button", { name: "Próximo passo" })).toBeDisabled();
-  await expect(conquista(page, "percurso")).toHaveAttribute("data-feita", "true");
   await page.getByRole("button", { name: "Sair" }).click();
   await expect(p).toHaveCount(0);
+  // As conquistas ficam em “Meu progresso” (etapa 2).
+  await abrir(page, "/meu-progresso");
+  await expect(conquista(page, "percurso")).toHaveAttribute("data-feita", "true");
   await page.reload();
   await expect(conquista(page, "percurso")).toHaveAttribute("data-feita", "true");
 });
@@ -137,17 +139,19 @@ test("[CT-079] conquistas somam uso de verdade e ficam no navegador", async ({ p
   await page.getByLabel("Adições (R$)", { exact: true }).fill("10");
   await page.getByRole("button", { name: "Marcar como estudada" }).click();
   await abrir(page, "/blocos/m/m300");
-  await abrir(page);
+  await abrir(page, "/meu-progresso");
   for (const id of ["simulador", "primeiro-passo"]) await expect(conquista(page, id)).toHaveAttribute("data-feita", "true");
   await expect(conquista(page, "registros")).toContainText("1 de 10");
   await expect(page.getByRole("progressbar", { name: /conquistas/ })).toHaveAttribute("aria-valuenow", "2");
   await page.evaluate(() => localStorage.setItem("ecf:preferencias:v1", "{lixo"));
   await page.reload();
-  await expect(page.getByRole("progressbar", { name: /conquistas/ })).toHaveAttribute("aria-valuenow", "0");
+  // Preferências ilegíveis: volta ao começo, sem contador em zero.
+  await expect(page.getByTestId("sem-progresso")).toBeVisible();
+  await expect(page.getByRole("progressbar", { name: /conquistas/ })).toHaveCount(0);
 });
 
 test("[CT-080] teclas de atalho: funcionam, não atrapalham campos e podem ser desligadas", async ({ page }) => {
-  await abrir(page);
+  await abrir(page, "/");
   await page.keyboard.press("s");
   await expect(page).toHaveURL(/\/simulador$/);
   await page.getByLabel("Adições (R$)", { exact: true }).press("q");
@@ -157,9 +161,9 @@ test("[CT-080] teclas de atalho: funcionam, não atrapalham campos e podem ser d
   await expect(page).toHaveURL(/\/ac\/2024$/);
   await page.keyboard.press("q");
   await expect(page).toHaveURL(/\/ac\/2024\/quem-deve-entregar$/);
-  await abrir(page);
+  await abrir(page, "/meu-progresso");
   await page.getByLabel("Usar teclas de atalho").uncheck();
-  await page.getByLabel("Usar teclas de atalho").blur();
+  await abrir(page, "/");
   await page.keyboard.press("s");
   await page.waitForTimeout(400);
   await expect(page).toHaveURL(/4173\/$/);

@@ -1,6 +1,6 @@
 import type { z } from "zod";
 import * as S from "@/schemas";
-import { conferirRastreio, ler, leiautes, leiauteDoAno } from "./index";
+import { anos, conferirRastreio, ler, leiautes, leiauteDoAno } from "./index";
 import type { Registro } from "@/schemas";
 
 /** Registros, matriz de regimes, grafo e textos didáticos. Lidos e validados em build. */
@@ -70,6 +70,48 @@ function dados(ano: number): Dados {
 export const registrosDoAno = (ano: number) => dados(ano).registros;
 export const registrosDoBloco = (letra: string, ano: number) => dados(ano).registros.filter((r) => r.codigo[0] === letra);
 export const registroDoAno = (codigo: string, ano: number) => dados(ano).registros.find((r) => r.codigo === codigo);
+
+/** Âncora de cada campo pelo nome: COD_SCP → "cod-scp"; nome repetido no registro ganha o número da ocorrência ("valor-2"). */
+export function ancorasDosCampos<C extends { nome: string }>(campos: readonly C[]): [C, string][] {
+  const vistos = new Map<string, number>();
+  return campos.map((c) => {
+    const base = c.nome.toLowerCase().replace(/_/g, "-").replace(/[^a-z0-9-]/g, "");
+    const n = (vistos.get(base) ?? 0) + 1;
+    vistos.set(base, n);
+    return [c, n === 1 ? base : `${base}-${n}`];
+  });
+}
+
+/**
+ * Âncora de cada regra, na ordem da página: primeiro as do registro, depois as dos campos.
+ * "regra-regra-cnpj-diferente-scp" (do registro) ou "regra-cod-scp-regra-cnpj-diferente-scp" (do campo); repetida ganha o número.
+ */
+export function ancorasDasRegras(r: Registro) {
+  const vistos = new Map<string, number>();
+  const ancora = (base: string) => {
+    const n = (vistos.get(base) ?? 0) + 1;
+    vistos.set(base, n);
+    return n === 1 ? base : `${base}-${n}`;
+  };
+  const limpo = (s: string) => s.toLowerCase().replace(/_/g, "-").replace(/[^a-z0-9-]/g, "");
+  return [
+    ...r.regrasRegistro.map((x) => ({ campo: "*", tipo: null as string | null, ...x, ancora: ancora(`regra-${limpo(x.codigo)}`) })),
+    ...r.regrasCampo.flatMap((g) => g.regras.map((x) => ({ campo: g.campo, ...x, ancora: ancora(`regra-${limpo(g.campo)}-${limpo(x.codigo)}`) }))),
+  ];
+}
+
+/** Registros na ordem do arquivo (blocos na ordem do leiaute), com o anterior e o próximo, atravessando blocos. */
+export function vizinhos(codigo: string, ano: number) {
+  const ordem = leiauteDoAno(ano).blocos.flatMap((b) => registrosDoBloco(b.letra, ano));
+  const i = ordem.findIndex((r) => r.codigo === codigo);
+  return { anterior: i > 0 ? ordem[i - 1]! : null, proximo: i >= 0 && i < ordem.length - 1 ? ordem[i + 1]! : null, posicao: i + 1, total: ordem.length };
+}
+
+/** Para cada ano, os registros que existem em outro ano mas não neste (o seletor de ano avisa). */
+export function ausentesPorAno(): Record<number, string[]> {
+  const codigos = new Set(anos.flatMap((a) => registrosDoAno(a).map((r) => r.codigo)));
+  return Object.fromEntries(anos.map((a) => [a, [...codigos].filter((c) => !registroDoAno(c, a))]));
+}
 export const descricaoOficial = (letra: string, ano: number) => dados(ano).descricoes.get(letra)!;
 export const conferencia = (ano: number) => dados(ano).conferidos;
 export const statusRegistro = (codigo: string, ano: number): S.Status =>

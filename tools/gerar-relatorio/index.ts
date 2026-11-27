@@ -7,7 +7,7 @@ type Bug = {
   passos: string; esperado: string; obtido: string; tecnico: string; evidencia: string;
 };
 type Extra = {
-  versao: string; bugs: Bug[]; aprovados: string[]; acoes: string[]; fora: string[]; reaproveitados: string[]; risco: string;
+  versao: string; antesDepois?: { tema: string; antes: string; depois: string }[]; bugs: Bug[]; aprovados: string[]; acoes: string[]; fora: string[]; reaproveitados: string[]; risco: string;
 };
 type Resultado = { ok: boolean; nota: string };
 
@@ -64,10 +64,11 @@ h1,h2,h3{line-height:1.2}section{background:#fff;border:1px solid #d3dcda;border
 .v{font-size:1.4rem;font-weight:700}.Passou{color:#1c6138}.Falhou{color:#a01c1c}.Bloqueado{color:#8a4b00}dt{font-weight:700}dd{margin:0 0 .5rem}</style></head><body>
 <h1>Relatório de testes: ECF e ECD Descomplicada (${e(extra.versao)})</h1>
 <section><h2>Cabeçalho</h2><dl><dt>Execução</dt><dd>${e(quando)} (horário de Brasília)</dd><dt>Ambiente</dt><dd>http://127.0.0.1:4173, build estático servido localmente com os cabeçalhos do vercel.json</dd>
-<dt>Navegador</dt><dd>Google Chrome instalado na máquina, via Playwright ${e(pw.config.version)}</dd><dt>Larguras</dt><dd>375, 768, 1050 e 1440 px</dd>
+<dt>Navegador</dt><dd>Google Chrome instalado na máquina, via Playwright ${e(pw.config.version)}</dd><dt>Larguras</dt><dd>375, 768, 1024, 1050, 1280 e 1440 px</dd>
 <dt>Escopo autorizado</dt><dd>Somente o próprio projeto, em servidor local; provas inofensivas</dd><dt>Módulos</dt><dd>${e([...new Set(casos.map((c) => c.modulo))].join(", "))}</dd></dl></section>
 <section><h2>Resumo executivo</h2><p class="v">Veredicto: ${veredicto}</p><p>${casos.length} casos: ${conta("Passou")} passaram, ${conta("Falhou")} falharam, ${conta("Bloqueado")} bloqueados.
 Defeitos abertos: ${ordem.map((s) => `${sev(s)} ${s}`).join(", ")}. Encontrados e corrigidos ao longo do projeto: ${extra.bugs.length - abertos.length}. De segurança: ${seg.filter((b) => b.situacao !== "Corrigido").length} abertos, ${seg.filter((b) => b.situacao === "Corrigido").length} corrigidos.</p><p>${e(extra.risco)}</p></section>
+${extra.antesDepois?.length ? `<section><h2>Antes × depois do layout</h2><div class="rolar" tabindex="0" role="region" aria-label="Antes e depois do layout"><table><thead><tr><th scope="col">Tema</th><th scope="col">Antes</th><th scope="col">Depois</th></tr></thead><tbody>${extra.antesDepois.map((x) => `<tr><td>${e(x.tema)}</td><td>${e(x.antes)}</td><td>${e(x.depois)}</td></tr>`).join("")}</tbody></table></div></section>` : ""}
 <section><h2>Defeitos encontrados</h2>${[...extra.bugs].sort((a, b) => ordem.indexOf(a.severidade) - ordem.indexOf(b.severidade)).map((b) => `<h3>${e(b.id)}: ${e(b.titulo)}</h3><p>${e(b.severidade)} · ${e(b.modulos.join(", "))} · casos ${e(b.casos.join(", "))} · <strong>${e(b.situacao)}</strong></p><dl><dt>Passos</dt><dd>${e(b.passos)}</dd><dt>Esperado</dt><dd>${e(b.esperado)}</dd><dt>Obtido</dt><dd>${e(b.obtido)}</dd><dt>Observações técnicas</dt><dd>${e(b.tecnico)}</dd><dt>Evidência</dt><dd>${e(b.evidencia)}</dd></dl>`).join("") || "<p>Nenhum.</p>"}${falhasSemBug.length ? `<p class="Falhou">Falhas ainda sem registro: ${e(falhasSemBug.map((l) => l.id).join(", "))}</p>` : ""}</section>
 <section><h2>Casos de teste executados</h2><div class="rolar" tabindex="0" role="region" aria-label="Casos de teste"><table><thead><tr><th scope="col">ID</th><th scope="col">Módulo</th><th scope="col">Caso de teste</th><th scope="col">Resultado obtido</th><th scope="col">Status</th></tr></thead><tbody>
 ${linhas.map((l) => `<tr><td>${e(l.id)}</td><td>${e(l.modulo)}</td><td>${e(l.caso)}</td><td>${e(l.notas)}${l.bugs.length ? ` (${e(l.bugs.map((b) => `${b.id}, ${b.situacao.toLowerCase()}`).join("; "))})` : ""}</td><td class="${l.status}">${l.status}</td></tr>`).join("\n")}

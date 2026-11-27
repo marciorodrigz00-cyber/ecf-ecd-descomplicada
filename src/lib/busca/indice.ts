@@ -1,5 +1,5 @@
 import { ANO_PADRAO, glossario, leiauteDoAno, novidades } from "@/lib/conteudo";
-import { didatico, registrosDoAno } from "@/lib/conteudo/leiautes";
+import { ancorasDasRegras, ancorasDosCampos, didatico, registrosDoAno } from "@/lib/conteudo/leiautes";
 import { exemplos } from "@/lib/exemplos";
 import { SECOES, rota } from "@/lib/rotas";
 import { TIPOS, type LinhaIndice, type TipoItem } from "./index";
@@ -10,6 +10,7 @@ export function montarIndice(ano: number): LinhaIndice[] {
   const n = (t: TipoItem) => TIPOS.indexOf(t);
   const registro = (c: string) => `/blocos/${c[0]!.toLowerCase()}/${c.toLowerCase()}`;
   const registros = registrosDoAno(ano);
+  const ancoras = new Map(registros.flatMap((r) => ancorasDosCampos(r.campos)));
   return [
     ...leiauteDoAno(ano).blocos.map((b): LinhaIndice => [n("bloco"), b.letra, `Bloco ${b.letra}: ${didatico(b.letra).curto}`, ir(`/blocos/${b.letra.toLowerCase()}`), b.nome]),
     ...SECOES.map((s): LinhaIndice => [n("secao"), "", s.titulo, ir(`/${s.slug}`), `${s.curto} ${s.profissional}`]),
@@ -23,7 +24,14 @@ export function montarIndice(ano: number): LinhaIndice[] {
     ...registros.flatMap((r) =>
       r.campos.slice(1).map((c): LinhaIndice => {
         const d = c.descricao.replace(/\s+/g, " ");
-        return [n("campo"), `${r.codigo}.${c.nome}`, d.length > 90 ? `${d.slice(0, 89)}…` : d, ir(`${registro(r.codigo)}#campo-${c.numero}`), ""];
+        return [n("campo"), `${r.codigo}.${c.nome}`, d.length > 90 ? `${d.slice(0, 89)}…` : d, ir(`${registro(r.codigo)}#${ancoras.get(c)!}`), ""];
+      }),
+    ),
+    // Regras do Manual: uma linha por registro e campo, levando à seção de regras do registro.
+    ...registros.flatMap((r) =>
+      ancorasDasRegras(r).map((x): LinhaIndice => {
+        const t = x.texto.replace(/\s+/g, " ");
+        return [n("regra"), x.codigo, `${r.codigo}${x.campo === "*" ? "" : `.${x.campo}`}: ${t.length > 70 ? `${t.slice(0, 69)}…` : t}`, ir(`${registro(r.codigo)}#${x.ancora}`), ""];
       }),
     ),
   ];

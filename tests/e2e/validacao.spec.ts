@@ -57,16 +57,16 @@ test("[CT-100] Voltar devolve a rolagem e âncora leva ao alvo", async ({ page }
 });
 
 test("[CT-101] mapa: bloco, regime e aba no endereço, com F5, link e início limpo", async ({ page }) => {
-  await abrir(page, "/");
+  await abrir(page, "/blocos");
   await page.locator('[data-no="K"]').click();
-  await expect(page).toHaveURL(/\/\?bloco=K$/);
+  await expect(page).toHaveURL(/\/blocos\?bloco=K$/);
   await page.getByRole("button", { name: /^Registros \(/ }).click();
-  await expect(page).toHaveURL(/\/\?bloco=K&aba=registros$/);
+  await expect(page).toHaveURL(/\/blocos\?bloco=K&aba=registros$/);
   await page.reload();
   await expect(page.locator('[data-no="K"]')).toHaveAttribute("aria-pressed", "true");
   await expect(page.locator("[data-registro]").first()).toBeVisible();
   // Link recebido de outra pessoa.
-  await abrir(page, "/?regime=presumido&bloco=Q&aba=erros");
+  await abrir(page, "/blocos?regime=presumido&bloco=Q&aba=erros");
   await expect(page.locator('[data-no="Q"]')).toHaveAttribute("aria-pressed", "true");
   await expect(page.getByRole("button", { name: "Lucro presumido", exact: true })).toHaveAttribute("aria-pressed", "true");
   await expect(page.getByRole("button", { name: /^Erros comuns/ })).toHaveAttribute("aria-pressed", "true");
@@ -75,9 +75,9 @@ test("[CT-101] mapa: bloco, regime e aba no endereço, com F5, link e início li
   await expect(page).toHaveURL(/\/blocos\/q$/);
   await page.goBack();
   await expect(page.locator('[data-no="Q"]')).toHaveAttribute("aria-pressed", "true");
-  // A marca no cabeçalho leva ao início limpo: endereço e tela iguais.
-  await page.locator("header a").first().click();
-  await expect(page).toHaveURL(/4173\/$/);
+  // O item do menu leva à área limpa: endereço e tela iguais.
+  await page.locator('[data-lateral] [data-item-menu="blocos"]').click();
+  await expect(page).toHaveURL(/4173\/blocos$/);
   await expect(page.locator('[data-no="M"]')).toHaveAttribute("aria-pressed", "true");
 });
 
@@ -108,7 +108,7 @@ test("[CT-101] filtros de novidades, blocos e glossário no endereço", async ({
   await expect(page.getByLabel("Filtrar termos")).toHaveValue("lalur");
   // Sair antes da espera não grava o filtro na página seguinte.
   await page.getByLabel("Filtrar termos").fill("scp");
-  await page.locator('header nav a[href="/simulador"]').first().evaluate((e: HTMLElement) => e.click());
+  await page.locator('[data-lateral] nav a[href="/simulador"]').first().evaluate((e: HTMLElement) => e.click());
   await expect(page).toHaveURL(/\/simulador$/);
   await page.waitForTimeout(600);
   await expect(page).toHaveURL(/\/simulador$/);
@@ -116,8 +116,8 @@ test("[CT-101] filtros de novidades, blocos e glossário no endereço", async ({
 
 test("[CT-101] link do mapa vale para quem prefere outro ano", async ({ page }) => {
   await page.addInitScript(() => localStorage.setItem("ecf:preferencias:v1", JSON.stringify({ ano: 2024 })));
-  await abrir(page, "/?bloco=K");
-  await expect(page).toHaveURL(/\/ac\/2024\?bloco=K$/);
+  await abrir(page, "/ac/2024/blocos?bloco=K");
+  await expect(page).toHaveURL(/\/ac\/2024\/blocos\?bloco=K$/);
   await expect(page.locator('[data-no="K"]')).toHaveAttribute("aria-pressed", "true");
 });
 
@@ -129,7 +129,7 @@ test("[SG-031] parâmetros do endereço só aceitam valores da lista e nunca exe
   const ruins = ['"><img src=x onerror=window.__pwn=1>', "<svg onload=window.__pwn=1>", "javascript:window.__pwn=1", "{{7*7}}", "__proto__", "constructor", "S", "x".repeat(3000)];
   for (const r of ruins) {
     const v = encodeURIComponent(r);
-    await abrir(page, `/?regime=${v}&bloco=${v}&aba=${v}`);
+    await abrir(page, `/blocos?regime=${v}&bloco=${v}&aba=${v}`);
     await expect(page.locator('[data-no="M"]')).toHaveAttribute("aria-pressed", "true");
     await abrir(page, `/novidades?tipo=${v}&so=${v}`);
     await expect(page.locator("main [role=status]")).toHaveText("Mostrando 15 de 15.");
@@ -141,7 +141,7 @@ test("[SG-031] parâmetros do endereço só aceitam valores da lista e nunca exe
   }
   expect(erros).toEqual([]);
   // Bloco que não existe no regime do link não deixa a tela sem seleção.
-  await abrir(page, "/?regime=presumido&bloco=M");
+  await abrir(page, "/blocos?regime=presumido&bloco=M");
   await expect(page.locator('[data-no="P"]')).toHaveAttribute("aria-pressed", "true");
   // O redirecionamento de ano leva a seleção, mas nunca para fora do domínio.
   await page.addInitScript(() => localStorage.setItem("ecf:preferencias:v1", JSON.stringify({ ano: 2024 })));

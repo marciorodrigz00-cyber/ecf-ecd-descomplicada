@@ -2,6 +2,9 @@ export const CHAVE = "ecf:preferencias:v1";
 
 export type Nivel = "iniciante" | "profissional";
 export type Tema = "light" | "dark";
+/** Os mesmos ids de content/regimes.json (um teste confere). */
+export const REGIMES_PERFIL = ["real", "presumido", "arbitrado", "imune", "isenta"] as const;
+export type RegimePerfil = (typeof REGIMES_PERFIL)[number];
 export type Preferencias = {
   nivel: Nivel;
   /** null = escuro, o padrão do site */
@@ -19,9 +22,28 @@ export type Preferencias = {
   feitos: string[];
   /** teclas de atalho ligadas */
   atalhos: boolean;
+  /** regime do perfil; null = ainda não sabe ou não respondeu */
+  regime: RegimePerfil | null;
+  /** o cartão de perfil já foi respondido ou pulado */
+  perfil: "respondido" | "pulado" | null;
+  /** menu lateral recolhido (trilho de ícones); null = aberto */
+  menu: "recolhido" | null;
 };
 
-export const PADRAO: Preferencias = { nivel: "iniciante", tema: null, ano: null, estudadas: [], roteiro: null, blocos: [], registros: [], feitos: [], atalhos: true };
+export const PADRAO: Preferencias = {
+  nivel: "iniciante",
+  tema: null,
+  ano: null,
+  estudadas: [],
+  roteiro: null,
+  blocos: [],
+  registros: [],
+  feitos: [],
+  atalhos: true,
+  regime: null,
+  perfil: null,
+  menu: null,
+};
 
 /** Aceita qualquer coisa que esteja no armazenamento e devolve sempre um estado válido. */
 export function interpretar(cru: string | null): Preferencias {
@@ -44,6 +66,9 @@ export function interpretar(cru: string | null): Preferencias {
     registros: lista(o.registros, /^[0-9A-Z]\d{3}$/, 400),
     feitos: lista(o.feitos, /^(?:quiz|simulador|percurso)$/, 3),
     atalhos: o.atalhos !== false,
+    regime: REGIMES_PERFIL.find((r) => r === o.regime) ?? null,
+    perfil: o.perfil === "respondido" || o.perfil === "pulado" ? o.perfil : null,
+    menu: o.menu === "recolhido" ? "recolhido" : null,
   };
 }
 

@@ -107,6 +107,18 @@ export function OQueE({ ano }: { ano: number }) {
         </h2>
         <LinhaDoTempo itens={itens} />
       </section>
+      <Link
+        href={rota("/importancia", ano, ANO_PADRAO)}
+        prefetch={false}
+        data-testid="link-importancia"
+        className="flex items-center justify-between gap-4 rounded-2xl border-2 border-marca bg-superficie p-6 text-tinta no-underline hover:bg-fundo"
+      >
+        <span>
+          <span className="block text-xl font-bold">Por que a ECF importa</span>
+          <span className="mt-1 block text-suave">Para que o Fisco usa a ECF, os cruzamentos e o que acontece quando ela atrasa.</span>
+        </span>
+        <ArrowRight aria-hidden size={24} className="shrink-0" />
+      </Link>
     </div>
   );
 }

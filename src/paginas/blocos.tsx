@@ -3,16 +3,21 @@ import { ArrowLeft, ArrowRight, ListChecks } from "lucide-react";
 import { NOME_FAMILIA, tomDoBloco } from "@/components/ecf/blocos";
 import { ICONES } from "@/components/ecf/icones";
 import { MapaBlocos } from "@/components/ecf/mapa";
+import { Console } from "@/components/console";
 import { EtiquetaStatus, LinkFonte, Selo } from "@/components/ecf/rastreio";
 import { BaseLegal } from "@/components/ecf/base-legal";
 import { BlocosPorRegime, EtiquetaSituacao, LegendaSituacao, type CartaoBloco } from "@/components/ecf/regimes";
 import { comTermos } from "@/components/ecf/com-termos";
+import { BotaoCopiar } from "@/components/ecf/copiar";
+import { RedirecionarAncora, SeletorRegistro } from "@/components/ecf/navegacao-registro";
 import { ExemploCampoACampo } from "@/components/ecf/exemplo-registro";
 import { Roteiro } from "@/components/ecf/roteiro";
 import { MarcarVisita } from "@/components/layout/trilha";
 import { CaixaRolavel, Cartao, Etiqueta, Nivel, estiloBotao } from "@/components/ui";
 import { ANO_PADRAO, leiauteDoAno, leiautes } from "@/lib/conteudo";
 import {
+  ancorasDasRegras,
+  ancorasDosCampos,
   conferencia,
   descricaoOficial,
   didatico,
@@ -25,6 +30,7 @@ import {
   registroDoAno,
   registrosDoBloco,
   statusRegistro,
+  vizinhos,
 } from "@/lib/conteudo/leiautes";
 import { resumoRegistro } from "@/lib/exemplos/por-registro";
 import { roteiroDe } from "@/lib/simulacao/montar";
@@ -51,7 +57,45 @@ function cartoes(ano: number): CartaoBloco[] {
     objetivo: nomeBloco(b.letra, ano).objetivo,
     nota: linhaRegime(b.letra).nota,
     celulas: linhaRegime(b.letra).celulas,
+    registros: registrosDoBloco(b.letra, ano).length,
   }));
+}
+
+/** O explorador do fluxo (saiu da home com o layout novo): blocos, ligações, registros e percurso. */
+function ConsoleDoArquivo({ ano }: { ano: number }) {
+  const leiaute = leiauteDoAno(ano);
+  const nos = [
+    ...grafo.externos.map((x) => ({ id: x.id, letra: x.id === "ECFA" ? "ECF" : x.id, curto: x.nome, bloco: null })),
+    ...leiaute.blocos.map((b) => {
+      const d = didatico(b.letra);
+      const n = nomeBloco(b.letra, ano);
+      const l = linhaRegime(b.letra);
+      return {
+        id: b.letra,
+        letra: b.letra,
+        curto: n.curto,
+        bloco: {
+          nome: n.nome,
+          href: ir(urlBloco(b.letra), ano),
+          objetivo: n.objetivo,
+          analogia: d.analogia,
+          nota: l.nota,
+          celulas: l.celulas,
+          erros: d.erros.map((e) => ({ titulo: e.titulo, comoEvitar: e.comoEvitar, registro: e.registro, href: ir(urlRegistro(e.registro), ano) })),
+          registros: registrosDoBloco(b.letra, ano).map((r) => ({ codigo: r.codigo, nome: r.nome, campos: r.campos.length, href: ir(urlRegistro(r.codigo), ano) })),
+        },
+      };
+    }),
+  ];
+  return (
+    <Console
+      key={ano}
+      ano={ano}
+      nos={nos}
+      ligacoes={grafo.arestas.map((x) => ({ de: x.de, para: x.para, o: x.o, registro: x.base.registro, href: ir(urlRegistro(x.base.registro), ano) }))}
+      regimes={regimes.regimes.map(({ id, nome }) => ({ id, nome }))}
+    />
+  );
 }
 
 function Mapa({ ano, inicial }: { ano: number; inicial?: string }) {
@@ -78,14 +122,12 @@ export function Blocos({ ano }: { ano: number }) {
   const total = leiauteDoAno(ano).blocos.length;
   return (
     <div className="space-y-12">
-      <Cartao className="flex flex-wrap items-center justify-between gap-4">
-        <p className="max-w-prose text-lg">
-          Prefere ir passo a passo? O roteiro mostra só os blocos do seu regime, na ordem do arquivo.
-        </p>
-        <Link href={ir("/preencher", ano)} prefetch={false} className={estiloBotao()}>
+      <p className="flex flex-wrap items-center gap-x-4 gap-y-2 text-suave">
+        Prefere ir passo a passo? O roteiro mostra só os blocos do seu regime, na ordem do arquivo.
+        <Link href={ir("/preencher", ano)} prefetch={false} className="inline-flex min-h-11 items-center gap-2 font-semibold text-tinta underline underline-offset-4">
           <ListChecks aria-hidden size={18} /> Abrir o roteiro
         </Link>
-      </Cartao>
+      </p>
       <section aria-labelledby="t-grade">
         <h2 id="t-grade" className="mb-4 text-2xl font-bold">
           {inteiro(total)} blocos cobertos
@@ -98,10 +140,14 @@ export function Blocos({ ano }: { ano: number }) {
         </p>
       </section>
       <section aria-labelledby="t-mapa">
-        <h2 id="t-mapa" className="mb-4 text-2xl font-bold">
-          De onde vêm os dados
+        <h2 id="t-mapa" className="text-2xl font-bold">
+          Como os dados percorrem a ECF
         </h2>
-        <Mapa ano={ano} />
+        <div className="mt-2 mb-5 max-w-prose text-suave">
+          <Nivel so="iniciante">Pense na ECF como um dossiê dividido em capítulos. Clique em um capítulo, ou percorra todos em ordem.</Nivel>
+          <Nivel so="profissional">Blocos, ligações e registros em consulta rápida, por regime.</Nivel>
+        </div>
+        <ConsoleDoArquivo ano={ano} />
       </section>
     </div>
   );
@@ -300,56 +346,158 @@ function Vizinhos({
 
 const LIMITE = 420;
 
-function TextoLongo({ texto }: { texto: string }) {
+function TextoLongo({ texto, termos }: { texto: string; termos?: Set<string> }) {
   const limpo = semQuebra(texto);
-  if (limpo.length <= LIMITE) return <span className="whitespace-pre-line">{limpo}</span>;
+  // Dica do glossário só no texto inteiro; o resumo do <summary> fica sem nada clicável dentro.
+  const comDicas = (t: string) => (termos ? comTermos(t, termos) : t);
+  if (limpo.length <= LIMITE) return <span className="whitespace-pre-line">{comDicas(limpo)}</span>;
   const corte = limpo.slice(0, 200).replace(/\s+\S*$/, "");
   return (
     <details>
       <summary className="min-h-6">
         {corte}… <span className="font-semibold text-marca underline underline-offset-4">ver tudo</span>
       </summary>
-      <span className="mt-2 block whitespace-pre-line">{limpo}</span>
+      <span className="mt-2 block whitespace-pre-line">{comDicas(limpo)}</span>
     </details>
   );
 }
 
-function TabelaCampos({ r }: { r: Registro }) {
+const COLUNAS = ["Nº", "Campo", "Descrição", "Tipo", "Tamanho", "Decimais", "Valores válidos", "Obrigatório"] as const;
+/** No celular cada linha vira um cartão (mesma marcação, só o estilo muda): as âncoras não se repetem. */
+const celula = "flex gap-3 px-1 py-1 before:w-28 before:shrink-0 before:text-sm before:font-semibold before:text-suave before:content-[attr(data-rotulo)] md:table-cell md:p-3 md:before:content-none";
+
+function TabelaCampos({ r, base }: { r: Registro; base: string }) {
+  const ancoras = ancorasDosCampos(r.campos);
   return (
     <CaixaRolavel rotulo={`Campos do registro ${r.codigo}`}>
-      <table className="w-full min-w-5xl text-left">
+      <table className="block w-full text-left md:table md:min-w-5xl">
         <caption className="sr-only">Campos do registro {r.codigo}</caption>
-        <thead className="border-b border-linha text-sm">
+        <thead className="sr-only border-b border-linha text-sm md:not-sr-only md:table-header-group">
           <tr>
-            {["Nº", "Campo", "Descrição", "Tipo", "Tamanho", "Decimais", "Valores válidos", "Obrigatório"].map((c) => (
+            {COLUNAS.map((c) => (
               <th key={c} scope="col" className="p-3 whitespace-nowrap">
                 {c}
               </th>
             ))}
           </tr>
         </thead>
-        <tbody>
-          {r.campos.map((c) => (
-            <tr key={c.numero} id={`campo-${c.numero}`} className="scroll-mt-6 border-b border-linha align-top last:border-0 target:bg-ok-fundo">
-              <td className="p-3">{inteiro(c.numero)}</td>
-              <th scope="row" className="p-3 font-mono text-sm font-semibold">
-                {c.nome}
-              </th>
-              <td className="max-w-md p-3 text-sm">
-                <TextoLongo texto={c.descricao} />
+        <tbody className="block space-y-3 md:table-row-group md:space-y-0">
+          {ancoras.map(([c, ancora]) => (
+            <tr
+              key={c.numero}
+              id={ancora}
+              data-campo={c.nome}
+              className="block scroll-mt-6 rounded-xl border border-linha p-3 align-top target:bg-ok-fundo data-alvo:bg-ok-fundo md:table-row md:rounded-none md:border-0 md:border-b md:p-0 md:last:border-0"
+            >
+              <td className={celula} data-rotulo="Nº">
+                {inteiro(c.numero)}
               </td>
-              <td className="p-3">
+              <th scope="row" className={`${celula} font-mono text-sm font-semibold`} data-rotulo="Campo">
+                <span className="flex flex-wrap items-center gap-2">
+                  <span className="break-all">{c.nome}</span>
+                  <BotaoCopiar texto={`${base}#${ancora}`} link curto rotulo={`Copiar link do campo ${c.nome}`} />
+                </span>
+              </th>
+              <td className={`${celula} text-sm md:max-w-md`} data-rotulo="Descrição">
+                <span className="min-w-0">
+                  <TextoLongo texto={c.descricao} />
+                </span>
+              </td>
+              <td className={celula} data-rotulo="Tipo">
                 {c.tipo === "—" ? "—" : <abbr title={(legendas.tipos as Record<string, string>)[c.tipo]}>{c.tipo}</abbr>}
               </td>
-              <td className="p-3">{c.tamanho}</td>
-              <td className="p-3">{c.decimal}</td>
-              <td className="max-w-48 p-3 text-sm break-words whitespace-pre-line">{c.valores}</td>
-              <td className="p-3 text-sm whitespace-pre-line">{c.obrigatorio}</td>
+              <td className={celula} data-rotulo="Tamanho">
+                {c.tamanho}
+              </td>
+              <td className={celula} data-rotulo="Decimais">
+                {c.decimal}
+              </td>
+              <td className={`${celula} text-sm break-words whitespace-pre-line md:max-w-48`} data-rotulo="Valores válidos">
+                <span className="min-w-0">{c.valores}</span>
+              </td>
+              <td className={`${celula} text-sm whitespace-pre-line`} data-rotulo="Obrigatório">
+                {c.obrigatorio}
+              </td>
             </tr>
           ))}
         </tbody>
       </table>
     </CaixaRolavel>
+  );
+}
+
+/** Anterior e próximo na ordem do arquivo, atravessando blocos. */
+function NavArquivo({ rotulo, codigo, ano }: { rotulo: string; codigo: string; ano: number }) {
+  const { anterior, proximo } = vizinhos(codigo, ano);
+  const outroBloco = (c: string) => (c[0] !== codigo[0] ? ` · bloco ${c[0]}` : "");
+  const item = (x: Registro, lado: "anterior" | "proximo") => (
+    <Link
+      href={ir(urlRegistro(x.codigo), ano)}
+      prefetch={false}
+      rel={lado === "anterior" ? "prev" : "next"}
+      data-testid={`registro-${lado}`}
+      className={`${estiloBotao({ variante: "contorno" })} max-w-full min-w-0`}
+    >
+      {lado === "anterior" && <ArrowLeft aria-hidden size={18} className="shrink-0" />}
+      <span className="min-w-0 truncate">
+        <span className="font-mono">{x.codigo}</span>
+        <span className="font-normal text-suave">
+          {outroBloco(x.codigo)} · {x.nome}
+        </span>
+      </span>
+      {lado === "proximo" && <ArrowRight aria-hidden size={18} className="shrink-0" />}
+    </Link>
+  );
+  return (
+    <nav aria-label={rotulo} className="grid gap-3 sm:grid-cols-2">
+      <div className="min-w-0">{anterior ? item(anterior, "anterior") : <span className="text-sm text-suave">Primeiro registro do arquivo</span>}</div>
+      <div className="min-w-0 sm:text-right">{proximo ? item(proximo, "proximo") : <span className="text-sm text-suave">Último registro do arquivo</span>}</div>
+    </nav>
+  );
+}
+
+/** Tela larga: coluna fixa com os registros do bloco e os blocos vizinhos. */
+function MapaDoBloco({ bloco, codigo, ano }: { bloco: string; codigo: string; ano: number }) {
+  const blocos = leiauteDoAno(ano).blocos;
+  const k = blocos.findIndex((b) => b.letra === bloco);
+  const [antes, depois] = [blocos[k - 1], blocos[k + 1]];
+  return (
+    <aside className="hidden min-[1440px]:block">
+      <nav aria-label={`Registros do bloco ${bloco}`} data-testid="mapa-do-bloco" className="sticky top-6 max-h-[calc(100vh-3rem)] overflow-y-auto rounded-xl border border-linha bg-superficie p-4">
+        <p className="mb-2 font-semibold">
+          Bloco {bloco}: {nomeBloco(bloco, ano).curto}
+        </p>
+        <ol className="space-y-0.5 text-sm">
+          {registrosDoBloco(bloco, ano).map((x) => (
+            <li key={x.codigo}>
+              <Link
+                href={ir(urlRegistro(x.codigo), ano)}
+                prefetch={false}
+                aria-current={x.codigo === codigo ? "page" : undefined}
+                className="flex min-h-8 gap-2 rounded-md px-2 py-1 text-tinta no-underline hover:bg-fundo aria-[current=page]:bg-marca aria-[current=page]:text-sobre-marca"
+              >
+                <span className="shrink-0 font-mono font-semibold">{x.codigo}</span>
+                <span className="min-w-0 truncate">{x.nome}</span>
+              </Link>
+            </li>
+          ))}
+        </ol>
+        <div className="mt-3 flex justify-between gap-2 border-t border-linha pt-3 text-sm">
+          {antes ? (
+            <Link href={ir(urlBloco(antes.letra), ano)} prefetch={false} className="inline-flex min-h-8 items-center gap-1 underline underline-offset-4">
+              <ArrowLeft aria-hidden size={14} /> Bloco {antes.letra}
+            </Link>
+          ) : (
+            <span />
+          )}
+          {depois && (
+            <Link href={ir(urlBloco(depois.letra), ano)} prefetch={false} className="inline-flex min-h-8 items-center gap-1 underline underline-offset-4">
+              Bloco {depois.letra} <ArrowRight aria-hidden size={14} />
+            </Link>
+          )}
+        </div>
+      </nav>
+    </aside>
   );
 }
 
@@ -363,12 +511,23 @@ export function PaginaRegistro({ codigo, ano }: { codigo: string; ano: number })
   const outroAno = leiautes.find((l) => l.anoCalendario !== ano && !registroDoAno(codigo, l.anoCalendario));
   const resumo = resumoRegistro(codigo, ano);
   const roteiro = roteiroDe(codigo, ano);
+  const ancoras = ancorasDosCampos(r.campos);
+  const regras = ancorasDasRegras(r);
+  const base = ir(urlRegistro(codigo), ano);
+  const posBloco = leiaute.blocos.findIndex((b) => b.letra === bloco);
+  // Dicas do glossário: cada termo uma vez por seção.
+  const vistos = () => new Set<string>();
+  const vistosPara = vistos();
+  const vistosRegras = vistos();
   return (
-    <div className="space-y-10">
+    <div className="min-[1440px]:grid min-[1440px]:grid-cols-[minmax(0,1fr)_16rem] min-[1440px]:gap-10">
+    <div className="min-w-0 space-y-10">
       <MarcarVisita codigo={codigo} />
+      <RedirecionarAncora mapa={Object.fromEntries(ancoras.map(([c, a]) => [`campo-${c.numero}`, a]))} />
+      <NavArquivo rotulo="Registro anterior e próximo, no topo" codigo={codigo} ano={ano} />
       <div>
-        <p className="font-mono text-suave">
-          Bloco {bloco} · {ordinal(i + 1)} registro do bloco
+        <p className="font-mono text-suave" data-testid="posicao-no-arquivo">
+          Bloco {bloco}, {ordinal(i + 1)} de {doBloco.length} registros · bloco {ordinal(posBloco + 1)} de {leiaute.blocos.length} no arquivo
         </p>
         <h1 className="mt-1 text-3xl font-bold sm:text-4xl">
           {r.codigo}: {r.nome}
@@ -386,6 +545,9 @@ export function PaginaRegistro({ codigo, ano }: { codigo: string; ano: number })
             <Etiqueta tom="alerta">Não existe no leiaute {outroAno.numero}</Etiqueta>
           </p>
         )}
+        <div className="mt-4">
+          <SeletorRegistro atual={codigo} opcoes={doBloco.map((x) => ({ codigo: x.codigo, nome: x.nome, href: ir(urlRegistro(x.codigo), ano) }))} />
+        </div>
       </div>
 
       <section aria-labelledby="t-para">
@@ -395,10 +557,10 @@ export function PaginaRegistro({ codigo, ano }: { codigo: string; ano: number })
         {roteiro && (
           <div data-testid="para-que-serve" className="mb-4 max-w-prose text-lg">
             <Nivel so="iniciante">
-              <p>{roteiro.paraQueServe.iniciante}</p>
+              <p>{comTermos(roteiro.paraQueServe.iniciante, vistosPara)}</p>
             </Nivel>
             <Nivel so="profissional">
-              <p>{roteiro.paraQueServe.profissional}</p>
+              <p>{comTermos(roteiro.paraQueServe.profissional, vistos())}</p>
             </Nivel>
           </div>
         )}
@@ -407,7 +569,7 @@ export function PaginaRegistro({ codigo, ano }: { codigo: string; ano: number })
           <div className="max-w-prose space-y-2">
             {r.descricao.map((p, n) => (
               <div key={n}>
-                <TextoLongo texto={p} />
+                <TextoLongo texto={p} termos={vistosPara} />
               </div>
             ))}
           </div>
@@ -484,11 +646,11 @@ export function PaginaRegistro({ codigo, ano }: { codigo: string; ano: number })
         </h2>
         <Nivel so="iniciante">
           <p className="mb-3 max-w-prose text-suave">
-            Cada linha da tabela é um dado que o arquivo leva, na ordem em que aparece. Para ver também as regras de
-            validação, mude o nível para “Já conheço”.
+            Cada linha da tabela é um dado que o arquivo leva, na ordem em que aparece. As regras que o programa confere estão logo
+            abaixo.
           </p>
         </Nivel>
-        <TabelaCampos r={r} />
+        <TabelaCampos r={r} base={base} />
         <p className="mt-2 text-sm text-suave">
           Tipos:{" "}
           {[...new Set(r.campos.map((c) => c.tipo))]
@@ -499,11 +661,16 @@ export function PaginaRegistro({ codigo, ano }: { codigo: string; ano: number })
         </p>
       </section>
 
-      <Nivel so="profissional">
-        <section aria-labelledby="t-regras">
+      <section aria-labelledby="t-regras" id="regras" className="scroll-mt-6">
           <h2 id="t-regras" className="mb-3 text-2xl font-bold">
             Regras de validação
           </h2>
+          <Nivel so="iniciante">
+            <p className="mb-3 max-w-prose text-suave">
+              O que o programa da ECF confere ao validar o arquivo, no texto do próprio Manual. É técnico: use como referência quando o
+              programa apontar um erro.
+            </p>
+          </Nivel>
           {r.regrasRegistro.length + r.regrasCampo.length === 0 && (
             <p className="text-suave">O Manual não lista regras para este registro.</p>
           )}
@@ -511,12 +678,14 @@ export function PaginaRegistro({ codigo, ano }: { codigo: string; ano: number })
             <>
               <h3 className="mb-2 text-lg font-semibold">Do registro</h3>
               <ul className="space-y-3">
-                {r.regrasRegistro.map((x, n) => (
-                  <li key={n} className="border-l-3 border-marca pl-4">
-                    <code className="block font-mono text-sm font-semibold break-all">{x.codigo}</code>
-                    <TextoLongo texto={x.texto} />
-                  </li>
-                ))}
+                {regras
+                  .filter((x) => x.campo === "*")
+                  .map((x) => (
+                    <li key={x.ancora} id={x.ancora} className="scroll-mt-6 border-l-3 border-marca pl-4 target:bg-ok-fundo">
+                      <code className="block font-mono text-sm font-semibold break-all">{x.codigo}</code>
+                      <TextoLongo texto={x.texto} termos={vistosRegras} />
+                    </li>
+                  ))}
               </ul>
             </>
           )}
@@ -524,25 +693,24 @@ export function PaginaRegistro({ codigo, ano }: { codigo: string; ano: number })
             <>
               <h3 className="mt-6 mb-2 text-lg font-semibold">Dos campos</h3>
               <ul className="space-y-3">
-                {r.regrasCampo.flatMap((c) =>
-                  c.regras.map((x) => (
-                    <li key={`${c.campo}-${x.codigo}`} className="border-l-3 border-linha pl-4">
+                {regras
+                  .filter((x) => x.campo !== "*")
+                  .map((x) => (
+                    <li key={x.ancora} id={x.ancora} className="scroll-mt-6 border-l-3 border-linha pl-4 target:bg-ok-fundo">
                       <p className="flex flex-wrap items-center gap-2">
-                        <span className="font-mono text-sm font-semibold break-all">{c.campo}</span>
+                        <span className="font-mono text-sm font-semibold break-all">{x.campo}</span>
                         <Etiqueta tom={x.tipo === "Erro" ? "alerta" : "neutro"}>
                           {x.tipo === "a verificar" ? "Tipo a verificar" : x.tipo}
                         </Etiqueta>
                       </p>
                       <code className="block font-mono text-sm break-all">{x.codigo}</code>
-                      <TextoLongo texto={x.texto} />
+                      <TextoLongo texto={x.texto} termos={vistosRegras} />
                     </li>
-                  )),
-                )}
+                  ))}
               </ul>
             </>
           )}
-        </section>
-      </Nivel>
+      </section>
 
       {r.exemplo.length > 0 && (
         <section aria-labelledby="t-exemplo">
@@ -558,11 +726,9 @@ export function PaginaRegistro({ codigo, ano }: { codigo: string; ano: number })
         </section>
       )}
 
-      <Vizinhos
-        rotulo="Outros registros do bloco"
-        anterior={doBloco[i - 1] && { href: ir(urlRegistro(doBloco[i - 1]!.codigo), ano), texto: doBloco[i - 1]!.codigo }}
-        proximo={doBloco[i + 1] && { href: ir(urlRegistro(doBloco[i + 1]!.codigo), ano), texto: doBloco[i + 1]!.codigo }}
-      />
+      <NavArquivo rotulo="Registro anterior e próximo, no fim" codigo={codigo} ano={ano} />
+    </div>
+    <MapaDoBloco bloco={bloco} codigo={codigo} ano={ano} />
     </div>
   );
 }

@@ -103,6 +103,82 @@
   display: none;
 }
 
+/* Perfil já respondido ou pulado: o cartão da home não aparece (definido antes da pintura, em prefs.js). */
+[data-perfil="ok"] [data-cartao-perfil] {
+  display: none;
+}
+
+/* Menu lateral: 15rem aberto, 4.5rem recolhido (trilho de ícones). Entre 1024 e 1279 px começa recolhido.
+   A largura sai do atributo data-menu, definido antes da pintura (prefs.js), e os rótulos seguem a largura real (container). */
+:root {
+  --lateral: 15rem;
+}
+@media (min-width: 1024px) and (max-width: 1279.98px) {
+  :root {
+    --lateral: 4.5rem;
+  }
+}
+:root[data-menu="recolhido"] {
+  --lateral: 4.5rem;
+}
+.lateral {
+  width: var(--lateral);
+  container: lateral / inline-size;
+  transition: width 0.15s ease;
+}
+.lateral[data-expandida] {
+  width: 15rem;
+  box-shadow: 0 0 0 100vmax rgb(0 0 0 / 0.35);
+}
+.gaveta {
+  container: lateral / inline-size;
+}
+.so-compacta {
+  display: none;
+}
+.sub-blocos {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+@container lateral (max-width: 6rem) {
+  .so-aberta {
+    display: none;
+  }
+  .so-compacta {
+    display: block;
+  }
+  .so-aberta-leitor {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  .item-lateral {
+    justify-content: center;
+    padding-inline: 0;
+  }
+  .sub-blocos {
+    grid-template-columns: 1fr;
+    padding-left: 0;
+  }
+  .rodape-lateral {
+    flex-direction: column;
+  }
+}
+.item-ativo {
+  background: color-mix(in srgb, var(--marca) 14%, var(--superficie));
+}
+.item-ativo::before {
+  content: "";
+  position: absolute;
+  inset-block: 0.5rem;
+  left: 0;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: var(--marca);
+}
+
 /* Um verde só: o grupo do bloco aparece no nome e no ícone, e o tom varia dentro dele. */
 [data-tom="0"] { --tom: 8%; }
 [data-tom="1"] { --tom: 12%; }
@@ -146,4 +222,10 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* Cartão de número em destaque na home: um só, com fundo suave da cor de destaque. */
+.cartao-destaque {
+  background: color-mix(in srgb, var(--marca) 10%, var(--superficie));
+  border-color: color-mix(in srgb, var(--marca) 45%, var(--superficie));
 }

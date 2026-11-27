@@ -2,6 +2,7 @@
 
 import { Fragment, useRef, useState, type KeyboardEvent } from "react";
 import type { ParteExemplo } from "@/lib/exemplos/por-registro";
+import { BotaoCopiar } from "./copiar";
 
 /**
  * A linha do exemplo com cada campo clicável. Ao lado, o que o campo é: valor, formato, leitura do Manual e regras.
@@ -47,7 +48,10 @@ export function LinhaExplicada({ partes, rotulo }: { partes: ParteExemplo[]; rot
           </Fragment>
         ))}
       </div>
-      {partes.some((x) => x.valor === "") && <p className="mt-1 text-xs text-suave">· campo vazio neste exemplo</p>}
+      <div className="mt-2 flex flex-wrap items-center justify-between gap-2">
+        <p className="text-xs text-suave">{partes.some((x) => x.valor === "") ? "· campo vazio neste exemplo" : ""}</p>
+        <BotaoCopiar texto={`|${partes.map((x) => x.valor).join("|")}|`} rotulo="Copiar linha" />
+      </div>
 
       <div aria-live="polite" data-testid="linha-campo" className="mt-3 rounded-lg border border-marca p-3">
         <p className="font-mono font-semibold break-all">
