@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  BadgePercent,
   BookA,
   BookOpen,
   Blocks,
@@ -18,7 +19,6 @@ import {
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useId, useState, useSyncExternalStore } from "react";
-import { BotaoBusca } from "@/components/busca";
 import { cn } from "@/lib/cn";
 import { salvar, usePreferencias } from "@/lib/preferencias";
 import { anoDaUrl, caminhoBase, rota } from "@/lib/rotas";
@@ -28,7 +28,7 @@ import { IndicadorPerfil } from "./perfil";
 type Item = { slug: string; rotulo: string; Icone: LucideIcon; tambem?: string[] };
 type Grupo = { titulo: string | null; itens: Item[] };
 
-/** Menu principal. “Importância” fica dentro de “O que é”. Incentivos entram na etapa 4. */
+/** Menu principal. “Importância” fica dentro de “O que é”. */
 export const GRUPOS: Grupo[] = [
   { titulo: null, itens: [{ slug: "", rotulo: "Visão geral", Icone: LayoutDashboard }] },
   {
@@ -48,6 +48,7 @@ export const GRUPOS: Grupo[] = [
       { slug: "simulador", rotulo: "Simulador", Icone: Calculator },
     ],
   },
+  { titulo: "Incentivos", itens: [{ slug: "incentivos", rotulo: "Incentivos fiscais", Icone: BadgePercent }] },
   {
     titulo: "Atualizações",
     itens: [
@@ -89,8 +90,8 @@ export function ConteudoLateral({
   emGaveta = false,
   aoIr,
   aoDica,
-  rodape,
-}: PropsLateral & { emGaveta?: boolean; aoIr?: () => void; aoDica?: (d: Dica) => void; rodape?: React.ReactNode }) {
+  topo,
+}: PropsLateral & { emGaveta?: boolean; aoIr?: () => void; aoDica?: (d: Dica) => void; topo?: React.ReactNode }) {
   const { pathname, area, bloco } = useArea();
   const ano = anoDaUrl(pathname, padrao);
   const base = useId();
@@ -106,45 +107,35 @@ export function ConteudoLateral({
     aoDica({ texto, topo: r.top + r.height / 2 });
   }
   return (
-    <div className="flex h-full flex-col gap-3 py-4">
-      <div className={cn("px-4", emGaveta && "pr-14")}>
+    <div className="flex h-full flex-col">
+      {/* Topo fixo: logo e, na coluna, o botão de recolher. */}
+      <div className={cn("topo-lateral flex items-center gap-2 border-b border-linha px-3 py-3", emGaveta && "pr-16")}>
         {/* Sem aria-label: o nome do link é o texto visível, mais "página inicial" para o leitor de tela. */}
         <Link
           href={rota("/", ano, padrao)}
           prefetch={false}
           onClick={aoIr}
-          className="flex min-h-11 min-w-0 items-center gap-2 font-mono font-semibold text-tinta no-underline"
+          className="flex min-h-11 min-w-0 flex-1 items-center gap-2.5 font-semibold text-tinta no-underline"
         >
-          <span className="grid size-10 shrink-0 place-items-center rounded-lg bg-marca text-sm text-sobre-marca">ECF</span>
-          <span className="so-aberta-leitor min-w-0">
-            descomplicada<span className="sr-only">, página inicial</span>
+          <span aria-hidden className="grid size-9 shrink-0 place-items-center rounded-lg bg-marca text-xs font-bold text-sobre-marca">
+            ECF
+          </span>
+          <span className="so-aberta-leitor min-w-0 text-sm leading-tight whitespace-nowrap">
+            <span className="block">ECF</span>
+            <span className="block">
+              descomplicada<span className="sr-only">, página inicial</span>
+            </span>
           </span>
         </Link>
-        <p className="so-aberta -mt-3 pl-12 text-xs text-suave">
-          ECF · <span data-testid="ecd-em-breve">ECD em breve</span>
-        </p>
+        {topo}
       </div>
 
-      <div className="space-y-1 px-3">
-        <span className="so-aberta block">
-          <BotaoBusca className="w-full justify-start" />
-        </span>
-        <span className="so-compacta">
-          <BotaoBusca compacto className="w-full border-0 bg-transparent" />
-        </span>
-        <span className="so-aberta block">
-          <IndicadorPerfil padrao={padrao} leiautes={leiautes} />
-        </span>
-        <span className="so-compacta" {...dica("Meu perfil")}>
-          <IndicadorPerfil padrao={padrao} leiautes={leiautes} compacto />
-        </span>
-      </div>
-
-      <nav aria-label="Menu principal" className="min-h-0 flex-1 overflow-x-hidden overflow-y-auto border-y border-linha px-3 py-3">
+      {/* Só a lista rola; topo e rodapé ficam sempre visíveis. */}
+      <nav aria-label="Principal" className="nav-lateral min-h-0 flex-1 overflow-x-hidden overflow-y-auto px-3 py-3">
         {GRUPOS.map((g, gi) => (
-          <div key={g.titulo ?? "inicio"} className={cn(gi > 0 && "mt-3")}>
+          <div key={g.titulo ?? "inicio"} className={cn(gi > 0 && "mt-4")}>
             {g.titulo && (
-              <p id={`${base}-${gi}`} className="so-aberta mb-1 px-3 font-mono text-[0.7rem] tracking-widest text-suave uppercase">
+              <p id={`${base}-${gi}`} className="so-aberta mb-1 px-3 text-xs font-semibold tracking-wider text-suave uppercase">
                 {g.titulo}
               </p>
             )}
@@ -163,11 +154,11 @@ export function ConteudoLateral({
                       data-item-menu={it.slug || "inicio"}
                       {...dica(it.rotulo)}
                       className={cn(
-                        "item-lateral relative flex min-h-11 items-center gap-3 rounded-lg px-3 font-medium no-underline",
+                        "item-lateral relative flex min-h-11 items-center gap-3 rounded-lg px-3 text-[0.9375rem] font-medium no-underline",
                         atual ? "item-ativo text-tinta" : "text-suave hover:bg-fundo hover:text-tinta",
                       )}
                     >
-                      <it.Icone aria-hidden size={20} className={cn("shrink-0", atual && "text-marca")} />
+                      <it.Icone aria-hidden size={20} strokeWidth={1.5} className={cn("shrink-0", atual && "text-marca")} />
                       <span className="so-aberta-leitor truncate">{it.rotulo}</span>
                     </Link>
                     {it.slug === "blocos" && area === "blocos" && blocos[ano] && (
@@ -203,25 +194,23 @@ export function ConteudoLateral({
         ))}
       </nav>
 
-      <div className="space-y-3 px-3">
-        <div className="so-aberta rounded-lg border border-linha bg-fundo p-3 text-xs leading-relaxed text-suave">
-          Conteúdo educacional. Confirme na legislação e com a Receita Federal.{" "}
-          <Link href={rota("/fontes", ano, padrao)} prefetch={false} onClick={aoIr} className="inline-flex min-h-6 items-center font-medium text-tinta underline underline-offset-4">
-            Fontes e verificações
-          </Link>
-        </div>
-        <div className="rodape-lateral flex items-center gap-2">
-          <span {...dica("Tema claro ou escuro")}>
-            <BotaoTema />
-          </span>
-          {rodape}
-        </div>
+      {/* Rodapé fixo: perfil e tema. */}
+      <div className="rodape-lateral flex items-center gap-2 border-t border-linha px-3 py-3">
+        <span className="so-aberta min-w-0 flex-1">
+          <IndicadorPerfil padrao={padrao} leiautes={leiautes} />
+        </span>
+        <span className="so-compacta" {...dica("Meu perfil")}>
+          <IndicadorPerfil padrao={padrao} leiautes={leiautes} compacto />
+        </span>
+        <span {...dica("Tema claro ou escuro")}>
+          <BotaoTema />
+        </span>
       </div>
     </div>
   );
 }
 
-/** Coluna fixa a partir de 1024 px. Aberta a partir de 1280 px; recolhida (trilho de ícones) entre 1024 e 1279 px. */
+/** Coluna fixa na altura da tela a partir de 1024 px. Aberta a partir de 1280 px; recolhida (trilho de ícones) entre 1024 e 1279 px. */
 export function Lateral(props: PropsLateral) {
   const { pathname } = useArea();
   const { menu } = usePreferencias();
@@ -253,7 +242,7 @@ export function Lateral(props: PropsLateral) {
         <ConteudoLateral
           {...props}
           aoDica={compacto ? setDica : undefined}
-          rodape={
+          topo={
             <button
               type="button"
               onClick={alternar}
@@ -261,9 +250,9 @@ export function Lateral(props: PropsLateral) {
               aria-label={compacto ? "Expandir menu" : "Recolher menu"}
               title={compacto ? "Expandir menu" : "Recolher menu"}
               data-testid="recolher-menu"
-              className="grid size-10 place-items-center rounded-lg border border-controle bg-superficie"
+              className="grid size-11 shrink-0 place-items-center rounded-lg text-suave hover:bg-fundo hover:text-tinta"
             >
-              {compacto ? <PanelLeftOpen aria-hidden size={18} /> : <PanelLeftClose aria-hidden size={18} />}
+              {compacto ? <PanelLeftOpen aria-hidden size={20} strokeWidth={1.5} /> : <PanelLeftClose aria-hidden size={20} strokeWidth={1.5} />}
             </button>
           }
         />
@@ -274,7 +263,7 @@ export function Lateral(props: PropsLateral) {
           role="tooltip"
           data-testid="dica-menu"
           style={{ top: dica.topo }}
-          className="pointer-events-none fixed left-[4.9rem] z-40 -translate-y-1/2 rounded-md bg-tinta px-2.5 py-1 text-sm font-medium whitespace-nowrap text-fundo shadow-lg"
+          className="pointer-events-none fixed left-[4.5rem] z-40 -translate-y-1/2 rounded-md bg-tinta px-2.5 py-1 text-sm font-medium whitespace-nowrap text-fundo shadow-lg"
         >
           {dica.texto}
         </span>

@@ -1,0 +1,80 @@
+{
+  "id": "entidades-sem-fins-lucrativos",
+  "nome": "Isenção das associações civis sem fins lucrativos",
+  "curto": "Entidades sem fins lucrativos",
+  "iniciante": "Associações e instituições sem fins lucrativos que cumprem os requisitos da lei não pagam IRPJ nem CSLL. Essa isenção ficou fora da redução.",
+  "profissional": "Isenção de IRPJ e de CSLL das instituições de caráter filantrópico, recreativo, cultural e científico e das associações civis sem fins lucrativos (Lei nº 9.532/1997, art. 15). Excetuada pela LC nº 224/2025, art. 4º, § 8º, V, na redação da LC nº 235/2026, e listada no Anexo Único (item 34).",
+  "comoFunciona": "Na ECF, a entidade informa a forma de tributação 9 (isenta do IRPJ) no registro 0010 e preenche o Bloco U, das imunes e isentas.",
+  "baseLegal": [
+    {
+      "norma": "Lei nº 9.532/1997, art. 15",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l9532.htm"
+    },
+    {
+      "norma": "IN RFB nº 2.305/2025, Anexo Único, item 34",
+      "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/148694"
+    },
+    {
+      "norma": "LC nº 224/2025, art. 4º, § 8º, V (redação da LC nº 235/2026)",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp224.htm"
+    }
+  ],
+  "tributos": [
+    "IRPJ",
+    "CSLL"
+  ],
+  "regimes": [
+    "isenta"
+  ],
+  "fruicao": "isencao",
+  "situacao": "excetuado",
+  "porQue": "Anexo Único da IN RFB nº 2.305/2025, item 34 (redação da IN RFB nº 2.307/2026); Perguntas e Respostas, pergunta 35; exceção do art. 4º, § 8º, V, da LC nº 224/2025, na redação da LC nº 235/2026.",
+  "porAno": [
+    {
+      "ac": 2026,
+      "efeito": "Sem redução.",
+      "regras": [],
+      "status": "conferido",
+      "fonte": {
+        "id": "in-2305",
+        "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/148694",
+        "trecho": "Anexo Único, item 34"
+      }
+    },
+    {
+      "ac": 2027,
+      "efeito": "A exceção do § 8º, V, continua na redação dada pela LC nº 239/2026. Falta orientação da Receita Federal para 2027.",
+      "regras": [
+        "lc239-inicio"
+      ],
+      "status": "a-verificar",
+      "fonte": {
+        "id": "lc-239",
+        "url": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp239.htm",
+        "trecho": "art. 4º (nova redação do art. 4º da LC nº 224/2025) e art. 15"
+      }
+    }
+  ],
+  "registros": [
+    "0010"
+  ],
+  "fonte": {
+    "id": "in-2305",
+    "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/148694",
+    "trecho": "Anexo Único, item 34"
+  },
+  "norma": "IN RFB nº 2.305/2025, art. 17 e Anexo Único, item 34",
+  "status": "conferido",
+  "leiautes": [
+    "12"
+  ],
+  "vigencia": {
+    "acNormal": [
+      2026
+    ],
+    "situacaoEspecial": [
+      2026
+    ]
+  },
+  "verificadoEm": "2026-11-27"
+}

@@ -1,0 +1,74 @@
+{
+  "id": "pronon-pronas",
+  "nome": "PRONON e PRONAS/PCD (saúde)",
+  "curto": "PRONON e PRONAS/PCD",
+  "iniciante": "Empresas do lucro real podem abater do imposto de renda doações e patrocínios a projetos de atenção oncológica e à pessoa com deficiência. Ainda falta conferir se a redução da LC nº 224/2025 se aplica.",
+  "profissional": "Dedução do imposto sobre a renda devido das doações e patrocínios ao PRONON e ao PRONAS/PCD (Lei nº 12.715/2012, art. 4º), facultada até o ano-calendário de 2031. Não estão no Anexo Único.",
+  "comoFunciona": "Se alcançados, a redução seguiria a regra das deduções do imposto devido: 90% do limite legal em 2026.",
+  "baseLegal": [
+    {
+      "norma": "Lei nº 12.715/2012, arts. 1º a 5º",
+      "url": "https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2012/lei/l12715.htm"
+    }
+  ],
+  "tributos": [
+    "IRPJ"
+  ],
+  "regimes": [
+    "real"
+  ],
+  "fruicao": "deducao-imposto",
+  "setorRegiao": "Saúde",
+  "situacao": "a-verificar",
+  "porQue": "Não estão no Anexo Único e não têm resposta própria no Perguntas e Respostas.",
+  "falta": "Conferir se constam do demonstrativo de gastos tributários da LOA de 2026.",
+  "porAno": [
+    {
+      "ac": 2026,
+      "efeito": "A verificar.",
+      "regras": [],
+      "status": "a-verificar",
+      "fonte": {
+        "id": "pr-lc224",
+        "url": "https://www.gov.br/receitafederal/pt-br/centrais-de-conteudo/publicacoes/perguntas-e-respostas/beneficios-fiscais/perguntas-e-respostas-reducao-dos-incentivos-e-beneficios-tributarios-v5-final.pdf",
+        "trecho": "pergunta 21 (regra geral das deduções do imposto devido)"
+      }
+    },
+    {
+      "ac": 2027,
+      "efeito": "A LC nº 239/2026 passa a usar o demonstrativo de gastos tributários da lei orçamentária de cada ano. Se este benefício continuar alcançado em 2027, a redução sobe de 10% para 20%. Falta orientação da Receita Federal sobre as datas e a lista.",
+      "regras": [
+        "lc239-inicio"
+      ],
+      "status": "a-verificar",
+      "fonte": {
+        "id": "lc-239",
+        "url": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp239.htm",
+        "trecho": "art. 4º (nova redação do art. 4º da LC nº 224/2025) e art. 15"
+      }
+    }
+  ],
+  "registros": [
+    "N620",
+    "N630"
+  ],
+  "fonte": {
+    "id": "pr-lc224",
+    "url": "https://www.gov.br/receitafederal/pt-br/centrais-de-conteudo/publicacoes/perguntas-e-respostas/beneficios-fiscais/perguntas-e-respostas-reducao-dos-incentivos-e-beneficios-tributarios-v5-final.pdf",
+    "trecho": "pergunta 21 (regra geral das deduções do imposto devido)"
+  },
+  "norma": "LC nº 224/2025, art. 4º, § 2º, I",
+  "status": "a-verificar",
+  "leiautes": [
+    "12"
+  ],
+  "vigencia": {
+    "acNormal": [
+      2026
+    ],
+    "situacaoEspecial": [
+      2026
+    ]
+  },
+  "verificadoEm": "2026-11-27"
+}

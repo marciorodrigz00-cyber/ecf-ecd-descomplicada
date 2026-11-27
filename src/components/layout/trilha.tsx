@@ -45,16 +45,38 @@ export function CartaoTrilha({ ano, padrao }: { ano: number; padrao: number }) {
 }
 
 /** “Estou aprendendo”: leva à próxima seção não estudada. No HTML gerado, começa em “O que é”. */
-export function CaminhoAprender({ ano, padrao, className, children }: { ano: number; padrao: number; className?: string; children: React.ReactNode }) {
+export function CaminhoAprender({ ano, padrao, className, chamada = "mt-3 flex items-center gap-2 font-semibold", children }: { ano: number; padrao: number; className?: string; chamada?: string; children: React.ReactNode }) {
   const { estudadas } = usePreferencias();
   const proxima = SECOES.find((s) => !estudadas.includes(s.slug)) ?? SECOES[0]!;
   return (
     <Link href={rota(`/${proxima.slug}`, ano, padrao)} prefetch={false} className={className} data-testid="caminho-aprender">
       {children}
-      <span className="mt-3 flex items-center gap-2 font-semibold">
-        {estudadas.length ? "Continuar" : "Começar"}: {proxima.curto} <ArrowRight aria-hidden size={18} />
+      <span className={chamada}>
+        {estudadas.length ? "Continuar" : "Começar"}: {proxima.curto} <ArrowRight aria-hidden size={16} />
       </span>
     </Link>
+  );
+}
+
+/** Card "Sua trilha" da home: o próximo tema não estudado, com botão primário. */
+export function CartaoContinuar({ ano, padrao }: { ano: number; padrao: number }) {
+  const { estudadas } = usePreferencias();
+  const proxima = SECOES.find((s) => !estudadas.includes(s.slug)) ?? SECOES[0]!;
+  return (
+    <section aria-labelledby="t-trilha-home" data-testid="trilha-home" className="flex flex-col rounded-xl border border-linha bg-superficie p-6">
+      <p className="text-xs font-semibold tracking-wider text-suave uppercase">Sua trilha</p>
+      <h2 id="t-trilha-home" className="mt-3 text-2xl font-semibold">
+        Continue de onde parou
+      </h2>
+      <p className="mt-2 text-suave">Próximo passo: {proxima.titulo}</p>
+      <Link
+        href={rota(`/${proxima.slug}`, ano, padrao)}
+        prefetch={false}
+        className="mt-6 inline-flex min-h-11 w-fit items-center gap-2 rounded-lg bg-marca px-5 font-semibold text-sobre-marca no-underline hover:opacity-90"
+      >
+        {estudadas.length ? "Continuar" : "Começar"} <ArrowRight aria-hidden size={18} />
+      </Link>
+    </section>
   );
 }
 

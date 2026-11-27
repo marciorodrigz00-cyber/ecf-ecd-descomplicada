@@ -136,5 +136,72 @@
     "orgao": "Receita Federal",
     "url": "https://www.gov.br/sped/pt-br/assuntos/comunicados/ecf",
     "papel": "primaria"
+  },
+  {
+    "id": "lc-224",
+    "nome": "Lei Complementar nº 224/2025",
+    "orgao": "Presidência da República",
+    "url": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp224.htm",
+    "papel": "primaria",
+    "observacao": "Texto compilado, já com as alterações das LCs 235 e 239 de 2026. Não substitui o publicado no DOU."
+  },
+  {
+    "id": "lc-235",
+    "nome": "Lei Complementar nº 235/2026",
+    "orgao": "Presidência da República",
+    "url": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp235.htm",
+    "papel": "primaria"
+  },
+  {
+    "id": "lc-239",
+    "nome": "Lei Complementar nº 239/2026",
+    "orgao": "Presidência da República",
+    "url": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp239.htm",
+    "papel": "primaria",
+    "observacao": "Publicada em 24/11/2026. Até a verificação, a Receita Federal não havia publicado orientação sobre ela."
+  },
+  {
+    "id": "decreto-12808",
+    "nome": "Decreto nº 12.808/2025",
+    "orgao": "Presidência da República",
+    "url": "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2025/decreto/D12808.htm",
+    "papel": "primaria"
+  },
+  {
+    "id": "in-2305",
+    "nome": "Instrução Normativa RFB nº 2.305/2025 (multivigente, com as INs 2.306 e 2.307 de 2026)",
+    "orgao": "Receita Federal",
+    "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/148694",
+    "papel": "primaria",
+    "observacao": "A página só abre em navegador. O Anexo Único lista os gastos tributários preservados da redução."
+  },
+  {
+    "id": "pr-lc224",
+    "nome": "Perguntas e Respostas: redução dos incentivos e benefícios tributários (versão 5, de 30/07/2026)",
+    "orgao": "Receita Federal",
+    "url": "https://www.gov.br/receitafederal/pt-br/centrais-de-conteudo/publicacoes/perguntas-e-respostas/beneficios-fiscais/perguntas-e-respostas-reducao-dos-incentivos-e-beneficios-tributarios-v5-final.pdf",
+    "papel": "primaria",
+    "observacao": "Anterior à LC nº 239/2026."
+  },
+  {
+    "id": "stf-adi-7936",
+    "nome": "STF: notícia da ADI 7936 (CNS), sobre o lucro presumido",
+    "orgao": "Supremo Tribunal Federal",
+    "url": "https://noticias.stf.jus.br/postsnoticias/confederacao-contesta-lei-que-alterou-regime-do-lucro-presumido/",
+    "papel": "primaria"
+  },
+  {
+    "id": "stf-adi-7982",
+    "nome": "STF: notícia da ADI 7982 (CNC), sobre o lucro presumido",
+    "orgao": "Supremo Tribunal Federal",
+    "url": "https://noticias.stf.jus.br/postsnoticias/cnc-questiona-normas-que-elevaram-base-de-calculo-do-lucro-presumido/",
+    "papel": "primaria"
+  },
+  {
+    "id": "stf-adi-7920",
+    "nome": "STF: notícia da ADI 7920 (CNI), sobre a redução de incentivos",
+    "orgao": "Supremo Tribunal Federal",
+    "url": "https://noticias.stf.jus.br/postsnoticias/cni-contesta-lei-que-reduz-incentivos-fiscais/",
+    "papel": "primaria"
   }
 ]

@@ -1,5 +1,5 @@
 /** Busca local, sem biblioteca: o índice tem poucos milhares de linhas curtas. */
-export const TIPOS = ["bloco", "registro", "campo", "termo", "secao", "novidade", "regra"] as const;
+export const TIPOS = ["bloco", "registro", "campo", "termo", "secao", "novidade", "regra", "incentivo"] as const;
 export type TipoItem = (typeof TIPOS)[number];
 /** Compacto de propósito: [índice do tipo, código, título, endereço, texto extra para achar]. */
 export type LinhaIndice = [tipo: number, codigo: string, titulo: string, href: string, extra: string];
@@ -31,7 +31,7 @@ const pontos = (codigo: string, titulo: string, extra: string, termos: string[],
   return p;
 };
 /** Empate: o que a pessoa costuma querer primeiro. */
-const PESO: Record<TipoItem, number> = { bloco: 50, secao: 45, termo: 40, registro: 35, novidade: 10, campo: 0, regra: 0 };
+const PESO: Record<TipoItem, number> = { bloco: 50, secao: 45, termo: 40, registro: 35, incentivo: 30, novidade: 10, campo: 0, regra: 0 };
 
 export type Indice = { linhas: readonly LinhaIndice[]; chaves: readonly [string, string, string][] };
 export function preparar(linhas: readonly LinhaIndice[]): Indice {

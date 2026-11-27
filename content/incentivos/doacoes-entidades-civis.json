@@ -1,0 +1,74 @@
+{
+  "id": "doacoes-entidades-civis",
+  "nome": "Doações a entidades civis sem fins lucrativos (despesa dedutível)",
+  "curto": "Doações a entidades civis",
+  "iniciante": "Doações feitas a certas entidades sem fins lucrativos podem ser descontadas como despesa no lucro real, até um limite. Esse benefício saiu da lista dos que não sofrem redução, mas as fontes lidas não dizem como a redução se aplica a ele.",
+  "profissional": "Dedução, como despesa operacional, das doações a entidades civis sem fins lucrativos (Lei nº 9.249/1995, art. 13, § 2º, III). O item 26 do Anexo Único da IN RFB nº 2.305/2025, que o preservava, foi revogado pela IN RFB nº 2.307/2026. O Anexo não é exaustivo (Perguntas e Respostas, pergunta 10).",
+  "comoFunciona": "A doação é deduzida na apuração do lucro real, até o limite sobre o lucro operacional previsto na lei.",
+  "baseLegal": [
+    {
+      "norma": "Lei nº 9.249/1995, art. 13, § 2º, III",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l9249.htm"
+    }
+  ],
+  "tributos": [
+    "IRPJ",
+    "CSLL"
+  ],
+  "regimes": [
+    "real"
+  ],
+  "fruicao": "despesa-dedutivel",
+  "situacao": "a-verificar",
+  "porQue": "O item 26 do Anexo Único foi revogado pela IN RFB nº 2.307/2026, mas nenhuma fonte lida diz se o benefício passou à redução nem como calculá-la.",
+  "porAno": [
+    {
+      "ac": 2026,
+      "efeito": "A verificar.",
+      "regras": [],
+      "status": "a-verificar",
+      "fonte": {
+        "id": "in-2305",
+        "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/148694",
+        "trecho": "Anexo Único, item 26 (revogado pela IN RFB nº 2.307/2026)"
+      }
+    },
+    {
+      "ac": 2027,
+      "efeito": "A LC nº 239/2026 passa a usar o demonstrativo de gastos tributários da lei orçamentária de cada ano. Se este benefício continuar alcançado em 2027, a redução sobe de 10% para 20%. Falta orientação da Receita Federal sobre as datas e a lista.",
+      "regras": [
+        "lc239-inicio"
+      ],
+      "status": "a-verificar",
+      "fonte": {
+        "id": "lc-239",
+        "url": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp239.htm",
+        "trecho": "art. 4º (nova redação do art. 4º da LC nº 224/2025) e art. 15"
+      }
+    }
+  ],
+  "registros": [
+    "M300",
+    "M350"
+  ],
+  "fonte": {
+    "id": "in-2305",
+    "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/148694",
+    "trecho": "Anexo Único, item 26 (revogado pela IN RFB nº 2.307/2026)"
+  },
+  "norma": "IN RFB nº 2.305/2025, art. 17 e Anexo Único (redação da IN RFB nº 2.307/2026)",
+  "status": "a-verificar",
+  "leiautes": [
+    "12"
+  ],
+  "vigencia": {
+    "acNormal": [
+      2026
+    ],
+    "situacaoEspecial": [
+      2026
+    ]
+  },
+  "verificadoEm": "2026-11-27",
+  "falta": "Conferir se a dedução consta do demonstrativo de gastos tributários da LOA de 2026, qual modalidade de redução se aplica, o que vale entre 1º/01/2026 e a IN RFB nº 2.307/2026 e se a dedução alcança a CSLL."
+}

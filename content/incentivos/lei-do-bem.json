@@ -1,0 +1,78 @@
+{
+  "id": "lei-do-bem",
+  "nome": "Lei do Bem (inovação tecnológica)",
+  "curto": "Lei do Bem",
+  "iniciante": "Empresas do lucro real que investem em pesquisa e inovação podem descontar uma parte desses gastos do lucro tributável. Esse incentivo não foi reduzido pela LC nº 224/2025.",
+  "profissional": "Exclusão do lucro líquido, na apuração do lucro real e da base da CSLL, de parte dos dispêndios com pesquisa tecnológica e desenvolvimento de inovação (Lei nº 11.196/2005, arts. 19, 19-A e 26). Consta do Anexo Único da IN RFB nº 2.305/2025, entre os gastos não alcançados.",
+  "comoFunciona": "A exclusão é feita na parte A do e-Lalur e do e-Lacs, e os projetos e dispêndios são informados no registro X460.",
+  "baseLegal": [
+    {
+      "norma": "Lei nº 11.196/2005, arts. 19, 19-A e 26",
+      "url": "https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2005/lei/l11196.htm"
+    },
+    {
+      "norma": "IN RFB nº 2.305/2025, Anexo Único, item 30",
+      "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/148694"
+    }
+  ],
+  "tributos": [
+    "IRPJ",
+    "CSLL"
+  ],
+  "regimes": [
+    "real"
+  ],
+  "fruicao": "exclusao",
+  "situacao": "excetuado",
+  "porQue": "Está no Anexo Único da IN RFB nº 2.305/2025 (item 30), que lista os gastos tributários não alcançados.",
+  "porAno": [
+    {
+      "ac": 2026,
+      "efeito": "Sem redução.",
+      "regras": [],
+      "status": "conferido",
+      "fonte": {
+        "id": "in-2305",
+        "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/148694",
+        "trecho": "Anexo Único, item 30"
+      }
+    },
+    {
+      "ac": 2027,
+      "efeito": "O Anexo Único se refere à LOA de 2026. Falta orientação da Receita Federal para 2027, quando a LC nº 239/2026 passa a usar o demonstrativo de cada ano.",
+      "regras": [
+        "lc239-inicio"
+      ],
+      "status": "a-verificar",
+      "fonte": {
+        "id": "lc-239",
+        "url": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp239.htm",
+        "trecho": "art. 4º (nova redação do art. 4º da LC nº 224/2025) e art. 15"
+      }
+    }
+  ],
+  "registros": [
+    "M300",
+    "M350",
+    "X460"
+  ],
+  "fonte": {
+    "id": "in-2305",
+    "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/148694",
+    "trecho": "Anexo Único, item 30"
+  },
+  "norma": "IN RFB nº 2.305/2025, art. 17 e Anexo Único",
+  "status": "conferido",
+  "leiautes": [
+    "12"
+  ],
+  "vigencia": {
+    "acNormal": [
+      2026
+    ],
+    "situacaoEspecial": [
+      2026
+    ]
+  },
+  "verificadoEm": "2026-11-27"
+}

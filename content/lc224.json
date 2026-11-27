@@ -1,0 +1,434 @@
+{
+  "linha": [
+    {
+      "id": "lc224-publicacao",
+      "quando": {
+        "data": "2025-12-26"
+      },
+      "titulo": "Publicação da LC nº 224/2025",
+      "iniciante": "A lei é publicada no Diário Oficial, em edição extra.",
+      "profissional": "A lei é publicada no Diário Oficial, em edição extra.",
+      "fonte": {
+        "id": "lc-224",
+        "url": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp224.htm",
+        "trecho": "rodapé do texto compilado"
+      },
+      "norma": "rodapé do texto compilado",
+      "leiautes": [
+        "12"
+      ],
+      "vigencia": {
+        "acNormal": [
+          2026
+        ],
+        "situacaoEspecial": [
+          2026
+        ]
+      },
+      "verificadoEm": "2026-11-27",
+      "status": "conferido"
+    },
+    {
+      "id": "lc224-decreto",
+      "quando": {
+        "data": "2025-12-29"
+      },
+      "titulo": "Decreto nº 12.808/2025",
+      "iniciante": "O decreto regulamenta a lei e manda a Receita Federal orientar os contribuintes.",
+      "profissional": "O decreto regulamenta a lei e manda a Receita Federal orientar os contribuintes.",
+      "fonte": {
+        "id": "pr-lc224",
+        "url": "https://www.gov.br/receitafederal/pt-br/centrais-de-conteudo/publicacoes/perguntas-e-respostas/beneficios-fiscais/perguntas-e-respostas-reducao-dos-incentivos-e-beneficios-tributarios-v5-final.pdf",
+        "trecho": "perguntas 3 e 28"
+      },
+      "norma": "perguntas 3 e 28",
+      "leiautes": [
+        "12"
+      ],
+      "vigencia": {
+        "acNormal": [
+          2026
+        ],
+        "situacaoEspecial": [
+          2026
+        ]
+      },
+      "verificadoEm": "2026-11-27",
+      "status": "conferido"
+    },
+    {
+      "id": "lc224-in-2305",
+      "quando": {
+        "data": "2025-12-31"
+      },
+      "titulo": "IN RFB nº 2.305/2025 e Portaria MF nº 3.278/2025",
+      "iniciante": "A Receita Federal disciplina a redução e lista, no Anexo Único, os gastos tributários preservados.",
+      "profissional": "A Receita Federal disciplina a redução e lista, no Anexo Único, os gastos tributários preservados.",
+      "fonte": {
+        "id": "pr-lc224",
+        "url": "https://www.gov.br/receitafederal/pt-br/centrais-de-conteudo/publicacoes/perguntas-e-respostas/beneficios-fiscais/perguntas-e-respostas-reducao-dos-incentivos-e-beneficios-tributarios-v5-final.pdf",
+        "trecho": "pergunta 3"
+      },
+      "norma": "pergunta 3",
+      "leiautes": [
+        "12"
+      ],
+      "vigencia": {
+        "acNormal": [
+          2026
+        ],
+        "situacaoEspecial": [
+          2026
+        ]
+      },
+      "verificadoEm": "2026-11-27",
+      "status": "conferido"
+    },
+    {
+      "id": "lc224-efeito-irpj",
+      "quando": {
+        "data": "2026-01-01"
+      },
+      "titulo": "Começa a redução do IRPJ",
+      "iniciante": "Os incentivos de IRPJ e o lucro presumido (no IRPJ) passam a ter a redução.",
+      "profissional": "Os incentivos de IRPJ e o lucro presumido (no IRPJ) passam a ter a redução.",
+      "fonte": {
+        "id": "in-2305",
+        "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/148694",
+        "trecho": "art. 3º, I"
+      },
+      "norma": "art. 3º, I",
+      "leiautes": [
+        "12"
+      ],
+      "vigencia": {
+        "acNormal": [
+          2026
+        ],
+        "situacaoEspecial": [
+          2026
+        ]
+      },
+      "verificadoEm": "2026-11-27",
+      "status": "conferido"
+    },
+    {
+      "id": "lc224-adi-7920",
+      "quando": {
+        "data": "2026-01-21"
+      },
+      "titulo": "ADI 7920 (CNI) no STF",
+      "iniciante": "A Confederação Nacional da Indústria questiona a regra sobre benefícios com prazo e condição onerosa.",
+      "profissional": "A Confederação Nacional da Indústria questiona a regra sobre benefícios com prazo e condição onerosa.",
+      "fonte": {
+        "id": "stf-adi-7920",
+        "url": "https://noticias.stf.jus.br/postsnoticias/cni-contesta-lei-que-reduz-incentivos-fiscais/",
+        "trecho": "notícia de 21/01/2026"
+      },
+      "norma": "notícia de 21/01/2026",
+      "leiautes": [
+        "12"
+      ],
+      "vigencia": {
+        "acNormal": [
+          2026
+        ],
+        "situacaoEspecial": [
+          2026
+        ]
+      },
+      "verificadoEm": "2026-11-27",
+      "status": "conferido"
+    },
+    {
+      "id": "lc224-in-2306",
+      "quando": {
+        "data": "2026-01-22"
+      },
+      "titulo": "IN RFB nº 2.306/2026",
+      "iniciante": "Detalha o limite trimestral do lucro presumido e o ajuste no último trimestre.",
+      "profissional": "Detalha o limite trimestral do lucro presumido e o ajuste no último trimestre.",
+      "fonte": {
+        "id": "in-2305",
+        "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/148694",
+        "trecho": "histórico de alterações"
+      },
+      "norma": "histórico de alterações",
+      "leiautes": [
+        "12"
+      ],
+      "vigencia": {
+        "acNormal": [
+          2026
+        ],
+        "situacaoEspecial": [
+          2026
+        ]
+      },
+      "verificadoEm": "2026-11-27",
+      "status": "conferido"
+    },
+    {
+      "id": "lc224-adi-7936",
+      "quando": {
+        "data": "2026-02-18"
+      },
+      "titulo": "ADI 7936 (CNS) no STF",
+      "iniciante": "A Confederação Nacional de Serviços questiona o acréscimo do lucro presumido.",
+      "profissional": "A Confederação Nacional de Serviços questiona o acréscimo do lucro presumido.",
+      "fonte": {
+        "id": "stf-adi-7936",
+        "url": "https://noticias.stf.jus.br/postsnoticias/confederacao-contesta-lei-que-alterou-regime-do-lucro-presumido/",
+        "trecho": "notícia de 18/02/2026"
+      },
+      "norma": "notícia de 18/02/2026",
+      "leiautes": [
+        "12"
+      ],
+      "vigencia": {
+        "acNormal": [
+          2026
+        ],
+        "situacaoEspecial": [
+          2026
+        ]
+      },
+      "verificadoEm": "2026-11-27",
+      "status": "conferido"
+    },
+    {
+      "id": "lc224-in-2307",
+      "quando": {
+        "data": "2026-02-20"
+      },
+      "titulo": "IN RFB nº 2.307/2026",
+      "iniciante": "Novo Anexo Único: entram a assistência médica aos empregados, a previdência privada fechada e as associações civis sem fins lucrativos; sai o item das doações a entidades civis.",
+      "profissional": "Novo Anexo Único: entram a assistência médica aos empregados, a previdência privada fechada e as associações civis sem fins lucrativos; sai o item das doações a entidades civis.",
+      "fonte": {
+        "id": "in-2305",
+        "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/148694",
+        "trecho": "histórico de alterações e Anexo Único"
+      },
+      "norma": "histórico de alterações e Anexo Único",
+      "leiautes": [
+        "12"
+      ],
+      "vigencia": {
+        "acNormal": [
+          2026
+        ],
+        "situacaoEspecial": [
+          2026
+        ]
+      },
+      "verificadoEm": "2026-11-27",
+      "status": "conferido"
+    },
+    {
+      "id": "lc224-adi-7944",
+      "quando": {
+        "data": "2026-03-13"
+      },
+      "titulo": "ADI 7944 (OAB) no STF",
+      "iniciante": "O Conselho Federal da OAB também questiona o acréscimo do lucro presumido.",
+      "profissional": "O Conselho Federal da OAB também questiona o acréscimo do lucro presumido.",
+      "fonte": {
+        "id": "stf-adi-7936",
+        "url": "https://noticias.stf.jus.br/postsnoticias/confederacao-contesta-lei-que-alterou-regime-do-lucro-presumido/",
+        "trecho": "atualização de 16/03/2026"
+      },
+      "norma": "atualização de 16/03/2026",
+      "leiautes": [
+        "12"
+      ],
+      "vigencia": {
+        "acNormal": [
+          2026
+        ],
+        "situacaoEspecial": [
+          2026
+        ]
+      },
+      "verificadoEm": "2026-11-27",
+      "status": "conferido"
+    },
+    {
+      "id": "lc224-efeito-demais",
+      "quando": {
+        "data": "2026-04-01"
+      },
+      "titulo": "Começa a redução dos demais tributos",
+      "iniciante": "CSLL, PIS/Cofins, IPI e contribuição patronal passam a ter a redução; no lucro presumido, a CSLL a partir do 2º trimestre.",
+      "profissional": "CSLL, PIS/Cofins, IPI e contribuição patronal passam a ter a redução; no lucro presumido, a CSLL a partir do 2º trimestre.",
+      "fonte": {
+        "id": "in-2305",
+        "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/148694",
+        "trecho": "art. 3º, II"
+      },
+      "norma": "art. 3º, II",
+      "leiautes": [
+        "12"
+      ],
+      "vigencia": {
+        "acNormal": [
+          2026
+        ],
+        "situacaoEspecial": [
+          2026
+        ]
+      },
+      "verificadoEm": "2026-11-27",
+      "status": "conferido"
+    },
+    {
+      "id": "lc224-adi-7982",
+      "quando": {
+        "data": "2026-07-02"
+      },
+      "titulo": "ADI 7982 (CNC) no STF",
+      "iniciante": "A Confederação Nacional do Comércio questiona o acréscimo; o relator pede informações aos Poderes e à Receita Federal.",
+      "profissional": "A Confederação Nacional do Comércio questiona o acréscimo; o relator pede informações aos Poderes e à Receita Federal.",
+      "fonte": {
+        "id": "stf-adi-7982",
+        "url": "https://noticias.stf.jus.br/postsnoticias/cnc-questiona-normas-que-elevaram-base-de-calculo-do-lucro-presumido/",
+        "trecho": "notícia de 02/07/2026"
+      },
+      "norma": "notícia de 02/07/2026",
+      "leiautes": [
+        "12"
+      ],
+      "vigencia": {
+        "acNormal": [
+          2026
+        ],
+        "situacaoEspecial": [
+          2026
+        ]
+      },
+      "verificadoEm": "2026-11-27",
+      "status": "conferido"
+    },
+    {
+      "id": "lc224-pr-v5",
+      "quando": {
+        "data": "2026-07-30"
+      },
+      "titulo": "Perguntas e Respostas, versão 5",
+      "iniciante": "A Receita Federal atualiza as respostas, com o caso da Lei Rouanet e dos benefícios criados depois da lei.",
+      "profissional": "A Receita Federal atualiza as respostas, com o caso da Lei Rouanet e dos benefícios criados depois da lei.",
+      "fonte": {
+        "id": "pr-lc224",
+        "url": "https://www.gov.br/receitafederal/pt-br/centrais-de-conteudo/publicacoes/perguntas-e-respostas/beneficios-fiscais/perguntas-e-respostas-reducao-dos-incentivos-e-beneficios-tributarios-v5-final.pdf",
+        "trecho": "capa e perguntas 21.1, 37 e 38"
+      },
+      "norma": "capa e perguntas 21.1, 37 e 38",
+      "leiautes": [
+        "12"
+      ],
+      "vigencia": {
+        "acNormal": [
+          2026
+        ],
+        "situacaoEspecial": [
+          2026
+        ]
+      },
+      "verificadoEm": "2026-11-27",
+      "status": "conferido"
+    },
+    {
+      "id": "lc224-lc-235",
+      "quando": {
+        "data": "2026-08-27"
+      },
+      "titulo": "LC nº 235/2026",
+      "iniciante": "Muda a redação da exceção das entidades sem fins lucrativos.",
+      "profissional": "Muda a redação da exceção das entidades sem fins lucrativos.",
+      "fonte": {
+        "id": "lc-235",
+        "url": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp235.htm",
+        "trecho": "art. 11"
+      },
+      "norma": "art. 11",
+      "leiautes": [
+        "12"
+      ],
+      "vigencia": {
+        "acNormal": [
+          2026
+        ],
+        "situacaoEspecial": [
+          2026
+        ]
+      },
+      "verificadoEm": "2026-11-27",
+      "status": "conferido"
+    },
+    {
+      "id": "lc224-lc-239",
+      "quando": {
+        "data": "2026-11-24"
+      },
+      "titulo": "LC nº 239/2026",
+      "iniciante": "A redução passa a 20% a partir de 2027, e a lista passa a seguir a lei orçamentária de cada ano.",
+      "profissional": "A redução passa a 20% a partir de 2027, e a lista passa a seguir a lei orçamentária de cada ano.",
+      "fonte": {
+        "id": "lc-239",
+        "url": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp239.htm",
+        "trecho": "arts. 4º e 15"
+      },
+      "norma": "arts. 4º e 15",
+      "leiautes": [],
+      "vigencia": {
+        "acNormal": [
+          2027
+        ],
+        "situacaoEspecial": []
+      },
+      "verificadoEm": "2026-11-27",
+      "status": "a-verificar"
+    }
+  ],
+  "naEcf": [
+    {
+      "quando": "AC 2025 (ECF entregue em 2026)",
+      "texto": "A lei não se aplica: a redução começa em 2026.",
+      "status": "conferido",
+      "fonte": {
+        "id": "in-2305",
+        "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/148694",
+        "trecho": "art. 3º"
+      }
+    },
+    {
+      "quando": "Situações especiais de 2026 (leiaute 12)",
+      "texto": "O Manual do leiaute 12 explica a lei no item 1.32 e no Bloco P, item XII. O campo 0020.IND_ALIQ_CSLL ganhou as opções 7 e 8 para as alíquotas transitórias da CSLL, e as tabelas dinâmicas ganharam linhas nos registros P300 e P500 para o ajuste do último trimestre.",
+      "status": "conferido",
+      "fonte": {
+        "id": "manual-12",
+        "url": "https://www.gov.br/sped/pt-br/assuntos/escrituracoes-digitais/ecf/manuais-e-documentos-tecnicos",
+        "trecho": "item 1.32; Bloco P, item XII; registro 0020"
+      }
+    },
+    {
+      "quando": "AC 2026 (ECF entregue em 2027)",
+      "texto": "Vale a redução de 10%. O leiaute desse ano ainda não foi publicado.",
+      "status": "a-verificar",
+      "fonte": {
+        "id": "in-2305",
+        "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/148694",
+        "trecho": "arts. 3º, 14 e 15"
+      }
+    },
+    {
+      "quando": "AC 2027 em diante",
+      "texto": "Vale a redução de 20% da LC nº 239/2026, ainda sem orientação da Receita Federal.",
+      "status": "a-verificar",
+      "fonte": {
+        "id": "lc-239",
+        "url": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp239.htm",
+        "trecho": "arts. 4º e 15"
+      }
+    }
+  ]
+}

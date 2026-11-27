@@ -5,6 +5,7 @@ import { comTermos } from "@/components/ecf/com-termos";
 import { EtiquetaStatus, LinkFonte, Selo } from "@/components/ecf/rastreio";
 import { Cartao, Etiqueta, Nivel } from "@/components/ui";
 import { ANO_PADRAO, leiauteDoAno, novidades } from "@/lib/conteudo";
+import { lc224 } from "@/lib/conteudo/incentivos";
 import { registroDoAno } from "@/lib/conteudo/leiautes";
 import { data, semQuebra } from "@/lib/formatos";
 import { rota } from "@/lib/rotas";
@@ -20,6 +21,7 @@ const TIPO: Record<Novidade["tipo"], string> = {
 
 /** "1 a 12" quando são muitos seguidos; senão, lista. */
 function textoLeiautes(l: string[]): string {
+  if (l.length === 0) return "Leiaute a definir";
   if (l.length === 1) return `Leiaute ${l[0]}`;
   return l.length > 2 ? `Leiautes ${l[0]} a ${l.at(-1)}` : `Leiautes ${l.join(" e ")}`;
 }
@@ -78,6 +80,54 @@ export function Novidades({ ano }: { ano: number }) {
   );
 }
 
+/** Página especial da lei de redução dos incentivos: o que muda na ECF por ano e a linha do tempo, tudo de content/lc224.json. */
+function EspecialLc224({ ano }: { ano: number }) {
+  return (
+    <>
+      <section aria-labelledby="t-na-ecf">
+        <h2 id="t-na-ecf" className="text-2xl font-bold">
+          O que muda na ECF, ano a ano
+        </h2>
+        <ul className="mt-4 divide-y divide-linha" data-testid="lc224-na-ecf">
+          {lc224.naEcf.map((x) => (
+            <li key={x.quando} className="grid gap-1 py-4 sm:grid-cols-[16rem_1fr] sm:gap-6">
+              <p className="font-semibold">{x.quando}</p>
+              <div>
+                <p className="max-w-prose">{x.texto}</p>
+                <p className="mt-1 flex flex-wrap items-center gap-2 text-sm text-suave">
+                  <EtiquetaStatus status={x.status} /> {x.fonte.trecho} · <LinkFonte fonte={x.fonte} curto />
+                </p>
+              </div>
+            </li>
+          ))}
+        </ul>
+        <Link href={rota("/incentivos", ano, ANO_PADRAO)} prefetch={false} className="mt-3 inline-flex min-h-11 items-center gap-2 font-semibold underline underline-offset-4">
+          Situação de cada incentivo <ArrowRight aria-hidden size={18} />
+        </Link>
+      </section>
+      <section aria-labelledby="t-linha">
+        <h2 id="t-linha" className="text-2xl font-bold">
+          Linha do tempo
+        </h2>
+        <ol className="mt-4 space-y-4 border-l-2 border-linha pl-5" data-testid="lc224-linha">
+          {lc224.linha.map((e) => (
+            <li key={e.id}>
+              <p className="flex flex-wrap items-center gap-2 font-mono text-sm text-suave">
+                {"data" in e.quando && <time dateTime={e.quando.data}>{data(e.quando.data)}</time>}
+                {e.status === "a-verificar" && <EtiquetaStatus status={e.status} />}
+              </p>
+              <p className="font-semibold">{e.titulo}</p>
+              <p className="max-w-prose text-suave">
+                {e.iniciante} <LinkFonte fonte={e.fonte} curto />
+              </p>
+            </li>
+          ))}
+        </ol>
+      </section>
+    </>
+  );
+}
+
 export function PaginaNovidade({ slug, ano }: { slug: string; ano: number }) {
   const n = novidades.find((x) => x.slug === slug)!;
   const registros = n.registros.filter((r) => registroDoAno(r, ano));
@@ -94,6 +144,7 @@ export function PaginaNovidade({ slug, ano }: { slug: string; ano: number }) {
         <Nivel so="iniciante">{comTermos(n.iniciante)}</Nivel>
         <Nivel so="profissional">{comTermos(semQuebra(n.profissional))}</Nivel>
       </div>
+      {n.slug === "lc-224-2025" && <EspecialLc224 ano={ano} />}
       {n.fazer && (
         <Cartao className="max-w-3xl">
           <h2 className="text-lg font-semibold">O que fazer</h2>

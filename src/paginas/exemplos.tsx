@@ -7,7 +7,7 @@ import { CaixaRolavel, Cartao, Etiqueta, Nivel, estiloBotao } from "@/components
 import { Simulador, type RegraCitada } from "@/components/simulador";
 import { ANO_PADRAO, leiauteDoAno, regras, textoDoValor } from "@/lib/conteudo";
 import { registroDoAno } from "@/lib/conteudo/leiautes";
-import { parametros } from "@/lib/conteudo/tributos";
+import { parametros, parametrosLc224 } from "@/lib/conteudo/tributos";
 import { ANO_EXEMPLOS, entradaInicial, exemplo, exemplos, tabelas, type Exemplo } from "@/lib/exemplos";
 import { data, inteiro, moeda, semQuebra } from "@/lib/formatos";
 import { rota } from "@/lib/rotas";
@@ -294,9 +294,11 @@ function Corpo({ e, ano }: { e: Exemplo; ano: number }) {
 }
 
 export function PaginaSimulador({ ano }: { ano: number }) {
+  const lc = parametrosLc224();
   const citadas: Record<string, RegraCitada> = Object.fromEntries(
     regras
-      .filter((r) => r.vigencia.acNormal.includes(ano))
+      // As regras do ano e as da LC 224, usadas no modo AC 2026 do lucro presumido.
+      .filter((r) => r.vigencia.acNormal.includes(ano) || r.id.startsWith("lc224-"))
       .map((r) => [
         r.id,
         {
@@ -313,7 +315,20 @@ export function PaginaSimulador({ ano }: { ano: number }) {
       <p className="max-w-3xl text-suave">
         Os campos já vêm com o 4º trimestre dos exemplos. Troque os números e veja cada passo mudar.
       </p>
-      <Simulador parametros={parametros(ano)} regras={citadas} inicial={entradaInicial} ano={ano} />
+      <Simulador
+        parametros={parametros(ano)}
+        regras={citadas}
+        inicial={entradaInicial}
+        ano={ano}
+        lc224={{
+          ac: lc.ac,
+          base: lc.base,
+          limiteTrimestre: Number(lc.lc224.limiteTrimestre),
+          acrescimoPb: lc.lc224.acrescimoPb,
+          trimestreInicioCsll: lc.lc224.trimestreInicioCsll,
+          href: rota("/incentivos/lucro-presumido", ano, ANO_PADRAO),
+        }}
+      />
       <section aria-labelledby="t-limites">
         <h2 id="t-limites" className="text-xl font-bold">
           Limites e critérios

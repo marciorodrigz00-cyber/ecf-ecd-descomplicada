@@ -10,6 +10,8 @@ import { BlocosPorRegime, EtiquetaSituacao, LegendaSituacao, type CartaoBloco } 
 import { comTermos } from "@/components/ecf/com-termos";
 import { BotaoCopiar } from "@/components/ecf/copiar";
 import { RedirecionarAncora, SeletorRegistro } from "@/components/ecf/navegacao-registro";
+import { IncentivosNoRegistro } from "@/components/ecf/situacao-incentivo";
+import { incentivosDoBloco, incentivosDoRegistro } from "@/lib/conteudo/incentivos";
 import { ExemploCampoACampo } from "@/components/ecf/exemplo-registro";
 import { Roteiro } from "@/components/ecf/roteiro";
 import { MarcarVisita } from "@/components/layout/trilha";
@@ -209,6 +211,9 @@ export function PaginaBloco({ letra, ano }: { letra: string; ano: number }) {
           Bloco {bloco.letra}: {bloco.nome}
         </h1>
         {nomeBloco(bloco.letra, ano).ecd && <AvisoEcd />}
+        <div className="mt-4 empty:hidden">
+          <IncentivosNoRegistro lista={incentivosDoBloco(bloco.letra)} ano={ano} />
+        </div>
         <div className="mt-4 max-w-prose text-lg">
           <Nivel so="iniciante">
             <p>{comTermos(d.objetivo, vistos.iniciante)}</p>
@@ -545,6 +550,9 @@ export function PaginaRegistro({ codigo, ano }: { codigo: string; ano: number })
             <Etiqueta tom="alerta">Não existe no leiaute {outroAno.numero}</Etiqueta>
           </p>
         )}
+        <div className="mt-4 empty:hidden">
+          <IncentivosNoRegistro lista={incentivosDoRegistro(codigo)} ano={ano} />
+        </div>
         <div className="mt-4">
           <SeletorRegistro atual={codigo} opcoes={doBloco.map((x) => ({ codigo: x.codigo, nome: x.nome, href: ir(urlRegistro(x.codigo), ano) }))} />
         </div>

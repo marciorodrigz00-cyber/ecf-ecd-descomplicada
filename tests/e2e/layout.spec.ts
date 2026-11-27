@@ -11,7 +11,7 @@ async function abrir(page: Page, url: string) {
 async function prefs(page: Page, p: Record<string, unknown>) {
   await page.addInitScript(([c, v]) => localStorage.getItem(c!) ?? localStorage.setItem(c!, v!), [CHAVE, JSON.stringify(p)]);
 }
-const menu = (page: Page) => page.locator("[data-lateral]").getByRole("navigation", { name: "Menu principal" });
+const menu = (page: Page) => page.locator("[data-lateral]").getByRole("navigation", { name: "Principal", exact: true });
 const sobraLateral = (page: Page) => page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
 
 const DESTINOS: [string, RegExp][] = [
@@ -23,6 +23,7 @@ const DESTINOS: [string, RegExp][] = [
   ["preencher", /\/preencher$/],
   ["exemplos", /\/exemplos$/],
   ["simulador", /\/simulador$/],
+  ["incentivos", /\/incentivos$/],
   ["novidades", /\/novidades$/],
   ["fontes", /\/fontes$/],
 ];
@@ -104,28 +105,31 @@ test("[CT-132] home: prazo pela data do dia, números dos dados e atalho do quiz
   await page.clock.setFixedTime(new Date("2026-07-01T12:00:00-03:00"));
   await page.setViewportSize({ width: 1440, height: 900 });
   await abrir(page, "/");
-  await expect(page.getByTestId("contagem-prazo")).toContainText("30");
-  await expect(page.getByTestId("contagem-prazo")).toContainText("AC 2025 (31/07/2026)");
+  // Card "Próxima entrega" (redesenho): qual ECF vem e quantos dias faltam.
+  await expect(page.getByTestId("contagem-prazo")).toContainText("ECF 2026 · ano-calendário 2025");
+  await expect(page.getByTestId("contagem-prazo")).toContainText("Prazo: 31/07/2026 · faltam 30 dias");
   const cartoes = page.getByTestId("cartao-numero");
   await expect(cartoes).toHaveCount(4);
   await expect(cartoes.nth(0)).toContainText("17");
-  await expect(cartoes.nth(0)).toContainText("do leiaute 12");
+  await expect(cartoes.nth(0)).toContainText("leiaute 12");
   await expect(cartoes.nth(1)).toContainText(/\d{3}/);
   await expect(page.getByTestId("widget-quiz")).toContainText("Minha empresa precisa entregar?");
-  await page.getByTestId("widget-quiz").getByRole("link", { name: /Descobrir/ }).click();
+  await page.getByTestId("widget-quiz").click();
   await expect(page).toHaveURL(/\/quem-deve-entregar$/);
 
   // Prazo já passado e sem regra para o ano seguinte: a confirmar, sem número.
   await page.clock.setFixedTime(new Date("2026-11-26T12:00:00-03:00"));
   await abrir(page, "/");
-  await expect(page.getByTestId("contagem-prazo")).toContainText("AC 2026");
-  await expect(page.getByTestId("contagem-prazo")).toContainText("a confirmar");
+  await expect(page.getByTestId("contagem-prazo")).toContainText("ECF 2027 · ano-calendário 2026");
+  await expect(page.getByTestId("contagem-prazo")).toContainText("a confirmar em norma");
 
-  // Com progresso, o atalho vira "Continue de onde parou".
+  // Card "Sua trilha": sem progresso, "Começar"; com progresso, "Continuar" no próximo tema.
+  await expect(page.getByTestId("trilha-home").getByRole("link")).toHaveText(/Começar/);
   await page.evaluate((c) => localStorage.setItem(c, JSON.stringify({ estudadas: ["o-que-e"] })), CHAVE);
   await abrir(page, "/");
-  await expect(page.getByTestId("widget-quiz")).toContainText("Continue de onde parou");
-  await expect(page.getByTestId("widget-quiz").getByRole("link")).toContainText("Importância");
+  await expect(page.getByTestId("trilha-home")).toContainText("Continue de onde parou");
+  await expect(page.getByTestId("trilha-home")).toContainText("Por que a ECF importa");
+  await expect(page.getByTestId("trilha-home").getByRole("link")).toHaveAttribute("href", "/importancia");
   // Saíram da home: cartão de perfil, mapa de fluxo e conquistas.
   await expect(page.getByTestId("cartao-perfil")).toHaveCount(0);
   await expect(page.getByRole("heading", { name: "Como os dados percorrem a ECF" })).toHaveCount(0);
@@ -165,7 +169,7 @@ test("[AC-026] menu lateral e gaveta pelo teclado: dicas, foco preso e Esc", asy
   await page.getByRole("button", { name: "Abrir menu" }).click();
   const gaveta = page.getByTestId("gaveta");
   await expect(gaveta).toBeVisible();
-  await expect(gaveta.getByRole("navigation", { name: "Menu principal" })).toBeVisible();
+  await expect(gaveta.getByRole("navigation", { name: "Principal", exact: true })).toBeVisible();
   // Foco preso: andar com Tab nunca sai da gaveta.
   for (let i = 0; i < 30; i++) {
     await page.keyboard.press("Tab");
@@ -216,5 +220,31 @@ for (const largura of [375, 768, 1024, 1050, 1280, 1440]) {
       );
       expect(pequenos).toBe(0);
     }
+  });
+}
+
+for (const largura of [375, 1024, 1440]) {
+  test(`[RS-015] coluna fixa ao rolar, busca centralizada e nada sobreposto, ${largura}`, async ({ page }) => {
+    await page.setViewportSize({ width: largura, height: 900 });
+    await abrir(page, "/");
+    await page.evaluate(() => window.scrollTo(0, 1500));
+    const busca = (await page.getByRole("button", { name: /^Buscar registro/ }).boundingBox())!;
+    // A barra superior é fixa: a busca continua no topo.
+    expect(busca.y).toBeLessThan(20);
+    if (largura >= 1024) {
+      const lateral = (await page.locator("[data-lateral]").boundingBox())!;
+      expect(lateral.y).toBe(0);
+      expect(lateral.height).toBeGreaterThanOrEqual(899);
+      // Logo, itens e perfil continuam visíveis com a página rolada.
+      await expect(page.locator("[data-lateral] [data-item-menu=blocos]")).toBeInViewport();
+      await expect(page.locator("[data-lateral] [data-testid=indicador-perfil]:visible").first()).toBeInViewport();
+      const main = (await page.locator("main").boundingBox())!;
+      expect(Math.abs(busca.x + busca.width / 2 - (main.x + main.width / 2))).toBeLessThanOrEqual(2);
+      // A coluna não cobre o conteúdo.
+      expect(main.x).toBeGreaterThanOrEqual(lateral.x + lateral.width);
+    } else {
+      await expect(page.getByRole("button", { name: "Abrir menu" })).toBeInViewport();
+    }
+    expect(await sobraLateral(page)).toBeLessThanOrEqual(0);
   });
 }

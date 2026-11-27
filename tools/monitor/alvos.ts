@@ -93,6 +93,24 @@ export const ALVOS: readonly Alvo[] = [
     confianca: "primaria",
   },
   {
+    id: "in-2305",
+    nome: "Instrução Normativa RFB nº 2.305/2025 (redução linear, LC 224)",
+    url: `${NORMAS}api/consulta-externa/ato/148694/visao/multivigente`,
+    pagina: `${NORMAS}#/consulta/externa/148694`,
+    tipo: "norma",
+    confianca: "primaria",
+  },
+  {
+    id: "pr-lc224",
+    nome: "Perguntas e Respostas da Receita sobre a redução de benefícios (LC 224)",
+    url: "https://www.gov.br/receitafederal/pt-br/centrais-de-conteudo/publicacoes/perguntas-e-respostas/beneficios-fiscais",
+    pagina: "https://www.gov.br/receitafederal/pt-br/centrais-de-conteudo/publicacoes/perguntas-e-respostas/beneficios-fiscais",
+    tipo: "html",
+    // O nome do arquivo traz a versão: uma versão nova muda o trecho e gera rascunho para revisão.
+    trechos: [/perguntas-e-respostas-reducao-dos-incentivos-e-beneficios-tributarios-v\d+[a-z0-9-]*\.pdf/gi],
+    confianca: "primaria",
+  },
+  {
     id: "sped-antigo",
     nome: "Destaques da ECF no portal antigo do Sped",
     url: "http://sped.rfb.gov.br/projeto/show/269",
@@ -108,4 +126,6 @@ export const MANUAIS: readonly { nome: string; url: string; motivo: string }[] =
   { nome: "Diário Oficial da União", url: "https://www.in.gov.br/consulta", motivo: "O site recusa acesso automático (403). O INLABS exige cadastro." },
   { nome: "Busca de normas da Receita Federal", url: "https://normas.receita.fazenda.gov.br/sijut2consulta/consulta.action?termoBusca=ECF", motivo: "A busca não tem endereço de leitura simples." },
   { nome: "Leis no portal do Planalto", url: "https://www.planalto.gov.br/legislacao", motivo: "Mudam pouco; conferir quando um ato citar alteração." },
+  { nome: "LC nº 224/2025 (texto compilado)", url: "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp224.htm", motivo: "Já alterada pelas LCs 235 e 239 de 2026; conferir a cada nova lei complementar sobre benefícios." },
+  { nome: "Demonstrativo de gastos tributários (LOA)", url: "https://www.gov.br/receitafederal/pt-br/centrais-de-conteudo/publicacoes/relatorios/renuncia/gastos-tributarios-ploa", motivo: "Com a LC nº 239/2026, a lista dos benefícios alcançados passa a seguir a LOA de cada ano." },
 ];

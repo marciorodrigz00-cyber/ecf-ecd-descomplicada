@@ -1,4 +1,5 @@
 import { aplicar, menor, positivo, soma, type Centavos } from "./dinheiro";
+import { presumidoComAcrescimo } from "./lc224";
 
 /** Parâmetros vindos de content/regras/tributos.json. Nenhum número fiscal mora aqui. */
 export type Parametros = {
@@ -127,22 +128,59 @@ const NOME: Record<Atividade, string> = {
   servicos: "serviços em geral",
 };
 
-export function lucroPresumido(e: EntradaPresumido, par: Parametros) {
+/** Camada da LC nº 224/2025 para um trimestre de 2026. Os valores vêm de content/regras/lc224.json. */
+export type CamadaLc224 = { trimestre: number; limiteTrimestre: Centavos; acrescimoPb: number; trimestreInicioCsll: number };
+
+export function lucroPresumido(e: EntradaPresumido, par: Parametros, lc224?: CamadaLc224) {
   exigirMeses(e.meses);
   exigirNaoNegativos({ ...e.receitas, financeiras: e.financeiras, demais: e.demais, irRetido: e.irRetido, csllRetida: e.csllRetida });
+  if (lc224 && (!Number.isInteger(lc224.trimestre) || lc224.trimestre < 1 || lc224.trimestre > 4)) throw new RangeError("Trimestre entre 1 e 4");
+  const comAcrescimo = (tributo: "irpj" | "csll") => Boolean(lc224) && (tributo === "irpj" || lc224!.trimestre >= lc224!.trimestreInicioCsll);
+  const com = ATIVIDADES.filter((k) => e.receitas[k] > 0n);
   // O total é arredondado uma vez só, como na fórmula da linha que soma as parcelas.
-  const presumir = (pres: Record<Atividade, number>) => {
+  const presumir = (pres: Record<Atividade, number>, tributo: "irpj" | "csll") => {
+    if (comAcrescimo(tributo)) return presumidoComAcrescimo(com.map((k) => ({ receita: e.receitas[k], pb: pres[k] })), lc224!.limiteTrimestre, lc224!.acrescimoPb).total;
     const bruto = ATIVIDADES.reduce((a, k) => a + e.receitas[k] * BigInt(pres[k]), 0n);
     return (bruto + 5000n) / 10000n;
   };
-  const presumidoIrpj = presumir(par.presIrpj);
-  const presumidoCsll = presumir(par.presCsll);
+  const presumidoIrpj = presumir(par.presIrpj, "irpj");
+  const presumidoCsll = presumir(par.presCsll, "csll");
   const baseIrpj = presumidoIrpj + e.financeiras + e.demais;
   const baseCsll = presumidoCsll + e.financeiras + e.demais;
   const irpj = irpjSobre(baseIrpj, e.meses, e.irRetido, par, "P300");
   const csll = csllSobre(baseCsll, e.csllRetida, par, "P500");
+  const regraPres = (k: Atividade, tributo: "irpj" | "csll") => (tributo === "irpj" ? `pres-irpj-${k}` : k === "servicos" ? "pres-csll-servicos" : "pres-csll-geral");
+  const linhaPres = (k: Atividade, tributo: "irpj" | "csll") => (tributo === "irpj" ? `P200, linha ${LINHA_P200[k]}` : `P400, linha ${k === "servicos" ? "4" : "2"}`);
+  /** Com a LC 224: até o limite, o percentual normal; acima, o acrescido. */
+  const parcelasLc224 = (pres: Record<Atividade, number>, tributo: "irpj" | "csll"): Passo[] => {
+    const r = presumidoComAcrescimo(com.map((k) => ({ receita: e.receitas[k], pb: pres[k] })), lc224!.limiteTrimestre, lc224!.acrescimoPb);
+    const regrasLc = ["lc224-acrescimo-presuncao", "lc224-limite-trimestral", tributo === "irpj" ? "lc224-inicio-irpj" : "lc224-inicio-csll"];
+    return [
+      {
+        id: `${tributo}-limite-lc224`,
+        titulo: "Limite do trimestre sem acréscimo",
+        conta: !r.linhas.some((l) => l.excedente > 0n)
+          ? ["A receita do trimestre não passa do limite: não há acréscimo"]
+          : r.linhas.length > 1
+            ? ["Repartido pela receita de cada atividade: ", ...r.linhas.flatMap((l, i) => [...(i ? [" + "] : []), v(l.ateLimite)])]
+            : ["Valor da regra"],
+        valor: lc224!.limiteTrimestre,
+        regras: ["lc224-limite-trimestral", "lc224-limite-anual"],
+        linha: null,
+      },
+      ...com.flatMap((k, i): Passo[] => {
+        const l = r.linhas[i]!;
+        return [
+          { id: `${tributo}-${k}`, titulo: `Receita de ${NOME[k]} até o limite`, conta: [v(l.ateLimite), " × ", p(l.pb)], valor: aplicar(l.ateLimite, l.pb), regras: [regraPres(k, tributo)], linha: linhaPres(k, tributo) },
+          ...(l.excedente > 0n
+            ? [{ id: `${tributo}-${k}-acrescimo`, titulo: `Receita de ${NOME[k]} acima do limite, com acréscimo`, conta: [v(l.excedente), " × ", p(l.pbAcrescido)], valor: aplicar(l.excedente, l.pbAcrescido), regras: [regraPres(k, tributo), ...regrasLc], linha: linhaPres(k, tributo) }]
+            : []),
+        ];
+      }),
+    ];
+  };
   const parcelas = (pres: Record<Atividade, number>, tributo: "irpj" | "csll"): Passo[] =>
-    ATIVIDADES.filter((k) => e.receitas[k] > 0n).map((k) => ({
+    comAcrescimo(tributo) ? parcelasLc224(pres, tributo) : ATIVIDADES.filter((k) => e.receitas[k] > 0n).map((k) => ({
       id: `${tributo}-${k}`,
       titulo: `Receita de ${NOME[k]}`,
       conta: [v(e.receitas[k]), " × ", p(pres[k])],

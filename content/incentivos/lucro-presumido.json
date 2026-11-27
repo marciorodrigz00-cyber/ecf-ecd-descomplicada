@@ -1,0 +1,127 @@
+{
+  "id": "lucro-presumido",
+  "nome": "Lucro presumido: acréscimo nos percentuais de presunção",
+  "curto": "Lucro presumido",
+  "iniciante": "No lucro presumido, o imposto é calculado sobre uma parte da receita, e não sobre o lucro de verdade. A partir de 2026, a parte da receita que passa de R$ 5 milhões no ano usa percentuais um pouco maiores.",
+  "profissional": "A LC nº 224/2025 incluiu o lucro presumido (arts. 25 e 26 da Lei nº 9.430/1996) entre os regimes alcançados. O acréscimo incide só sobre os percentuais aplicados à parcela da receita bruta que excede o limite anual, distribuído por trimestre, com ajuste no último trimestre.",
+  "comoFunciona": "Em cada trimestre, a receita bruta sujeita aos percentuais de presunção até o limite proporcional usa o percentual normal; a parcela acima usa o percentual acrescido. Com mais de uma atividade, o limite é repartido pela proporção da receita de cada uma. Receitas financeiras e ganhos de capital, somados à base de forma integral, não contam para o limite. No último trimestre, a empresa confere o limite anual e pode recalcular os trimestres anteriores.",
+  "baseLegal": [
+    {
+      "norma": "Lei nº 9.430/1996, arts. 25 e 26",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l9430.htm"
+    },
+    {
+      "norma": "LC nº 224/2025, art. 4º, § 2º, II, a, § 4º, VII, e § 5º",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp224.htm"
+    },
+    {
+      "norma": "IN RFB nº 2.305/2025, arts. 14 e 15",
+      "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/148694"
+    }
+  ],
+  "tributos": [
+    "IRPJ",
+    "CSLL"
+  ],
+  "regimes": [
+    "presumido"
+  ],
+  "fruicao": "presuncao",
+  "situacao": "reduzido",
+  "porQue": "A própria LC nº 224/2025 lista o lucro presumido entre os regimes alcançados (art. 4º, § 2º, II, a), com regra própria no § 5º.",
+  "porAno": [
+    {
+      "ac": 2026,
+      "efeito": "Acréscimo de 10% nos percentuais de presunção sobre a receita que excede R$ 1.250.000,00 por trimestre (R$ 5.000.000,00 no ano). IRPJ desde o 1º trimestre; CSLL desde o 2º trimestre, com limite anual de R$ 3.750.000,00 em 2026.",
+      "regras": [
+        "lc224-acrescimo-presuncao",
+        "lc224-limite-anual",
+        "lc224-limite-trimestral",
+        "lc224-inicio-irpj",
+        "lc224-inicio-csll"
+      ],
+      "status": "conferido",
+      "fonte": {
+        "id": "pr-lc224",
+        "url": "https://www.gov.br/receitafederal/pt-br/centrais-de-conteudo/publicacoes/perguntas-e-respostas/beneficios-fiscais/perguntas-e-respostas-reducao-dos-incentivos-e-beneficios-tributarios-v5-final.pdf",
+        "trecho": "perguntas 11 a 14"
+      }
+    },
+    {
+      "ac": 2027,
+      "efeito": "A LC nº 239/2026 eleva o acréscimo para 20%. O limite de R$ 5 milhões (§ 5º) não mudou. Falta orientação da Receita Federal sobre a data de início para o IRPJ e para a CSLL.",
+      "regras": [
+        "lc239-acrescimo-presuncao",
+        "lc239-inicio"
+      ],
+      "status": "a-verificar",
+      "fonte": {
+        "id": "lc-239",
+        "url": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp239.htm",
+        "trecho": "art. 4º (nova redação do art. 4º da LC nº 224/2025) e art. 15"
+      }
+    }
+  ],
+  "registros": [
+    "P200",
+    "P300",
+    "P400",
+    "P500"
+  ],
+  "judicial": {
+    "texto": "O acréscimo é questionado no STF nas ADIs 7936 (Confederação Nacional de Serviços) e 7982 (Confederação Nacional do Comércio), com o ministro Luiz Fux, e na ADI 7944 (Conselho Federal da OAB). Na ADI 7982, o relator pediu informações aos Poderes e à Receita Federal. Nenhuma decisão foi localizada nas notícias lidas.",
+    "verificadoEm": "2026-11-27",
+    "fontes": [
+      {
+        "id": "stf-adi-7936",
+        "url": "https://noticias.stf.jus.br/postsnoticias/confederacao-contesta-lei-que-alterou-regime-do-lucro-presumido/",
+        "trecho": "notícia de 18/02/2026, atualizada em 16/03/2026 com a ADI 7944"
+      },
+      {
+        "id": "stf-adi-7982",
+        "url": "https://noticias.stf.jus.br/postsnoticias/cnc-questiona-normas-que-elevaram-base-de-calculo-do-lucro-presumido/",
+        "trecho": "notícia de 02/07/2026"
+      }
+    ]
+  },
+  "exemplo": {
+    "tipo": "presumido",
+    "titulo": "Comércio e serviços no 1º trimestre de 2026 (exemplo da Receita Federal)",
+    "receitas": [
+      {
+        "atividade": "Venda de mercadorias",
+        "centavos": 144000000,
+        "presIrpjPb": 800
+      },
+      {
+        "atividade": "Prestação de serviços",
+        "centavos": 36000000,
+        "presIrpjPb": 3200
+      }
+    ],
+    "fonte": {
+      "id": "pr-lc224",
+      "url": "https://www.gov.br/receitafederal/pt-br/centrais-de-conteudo/publicacoes/perguntas-e-respostas/beneficios-fiscais/perguntas-e-respostas-reducao-dos-incentivos-e-beneficios-tributarios-v5-final.pdf",
+      "trecho": "pergunta 14"
+    }
+  },
+  "fonte": {
+    "id": "in-2305",
+    "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/148694",
+    "trecho": "arts. 14 e 15"
+  },
+  "norma": "LC nº 224/2025, art. 4º, § 5º; IN RFB nº 2.305/2025, arts. 14 e 15",
+  "status": "conferido",
+  "leiautes": [
+    "12"
+  ],
+  "vigencia": {
+    "acNormal": [
+      2026
+    ],
+    "situacaoEspecial": [
+      2026
+    ]
+  },
+  "verificadoEm": "2026-11-27"
+}

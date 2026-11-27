@@ -1,0 +1,77 @@
+{
+  "id": "assistencia-medica-previdencia",
+  "nome": "Assistência médica e previdência privada dos empregados",
+  "curto": "Assistência médica e previdência",
+  "iniciante": "O gasto da empresa com plano de saúde e previdência dos empregados continua dedutível como sempre. Para a Receita Federal, isso é despesa normal da empresa, e não benefício fiscal.",
+  "profissional": "A dedução dos dispêndios com planos de saúde e de previdência privada concedidos aos empregados está no demonstrativo de gastos tributários, mas a Receita Federal entende que não é incentivo ou benefício: são despesas operacionais (Decreto nº 9.580/2018, art. 311).",
+  "comoFunciona": "Nada muda na apuração: as despesas seguem dedutíveis na forma da legislação do IRPJ e da CSLL.",
+  "baseLegal": [
+    {
+      "norma": "Lei nº 9.249/1995, art. 13, V",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l9249.htm"
+    },
+    {
+      "norma": "IN RFB nº 2.305/2025, Anexo Único, item 32 (assistência médica, odontológica e farmacêutica)",
+      "url": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/148694"
+    }
+  ],
+  "tributos": [
+    "IRPJ",
+    "CSLL"
+  ],
+  "regimes": [
+    "real"
+  ],
+  "fruicao": "despesa-dedutivel",
+  "situacao": "nao-beneficio",
+  "porQue": "Perguntas e Respostas, pergunta 18; a assistência médica aos empregados está no Anexo Único, item 32.",
+  "porAno": [
+    {
+      "ac": 2026,
+      "efeito": "Sem redução: não é benefício tributário para fins da LC nº 224/2025.",
+      "regras": [],
+      "status": "conferido",
+      "fonte": {
+        "id": "pr-lc224",
+        "url": "https://www.gov.br/receitafederal/pt-br/centrais-de-conteudo/publicacoes/perguntas-e-respostas/beneficios-fiscais/perguntas-e-respostas-reducao-dos-incentivos-e-beneficios-tributarios-v5-final.pdf",
+        "trecho": "pergunta 18"
+      }
+    },
+    {
+      "ac": 2027,
+      "efeito": "Falta orientação da Receita Federal para 2027.",
+      "regras": [
+        "lc239-inicio"
+      ],
+      "status": "a-verificar",
+      "fonte": {
+        "id": "lc-239",
+        "url": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp239.htm",
+        "trecho": "art. 4º (nova redação do art. 4º da LC nº 224/2025) e art. 15"
+      }
+    }
+  ],
+  "registros": [
+    "M300",
+    "M350"
+  ],
+  "fonte": {
+    "id": "pr-lc224",
+    "url": "https://www.gov.br/receitafederal/pt-br/centrais-de-conteudo/publicacoes/perguntas-e-respostas/beneficios-fiscais/perguntas-e-respostas-reducao-dos-incentivos-e-beneficios-tributarios-v5-final.pdf",
+    "trecho": "pergunta 18"
+  },
+  "norma": "Perguntas e Respostas da Receita Federal, pergunta 18; IN RFB nº 2.305/2025, Anexo Único, item 32",
+  "status": "conferido",
+  "leiautes": [
+    "12"
+  ],
+  "vigencia": {
+    "acNormal": [
+      2026
+    ],
+    "situacaoEspecial": [
+      2026
+    ]
+  },
+  "verificadoEm": "2026-11-27"
+}

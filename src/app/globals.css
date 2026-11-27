@@ -22,8 +22,8 @@
 }
 
 [data-theme="dark"] {
-  --fundo: #000000;
-  --superficie: #0d100a;
+  --fundo: #0e0f0c;
+  --superficie: #151713;
   --tinta: #f3f6ee;
   --suave: #a8b39b;
   --linha: #2b3124;
@@ -108,18 +108,18 @@
   display: none;
 }
 
-/* Menu lateral: 15rem aberto, 4.5rem recolhido (trilho de ícones). Entre 1024 e 1279 px começa recolhido.
+/* Menu lateral: 15rem aberto, 4rem recolhido (trilho de ícones). Entre 1024 e 1279 px começa recolhido.
    A largura sai do atributo data-menu, definido antes da pintura (prefs.js), e os rótulos seguem a largura real (container). */
 :root {
   --lateral: 15rem;
 }
 @media (min-width: 1024px) and (max-width: 1279.98px) {
   :root {
-    --lateral: 4.5rem;
+    --lateral: 4rem;
   }
 }
 :root[data-menu="recolhido"] {
-  --lateral: 4.5rem;
+  --lateral: 4rem;
 }
 .lateral {
   width: var(--lateral);
@@ -162,8 +162,15 @@
     grid-template-columns: 1fr;
     padding-left: 0;
   }
-  .rodape-lateral {
+  .rodape-lateral,
+  .topo-lateral {
     flex-direction: column;
+  }
+  /* Itens do trilho com pelo menos 44 px de largura. */
+  .nav-lateral,
+  .rodape-lateral,
+  .topo-lateral {
+    padding-inline: 0.5rem;
   }
 }
 .item-ativo {

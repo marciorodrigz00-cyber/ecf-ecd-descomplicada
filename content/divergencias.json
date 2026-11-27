@@ -158,6 +158,13 @@
         "12"
       ],
       "texto": "REGRA_COMPATIBILIDADE_L100_E010 aparece duas vezes, com textos diferentes: um gera aviso e o outro, erro. O site mostra os dois textos e o tipo “Aviso/Erro”."
+    },
+    {
+      "onde": "Registro 0020, campo IND_ALIQ_CSLL",
+      "leiautes": [
+        "12"
+      ],
+      "texto": "A descrição do campo lista as opções 7 (9% para 12%) e 8 (15% para 17,5%), criadas para as alíquotas transitórias da CSLL da Lei Complementar nº 224/2025, mas a coluna de valores válidos continua [1;3;4]. O site mostra as duas informações como estão no Manual."
     }
   ]
 }

@@ -104,7 +104,7 @@ test("[SG-026] payloads na busca e no filtro do glossário não executam", async
 test("[CT-098] glossário: filtro, letras, nível, F5 e âncora", async ({ page }) => {
   await abrir(page, "/glossario");
   const total = await page.locator("main ul > li[id]").count();
-  expect(total).toBe(41);
+  expect(total).toBe(47);
   const filtro = page.getByLabel("Filtrar termos");
   await filtro.fill("LIVRO  caixa");
   await expect(page.locator("#livro-caixa")).toBeVisible();
@@ -112,7 +112,7 @@ test("[CT-098] glossário: filtro, letras, nível, F5 e âncora", async ({ page 
   await filtro.fill("zzz");
   await expect(page.locator("main [role=status]")).toHaveText("Nenhum resultado para 'zzz'");
   await filtro.fill("  ");
-  await expect(page.locator("main [role=status]")).toHaveText("Mostrando 41 de 41 termos");
+  await expect(page.locator("main [role=status]")).toHaveText("Mostrando 47 de 47 termos");
   await page.getByRole("navigation", { name: "Letras do glossário" }).getByRole("link", { name: "L", exact: true }).click();
   await expect(page).toHaveURL(/#[a-z-]+$/);
   await page.reload();

@@ -12,6 +12,7 @@ import { conferirRoteiro } from "./roteiros.mjs";
  *  citacao  texto que precisa citar regras existentes
  *  apoio    sem regra fiscal própria: só o schema (catálogo de fontes, controle, dados fictícios)
  *  roteiro  simulação de preenchimento: schema, rastreio e conferência com o Manual e o motor de regras
+ *  incentivo ficha de incentivo (etapa 4): schema, rastreio, registros do leiaute 12 e regras citadas
  */
 const MAPA = [
   [/^content\/regras\/[\w-]+\.json$/, "Regra", "itens"],
@@ -37,6 +38,8 @@ const MAPA = [
   [/^content\/exemplos\/ilustrativos\.json$/, "ExemplosIlustrativos", "apoio"],
   [/^content\/exemplos\/isenta\.json$/, "ExemploIsenta", "apoio"],
   [/^content\/roteiros\/[0-9a-z]\/[0-9a-z]{4}\.json$/, "Roteiro", "roteiro"],
+  [/^content\/incentivos\/[a-z0-9-]+\.json$/, "Incentivo", "incentivo"],
+  [/^content\/lc224\.json$/, "PaginaLc224", "apoio"],
 ];
 
 const RASTREIO = new Set(["fonte", "norma", "leiautes", "vigencia", "verificadoEm"]);
@@ -74,6 +77,20 @@ function regrasExistentes() {
     }
   }
   return ids;
+}
+
+/** Códigos de registro do leiaute 12, o que documenta a LC nº 224/2025. */
+function registrosDoLeiaute12() {
+  const dir = path.join(RAIZ, "content", "leiautes", "12", "registros");
+  const cods = new Set();
+  for (const f of readdirSync(dir).filter((n) => n.endsWith(".json"))) {
+    try {
+      for (const r of JSON.parse(readFileSync(path.join(dir, f), "utf8")).registros) cods.add(r.codigo);
+    } catch {
+      // Arquivo inválido é apontado quando ele próprio for validado.
+    }
+  }
+  return cods;
 }
 
 /** Trechos internos marcados como "a verificar", com o caminho de cada um. */
@@ -149,6 +166,21 @@ export async function validarArquivo(arquivo) {
       const extra = await conferirRoteiro(rel, r.data);
       if (extra.erros.length) erros.push({ item: dado.registro, faltam: [], schema: extra.erros });
       avisos.push(...extra.avisos);
+    }
+  } else if (modo === "incentivo") {
+    const r = schema.safeParse(dado);
+    conferir(dado, nomear(dado, 0), r);
+    if (r.success) {
+      const extra = [];
+      if (path.basename(rel, ".json") !== r.data.id) extra.push("o nome do arquivo precisa ser o id da ficha");
+      const regs = registrosDoLeiaute12();
+      const soltos = r.data.registros.filter((c) => !regs.has(c));
+      if (soltos.length) extra.push(`registros que não existem no leiaute 12: ${soltos.join(", ")}`);
+      const ids = regrasExistentes();
+      const soltas = r.data.porAno.flatMap((p) => p.regras).filter((id) => !ids.has(id));
+      if (soltas.length) extra.push(`cita regra inexistente: ${soltas.join(", ")}`);
+      if (!r.data.porAno.some((p) => p.status !== "a-verificar") && r.data.situacao !== "a-verificar") extra.push("a situação não é 'a verificar', mas nenhum ano-calendário foi conferido");
+      if (extra.length) erros.push({ item: r.data.id, faltam: [], schema: extra });
     }
   } else {
     const r = schema.safeParse(dado);

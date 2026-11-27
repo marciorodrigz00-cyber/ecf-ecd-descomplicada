@@ -81,7 +81,7 @@ test("[CT-117] perfil pulado e alterado depois pelo indicador do perfil", async 
 
 test("[CT-118] home: destaque, números, Comece por aqui e Novidades", async ({ page }) => {
   await abrir(page, "/");
-  await expect(page.locator("h1")).toHaveText(/A ECF,\s*sem complicação\./i);
+  await expect(page.locator("h1")).toHaveText("ECF sem complicação");
   const comece = page.locator("section[aria-labelledby=t-comece]");
   await expect(comece.getByTestId("caminho-aprender")).toHaveAttribute("href", "/o-que-e");
   await expect(page.getByTestId("caminho-preencher")).toHaveAttribute("href", "/preencher");
@@ -121,7 +121,7 @@ test("[CT-119] Meu progresso: convite para quem chega, contadores depois do prim
 test("[CT-120] menu lateral na ordem da spec; Importância dentro de O que é", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await abrir(page, "/");
-  const menu = page.locator("[data-lateral]").getByRole("navigation", { name: "Menu principal" });
+  const menu = page.locator("[data-lateral]").getByRole("navigation", { name: "Principal", exact: true });
   const itens = await menu.locator("[data-item-menu]").allInnerTexts();
   expect(itens.map((t) => t.trim())).toEqual([
     "Visão geral",
@@ -132,6 +132,7 @@ test("[CT-120] menu lateral na ordem da spec; Importância dentro de O que é", 
     "Roteiro",
     "Casos práticos",
     "Simulador",
+    "Incentivos fiscais",
     "Novidades",
     "Fontes e verificações",
   ]);
