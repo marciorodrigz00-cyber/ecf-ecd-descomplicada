@@ -50,9 +50,9 @@ test("[CT-041] filtro por regime mantém a posição original", async ({ page })
   await expect(page.locator("[data-bloco=M]")).toHaveCount(0);
   await expect(posU).toBeVisible();
   await page.getByLabel("Regime da empresa").selectOption("real");
-  await expect(page.locator("[data-bloco=M]").getByText("Previsto")).toBeVisible();
+  await expect(page.locator("[data-bloco=M]").getByText("Previsto para o seu regime")).toBeVisible();
   await expect(page.locator("[data-bloco=U]")).toHaveCount(0);
-  await page.getByLabel("Regime da empresa").selectOption("");
+  await page.getByLabel("Regime da empresa").selectOption("todos");
   await expect(itens).toHaveCount(17);
 });
 
@@ -83,7 +83,8 @@ test("[CT-043] bloco e registro: URL, breadcrumb, F5 e vizinhos", async ({ page 
   await expect(page.locator("h1")).toContainText("M300: Demonstração do Lucro Real");
   const trilha = page.getByRole("navigation", { name: "Você está em" });
   await expect(trilha.locator("[aria-current=page]")).toHaveText("M300");
-  await page.getByRole("navigation", { name: "Outros registros do bloco" }).getByRole("link", { name: "M305" }).click();
+  // Anterior/próximo pela ordem do arquivo (etapa 3).
+  await page.getByRole("navigation", { name: "Registro anterior e próximo, no fim" }).getByRole("link", { name: /^M305/ }).click();
   await expect(page).toHaveURL(/m305$/);
   await page.goBack();
   await expect(page).toHaveURL(/m300$/);
@@ -94,8 +95,12 @@ test("[CT-043] bloco e registro: URL, breadcrumb, F5 e vizinhos", async ({ page 
 test("[CT-044] nível muda a profundidade do registro", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await abrir(page, "/blocos/m/m300");
-  await expect(page.getByRole("heading", { name: "Regras de validação" })).toBeHidden();
+  // Desde a etapa 3 as regras aparecem nos dois níveis; no iniciante, com um aviso de que o texto é técnico.
+  const aviso = page.getByText("O que o programa da ECF confere ao validar o arquivo");
+  await expect(page.getByRole("heading", { name: "Regras de validação" })).toBeVisible();
+  await expect(aviso).toBeVisible();
   await page.getByText("Já conheço", { exact: true }).first().click();
+  await expect(aviso).toBeHidden();
   await expect(page.getByRole("heading", { name: "Regras de validação" })).toBeVisible();
   await expect(page.getByText("REGRA_VALOR_DETALHADO").first()).toBeVisible();
   await page.reload();

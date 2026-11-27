@@ -123,7 +123,7 @@ test("[CT-006][CT-007] progresso, tema e cliques repetidos", async ({ page }) =>
   await page.reload();
   await expect(page.locator("html")).toHaveAttribute("data-theme", depois!);
   await expect(page.getByRole("button", { name: "Seção estudada" })).toHaveAttribute("aria-pressed", "true");
-  await pronta(page, "/");
+  await pronta(page, "/meu-progresso");
   await expect(page.getByRole("progressbar", { name: /seções estudadas/ })).toHaveAttribute("aria-valuenow", "1");
   for (let i = 0; i < 6; i++) await page.getByText(i % 2 ? "Estou começando" : "Já conheço", { exact: true }).first().click();
   await expect(page.locator("html")).toHaveAttribute("data-nivel", "iniciante");

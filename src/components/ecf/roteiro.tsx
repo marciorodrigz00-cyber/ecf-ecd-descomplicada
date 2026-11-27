@@ -13,13 +13,14 @@ export type PassoBloco = CartaoBloco & { origem: string; erros: { titulo: string
 
 /** Etapas na ordem do arquivo, só com os blocos previstos ou condicionais do regime. */
 export function Roteiro({ blocos, regimes }: { blocos: PassoBloco[]; regimes: { id: Regime; nome: string }[] }) {
-  const { roteiro } = usePreferencias();
+  const { roteiro, regime: doPerfil } = usePreferencias();
   const id = useId();
   const titulo = useRef<HTMLHeadingElement>(null);
   const agiu = useRef(false);
-  const regime = regimes.find((r) => r.id === roteiro?.regime) ?? null;
+  // O roteiro em andamento vence; sem ele, vale o regime do perfil.
+  const regime = regimes.find((r) => r.id === (roteiro?.regime ?? doPerfil)) ?? null;
   const passos = regime ? blocos.filter((b) => b.celulas[regime.id] !== "nao") : [];
-  const i = Math.min(roteiro?.passo ?? 0, Math.max(0, passos.length - 1));
+  const i = Math.min(roteiro && roteiro.regime === regime?.id ? roteiro.passo : 0, Math.max(0, passos.length - 1));
   const atual = passos[i];
 
   useEffect(() => {

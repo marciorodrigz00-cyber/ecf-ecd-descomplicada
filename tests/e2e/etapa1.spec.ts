@@ -15,8 +15,7 @@ test("[CT-110] mapa da home diz o regime e quantos blocos mostra", async ({ page
   await page.getByRole("button", { name: "Lucro presumido", exact: true }).click();
   const n = await page.locator("button[data-no]").evaluateAll((b) => b.filter((x) => /Bloco/.test(x.textContent ?? "")).length);
   await expect(contagem).toHaveText(new RegExp(`Regime escolhido: Lucro presumido\\. Mostrando ${n} de 17 blocos`));
-  // A conquista explica que vale para qualquer regime.
-  await expect(page.getByText("Abra os 17 blocos cobertos, em qualquer regime")).toBeVisible();
+  // A conquista que fala dos 17 blocos foi para “Meu progresso” (CT-119).
 });
 
 test("[CN-072] página de bloco: nome oficial uma vez, ECD sinalizada e mapa com nome curto", async ({ page }) => {
@@ -53,7 +52,7 @@ test("[AC-020] logo, selo da ECD, legendas e abreviações com texto", async ({ 
   await expect(page.getByTestId("legenda-situacao")).toHaveCount(0);
   await page.getByLabel("Regime da empresa").selectOption({ label: "Lucro real" });
   const legenda = page.getByTestId("legenda-situacao");
-  for (const t of ["Previsto", "Depende", "Não previsto"]) await expect(legenda.getByText(t, { exact: true })).toBeVisible();
+  for (const t of ["Previsto para o seu regime", "Depende de uma condição", "Não se aplica ao seu regime"]) await expect(legenda.getByText(t, { exact: true })).toBeVisible();
   await expect(legenda).toContainText("só existe se uma condição do Manual for atendida");
   await expect(page.locator("[data-bloco=M]")).toContainText("Apuração");
   await expect(page.locator("[data-bloco=C]")).toContainText("dados da ECD");

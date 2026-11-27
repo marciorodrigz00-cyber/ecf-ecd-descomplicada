@@ -1,5 +1,5 @@
 {
-  "versao": "etapa 1 e pilotos da simulação de preenchimento",
+  "versao": "etapa 1, pilotos da simulação e etapas 2 e 3",
   "risco": "Bateria completa sobre o build local com as correções da validação pós-publicação. O risco que resta não está no código testado: o conteúdo foi conferido com as fontes, mas nenhum contador o revisou; a regra de arredondamento e dois campos de exemplo estão a verificar; e os arquivos de exemplo não passaram pelo programa da ECF. A versão publicada foi conferida antes destas correções. O nome do site inclui a ECD, que ainda não tem conteúdo: o aviso está em todas as páginas. A simulação de preenchimento cobre só 4 registros-piloto; as regras em código seguem o texto do Manual e foram conferidas com casos feitos à mão, não pelo programa da ECF.",
   "bugs": [
     {

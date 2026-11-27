@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronRight, Menu, X } from "lucide-react";
+import { ChevronRight, Menu, Trophy, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useRef } from "react";
@@ -10,8 +10,13 @@ import { ENDERECO_MUDOU } from "@/lib/parametros";
 import { preferenciasAgora } from "@/lib/preferencias";
 import { SECOES, anoDaUrl, caminhoBase, rota, secaoDoCaminho, type Ausentes } from "@/lib/rotas";
 import { BotaoTema, SeletorAno, SeletorNivel } from "./controles";
+import { BotaoPerfil, type RegimeNome } from "./perfil";
 
-type Props = { anos: number[]; padrao: number; ausentes: Ausentes };
+type Props = { anos: number[]; padrao: number; ausentes: Ausentes; regimes: RegimeNome[] };
+
+/** Menu principal. “Importância” fica dentro de “O que é”; “Fontes” é página avulsa. */
+const MENU = [...SECOES.filter((s) => s.slug !== "importancia").map((s) => ({ slug: s.slug, curto: s.curto })), { slug: "fontes", curto: "Fontes" }];
+const DENTRO_DE: Record<string, string> = { importancia: "o-que-e" };
 
 // Vale uma vez por carga: voltar para a home depois não redireciona de novo.
 let entradaTratada = false;
@@ -19,10 +24,11 @@ let entradaTratada = false;
 function ItensMenu({ padrao, vertical, aoIr }: { padrao: number; vertical?: boolean; aoIr?: () => void }) {
   const pathname = usePathname();
   const ano = anoDaUrl(pathname, padrao);
-  const ativa = secaoDoCaminho(caminhoBase(pathname))?.slug;
+  const primeiro = caminhoBase(pathname).split("/")[1] ?? "";
+  const ativa = DENTRO_DE[primeiro] ?? primeiro;
   return (
     <ul className={cn("flex", vertical ? "flex-col gap-1" : "flex-wrap gap-x-1")}>
-      {SECOES.map((s) => {
+      {MENU.map((s) => {
         const atual = s.slug === ativa;
         return (
           <li key={s.slug}>
@@ -55,7 +61,24 @@ function AvisoEndereco() {
   return null;
 }
 
-export function Cabecalho({ anos, padrao, ausentes }: Props) {
+/** Link para a página de progresso, perto do perfil. */
+function LinkProgresso({ padrao, aoIr }: { padrao: number; aoIr?: () => void }) {
+  const pathname = usePathname();
+  const atual = caminhoBase(pathname) === "/meu-progresso";
+  return (
+    <Link
+      href={rota("/meu-progresso", anoDaUrl(pathname, padrao), padrao)}
+      prefetch={false}
+      aria-current={atual ? "page" : undefined}
+      onClick={aoIr}
+      className="flex min-h-11 items-center gap-2 px-3 font-medium text-tinta no-underline hover:text-marca aria-[current=page]:text-marca"
+    >
+      <Trophy aria-hidden size={18} /> Meu progresso
+    </Link>
+  );
+}
+
+export function Cabecalho({ anos, padrao, ausentes, regimes }: Props) {
   const pathname = usePathname();
   const router = useRouter();
   const dialogo = useRef<HTMLDialogElement>(null);
@@ -124,6 +147,7 @@ export function Cabecalho({ anos, padrao, ausentes }: Props) {
           <SeletorNivel />
           <BotaoTema />
         </div>
+        <BotaoPerfil anos={anos} padrao={padrao} ausentes={ausentes} regimes={regimes} />
         <button
           type="button"
           aria-label="Abrir menu"
@@ -136,9 +160,12 @@ export function Cabecalho({ anos, padrao, ausentes }: Props) {
           <Menu aria-hidden size={22} />
         </button>
       </div>
-      <nav aria-label="Principal" className="mx-auto hidden max-w-[92rem] px-3 xl:block">
-        <ItensMenu padrao={padrao} />
-      </nav>
+      <div className="mx-auto hidden max-w-[92rem] items-center justify-between px-3 xl:flex">
+        <nav aria-label="Principal">
+          <ItensMenu padrao={padrao} />
+        </nav>
+        <LinkProgresso padrao={padrao} />
+      </div>
 
       <dialog
         ref={dialogo}
@@ -163,6 +190,9 @@ export function Cabecalho({ anos, padrao, ausentes }: Props) {
         <nav aria-label="Principal (menu)">
           <ItensMenu padrao={padrao} vertical aoIr={fechar} />
         </nav>
+        <div className="mt-4 border-t border-linha pt-4">
+          <LinkProgresso padrao={padrao} aoIr={fechar} />
+        </div>
       </dialog>
     </header>
   );
@@ -173,7 +203,7 @@ const EXEMPLOS: Record<string, string> = {
   "lucro-presumido": "Lucro presumido",
   isenta: "Isenta",
 };
-const AVULSAS: Record<string, string> = { fontes: "Fontes", preencher: "Roteiro" };
+const AVULSAS: Record<string, string> = { fontes: "Fontes", preencher: "Roteiro", "meu-progresso": "Meu progresso" };
 
 export function Breadcrumb({ padrao }: { padrao: number }) {
   const pathname = usePathname();

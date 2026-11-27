@@ -44,6 +44,27 @@ export function CartaoTrilha({ ano, padrao }: { ano: number; padrao: number }) {
   );
 }
 
+/** “Estou aprendendo”: leva à próxima seção não estudada. No HTML gerado, começa em “O que é”. */
+export function CaminhoAprender({ ano, padrao, className, children }: { ano: number; padrao: number; className?: string; children: React.ReactNode }) {
+  const { estudadas } = usePreferencias();
+  const proxima = SECOES.find((s) => !estudadas.includes(s.slug)) ?? SECOES[0]!;
+  return (
+    <Link href={rota(`/${proxima.slug}`, ano, padrao)} prefetch={false} className={className} data-testid="caminho-aprender">
+      {children}
+      <span className="mt-3 flex items-center gap-2 font-semibold">
+        {estudadas.length ? "Continuar" : "Começar"}: {proxima.curto} <ArrowRight aria-hidden size={18} />
+      </span>
+    </Link>
+  );
+}
+
+/** Quem acabou de chegar não vê contadores em zero: vê o convite. */
+export function ComProgresso({ convite, children }: { convite: React.ReactNode; children: React.ReactNode }) {
+  const p = usePreferencias();
+  const tem = p.estudadas.length + p.blocos.length + p.registros.length + p.feitos.length > 0;
+  return <>{tem ? children : convite}</>;
+}
+
 export function Conquistas() {
   const prefs = usePreferencias();
   const lista = conquistas(prefs, SECOES.length);

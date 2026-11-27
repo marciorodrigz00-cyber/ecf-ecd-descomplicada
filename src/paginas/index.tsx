@@ -1,12 +1,13 @@
 import Link from "next/link";
-import { ArrowRight, Hammer } from "lucide-react";
+import { ArrowRight, ClipboardList, GraduationCap, Hammer } from "lucide-react";
 import { Console } from "@/components/console";
 import { CartaoRegra, EtiquetaStatus, LinkFonte, Selo } from "@/components/ecf/rastreio";
 import { MarcarEstudada } from "@/components/layout/progresso";
-import { Atalhos, CartaoTrilha, Conquistas } from "@/components/layout/trilha";
+import { CartaoPerfil } from "@/components/layout/perfil";
+import { Atalhos, CaminhoAprender, CartaoTrilha, ComProgresso, Conquistas } from "@/components/layout/trilha";
 import { CaixaRolavel, Cartao, Etiqueta, Nivel } from "@/components/ui";
-import { ANO_PADRAO, fontes, leiauteDoAno, linhaDoTempo, novidades, programa, rastreaveis, regra, regras } from "@/lib/conteudo";
-import { conferencia, didatico, divergencias, grafo, legendas, linhaRegime, nomeBloco, regimes, registrosDoBloco } from "@/lib/conteudo/leiautes";
+import { ANO_PADRAO, anos, fontes, leiauteDoAno, linhaDoTempo, novidades, programa, rastreaveis, regra, regras } from "@/lib/conteudo";
+import { ausentesPorAno, conferencia, didatico, divergencias, grafo, legendas, linhaRegime, nomeBloco, regimes, registrosDoBloco } from "@/lib/conteudo/leiautes";
 import { data, inteiro } from "@/lib/formatos";
 import { SECOES, rota, type Secao } from "@/lib/rotas";
 import { AVISO_ECD } from "@/lib/seo";
@@ -54,100 +55,38 @@ export function Inicio({ ano }: { ano: number }) {
       };
     }),
   ];
+  const card = "flex h-full flex-col rounded-2xl border-2 border-linha bg-superficie p-6 text-tinta no-underline transition-colors hover:border-marca";
   return (
     <div className="space-y-14">
-      <div className="grid grid-cols-1 gap-6 xl:grid-cols-[minmax(0,1fr)_21rem]">
-        <div>
-          <div className="mb-5">
-            <p className="font-mono text-sm text-suave">
-              mapa de fluxo · leiaute {leiaute.numero} · AC {ano}
-            </p>
-            <h1 className="mt-1 text-3xl font-bold sm:text-4xl">Como os dados percorrem a ECF</h1>
-            <div className="mt-3 max-w-prose text-lg text-suave">
-              <Nivel so="iniciante">
-                Nunca viu uma ECF? Pense nela como um dossiê: a empresa reúne a contabilidade e os cálculos de imposto em
-                um único arquivo, dividido em capítulos. Clique em um capítulo, ou percorra todos em ordem.
-              </Nivel>
-              <Nivel so="profissional">
-                Blocos, ligações e registros do leiaute {leiaute.numero} em consulta rápida, cada um com norma, vigência e
-                data de verificação.
-              </Nivel>
-            </div>
-            <p className="mt-3 max-w-prose rounded-lg bg-alerta-fundo px-4 py-2 text-sm text-alerta">{AVISO_ECD}</p>
-            <div className="mt-3">
-              <Selo ano={ano} itens={[prazo, legendas.rastreio]} />
-            </div>
-          </div>
-          <Console
-            key={ano}
-            ano={ano}
-            nos={nos}
-            ligacoes={grafo.arestas.map((x) => ({ de: x.de, para: x.para, o: x.o, registro: x.base.registro, href: ir(urlRegistro(x.base.registro)) }))}
-            regimes={regimes.regimes.map(({ id, nome }) => ({ id, nome }))}
-          />
+      <CartaoPerfil anos={anos} padrao={ANO_PADRAO} ausentes={ausentesPorAno()} regimes={regimes.regimes.map(({ id, nome }) => ({ id, nome }))} />
+
+      <section aria-labelledby="t-caminhos">
+        <p className="font-mono text-sm text-suave">
+          leiaute {leiaute.numero} · AC {ano}
+        </p>
+        <h1 id="t-caminhos" className="mt-1 text-3xl font-bold sm:text-4xl">
+          Entenda e prepare a ECF
+        </h1>
+        <div className="mt-3 max-w-prose text-lg text-suave">
+          <Nivel so="iniciante">Escolha por onde começar: aprender o que é a ECF, ou ir direto ao passo a passo do preenchimento.</Nivel>
+          <Nivel so="profissional">Trilha de estudo ou roteiro de preenchimento por regime, com fonte e data de verificação em cada regra.</Nivel>
         </div>
-        <aside aria-label="Trilha, novidades e atalhos" className="grid grid-cols-1 content-start gap-5 md:grid-cols-3 xl:grid-cols-1">
-          <Cartao className="p-5">
-            <h2 className="mb-3 text-xl font-bold">Sua trilha</h2>
-            <CartaoTrilha ano={ano} padrao={ANO_PADRAO} />
-          </Cartao>
-          <Cartao className="p-5">
-            <h2 className="mb-3 text-xl font-bold">Novidades conferidas</h2>
-            <ul className="divide-y divide-linha">
-              {novidades.slice(0, 3).map((n) => (
-                <li key={n.id} className="py-3 first:pt-0">
-                  <p className="font-mono text-sm text-suave">
-                    <time dateTime={n.data}>{data(n.data)}</time> · {n.tipo}
-                  </p>
-                  <Link href={ir(`/novidades/${n.slug}`)} prefetch={false} className="inline-block py-1 font-semibold underline underline-offset-4">
-                    {n.titulo}
-                  </Link>
-                  <div className="mt-1">
-                    <EtiquetaStatus status={n.status} />
-                  </div>
-                </li>
-              ))}
-            </ul>
-            <Link href={ir("/novidades")} prefetch={false} className="inline-flex min-h-11 items-center gap-2 underline underline-offset-4">
-              Ver todas <ArrowRight aria-hidden size={18} />
-            </Link>
-          </Cartao>
-          <Cartao className="p-5">
-            <h2 className="mb-3 text-xl font-bold">Atalhos</h2>
-            <Atalhos ano={ano} padrao={ANO_PADRAO} />
-          </Cartao>
-        </aside>
-      </div>
-
-      <section aria-labelledby="t-conquistas">
-        <h2 id="t-conquistas" className="mb-4 text-2xl font-bold sm:text-3xl">
-          Conquistas
-        </h2>
-        <Conquistas />
-      </section>
-
-      <section aria-labelledby="t-trilha">
-        <h2 id="t-trilha" className="text-2xl font-bold sm:text-3xl">
-          Trilha de estudo
-        </h2>
-        <ol className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {SECOES.map((s, i) => (
-            <li key={s.slug}>
-              <Link
-                href={ir(`/${s.slug}`)}
-                prefetch={false}
-                className="block h-full rounded-2xl border border-linha bg-superficie p-5 text-tinta no-underline hover:border-marca"
-              >
-                <span className="font-mono text-sm text-marca">Etapa {inteiro(i + 1)}</span>
-                <h3 className="mt-1 text-lg font-semibold">{s.titulo}</h3>
-                <div className="mt-2 text-suave">
-                  <Nivel so="iniciante">{s.iniciante}</Nivel>
-                  <Nivel so="profissional">{s.profissional}</Nivel>
-                </div>
-              </Link>
-            </li>
-          ))}
-        </ol>
+        <p className="mt-3 max-w-prose rounded-lg bg-alerta-fundo px-4 py-2 text-sm text-alerta">{AVISO_ECD}</p>
+        <div className="mt-6 grid gap-4 md:grid-cols-2">
+          <CaminhoAprender ano={ano} padrao={ANO_PADRAO} className={card}>
+            <GraduationCap aria-hidden size={32} className="text-marca" />
+            <span className="mt-3 text-2xl font-bold">Estou aprendendo</span>
+            <span className="mt-2 text-suave">O que é a ECF, quem entrega, os blocos e os exemplos, numa trilha em ordem.</span>
+          </CaminhoAprender>
+          <Link href={ir("/preencher")} prefetch={false} className={card} data-testid="caminho-preencher">
+            <ClipboardList aria-hidden size={32} className="text-marca" />
+            <span className="mt-3 text-2xl font-bold">Vou preencher</span>
+            <span className="mt-2 text-suave">O passo a passo do arquivo para o regime da empresa, bloco por bloco.</span>
+            <span className="mt-3 flex items-center gap-2 font-semibold">
+              Abrir o roteiro <ArrowRight aria-hidden size={18} />
+            </span>
+          </Link>
+        </div>
       </section>
 
       <section aria-labelledby="t-agora">
@@ -171,6 +110,132 @@ export function Inicio({ ano }: { ano: number }) {
             </p>
           </Cartao>
         </div>
+      </section>
+
+      <section aria-labelledby="t-novidades">
+        <h2 id="t-novidades" className="text-2xl font-bold sm:text-3xl">
+          Novidades conferidas
+        </h2>
+        <ul className="mt-5 grid gap-4 md:grid-cols-3">
+          {novidades.slice(0, 3).map((n) => (
+            <li key={n.id} className="rounded-2xl border border-linha bg-superficie p-5">
+              <p className="font-mono text-sm text-suave">
+                <time dateTime={n.data}>{data(n.data)}</time> · {n.tipo}
+              </p>
+              <Link href={ir(`/novidades/${n.slug}`)} prefetch={false} className="inline-block py-1 font-semibold underline underline-offset-4">
+                {n.titulo}
+              </Link>
+              <div className="mt-1">
+                <EtiquetaStatus status={n.status} />
+              </div>
+            </li>
+          ))}
+        </ul>
+        <Link href={ir("/novidades")} prefetch={false} className="mt-2 inline-flex min-h-11 items-center gap-2 underline underline-offset-4">
+          Ver todas <ArrowRight aria-hidden size={18} />
+        </Link>
+      </section>
+
+      <section aria-labelledby="t-mapa">
+        <p className="font-mono text-sm text-suave">
+          mapa de fluxo · leiaute {leiaute.numero} · AC {ano}
+        </p>
+        <h2 id="t-mapa" className="mt-1 text-2xl font-bold sm:text-3xl">
+          Como os dados percorrem a ECF
+        </h2>
+        <div className="mt-3 max-w-prose text-lg text-suave">
+          <Nivel so="iniciante">
+            Nunca viu uma ECF? Pense nela como um dossiê: a empresa reúne a contabilidade e os cálculos de imposto em um único arquivo,
+            dividido em capítulos. Clique em um capítulo, ou percorra todos em ordem.
+          </Nivel>
+          <Nivel so="profissional">
+            Blocos, ligações e registros do leiaute {leiaute.numero} em consulta rápida, cada um com norma, vigência e data de verificação.
+          </Nivel>
+        </div>
+        <div className="mt-3 mb-5">
+          <Selo ano={ano} itens={[prazo, legendas.rastreio]} />
+        </div>
+        <Console
+          key={ano}
+          ano={ano}
+          nos={nos}
+          ligacoes={grafo.arestas.map((x) => ({ de: x.de, para: x.para, o: x.o, registro: x.base.registro, href: ir(urlRegistro(x.base.registro)) }))}
+          regimes={regimes.regimes.map(({ id, nome }) => ({ id, nome }))}
+        />
+      </section>
+    </div>
+  );
+}
+
+/** Meu progresso: trilha, conquistas e atalhos. Sem contadores em zero para quem acabou de chegar. */
+export function MeuProgresso({ ano }: { ano: number }) {
+  const ir = (b: string) => rota(b, ano, ANO_PADRAO);
+  return (
+    <div className="space-y-12">
+      <div>
+        <h1 className="text-3xl font-bold sm:text-4xl">Meu progresso</h1>
+        <p className="mt-3 max-w-prose text-lg text-suave">O que você já estudou e abriu neste navegador, e por onde continuar.</p>
+      </div>
+      <ComProgresso
+        convite={
+          <Cartao className="p-6" data-testid="sem-progresso">
+            <h2 className="text-xl font-bold">Você ainda não começou</h2>
+            <p className="mt-2 max-w-prose text-suave">
+              Quando você marcar uma seção como estudada ou abrir um bloco, o seu progresso aparece aqui. Nada sai deste navegador.
+            </p>
+            <Link href={ir("/o-que-e")} prefetch={false} className="mt-4 inline-flex min-h-11 items-center gap-2 font-semibold underline underline-offset-4">
+              Começar por “O que é” <ArrowRight aria-hidden size={18} />
+            </Link>
+          </Cartao>
+        }
+      >
+        <section aria-labelledby="t-sua-trilha">
+          <h2 id="t-sua-trilha" className="mb-4 text-2xl font-bold">
+            Sua trilha
+          </h2>
+          <Cartao className="p-5">
+            <CartaoTrilha ano={ano} padrao={ANO_PADRAO} />
+          </Cartao>
+        </section>
+        <section aria-labelledby="t-conquistas">
+          <h2 id="t-conquistas" className="mb-4 text-2xl font-bold">
+            Conquistas
+          </h2>
+          <Conquistas />
+        </section>
+      </ComProgresso>
+
+      <section aria-labelledby="t-trilha">
+        <h2 id="t-trilha" className="text-2xl font-bold">
+          Trilha de estudo
+        </h2>
+        <ol className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {SECOES.map((s, i) => (
+            <li key={s.slug}>
+              <Link
+                href={ir(`/${s.slug}`)}
+                prefetch={false}
+                className="block h-full rounded-2xl border border-linha bg-superficie p-5 text-tinta no-underline hover:border-marca"
+              >
+                <span className="font-mono text-sm text-marca">Etapa {inteiro(i + 1)}</span>
+                <h3 className="mt-1 text-lg font-semibold">{s.titulo}</h3>
+                <div className="mt-2 text-suave">
+                  <Nivel so="iniciante">{s.iniciante}</Nivel>
+                  <Nivel so="profissional">{s.profissional}</Nivel>
+                </div>
+              </Link>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <section aria-labelledby="t-atalhos">
+        <h2 id="t-atalhos" className="mb-4 text-2xl font-bold">
+          Atalhos
+        </h2>
+        <Cartao className="p-5">
+          <Atalhos ano={ano} padrao={ANO_PADRAO} />
+        </Cartao>
       </section>
     </div>
   );

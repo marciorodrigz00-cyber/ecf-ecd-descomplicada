@@ -23,7 +23,7 @@ describe("Busca", () => {
     expect(achar("m")[0]).toMatchObject({ tipo: "bloco", codigo: "M" });
     expect(achar("9")[0]).toMatchObject({ tipo: "bloco", codigo: "9" });
     // Campo pelo nome completo, pelo nome solto e por palavras fora de ordem.
-    expect(achar("0010.FORMA_TRIB")[0]).toMatchObject({ tipo: "campo", href: "/blocos/0/0010#campo-4" });
+    expect(achar("0010.FORMA_TRIB")[0]).toMatchObject({ tipo: "campo", href: "/blocos/0/0010#forma-trib" });
     expect(achar("forma_trib").map((r) => r.codigo)).toContain("0010.FORMA_TRIB");
     expect(achar("caixa livro").map((r) => r.titulo)).toEqual(expect.arrayContaining(["livro caixa"]));
     expect(achar("12.2.8")[0]).toMatchObject({ tipo: "novidade" });
@@ -41,7 +41,7 @@ describe("Busca", () => {
     const linhas: LinhaIndice[] = ["B", "A", "C"].map((x) => [1, x, "igual", `/${x}`, ""]);
     expect(buscar(preparar(linhas), "igual").map((r) => r.codigo)).toEqual(["B", "A", "C"]);
     expect(linhas.map((l) => l[1])).toEqual(["B", "A", "C"]);
-    expect(achar("m300").slice(1).every((r) => r.codigo.startsWith("M300."))).toBe(true);
+    expect(achar("m300").slice(1).filter((r) => r.tipo !== "regra").every((r) => r.codigo.startsWith("M300."))).toBe(true);
   });
 
   test("[CT-093] índice cobre tudo, por ano, sem o que está fora do escopo", () => {

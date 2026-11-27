@@ -55,6 +55,8 @@ export function salvar(mudanca: Partial<Preferencias>) {
   atual = proxima;
   const html = document.documentElement;
   html.dataset.nivel = proxima.nivel;
+  if (proxima.perfil) html.dataset.perfil = "ok";
+  else delete html.dataset.perfil;
   if (proxima.tema) html.dataset.theme = proxima.tema;
   window.dispatchEvent(new Event(EVENTO));
 }

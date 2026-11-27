@@ -9,6 +9,7 @@ import { registrarFeito, registrarVisita } from "@/components/layout/trilha";
 import { Cartao, Nivel, estiloBotao } from "@/components/ui";
 import { cn } from "@/lib/cn";
 import { useParametros } from "@/lib/parametros";
+import { usePreferencias } from "@/lib/preferencias";
 import type { ResumoRegistro } from "@/lib/exemplos/por-registro";
 
 type Situacao = "sim" | "depende" | "nao";
@@ -53,13 +54,17 @@ function traco([x1, y1]: readonly [number, number], [x2, y2]: readonly [number, 
 }
 
 export function Console({ nos, ligacoes, regimes, ano }: Props) {
-  const padrao = { regime: regimes[0]!.id, bloco: "M", aba: "ligacoes" };
-  const [{ regime, bloco: sel, aba }, mudar] = useParametros(padrao, (lidos) => {
-    const r = regimes.some((x) => x.id === lidos.regime) ? lidos.regime : padrao.regime;
-    const no = nos.find((n) => n.id === lidos.bloco);
-    const some = !no || no.bloco?.celulas[r] === "nao";
-    return { regime: r, bloco: some ? (INICIAL[r] ?? padrao.bloco) : no.id, aba: (ABAS as readonly string[]).includes(lidos.aba) ? lidos.aba : padrao.aba };
-  });
+  // Regime vazio no endereço = o do perfil, ou o primeiro (lucro real). Escolher um regime sempre o grava no endereço.
+  const padrao = { regime: "", bloco: "M", aba: "ligacoes" };
+  const [{ regime: escolhido, bloco: lido, aba }, mudar] = useParametros(padrao, (lidos) => ({
+    regime: regimes.some((x) => x.id === lidos.regime) ? lidos.regime : "",
+    bloco: nos.some((n) => n.id === lidos.bloco) ? lidos.bloco : padrao.bloco,
+    aba: (ABAS as readonly string[]).includes(lidos.aba) ? lidos.aba : padrao.aba,
+  }));
+  const { regime: doPerfil } = usePreferencias();
+  const regime = escolhido || (regimes.some((x) => x.id === doPerfil) ? doPerfil! : regimes[0]!.id);
+  const noLido = nos.find((n) => n.id === lido);
+  const sel = !noLido || noLido.bloco?.celulas[regime] === "nao" ? (INICIAL[regime] ?? padrao.bloco) : lido;
   const [aberto, setAberto] = useState<string | null>(null);
   const [passo, setPasso] = useState<number | null>(null);
   const [tocando, setTocando] = useState(false);

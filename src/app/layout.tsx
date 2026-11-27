@@ -3,7 +3,7 @@ import { IBM_Plex_Mono, Instrument_Sans } from "next/font/google";
 import { Breadcrumb, Cabecalho, LinkAno } from "@/components/layout/cabecalho";
 import { OuvirAtalhos } from "@/components/layout/trilha";
 import { ANO_PADRAO, anos } from "@/lib/conteudo";
-import { registroDoAno, registrosDoAno } from "@/lib/conteudo/leiautes";
+import { ausentesPorAno, regimes } from "@/lib/conteudo/leiautes";
 import { AVISO_ECD, DESCRICAO, INDEXAR, NOME_SITE, SITE } from "@/lib/seo";
 import "./globals.css";
 
@@ -23,8 +23,7 @@ export const metadata: Metadata = {
   formatDetection: { telephone: false, email: false, address: false },
 };
 
-const codigos = new Set(anos.flatMap((a) => registrosDoAno(a).map((r) => r.codigo)));
-const AUSENTES = Object.fromEntries(anos.map((a) => [a, [...codigos].filter((c) => !registroDoAno(c, a))]));
+const AUSENTES = ausentesPorAno();
 
 export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#000000", colorScheme: "dark light" };
 
@@ -43,7 +42,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           Pular para o conteúdo
         </a>
         <OuvirAtalhos padrao={ANO_PADRAO} />
-        <Cabecalho anos={anos} padrao={ANO_PADRAO} ausentes={AUSENTES} />
+        <Cabecalho anos={anos} padrao={ANO_PADRAO} ausentes={AUSENTES} regimes={regimes.regimes} />
         <Breadcrumb padrao={ANO_PADRAO} />
         <main id="conteudo" tabIndex={-1} className="mx-auto w-full max-w-[92rem] flex-1 px-4 py-8 outline-none sm:px-6">
           {children}

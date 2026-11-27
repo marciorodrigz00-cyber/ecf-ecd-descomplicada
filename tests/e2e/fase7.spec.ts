@@ -52,8 +52,8 @@ test("[CT-096] busca: acentos, vazio, sem resultado e campo", async ({ page }) =
   await expect(estado(page)).toContainText("Todos os blocos");
   await campo(page).fill("0010.forma_trib");
   await opcoes(page).first().click();
-  await expect(page).toHaveURL(/\/blocos\/0\/0010#campo-4$/);
-  await expect(page.locator("#campo-4")).toContainText("FORMA_TRIB");
+  await expect(page).toHaveURL(/\/blocos\/0\/0010#forma-trib$/);
+  await expect(page.locator("#forma-trib")).toContainText("FORMA_TRIB");
   await page.keyboard.press("Control+k");
   await campo(page).fill("scp");
   await opcoes(page).filter({ hasText: "Glossário" }).first().click();

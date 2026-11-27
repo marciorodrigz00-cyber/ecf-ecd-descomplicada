@@ -103,6 +103,11 @@
   display: none;
 }
 
+/* Perfil já respondido ou pulado: o cartão da home não aparece (definido antes da pintura, em prefs.js). */
+[data-perfil="ok"] [data-cartao-perfil] {
+  display: none;
+}
+
 /* Um verde só: o grupo do bloco aparece no nome e no ícone, e o tom varia dentro dele. */
 [data-tom="0"] { --tom: 8%; }
 [data-tom="1"] { --tom: 12%; }

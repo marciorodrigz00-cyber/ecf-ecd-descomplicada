@@ -3,11 +3,12 @@
 import { Search, X } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useId, useRef, useState, type KeyboardEvent } from "react";
-import { buscar, preparar, type Indice, type LinhaIndice, type Resultado, type TipoItem } from "@/lib/busca";
+import { agrupar, buscar, preparar, type Indice, type LinhaIndice, type Resultado, type TipoItem } from "@/lib/busca";
 import { cn } from "@/lib/cn";
 import { anoDaUrl } from "@/lib/rotas";
 
-const NOME: Record<TipoItem, string> = { bloco: "Bloco", registro: "Registro", campo: "Campo", termo: "Glossário", secao: "Página", novidade: "Novidade" };
+const NOME: Record<TipoItem, string> = { bloco: "Bloco", registro: "Registro", campo: "Campo", termo: "Glossário", secao: "Página", novidade: "Novidade", regra: "Regra" };
+const GRUPO: Record<TipoItem, string> = { bloco: "Blocos", registro: "Registros", campo: "Campos", termo: "Glossário", secao: "Páginas", novidade: "Novidades", regra: "Regras de validação" };
 const guardados = new Map<number, Indice>();
 type Carga = { ano: number; estado: "carregando" | "erro" | "pronto" };
 
@@ -28,7 +29,14 @@ export function Busca({ padrao }: { padrao: number }) {
   const indice = guardados.get(ano);
   const consulta = texto.trim();
   const iniciais = (): Resultado[] => (indice ? indice.linhas.slice(0, 17).map(([, codigo, titulo, href]) => ({ tipo: "bloco", codigo, titulo, href })) : []);
-  const itens = !indice ? [] : consulta === "" ? iniciais() : buscar(indice, consulta);
+  const itens = !indice ? [] : consulta === "" ? iniciais() : agrupar(buscar(indice, consulta));
+  // Grupos por tipo, já na ordem de itens: o índice de cada opção continua o mesmo para o teclado.
+  const grupos = itens.reduce<{ tipo: TipoItem; de: number; ate: number }[]>((g, r, i) => {
+    const ultimo = g.at(-1);
+    if (ultimo && ultimo.tipo === r.tipo) ultimo.ate = i;
+    else g.push({ tipo: r.tipo, de: i, ate: i });
+    return g;
+  }, []);
   const estado = indice ? "pronto" : carga.ano === ano ? carga.estado : "carregando";
 
   function abrir() {
@@ -167,24 +175,41 @@ export function Busca({ padrao }: { padrao: number }) {
             </div>
           )}
           <div ref={lista} id={`${id}-lista`} role="listbox" aria-label="Resultados" tabIndex={-1} className="min-h-0 flex-1 overflow-y-auto p-2">
-            {itens.map((r, i) => (
-              // O teclado age no campo, pelo padrão de combobox; o clique é o atalho do mouse e do toque.
-              <div
-                key={r.href + r.codigo + r.titulo}
-                id={`${id}-${i}`}
-                role="option"
-                tabIndex={-1}
-                aria-selected={i === sel}
-                onClick={() => ir(r)}
-                onKeyDown={(e) => e.key === "Enter" && ir(r)}
-                onMouseMove={() => i !== sel && setSel(i)}
-                className={cn("flex min-h-11 cursor-pointer items-baseline gap-3 rounded-lg px-3 py-2", i === sel && "bg-ok-fundo")}
-              >
-                <span className="min-w-0 flex-1">
-                  {r.codigo && r.tipo !== "bloco" && <span className="mr-2 font-mono font-semibold break-all text-marca">{r.codigo}</span>}
-                  {r.titulo}
-                </span>
-                <span className="shrink-0 text-sm text-suave">{NOME[r.tipo]}</span>
+            {grupos.map((g) => (
+              <div key={g.tipo} role="group" aria-labelledby={`${id}-g-${g.tipo}`} data-grupo={g.tipo}>
+                {consulta !== "" && (
+                  <div id={`${id}-g-${g.tipo}`} role="presentation" className="px-3 pt-3 pb-1 text-sm font-semibold text-suave">
+                    {GRUPO[g.tipo]}
+                  </div>
+                )}
+                {consulta === "" && (
+                  <span id={`${id}-g-${g.tipo}`} className="sr-only">
+                    {GRUPO[g.tipo]}
+                  </span>
+                )}
+                {itens.slice(g.de, g.ate + 1).map((r, k) => {
+                  const i = g.de + k;
+                  return (
+                    // O teclado age no campo, pelo padrão de combobox; o clique é o atalho do mouse e do toque.
+                    <div
+                      key={r.href + r.codigo + r.titulo}
+                      id={`${id}-${i}`}
+                      role="option"
+                      tabIndex={-1}
+                      aria-selected={i === sel}
+                      onClick={() => ir(r)}
+                      onKeyDown={(e) => e.key === "Enter" && ir(r)}
+                      onMouseMove={() => i !== sel && setSel(i)}
+                      className={cn("flex min-h-11 cursor-pointer items-baseline gap-3 rounded-lg px-3 py-2", i === sel && "bg-ok-fundo")}
+                    >
+                      <span className="min-w-0 flex-1">
+                        {r.codigo && r.tipo !== "bloco" && <span className="mr-2 font-mono font-semibold break-all text-marca">{r.codigo}</span>}
+                        {r.titulo}
+                      </span>
+                      <span className="shrink-0 text-sm text-suave">{NOME[r.tipo]}</span>
+                    </div>
+                  );
+                })}
               </div>
             ))}
           </div>

@@ -6,6 +6,7 @@ import { useId } from "react";
 import { Etiqueta } from "@/components/ui";
 import { ordinal } from "@/lib/formatos";
 import { useParametros } from "@/lib/parametros";
+import { usePreferencias } from "@/lib/preferencias";
 import type { Regime, Situacao } from "@/schemas";
 import { ICONES } from "./icones";
 
@@ -15,6 +16,13 @@ export const ROTULO: Record<Situacao, { texto: string; tom: "ok" | "alerta" | "n
   nao: { texto: "Não previsto", tom: "neutro", Icone: Minus },
 };
 
+/** Nos cartões de bloco, a situação dita para o regime escolhido (decisão da etapa 2). */
+export const PARA_O_REGIME: Record<Situacao, string> = {
+  sim: "Previsto para o seu regime",
+  depende: "Depende de uma condição",
+  nao: "Não se aplica ao seu regime",
+};
+
 export const SIGNIFICADO: Record<Situacao, string> = {
   sim: "o Manual prevê o bloco para esse regime",
   depende: "o bloco só existe se uma condição do Manual for atendida",
@@ -22,13 +30,13 @@ export const SIGNIFICADO: Record<Situacao, string> = {
 };
 
 /** Legenda visível das etiquetas Previsto, Depende e Não previsto. */
-export function LegendaSituacao() {
+export function LegendaSituacao({ doRegime = false }: { doRegime?: boolean }) {
   return (
     <dl data-testid="legenda-situacao" className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-sm">
       {(Object.keys(ROTULO) as Situacao[]).map((s) => (
         <div key={s} className="flex flex-wrap items-center gap-2">
           <dt>
-            <EtiquetaSituacao s={s} />
+            <EtiquetaSituacao s={s} doRegime={doRegime} />
           </dt>
           <dd className="text-suave">{SIGNIFICADO[s]}</dd>
         </div>
@@ -37,13 +45,33 @@ export function LegendaSituacao() {
   );
 }
 
-export function EtiquetaSituacao({ s }: { s: Situacao }) {
+export function EtiquetaSituacao({ s, doRegime = false }: { s: Situacao; doRegime?: boolean }) {
   const { texto, tom, Icone } = ROTULO[s];
   return (
     <Etiqueta tom={tom} title={SIGNIFICADO[s]}>
       <Icone aria-hidden size={16} />
-      {texto}
+      {doRegime ? PARA_O_REGIME[s] : texto}
     </Etiqueta>
+  );
+}
+
+const CURTO: Record<string, string> = { real: "Real", presumido: "Presumido", arbitrado: "Arbitrado", imune: "Imune", isenta: "Isenta" };
+
+/** Os cinco regimes em linha: ícone e nome curto, com a situação por extenso para leitor de tela. */
+function RegimesDoBloco({ celulas, regimes }: { celulas: Record<Regime, Situacao>; regimes: { id: Regime; nome: string }[] }) {
+  return (
+    <ul aria-label="Situação em cada regime" className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-xs">
+      {regimes.map((r) => {
+        const { Icone, texto } = ROTULO[celulas[r.id]];
+        return (
+          <li key={r.id} className="flex items-center gap-1" data-regime={r.id} data-situacao={celulas[r.id]}>
+            <Icone aria-hidden size={14} className={celulas[r.id] === "nao" ? "text-suave" : undefined} />
+            <span className={celulas[r.id] === "nao" ? "text-suave line-through" : undefined}>{CURTO[r.id] ?? r.nome}</span>
+            <span className="sr-only">: {texto}</span>
+          </li>
+        );
+      })}
+    </ul>
   );
 }
 
@@ -61,14 +89,19 @@ export type CartaoBloco = {
   objetivo: string;
   nota: string;
   celulas: Record<Regime, Situacao>;
+  /** registros do bloco no ano */
+  registros: number;
 };
 
 export function BlocosPorRegime({ blocos, regimes }: { blocos: CartaoBloco[]; regimes: { id: Regime; nome: string }[] }) {
   const [valores, mudar] = useParametros({ regime: "", so: "" }, (lidos) => ({
-    regime: regimes.some((r) => r.id === lidos.regime) ? lidos.regime : "",
+    regime: lidos.regime === "todos" || regimes.some((r) => r.id === lidos.regime) ? lidos.regime : "",
     so: lidos.so === "previstos" ? "previstos" : "",
   }));
-  const regime = regimes.find((r) => r.id === valores.regime)?.id ?? null;
+  // Sem regime no endereço, vale o do perfil; “todos” é a escolha explícita de ver todos.
+  const { regime: doPerfil } = usePreferencias();
+  const doEndereco = valores.regime !== "";
+  const regime = valores.regime === "todos" ? null : (regimes.find((r) => r.id === (valores.regime || doPerfil))?.id ?? null);
   const soAplicaveis = valores.so === "previstos";
   const id = useId();
   const lista = regime && soAplicaveis ? blocos.filter((b) => b.celulas[regime] !== "nao") : blocos;
@@ -81,11 +114,11 @@ export function BlocosPorRegime({ blocos, regimes }: { blocos: CartaoBloco[]; re
           </label>
           <select
             id={id}
-            value={regime ?? ""}
+            value={regime ?? "todos"}
             onChange={(e) => mudar({ regime: e.target.value })}
             className="mt-1 min-h-11 rounded-lg border border-controle bg-superficie px-3"
           >
-            <option value="">Todos</option>
+            <option value="todos">Todos</option>
             {regimes.map((r) => (
               <option key={r.id} value={r.id}>
                 {r.nome}
@@ -104,7 +137,12 @@ export function BlocosPorRegime({ blocos, regimes }: { blocos: CartaoBloco[]; re
           Esconder os não previstos
         </label>
       </div>
-      {regime && <LegendaSituacao />}
+      {regime && !doEndereco && (
+        <p className="mb-2 text-sm text-suave" data-testid="regime-do-perfil">
+          Regime do seu perfil. Para ver outro, troque acima.
+        </p>
+      )}
+      {regime && <LegendaSituacao doRegime />}
       <p role="status" className="mb-4 text-suave">
         Mostrando {lista.length} de {blocos.length} blocos
       </p>
@@ -123,14 +161,18 @@ export function BlocosPorRegime({ blocos, regimes }: { blocos: CartaoBloco[]; re
                   <span className="block font-mono font-semibold">
                     Bloco {b.letra} <span className="text-sm font-medium">· {ordinal(b.posicao)} do arquivo · {b.grupo}</span>
                   </span>
+                  <span className="block text-sm text-suave" data-testid="registros-do-bloco">
+                    {b.registros} {b.registros === 1 ? "registro" : "registros"}
+                  </span>
                   <span className="block font-semibold">{b.nome}</span>
                   {b.ecd && <Etiqueta className="mt-1">dados da ECD</Etiqueta>}
                   <span data-so="iniciante" className="mt-1 block">
                     {b.objetivo}
                   </span>
+                  <RegimesDoBloco celulas={b.celulas} regimes={regimes} />
                   {regime && (
                     <span className="mt-2 block">
-                      <EtiquetaSituacao s={b.celulas[regime]} />
+                      <EtiquetaSituacao s={b.celulas[regime]} doRegime />
                       <span data-so="profissional" className="mt-1 block text-sm">
                         {b.nota}
                       </span>
