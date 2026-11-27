@@ -44,7 +44,7 @@ export function Inicio({ ano }: { ano: number }) {
     { rotulo: "Última revisão", valor: data(revisao), legenda: "fontes oficiais conferidas", href: "/fontes", Icone: ShieldCheck },
     { rotulo: "Novidades", valor: <NovidadesRecentes datas={novidades.map((n) => n.data)} />, legenda: "nos últimos 90 dias · ver o que mudou", href: "/novidades", Icone: Bell },
   ];
-  const caminho = "flex h-full flex-col border-t-2 border-linha pt-5 text-tinta no-underline transition-colors hover:border-marca";
+  const caminho = "flex h-full flex-col border-t-2 border-linha pt-5 text-tinta no-underline transition-[border-color] hover:border-marca";
   return (
     <div className="space-y-12">
       <section aria-labelledby="t-destaque" data-testid="destaque" className="relative overflow-hidden rounded-2xl border border-linha bg-superficie">
@@ -104,7 +104,7 @@ export function Inicio({ ano }: { ano: number }) {
               prefetch={false}
               data-testid="cartao-numero"
               className={cn(
-                "flex h-full flex-col rounded-xl border p-5 text-tinta no-underline transition-colors hover:border-marca",
+                "flex h-full flex-col rounded-xl border p-5 text-tinta no-underline transition-[border-color] hover:border-marca",
                 n.destaque ? "cartao-destaque" : "border-linha bg-superficie",
               )}
             >

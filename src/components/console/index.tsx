@@ -207,7 +207,7 @@ export function Console({ nos, ligacoes, regimes, ano }: Props) {
                 onKeyDown={setas}
                 style={{ left: `${x}%`, top: `${y}%` }}
                 className={cn(
-                  "min-h-17 rounded-xl border bg-superficie px-3 py-2 text-left transition-colors hover:border-marca lg:absolute lg:w-32 lg:-translate-x-1/2 lg:-translate-y-1/2",
+                  "min-h-17 rounded-xl border bg-superficie px-3 py-2 text-left transition-[border-color] hover:border-marca lg:absolute lg:w-32 lg:-translate-x-1/2 lg:-translate-y-1/2",
                   n.id === sel
                     ? "border-marca bg-marca text-sobre-marca"
                     : cn(

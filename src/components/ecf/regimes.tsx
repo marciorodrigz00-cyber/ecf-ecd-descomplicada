@@ -155,7 +155,7 @@ export function BlocosPorRegime({ blocos, regimes }: { blocos: CartaoBloco[]; re
                 href={b.href}
                 prefetch={false}
                 title={b.objetivo}
-                className="bloco flex h-full flex-col rounded-xl border p-5 text-tinta no-underline transition-colors hover:border-marca"
+                className="bloco flex h-full flex-col rounded-xl border p-5 text-tinta no-underline transition-[border-color] hover:border-marca"
               >
                 <span className="flex items-start justify-between gap-3">
                   <span className="font-mono text-xs tracking-widest text-suave uppercase">

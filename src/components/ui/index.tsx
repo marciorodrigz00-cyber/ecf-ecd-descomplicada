@@ -4,7 +4,7 @@ import { cn } from "@/lib/cn";
 
 /** Componentes base no padrão shadcn/ui: código próprio, variantes por cva. */
 export const estiloBotao = cva(
-  "inline-flex min-h-11 items-center justify-center gap-2 rounded-lg px-5 py-2 font-semibold no-underline transition-colors",
+  "inline-flex min-h-11 items-center justify-center gap-2 rounded-lg px-5 py-2 font-semibold no-underline transition-opacity",
   {
     variants: {
       variante: {
