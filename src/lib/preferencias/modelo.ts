@@ -26,6 +26,8 @@ export type Preferencias = {
   regime: RegimePerfil | null;
   /** o cartão de perfil já foi respondido ou pulado */
   perfil: "respondido" | "pulado" | null;
+  /** menu lateral recolhido (trilho de ícones); null = aberto */
+  menu: "recolhido" | null;
 };
 
 export const PADRAO: Preferencias = {
@@ -40,6 +42,7 @@ export const PADRAO: Preferencias = {
   atalhos: true,
   regime: null,
   perfil: null,
+  menu: null,
 };
 
 /** Aceita qualquer coisa que esteja no armazenamento e devolve sempre um estado válido. */
@@ -65,6 +68,7 @@ export function interpretar(cru: string | null): Preferencias {
     atalhos: o.atalhos !== false,
     regime: REGIMES_PERFIL.find((r) => r === o.regime) ?? null,
     perfil: o.perfil === "respondido" || o.perfil === "pulado" ? o.perfil : null,
+    menu: o.menu === "recolhido" ? "recolhido" : null,
   };
 }
 

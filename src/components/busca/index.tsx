@@ -11,6 +11,31 @@ const NOME: Record<TipoItem, string> = { bloco: "Bloco", registro: "Registro", c
 const GRUPO: Record<TipoItem, string> = { bloco: "Blocos", registro: "Registros", campo: "Campos", termo: "Glossário", secao: "Páginas", novidade: "Novidades", regra: "Regras de validação" };
 const guardados = new Map<number, Indice>();
 type Carga = { ano: number; estado: "carregando" | "erro" | "pronto" };
+/** Qualquer botão de busca abre o mesmo diálogo, que existe uma vez só na página. */
+const ABRIR_BUSCA = "ecf:abrir-busca";
+
+export function BotaoBusca({ compacto = false, className }: { compacto?: boolean; className?: string }) {
+  return (
+    <button
+      type="button"
+      onClick={() => window.dispatchEvent(new Event(ABRIR_BUSCA))}
+      aria-haspopup="dialog"
+      aria-label={compacto ? "Buscar" : undefined}
+      className={cn(
+        "flex min-h-11 min-w-11 items-center justify-center gap-3 rounded-lg border border-controle bg-fundo px-3 text-suave hover:border-marca",
+        className,
+      )}
+    >
+      <Search aria-hidden size={20} className="shrink-0" />
+      {!compacto && (
+        <>
+          <span className="min-w-0 flex-1 truncate text-left">Buscar…</span>
+          <kbd className="shrink-0 rounded border border-controle px-1.5 font-mono text-xs">Ctrl K</kbd>
+        </>
+      )}
+    </button>
+  );
+}
 
 export function Busca({ padrao }: { padrao: number }) {
   const pathname = usePathname();
@@ -57,8 +82,17 @@ export function Busca({ padrao }: { padrao: number }) {
         else abrir();
       }
     };
+    // Botão de busca (na lateral ou na gaveta): fecha a gaveta antes de abrir.
+    const pedido = () => {
+      document.querySelectorAll("dialog[open]").forEach((d) => d !== dialogo.current && (d as HTMLDialogElement).close());
+      abrir();
+    };
     window.addEventListener("keydown", ouvir);
-    return () => window.removeEventListener("keydown", ouvir);
+    window.addEventListener(ABRIR_BUSCA, pedido);
+    return () => {
+      window.removeEventListener("keydown", ouvir);
+      window.removeEventListener(ABRIR_BUSCA, pedido);
+    };
   }, []);
 
   // Clique fora fecha: o alvo é o próprio diálogo só quando o clique cai na área escura.
@@ -106,20 +140,6 @@ export function Busca({ padrao }: { padrao: number }) {
 
   return (
     <>
-      <button
-        type="button"
-        onClick={abrir}
-        aria-haspopup="dialog"
-        className="flex min-h-11 min-w-11 items-center justify-center gap-3 rounded-lg border border-controle bg-fundo px-3 text-suave hover:border-marca xl:min-w-0 xl:flex-1 xl:justify-start"
-      >
-        <Search aria-hidden size={20} className="shrink-0" />
-        <span className="sr-only min-w-0 flex-1 truncate text-left xl:not-sr-only xl:truncate">
-          Buscar bloco, registro, campo ou termo
-        </span>
-        <kbd className="hidden shrink-0 rounded border border-controle px-2 font-mono text-sm xl:block">
-          Ctrl K
-        </kbd>
-      </button>
       <dialog
         ref={dialogo}
         aria-label="Busca"

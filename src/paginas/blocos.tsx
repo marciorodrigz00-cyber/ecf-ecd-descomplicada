@@ -3,6 +3,7 @@ import { ArrowLeft, ArrowRight, ListChecks } from "lucide-react";
 import { NOME_FAMILIA, tomDoBloco } from "@/components/ecf/blocos";
 import { ICONES } from "@/components/ecf/icones";
 import { MapaBlocos } from "@/components/ecf/mapa";
+import { Console } from "@/components/console";
 import { EtiquetaStatus, LinkFonte, Selo } from "@/components/ecf/rastreio";
 import { BaseLegal } from "@/components/ecf/base-legal";
 import { BlocosPorRegime, EtiquetaSituacao, LegendaSituacao, type CartaoBloco } from "@/components/ecf/regimes";
@@ -60,6 +61,43 @@ function cartoes(ano: number): CartaoBloco[] {
   }));
 }
 
+/** O explorador do fluxo (saiu da home com o layout novo): blocos, ligações, registros e percurso. */
+function ConsoleDoArquivo({ ano }: { ano: number }) {
+  const leiaute = leiauteDoAno(ano);
+  const nos = [
+    ...grafo.externos.map((x) => ({ id: x.id, letra: x.id === "ECFA" ? "ECF" : x.id, curto: x.nome, bloco: null })),
+    ...leiaute.blocos.map((b) => {
+      const d = didatico(b.letra);
+      const n = nomeBloco(b.letra, ano);
+      const l = linhaRegime(b.letra);
+      return {
+        id: b.letra,
+        letra: b.letra,
+        curto: n.curto,
+        bloco: {
+          nome: n.nome,
+          href: ir(urlBloco(b.letra), ano),
+          objetivo: n.objetivo,
+          analogia: d.analogia,
+          nota: l.nota,
+          celulas: l.celulas,
+          erros: d.erros.map((e) => ({ titulo: e.titulo, comoEvitar: e.comoEvitar, registro: e.registro, href: ir(urlRegistro(e.registro), ano) })),
+          registros: registrosDoBloco(b.letra, ano).map((r) => ({ codigo: r.codigo, nome: r.nome, campos: r.campos.length, href: ir(urlRegistro(r.codigo), ano) })),
+        },
+      };
+    }),
+  ];
+  return (
+    <Console
+      key={ano}
+      ano={ano}
+      nos={nos}
+      ligacoes={grafo.arestas.map((x) => ({ de: x.de, para: x.para, o: x.o, registro: x.base.registro, href: ir(urlRegistro(x.base.registro), ano) }))}
+      regimes={regimes.regimes.map(({ id, nome }) => ({ id, nome }))}
+    />
+  );
+}
+
 function Mapa({ ano, inicial }: { ano: number; inicial?: string }) {
   const { blocos } = leiauteDoAno(ano);
   return (
@@ -84,14 +122,12 @@ export function Blocos({ ano }: { ano: number }) {
   const total = leiauteDoAno(ano).blocos.length;
   return (
     <div className="space-y-12">
-      <Cartao className="flex flex-wrap items-center justify-between gap-4">
-        <p className="max-w-prose text-lg">
-          Prefere ir passo a passo? O roteiro mostra só os blocos do seu regime, na ordem do arquivo.
-        </p>
-        <Link href={ir("/preencher", ano)} prefetch={false} className={estiloBotao()}>
+      <p className="flex flex-wrap items-center gap-x-4 gap-y-2 text-suave">
+        Prefere ir passo a passo? O roteiro mostra só os blocos do seu regime, na ordem do arquivo.
+        <Link href={ir("/preencher", ano)} prefetch={false} className="inline-flex min-h-11 items-center gap-2 font-semibold text-tinta underline underline-offset-4">
           <ListChecks aria-hidden size={18} /> Abrir o roteiro
         </Link>
-      </Cartao>
+      </p>
       <section aria-labelledby="t-grade">
         <h2 id="t-grade" className="mb-4 text-2xl font-bold">
           {inteiro(total)} blocos cobertos
@@ -104,10 +140,14 @@ export function Blocos({ ano }: { ano: number }) {
         </p>
       </section>
       <section aria-labelledby="t-mapa">
-        <h2 id="t-mapa" className="mb-4 text-2xl font-bold">
-          De onde vêm os dados
+        <h2 id="t-mapa" className="text-2xl font-bold">
+          Como os dados percorrem a ECF
         </h2>
-        <Mapa ano={ano} />
+        <div className="mt-2 mb-5 max-w-prose text-suave">
+          <Nivel so="iniciante">Pense na ECF como um dossiê dividido em capítulos. Clique em um capítulo, ou percorra todos em ordem.</Nivel>
+          <Nivel so="profissional">Blocos, ligações e registros em consulta rápida, por regime.</Nivel>
+        </div>
+        <ConsoleDoArquivo ano={ano} />
       </section>
     </div>
   );
@@ -422,7 +462,7 @@ function MapaDoBloco({ bloco, codigo, ano }: { bloco: string; codigo: string; an
   const k = blocos.findIndex((b) => b.letra === bloco);
   const [antes, depois] = [blocos[k - 1], blocos[k + 1]];
   return (
-    <aside className="hidden xl:block">
+    <aside className="hidden min-[1440px]:block">
       <nav aria-label={`Registros do bloco ${bloco}`} data-testid="mapa-do-bloco" className="sticky top-6 max-h-[calc(100vh-3rem)] overflow-y-auto rounded-xl border border-linha bg-superficie p-4">
         <p className="mb-2 font-semibold">
           Bloco {bloco}: {nomeBloco(bloco, ano).curto}
@@ -480,7 +520,7 @@ export function PaginaRegistro({ codigo, ano }: { codigo: string; ano: number })
   const vistosPara = vistos();
   const vistosRegras = vistos();
   return (
-    <div className="xl:grid xl:grid-cols-[minmax(0,1fr)_16rem] xl:gap-10">
+    <div className="min-[1440px]:grid min-[1440px]:grid-cols-[minmax(0,1fr)_16rem] min-[1440px]:gap-10">
     <div className="min-w-0 space-y-10">
       <MarcarVisita codigo={codigo} />
       <RedirecionarAncora mapa={Object.fromEntries(ancoras.map(([c, a]) => [`campo-${c.numero}`, a]))} />

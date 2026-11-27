@@ -1,17 +1,18 @@
 import Link from "next/link";
-import { ArrowRight, ClipboardList, GraduationCap, Hammer } from "lucide-react";
-import { Console } from "@/components/console";
-import { CartaoRegra, EtiquetaStatus, LinkFonte, Selo } from "@/components/ecf/rastreio";
+import { ArrowRight, Bell, Blocks, ClipboardList, FileText, GraduationCap, Hammer, ShieldCheck, Trophy } from "lucide-react";
+import { EtiquetaStatus, LinkFonte, Selo } from "@/components/ecf/rastreio";
 import { MarcarEstudada } from "@/components/layout/progresso";
-import { CartaoPerfil } from "@/components/layout/perfil";
+import { ContagemPrazo, NovidadesRecentes } from "@/components/layout/visao-geral";
 import { Atalhos, CaminhoAprender, CartaoTrilha, ComProgresso, Conquistas } from "@/components/layout/trilha";
 import { CaixaRolavel, Cartao, Etiqueta, Nivel } from "@/components/ui";
-import { ANO_PADRAO, anos, fontes, leiauteDoAno, linhaDoTempo, novidades, programa, rastreaveis, regra, regras } from "@/lib/conteudo";
-import { ausentesPorAno, conferencia, didatico, divergencias, grafo, legendas, linhaRegime, nomeBloco, regimes, registrosDoBloco } from "@/lib/conteudo/leiautes";
+import { ANO_PADRAO, fontes, leiauteDoAno, linhaDoTempo, novidades, quiz, rastreaveis, regra, regras, textoDoValor } from "@/lib/conteudo";
+import { conferencia, divergencias, registrosDoBloco } from "@/lib/conteudo/leiautes";
+import { cn } from "@/lib/cn";
+import { resumoRegistro } from "@/lib/exemplos/por-registro";
+import { prazoDoAno } from "@/lib/prazo";
 import { data, inteiro } from "@/lib/formatos";
 import { SECOES, rota, type Secao } from "@/lib/rotas";
-import { AVISO_ECD } from "@/lib/seo";
-import { Blocos, urlRegistro } from "./blocos";
+import { Blocos } from "./blocos";
 import { Exemplos, PaginaSimulador } from "./exemplos";
 import { Glossario } from "./glossario";
 import { Novidades } from "./novidades";
@@ -30,140 +31,159 @@ const PRONTAS: Record<string, (p: { ano: number }) => React.ReactNode> = {
 
 export function Inicio({ ano }: { ano: number }) {
   const leiaute = leiauteDoAno(ano);
-  const prazo = regra("prazo-regra-geral", ano);
   const ir = (b: string) => rota(b, ano, ANO_PADRAO);
-  const nos = [
-    ...grafo.externos.map((x) => ({ id: x.id, letra: x.id === "ECFA" ? "ECF" : x.id, curto: x.nome, bloco: null })),
-    ...leiaute.blocos.map((b) => {
-      const d = didatico(b.letra);
-      const n = nomeBloco(b.letra, ano);
-      const l = linhaRegime(b.letra);
-      return {
-        id: b.letra,
-        letra: b.letra,
-        curto: n.curto,
-        bloco: {
-          nome: n.nome,
-          href: ir(`/blocos/${b.letra.toLowerCase()}`),
-          objetivo: n.objetivo,
-          analogia: d.analogia,
-          nota: l.nota,
-          celulas: l.celulas,
-          erros: d.erros.map((e) => ({ titulo: e.titulo, comoEvitar: e.comoEvitar, registro: e.registro, href: ir(urlRegistro(e.registro)) })),
-          registros: registrosDoBloco(b.letra, ano).map((r) => ({ codigo: r.codigo, nome: r.nome, campos: r.campos.length, href: ir(urlRegistro(r.codigo)) })),
-        },
-      };
-    }),
+  const prazos = regras.filter((r) => r.id === "prazo-regra-geral").flatMap((r) => r.vigencia.acNormal.map((ac) => ({ ac, data: prazoDoAno(ac) })));
+  const prazo = regra("prazo-regra-geral", ano);
+  const registros = leiaute.blocos.flatMap((b) => registrosDoBloco(b.letra, ano));
+  const explicados = registros.filter((r) => resumoRegistro(r.codigo, ano).exemplos.some((e) => e.partes)).length;
+  const revisao = [...rastreaveis.map((r) => r.verificadoEm), conferencia(ano).verificadoEm].sort().at(-1)!;
+  const primeira = quiz.perguntas.find((p) => p.id === quiz.inicio)!;
+  const numeros = [
+    { rotulo: "Blocos cobertos", valor: inteiro(leiaute.blocos.length), legenda: `do leiaute ${leiaute.numero}`, href: "/blocos", Icone: Blocks },
+    { rotulo: "Registros explicados", valor: inteiro(explicados), legenda: "com exemplo de preenchimento", href: "/blocos", Icone: FileText, destaque: true },
+    { rotulo: "Última revisão", valor: data(revisao), legenda: "fontes oficiais conferidas", href: "/fontes", Icone: ShieldCheck },
+    { rotulo: "Novidades", valor: <NovidadesRecentes datas={novidades.map((n) => n.data)} />, legenda: "nos últimos 90 dias · ver o que mudou", href: "/novidades", Icone: Bell },
   ];
-  const card = "flex h-full flex-col rounded-2xl border-2 border-linha bg-superficie p-6 text-tinta no-underline transition-colors hover:border-marca";
+  const caminho = "flex h-full flex-col border-t-2 border-linha pt-5 text-tinta no-underline transition-colors hover:border-marca";
   return (
-    <div className="space-y-14">
-      <CartaoPerfil anos={anos} padrao={ANO_PADRAO} ausentes={ausentesPorAno()} regimes={regimes.regimes.map(({ id, nome }) => ({ id, nome }))} />
-
-      <section aria-labelledby="t-caminhos">
-        <p className="font-mono text-sm text-suave">
-          leiaute {leiaute.numero} · AC {ano}
-        </p>
-        <h1 id="t-caminhos" className="mt-1 text-3xl font-bold sm:text-4xl">
-          Entenda e prepare a ECF
-        </h1>
-        <div className="mt-3 max-w-prose text-lg text-suave">
-          <Nivel so="iniciante">Escolha por onde começar: aprender o que é a ECF, ou ir direto ao passo a passo do preenchimento.</Nivel>
-          <Nivel so="profissional">Trilha de estudo ou roteiro de preenchimento por regime, com fonte e data de verificação em cada regra.</Nivel>
+    <div className="space-y-12">
+      <section aria-labelledby="t-destaque" data-testid="destaque" className="relative overflow-hidden rounded-2xl border border-linha bg-superficie">
+        <FundoSped />
+        <div className="relative grid gap-8 p-6 sm:p-10 xl:grid-cols-[minmax(0,1fr)_20rem] xl:items-end">
+          <div>
+            <p className="flex items-center gap-3 font-mono text-xs tracking-widest text-suave uppercase">
+              ECF {ano + 1} <span aria-hidden className="h-px w-8 bg-controle" /> Ano-calendário {ano}
+            </p>
+            <h1 id="t-destaque" className="mt-4 font-mono text-4xl font-semibold tracking-tight uppercase sm:text-6xl">
+              A ECF,
+              <span className="block text-marca">sem complicação.</span>
+            </h1>
+            <p className="mt-4 max-w-prose text-lg text-suave">Entenda o arquivo, prepare cada bloco e confira as regras na fonte oficial.</p>
+            <div className="mt-8">
+              <ContagemPrazo prazos={prazos} ano={ano} />
+              <div className="mt-4">
+                <Selo ano={ano} itens={[prazo, conferencia(ano)]} />
+              </div>
+              <p className="mt-2 text-xs text-suave">
+                Regra geral: {textoDoValor(prazo.valor).toLowerCase()} (<LinkFonte fonte={prazo.fonte} curto />).
+              </p>
+            </div>
+          </div>
+          <div data-testid="widget-quiz" className="rounded-xl border border-linha bg-fundo p-5">
+            <ComProgresso
+              convite={
+                <>
+                  <p className="font-mono text-xs tracking-widest text-suave uppercase">Quem entrega</p>
+                  <h2 className="mt-2 text-lg font-semibold">Minha empresa precisa entregar?</h2>
+                  <p className="mt-1 text-sm text-suave">{primeira.texto}</p>
+                  <Link
+                    href={ir("/quem-deve-entregar")}
+                    prefetch={false}
+                    className="mt-4 inline-flex min-h-11 items-center gap-2 rounded-lg bg-marca px-5 font-semibold text-sobre-marca no-underline"
+                  >
+                    Descobrir <ArrowRight aria-hidden size={18} />
+                  </Link>
+                </>
+              }
+            >
+              <p className="font-mono text-xs tracking-widest text-suave uppercase">Sua trilha</p>
+              <h2 className="mt-2 text-lg font-semibold">Continue de onde parou</h2>
+              <CaminhoAprender ano={ano} padrao={ANO_PADRAO} className="mt-2 inline-flex min-h-11 flex-col justify-center text-tinta underline underline-offset-4">
+                <span className="sr-only">Próximo tema da trilha</span>
+              </CaminhoAprender>
+            </ComProgresso>
+          </div>
         </div>
-        <p className="mt-3 max-w-prose rounded-lg bg-alerta-fundo px-4 py-2 text-sm text-alerta">{AVISO_ECD}</p>
-        <div className="mt-6 grid gap-4 md:grid-cols-2">
-          <CaminhoAprender ano={ano} padrao={ANO_PADRAO} className={card}>
-            <GraduationCap aria-hidden size={32} className="text-marca" />
-            <span className="mt-3 text-2xl font-bold">Estou aprendendo</span>
-            <span className="mt-2 text-suave">O que é a ECF, quem entrega, os blocos e os exemplos, numa trilha em ordem.</span>
+      </section>
+
+      <ul aria-label="Números do site" className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {numeros.map((n) => (
+          <li key={n.rotulo}>
+            <Link
+              href={ir(n.href)}
+              prefetch={false}
+              data-testid="cartao-numero"
+              className={cn(
+                "flex h-full flex-col rounded-xl border p-5 text-tinta no-underline transition-colors hover:border-marca",
+                n.destaque ? "cartao-destaque" : "border-linha bg-superficie",
+              )}
+            >
+              <span className="flex items-start justify-between gap-3">
+                <span className="font-mono text-xs tracking-widest text-suave uppercase">{n.rotulo}</span>
+                <n.Icone aria-hidden size={18} className={n.destaque ? "text-marca" : "text-suave"} />
+              </span>
+              <span className={cn("mt-3 font-mono text-3xl font-semibold", n.destaque && "text-marca")}>{n.valor}</span>
+              <span className="mt-1 text-sm text-suave">{n.legenda}</span>
+            </Link>
+          </li>
+        ))}
+      </ul>
+
+      <section aria-labelledby="t-comece">
+        <h2 id="t-comece" className="text-2xl font-bold">
+          Comece por aqui
+        </h2>
+        <div className="mt-5 grid gap-8 md:grid-cols-2">
+          <CaminhoAprender ano={ano} padrao={ANO_PADRAO} className={caminho}>
+            <GraduationCap aria-hidden size={28} className="text-marca" />
+            <span className="mt-3 text-xl font-bold">Estou aprendendo</span>
+            <span className="mt-1 text-suave">O que é a ECF, quem entrega, os blocos e os casos práticos, numa trilha em ordem.</span>
           </CaminhoAprender>
-          <Link href={ir("/preencher")} prefetch={false} className={card} data-testid="caminho-preencher">
-            <ClipboardList aria-hidden size={32} className="text-marca" />
-            <span className="mt-3 text-2xl font-bold">Vou preencher</span>
-            <span className="mt-2 text-suave">O passo a passo do arquivo para o regime da empresa, bloco por bloco.</span>
+          <Link href={ir("/preencher")} prefetch={false} className={caminho} data-testid="caminho-preencher">
+            <ClipboardList aria-hidden size={28} className="text-marca" />
+            <span className="mt-3 text-xl font-bold">Vou preencher</span>
+            <span className="mt-1 text-suave">O passo a passo do arquivo para o regime da empresa, bloco por bloco.</span>
             <span className="mt-3 flex items-center gap-2 font-semibold">
               Abrir o roteiro <ArrowRight aria-hidden size={18} />
             </span>
           </Link>
         </div>
-      </section>
-
-      <section aria-labelledby="t-agora">
-        <h2 id="t-agora" className="text-2xl font-bold sm:text-3xl">
-          O que vale para o ano-calendário {ano}
-        </h2>
-        <div className="mt-5 grid gap-4 lg:grid-cols-2">
-          <CartaoRegra regra={prazo} />
-          <Cartao>
-            <div className="flex flex-wrap items-center justify-between gap-3">
-              <h3 className="text-lg font-semibold">Programa da ECF</h3>
-              <EtiquetaStatus status={programa.status} />
-            </div>
-            <p className="mt-3 text-lg">
-              Versão {programa.versao} na página oficial de download, atualizada em {data(programa.paginaAtualizadaEm)}.
-            </p>
-            <p className="mt-2 text-suave">Confira sempre a página oficial antes de instalar.</p>
-            <p className="mt-4 text-sm text-suave">
-              <LinkFonte fonte={programa.fonte} /> · comunicado verificado em{" "}
-              {data(programa.verificadoEm)}
-            </p>
-          </Cartao>
-        </div>
+        <Link href={ir("/meu-progresso")} prefetch={false} className="mt-4 inline-flex min-h-11 items-center gap-2 text-sm text-suave underline underline-offset-4">
+          <Trophy aria-hidden size={16} /> Ver meu progresso
+        </Link>
       </section>
 
       <section aria-labelledby="t-novidades">
-        <h2 id="t-novidades" className="text-2xl font-bold sm:text-3xl">
-          Novidades conferidas
+        <h2 id="t-novidades" className="text-2xl font-bold">
+          Novidades
         </h2>
-        <ul className="mt-5 grid gap-4 md:grid-cols-3">
+        <ul className="mt-4 divide-y divide-linha">
           {novidades.slice(0, 3).map((n) => (
-            <li key={n.id} className="rounded-2xl border border-linha bg-superficie p-5">
-              <p className="font-mono text-sm text-suave">
-                <time dateTime={n.data}>{data(n.data)}</time> · {n.tipo}
-              </p>
-              <Link href={ir(`/novidades/${n.slug}`)} prefetch={false} className="inline-block py-1 font-semibold underline underline-offset-4">
+            <li key={n.id} className="flex flex-col gap-1 py-4 sm:flex-row sm:items-baseline sm:gap-6">
+              <time dateTime={n.data} className="w-28 shrink-0 font-mono text-sm text-suave">
+                {data(n.data)}
+              </time>
+              <Link href={ir(`/novidades/${n.slug}`)} prefetch={false} className="inline-flex min-h-6 items-center font-semibold underline underline-offset-4">
                 {n.titulo}
               </Link>
-              <div className="mt-1">
-                <EtiquetaStatus status={n.status} />
-              </div>
             </li>
           ))}
         </ul>
         <Link href={ir("/novidades")} prefetch={false} className="mt-2 inline-flex min-h-11 items-center gap-2 underline underline-offset-4">
-          Ver todas <ArrowRight aria-hidden size={18} />
+          Todas as novidades <ArrowRight aria-hidden size={18} />
         </Link>
       </section>
-
-      <section aria-labelledby="t-mapa">
-        <p className="font-mono text-sm text-suave">
-          mapa de fluxo · leiaute {leiaute.numero} · AC {ano}
-        </p>
-        <h2 id="t-mapa" className="mt-1 text-2xl font-bold sm:text-3xl">
-          Como os dados percorrem a ECF
-        </h2>
-        <div className="mt-3 max-w-prose text-lg text-suave">
-          <Nivel so="iniciante">
-            Nunca viu uma ECF? Pense nela como um dossiê: a empresa reúne a contabilidade e os cálculos de imposto em um único arquivo,
-            dividido em capítulos. Clique em um capítulo, ou percorra todos em ordem.
-          </Nivel>
-          <Nivel so="profissional">
-            Blocos, ligações e registros do leiaute {leiaute.numero} em consulta rápida, cada um com norma, vigência e data de verificação.
-          </Nivel>
-        </div>
-        <div className="mt-3 mb-5">
-          <Selo ano={ano} itens={[prazo, legendas.rastreio]} />
-        </div>
-        <Console
-          key={ano}
-          ano={ano}
-          nos={nos}
-          ligacoes={grafo.arestas.map((x) => ({ de: x.de, para: x.para, o: x.o, registro: x.base.registro, href: ir(urlRegistro(x.base.registro)) }))}
-          regimes={regimes.regimes.map(({ id, nome }) => ({ id, nome }))}
-        />
-      </section>
     </div>
+  );
+}
+
+/** Linhas de um arquivo SPED em baixo contraste, só decoração. Em SVG, fora da leitura de tela. */
+function FundoSped() {
+  const linhas = ["|0000|LECF|0012|", "|0010||A|N|N|", "|0020|S|N|N|", "|J100|01012025|", "|K155|1.01.01|", "|L100|1|A|", "|M300|1|E|", "|N630|1|", "|P200|1|", "|Y540|1|", "|9900|0000|1|", "|9999|1234|"];
+  return (
+    <svg
+      aria-hidden
+      focusable="false"
+      className="pointer-events-none absolute inset-y-0 right-0 hidden h-full w-[30rem] text-marca opacity-[0.12] min-[1440px]:block"
+      viewBox="0 0 600 420"
+      preserveAspectRatio="xMaxYMid slice"
+    >
+      {linhas.map((l, i) => (
+        <text key={l} x={i % 2 ? 140 : 90} y={36 + i * 34} fill="currentColor" fontFamily="var(--font-mono)" fontSize="22">
+          {l}
+        </text>
+      ))}
+    </svg>
   );
 }
 

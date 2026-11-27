@@ -11,4 +11,6 @@
   html.dataset.theme = p.tema === "light" ? "light" : "dark";
   // Perfil já respondido ou pulado: o cartão da home some antes de aparecer.
   if (p.perfil === "respondido" || p.perfil === "pulado") html.dataset.perfil = "ok";
+  // Menu lateral recolhido: a largura certa já na primeira pintura.
+  if (p.menu === "recolhido") html.dataset.menu = "recolhido";
 })();

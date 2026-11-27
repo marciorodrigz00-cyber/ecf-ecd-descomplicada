@@ -3,6 +3,7 @@ import { expect, test, type Page } from "@playwright/test";
 import { request as httpRequest } from "node:http";
 import { readdirSync, statSync } from "node:fs";
 import path from "node:path";
+import { abrirPerfil, mudarAno, mudarNivel } from "./apoio";
 
 const SECOES = ["o-que-e", "importancia", "quem-deve-entregar", "blocos", "exemplos", "simulador", "novidades", "glossario"];
 const AMOSTRA = ["/", "/blocos", "/blocos/m", "/fontes", "/simulador", "/o-que-e", "/importancia", "/quem-deve-entregar", "/ac/2024", "/ac/2024/importancia"];
@@ -15,7 +16,6 @@ const TODAS = ["", "/ac/2024"].flatMap((p) => [
   ..."0cejklmnpqtuvwxy9".split("").map((l) => `${p}/blocos/${l}`),
 ]);
 const CHAVE = "ecf:preferencias:v1";
-const ano = (page: Page, a: string) => page.getByRole("group", { name: "Ano-calendário" }).getByRole("link", { name: a });
 
 async function pronta(page: Page, url: string) {
   await page.goto(url);
@@ -56,12 +56,12 @@ test("[CT-001][CT-002] menu, item ativo, breadcrumb, topo e foco", async ({ page
   await page.setViewportSize({ width: 1440, height: 700 });
   await pronta(page, "/");
   await page.evaluate(() => scrollTo(0, document.body.scrollHeight));
-  const menu = page.getByRole("navigation", { name: "Principal", exact: true });
-  for (const [nome, slug] of [["Blocos", "blocos"], ["Simulador", "simulador"], ["Glossário", "glossario"]] as const) {
+  const menu = page.locator("[data-lateral]").getByRole("navigation", { name: "Menu principal" });
+  for (const [nome, slug, trilha] of [["Blocos e registros", "blocos", "Blocos"], ["Simulador", "simulador", "Simulador"], ["Glossário", "glossario", "Glossário"]] as const) {
     await menu.getByRole("link", { name: nome, exact: true }).click();
     await expect(page).toHaveURL(new RegExp(`/${slug}$`));
-    await expect(menu.locator("[aria-current=page]")).toHaveText(nome);
-    await expect(page.getByRole("navigation", { name: "Você está em" }).locator("[aria-current=page]")).toHaveText(nome);
+    await expect(menu.locator("[data-item-menu][aria-current=page]")).toHaveText(nome);
+    await expect(page.getByRole("navigation", { name: "Você está em" }).locator("[aria-current=page]")).toHaveText(trilha);
     await expect(page.locator("h1")).toBeFocused();
     expect(await page.evaluate(() => scrollY)).toBe(0);
   }
@@ -81,14 +81,15 @@ test("[CT-003] F5 mantém a seção e Voltar retorna", async ({ page }) => {
 
 test("[CT-004] nível muda o conteúdo e persiste", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
-  await pronta(page, "/");
-  await expect(page.getByText("Nunca viu uma ECF?")).toBeVisible();
-  await page.getByText("Já conheço", { exact: true }).first().click();
-  await expect(page.getByText("Nunca viu uma ECF?")).toBeHidden();
+  await pronta(page, "/blocos");
+  await expect(page.getByText("Pense na ECF como um dossiê")).toBeVisible();
+  await mudarNivel(page, "Já conheço");
+  await expect(page.getByText("Pense na ECF como um dossiê")).toBeHidden();
   await expect(page.getByText(/em consulta rápida/)).toBeVisible();
   await page.reload();
   await expect(page.getByText(/em consulta rápida/)).toBeVisible();
-  await expect(page.getByRole("radio", { name: "Já conheço" }).first()).toBeChecked();
+  await expect((await abrirPerfil(page)).getByRole("radio", { name: "Já conheço" })).toBeChecked();
+  await page.keyboard.press("Escape");
   await pronta(page, "/simulador");
   await expect(page.getByText("memória de cálculo")).toBeVisible();
 });
@@ -96,14 +97,16 @@ test("[CT-004] nível muda o conteúdo e persiste", async ({ page }) => {
 test("[CT-005] ano muda o conteúdo, vive na URL e persiste", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await pronta(page, "/blocos/m");
-  await ano(page, "2024").click();
+  await mudarAno(page, "2024");
   await expect(page).toHaveURL(/\/ac\/2024\/blocos\/m$/);
   await expect(page.getByTestId("selo")).toContainText("leiaute 11");
   await page.reload();
-  await expect(ano(page, "2024")).toHaveAttribute("aria-current", "true");
+  const painel = await abrirPerfil(page);
+  await expect(painel.getByRole("group", { name: "Ano da ECF no perfil" }).getByRole("link", { name: "2024" })).toHaveAttribute("aria-current", "true");
+  await page.keyboard.press("Escape");
   await pronta(page, "/");
   await expect(page).toHaveURL(/\/ac\/2024$/);
-  await ano(page, "2025").click();
+  await mudarAno(page, "2025");
   await expect(page).toHaveURL(/4173\/$/);
   await expect(page.getByTestId("selo")).toContainText("leiaute 12");
 });
@@ -125,14 +128,15 @@ test("[CT-006][CT-007] progresso, tema e cliques repetidos", async ({ page }) =>
   await expect(page.getByRole("button", { name: "Seção estudada" })).toHaveAttribute("aria-pressed", "true");
   await pronta(page, "/meu-progresso");
   await expect(page.getByRole("progressbar", { name: /seções estudadas/ })).toHaveAttribute("aria-valuenow", "1");
-  for (let i = 0; i < 6; i++) await page.getByText(i % 2 ? "Estou começando" : "Já conheço", { exact: true }).first().click();
+  const painel = await abrirPerfil(page);
+  for (let i = 0; i < 6; i++) await painel.getByText(i % 2 ? "Estou começando" : "Já conheço", { exact: true }).click();
   await expect(page.locator("html")).toHaveAttribute("data-nivel", "iniciante");
 });
 
 test("[CT-008] Voltar para a home não prende", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await pronta(page, "/");
-  await ano(page, "2024").click();
+  await mudarAno(page, "2024");
   await expect(page).toHaveURL(/\/ac\/2024$/);
   await page.goBack();
   await expect(page).toHaveURL(/4173\/$/);
@@ -265,7 +269,7 @@ test("[AC-004] menu móvel por teclado", async ({ page }) => {
   await expect(dialogo).toBeHidden();
   await expect(abrir).toBeFocused();
   await abrir.click();
-  await dialogo.getByRole("link", { name: "Blocos", exact: true }).click();
+  await dialogo.getByRole("link", { name: "Blocos e registros", exact: true }).click();
   await expect(page).toHaveURL(/\/blocos$/);
   await expect(dialogo).toBeHidden();
   await expect(page.locator("h1")).toBeFocused();

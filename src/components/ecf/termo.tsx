@@ -44,10 +44,13 @@ export function Termo({ children, iniciante, profissional }: Props) {
     };
     window.addEventListener("keydown", tecla);
     window.addEventListener("scroll", rolar, true);
+    // A janela mudou de tamanho (girar o celular, redimensionar): a dica se reposiciona para caber.
+    window.addEventListener("resize", rolar);
     window.addEventListener("pointerdown", fora);
     return () => {
       window.removeEventListener("keydown", tecla);
       window.removeEventListener("scroll", rolar, true);
+      window.removeEventListener("resize", rolar);
       window.removeEventListener("pointerdown", fora);
     };
   }, [pos]);

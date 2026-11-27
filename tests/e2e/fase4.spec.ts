@@ -2,6 +2,7 @@ import AxeBuilder from "@axe-core/playwright";
 import { expect, test, type Page } from "@playwright/test";
 import { request as httpRequest } from "node:http";
 import { readdirSync } from "node:fs";
+import { mudarAno, mudarNivel } from "./apoio";
 
 const CHAVE = "ecf:preferencias:v1";
 async function abrir(page: Page, url: string) {
@@ -46,7 +47,7 @@ test("[CT-041] filtro por regime mantém a posição original", async ({ page })
   await expect(posU).toBeVisible();
   await page.getByLabel("Regime da empresa").selectOption("imune");
   await page.getByLabel("Esconder os não previstos").check();
-  await expect(page.getByRole("status").filter({ hasText: "Mostrando" })).toHaveText("Mostrando 12 de 17 blocos");
+  await expect(page.getByRole("status").filter({ hasText: /^Mostrando \d+ de 17 blocos$/ })).toHaveText("Mostrando 12 de 17 blocos");
   await expect(page.locator("[data-bloco=M]")).toHaveCount(0);
   await expect(posU).toBeVisible();
   await page.getByLabel("Regime da empresa").selectOption("real");
@@ -58,7 +59,7 @@ test("[CT-041] filtro por regime mantém a posição original", async ({ page })
 
 test("[CT-042] mapa de dados mostra entradas e saídas", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
-  await abrir(page, "/blocos");
+  await abrir(page, "/blocos/m");
   const painel = page.getByTestId("mapa-painel");
   await expect(painel).toContainText("Bloco M");
   await expect(painel).toContainText("Lucro líquido antes do IRPJ");
@@ -99,7 +100,7 @@ test("[CT-044] nível muda a profundidade do registro", async ({ page }) => {
   const aviso = page.getByText("O que o programa da ECF confere ao validar o arquivo");
   await expect(page.getByRole("heading", { name: "Regras de validação" })).toBeVisible();
   await expect(aviso).toBeVisible();
-  await page.getByText("Já conheço", { exact: true }).first().click();
+  await mudarNivel(page, "Já conheço");
   await expect(aviso).toBeHidden();
   await expect(page.getByRole("heading", { name: "Regras de validação" })).toBeVisible();
   await expect(page.getByText("REGRA_VALOR_DETALHADO").first()).toBeVisible();
@@ -112,7 +113,7 @@ test("[CT-045] ano muda o registro e o que mudou aparece", async ({ page }) => {
   await abrir(page, "/blocos/0/0000");
   await expect(page.getByText("Campo novo: EVENTO_SCP")).toBeVisible();
   await expect(page.getByRole("rowheader", { name: "EVENTO_SCP" })).toBeVisible();
-  await page.getByRole("group", { name: "Ano-calendário" }).getByRole("link", { name: "2024" }).click();
+  await mudarAno(page, "2024");
   await expect(page).toHaveURL(/\/ac\/2024\/blocos\/0\/0000$/);
   await expect(page.getByRole("rowheader", { name: "EVENTO_SCP" })).toHaveCount(0);
   await abrir(page, "/blocos/y/y730");

@@ -146,7 +146,7 @@ export function BlocosPorRegime({ blocos, regimes }: { blocos: CartaoBloco[]; re
       <p role="status" className="mb-4 text-suave">
         Mostrando {lista.length} de {blocos.length} blocos
       </p>
-      <ol className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
         {lista.map((b) => {
           const Icone = ICONES[b.letra]!;
           return (
@@ -154,30 +154,27 @@ export function BlocosPorRegime({ blocos, regimes }: { blocos: CartaoBloco[]; re
               <Link
                 href={b.href}
                 prefetch={false}
-                className="bloco flex h-full items-start gap-4 rounded-xl border p-4 text-tinta no-underline transition-transform hover:-translate-y-0.5"
+                title={b.objetivo}
+                className="bloco flex h-full flex-col rounded-xl border p-5 text-tinta no-underline transition-colors hover:border-marca"
               >
-                <Icone aria-hidden className="bloco-icone shrink-0" size={26} />
-                <span className="min-w-0">
-                  <span className="block font-mono font-semibold">
-                    Bloco {b.letra} <span className="text-sm font-medium">· {ordinal(b.posicao)} do arquivo · {b.grupo}</span>
+                <span className="flex items-start justify-between gap-3">
+                  <span className="font-mono text-xs tracking-widest text-suave uppercase">
+                    {ordinal(b.posicao)} do arquivo · {b.grupo}
                   </span>
-                  <span className="block text-sm text-suave" data-testid="registros-do-bloco">
-                    {b.registros} {b.registros === 1 ? "registro" : "registros"}
-                  </span>
-                  <span className="block font-semibold">{b.nome}</span>
-                  {b.ecd && <Etiqueta className="mt-1">dados da ECD</Etiqueta>}
-                  <span data-so="iniciante" className="mt-1 block">
-                    {b.objetivo}
-                  </span>
+                  <Icone aria-hidden className="bloco-icone shrink-0" size={20} />
+                </span>
+                <span className="mt-3 font-mono text-4xl leading-none font-semibold">
+                  <span className="sr-only">Bloco </span>
+                  {b.letra}
+                </span>
+                <span className="mt-2 block font-semibold">{b.nome}</span>
+                <span className="block text-sm text-suave" data-testid="registros-do-bloco">
+                  {b.registros} {b.registros === 1 ? "registro" : "registros"}
+                </span>
+                <span className="mt-auto flex flex-col items-start gap-2 pt-3">
+                  {b.ecd && <Etiqueta>dados da ECD</Etiqueta>}
+                  {regime && <EtiquetaSituacao s={b.celulas[regime]} doRegime />}
                   <RegimesDoBloco celulas={b.celulas} regimes={regimes} />
-                  {regime && (
-                    <span className="mt-2 block">
-                      <EtiquetaSituacao s={b.celulas[regime]} doRegime />
-                      <span data-so="profissional" className="mt-1 block text-sm">
-                        {b.nota}
-                      </span>
-                    </span>
-                  )}
                 </span>
               </Link>
             </li>

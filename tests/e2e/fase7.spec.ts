@@ -1,5 +1,6 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test, type Page } from "@playwright/test";
+import { mudarNivel } from "./apoio";
 
 async function abrir(page: Page, url = "/") {
   await page.goto(url);
@@ -41,7 +42,7 @@ test("[CT-095] busca: Ctrl+K, setas, Enter e foco", async ({ page }) => {
 
 test("[CT-096] busca: acentos, vazio, sem resultado e campo", async ({ page }) => {
   await abrir(page);
-  await page.getByRole("button", { name: /Buscar bloco/ }).click();
+  await page.getByRole("button", { name: /^Buscar/ }).filter({ visible: true }).first().click();
   await campo(page).fill("PREJUIZO fiscal");
   await expect(opcoes(page).first()).toContainText("prejuízo fiscal");
   await campo(page).fill("xyz123");
@@ -117,7 +118,7 @@ test("[CT-098] glossário: filtro, letras, nível, F5 e âncora", async ({ page 
   await page.reload();
   await expect(page.locator("li[id]:target")).toBeInViewport();
   await expect(page.locator("#ecf")).toContainText("O arquivo em que a empresa");
-  await page.getByText("Já conheço", { exact: true }).first().click();
+  await mudarNivel(page, "Já conheço");
   await expect(page.locator("#ecf")).toContainText("Escrituração Contábil Fiscal: informa");
 });
 
@@ -192,7 +193,7 @@ for (const tema of ["light", "dark"] as const) {
       };
       await abrir(page, "/glossario");
       await checar("glossário");
-      await page.getByRole("button", { name: /Buscar bloco/ }).click();
+      await page.getByRole("button", { name: /^Buscar/ }).filter({ visible: true }).first().click();
       await campo(page).fill("lucro");
       await expect(opcoes(page).first()).toBeVisible();
       await checar("busca");

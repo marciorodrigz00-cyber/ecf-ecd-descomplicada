@@ -1,56 +1,20 @@
 "use client";
 
-import { ChevronRight, Menu, Trophy, X } from "lucide-react";
+import { ChevronRight, Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { Suspense, useEffect, useRef } from "react";
-import { Busca } from "@/components/busca";
-import { cn } from "@/lib/cn";
+import { Suspense, useEffect, useRef, useState } from "react";
+import { Busca, BotaoBusca } from "@/components/busca";
 import { ENDERECO_MUDOU } from "@/lib/parametros";
 import { preferenciasAgora } from "@/lib/preferencias";
-import { SECOES, anoDaUrl, caminhoBase, rota, secaoDoCaminho, type Ausentes } from "@/lib/rotas";
-import { BotaoTema, SeletorAno, SeletorNivel } from "./controles";
-import { BotaoPerfil, type RegimeNome } from "./perfil";
+import { anoDaUrl, caminhoBase, rota, secaoDoCaminho, type Ausentes } from "@/lib/rotas";
+import { ConteudoLateral, Lateral, type PropsLateral } from "./lateral";
+import { PainelPerfil, type RegimeNome } from "./perfil";
 
-type Props = { anos: number[]; padrao: number; ausentes: Ausentes; regimes: RegimeNome[] };
-
-/** Menu principal. “Importância” fica dentro de “O que é”; “Fontes” é página avulsa. */
-const MENU = [...SECOES.filter((s) => s.slug !== "importancia").map((s) => ({ slug: s.slug, curto: s.curto })), { slug: "fontes", curto: "Fontes" }];
-const DENTRO_DE: Record<string, string> = { importancia: "o-que-e" };
+type Props = { anos: number[]; padrao: number; ausentes: Ausentes; regimes: RegimeNome[] } & PropsLateral;
 
 // Vale uma vez por carga: voltar para a home depois não redireciona de novo.
 let entradaTratada = false;
-
-function ItensMenu({ padrao, vertical, aoIr }: { padrao: number; vertical?: boolean; aoIr?: () => void }) {
-  const pathname = usePathname();
-  const ano = anoDaUrl(pathname, padrao);
-  const primeiro = caminhoBase(pathname).split("/")[1] ?? "";
-  const ativa = DENTRO_DE[primeiro] ?? primeiro;
-  return (
-    <ul className={cn("flex", vertical ? "flex-col gap-1" : "flex-wrap gap-x-1")}>
-      {MENU.map((s) => {
-        const atual = s.slug === ativa;
-        return (
-          <li key={s.slug}>
-            <Link
-              href={rota(`/${s.slug}`, ano, padrao)}
-              prefetch={false}
-              aria-current={atual ? "page" : undefined}
-              onClick={aoIr}
-              className={cn(
-                "flex min-h-11 items-center px-3 font-medium text-tinta no-underline hover:text-marca",
-                vertical ? "rounded-lg" : "border-b-3 border-transparent",
-                atual && (vertical ? "bg-marca text-sobre-marca hover:text-sobre-marca" : "border-marca text-marca"),
-              )}
-            >
-              {s.curto}
-            </Link>
-          </li>
-        );
-      })}
-    </ul>
-  );
-}
 
 /** Sem tela. O Suspense deixa só este pedaço fora do HTML gerado; o resto da página continua estático. */
 function AvisoEndereco() {
@@ -61,27 +25,11 @@ function AvisoEndereco() {
   return null;
 }
 
-/** Link para a página de progresso, perto do perfil. */
-function LinkProgresso({ padrao, aoIr }: { padrao: number; aoIr?: () => void }) {
-  const pathname = usePathname();
-  const atual = caminhoBase(pathname) === "/meu-progresso";
-  return (
-    <Link
-      href={rota("/meu-progresso", anoDaUrl(pathname, padrao), padrao)}
-      prefetch={false}
-      aria-current={atual ? "page" : undefined}
-      onClick={aoIr}
-      className="flex min-h-11 items-center gap-2 px-3 font-medium text-tinta no-underline hover:text-marca aria-[current=page]:text-marca"
-    >
-      <Trophy aria-hidden size={18} /> Meu progresso
-    </Link>
-  );
-}
-
-export function Cabecalho({ anos, padrao, ausentes, regimes }: Props) {
+/** Menu lateral (computador), barra fina e gaveta (celular), busca e painel de perfil. */
+export function Cabecalho({ anos, padrao, ausentes, regimes, leiautes, blocos }: Props) {
   const pathname = usePathname();
   const router = useRouter();
-  const dialogo = useRef<HTMLDialogElement>(null);
+  const gaveta = useRef<HTMLDialogElement>(null);
   const anterior = useRef(pathname);
   const ano = anoDaUrl(pathname, padrao);
 
@@ -117,84 +65,64 @@ export function Cabecalho({ anos, padrao, ausentes, regimes }: Props) {
     historico.current = null;
   }, [pathname]);
 
-  const fechar = () => dialogo.current?.close();
+  // O conteúdo da gaveta só existe com ela aberta: fechada, não repete o menu da coluna.
+  const [gavetaAberta, setGavetaAberta] = useState(false);
+  const fechar = () => gaveta.current?.close();
+  const lateral = { padrao, leiautes, blocos };
 
   return (
-    <header className="border-b border-linha bg-superficie">
+    <>
       <Suspense fallback={null}>
         <AvisoEndereco />
       </Suspense>
-      <div className="mx-auto flex max-w-[92rem] items-center justify-between gap-4 px-4 py-3 sm:px-6">
-        <span className="flex shrink-0 items-center gap-2">
-          <Link
-            href={rota("/", ano, padrao)}
-            prefetch={false}
-            aria-label="ECF e ECD descomplicada, página inicial"
-            className="flex min-h-11 items-center gap-3 font-mono text-lg font-semibold text-tinta no-underline"
-          >
-            <span className="rounded-md bg-marca px-2 whitespace-nowrap text-sobre-marca">ECF e ECD</span>{" "}
-            <span className="sr-only sm:not-sr-only">descomplicada</span>
-          </Link>
-          <span data-testid="ecd-em-breve" className="hidden rounded-md border border-controle px-1.5 py-0.5 text-xs font-medium whitespace-nowrap text-suave md:inline">
-            ECD em breve
-          </span>
-        </span>
-        <span className="flex min-w-0 flex-1 justify-end xl:justify-start">
-          <Busca padrao={padrao} />
-        </span>
-        <div className="hidden items-center gap-3 lg:flex">
-          <SeletorAno anos={anos} padrao={padrao} ausentes={ausentes} />
-          <SeletorNivel />
-          <BotaoTema />
-        </div>
-        <BotaoPerfil anos={anos} padrao={padrao} ausentes={ausentes} regimes={regimes} />
+      <Busca padrao={padrao} />
+      <PainelPerfil anos={anos} padrao={padrao} ausentes={ausentes} regimes={regimes} />
+      <Lateral {...lateral} />
+
+      <header className="flex items-center gap-2 border-b border-linha bg-superficie px-3 py-2 lg:hidden">
         <button
           type="button"
           aria-label="Abrir menu"
           aria-haspopup="dialog"
           onClick={() => {
-            if (!dialogo.current?.open) dialogo.current?.showModal();
+            setGavetaAberta(true);
+            if (!gaveta.current?.open) gaveta.current?.showModal();
           }}
-          className="grid size-11 shrink-0 place-items-center rounded-lg border border-controle xl:hidden"
+          className="grid size-11 shrink-0 place-items-center rounded-lg border border-controle"
         >
           <Menu aria-hidden size={22} />
         </button>
-      </div>
-      <div className="mx-auto hidden max-w-[92rem] items-center justify-between px-3 xl:flex">
-        <nav aria-label="Principal">
-          <ItensMenu padrao={padrao} />
-        </nav>
-        <LinkProgresso padrao={padrao} />
-      </div>
+        <Link
+          href={rota("/", ano, padrao)}
+          prefetch={false}
+          className="flex min-h-11 min-w-0 flex-1 items-center gap-2 font-mono font-semibold text-tinta no-underline"
+        >
+          <span className="rounded-md bg-marca px-2 py-0.5 whitespace-nowrap text-sobre-marca">ECF e ECD</span>
+          <span className="truncate">
+            <span className="sr-only"> </span>descomplicada<span className="sr-only">, página inicial</span>
+          </span>
+        </Link>
+        <BotaoBusca compacto />
+      </header>
 
       <dialog
-        ref={dialogo}
+        ref={gaveta}
         aria-label="Menu"
-        className="m-0 ml-auto h-dvh max-h-none w-[min(22rem,100vw)] max-w-none bg-superficie p-5 text-tinta"
+        data-testid="gaveta"
+        onClose={() => setGavetaAberta(false)}
+        className="gaveta m-0 h-dvh max-h-none w-[min(18rem,88vw)] max-w-none overflow-hidden bg-superficie p-0 text-tinta backdrop:bg-black/60"
       >
-        <div className="mb-4 flex items-center justify-between">
-          <BotaoTema />
-          <button
-            type="button"
-            aria-label="Fechar menu"
-            onClick={fechar}
-            className="grid size-11 place-items-center rounded-lg border border-controle"
-          >
-            <X aria-hidden size={22} />
-          </button>
-        </div>
-        <div className="mb-5 flex flex-col items-start gap-3 border-b border-linha pb-5 lg:hidden">
-          <SeletorNivel />
-          <SeletorAno anos={anos} padrao={padrao} ausentes={ausentes} />
-        </div>
-        <nav aria-label="Principal (menu)">
-          <ItensMenu padrao={padrao} vertical aoIr={fechar} />
-        </nav>
-        <div className="mt-4 border-t border-linha pt-4">
-          <LinkProgresso padrao={padrao} aoIr={fechar} />
-        </div>
+        <button
+          type="button"
+          aria-label="Fechar menu"
+          onClick={fechar}
+          className="absolute top-4 right-3 z-10 grid size-11 place-items-center rounded-lg border border-controle bg-superficie"
+        >
+          <X aria-hidden size={22} />
+        </button>
+        {gavetaAberta && <ConteudoLateral {...lateral} emGaveta aoIr={fechar} />}
       </dialog>
-    </header>
+    </>
   );
 }
 
@@ -223,7 +151,7 @@ export function Breadcrumb({ padrao }: { padrao: number }) {
     ...(secao?.slug === "blocos" && partes[2] ? [{ href: base, texto: partes[2].toUpperCase() }] : []),
   ];
   return (
-    <nav aria-label="Você está em" className="mx-auto w-full max-w-[92rem] px-4 pt-5 text-sm sm:px-6">
+    <nav aria-label="Você está em" className="mx-auto w-full max-w-[84rem] px-4 pt-6 text-sm sm:px-6 lg:px-10">
       <ol className="flex flex-wrap items-center gap-1 text-suave">
         {trilha.map((t, i) => (
           <li key={t.href} className="flex items-center gap-1">

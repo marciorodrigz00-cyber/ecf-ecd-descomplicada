@@ -1,7 +1,7 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test, type Page } from "@playwright/test";
 
-async function abrir(page: Page, url = "/") {
+async function abrir(page: Page, url = "/blocos") {
   await page.goto(url);
   await page.waitForLoadState("networkidle");
 }
@@ -37,7 +37,7 @@ test("[CT-073] mapa: regime, bloco, ligações e abas", async ({ page }) => {
   await page.getByRole("link", { name: "Abrir o bloco Y" }).click();
   await expect(page).toHaveURL(/\/blocos\/y$/);
   await page.goBack();
-  await expect(page.locator("h1")).toHaveText("Entenda e prepare a ECF");
+  await expect(page.locator("h1")).toHaveText("Blocos e preenchimento");
   await expect(page.getByRole("heading", { name: "Como os dados percorrem a ECF" })).toBeVisible();
 });
 
@@ -90,7 +90,7 @@ test("[CT-075] falha ao buscar o exemplo avisa e permite tentar de novo", async 
 });
 
 test("[CT-076] ano 2024 traz o leiaute 11, sem exemplo fictício", async ({ page }) => {
-  await abrir(page, "/ac/2024");
+  await abrir(page, "/ac/2024/blocos");
   await expect(page.getByTestId("selo")).toContainText("leiaute 11");
   await no(page, "0").click();
   await page.getByRole("button", { name: /^Registros \(/ }).click();
@@ -151,7 +151,7 @@ test("[CT-079] conquistas somam uso de verdade e ficam no navegador", async ({ p
 });
 
 test("[CT-080] teclas de atalho: funcionam, não atrapalham campos e podem ser desligadas", async ({ page }) => {
-  await abrir(page);
+  await abrir(page, "/");
   await page.keyboard.press("s");
   await expect(page).toHaveURL(/\/simulador$/);
   await page.getByLabel("Adições (R$)", { exact: true }).press("q");
@@ -163,7 +163,7 @@ test("[CT-080] teclas de atalho: funcionam, não atrapalham campos e podem ser d
   await expect(page).toHaveURL(/\/ac\/2024\/quem-deve-entregar$/);
   await abrir(page, "/meu-progresso");
   await page.getByLabel("Usar teclas de atalho").uncheck();
-  await abrir(page);
+  await abrir(page, "/");
   await page.keyboard.press("s");
   await page.waitForTimeout(400);
   await expect(page).toHaveURL(/4173\/$/);

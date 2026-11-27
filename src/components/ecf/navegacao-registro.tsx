@@ -8,7 +8,7 @@ export function SeletorRegistro({ atual, opcoes }: { atual: string; opcoes: { co
   const router = useRouter();
   const id = useId();
   return (
-    <div className="xl:hidden">
+    <div className="min-[1440px]:hidden">
       <label htmlFor={id} className="block text-sm font-medium">
         Ir para o registro
       </label>

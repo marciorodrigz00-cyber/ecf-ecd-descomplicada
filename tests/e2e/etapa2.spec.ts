@@ -1,5 +1,6 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test, type Page } from "@playwright/test";
+import { abrirPerfil } from "./apoio";
 
 const CHAVE = "ecf:preferencias:v1";
 const AXE = ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"];
@@ -14,22 +15,25 @@ const erros = (page: Page) => {
   page.on("console", (m) => m.type() === "error" && lista.push(m.text()));
   return lista;
 };
+const indicador = (page: Page) => page.locator("[data-testid=indicador-perfil]:visible").first();
 const sobraLateral = (page: Page) => page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
 
 test("[CT-116] perfil respondido ajusta blocos e roteiro, e sobrevive ao F5", async ({ page }) => {
   const e = erros(page);
+  await page.setViewportSize({ width: 1440, height: 900 });
   await abrir(page, "/");
-  const cartao = page.getByTestId("cartao-perfil");
+  const cartao = await abrirPerfil(page);
   await expect(cartao).toBeVisible();
   await cartao.getByText("Lucro presumido", { exact: true }).click();
   await cartao.getByText("Já conheço", { exact: true }).click();
   await expect(page.locator("html")).toHaveAttribute("data-nivel", "profissional");
   await cartao.getByRole("button", { name: "Pronto" }).click();
   await expect(cartao).toBeHidden();
-  // F5: o cartão não volta, nem por um instante (some antes da pintura).
+  // F5: o perfil continua, e o nível já vem certo antes da pintura.
   await page.reload();
   await expect(page.locator("html")).toHaveAttribute("data-perfil", "ok");
-  await expect(page.getByTestId("cartao-perfil")).toBeHidden();
+  await expect(page.locator("html")).toHaveAttribute("data-nivel", "profissional");
+  await expect(indicador(page)).toContainText("Profissional");
   // Blocos: o filtro já vem no regime do perfil.
   await abrir(page, "/blocos");
   await expect(page.getByLabel("Regime da empresa")).toHaveValue("presumido");
@@ -44,18 +48,19 @@ test("[CT-116] perfil respondido ajusta blocos e roteiro, e sobrevive ao F5", as
   // Roteiro de preenchimento abre no regime do perfil.
   await abrir(page, "/preencher");
   await expect(page.getByLabel("Qual é o regime da empresa?")).toHaveValue("presumido");
-  // Mapa da home também.
-  await abrir(page, "/");
+  // O mapa de fluxo (agora em /blocos) também.
+  await abrir(page, "/blocos");
   await expect(page.getByTestId("mapa-contagem")).toHaveText(/Regime escolhido: Lucro presumido/);
   expect(e).toEqual([]);
 });
 
-test("[CT-117] perfil pulado e alterado depois por “Meu perfil”", async ({ page }) => {
+test("[CT-117] perfil pulado e alterado depois pelo indicador do perfil", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
   await abrir(page, "/");
-  await page.getByTestId("cartao-perfil").getByRole("button", { name: "Pular por agora" }).click();
-  await expect(page.getByTestId("cartao-perfil")).toBeHidden();
+  await (await abrirPerfil(page)).getByRole("button", { name: "Pular por agora" }).click();
+  await expect(page.locator("html")).toHaveAttribute("data-perfil", "ok");
   await abrir(page, "/blocos/m");
-  const botao = page.getByRole("button", { name: "Meu perfil" });
+  const botao = indicador(page);
   await botao.click();
   const dialogo = page.getByTestId("dialogo-perfil");
   await expect(dialogo).toBeVisible();
@@ -67,31 +72,32 @@ test("[CT-117] perfil pulado e alterado depois por “Meu perfil”", async ({ p
   await abrir(page, "/blocos");
   await expect(page.getByLabel("Regime da empresa")).toHaveValue("imune");
   // Escape fecha; “Ainda não sei” apaga o regime.
-  await page.getByRole("button", { name: "Meu perfil" }).click();
+  await indicador(page).click();
   await page.getByTestId("dialogo-perfil").getByText("Ainda não sei", { exact: true }).click();
   await page.keyboard.press("Escape");
   await expect(page.getByTestId("dialogo-perfil")).toBeHidden();
   await expect(page.getByLabel("Regime da empresa")).toHaveValue("todos");
 });
 
-test("[CT-118] home: dois caminhos no topo, depois prazo, novidades e mapa", async ({ page }) => {
+test("[CT-118] home: destaque, números, Comece por aqui e Novidades", async ({ page }) => {
   await abrir(page, "/");
-  await expect(page.locator("h1")).toHaveText("Entenda e prepare a ECF");
-  await expect(page.getByTestId("caminho-aprender")).toHaveAttribute("href", "/o-que-e");
+  await expect(page.locator("h1")).toHaveText(/A ECF,\s*sem complicação\./i);
+  const comece = page.locator("section[aria-labelledby=t-comece]");
+  await expect(comece.getByTestId("caminho-aprender")).toHaveAttribute("href", "/o-que-e");
   await expect(page.getByTestId("caminho-preencher")).toHaveAttribute("href", "/preencher");
   const titulos = await page.locator("main h2").allInnerTexts();
   const pos = (t: string) => titulos.findIndex((x) => x.startsWith(t));
-  expect(pos("Monte seu perfil")).toBe(0);
-  expect(pos("O que vale para o ano-calendário")).toBeLessThan(pos("Novidades conferidas"));
-  expect(pos("Novidades conferidas")).toBeLessThan(pos("Como os dados percorrem a ECF"));
+  expect(pos("Comece por aqui")).toBeGreaterThan(-1);
+  expect(pos("Comece por aqui")).toBeLessThan(pos("Novidades"));
+  for (const fora of ["Monte seu perfil", "O que vale para o ano-calendário", "Como os dados percorrem a ECF"]) expect(pos(fora), fora).toBe(-1);
   // Conquistas e atalhos saíram da home.
   await expect(page.getByRole("heading", { name: "Conquistas" })).toHaveCount(0);
   await expect(page.getByRole("heading", { name: "Atalhos" })).toHaveCount(0);
   // Estudada a primeira seção, o caminho continua na seguinte.
   await page.evaluate((c) => localStorage.setItem(c, JSON.stringify({ estudadas: ["o-que-e"], perfil: "pulado" })), CHAVE);
   await page.reload();
-  await expect(page.getByTestId("caminho-aprender")).toHaveAttribute("href", "/importancia");
-  await expect(page.getByTestId("caminho-aprender")).toContainText("Continuar");
+  await expect(comece.getByTestId("caminho-aprender")).toHaveAttribute("href", "/importancia");
+  await expect(comece.getByTestId("caminho-aprender")).toContainText("Continuar");
 });
 
 test("[CT-119] Meu progresso: convite para quem chega, contadores depois do primeiro passo", async ({ page }) => {
@@ -105,20 +111,34 @@ test("[CT-119] Meu progresso: convite para quem chega, contadores depois do prim
   await expect(page.getByTestId("sem-progresso")).toHaveCount(0);
   await expect(page.getByText(/1 de \d+ conquistas|0 de \d+ conquistas/)).toBeVisible();
   await expect(page.getByText(`Abra os 17 blocos cobertos, em qualquer regime`)).toBeVisible();
-  // Link no cabeçalho marca a página atual.
+  // O painel do perfil leva ao progresso.
   await page.setViewportSize({ width: 1440, height: 900 });
-  await expect(page.getByRole("link", { name: "Meu progresso" }).first()).toHaveAttribute("aria-current", "page");
+  await abrir(page, "/glossario");
+  await (await abrirPerfil(page)).getByRole("link", { name: "Ver meu progresso" }).click();
+  await expect(page).toHaveURL(/\/meu-progresso$/);
 });
 
-test("[CT-120] menu na ordem nova; Importância dentro de O que é", async ({ page }) => {
+test("[CT-120] menu lateral na ordem da spec; Importância dentro de O que é", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await abrir(page, "/");
-  const itens = await page.getByRole("navigation", { name: "Principal", exact: true }).getByRole("link").allInnerTexts();
-  expect(itens.map((t) => t.trim())).toEqual(["O que é", "Quem entrega", "Blocos", "Exemplos", "Simulador", "Novidades", "Glossário", "Fontes"]);
+  const menu = page.locator("[data-lateral]").getByRole("navigation", { name: "Menu principal" });
+  const itens = await menu.locator("[data-item-menu]").allInnerTexts();
+  expect(itens.map((t) => t.trim())).toEqual([
+    "Visão geral",
+    "O que é a ECF",
+    "Quem entrega",
+    "Glossário",
+    "Blocos e registros",
+    "Roteiro",
+    "Casos práticos",
+    "Simulador",
+    "Novidades",
+    "Fontes e verificações",
+  ]);
   await abrir(page, "/o-que-e");
   await page.getByTestId("link-importancia").click();
   await expect(page).toHaveURL(/\/importancia$/);
-  await expect(page.getByRole("navigation", { name: "Principal", exact: true }).getByRole("link", { name: "O que é" })).toHaveAttribute("aria-current", "page");
+  await expect(menu.getByRole("link", { name: "O que é a ECF" })).toHaveAttribute("aria-current", "true");
 });
 
 test("[CT-121] cartões de bloco: registros, regimes e situação para o regime do perfil", async ({ page }) => {
@@ -147,7 +167,8 @@ test("[SG-033] perfil corrompido no navegador volta ao padrão, sem erro e sem e
   });
   await page.reload();
   await page.waitForLoadState("networkidle");
-  await expect(page.getByTestId("cartao-perfil")).toBeVisible();
+  await expect(page.locator("html")).not.toHaveAttribute("data-perfil", "ok");
+  await expect(page.locator("html")).toHaveAttribute("data-nivel", "iniciante");
   await abrir(page, "/blocos");
   await expect(page.getByLabel("Regime da empresa")).toHaveValue("todos");
   expect(alerta).toBe(false);
@@ -155,6 +176,7 @@ test("[SG-033] perfil corrompido no navegador volta ao padrão, sem erro e sem e
 });
 
 test("[AC-024] perfil e home pelo teclado, com axe nos dois temas", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
   await abrir(page, "/");
   for (const tema of ["light", "dark"]) {
     await page.evaluate((t) => document.documentElement.setAttribute("data-theme", t), tema);
@@ -162,7 +184,7 @@ test("[AC-024] perfil e home pelo teclado, com axe nos dois temas", async ({ pag
     expect(r.violations.map((v) => `${v.id} ${v.nodes[0]!.target}`), `home ${tema}`).toEqual([]);
   }
   // Janela do perfil: abre pelo teclado, prende o foco e fecha com Escape.
-  await page.getByRole("button", { name: "Meu perfil" }).focus();
+  await indicador(page).focus();
   await page.keyboard.press("Enter");
   const dialogo = page.getByTestId("dialogo-perfil");
   await expect(dialogo).toBeVisible();
@@ -174,7 +196,7 @@ test("[AC-024] perfil e home pelo teclado, com axe nos dois temas", async ({ pag
   }
   await page.keyboard.press("Escape");
   await expect(dialogo).toBeHidden();
-  await expect(page.getByRole("button", { name: "Meu perfil" })).toBeFocused();
+  await expect(indicador(page)).toBeFocused();
   await abrir(page, "/meu-progresso");
   const r = await new AxeBuilder({ page }).withTags(AXE).analyze();
   expect(r.violations.map((v) => `${v.id} ${v.nodes[0]!.target}`), "meu progresso").toEqual([]);
@@ -187,7 +209,7 @@ for (const largura of [375, 768, 1050, 1440]) {
       await abrir(page, url);
       expect(await sobraLateral(page), url).toBeLessThanOrEqual(0);
     }
-    await page.getByRole("button", { name: "Meu perfil" }).click();
+    await abrirPerfil(page);
     await expect(page.getByTestId("dialogo-perfil")).toBeVisible();
     expect(await sobraLateral(page), "diálogo").toBeLessThanOrEqual(0);
   });

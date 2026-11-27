@@ -1,5 +1,42 @@
 {
-  "versao": "etapa 1, pilotos da simulação e etapas 2 e 3",
+  "versao": "etapa 1, pilotos da simulação, etapas 2 e 3 e layout com menu lateral",
+  "antesDepois": [
+    {
+      "tema": "Menu",
+      "antes": "Barra no topo com 8 itens e Meu progresso; no celular, gaveta à direita.",
+      "depois": "Coluna fixa à esquerda com ícones, em grupos (Aprender, Preencher, Atualizações); recolhível a 72 px; no celular, gaveta à esquerda com foco preso."
+    },
+    {
+      "tema": "Topo",
+      "antes": "Logo, busca, seletor de ano, seletor de nível, tema, perfil e menu numa barra só, mais a linha do menu.",
+      "depois": "Sem barra no computador. Busca e indicador de perfil no alto da coluna; tema e aviso no pé. No celular, barra fina com menu, logo e busca."
+    },
+    {
+      "tema": "Ano, nível e regime",
+      "antes": "No topo de toda página e de novo no cartão de perfil da home.",
+      "depois": "Só no painel de perfil, aberto pelo indicador “AC 2025 · Leiaute 12 · Iniciante”. Nenhum controle repetido (CT-133)."
+    },
+    {
+      "tema": "Home",
+      "antes": "Cartão de perfil, dois caminhos, prazo e programa, novidades e o mapa de fluxo completo.",
+      "depois": "Um card de destaque (prazo e mini-quiz), 4 cartões de números tirados dos dados e duas seções: Comece por aqui e Novidades."
+    },
+    {
+      "tema": "Blocos",
+      "antes": "Cartões com objetivo, nota e regimes; convite ao roteiro numa caixa.",
+      "depois": "Cartões no estilo dos de número: letra grande, nome, registros e etiquetas; convite ao roteiro numa linha."
+    },
+    {
+      "tema": "Registro",
+      "antes": "Mapa do bloco a partir de 1280 px.",
+      "depois": "Mapa do bloco a partir de 1440 px (o menu ocupa a esquerda); seletor abaixo disso."
+    },
+    {
+      "tema": "Capturas",
+      "antes": "docs/referencias/menu-atual.png",
+      "depois": "docs/referencias/capturas-layout/ (375, 1024 e 1440 px, temas claro e escuro, menu recolhido, gaveta e dica)"
+    }
+  ],
   "risco": "Bateria completa sobre o build local com as correções da validação pós-publicação. O risco que resta não está no código testado: o conteúdo foi conferido com as fontes, mas nenhum contador o revisou; a regra de arredondamento e dois campos de exemplo estão a verificar; e os arquivos de exemplo não passaram pelo programa da ECF. A versão publicada foi conferida antes destas correções. O nome do site inclui a ECD, que ainda não tem conteúdo: o aviso está em todas as páginas. A simulação de preenchimento cobre só 4 registros-piloto; as regras em código seguem o texto do Manual e foram conferidas com casos feitos à mão, não pelo programa da ECF.",
   "bugs": [
     {

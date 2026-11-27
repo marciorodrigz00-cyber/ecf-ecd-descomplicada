@@ -236,5 +236,15 @@
   { "id": "AC-025", "modulo": "Acessibilidade", "caso": "Registro: cartões de campo, mapa e botões de copiar pelo teclado, com axe nos dois temas", "severidade": "Alta" },
   { "id": "RS-012", "modulo": "Responsividade", "caso": "Registros com muitos campos em 375, 768, 1050 e 1440 px sem rolagem lateral", "severidade": "Média" },
   { "id": "RD-010", "modulo": "Rede e Storage", "caso": "Índice da busca com as regras continua abaixo do limite", "severidade": "Média" },
+  { "id": "CT-127", "modulo": "Funcional", "caso": "Prazo da home calculado pela regra geral, com o próximo prazo a confirmar quando não há regra", "severidade": "Alta" },
+  { "id": "CT-128", "modulo": "Funcional", "caso": "Novidades dos últimos 90 dias e preferência de menu recolhido validada", "severidade": "Média" },
+  { "id": "CT-129", "modulo": "Funcional", "caso": "Cada item do menu lateral leva à área certa, com item ativo nas páginas filhas e no AC 2024", "severidade": "Alta" },
+  { "id": "CT-130", "modulo": "Funcional", "caso": "Subnível dos blocos só na área de blocos, com o bloco atual marcado", "severidade": "Média" },
+  { "id": "CT-131", "modulo": "Funcional", "caso": "Menu recolhido salvo e sem piscar; expansão temporária entre 1024 e 1279 px", "severidade": "Média" },
+  { "id": "CT-132", "modulo": "Funcional", "caso": "Home: prazo pela data do dia, números tirados dos dados e atalho do quiz com e sem progresso", "severidade": "Alta" },
+  { "id": "CT-133", "modulo": "Funcional", "caso": "Nenhum controle repetido: ano, nível e tema uma vez só; o perfil troca ano e nível", "severidade": "Média" },
+  { "id": "AC-026", "modulo": "Acessibilidade", "caso": "Menu lateral e gaveta pelo teclado: dicas no foco, foco preso e Esc", "severidade": "Alta" },
+  { "id": "AC-027", "modulo": "Acessibilidade", "caso": "axe no layout novo, com menu aberto e recolhido, nos dois temas", "severidade": "Alta" },
+  { "id": "RS-013", "modulo": "Responsividade", "caso": "Layout com menu lateral em 375, 768, 1024, 1050, 1280 e 1440 px, sem rolagem lateral e com alvos de 44 px", "severidade": "Média" },
   { "id": "PF-001", "modulo": "Desempenho", "caso": "Lighthouse nas páginas principais", "severidade": "Média" }
 ]

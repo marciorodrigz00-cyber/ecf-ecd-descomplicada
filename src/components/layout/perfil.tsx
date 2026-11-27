@@ -1,11 +1,14 @@
 "use client";
 
-import { UserRound, X } from "lucide-react";
-import { useId, useRef, useState } from "react";
+import { Trophy, UserRound, X } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useId, useRef, useState } from "react";
 import { Botao } from "@/components/ui";
 import { salvar, usePreferencias } from "@/lib/preferencias";
 import { REGIMES_PERFIL, type RegimePerfil } from "@/lib/preferencias/modelo";
-import type { Ausentes } from "@/lib/rotas";
+import { cn } from "@/lib/cn";
+import { anoDaUrl, rota, type Ausentes } from "@/lib/rotas";
 import { SeletorAno, SeletorNivel } from "./controles";
 
 export type RegimeNome = { id: string; nome: string };
@@ -99,45 +102,91 @@ export function CartaoPerfil(props: Props) {
   );
 }
 
-/** Botão “Meu perfil” do cabeçalho: as mesmas perguntas numa janela. */
-export function BotaoPerfil(props: Props) {
+/** Qualquer indicador de perfil abre o mesmo painel, que existe uma vez só na página. */
+const ABRIR_PERFIL = "ecf:abrir-perfil";
+
+/** Resumo clicável do perfil: ano da página, leiaute e nível. */
+export function IndicadorPerfil({ padrao, leiautes, compacto = false }: { padrao: number; leiautes: Record<number, string>; compacto?: boolean }) {
+  const pathname = usePathname();
+  const ano = anoDaUrl(pathname, padrao);
+  const resumo = `AC ${ano} · Leiaute ${leiautes[ano] ?? "?"}`;
+  return (
+    <button
+      type="button"
+      aria-haspopup="dialog"
+      data-testid="indicador-perfil"
+      aria-label={compacto ? `Meu perfil: ${resumo}` : undefined}
+      onClick={() => {
+        document.querySelectorAll("dialog[open]").forEach((d) => (d as HTMLDialogElement).close());
+        window.dispatchEvent(new Event(ABRIR_PERFIL));
+      }}
+      className={cn(
+        "flex min-h-11 w-full items-center gap-2 rounded-lg px-2 text-left font-mono text-xs tracking-wide text-suave uppercase hover:bg-fundo hover:text-tinta",
+        compacto && "justify-center px-0",
+      )}
+    >
+      {compacto ? (
+        <UserRound aria-hidden size={20} />
+      ) : (
+        <>
+          <span aria-hidden className="size-2 shrink-0 rounded-full bg-marca" />
+          <span className="min-w-0">
+            <span className="sr-only">Meu perfil: </span>
+            {resumo} ·{" "}
+            <span data-so="iniciante">Iniciante</span>
+            <span data-so="profissional">Profissional</span>
+          </span>
+        </>
+      )}
+    </button>
+  );
+}
+
+/** Painel do perfil: as mesmas perguntas numa janela, mais o caminho para o progresso. */
+export function PainelPerfil(props: Props) {
   const dialogo = useRef<HTMLDialogElement>(null);
   const titulo = useId();
+  const pathname = usePathname();
   // As perguntas só existem com a janela aberta: fechada, ela não repete campos da página.
   const [aberto, setAberto] = useState(false);
   const fechar = () => dialogo.current?.close();
+  useEffect(() => {
+    const abrir = () => {
+      setAberto(true);
+      if (!dialogo.current?.open) dialogo.current?.showModal();
+    };
+    window.addEventListener(ABRIR_PERFIL, abrir);
+    return () => window.removeEventListener(ABRIR_PERFIL, abrir);
+  }, []);
   return (
-    <>
-      <button
-        type="button"
-        aria-haspopup="dialog"
-        title="Meu perfil"
-        onClick={() => {
-          setAberto(true);
-          if (!dialogo.current?.open) dialogo.current?.showModal();
-        }}
-        className="flex min-h-11 shrink-0 items-center gap-2 rounded-lg border border-controle bg-superficie px-3 text-sm font-medium"
-      >
-        <UserRound aria-hidden size={18} />
-        <span className="sr-only 2xl:not-sr-only">Meu perfil</span>
-      </button>
-      <dialog
-        ref={dialogo}
-        aria-labelledby={titulo}
-        data-testid="dialogo-perfil"
-        onClose={() => setAberto(false)}
-        className="m-auto w-[min(36rem,calc(100vw-2rem))] max-w-none rounded-2xl bg-superficie p-5 text-tinta backdrop:bg-black/60 sm:p-6"
-      >
-        <div className="mb-4 flex items-start justify-between gap-4">
-          <h2 id={titulo} className="text-xl font-bold">
-            Meu perfil
-          </h2>
-          <button type="button" aria-label="Fechar" onClick={fechar} className="grid size-11 shrink-0 place-items-center rounded-lg border border-controle">
-            <X aria-hidden size={20} />
-          </button>
-        </div>
-        {aberto && <Perguntas {...props} aoTerminar={fechar} />}
-      </dialog>
-    </>
+    <dialog
+      ref={dialogo}
+      aria-labelledby={titulo}
+      data-testid="dialogo-perfil"
+      onClose={() => setAberto(false)}
+      className="m-auto w-[min(36rem,calc(100vw-2rem))] max-w-none rounded-2xl bg-superficie p-5 text-tinta backdrop:bg-black/60 sm:p-6"
+    >
+      <div className="mb-4 flex items-start justify-between gap-4">
+        <h2 id={titulo} className="text-xl font-bold">
+          Meu perfil
+        </h2>
+        <button type="button" aria-label="Fechar" onClick={fechar} className="grid size-11 shrink-0 place-items-center rounded-lg border border-controle">
+          <X aria-hidden size={20} />
+        </button>
+      </div>
+      {aberto && (
+        <>
+          <Perguntas {...props} aoTerminar={fechar} />
+          <Link
+            href={rota("/meu-progresso", anoDaUrl(pathname, props.padrao), props.padrao)}
+            prefetch={false}
+            onClick={fechar}
+            className="mt-5 inline-flex min-h-11 items-center gap-2 font-semibold underline underline-offset-4"
+          >
+            <Trophy aria-hidden size={18} /> Ver meu progresso
+          </Link>
+        </>
+      )}
+    </dialog>
   );
 }

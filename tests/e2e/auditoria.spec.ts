@@ -31,7 +31,7 @@ test("[RD-006] armazenamento cheio ou bloqueado não quebra o site", async ({ pa
   await outra.addInitScript(() => {
     Object.defineProperty(window, "localStorage", { get() { throw new DOMException("bloqueado", "SecurityError"); } });
   });
-  await abrir(outra, "/");
+  await abrir(outra, "/blocos");
   await outra.locator('[data-no="K"]').click();
   await expect(outra.locator('[data-no="K"]')).toHaveAttribute("aria-pressed", "true");
   await expect(outra.locator("html")).toHaveAttribute("data-theme", "dark");
@@ -44,7 +44,7 @@ test("[RD-006] preferências ocupam pouco, mesmo com tudo visitado", async ({ pa
     const registros = Array.from({ length: 1000 }, (_, i) => `M${String(i).padStart(3, "0")}`);
     localStorage.setItem(k, JSON.stringify({ registros, blocos: [..."0CEJKLMNPQTUVWXY9"], estudadas: ["blocos"], feitos: ["quiz"] }));
   }, CHAVE);
-  await page.reload();
+  await abrir(page, "/blocos");
   await page.locator('[data-no="K"]').click();
   const bytes = await page.evaluate((k) => localStorage.getItem(k)!.length, CHAVE);
   expect(bytes).toBeLessThan(10_000);
